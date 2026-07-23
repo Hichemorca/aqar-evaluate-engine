@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AQAR Export Data</title>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #060d1a; color: #e8edf5; padding: 40px; text-align: center; }
+    .btn { display: inline-block; padding: 14px 28px; margin: 10px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+    .btn-csv { background: #00b86e; color: #000; }
+    .btn-json { background: #3c8cdc; color: #fff; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .stats { margin: 20px 0; font-size: 14px; color: #8a9ab0; }
+  </style>
+</head>
+<body>
+  <h1>?? AQAR Export Data</h1>
+  <div class="stats" id="stats">Loading...</div>
+  <button class="btn btn-csv" onclick="exportCSV()">?? Download CSV (Excel)</button>
+  <button class="btn btn-json" onclick="exportJSON()">?? Download JSON</button>
+  <br><br>
+  <a href="/accuracy-dashboard" style="color:#8a9ab0;font-size:12px">? Back to Dashboard</a>
+
+  <script>
+    let data = null;
+
+    async function loadData() {
+      try {
+        const res = await fetch('/data/accuracy-data.json');
+        data = await res.json();
+        document.getElementById('stats').innerHTML = `
+          ? ${data.metrics.totalRecords} transactions loaded | 
+          Accuracy: <b style="color:#00b86e">${data.metrics.avgAccuracy}%</b> | 
+          Deviation: ±${data.metrics.avgDeviation}%
+        `;
+      } catch(e) {
+        document.getElementById('stats').textContent = '? Data not available';
+      }
+    }
+
+    function exportCSV() {
+      if (!data || !data.records) return alert('No data');
+      let csv = 'Ref,Type,District,Area (sqm),Actual Price (AED),AQAR Valuation (AED),AQAR vs Actual (%),Appraiser Valuation (AED),Date\n';
+      data.records.forEach(r => {
+        csv += `"${r.propertyRef}","${r.propertyType}","${r.district}",${r.area},${r.actualSalePrice},${r.aqarValuation},${r.aqarVsActual},${r.appraiserValuation},"${r.saleDate}"\n`;
+      });
+      downloadFile(csv, 'aqar-accuracy-data.csv', 'text/csv');
+    }
+
+    function exportJSON() {
+      if (!data) return alert('No data');
+      downloadFile(JSON.stringify(data, null, 2), 'aqar-accuracy-data.json', 'application/json');
+    }
+
+    function downloadFile(content, filename, type) {
+      const blob = new Blob([content], { type });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
