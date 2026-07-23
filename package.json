@@ -1,9 +1,17 @@
 {
   "name": "aqar-valuation-engine",
-  "version": "1.0.0",
-  "description": "AQAR Valuation Intelligence Engine — Real Estate Valuation with Real-Time Scraping",
+  "version": "2.0.0",
+  "description": "AQAR Valuation Intelligence Engine — Real Estate Valuation Platform",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "fetch": "node scripts/fetch-transactions.js",
+    "evaluate": "node scripts/evaluate-and-save.js"
+  },
   "dependencies": {
-    "axios": "^1.6.0",
+    "axios": "^1.7.0",
     "cheerio": "^1.0.0-rc.12"
-  }
+  },
+  "author": "AQAR Engine",
+  "license": "UNLICENSED"
 }
