@@ -25,7 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm install axios
         
-      - name: Fetch transactions
+      - name: Fetch DLD real transactions
+        run: node scripts/fetch-dld.js
+        continue-on-error: true
+        
+      - name: Fetch generated transactions
         run: node scripts/fetch-transactions.js
         
       - name: Evaluate properties
