@@ -179,6 +179,10 @@
     .scrape-comps th { color: var(--muted); font-weight: 600; padding: 5px 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
     .scrape-comps td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
 
+    .footer-links { text-align: center; margin-top: 30px; font-size: 11px; color: var(--muted); }
+    .footer-links a { color: var(--muted); text-decoration: underline; }
+    .footer-links a:hover { color: var(--gold); }
+
     .text-center { text-align: center; }
     .text-muted { color: var(--muted); font-size: 10px; }
     .mt-2 { margin-top: 8px; }
@@ -287,6 +291,85 @@
     </div>
   </div>
 
+  <!-- Expert Assessment -->
+  <div class="section" id="expertSection">
+    <div class="section-title">👁️ Expert Assessment (Optional)</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Fields vary by property type. Leave empty if unknown.</div>
+    
+    <div class="row">
+      <div class="fg" id="fgFinishQuality">
+        <label>⭐ Finish Quality</label>
+        <select id="finishQuality">
+          <option value="">Unknown</option>
+          <option value="luxury">Luxury / High-end</option>
+          <option value="good">Good / Standard</option>
+          <option value="normal">Normal / Average</option>
+          <option value="basic">Basic / Economy</option>
+          <option value="poor">Poor / Needs Work</option>
+        </select>
+      </div>
+      <div class="fg" id="fgViewType">
+        <label>🌅 View Type</label>
+        <select id="viewType">
+          <option value="">Unknown</option>
+          <option value="sea">Full Sea / Waterfront</option>
+          <option value="partial-sea">Partial Sea View</option>
+          <option value="city">City Skyline</option>
+          <option value="garden">Garden / Park</option>
+          <option value="street">Street / Main Road</option>
+          <option value="internal">Internal / No View</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fg" id="fgFloorLevel">
+        <label>🏢 Floor Level</label>
+        <select id="floorLevel">
+          <option value="">Unknown / Not applicable</option>
+          <option value="ground">Ground Floor</option>
+          <option value="low">Low Floor (1-3)</option>
+          <option value="mid">Mid Floor (4-10)</option>
+          <option value="high">High Floor (11-20)</option>
+          <option value="very-high">Very High (21+)</option>
+          <option value="penthouse">Penthouse</option>
+        </select>
+      </div>
+      <div class="fg" id="fgStreetPosition">
+        <label>📍 Street Position</label>
+        <select id="streetPosition">
+          <option value="">Unknown</option>
+          <option value="main">Main Street / Boulevard</option>
+          <option value="secondary">Secondary Street</option>
+          <option value="quiet">Quiet Street / Cul-de-sac</option>
+          <option value="corner">Corner Plot</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fg" id="fgBuildingCondition">
+        <label>🏗️ Building Condition</label>
+        <select id="buildingCondition">
+          <option value="">Unknown</option>
+          <option value="excellent">Excellent / Like New</option>
+          <option value="good">Well Maintained</option>
+          <option value="fair">Fair / Some Wear</option>
+          <option value="old">Old / Needs Renovation</option>
+        </select>
+      </div>
+      <div class="fg" id="fgFurnishedStatus">
+        <label>🛋️ Furnished Status</label>
+        <select id="furnishedStatus">
+          <option value="">Unknown</option>
+          <option value="furnished">Fully Furnished</option>
+          <option value="semi-furnished">Semi-Furnished</option>
+          <option value="unfurnished">Unfurnished</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <!-- Market Data -->
   <div class="section">
     <div class="section-title">🔍 Market Data <span style="font-size:10px;color:var(--muted);font-weight:400">(Run first!)</span></div>
@@ -348,6 +431,11 @@
 
   <div id="resultSection" class="hidden"></div>
 
+  <div class="footer-links">
+    <a href="/accuracy-dashboard">📊 Accuracy Dashboard</a> — 
+    See how AQAR compares to actual sale prices
+  </div>
+
 </div>
 
 <script>
@@ -408,7 +496,12 @@ function onPropertyTypeChange() {
   const type = document.getElementById('propType').value;
   const isLand = type === 'land';
   const isWarehouse = type === 'warehouse';
-  const needsBedrooms = ['apartment', 'villa', 'townhouse'].includes(type);
+  const isApartment = type === 'apartment';
+  const isVilla = type === 'villa';
+  const isTownhouse = type === 'townhouse';
+  const isOffice = type === 'office';
+  const isRetail = type === 'retail';
+  const needsBedrooms = isApartment || isVilla || isTownhouse;
   const needsFeatures = !isLand && !isWarehouse;
   
   document.getElementById('rowBedrooms').style.display = needsBedrooms ? 'flex' : 'none';
@@ -417,21 +510,23 @@ function onPropertyTypeChange() {
   document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
   document.getElementById('costSection').style.display = isLand ? 'none' : 'block';
 
-  // Show/hide features based on property type
+  // Features per type
   document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
     const types = item.dataset.types || '';
-    if (types.includes(type)) {
-      item.style.display = 'flex';
-    } else {
-      item.style.display = 'none';
-      // Uncheck if hidden
+    item.style.display = types.includes(type) ? 'flex' : 'none';
+    if (!types.includes(type)) {
       const cb = item.querySelector('input');
-      if (cb && cb.checked) {
-        cb.checked = false;
-        item.classList.remove('checked');
-      }
+      if (cb && cb.checked) { cb.checked = false; item.classList.remove('checked'); }
     }
   });
+
+  // Expert Assessment Fields
+  document.getElementById('fgFinishQuality').style.display = (!isLand && !isWarehouse) ? '' : 'none';
+  document.getElementById('fgViewType').style.display = (isApartment || isVilla || isTownhouse || isOffice) ? '' : 'none';
+  document.getElementById('fgFloorLevel').style.display = (isApartment || isOffice) ? '' : 'none';
+  document.getElementById('fgStreetPosition').style.display = (isVilla || isTownhouse || isOffice || isRetail) ? '' : 'none';
+  document.getElementById('fgBuildingCondition').style.display = (!isLand) ? '' : 'none';
+  document.getElementById('fgFurnishedStatus').style.display = (isApartment || isVilla || isTownhouse || isOffice) ? '' : 'none';
 }
 
 // ===== TOAST =====
@@ -585,7 +680,13 @@ function collectPropertyData() {
     annualExpenses: parseFloat(document.getElementById('annualExpenses').value) || 0,
     landValue: parseFloat(document.getElementById('landValue').value) || 0,
     constructionCost: parseFloat(document.getElementById('constructionCost').value) || 0,
-    scrapedData: scrapedDistrictData
+    scrapedData: scrapedDistrictData,
+    finishQuality: document.getElementById('finishQuality').value,
+    viewType: document.getElementById('viewType').value,
+    floorLevel: document.getElementById('floorLevel').value,
+    streetPosition: document.getElementById('streetPosition').value,
+    buildingCondition: document.getElementById('buildingCondition').value,
+    furnishedStatus: document.getElementById('furnishedStatus').value
   };
 }
 
@@ -593,17 +694,44 @@ function salesComparisonApproach(data) {
   if (!data.avgPriceSqm && !data.scrapedData) return null;
   const avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice(data.city, data.district);
   let value = avgPrice * data.area;
+  
   const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
   value *= conditionFactors[data.condition] || 1.00;
   const age = 2026 - data.yearBuilt;
   value *= Math.max(0.80, 1 - (age * 0.005));
   value += data.features.length * (data.area * 50);
+
+  // Expert Assessment Adjustments
+  const finishFactors = { luxury: 1.15, good: 1.05, normal: 1.00, basic: 0.92, poor: 0.80 };
+  if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1.00;
+  
+  const viewFactors = { sea: 1.15, 'partial-sea': 1.08, city: 1.05, garden: 1.03, street: 0.97, internal: 0.92 };
+  if (data.viewType) value *= viewFactors[data.viewType] || 1.00;
+  
+  const floorFactors = { penthouse: 1.12, 'very-high': 1.06, high: 1.03, mid: 1.00, low: 0.97, ground: 0.92 };
+  if (data.floorLevel) value *= floorFactors[data.floorLevel] || 1.00;
+  
+  const streetFactors = { main: 1.08, corner: 1.05, secondary: 1.00, quiet: 0.96 };
+  if (data.streetPosition) value *= streetFactors[data.streetPosition] || 1.00;
+  
+  const buildingFactors = { excellent: 1.10, good: 1.03, fair: 0.95, old: 0.82 };
+  if (data.buildingCondition) value *= buildingFactors[data.buildingCondition] || 1.00;
+  
+  const furnishedFactors = { furnished: 1.04, 'semi-furnished': 1.02, unfurnished: 0.98 };
+  if (data.furnishedStatus) value *= furnishedFactors[data.furnishedStatus] || 1.00;
+
   value = Math.round(value);
+  
+  let details = `Based on avg ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
+  if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
+  if (data.viewType) details += ` View: ${data.viewType}.`;
+  if (data.floorLevel) details += ` Floor: ${data.floorLevel}.`;
+  details += ` Condition: ${data.condition}, Age: ${age}y.`;
+
   return {
     method: 'Sales Comparison Approach', value, weight: 0.40,
     confidence: (data.scrapedData?.count || 0) > 3 ? 'high' : 'medium',
-    details: `Based on avg ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm. Adjusted for condition (${data.condition}), age (${age}y), ${data.features.length} features.`,
-    perSqm: avgPrice
+    details, perSqm: avgPrice
   };
 }
 
@@ -618,7 +746,7 @@ function incomeCapitalizationApproach(data) {
   const value = Math.round(noi / capRate);
   return {
     method: 'Income Capitalization Approach', value, weight: 0.35, confidence: 'high',
-    details: `NOI: ${Math.round(noi).toLocaleString()} AED (Gross: ${Math.round(data.annualRent).toLocaleString()} × ${(100-vacancyRate).toFixed(0)}% occupancy − ${Math.round(annualExpenses).toLocaleString()} expenses). Cap Rate: ${(capRate*100).toFixed(1)}%.`,
+    details: `NOI: ${Math.round(noi).toLocaleString()} AED / Cap Rate: ${(capRate*100).toFixed(1)}%.`,
     perSqm: Math.round(value / data.area),
     rentalYield: Math.round((data.annualRent / value) * 1000) / 10
   };
@@ -637,7 +765,7 @@ function costApproach(data) {
   return {
     method: 'Cost Approach (Replacement)', value: depreciatedValue, weight: 0.15,
     confidence: data.constructionCost > 0 ? 'medium' : 'low',
-    details: `Land: ${landValue.toLocaleString()} AED + Build: ${buildCost.toLocaleString()} AED (${buildCostPerSqm} AED/sqm × ${data.area} sqm). Depreciation: ${(depreciation*100).toFixed(1)}% (${age}y).`,
+    details: `Land: ${landValue.toLocaleString()} + Build: ${buildCost.toLocaleString()} AED. Depreciation: ${(depreciation*100).toFixed(1)}%.`,
     perSqm: Math.round(depreciatedValue / data.area)
   };
 }
@@ -646,7 +774,6 @@ function dcfApproach(data) {
   const incomeTypes = ['apartment', 'villa', 'townhouse', 'office', 'retail'];
   if (!incomeTypes.includes(data.propType)) return null;
   if (!data.annualRent || data.annualRent <= 0) return null;
-
   const currentValue = data.avgPriceSqm ? data.avgPriceSqm * data.area : data.annualRent / 0.07;
   if (currentValue <= 0) return null;
   const rentGrowth = 0.02, valueGrowth = 0.03, discountRate = 0.10, exitCost = 0.05;
@@ -661,7 +788,7 @@ function dcfApproach(data) {
   const dcfValue = totalNPV > 0 ? Math.round(totalNPV) : Math.round(currentValue * 0.85);
   return {
     method: 'DCF Analysis (10-Year)', value: dcfValue, weight: 0.10, confidence: 'medium',
-    details: `10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr. Discount rate: 10%. Exit cost: 5%.`,
+    details: `10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr.`,
     perSqm: Math.round(dcfValue / data.area)
   };
 }
@@ -687,6 +814,29 @@ function calculateWeightedValue(valuations, propData) {
   };
 }
 
+function buildDecisionEngineLink(result, propData) {
+  const params = new URLSearchParams();
+  params.set('price', result.finalValue);
+  params.set('area', propData.area);
+  params.set('type', propData.propType);
+  params.set('city', propData.city);
+  params.set('district', propData.district);
+  params.set('valuation', result.finalValue);
+  params.set('valLow', result.range.low);
+  params.set('valHigh', result.range.high);
+  params.set('confidence', result.confidencePct);
+  params.set('methods', result.valuations.length);
+  if (propData.avgPriceSqm > 0) params.set('pricePerSqm', propData.avgPriceSqm);
+  if (scrapedDistrictData?.capRate) params.set('capRate', scrapedDistrictData.capRate);
+  if (scrapedDistrictData?.vacancyRate) params.set('vacancy', scrapedDistrictData.vacancyRate);
+  if (scrapedDistrictData?.marketTrend) params.set('trend', scrapedDistrictData.marketTrend);
+  if (propData.annualRent > 0) params.set('rent', propData.annualRent);
+  if (scrapedDistrictData?.districtInfo?.classification) params.set('classification', scrapedDistrictData.districtInfo.classification);
+  params.set('source', 'valuation_engine');
+  params.set('referrer', 'aqar_valuation');
+  return `https://aqar-engine.netlify.app/?${params.toString()}`;
+}
+
 function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
@@ -710,11 +860,7 @@ function displayResult(result, valuations, propData) {
     `;
   });
 
-  const deParams = new URLSearchParams({
-    price: result.finalValue, area: propData.area, type: propData.propType,
-    city: propData.city, district: propData.district, source: 'valuation_engine'
-  });
-  const deUrl = `https://aqar-engine.netlify.app/?${deParams.toString()}`;
+  const deUrl = buildDecisionEngineLink(result, propData);
 
   section.innerHTML = `
     <div class="result-card">
@@ -737,7 +883,7 @@ function displayResult(result, valuations, propData) {
       <a href="${deUrl}" target="_blank" class="integration-btn">
         🧠 Analyze in AQAR Decision Engine →
       </a>
-      <div class="text-center text-muted mt-2">Opens Decision Engine with property data pre-filled</div>
+      <div class="text-center text-muted mt-2">Opens Decision Engine with full valuation data pre-filled</div>
       <button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">
         🔄 New Valuation
       </button>
@@ -762,6 +908,12 @@ function resetAll() {
   document.getElementById('annualExpenses').value = '';
   document.getElementById('landValue').value = '';
   document.getElementById('constructionCost').value = '';
+  document.getElementById('finishQuality').value = '';
+  document.getElementById('viewType').value = '';
+  document.getElementById('floorLevel').value = '';
+  document.getElementById('streetPosition').value = '';
+  document.getElementById('buildingCondition').value = '';
+  document.getElementById('furnishedStatus').value = '';
   document.getElementById('scrapeStatus').innerHTML = '';
   document.getElementById('scrapedComps').innerHTML = '';
   document.getElementById('resultSection').classList.add('hidden');
@@ -792,7 +944,3 @@ function saveToHistory(result, propData) {
 </script>
 </body>
 </html>
-<div style="text-align:center;margin-top:30px;font-size:11px;color:var(--muted)">
-  <a href="/accuracy-dashboard" style="color:var(--muted);text-decoration:underline">📊 Accuracy Dashboard</a> — 
-  See how AQAR compares to actual sale prices
-</div>
