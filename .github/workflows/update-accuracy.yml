@@ -2,20 +2,23 @@ name: Update Accuracy Data
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # يومياً الساعة 6 صباحاً UTC
-  workflow_dispatch:      # تشغيل يدوي
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           
       - name: Install dependencies
         run: npm install axios
@@ -28,7 +31,7 @@ jobs:
         
       - name: Commit and push if changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "AQAR Bot"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add data/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "📊 Auto-update accuracy data" && git push)
+          git diff --staged --quiet || (git commit -m "📊 Auto-update accuracy data [skip ci]" && git push)
