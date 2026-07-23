@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQAR Valuation Intelligence Engine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4920e; --green: #00b86e; --red: #ff3c5a; --blue: #3c8cdc;
+      --text: #e8edf5; --muted: #8a9ab0; --bg: #060d1a;
+      --card: rgba(4, 10, 24, 0.55);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; overflow-x: hidden;
+    }
+    #app-container { max-width: 720px; margin: 0 auto; padding: 30px 16px 60px; }
+    
+    .brand { text-align: center; margin-bottom: 20px; }
+    .brand .tag {
+      font-size: 10px; letter-spacing: 5px; color: var(--gold); font-weight: 700;
+      text-transform: uppercase; text-shadow: 0 0 18px rgba(212,146,14,0.5);
+    }
+    .brand .title { font-size: 22px; font-weight: 900; color: #f0e0b0; margin: 4px 0; }
+    .brand .sub { font-size: 11px; color: var(--muted); font-weight: 300; }
+    .beta-badge {
+      display: inline-block; padding: 4px 10px; border-radius: 12px;
+      background: rgba(212,146,14,0.15); color: var(--gold);
+      font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      border: 1px solid rgba(212,146,14,0.3); margin-left: 8px;
+    }
+
+    .section {
+      background: var(--card); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 20px; margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 14px; font-weight: 900; color: var(--gold);
+      margin-bottom: 14px; letter-spacing: 0.5px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .fg { flex: 1; min-width: 160px; margin-bottom: 10px; }
+    .fg label {
+      display: block; font-size: 10px; font-weight: 700; color: #b0c0d8;
+      margin-bottom: 4px; letter-spacing: 0.3px; text-transform: uppercase;
+    }
+    .fg input, .fg select {
+      width: 100%; padding: 10px 12px; border-radius: 9px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(4,10,24,0.50); backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px); color: var(--text);
+      font-size: 14px; font-family: 'Inter', sans-serif;
+      transition: border 0.2s, background 0.2s;
+    }
+    .fg input:focus, .fg select:focus {
+      outline: none; border-color: rgba(212,146,14,0.5);
+      background: rgba(4,10,24,0.65); box-shadow: 0 0 0 2px rgba(212,146,14,0.1);
+    }
+    .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
+    .fg .error { border-color: rgba(255,60,90,0.6) !important; }
+
+    .btn {
+      display: block; width: 100%; padding: 13px; border-radius: 10px; border: none;
+      font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer;
+      transition: all 0.22s; margin-top: 8px; text-align: center;
+    }
+    .btn-p {
+      background: linear-gradient(135deg, #d4920e, #a86c08); color: #000;
+      box-shadow: 0 4px 18px rgba(212,146,14,0.25);
+    }
+    .btn-p:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,146,14,0.4); }
+    .btn-p:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-s {
+      background: rgba(4,10,24,0.45); backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px); color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.10); margin-top: 6px;
+      font-size: 13px; padding: 10px;
+    }
+    .btn-s:hover { border-color: rgba(212,146,14,0.4); color: var(--gold); }
+    .btn-reset {
+      background: transparent; border: 1px solid rgba(255,60,90,0.2); color: rgba(255,60,90,0.7);
+      font-size: 12px; padding: 8px; margin-top: 6px;
+    }
+    .btn-reset:hover { border-color: rgba(255,60,90,0.5); color: var(--red); background: rgba(255,60,90,0.05); }
+
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+    .checkbox-item {
+      display: flex; align-items: center; gap: 5px;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(4,10,24,0.35); cursor: pointer;
+      font-size: 11px; color: var(--muted); transition: all 0.2s;
+      user-select: none;
+    }
+    .checkbox-item:hover { border-color: rgba(212,146,14,0.35); }
+    .checkbox-item.checked { border-color: var(--gold); color: var(--gold); background: rgba(212,146,14,0.1); }
+    .checkbox-item input { display: none; }
+
+    .hidden { display: none !important; }
+
+    .status-badge {
+      display: inline-block; padding: 4px 10px; border-radius: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    }
+    .status-badge.success { background: rgba(0,184,110,0.15); color: var(--green); }
+    .status-badge.warning { background: rgba(212,146,14,0.15); color: var(--gold); }
+    .status-badge.error { background: rgba(255,60,90,0.15); color: var(--red); }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(212,146,14,0.95); color: #000; padding: 12px 24px;
+      border-radius: 10px; font-size: 13px; font-weight: 700; z-index: 1000;
+      animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
+      pointer-events: none; max-width: 90vw; text-align: center;
+    }
+    @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+    @keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
+
+    .result-card {
+      background: var(--card); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 24px; margin-top: 20px;
+      animation: fadeUp 0.4s ease;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .final-value {
+      text-align: center; font-size: 44px; font-weight: 900; color: var(--gold);
+      margin: 10px 0; letter-spacing: -1px;
+    }
+    .confidence-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); margin: 12px 0; overflow: hidden; }
+    .confidence-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+    .confidence-fill.high { background: var(--green); }
+    .confidence-fill.medium { background: var(--gold); }
+    .confidence-fill.low { background: var(--red); }
+
+    .method-card {
+      background: rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px; padding: 14px; margin: 10px 0;
+    }
+    .method-card .m-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+    }
+    .method-card .m-name { font-size: 13px; font-weight: 700; color: #dce8f5; }
+    .method-card .m-value { font-size: 22px; font-weight: 900; color: var(--gold); }
+    .method-card .m-meta { font-size: 10px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
+    .method-card .m-detail { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+
+    .integration-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(212,146,14,0.2), rgba(212,146,14,0.08));
+      border: 1px solid rgba(212,146,14,0.35); color: var(--gold);
+      font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all 0.22s; text-align: center;
+      text-decoration: none; margin-top: 16px;
+    }
+    .integration-btn:hover {
+      background: linear-gradient(135deg, rgba(212,146,14,0.3), rgba(212,146,14,0.15));
+      border-color: rgba(212,146,14,0.6); box-shadow: 0 4px 20px rgba(212,146,14,0.15);
+      transform: translateY(-2px);
+    }
+
+    .loading {
+      display: inline-block; width: 20px; height: 20px;
+      border: 2px solid rgba(212,146,14,0.3); border-radius: 50%;
+      border-top-color: var(--gold); animation: spin 0.8s linear infinite;
+      margin-right: 8px; vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .scrape-comps { margin-top: 10px; max-height: 300px; overflow-y: auto; }
+    .scrape-comps table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .scrape-comps th { color: var(--muted); font-weight: 600; padding: 5px 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .scrape-comps td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
+
+    .text-center { text-align: center; }
+    .text-muted { color: var(--muted); font-size: 10px; }
+    .mt-2 { margin-top: 8px; }
+
+    @media (max-width: 500px) {
+      .row { flex-direction: column; gap: 0; }
+      #app-container { padding: 20px 10px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app-container">
+
+  <div class="brand">
+    <div class="tag">AQAR Valuation Intelligence <span class="beta-badge">BETA</span></div>
+    <div class="title">Real Estate Valuation Engine</div>
+    <div class="sub">4 Valuation Methods • Smart Market Data • UAE</div>
+  </div>
+
+  <div style="background:rgba(212,146,14,0.08);border:1px solid rgba(212,146,14,0.2);border-radius:10px;padding:12px;margin-bottom:16px;font-size:11px;color:var(--gold)">
+    ⚠️ <b>Beta:</b> Click "Scrape Live Data" first (takes 3-5s), then "Calculate". For best results, enter all available data.
+  </div>
+
+  <!-- Property Info -->
+  <div class="section">
+    <div class="section-title">🏠 Property Information</div>
+    <div class="row">
+      <div class="fg">
+        <label>📍 City</label>
+        <select id="city" onchange="onCityChange()">
+          <option value="">Select Emirate...</option>
+          <option value="dubai">Dubai • دبي</option>
+          <option value="abu-dhabi">Abu Dhabi • أبوظبي</option>
+          <option value="sharjah">Sharjah • الشارقة</option>
+          <option value="ajman">Ajman • عجمان</option>
+          <option value="ras-al-khaimah">Ras Al Khaimah • رأس الخيمة</option>
+          <option value="fujairah">Fujairah • الفجيرة</option>
+          <option value="umm-al-quwain">Umm Al Quwain • أم القيوين</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>📍 District / Area</label>
+        <input type="text" id="district" list="districtList" 
+               placeholder="Select city first..." 
+               oninput="this.value = this.value.replace(/^\s+/, '')"
+               autocomplete="off">
+        <datalist id="districtList"></datalist>
+        <div class="note">Select from list or type any area name</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fg">
+        <label>🏗️ Property Type</label>
+        <select id="propType" onchange="onPropertyTypeChange()">
+          <option value="apartment">Apartment</option>
+          <option value="villa">Villa</option>
+          <option value="townhouse">Townhouse</option>
+          <option value="office">Office</option>
+          <option value="retail">Retail / Shop</option>
+          <option value="warehouse">Warehouse</option>
+          <option value="land">Land</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>📐 Total Area (sqm)</label>
+        <input type="number" id="area" placeholder="e.g. 150" value="120" min="10">
+      </div>
+    </div>
+
+    <div class="row" id="rowBedrooms">
+      <div class="fg">
+        <label>🛏️ Bedrooms</label>
+        <input type="number" id="bedrooms" value="2" min="0">
+      </div>
+    </div>
+
+    <div class="row" id="rowYearCondition">
+      <div class="fg">
+        <label>📅 Year Built</label>
+        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026">
+      </div>
+      <div class="fg">
+        <label>⭐ Condition</label>
+        <select id="condition">
+          <option value="excellent">Excellent</option>
+          <option value="good" selected>Good</option>
+          <option value="fair">Fair</option>
+          <option value="needs-renovation">Needs Renovation</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="fg" id="rowFeatures">
+      <label>✨ Features & Amenities</label>
+      <div class="checkbox-group" id="featuresGroup">
+        <label class="checkbox-item" data-types="apartment,villa"><input type="checkbox" value="pool">🏊 Pool</label>
+        <label class="checkbox-item" data-types="villa,townhouse"><input type="checkbox" value="garden">🌿 Garden</label>
+        <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="parking">🚗 Parking</label>
+        <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="security">👮 Security</label>
+        <label class="checkbox-item" data-types="apartment,office"><input type="checkbox" value="elevator">🛗 Elevator</label>
+        <label class="checkbox-item" data-types="apartment,villa,townhouse,office"><input type="checkbox" value="view">🌅 View</label>
+        <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="ac">❄️ Central AC</label>
+        <label class="checkbox-item" data-types="apartment"><input type="checkbox" value="gym">💪 Gym</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Market Data -->
+  <div class="section">
+    <div class="section-title">🔍 Market Data <span style="font-size:10px;color:var(--muted);font-weight:400">(Run first!)</span></div>
+    <div class="row">
+      <div class="fg">
+        <label>📊 Avg Price/sqm (Auto)</label>
+        <input type="number" id="avgPriceSqm" placeholder="Click 'Scrape'" readonly>
+      </div>
+      <div class="fg">
+        <label>📋 Listings Found</label>
+        <input type="number" id="recentSalesCount" placeholder="0" readonly>
+      </div>
+    </div>
+    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">
+      🔍 Scrape Live Market Data
+    </button>
+    <div id="scrapeStatus" style="font-size:11px;margin-top:8px;text-align:center"></div>
+    <div class="scrape-comps" id="scrapedComps"></div>
+  </div>
+
+  <!-- Income Data -->
+  <div class="section" id="incomeSection">
+    <div class="section-title">💰 Income Capitalization (Optional)</div>
+    <div class="row">
+      <div class="fg">
+        <label>📊 Annual Gross Rent (AED)</label>
+        <input type="number" id="annualRent" placeholder="e.g. 80000 (leave empty if unknown)">
+      </div>
+      <div class="fg">
+        <label>🛠️ Annual Expenses (AED)</label>
+        <input type="number" id="annualExpenses" placeholder="~20% of rent">
+      </div>
+    </div>
+  </div>
+
+  <!-- Cost Data -->
+  <div class="section" id="costSection">
+    <div class="section-title">🔨 Cost Approach (Optional)</div>
+    <div class="row">
+      <div class="fg">
+        <label>🏗️ Land Value (AED)</label>
+        <input type="number" id="landValue" placeholder="Auto: ~30% of market value">
+      </div>
+      <div class="fg">
+        <label>🔨 Build Cost/sqm (AED)</label>
+        <input type="number" id="constructionCost" placeholder="e.g. 3000 (UAE: 2000-5000)">
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">
+      🧮 Calculate Full Valuation
+    </button>
+    <button class="btn btn-reset" onclick="resetAll()" style="flex:1">
+      🔄 Reset
+    </button>
+  </div>
+
+  <div id="resultSection" class="hidden"></div>
+
+</div>
+
+<script>
+// ===== UAE DISTRICTS DATABASE =====
+const UAE_DISTRICTS = {
+  dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"],
+  'abu-dhabi': ["Saadiyat Island","Yas Island","Al Reem Island","Al Raha Beach","Khalifa City","Mohammed Bin Zayed City","Al Reef","Corniche Area","Al Maryah Island","Masdar City","Al Ain City","Al Bateen","Al Dana","Al Falah","Al Ghadeer","Al Shamkha","Baniyas","Hudayriyat Island","Jubail Island","Khalidiya","Mushrif","Nurai Island","Ramhan Island","Shakhbout City","Zayed City"],
+  sharjah: ["Al Majaz","Al Nahda","Al Taawun","Muwaileh","Aljada","Al Khan","Maryam Island","Al Ghuwair","Al Mamzar","Al Qasimia","Al Rahmaniya","Al Suyoh","Al Zahia","Tilal City","University City"],
+  ajman: ["Al Rashidiya","Al Nuaimiya","Emirates City","Ajman Downtown","Ajman One","Al Jurf","Al Mowaihat","City Towers","Corniche Ajman"],
+  'ras-al-khaimah': ["Al Hamra Village","Mina Al Arab","Al Marjan Island","Al Nakheel","Dafan Al Khor","RAK City Center"],
+  fujairah: ["Al Aqah","Fujairah City Center","Al Faseel","Dibba","Murbah","Sharm"],
+  'umm-al-quwain': ["Umm Al Quwain Marina","Al Salamah","Al Raas","King Shaheen Street"]
+};
+
+let scrapedDistrictData = null;
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.checkbox-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      const cb = this.querySelector('input');
+      cb.checked = !cb.checked;
+      this.classList.toggle('checked', cb.checked);
+    });
+  });
+  onPropertyTypeChange();
+  document.getElementById('district').addEventListener('blur', function() {
+    this.value = this.value.trim();
+  });
+});
+
+function onCityChange() {
+  updateDistrictList();
+  const city = document.getElementById('city').value;
+  const districtInput = document.getElementById('district');
+  if (city && UAE_DISTRICTS[city]) {
+    districtInput.placeholder = `e.g. ${UAE_DISTRICTS[city][0]}`;
+  } else {
+    districtInput.placeholder = 'Enter district name';
+  }
+}
+
+function updateDistrictList() {
+  const city = document.getElementById('city').value;
+  const datalist = document.getElementById('districtList');
+  datalist.innerHTML = '';
+  if (city && UAE_DISTRICTS[city]) {
+    UAE_DISTRICTS[city].forEach(d => {
+      const option = document.createElement('option');
+      option.value = d;
+      datalist.appendChild(option);
+    });
+  }
+}
+
+function onPropertyTypeChange() {
+  const type = document.getElementById('propType').value;
+  const isLand = type === 'land';
+  const isWarehouse = type === 'warehouse';
+  const needsBedrooms = ['apartment', 'villa', 'townhouse'].includes(type);
+  const needsFeatures = !isLand && !isWarehouse;
+  
+  document.getElementById('rowBedrooms').style.display = needsBedrooms ? 'flex' : 'none';
+  document.getElementById('rowFeatures').style.display = needsFeatures ? 'block' : 'none';
+  document.getElementById('rowYearCondition').style.display = isLand ? 'none' : 'flex';
+  document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
+  document.getElementById('costSection').style.display = isLand ? 'none' : 'block';
+
+  // Show/hide features based on property type
+  document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
+    const types = item.dataset.types || '';
+    if (types.includes(type)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+      // Uncheck if hidden
+      const cb = item.querySelector('input');
+      if (cb && cb.checked) {
+        cb.checked = false;
+        item.classList.remove('checked');
+      }
+    }
+  });
+}
+
+// ===== TOAST =====
+function showToast(msg, duration = 3000) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), duration);
+}
+
+// ===== SCRAPE =====
+async function scrapeRealData() {
+  const city = document.getElementById('city').value;
+  const district = document.getElementById('district').value.trim();
+  const propType = document.getElementById('propType').value;
+  const btn = document.getElementById('btnScrape');
+  const status = document.getElementById('scrapeStatus');
+
+  if (!city || !district) {
+    status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>';
+    showToast('Please select a city and enter a district name');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading"></span> Analyzing market...';
+  status.innerHTML = '<span style="color:var(--muted)">Fetching comparable sales (3-5s)...</span>';
+
+  try {
+    const response = await fetch('/.netlify/functions/scrape', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ city, district, propertyType: propType || 'apartment' })
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    scrapedDistrictData = data;
+
+    document.getElementById('avgPriceSqm').value = data.avgPricePerSqm || 0;
+    document.getElementById('recentSalesCount').value = data.count || 0;
+
+    let compsHTML = '';
+    if (data.sales && data.sales.length > 0) {
+      compsHTML = `<table><thead><tr><th>Price</th><th>Area</th><th>AED/sqm</th><th>Date</th></tr></thead><tbody>`;
+      data.sales.forEach(s => {
+        compsHTML += `<tr>
+          <td>${Number(s.price).toLocaleString()} AED</td>
+          <td>${s.sqm} sqm</td>
+          <td>${s.pricePerSqm.toLocaleString()}</td>
+          <td>${s.date}</td>
+        </tr>`;
+      });
+      compsHTML += '</tbody></table>';
+    }
+    document.getElementById('scrapedComps').innerHTML = compsHTML;
+
+    const srcLabel = data.dataSource === 'algorithmic' ? '🤖 AI-Generated' : '📊 Market Data';
+    status.innerHTML = `<span class="status-badge success">✅ ${data.count} comparable sales • ${srcLabel}</span>`;
+    showToast(`Found ${data.count} comparable sales in ${district}`);
+  } catch (err) {
+    console.error('Scrape error:', err);
+    status.innerHTML = `<span class="status-badge warning">⚠️ Using smart estimates</span>`;
+    const fb = getFallbackPrice(city, district);
+    document.getElementById('avgPriceSqm').value = fb;
+    document.getElementById('recentSalesCount').value = 5;
+    showToast('Using estimated market data for this area');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🔄 Re-Scrape';
+}
+
+function getFallbackPrice(city, district) {
+  const cleanDistrict = (district || '').trim().toLowerCase();
+  const rates = {
+    dubai: { 'dubai marina': 11850, 'palm jumeirah': 16500, 'downtown dubai': 13200, 'business bay': 9200, default: 7000 },
+    'abu-dhabi': { 'saadiyat island': 10200, 'yas island': 7500, 'al reem island': 7200, default: 6000 },
+    sharjah: { default: 3200 }, ajman: { default: 2500 },
+    'ras-al-khaimah': { default: 2800 }, fujairah: { default: 2200 }, 'umm-al-quwain': { default: 2000 }
+  };
+  const cityRates = rates[city] || rates.dubai;
+  return cityRates[cleanDistrict] || cityRates.default || 6000;
+}
+
+// ===== VALUATION ENGINE =====
+function runValuation() {
+  const area = parseFloat(document.getElementById('area').value);
+  if (!area || area < 10) {
+    document.getElementById('area').classList.add('error');
+    document.getElementById('area').focus();
+    showToast('Area must be at least 10 sqm');
+    setTimeout(() => document.getElementById('area').classList.remove('error'), 3000);
+    return;
+  }
+
+  document.getElementById('btnValuate').disabled = true;
+  document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
+
+  setTimeout(() => {
+    const propData = collectPropertyData();
+    const valuations = [];
+
+    const salesComp = salesComparisonApproach(propData);
+    if (salesComp) valuations.push(salesComp);
+
+    const incomeVal = incomeCapitalizationApproach(propData);
+    if (incomeVal) valuations.push(incomeVal);
+
+    const costVal = costApproach(propData);
+    if (costVal) valuations.push(costVal);
+
+    const dcfVal = dcfApproach(propData);
+    if (dcfVal) valuations.push(dcfVal);
+
+    if (valuations.length === 0) {
+      showToast('Insufficient data. Run "Scrape" first or enter more property details.');
+      document.getElementById('btnValuate').disabled = false;
+      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation';
+      return;
+    }
+
+    const finalResult = calculateWeightedValue(valuations, propData);
+    displayResult(finalResult, valuations, propData);
+
+    document.getElementById('btnValuate').disabled = false;
+    document.getElementById('btnValuate').innerHTML = '🧮 Recalculate Valuation';
+    saveToHistory(finalResult, propData);
+  }, 800);
+}
+
+function collectPropertyData() {
+  const features = [];
+  document.querySelectorAll('#featuresGroup input:checked').forEach(cb => features.push(cb.value));
+  const isLand = document.getElementById('propType').value === 'land';
+
+  return {
+    city: document.getElementById('city').value,
+    district: document.getElementById('district').value.trim(),
+    propType: document.getElementById('propType').value,
+    area: Math.max(10, parseFloat(document.getElementById('area').value) || 0),
+    bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
+    yearBuilt: isLand ? 2026 : Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value) || 2020)),
+    condition: isLand ? 'good' : document.getElementById('condition').value,
+    features: features,
+    avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value) || 0,
+    annualRent: parseFloat(document.getElementById('annualRent').value) || 0,
+    annualExpenses: parseFloat(document.getElementById('annualExpenses').value) || 0,
+    landValue: parseFloat(document.getElementById('landValue').value) || 0,
+    constructionCost: parseFloat(document.getElementById('constructionCost').value) || 0,
+    scrapedData: scrapedDistrictData
+  };
+}
+
+function salesComparisonApproach(data) {
+  if (!data.avgPriceSqm && !data.scrapedData) return null;
+  const avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice(data.city, data.district);
+  let value = avgPrice * data.area;
+  const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
+  value *= conditionFactors[data.condition] || 1.00;
+  const age = 2026 - data.yearBuilt;
+  value *= Math.max(0.80, 1 - (age * 0.005));
+  value += data.features.length * (data.area * 50);
+  value = Math.round(value);
+  return {
+    method: 'Sales Comparison Approach', value, weight: 0.40,
+    confidence: (data.scrapedData?.count || 0) > 3 ? 'high' : 'medium',
+    details: `Based on avg ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm. Adjusted for condition (${data.condition}), age (${age}y), ${data.features.length} features.`,
+    perSqm: avgPrice
+  };
+}
+
+function incomeCapitalizationApproach(data) {
+  if (!data.annualRent || data.annualRent <= 0) return null;
+  let annualExpenses = data.annualExpenses || Math.round(data.annualRent * 0.20);
+  const vacancyRate = data.scrapedData?.vacancyRate || 10;
+  const effectiveGross = data.annualRent * (1 - vacancyRate / 100);
+  const noi = effectiveGross - annualExpenses;
+  if (noi <= 0) return null;
+  const capRate = data.scrapedData?.capRate ? data.scrapedData.capRate / 100 : 0.07;
+  const value = Math.round(noi / capRate);
+  return {
+    method: 'Income Capitalization Approach', value, weight: 0.35, confidence: 'high',
+    details: `NOI: ${Math.round(noi).toLocaleString()} AED (Gross: ${Math.round(data.annualRent).toLocaleString()} × ${(100-vacancyRate).toFixed(0)}% occupancy − ${Math.round(annualExpenses).toLocaleString()} expenses). Cap Rate: ${(capRate*100).toFixed(1)}%.`,
+    perSqm: Math.round(value / data.area),
+    rentalYield: Math.round((data.annualRent / value) * 1000) / 10
+  };
+}
+
+function costApproach(data) {
+  const buildCostPerSqm = data.constructionCost || 3000;
+  const buildCost = buildCostPerSqm * data.area;
+  let landValue = data.landValue || (data.avgPriceSqm ? Math.round(data.avgPriceSqm * data.area * 0.30) : Math.round(buildCost * 0.35));
+  const totalCost = landValue + buildCost;
+  const age = Math.min(50, Math.max(0, 2026 - data.yearBuilt));
+  const depreciation = Math.min(0.60, age * 0.015);
+  const conditionFactors = { excellent: 0.95, good: 1.00, fair: 1.10, 'needs-renovation': 1.25 };
+  const conditionAdjustment = conditionFactors[data.condition] || 1.00;
+  const depreciatedValue = Math.round(totalCost * (1 - depreciation) * conditionAdjustment);
+  return {
+    method: 'Cost Approach (Replacement)', value: depreciatedValue, weight: 0.15,
+    confidence: data.constructionCost > 0 ? 'medium' : 'low',
+    details: `Land: ${landValue.toLocaleString()} AED + Build: ${buildCost.toLocaleString()} AED (${buildCostPerSqm} AED/sqm × ${data.area} sqm). Depreciation: ${(depreciation*100).toFixed(1)}% (${age}y).`,
+    perSqm: Math.round(depreciatedValue / data.area)
+  };
+}
+
+function dcfApproach(data) {
+  const incomeTypes = ['apartment', 'villa', 'townhouse', 'office', 'retail'];
+  if (!incomeTypes.includes(data.propType)) return null;
+  if (!data.annualRent || data.annualRent <= 0) return null;
+
+  const currentValue = data.avgPriceSqm ? data.avgPriceSqm * data.area : data.annualRent / 0.07;
+  if (currentValue <= 0) return null;
+  const rentGrowth = 0.02, valueGrowth = 0.03, discountRate = 0.10, exitCost = 0.05;
+  let totalNPV = -currentValue, runningValue = currentValue;
+  let runningRent = data.annualRent;
+  for (let y = 1; y <= 10; y++) {
+    runningRent *= (1 + rentGrowth);
+    runningValue *= (1 + valueGrowth);
+    totalNPV += (runningRent * 0.75) / Math.pow(1 + discountRate, y);
+    if (y === 10) totalNPV += (runningValue * (1 - exitCost)) / Math.pow(1 + discountRate, 10);
+  }
+  const dcfValue = totalNPV > 0 ? Math.round(totalNPV) : Math.round(currentValue * 0.85);
+  return {
+    method: 'DCF Analysis (10-Year)', value: dcfValue, weight: 0.10, confidence: 'medium',
+    details: `10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr. Discount rate: 10%. Exit cost: 5%.`,
+    perSqm: Math.round(dcfValue / data.area)
+  };
+}
+
+function calculateWeightedValue(valuations, propData) {
+  if (valuations.length === 0) {
+    const fallback = (propData.avgPriceSqm || 4000) * propData.area;
+    return { finalValue: Math.round(fallback), confidence: 'low', confidencePct: 25, valuations: [], range: { low: Math.round(fallback * 0.8), high: Math.round(fallback * 1.2) } };
+  }
+  let weightedSum = 0, totalWeight = 0;
+  valuations.forEach(v => { weightedSum += v.value * v.weight; totalWeight += v.weight; });
+  const finalValue = Math.round(weightedSum / totalWeight);
+  let confidencePct = 60;
+  if (valuations.some(v => v.confidence === 'high')) confidencePct += 20;
+  if (valuations.length >= 3) confidencePct += 10;
+  if (valuations.length >= 4) confidencePct += 5;
+  confidencePct = Math.min(95, Math.max(20, confidencePct));
+  const allValues = valuations.map(v => v.value);
+  return {
+    finalValue, confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low',
+    confidencePct, valuations,
+    range: { low: Math.round(Math.min(...allValues) * 0.92), high: Math.round(Math.max(...allValues) * 1.08) }
+  };
+}
+
+function displayResult(result, valuations, propData) {
+  const section = document.getElementById('resultSection');
+  const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
+  let vHTML = '';
+  valuations.forEach(v => {
+    const confColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
+    vHTML += `
+      <div class="method-card">
+        <div class="m-header">
+          <span class="m-name">${v.method}</span>
+          <span style="font-size:10px;color:${confColor}">● ${v.confidence} confidence</span>
+        </div>
+        <div class="m-value">${v.value.toLocaleString()} AED</div>
+        <div class="m-meta">
+          <span>Weight: ${Math.round(v.weight*100)}%</span>
+          ${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}
+          ${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}
+        </div>
+        <div class="m-detail">${v.details}</div>
+      </div>
+    `;
+  });
+
+  const deParams = new URLSearchParams({
+    price: result.finalValue, area: propData.area, type: propData.propType,
+    city: propData.city, district: propData.district, source: 'valuation_engine'
+  });
+  const deUrl = `https://aqar-engine.netlify.app/?${deParams.toString()}`;
+
+  section.innerHTML = `
+    <div class="result-card">
+      <div style="text-align:center">
+        <div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div>
+        <div class="final-value">AED ${result.finalValue.toLocaleString()}</div>
+        <div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district || 'N/A'} • ${propData.area} sqm</div>
+        <div style="margin:10px 0;font-size:13px;color:var(--muted)">
+          Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED
+        </div>
+        <div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div>
+        <div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">
+          ${result.confidencePct}% Confidence • ${valuations.length} Methods
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Valuation Methods Detail</div>
+        ${vHTML}
+      </div>
+      <a href="${deUrl}" target="_blank" class="integration-btn">
+        🧠 Analyze in AQAR Decision Engine →
+      </a>
+      <div class="text-center text-muted mt-2">Opens Decision Engine with property data pre-filled</div>
+      <button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">
+        🔄 New Valuation
+      </button>
+    </div>
+  `;
+  section.classList.remove('hidden');
+  section.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetAll() {
+  document.getElementById('city').value = '';
+  document.getElementById('district').value = '';
+  document.getElementById('districtList').innerHTML = '';
+  document.getElementById('propType').value = 'apartment';
+  document.getElementById('area').value = '120';
+  document.getElementById('bedrooms').value = '2';
+  document.getElementById('yearBuilt').value = '2020';
+  document.getElementById('condition').value = 'good';
+  document.getElementById('avgPriceSqm').value = '';
+  document.getElementById('recentSalesCount').value = '';
+  document.getElementById('annualRent').value = '';
+  document.getElementById('annualExpenses').value = '';
+  document.getElementById('landValue').value = '';
+  document.getElementById('constructionCost').value = '';
+  document.getElementById('scrapeStatus').innerHTML = '';
+  document.getElementById('scrapedComps').innerHTML = '';
+  document.getElementById('resultSection').classList.add('hidden');
+  document.getElementById('resultSection').innerHTML = '';
+  document.querySelectorAll('#featuresGroup input:checked').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.checkbox-item').classList.remove('checked');
+  });
+  scrapedDistrictData = null;
+  onPropertyTypeChange();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast('All fields cleared');
+}
+
+function saveToHistory(result, propData) {
+  try {
+    const history = JSON.parse(localStorage.getItem('aqar_history') || '[]');
+    history.unshift({
+      date: new Date().toISOString(),
+      value: result.finalValue,
+      district: propData.district,
+      type: propData.propType,
+      area: propData.area
+    });
+    localStorage.setItem('aqar_history', JSON.stringify(history.slice(0, 5)));
+  } catch(e) {}
+}
+</script>
+</body>
+</html>
+<div style="text-align:center;margin-top:30px;font-size:11px;color:var(--muted)">
+  <a href="/accuracy-dashboard" style="color:var(--muted);text-decoration:underline">📊 Accuracy Dashboard</a> — 
+  See how AQAR compares to actual sale prices
+</div>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQAR Accuracy Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4920e; --green: #00b86e; --red: #ff3c5a; --blue: #3c8cdc;
+      --text: #e8edf5; --muted: #8a9ab0; --bg: #060d1a;
+      --card: rgba(4, 10, 24, 0.55);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; overflow-x: hidden;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 30px 16px 60px; }
+    
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { font-size: 24px; font-weight: 900; color: #f0e0b0; }
+    .header p { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .header .last-update { font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card {
+      background: var(--card); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 20px; text-align: center;
+    }
+    .stat-value { font-size: 36px; font-weight: 900; }
+    .stat-value.green { color: var(--green); }
+    .stat-value.gold { color: var(--gold); }
+    .stat-value.blue { color: var(--blue); }
+    .stat-value.red { color: var(--red); }
+    .stat-label { font-size: 12px; font-weight: 700; color: #dce8f5; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .stat-detail { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+    .section {
+      background: var(--card); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 20px; margin-bottom: 20px;
+    }
+    .section-title { font-size: 15px; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    th { color: var(--muted); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; background: var(--bg); }
+    td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
+    tr:hover td { background: rgba(212,146,14,0.03); }
+
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 700; }
+    .badge.green { background: rgba(0,184,110,0.15); color: var(--green); }
+    .badge.red { background: rgba(255,60,90,0.15); color: var(--red); }
+    .badge.gold { background: rgba(212,146,14,0.15); color: var(--gold); }
+
+    .loading { text-align: center; padding: 40px; color: var(--muted); }
+    .spinner {
+      display: inline-block; width: 30px; height: 30px; border: 3px solid rgba(212,146,14,0.3);
+      border-radius: 50%; border-top-color: var(--gold); animation: spin 0.8s linear infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .btn {
+      display: inline-block; padding: 12px 24px; border-radius: 10px; border: none;
+      font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer;
+      transition: all 0.22s; text-align: center; text-decoration: none;
+    }
+    .btn-p {
+      background: linear-gradient(135deg, #d4920e, #a86c08); color: #000;
+      box-shadow: 0 4px 18px rgba(212,146,14,0.25);
+    }
+    .btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,146,14,0.4); }
+    .btn-s {
+      background: rgba(4,10,24,0.45); backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px); color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 12px; padding: 8px 16px; border-radius: 8px; cursor: pointer;
+    }
+    .btn-s:hover { border-color: rgba(212,146,14,0.4); color: var(--gold); }
+
+    .back-link { display: inline-block; margin-top: 20px; color: var(--muted); font-size: 12px; text-decoration: none; }
+    .back-link:hover { color: var(--gold); }
+
+    .refresh-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .refresh-bar .last-updated { font-size: 10px; color: var(--muted); }
+
+    .table-container { max-height: 600px; overflow-y: auto; border-radius: 8px; }
+
+    .data-source-badge {
+      display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 700;
+      margin-left: 6px;
+    }
+    .data-source-badge.live { background: rgba(0,184,110,0.15); color: var(--green); }
+    .data-source-badge.cached { background: rgba(60,140,220,0.15); color: var(--blue); }
+    .data-source-badge.generated { background: rgba(212,146,14,0.15); color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      table { font-size: 9px; }
+      th, td { padding: 5px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>📊 AQAR Accuracy Dashboard</h1>
+    <p>Real-time comparison: AQAR Valuation vs Actual Sale Prices (Last 60 Days)</p>
+    <div class="last-update" id="lastUpdated">Loading...</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value green" id="avgAccuracy">—</div>
+      <div class="stat-label">Average Accuracy</div>
+      <div class="stat-detail">AQAR vs Actual Sale Price</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value gold" id="avgDeviation">—</div>
+      <div class="stat-label">Avg Deviation</div>
+      <div class="stat-detail">From actual sale price</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value blue" id="betterThan">—</div>
+      <div class="stat-label">Better Than Appraiser</div>
+      <div class="stat-detail">AQAR more accurate in <span id="betterThanPct">—</span> of cases</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="totalRecords">—</div>
+      <div class="stat-label">Tracked Transactions</div>
+      <div class="stat-detail">Last 60 days</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="refresh-bar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="section-title" style="margin-bottom:0">📋 Recent Transactions — AQAR vs Actual vs Appraiser</div>
+        <span id="dataSourceBadge"></span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn-s" onclick="loadFromLocal()">📁 Load Saved Data</button>
+        <button class="btn btn-p" onclick="loadFromLive()" style="width:auto;margin:0;padding:8px 16px;font-size:12px">🔄 Fetch Live Data</button>
+      </div>
+    </div>
+    <div class="table-container" id="tableContainer">
+      <div class="loading">
+        <div class="spinner"></div>
+        <div>Loading transaction data...</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:16px;justify-content:center;margin-top:16px">
+    <a href="/" class="back-link">← Back to Valuation Engine</a>
+    <span style="color:var(--muted)">•</span>
+    <a href="https://aqar-engine.netlify.app" class="back-link" target="_blank">Open Decision Engine →</a>
+  </div>
+</div>
+
+<script>
+let currentDataSource = 'unknown';
+
+async function loadDashboard() {
+  // نحاول تحميل البيانات المحلية أولاً
+  const localLoaded = await loadFromLocal();
+  if (!localLoaded) {
+    // إذا لم توجد بيانات محلية، نجلب من الوظيفة
+    await loadFromLive();
+  }
+}
+
+async function loadFromLocal() {
+  document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Loading saved data...</div></div>';
+  
+  try {
+    const response = await fetch('/data/accuracy-data.json');
+    if (!response.ok) return false;
+    
+    const data = await response.json();
+    
+    if (!data.records || data.records.length === 0) {
+      document.getElementById('tableContainer').innerHTML = '<div class="loading">No saved data found. Click "Fetch Live Data".</div>';
+      return false;
+    }
+    
+    updateStats(data.metrics);
+    updateTable(data.records);
+    updateLastUpdated(data.metadata?.lastUpdated);
+    updateSourceBadge('cached', '📁 Saved Data');
+    currentDataSource = 'cached';
+    return true;
+  } catch (err) {
+    console.log('No local data file found');
+    return false;
+  }
+}
+
+async function loadFromLive() {
+  document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Fetching live transaction data from Dubai Land Department & Property Finder...</div></div>';
+  
+  try {
+    const response = await fetch('/.netlify/functions/scrape-sold', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ city: 'dubai', days: 60 })
+    });
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json();
+    
+    updateStats(data.metrics);
+    updateTable(data.properties);
+    updateLastUpdated(data.scrapedAt);
+    
+    const sourceLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
+    updateSourceBadge(data.dataSource === 'live' ? 'live' : 'generated', sourceLabel);
+    currentDataSource = data.dataSource || 'unknown';
+    
+    return true;
+  } catch (err) {
+    console.error('Live fetch error:', err);
+    document.getElementById('tableContainer').innerHTML = 
+      '<div class="loading"><div style="color:var(--red);margin-bottom:10px">⚠️ Could not load live data.</div><button class="btn btn-s" onclick="loadFromLocal()">📁 Try Saved Data</button></div>';
+    return false;
+  }
+}
+
+function updateStats(metrics) {
+  if (!metrics) return;
+  
+  const avgAcc = document.getElementById('avgAccuracy');
+  avgAcc.textContent = metrics.avgAccuracy ? metrics.avgAccuracy + '%' : '—';
+  avgAcc.className = 'stat-value ' + (metrics.avgAccuracy >= 90 ? 'green' : metrics.avgAccuracy >= 75 ? 'gold' : 'red');
+  
+  document.getElementById('avgDeviation').textContent = metrics.avgDeviation ? '±' + metrics.avgDeviation + '%' : '—';
+  document.getElementById('betterThan').textContent = metrics.betterThanAppraiser || '—';
+  document.getElementById('betterThanPct').textContent = metrics.betterThanAppraiserPct ? metrics.betterThanAppraiserPct + '%' : '—';
+  document.getElementById('totalRecords').textContent = metrics.totalRecords || '0';
+}
+
+function updateTable(properties) {
+  if (!properties || properties.length === 0) {
+    document.getElementById('tableContainer').innerHTML = '<div class="loading">No transaction data available.</div>';
+    return;
+  }
+
+  let html = '<table><thead><tr>';
+  html += '<th>Reference</th><th>Type</th><th>District</th><th>Area</th>';
+  html += '<th>Actual Price</th><th>AQAR Valuation</th><th>AQAR vs Actual</th>';
+  html += '<th>Appraiser</th><th>AQAR Better?</th><th>Date</th>';
+  html += '</tr></thead><tbody>';
+
+  properties.slice(0, 100).forEach(p => {
+    const aqarDiff = p.aqarVsActual || 0;
+    const appraiserDiff = p.appraiserValuation && p.actualSalePrice 
+      ? ((p.appraiserValuation - p.actualSalePrice) / p.actualSalePrice) * 100 
+      : 0;
+    const aqarBetter = Math.abs(aqarDiff) <= Math.abs(appraiserDiff);
+    
+    const diffClass = Math.abs(aqarDiff) < 3 ? 'green' : Math.abs(aqarDiff) < 7 ? 'gold' : 'red';
+    
+    html += '<tr>';
+    html += `<td style="font-family:monospace;font-size:10px">${p.propertyRef || '—'}</td>`;
+    html += `<td>${p.propertyType || '—'}</td>`;
+    html += `<td>${p.district || '—'}</td>`;
+    html += `<td>${p.area ? p.area.toLocaleString() + ' sqm' : '—'}</td>`;
+    html += `<td>${p.actualSalePrice ? Number(p.actualSalePrice).toLocaleString() + ' AED' : '—'}</td>`;
+    html += `<td>${p.aqarValuation ? Number(p.aqarValuation).toLocaleString() + ' AED' : '—'}</td>`;
+    html += `<td><span class="badge ${diffClass}">${aqarDiff > 0 ? '+' : ''}${aqarDiff}%</span></td>`;
+    html += `<td>${p.appraiserValuation ? Number(p.appraiserValuation).toLocaleString() + ' AED' : '—'}</td>`;
+    html += `<td><span class="badge ${aqarBetter ? 'green' : 'gold'}">${aqarBetter ? '✅ Yes' : '—'}</span></td>`;
+    html += `<td style="font-size:10px;color:var(--muted)">${p.saleDate || '—'}</td>`;
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  html += `<div style="text-align:center;padding:10px;font-size:10px;color:var(--muted)">Showing ${Math.min(properties.length, 100)} of ${properties.length} transactions</div>`;
+  
+  document.getElementById('tableContainer').innerHTML = html;
+}
+
+function updateLastUpdated(dateStr) {
+  if (!dateStr) {
+    document.getElementById('lastUpdated').textContent = '';
+    return;
+  }
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diffHours = Math.round((now - date) / 3600000);
+  const timeAgo = diffHours < 1 ? 'Just now' : 
+                  diffHours < 24 ? diffHours + ' hours ago' : 
+                  Math.round(diffHours / 24) + ' days ago';
+  document.getElementById('lastUpdated').textContent = `Last updated: ${date.toLocaleString()} (${timeAgo})`;
+}
+
+function updateSourceBadge(type, label) {
+  const badge = document.getElementById('dataSourceBadge');
+  badge.innerHTML = `<span class="data-source-badge ${type}">${label}</span>`;
+}
+
+// Auto-load on page ready
+document.addEventListener('DOMContentLoaded', loadDashboard);
+</script>
+</body>
+</html>

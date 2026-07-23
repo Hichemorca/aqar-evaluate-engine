@@ -1,0 +1,9 @@
+{
+  "name": "aqar-valuation-engine",
+  "version": "1.0.0",
+  "description": "AQAR Valuation Intelligence Engine — Real Estate Valuation with Real-Time Scraping",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
