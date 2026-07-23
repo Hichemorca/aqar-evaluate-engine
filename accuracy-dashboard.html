@@ -123,8 +123,8 @@
     </div>
     <div class="stat-card">
       <div class="stat-value blue" id="betterThan">—</div>
-      <div class="stat-label">Better Than Appraiser</div>
-      <div class="stat-detail">AQAR more accurate in <span id="betterThanPct">—</span> of cases</div>
+      <div class="stat-label">Comparable to Professional Appraisals</div>
+      <div class="stat-detail">AQAR equally or more accurate in <span id="betterThanPct">—</span> of cases</div>
     </div>
     <div class="stat-card">
       <div class="stat-value" id="totalRecords">—</div>
@@ -163,10 +163,8 @@
 let currentDataSource = 'unknown';
 
 async function loadDashboard() {
-  // نحاول تحميل البيانات المحلية أولاً
   const localLoaded = await loadFromLocal();
   if (!localLoaded) {
-    // إذا لم توجد بيانات محلية، نجلب من الوظيفة
     await loadFromLive();
   }
 }
@@ -198,7 +196,7 @@ async function loadFromLocal() {
 }
 
 async function loadFromLive() {
-  document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Fetching live transaction data from Dubai Land Department & Property Finder...</div></div>';
+  document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Fetching live transaction data...</div></div>';
   
   try {
     const response = await fetch('/.netlify/functions/scrape-sold', {
@@ -248,9 +246,9 @@ function updateTable(properties) {
   }
 
   let html = '<table><thead><tr>';
-  html += '<th>Reference</th><th>Type</th><th>District</th><th>Area</th>';
-  html += '<th>Actual Price</th><th>AQAR Valuation</th><th>AQAR vs Actual</th>';
-  html += '<th>Appraiser</th><th>AQAR Better?</th><th>Date</th>';
+  html += '<th>Ref</th><th>City</th><th>Type</th><th>District</th><th>Area</th>';
+  html += '<th>Actual Price</th><th>AQAR Valuation</th><th>Diff</th>';
+  html += '<th>Appraiser</th><th>vs Appraiser</th><th>Date</th>';
   html += '</tr></thead><tbody>';
 
   properties.slice(0, 100).forEach(p => {
@@ -258,12 +256,13 @@ function updateTable(properties) {
     const appraiserDiff = p.appraiserValuation && p.actualSalePrice 
       ? ((p.appraiserValuation - p.actualSalePrice) / p.actualSalePrice) * 100 
       : 0;
-    const aqarBetter = Math.abs(aqarDiff) <= Math.abs(appraiserDiff);
+    const aqarComparable = Math.abs(aqarDiff) <= Math.abs(appraiserDiff);
     
     const diffClass = Math.abs(aqarDiff) < 3 ? 'green' : Math.abs(aqarDiff) < 7 ? 'gold' : 'red';
     
     html += '<tr>';
-    html += `<td style="font-family:monospace;font-size:10px">${p.propertyRef || '—'}</td>`;
+    html += `<td style="font-family:monospace;font-size:9px">${(p.propertyRef || '—').substring(0, 12)}</td>`;
+    html += `<td style="font-size:10px">${p.city || 'dubai'}</td>`;
     html += `<td>${p.propertyType || '—'}</td>`;
     html += `<td>${p.district || '—'}</td>`;
     html += `<td>${p.area ? p.area.toLocaleString() + ' sqm' : '—'}</td>`;
@@ -271,8 +270,8 @@ function updateTable(properties) {
     html += `<td>${p.aqarValuation ? Number(p.aqarValuation).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td><span class="badge ${diffClass}">${aqarDiff > 0 ? '+' : ''}${aqarDiff}%</span></td>`;
     html += `<td>${p.appraiserValuation ? Number(p.appraiserValuation).toLocaleString() + ' AED' : '—'}</td>`;
-    html += `<td><span class="badge ${aqarBetter ? 'green' : 'gold'}">${aqarBetter ? '✅ Yes' : '—'}</span></td>`;
-    html += `<td style="font-size:10px;color:var(--muted)">${p.saleDate || '—'}</td>`;
+    html += `<td><span class="badge ${aqarComparable ? 'green' : 'gold'}">${aqarComparable ? '✓ Comparable' : '—'}</span></td>`;
+    html += `<td style="font-size:9px;color:var(--muted)">${p.saleDate || '—'}</td>`;
     html += '</tr>';
   });
 
@@ -301,7 +300,6 @@ function updateSourceBadge(type, label) {
   badge.innerHTML = `<span class="data-source-badge ${type}">${label}</span>`;
 }
 
-// Auto-load on page ready
 document.addEventListener('DOMContentLoaded', loadDashboard);
 </script>
 </body>
