@@ -510,7 +510,6 @@ function onPropertyTypeChange() {
   document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
   document.getElementById('costSection').style.display = isLand ? 'none' : 'block';
 
-  // Features per type
   document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
     const types = item.dataset.types || '';
     item.style.display = types.includes(type) ? 'flex' : 'none';
@@ -520,7 +519,6 @@ function onPropertyTypeChange() {
     }
   });
 
-  // Expert Assessment Fields
   document.getElementById('fgFinishQuality').style.display = (!isLand && !isWarehouse) ? '' : 'none';
   document.getElementById('fgViewType').style.display = (isApartment || isVilla || isTownhouse || isOffice) ? '' : 'none';
   document.getElementById('fgFloorLevel').style.display = (isApartment || isOffice) ? '' : 'none';
@@ -692,7 +690,18 @@ function collectPropertyData() {
 
 function salesComparisonApproach(data) {
   if (!data.avgPriceSqm && !data.scrapedData) return null;
-  const avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice(data.city, data.district);
+  let avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice(data.city, data.district);
+  
+  // ===== CAP ULTRA-LUXURY PRICE =====
+  const maxPricePerSqm = {
+    dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500,
+    'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500
+  };
+  const cappedPrice = maxPricePerSqm[data.city] || 20000;
+  if (avgPrice > cappedPrice) {
+    avgPrice = cappedPrice;
+  }
+  
   let value = avgPrice * data.area;
   
   const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
@@ -719,6 +728,25 @@ function salesComparisonApproach(data) {
   
   const furnishedFactors = { furnished: 1.04, 'semi-furnished': 1.02, unfurnished: 0.98 };
   if (data.furnishedStatus) value *= furnishedFactors[data.furnishedStatus] || 1.00;
+
+  // ===== WATERFRONT PREMIUM =====
+  const waterfrontAreas = ['Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island', 'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'];
+  if (waterfrontAreas.includes(data.district) && (data.propType === 'villa' || data.propType === 'townhouse')) {
+    value = Math.round(value * 1.06);
+  }
+
+  // ===== BIAS CALIBRATION =====
+  const biasCorrection = {
+    'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018,
+    ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016
+  };
+  if (biasCorrection[data.city]) {
+    value = Math.round(value * biasCorrection[data.city]);
+  }
+
+  // Villa/Townhouse correction
+  if (data.propType === 'villa') value = Math.round(value * 1.018);
+  if (data.propType === 'townhouse') value = Math.round(value * 1.021);
 
   value = Math.round(value);
   
