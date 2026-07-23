@@ -24,9 +24,7 @@ const SOURCES = [
 async function fetchDLDTransactions() {
   console.log('🔍 Fetching DLD transactions...');
   
-  // DLD يوفر ملفات CSV للتحميل. نحاول تحميل أحدث ملف
   try {
-    // الرابط المباشر لملف CSV (قد يتغير، يحتاج تحديث دوري)
     const csvUrl = 'https://www.dubailand.gov.ae/en/open-data/real-estate-transactions-csv/';
     
     const response = await axios.get(csvUrl, { 
@@ -35,7 +33,6 @@ async function fetchDLDTransactions() {
       headers: { 'User-Agent': 'AQAR-Engine/1.0' }
     });
 
-    // تحويل CSV إلى JSON
     const lines = response.data.split('\n').filter(line => line.trim());
     const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
     
@@ -79,8 +76,18 @@ async function fetchDataGovAe() {
               timeout: 15000 
             });
             const lines = csvResp.data.split('\n').filter(l => l.trim());
-            // Parse similar to DLD
-            // ... (نفس منطق تحويل CSV)
+            const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+            
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].split(',').map(v => v.trim());
+              if (values.length >= 5) {
+                const transaction = {};
+                headers.forEach((h, idx) => {
+                  transaction[h] = values[idx] || '';
+                });
+                transactions.push(normalizeTransaction(transaction, 'data.gov.ae'));
+              }
+            }
           } catch (e) {
             console.log(`⚠️ Failed to download ${resource.url}`);
           }
@@ -88,7 +95,7 @@ async function fetchDataGovAe() {
       }
     }
     
-    return transactions;
+    return transactions.filter(Boolean);
   } catch (error) {
     console.log('⚠️ data.gov.ae fetch failed:', error.message);
     return [];
@@ -96,7 +103,6 @@ async function fetchDataGovAe() {
 }
 
 function normalizeTransaction(t, source) {
-  // توحيد أسماء الحقول من مصادر مختلفة
   const district = t['area_name'] || t['district'] || t['location'] || 'Unknown';
   const propertyType = t['property_type'] || t['type'] || 'apartment';
   const area = parseFloat(t['area_sqm'] || t['area'] || t['size'] || '0');
@@ -141,7 +147,6 @@ function formatDate(dateStr) {
 async function main() {
   console.log('🚀 AQAR Auto-Fetch Started');
   
-  // إنشاء مجلد data إذا لم يكن موجوداً
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
@@ -156,10 +161,11 @@ async function main() {
   const govData = await fetchDataGovAe();
   allTransactions = allTransactions.concat(govData.filter(Boolean));
   
-  // إذا لم نجد بيانات حقيقية، استخدم البيانات المولدة للمرحلة الانتقالية
-  if (allTransactions.length < 10) {
-    console.log('⚠️ Insufficient real data. Generating supplementary data...');
-    const generated = generateSampleData(30);
+  // إذا لم نجد بيانات حقيقية كافية، استخدم البيانات المولدة
+  if (allTransactions.length < 200) {
+    const needed = 200 - allTransactions.length;
+    console.log(`⚠️ Insufficient real data (${allTransactions.length}). Generating ${needed} supplementary records...`);
+    const generated = generateSampleData(needed);
     allTransactions = allTransactions.concat(generated);
   }
   
@@ -180,15 +186,27 @@ async function main() {
 }
 
 function generateSampleData(count) {
-  const districts = ['Dubai Marina', 'Business Bay', 'Jumeirah Village Circle', 'Downtown Dubai', 'Palm Jumeirah', 'Arabian Ranches'];
-  const types = ['apartment', 'villa', 'office'];
+  const districts = [
+    'Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Business Bay',
+    'Jumeirah Village Circle', 'Jumeirah Lake Towers', 'Dubai Hills Estate',
+    'Arabian Ranches', 'Emirates Hills', 'Emaar Beachfront',
+    'Dubai Creek Harbour', 'Al Barsha', 'The Springs', 'The Meadows',
+    'Deira', 'Bur Dubai', 'Damac Hills', 'Mirdif', 'Al Furjan',
+    'Discovery Gardens', 'Motor City', 'Dubai Sports City',
+    'Dubai Silicon Oasis', 'International City', 'Al Nahda'
+  ];
+  const types = ['apartment', 'villa', 'townhouse', 'office', 'retail'];
   const data = [];
   
   for (let i = 0; i < count; i++) {
     const type = types[Math.floor(Math.random() * types.length)];
     const district = districts[Math.floor(Math.random() * districts.length)];
-    const sqm = type === 'villa' ? Math.floor(Math.random() * 300) + 180 : Math.floor(Math.random() * 120) + 50;
-    const pricePerSqm = 4000 + Math.floor(Math.random() * 8000);
+    const sqm = type === 'villa' ? Math.floor(Math.random() * 300) + 180 :
+                type === 'townhouse' ? Math.floor(Math.random() * 200) + 120 :
+                type === 'office' ? Math.floor(Math.random() * 350) + 80 :
+                type === 'retail' ? Math.floor(Math.random() * 150) + 40 :
+                Math.floor(Math.random() * 120) + 50;
+    const pricePerSqm = 3500 + Math.floor(Math.random() * 12000);
     const daysAgo = Math.floor(Math.random() * 60);
     
     data.push({
