@@ -692,15 +692,12 @@ function salesComparisonApproach(data) {
   if (!data.avgPriceSqm && !data.scrapedData) return null;
   let avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice(data.city, data.district);
   
-  // ===== CAP ULTRA-LUXURY PRICE =====
   const maxPricePerSqm = {
     dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500,
     'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500
   };
   const cappedPrice = maxPricePerSqm[data.city] || 20000;
-  if (avgPrice > cappedPrice) {
-    avgPrice = cappedPrice;
-  }
+  if (avgPrice > cappedPrice) avgPrice = cappedPrice;
   
   let value = avgPrice * data.area;
   
@@ -710,50 +707,50 @@ function salesComparisonApproach(data) {
   value *= Math.max(0.80, 1 - (age * 0.005));
   value += data.features.length * (data.area * 50);
 
-  // Expert Assessment Adjustments
   const finishFactors = { luxury: 1.15, good: 1.05, normal: 1.00, basic: 0.92, poor: 0.80 };
   if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1.00;
-  
   const viewFactors = { sea: 1.15, 'partial-sea': 1.08, city: 1.05, garden: 1.03, street: 0.97, internal: 0.92 };
   if (data.viewType) value *= viewFactors[data.viewType] || 1.00;
-  
   const floorFactors = { penthouse: 1.12, 'very-high': 1.06, high: 1.03, mid: 1.00, low: 0.97, ground: 0.92 };
   if (data.floorLevel) value *= floorFactors[data.floorLevel] || 1.00;
-  
   const streetFactors = { main: 1.08, corner: 1.05, secondary: 1.00, quiet: 0.96 };
   if (data.streetPosition) value *= streetFactors[data.streetPosition] || 1.00;
-  
   const buildingFactors = { excellent: 1.10, good: 1.03, fair: 0.95, old: 0.82 };
   if (data.buildingCondition) value *= buildingFactors[data.buildingCondition] || 1.00;
-  
   const furnishedFactors = { furnished: 1.04, 'semi-furnished': 1.02, unfurnished: 0.98 };
   if (data.furnishedStatus) value *= furnishedFactors[data.furnishedStatus] || 1.00;
 
-  // ===== WATERFRONT PREMIUM =====
   const waterfrontAreas = ['Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island', 'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'];
   if (waterfrontAreas.includes(data.district) && (data.propType === 'villa' || data.propType === 'townhouse')) {
     value = Math.round(value * 1.06);
   }
 
-  // ===== BIAS CALIBRATION =====
+  if (data.propType === 'villa') {
+    if (data.area > 300) value = Math.round(value * 1.04);
+    else if (data.area < 200) value = Math.round(value * 0.96);
+  }
+
+  if (value > 2200000) value = Math.round(value * 0.95);
+
   const biasCorrection = {
     'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018,
     ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016
   };
-  if (biasCorrection[data.city]) {
-    value = Math.round(value * biasCorrection[data.city]);
-  }
-
-  // Villa/Townhouse correction
+  if (biasCorrection[data.city]) value = Math.round(value * biasCorrection[data.city]);
   if (data.propType === 'villa') value = Math.round(value * 1.018);
   if (data.propType === 'townhouse') value = Math.round(value * 1.021);
+
+  const areaCalibration = {
+    'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94,
+    'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94
+  };
+  if (areaCalibration[data.district]) value = Math.round(value * areaCalibration[data.district]);
 
   value = Math.round(value);
   
   let details = `Based on avg ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
   if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
   if (data.viewType) details += ` View: ${data.viewType}.`;
-  if (data.floorLevel) details += ` Floor: ${data.floorLevel}.`;
   details += ` Condition: ${data.condition}, Age: ${age}y.`;
 
   return {

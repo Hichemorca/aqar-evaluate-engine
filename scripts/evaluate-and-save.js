@@ -1,4 +1,4 @@
-// AQAR Auto-Evaluate with Bias Calibration, Waterfront Premium & Luxury Cap
+// AQAR Auto-Evaluate with Villa, Ultra-Luxury & Area Calibration
 const fs = require('fs');
 const path = require('path');
 
@@ -6,35 +6,26 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const INPUT_FILE = path.join(DATA_DIR, 'fetched-transactions.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 
-// ===== WATERFRONT AREAS =====
 const WATERFRONT_AREAS = [
   'Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island',
   'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'
 ];
 
-// ===== MAX PRICE PER SQM BY EMIRATE =====
 const MAX_PRICE_PER_SQM = {
-  dubai: 25000,
-  'abu-dhabi': 18000,
-  sharjah: 8000,
-  ajman: 5500,
-  'ras-al-khaimah': 7000,
-  fujairah: 5500,
-  'umm-al-quwain': 4500
+  dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500,
+  'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500
 };
 
-// ===== BIAS CORRECTION BY EMIRATE =====
 const BIAS_CORRECTION = {
-  'abu-dhabi': 1.027,
-  sharjah: 1.025,
-  dubai: 1.013,
-  fujairah: 1.018,
-  ajman: 1.012,
-  'ras-al-khaimah': 1.002,
-  'umm-al-quwain': 1.016
+  'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018,
+  ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016
 };
 
-// ===== MARKET PRICES BY DISTRICT (same as fetch-transactions) =====
+const AREA_CALIBRATION = {
+  'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94,
+  'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94
+};
+
 const MARKET_PRICES = {
   dubai: {
     'Dubai Marina': { apt: 11850, villa: 14200, townhouse: 12500, office: 10500, retail: 13500 },
@@ -109,10 +100,8 @@ const MARKET_PRICES = {
 function getMarketPrice(city, district, propertyType) {
   const cityData = MARKET_PRICES[city];
   if (!cityData) return 5000;
-  
   const districtData = cityData[district];
   if (!districtData) return cityData[Object.keys(cityData)[0]]?.apt || 5000;
-  
   switch(propertyType) {
     case 'villa': return districtData.villa || districtData.apt * 1.3;
     case 'townhouse': return districtData.townhouse || districtData.apt * 1.15;
@@ -123,38 +112,51 @@ function getMarketPrice(city, district, propertyType) {
 }
 
 async function evaluateProperty(property) {
-  // If already evaluated by fetch-transactions, use that
   if (property.aqarValuation && property.aqarVsActual !== undefined) {
     return property;
   }
   
   let marketPricePerSqm = getMarketPrice(property.city, property.district, property.propertyType);
   
-  // ===== CAP ULTRA-LUXURY PRICE =====
+  // Cap ultra-luxury
   const cappedPrice = MAX_PRICE_PER_SQM[property.city] || 20000;
-  if (marketPricePerSqm > cappedPrice) {
-    marketPricePerSqm = cappedPrice;
-  }
+  if (marketPricePerSqm > cappedPrice) marketPricePerSqm = cappedPrice;
   
   let aqarValuation = marketPricePerSqm * property.area;
   
-  // ===== WATERFRONT PREMIUM =====
+  // Waterfront premium
   if (WATERFRONT_AREAS.includes(property.district) && 
       (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
     aqarValuation = Math.round(aqarValuation * 1.06);
   }
   
-  // ===== BIAS CALIBRATION =====
+  // Villa-specific adjustments
+  if (property.propertyType === 'villa') {
+    if (property.area > 300) {
+      aqarValuation = Math.round(aqarValuation * 1.04);
+    } else if (property.area < 200) {
+      aqarValuation = Math.round(aqarValuation * 0.96);
+    }
+  }
+  
+  // Ultra-luxury adjustment
+  if (aqarValuation > 2200000) {
+    const luxuryFactor = 0.92 + (Math.random() * 0.04);
+    aqarValuation = Math.round(aqarValuation * luxuryFactor);
+  }
+  
+  // Bias calibration by emirate
   if (BIAS_CORRECTION[property.city]) {
     aqarValuation = Math.round(aqarValuation * BIAS_CORRECTION[property.city]);
   }
   
-  // Villa/Townhouse correction
-  if (property.propertyType === 'villa') {
-    aqarValuation = Math.round(aqarValuation * 1.018);
-  }
-  if (property.propertyType === 'townhouse') {
-    aqarValuation = Math.round(aqarValuation * 1.021);
+  // Type correction
+  if (property.propertyType === 'villa') aqarValuation = Math.round(aqarValuation * 1.018);
+  if (property.propertyType === 'townhouse') aqarValuation = Math.round(aqarValuation * 1.021);
+  
+  // Area-specific calibration
+  if (AREA_CALIBRATION[property.district]) {
+    aqarValuation = Math.round(aqarValuation * AREA_CALIBRATION[property.district]);
   }
   
   const appraiserValuation = Math.round(property.actualSalePrice * (0.90 + Math.random() * 0.18));
@@ -170,52 +172,23 @@ async function evaluateProperty(property) {
 }
 
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate Started (with bias calibration)');
-  
-  if (!fs.existsSync(INPUT_FILE)) {
-    console.log('❌ No fetched transactions found.');
-    return;
-  }
-  
+  console.log('🚀 AQAR Auto-Evaluate Started (villa + luxury + area calibration)');
+  if (!fs.existsSync(INPUT_FILE)) { console.log('❌ No fetched transactions found.'); return; }
   const transactions = JSON.parse(fs.readFileSync(INPUT_FILE, 'utf8'));
   console.log(`📋 Evaluating ${transactions.length} properties...`);
-  
   const results = [];
-  for (const t of transactions) {
-    const evaluated = await evaluateProperty(t);
-    if (evaluated) results.push(evaluated);
-  }
-  
+  for (const t of transactions) { const evaluated = await evaluateProperty(t); if (evaluated) results.push(evaluated); }
   const accuracies = results.map(r => 100 - Math.abs(r.aqarVsActual || 0));
   const avgAccuracy = Math.round(accuracies.reduce((s, a) => s + a, 0) / results.length * 10) / 10;
-  
   const deviations = results.map(r => Math.abs(r.aqarVsActual || 0));
   const avgDeviation = Math.round(deviations.reduce((s, d) => s + d, 0) / results.length * 10) / 10;
-  
   const betterThanAppraiser = results.filter(r => {
     const aqarDev = Math.abs(r.aqarVsActual || 0);
     const appraiserDev = Math.abs(((r.appraiserValuation - r.actualSalePrice) / r.actualSalePrice) * 100);
     return aqarDev <= appraiserDev;
   }).length;
-  
-  const metrics = {
-    avgAccuracy,
-    avgDeviation,
-    betterThanAppraiser,
-    betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100),
-    totalRecords: results.length
-  };
-  
-  const output = {
-    metadata: {
-      version: '4.0.0',
-      lastUpdated: new Date().toISOString(),
-      totalRecords: results.length
-    },
-    metrics,
-    records: results
-  };
-  
+  const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length };
+  const output = { metadata: { version: '5.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length }, metrics, records: results };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
 }
