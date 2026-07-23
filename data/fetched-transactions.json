@@ -1,0 +1,302 @@
+[
+  {
+    "propertyRef": "GEN-1784773850647-0",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 261,
+    "actualSalePrice": 1331100,
+    "saleDate": "2026-07-14",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-1",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Business Bay",
+    "area": 368,
+    "actualSalePrice": 1583872,
+    "saleDate": "2026-06-09",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-2",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Business Bay",
+    "area": 230,
+    "actualSalePrice": 1592750,
+    "saleDate": "2026-07-22",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-3",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Dubai Marina",
+    "area": 103,
+    "actualSalePrice": 1025983,
+    "saleDate": "2026-07-18",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-4",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Dubai Marina",
+    "area": 152,
+    "actualSalePrice": 1302640,
+    "saleDate": "2026-07-04",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-5",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Palm Jumeirah",
+    "area": 284,
+    "actualSalePrice": 2336752,
+    "saleDate": "2026-07-10",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-6",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Arabian Ranches",
+    "area": 391,
+    "actualSalePrice": 4199731,
+    "saleDate": "2026-06-27",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-7",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Dubai Marina",
+    "area": 84,
+    "actualSalePrice": 533148,
+    "saleDate": "2026-06-30",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-8",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Palm Jumeirah",
+    "area": 115,
+    "actualSalePrice": 699085,
+    "saleDate": "2026-05-28",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-9",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 150,
+    "actualSalePrice": 750750,
+    "saleDate": "2026-06-12",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-10",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Business Bay",
+    "area": 151,
+    "actualSalePrice": 1553488,
+    "saleDate": "2026-07-08",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-11",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Arabian Ranches",
+    "area": 59,
+    "actualSalePrice": 278303,
+    "saleDate": "2026-07-16",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-12",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 115,
+    "actualSalePrice": 973360,
+    "saleDate": "2026-06-22",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-13",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Business Bay",
+    "area": 378,
+    "actualSalePrice": 2449062,
+    "saleDate": "2026-05-25",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-14",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Palm Jumeirah",
+    "area": 159,
+    "actualSalePrice": 1165629,
+    "saleDate": "2026-06-16",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-15",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Jumeirah Village Circle",
+    "area": 110,
+    "actualSalePrice": 500280,
+    "saleDate": "2026-06-24",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-16",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Arabian Ranches",
+    "area": 396,
+    "actualSalePrice": 4258980,
+    "saleDate": "2026-06-06",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-17",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Business Bay",
+    "area": 117,
+    "actualSalePrice": 716157,
+    "saleDate": "2026-06-06",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-18",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Arabian Ranches",
+    "area": 70,
+    "actualSalePrice": 832510,
+    "saleDate": "2026-07-01",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-19",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 80,
+    "actualSalePrice": 639840,
+    "saleDate": "2026-06-06",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-20",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Arabian Ranches",
+    "area": 75,
+    "actualSalePrice": 533175,
+    "saleDate": "2026-06-22",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-21",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Business Bay",
+    "area": 458,
+    "actualSalePrice": 5159828,
+    "saleDate": "2026-06-21",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-22",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Palm Jumeirah",
+    "area": 103,
+    "actualSalePrice": 845218,
+    "saleDate": "2026-06-12",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-23",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 72,
+    "actualSalePrice": 690048,
+    "saleDate": "2026-06-04",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-24",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Dubai Marina",
+    "area": 61,
+    "actualSalePrice": 421937,
+    "saleDate": "2026-07-18",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-25",
+    "propertyType": "office",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 103,
+    "actualSalePrice": 762509,
+    "saleDate": "2026-06-06",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-26",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Palm Jumeirah",
+    "area": 88,
+    "actualSalePrice": 525800,
+    "saleDate": "2026-06-14",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-27",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Downtown Dubai",
+    "area": 91,
+    "actualSalePrice": 570206,
+    "saleDate": "2026-06-07",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-28",
+    "propertyType": "apartment",
+    "city": "dubai",
+    "district": "Dubai Marina",
+    "area": 65,
+    "actualSalePrice": 694720,
+    "saleDate": "2026-06-28",
+    "scrapedFrom": "Generated (No live data)"
+  },
+  {
+    "propertyRef": "GEN-1784773850648-29",
+    "propertyType": "villa",
+    "city": "dubai",
+    "district": "Palm Jumeirah",
+    "area": 433,
+    "actualSalePrice": 2481090,
+    "saleDate": "2026-07-11",
+    "scrapedFrom": "Generated (No live data)"
+  }
+]

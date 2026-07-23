@@ -1,0 +1,2813 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-07-23T02:31:11.650Z",
+    "totalRecords": 30
+  },
+  "metrics": {
+    "avgAccuracy": -15,
+    "avgDeviation": 115,
+    "betterThanAppraiser": 1,
+    "totalRecords": 30
+  },
+  "records": [
+    {
+      "propertyRef": "GEN-1784773850647-0",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 261,
+      "actualSalePrice": 1331100,
+      "saleDate": "2026-07-14",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 5321790,
+      "aqarVsActual": 299.8,
+      "appraiserValuation": 1265973.8399602873,
+      "aqarVsAppraiser": 292,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 6933120,
+            "sqm": 384,
+            "pricePerSqm": 18055,
+            "date": "2026-07-10",
+            "source": "Bayut"
+          },
+          {
+            "price": 4555008,
+            "sqm": 256,
+            "pricePerSqm": 17793,
+            "date": "2026-07-09",
+            "source": "Property Finder"
+          },
+          {
+            "price": 5945008,
+            "sqm": 344,
+            "pricePerSqm": 17282,
+            "date": "2026-07-03",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 7191464,
+            "sqm": 371,
+            "pricePerSqm": 19384,
+            "date": "2026-06-30",
+            "source": "Property Finder"
+          },
+          {
+            "price": 10017530,
+            "sqm": 461,
+            "pricePerSqm": 21730,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 9071958,
+            "sqm": 413,
+            "pricePerSqm": 21966,
+            "date": "2026-06-25",
+            "source": "Bayut"
+          },
+          {
+            "price": 7337840,
+            "sqm": 370,
+            "pricePerSqm": 19832,
+            "date": "2026-06-18",
+            "source": "Bayut"
+          },
+          {
+            "price": 4026888,
+            "sqm": 181,
+            "pricePerSqm": 22248,
+            "date": "2026-06-13",
+            "source": "Property Finder"
+          },
+          {
+            "price": 5069818,
+            "sqm": 227,
+            "pricePerSqm": 22334,
+            "date": "2026-06-07",
+            "source": "Bayut"
+          },
+          {
+            "price": 8263815,
+            "sqm": 373,
+            "pricePerSqm": 22155,
+            "date": "2026-06-03",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 6597768,
+            "sqm": 314,
+            "pricePerSqm": 21012,
+            "date": "2026-05-25",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 20390,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 5,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:51.452Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-1",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Business Bay",
+      "area": 368,
+      "actualSalePrice": 1583872,
+      "saleDate": "2026-06-09",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 5419168,
+      "aqarVsActual": 242.1,
+      "appraiserValuation": 1539530.686213202,
+      "aqarVsAppraiser": 235.4,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 5394550,
+            "sqm": 350,
+            "pricePerSqm": 15413,
+            "date": "2026-07-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 4361896,
+            "sqm": 292,
+            "pricePerSqm": 14938,
+            "date": "2026-07-06",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3713310,
+            "sqm": 270,
+            "pricePerSqm": 13753,
+            "date": "2026-07-05",
+            "source": "Bayut"
+          },
+          {
+            "price": 5595720,
+            "sqm": 442,
+            "pricePerSqm": 12660,
+            "date": "2026-06-26",
+            "source": "Bayut"
+          },
+          {
+            "price": 2739724,
+            "sqm": 188,
+            "pricePerSqm": 14573,
+            "date": "2026-06-19",
+            "source": "Bayut"
+          },
+          {
+            "price": 3794772,
+            "sqm": 303,
+            "pricePerSqm": 12524,
+            "date": "2026-06-05",
+            "source": "Property Finder"
+          },
+          {
+            "price": 6524130,
+            "sqm": 435,
+            "pricePerSqm": 14998,
+            "date": "2026-06-05",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2964927,
+            "sqm": 177,
+            "pricePerSqm": 16751,
+            "date": "2026-06-03",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 14726,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Business Bay",
+          "nameAr": "Business Bay",
+          "classification": "middle",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": true
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 10,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:30:52.145Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-2",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Business Bay",
+      "area": 230,
+      "actualSalePrice": 1592750,
+      "saleDate": "2026-07-22",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 3386980,
+      "aqarVsActual": 112.6,
+      "appraiserValuation": 1564586.787048091,
+      "aqarVsAppraiser": 108.5,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 3162375,
+            "sqm": 225,
+            "pricePerSqm": 14055,
+            "date": "2026-07-18",
+            "source": "Property Finder"
+          },
+          {
+            "price": 5226870,
+            "sqm": 330,
+            "pricePerSqm": 15839,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 7124962,
+            "sqm": 494,
+            "pricePerSqm": 14423,
+            "date": "2026-06-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 3086880,
+            "sqm": 236,
+            "pricePerSqm": 13080,
+            "date": "2026-06-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 3392700,
+            "sqm": 263,
+            "pricePerSqm": 12900,
+            "date": "2026-06-14",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2764200,
+            "sqm": 170,
+            "pricePerSqm": 16260,
+            "date": "2026-06-14",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 5672564,
+            "sqm": 404,
+            "pricePerSqm": 14041,
+            "date": "2026-06-09",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 5568124,
+            "sqm": 367,
+            "pricePerSqm": 15172,
+            "date": "2026-05-27",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3550688,
+            "sqm": 244,
+            "pricePerSqm": 14552,
+            "date": "2026-05-25",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 14726,
+        "count": 9,
+        "districtInfo": {
+          "nameEn": "Business Bay",
+          "nameAr": "Business Bay",
+          "classification": "middle",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": true
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 8,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:30:52.819Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-3",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Dubai Marina",
+      "area": 103,
+      "actualSalePrice": 1025983,
+      "saleDate": "2026-07-18",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1807650,
+      "aqarVsActual": 76.2,
+      "appraiserValuation": 988063.9624708203,
+      "aqarVsAppraiser": 72.7,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2513968,
+            "sqm": 142,
+            "pricePerSqm": 17704,
+            "date": "2026-07-13",
+            "source": "Bayut"
+          },
+          {
+            "price": 1726017,
+            "sqm": 107,
+            "pricePerSqm": 16131,
+            "date": "2026-07-02",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2107184,
+            "sqm": 122,
+            "pricePerSqm": 17272,
+            "date": "2026-06-30",
+            "source": "Bayut"
+          },
+          {
+            "price": 2900360,
+            "sqm": 155,
+            "pricePerSqm": 18712,
+            "date": "2026-06-28",
+            "source": "Bayut"
+          },
+          {
+            "price": 2327265,
+            "sqm": 135,
+            "pricePerSqm": 17239,
+            "date": "2026-06-28",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1012150,
+            "sqm": 50,
+            "pricePerSqm": 20243,
+            "date": "2026-06-22",
+            "source": "Bayut"
+          },
+          {
+            "price": 3232942,
+            "sqm": 163,
+            "pricePerSqm": 19834,
+            "date": "2026-06-18",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2549211,
+            "sqm": 133,
+            "pricePerSqm": 19167,
+            "date": "2026-06-17",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2781100,
+            "sqm": 175,
+            "pricePerSqm": 15892,
+            "date": "2026-06-11",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1345500,
+            "sqm": 69,
+            "pricePerSqm": 19500,
+            "date": "2026-06-10",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3282073,
+            "sqm": 181,
+            "pricePerSqm": 18133,
+            "date": "2026-05-29",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 17550,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Dubai Marina",
+          "nameAr": "Dubai Marina",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 7,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:53.614Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-4",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Dubai Marina",
+      "area": 152,
+      "actualSalePrice": 1302640,
+      "saleDate": "2026-07-04",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 2347488,
+      "aqarVsActual": 80.2,
+      "appraiserValuation": 1325088.2873114217,
+      "aqarVsAppraiser": 76.7,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2098200,
+            "sqm": 120,
+            "pricePerSqm": 17485,
+            "date": "2026-07-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 3486728,
+            "sqm": 226,
+            "pricePerSqm": 15428,
+            "date": "2026-07-14",
+            "source": "Property Finder"
+          },
+          {
+            "price": 4025868,
+            "sqm": 231,
+            "pricePerSqm": 17428,
+            "date": "2026-07-04",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1721856,
+            "sqm": 128,
+            "pricePerSqm": 13452,
+            "date": "2026-06-24",
+            "source": "Bayut"
+          },
+          {
+            "price": 4149075,
+            "sqm": 245,
+            "pricePerSqm": 16935,
+            "date": "2026-06-21",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 4335006,
+            "sqm": 298,
+            "pricePerSqm": 14547,
+            "date": "2026-06-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 3452927,
+            "sqm": 263,
+            "pricePerSqm": 13129,
+            "date": "2026-06-14",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2238912,
+            "sqm": 169,
+            "pricePerSqm": 13248,
+            "date": "2026-06-09",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1828224,
+            "sqm": 128,
+            "pricePerSqm": 14283,
+            "date": "2026-06-04",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2042992,
+            "sqm": 116,
+            "pricePerSqm": 17612,
+            "date": "2026-05-26",
+            "source": "Bayut"
+          },
+          {
+            "price": 2180875,
+            "sqm": 125,
+            "pricePerSqm": 17447,
+            "date": "2026-05-26",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 15444,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Dubai Marina",
+          "nameAr": "Dubai Marina",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 8,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:54.281Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-5",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Palm Jumeirah",
+      "area": 284,
+      "actualSalePrice": 2336752,
+      "saleDate": "2026-07-10",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 6379776,
+      "aqarVsActual": 173,
+      "appraiserValuation": 2362623.0804622113,
+      "aqarVsAppraiser": 167.7,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 6474524,
+            "sqm": 316,
+            "pricePerSqm": 20489,
+            "date": "2026-07-18",
+            "source": "Bayut"
+          },
+          {
+            "price": 4834820,
+            "sqm": 206,
+            "pricePerSqm": 23470,
+            "date": "2026-07-17",
+            "source": "Property Finder"
+          },
+          {
+            "price": 8813100,
+            "sqm": 435,
+            "pricePerSqm": 20260,
+            "date": "2026-07-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 9775592,
+            "sqm": 472,
+            "pricePerSqm": 20711,
+            "date": "2026-07-06",
+            "source": "Property Finder"
+          },
+          {
+            "price": 4711426,
+            "sqm": 206,
+            "pricePerSqm": 22871,
+            "date": "2026-06-27",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 9810459,
+            "sqm": 471,
+            "pricePerSqm": 20829,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 7536954,
+            "sqm": 393,
+            "pricePerSqm": 19178,
+            "date": "2026-06-22",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 6329490,
+            "sqm": 282,
+            "pricePerSqm": 22445,
+            "date": "2026-06-05",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 22464,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Palm Jumeirah",
+          "nameAr": "Palm Jumeirah",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 8,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:54.953Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-6",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Arabian Ranches",
+      "area": 391,
+      "actualSalePrice": 4199731,
+      "saleDate": "2026-06-27",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 5067360,
+      "aqarVsActual": 20.7,
+      "appraiserValuation": 4047551.203169078,
+      "aqarVsAppraiser": 18.3,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 5094814,
+            "sqm": 386,
+            "pricePerSqm": 13199,
+            "date": "2026-07-10",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 4757940,
+            "sqm": 405,
+            "pricePerSqm": 11748,
+            "date": "2026-07-08",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3957202,
+            "sqm": 346,
+            "pricePerSqm": 11437,
+            "date": "2026-07-02",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2039492,
+            "sqm": 169,
+            "pricePerSqm": 12068,
+            "date": "2026-06-21",
+            "source": "Bayut"
+          },
+          {
+            "price": 5821760,
+            "sqm": 460,
+            "pricePerSqm": 12656,
+            "date": "2026-06-20",
+            "source": "Bayut"
+          },
+          {
+            "price": 6258536,
+            "sqm": 461,
+            "pricePerSqm": 13576,
+            "date": "2026-06-04",
+            "source": "Bayut"
+          },
+          {
+            "price": 3232007,
+            "sqm": 263,
+            "pricePerSqm": 12289,
+            "date": "2026-06-02",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2938528,
+            "sqm": 229,
+            "pricePerSqm": 12832,
+            "date": "2026-06-02",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3096360,
+            "sqm": 282,
+            "pricePerSqm": 10980,
+            "date": "2026-06-01",
+            "source": "Bayut"
+          },
+          {
+            "price": 4990618,
+            "sqm": 409,
+            "pricePerSqm": 12202,
+            "date": "2026-05-25",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 12960,
+        "count": 10,
+        "districtInfo": {
+          "nameEn": "Arabian Ranches",
+          "nameAr": "Arabian Ranches",
+          "classification": "upper",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 14,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:30:55.622Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-7",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Dubai Marina",
+      "area": 84,
+      "actualSalePrice": 533148,
+      "saleDate": "2026-06-30",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1297296,
+      "aqarVsActual": 143.3,
+      "appraiserValuation": 528155.6281518413,
+      "aqarVsAppraiser": 138.6,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 4315443,
+            "sqm": 251,
+            "pricePerSqm": 17193,
+            "date": "2026-07-12",
+            "source": "Bayut"
+          },
+          {
+            "price": 778741,
+            "sqm": 59,
+            "pricePerSqm": 13199,
+            "date": "2026-07-07",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1555982,
+            "sqm": 94,
+            "pricePerSqm": 16553,
+            "date": "2026-07-04",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1354644,
+            "sqm": 81,
+            "pricePerSqm": 16724,
+            "date": "2026-07-03",
+            "source": "Bayut"
+          },
+          {
+            "price": 4476276,
+            "sqm": 252,
+            "pricePerSqm": 17763,
+            "date": "2026-06-28",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1800435,
+            "sqm": 105,
+            "pricePerSqm": 17147,
+            "date": "2026-06-21",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 4445613,
+            "sqm": 261,
+            "pricePerSqm": 17033,
+            "date": "2026-06-18",
+            "source": "Bayut"
+          },
+          {
+            "price": 1068280,
+            "sqm": 68,
+            "pricePerSqm": 15710,
+            "date": "2026-06-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 3486720,
+            "sqm": 256,
+            "pricePerSqm": 13620,
+            "date": "2026-06-11",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2835040,
+            "sqm": 208,
+            "pricePerSqm": 13630,
+            "date": "2026-06-09",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 15444,
+        "count": 10,
+        "districtInfo": {
+          "nameEn": "Dubai Marina",
+          "nameAr": "Dubai Marina",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 5,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:56.300Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-8",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Palm Jumeirah",
+      "area": 115,
+      "actualSalePrice": 699085,
+      "saleDate": "2026-05-28",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1776060,
+      "aqarVsActual": 154.1,
+      "appraiserValuation": 715497.1724096145,
+      "aqarVsAppraiser": 149.1,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 3309299,
+            "sqm": 233,
+            "pricePerSqm": 14203,
+            "date": "2026-07-13",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3343978,
+            "sqm": 194,
+            "pricePerSqm": 17237,
+            "date": "2026-06-25",
+            "source": "Bayut"
+          },
+          {
+            "price": 2112040,
+            "sqm": 140,
+            "pricePerSqm": 15086,
+            "date": "2026-06-20",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3954375,
+            "sqm": 285,
+            "pricePerSqm": 13875,
+            "date": "2026-06-20",
+            "source": "Bayut"
+          },
+          {
+            "price": 3934616,
+            "sqm": 238,
+            "pricePerSqm": 16532,
+            "date": "2026-06-20",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3125799,
+            "sqm": 197,
+            "pricePerSqm": 15867,
+            "date": "2026-06-04",
+            "source": "Bayut"
+          },
+          {
+            "price": 4257462,
+            "sqm": 251,
+            "pricePerSqm": 16962,
+            "date": "2026-06-01",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 15444,
+        "count": 7,
+        "districtInfo": {
+          "nameEn": "Palm Jumeirah",
+          "nameAr": "Palm Jumeirah",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 6,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:56.968Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-9",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 150,
+      "actualSalePrice": 750750,
+      "saleDate": "2026-06-12",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 2102700,
+      "aqarVsActual": 180.1,
+      "appraiserValuation": 750030.3029367056,
+      "aqarVsAppraiser": 174.6,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2686860,
+            "sqm": 180,
+            "pricePerSqm": 14927,
+            "date": "2026-07-17",
+            "source": "Property Finder"
+          },
+          {
+            "price": 4420416,
+            "sqm": 273,
+            "pricePerSqm": 16192,
+            "date": "2026-07-15",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2188496,
+            "sqm": 152,
+            "pricePerSqm": 14398,
+            "date": "2026-07-03",
+            "source": "Bayut"
+          },
+          {
+            "price": 2196478,
+            "sqm": 139,
+            "pricePerSqm": 15802,
+            "date": "2026-06-21",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1437890,
+            "sqm": 106,
+            "pricePerSqm": 13565,
+            "date": "2026-06-08",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1368882,
+            "sqm": 113,
+            "pricePerSqm": 12114,
+            "date": "2026-05-28",
+            "source": "Bayut"
+          },
+          {
+            "price": 1733400,
+            "sqm": 107,
+            "pricePerSqm": 16200,
+            "date": "2026-05-26",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 14018,
+        "count": 7,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 4,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:57.638Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-10",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Business Bay",
+      "area": 151,
+      "actualSalePrice": 1553488,
+      "saleDate": "2026-07-08",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1528724,
+      "aqarVsActual": -1.6,
+      "appraiserValuation": 1484322.9380730845,
+      "aqarVsAppraiser": -3.5,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2008109,
+            "sqm": 199,
+            "pricePerSqm": 10091,
+            "date": "2026-07-16",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1717314,
+            "sqm": 193,
+            "pricePerSqm": 8898,
+            "date": "2026-07-14",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2171232,
+            "sqm": 216,
+            "pricePerSqm": 10052,
+            "date": "2026-07-13",
+            "source": "Bayut"
+          },
+          {
+            "price": 3261920,
+            "sqm": 296,
+            "pricePerSqm": 11020,
+            "date": "2026-06-27",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2224869,
+            "sqm": 201,
+            "pricePerSqm": 11069,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 1428976,
+            "sqm": 124,
+            "pricePerSqm": 11524,
+            "date": "2026-06-16",
+            "source": "Bayut"
+          },
+          {
+            "price": 815915,
+            "sqm": 85,
+            "pricePerSqm": 9599,
+            "date": "2026-06-12",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2498619,
+            "sqm": 229,
+            "pricePerSqm": 10911,
+            "date": "2026-05-25",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 10124,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Business Bay",
+          "nameAr": "Business Bay",
+          "classification": "middle",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": true
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 11,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:30:58.309Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-11",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Arabian Ranches",
+      "area": 59,
+      "actualSalePrice": 278303,
+      "saleDate": "2026-07-16",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 597375,
+      "aqarVsActual": 114.6,
+      "appraiserValuation": 291487.5465735748,
+      "aqarVsAppraiser": 110.4,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 427800,
+            "sqm": 50,
+            "pricePerSqm": 8556,
+            "date": "2026-07-07",
+            "source": "Property Finder"
+          },
+          {
+            "price": 996933,
+            "sqm": 87,
+            "pricePerSqm": 11459,
+            "date": "2026-07-02",
+            "source": "Bayut"
+          },
+          {
+            "price": 969969,
+            "sqm": 91,
+            "pricePerSqm": 10659,
+            "date": "2026-07-02",
+            "source": "Property Finder"
+          },
+          {
+            "price": 873661,
+            "sqm": 79,
+            "pricePerSqm": 11059,
+            "date": "2026-06-08",
+            "source": "Bayut"
+          },
+          {
+            "price": 708271,
+            "sqm": 61,
+            "pricePerSqm": 11611,
+            "date": "2026-05-30",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 10125,
+        "count": 5,
+        "districtInfo": {
+          "nameEn": "Arabian Ranches",
+          "nameAr": "Arabian Ranches",
+          "classification": "upper",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 10,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:30:58.979Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-12",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 115,
+      "actualSalePrice": 973360,
+      "saleDate": "2026-06-22",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1831950,
+      "aqarVsActual": 88.2,
+      "appraiserValuation": 975885.5798972491,
+      "aqarVsAppraiser": 84.5,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2542400,
+            "sqm": 160,
+            "pricePerSqm": 15890,
+            "date": "2026-07-11",
+            "source": "Bayut"
+          },
+          {
+            "price": 2067030,
+            "sqm": 153,
+            "pricePerSqm": 13510,
+            "date": "2026-06-27",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1036959,
+            "sqm": 77,
+            "pricePerSqm": 13467,
+            "date": "2026-06-19",
+            "source": "Property Finder"
+          },
+          {
+            "price": 948550,
+            "sqm": 61,
+            "pricePerSqm": 15550,
+            "date": "2026-06-14",
+            "source": "Bayut"
+          },
+          {
+            "price": 976854,
+            "sqm": 61,
+            "pricePerSqm": 16014,
+            "date": "2026-06-12",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1298950,
+            "sqm": 83,
+            "pricePerSqm": 15650,
+            "date": "2026-05-26",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 15930,
+        "count": 6,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "declining",
+        "vacancyRate": 8,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:30:59.645Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-13",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Business Bay",
+      "area": 378,
+      "actualSalePrice": 2449062,
+      "saleDate": "2026-05-25",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 5566428,
+      "aqarVsActual": 127.3,
+      "appraiserValuation": 2377974.7278555254,
+      "aqarVsAppraiser": 122.8,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 5284084,
+            "sqm": 331,
+            "pricePerSqm": 15964,
+            "date": "2026-07-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 4603500,
+            "sqm": 297,
+            "pricePerSqm": 15500,
+            "date": "2026-07-11",
+            "source": "Property Finder"
+          },
+          {
+            "price": 7888881,
+            "sqm": 481,
+            "pricePerSqm": 16401,
+            "date": "2026-07-07",
+            "source": "Bayut"
+          },
+          {
+            "price": 3277194,
+            "sqm": 218,
+            "pricePerSqm": 15033,
+            "date": "2026-07-07",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 4967676,
+            "sqm": 378,
+            "pricePerSqm": 13142,
+            "date": "2026-06-20",
+            "source": "Property Finder"
+          },
+          {
+            "price": 6840834,
+            "sqm": 442,
+            "pricePerSqm": 15477,
+            "date": "2026-06-17",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 6080296,
+            "sqm": 412,
+            "pricePerSqm": 14758,
+            "date": "2026-06-07",
+            "source": "Bayut"
+          },
+          {
+            "price": 3975264,
+            "sqm": 321,
+            "pricePerSqm": 12384,
+            "date": "2026-05-31",
+            "source": "Bayut"
+          },
+          {
+            "price": 4375566,
+            "sqm": 351,
+            "pricePerSqm": 12466,
+            "date": "2026-05-30",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 14726,
+        "count": 9,
+        "districtInfo": {
+          "nameEn": "Business Bay",
+          "nameAr": "Business Bay",
+          "classification": "middle",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": true
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 11,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:31:00.326Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-14",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Palm Jumeirah",
+      "area": 159,
+      "actualSalePrice": 1165629,
+      "saleDate": "2026-06-16",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 2790450,
+      "aqarVsActual": 139.4,
+      "appraiserValuation": 1117776.8202117872,
+      "aqarVsAppraiser": 134.7,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 1465002,
+            "sqm": 77,
+            "pricePerSqm": 19026,
+            "date": "2026-07-16",
+            "source": "Bayut"
+          },
+          {
+            "price": 2841518,
+            "sqm": 151,
+            "pricePerSqm": 18818,
+            "date": "2026-07-09",
+            "source": "Bayut"
+          },
+          {
+            "price": 1441266,
+            "sqm": 89,
+            "pricePerSqm": 16194,
+            "date": "2026-07-07",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 935592,
+            "sqm": 56,
+            "pricePerSqm": 16707,
+            "date": "2026-07-07",
+            "source": "Bayut"
+          },
+          {
+            "price": 1003408,
+            "sqm": 56,
+            "pricePerSqm": 17918,
+            "date": "2026-06-23",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1967895,
+            "sqm": 113,
+            "pricePerSqm": 17415,
+            "date": "2026-06-21",
+            "source": "Bayut"
+          },
+          {
+            "price": 2073335,
+            "sqm": 115,
+            "pricePerSqm": 18029,
+            "date": "2026-06-19",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1443388,
+            "sqm": 92,
+            "pricePerSqm": 15689,
+            "date": "2026-06-09",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3077670,
+            "sqm": 173,
+            "pricePerSqm": 17790,
+            "date": "2026-06-08",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3606280,
+            "sqm": 178,
+            "pricePerSqm": 20260,
+            "date": "2026-05-31",
+            "source": "Bayut"
+          },
+          {
+            "price": 1373346,
+            "sqm": 78,
+            "pricePerSqm": 17607,
+            "date": "2026-05-26",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 17550,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Palm Jumeirah",
+          "nameAr": "Palm Jumeirah",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 4,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:00.992Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-15",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Jumeirah Village Circle",
+      "area": 110,
+      "actualSalePrice": 500280,
+      "saleDate": "2026-06-24",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1306800,
+      "aqarVsActual": 161.2,
+      "appraiserValuation": 511726.7588027347,
+      "aqarVsAppraiser": 156.1,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 799064,
+            "sqm": 76,
+            "pricePerSqm": 10514,
+            "date": "2026-07-16",
+            "source": "Bayut"
+          },
+          {
+            "price": 3499488,
+            "sqm": 288,
+            "pricePerSqm": 12151,
+            "date": "2026-07-13",
+            "source": "Bayut"
+          },
+          {
+            "price": 1599392,
+            "sqm": 151,
+            "pricePerSqm": 10592,
+            "date": "2026-07-13",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3261600,
+            "sqm": 240,
+            "pricePerSqm": 13590,
+            "date": "2026-07-08",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2491424,
+            "sqm": 212,
+            "pricePerSqm": 11752,
+            "date": "2026-07-06",
+            "source": "Bayut"
+          },
+          {
+            "price": 2877783,
+            "sqm": 233,
+            "pricePerSqm": 12351,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 1503372,
+            "sqm": 138,
+            "pricePerSqm": 10894,
+            "date": "2026-06-25",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1114344,
+            "sqm": 99,
+            "pricePerSqm": 11256,
+            "date": "2026-06-12",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1628192,
+            "sqm": 136,
+            "pricePerSqm": 11972,
+            "date": "2026-06-07",
+            "source": "Bayut"
+          },
+          {
+            "price": 2936691,
+            "sqm": 283,
+            "pricePerSqm": 10377,
+            "date": "2026-06-01",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1549781,
+            "sqm": 127,
+            "pricePerSqm": 12203,
+            "date": "2026-05-31",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 11880,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Jumeirah Village Circle",
+          "nameAr": "Jumeirah Village Circle",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 5,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:01.668Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-16",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Arabian Ranches",
+      "area": 396,
+      "actualSalePrice": 4258980,
+      "saleDate": "2026-06-06",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 5132160,
+      "aqarVsActual": 20.5,
+      "appraiserValuation": 4211642.990470462,
+      "aqarVsAppraiser": 18.1,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 4621224,
+            "sqm": 334,
+            "pricePerSqm": 13836,
+            "date": "2026-07-02",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3663252,
+            "sqm": 321,
+            "pricePerSqm": 11412,
+            "date": "2026-06-20",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2339330,
+            "sqm": 161,
+            "pricePerSqm": 14530,
+            "date": "2026-06-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 3131986,
+            "sqm": 286,
+            "pricePerSqm": 10951,
+            "date": "2026-06-10",
+            "source": "Bayut"
+          },
+          {
+            "price": 3818064,
+            "sqm": 272,
+            "pricePerSqm": 14037,
+            "date": "2026-05-26",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 12960,
+        "count": 5,
+        "districtInfo": {
+          "nameEn": "Arabian Ranches",
+          "nameAr": "Arabian Ranches",
+          "classification": "upper",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 12,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:31:02.339Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-17",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Business Bay",
+      "area": 117,
+      "actualSalePrice": 716157,
+      "saleDate": "2026-06-06",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1184508,
+      "aqarVsActual": 65.4,
+      "appraiserValuation": 689030.1721887448,
+      "aqarVsAppraiser": 62.2,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2195212,
+            "sqm": 223,
+            "pricePerSqm": 9844,
+            "date": "2026-07-18",
+            "source": "Bayut"
+          },
+          {
+            "price": 3231684,
+            "sqm": 276,
+            "pricePerSqm": 11709,
+            "date": "2026-06-25",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2107466,
+            "sqm": 202,
+            "pricePerSqm": 10433,
+            "date": "2026-06-22",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1487232,
+            "sqm": 144,
+            "pricePerSqm": 10328,
+            "date": "2026-06-14",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2629452,
+            "sqm": 276,
+            "pricePerSqm": 9527,
+            "date": "2026-05-25",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 10124,
+        "count": 5,
+        "districtInfo": {
+          "nameEn": "Business Bay",
+          "nameAr": "Business Bay",
+          "classification": "middle",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": true
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 10,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:31:03.011Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-18",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Arabian Ranches",
+      "area": 70,
+      "actualSalePrice": 832510,
+      "saleDate": "2026-07-01",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 623700,
+      "aqarVsActual": -25.1,
+      "appraiserValuation": 807556.6794462169,
+      "aqarVsAppraiser": -26.6,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 1821140,
+            "sqm": 230,
+            "pricePerSqm": 7918,
+            "date": "2026-07-13",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2501352,
+            "sqm": 252,
+            "pricePerSqm": 9926,
+            "date": "2026-07-01",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2266398,
+            "sqm": 246,
+            "pricePerSqm": 9213,
+            "date": "2026-06-25",
+            "source": "Bayut"
+          },
+          {
+            "price": 1955822,
+            "sqm": 209,
+            "pricePerSqm": 9358,
+            "date": "2026-06-25",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2591600,
+            "sqm": 275,
+            "pricePerSqm": 9424,
+            "date": "2026-06-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 746882,
+            "sqm": 74,
+            "pricePerSqm": 10093,
+            "date": "2026-06-13",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1635369,
+            "sqm": 173,
+            "pricePerSqm": 9453,
+            "date": "2026-06-01",
+            "source": "Bayut"
+          },
+          {
+            "price": 503712,
+            "sqm": 66,
+            "pricePerSqm": 7632,
+            "date": "2026-05-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 2779110,
+            "sqm": 270,
+            "pricePerSqm": 10293,
+            "date": "2026-05-25",
+            "source": "Property Finder"
+          }
+        ],
+        "avgPricePerSqm": 8910,
+        "count": 9,
+        "districtInfo": {
+          "nameEn": "Arabian Ranches",
+          "nameAr": "Arabian Ranches",
+          "classification": "upper",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 12,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:31:03.679Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-19",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 80,
+      "actualSalePrice": 639840,
+      "saleDate": "2026-06-06",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1121440,
+      "aqarVsActual": 75.3,
+      "appraiserValuation": 615888.7600627107,
+      "aqarVsAppraiser": 71.8,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2090660,
+            "sqm": 143,
+            "pricePerSqm": 14620,
+            "date": "2026-07-10",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3249312,
+            "sqm": 264,
+            "pricePerSqm": 12308,
+            "date": "2026-07-07",
+            "source": "Property Finder"
+          },
+          {
+            "price": 4232130,
+            "sqm": 294,
+            "pricePerSqm": 14395,
+            "date": "2026-06-28",
+            "source": "Bayut"
+          },
+          {
+            "price": 3454542,
+            "sqm": 266,
+            "pricePerSqm": 12987,
+            "date": "2026-06-27",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2879153,
+            "sqm": 223,
+            "pricePerSqm": 12911,
+            "date": "2026-06-14",
+            "source": "Bayut"
+          },
+          {
+            "price": 986550,
+            "sqm": 75,
+            "pricePerSqm": 13154,
+            "date": "2026-06-12",
+            "source": "Bayut"
+          },
+          {
+            "price": 1046760,
+            "sqm": 66,
+            "pricePerSqm": 15860,
+            "date": "2026-06-04",
+            "source": "Bayut"
+          },
+          {
+            "price": 1489572,
+            "sqm": 126,
+            "pricePerSqm": 11822,
+            "date": "2026-05-29",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 14018,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "declining",
+        "vacancyRate": 7,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:04.357Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-20",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Arabian Ranches",
+      "area": 75,
+      "actualSalePrice": 533175,
+      "saleDate": "2026-06-22",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 759375,
+      "aqarVsActual": 42.4,
+      "appraiserValuation": 541161.5180427051,
+      "aqarVsAppraiser": 39.6,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 536983,
+            "sqm": 61,
+            "pricePerSqm": 8803,
+            "date": "2026-07-14",
+            "source": "Bayut"
+          },
+          {
+            "price": 911898,
+            "sqm": 81,
+            "pricePerSqm": 11258,
+            "date": "2026-07-09",
+            "source": "Bayut"
+          },
+          {
+            "price": 733380,
+            "sqm": 85,
+            "pricePerSqm": 8628,
+            "date": "2026-07-08",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1539405,
+            "sqm": 135,
+            "pricePerSqm": 11403,
+            "date": "2026-07-04",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 449514,
+            "sqm": 51,
+            "pricePerSqm": 8814,
+            "date": "2026-06-25",
+            "source": "Bayut"
+          },
+          {
+            "price": 508775,
+            "sqm": 47,
+            "pricePerSqm": 10825,
+            "date": "2026-06-22",
+            "source": "Bayut"
+          },
+          {
+            "price": 1423670,
+            "sqm": 127,
+            "pricePerSqm": 11210,
+            "date": "2026-06-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 651339,
+            "sqm": 57,
+            "pricePerSqm": 11427,
+            "date": "2026-06-14",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1619568,
+            "sqm": 163,
+            "pricePerSqm": 9936,
+            "date": "2026-06-12",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1394256,
+            "sqm": 124,
+            "pricePerSqm": 11244,
+            "date": "2026-06-03",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1050560,
+            "sqm": 112,
+            "pricePerSqm": 9380,
+            "date": "2026-06-02",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 10125,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Arabian Ranches",
+          "nameAr": "Arabian Ranches",
+          "classification": "upper",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 12,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:31:05.023Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-21",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Business Bay",
+      "area": 458,
+      "actualSalePrice": 5159828,
+      "saleDate": "2026-06-21",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 6744508,
+      "aqarVsActual": 30.7,
+      "appraiserValuation": 5252227.262714659,
+      "aqarVsAppraiser": 28.1,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 3396072,
+            "sqm": 213,
+            "pricePerSqm": 15944,
+            "date": "2026-06-28",
+            "source": "Property Finder"
+          },
+          {
+            "price": 4299075,
+            "sqm": 297,
+            "pricePerSqm": 14475,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 4738265,
+            "sqm": 331,
+            "pricePerSqm": 14315,
+            "date": "2026-06-25",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3074488,
+            "sqm": 227,
+            "pricePerSqm": 13544,
+            "date": "2026-06-21",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3970254,
+            "sqm": 298,
+            "pricePerSqm": 13323,
+            "date": "2026-06-11",
+            "source": "Bayut"
+          },
+          {
+            "price": 3210361,
+            "sqm": 241,
+            "pricePerSqm": 13321,
+            "date": "2026-06-01",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 14726,
+        "count": 6,
+        "districtInfo": {
+          "nameEn": "Business Bay",
+          "nameAr": "Business Bay",
+          "classification": "middle",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": true
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 12,
+        "capRate": 7.3,
+        "scrapedAt": "2026-07-23T02:31:05.694Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-22",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Palm Jumeirah",
+      "area": 103,
+      "actualSalePrice": 845218,
+      "saleDate": "2026-06-12",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1807650,
+      "aqarVsActual": 113.9,
+      "appraiserValuation": 837765.138107073,
+      "aqarVsAppraiser": 109.7,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2271836,
+            "sqm": 134,
+            "pricePerSqm": 16954,
+            "date": "2026-07-11",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3124968,
+            "sqm": 168,
+            "pricePerSqm": 18601,
+            "date": "2026-07-08",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1574892,
+            "sqm": 99,
+            "pricePerSqm": 15908,
+            "date": "2026-07-06",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1645650,
+            "sqm": 90,
+            "pricePerSqm": 18285,
+            "date": "2026-07-05",
+            "source": "Bayut"
+          },
+          {
+            "price": 2629880,
+            "sqm": 172,
+            "pricePerSqm": 15290,
+            "date": "2026-06-27",
+            "source": "Property Finder"
+          },
+          {
+            "price": 890100,
+            "sqm": 50,
+            "pricePerSqm": 17802,
+            "date": "2026-06-25",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2575962,
+            "sqm": 162,
+            "pricePerSqm": 15901,
+            "date": "2026-06-24",
+            "source": "Bayut"
+          },
+          {
+            "price": 2670224,
+            "sqm": 136,
+            "pricePerSqm": 19634,
+            "date": "2026-06-20",
+            "source": "Bayut"
+          },
+          {
+            "price": 1606110,
+            "sqm": 93,
+            "pricePerSqm": 17270,
+            "date": "2026-06-12",
+            "source": "Bayut"
+          },
+          {
+            "price": 1660800,
+            "sqm": 96,
+            "pricePerSqm": 17300,
+            "date": "2026-05-30",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 17550,
+        "count": 10,
+        "districtInfo": {
+          "nameEn": "Palm Jumeirah",
+          "nameAr": "Palm Jumeirah",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 5,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:06.359Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-23",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 72,
+      "actualSalePrice": 690048,
+      "saleDate": "2026-06-04",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1009296,
+      "aqarVsActual": 46.3,
+      "appraiserValuation": 716132.4010675199,
+      "aqarVsAppraiser": 43.4,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2901220,
+            "sqm": 212,
+            "pricePerSqm": 13685,
+            "date": "2026-07-10",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2931222,
+            "sqm": 202,
+            "pricePerSqm": 14511,
+            "date": "2026-07-05",
+            "source": "Bayut"
+          },
+          {
+            "price": 2621520,
+            "sqm": 165,
+            "pricePerSqm": 15888,
+            "date": "2026-07-01",
+            "source": "Bayut"
+          },
+          {
+            "price": 3289464,
+            "sqm": 216,
+            "pricePerSqm": 15229,
+            "date": "2026-06-26",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2682680,
+            "sqm": 220,
+            "pricePerSqm": 12194,
+            "date": "2026-06-22",
+            "source": "Bayut"
+          },
+          {
+            "price": 1739066,
+            "sqm": 119,
+            "pricePerSqm": 14614,
+            "date": "2026-06-19",
+            "source": "Property Finder"
+          },
+          {
+            "price": 876162,
+            "sqm": 69,
+            "pricePerSqm": 12698,
+            "date": "2026-06-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 4368770,
+            "sqm": 278,
+            "pricePerSqm": 15715,
+            "date": "2026-06-09",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 14018,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 4,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:07.033Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-24",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Dubai Marina",
+      "area": 61,
+      "actualSalePrice": 421937,
+      "saleDate": "2026-07-18",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 942084,
+      "aqarVsActual": 123.3,
+      "appraiserValuation": 421486.08101038827,
+      "aqarVsAppraiser": 118.9,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 4214276,
+            "sqm": 284,
+            "pricePerSqm": 14839,
+            "date": "2026-07-10",
+            "source": "Bayut"
+          },
+          {
+            "price": 1930068,
+            "sqm": 138,
+            "pricePerSqm": 13986,
+            "date": "2026-07-06",
+            "source": "Bayut"
+          },
+          {
+            "price": 1320011,
+            "sqm": 79,
+            "pricePerSqm": 16709,
+            "date": "2026-06-24",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2415468,
+            "sqm": 174,
+            "pricePerSqm": 13882,
+            "date": "2026-06-19",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2604784,
+            "sqm": 182,
+            "pricePerSqm": 14312,
+            "date": "2026-06-17",
+            "source": "Bayut"
+          },
+          {
+            "price": 3698469,
+            "sqm": 207,
+            "pricePerSqm": 17867,
+            "date": "2026-06-09",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1049360,
+            "sqm": 80,
+            "pricePerSqm": 13117,
+            "date": "2026-06-06",
+            "source": "Bayut"
+          },
+          {
+            "price": 771700,
+            "sqm": 50,
+            "pricePerSqm": 15434,
+            "date": "2026-05-31",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 15444,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Dubai Marina",
+          "nameAr": "Dubai Marina",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 8,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:07.701Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-25",
+      "propertyType": "office",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 103,
+      "actualSalePrice": 762509,
+      "saleDate": "2026-06-06",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1443854,
+      "aqarVsActual": 89.4,
+      "appraiserValuation": 798220.4805341031,
+      "aqarVsAppraiser": 85.6,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 830312,
+            "sqm": 56,
+            "pricePerSqm": 14827,
+            "date": "2026-07-18",
+            "source": "Bayut"
+          },
+          {
+            "price": 2415288,
+            "sqm": 157,
+            "pricePerSqm": 15384,
+            "date": "2026-07-16",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 3196405,
+            "sqm": 215,
+            "pricePerSqm": 14867,
+            "date": "2026-07-16",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1333100,
+            "sqm": 100,
+            "pricePerSqm": 13331,
+            "date": "2026-07-14",
+            "source": "Bayut"
+          },
+          {
+            "price": 1152440,
+            "sqm": 94,
+            "pricePerSqm": 12260,
+            "date": "2026-07-01",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2663850,
+            "sqm": 215,
+            "pricePerSqm": 12390,
+            "date": "2026-07-01",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 4230027,
+            "sqm": 261,
+            "pricePerSqm": 16207,
+            "date": "2026-06-14",
+            "source": "Bayut"
+          },
+          {
+            "price": 2796643,
+            "sqm": 223,
+            "pricePerSqm": 12541,
+            "date": "2026-06-10",
+            "source": "Property Finder"
+          },
+          {
+            "price": 956202,
+            "sqm": 78,
+            "pricePerSqm": 12259,
+            "date": "2026-05-28",
+            "source": "Bayut"
+          },
+          {
+            "price": 3966819,
+            "sqm": 267,
+            "pricePerSqm": 14857,
+            "date": "2026-05-28",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 14018,
+        "count": 10,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 6,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:08.371Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-26",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Palm Jumeirah",
+      "area": 88,
+      "actualSalePrice": 525800,
+      "saleDate": "2026-06-14",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1544400,
+      "aqarVsActual": 193.7,
+      "appraiserValuation": 508921.75620478165,
+      "aqarVsAppraiser": 188,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2253373,
+            "sqm": 151,
+            "pricePerSqm": 14923,
+            "date": "2026-07-15",
+            "source": "Property Finder"
+          },
+          {
+            "price": 961360,
+            "sqm": 61,
+            "pricePerSqm": 15760,
+            "date": "2026-07-14",
+            "source": "Bayut"
+          },
+          {
+            "price": 1640736,
+            "sqm": 96,
+            "pricePerSqm": 17091,
+            "date": "2026-07-05",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1743308,
+            "sqm": 92,
+            "pricePerSqm": 18949,
+            "date": "2026-07-03",
+            "source": "Bayut"
+          },
+          {
+            "price": 2014166,
+            "sqm": 121,
+            "pricePerSqm": 16646,
+            "date": "2026-07-02",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 842296,
+            "sqm": 56,
+            "pricePerSqm": 15041,
+            "date": "2026-06-14",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 1874902,
+            "sqm": 118,
+            "pricePerSqm": 15889,
+            "date": "2026-06-03",
+            "source": "Bayut"
+          },
+          {
+            "price": 2515758,
+            "sqm": 129,
+            "pricePerSqm": 19502,
+            "date": "2026-05-31",
+            "source": "Bayut"
+          },
+          {
+            "price": 3081240,
+            "sqm": 162,
+            "pricePerSqm": 19020,
+            "date": "2026-05-30",
+            "source": "Bayut"
+          },
+          {
+            "price": 1273850,
+            "sqm": 73,
+            "pricePerSqm": 17450,
+            "date": "2026-05-25",
+            "source": "Property Finder"
+          },
+          {
+            "price": 910554,
+            "sqm": 51,
+            "pricePerSqm": 17854,
+            "date": "2026-05-25",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 17550,
+        "count": 11,
+        "districtInfo": {
+          "nameEn": "Palm Jumeirah",
+          "nameAr": "Palm Jumeirah",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 6,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:09.034Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-27",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Downtown Dubai",
+      "area": 91,
+      "actualSalePrice": 570206,
+      "saleDate": "2026-06-07",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1449630,
+      "aqarVsActual": 154.2,
+      "appraiserValuation": 556464.8791159268,
+      "aqarVsAppraiser": 149.2,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 2692001,
+            "sqm": 169,
+            "pricePerSqm": 15929,
+            "date": "2026-07-09",
+            "source": "Bayut"
+          },
+          {
+            "price": 1372844,
+            "sqm": 82,
+            "pricePerSqm": 16742,
+            "date": "2026-07-05",
+            "source": "Bayut"
+          },
+          {
+            "price": 1610297,
+            "sqm": 97,
+            "pricePerSqm": 16601,
+            "date": "2026-06-18",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 2636080,
+            "sqm": 166,
+            "pricePerSqm": 15880,
+            "date": "2026-06-09",
+            "source": "Property Finder"
+          },
+          {
+            "price": 769888,
+            "sqm": 49,
+            "pricePerSqm": 15712,
+            "date": "2026-06-04",
+            "source": "Bayut"
+          },
+          {
+            "price": 2085504,
+            "sqm": 128,
+            "pricePerSqm": 16293,
+            "date": "2026-05-31",
+            "source": "Property Finder"
+          },
+          {
+            "price": 2460096,
+            "sqm": 144,
+            "pricePerSqm": 17084,
+            "date": "2026-05-30",
+            "source": "Dubizzle"
+          }
+        ],
+        "avgPricePerSqm": 15930,
+        "count": 7,
+        "districtInfo": {
+          "nameEn": "Downtown Dubai",
+          "nameAr": "Downtown Dubai",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": false,
+          "cityCenter": true
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 4,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:09.707Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-28",
+      "propertyType": "apartment",
+      "city": "dubai",
+      "district": "Dubai Marina",
+      "area": 65,
+      "actualSalePrice": 694720,
+      "saleDate": "2026-06-28",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 1140750,
+      "aqarVsActual": 64.2,
+      "appraiserValuation": 680712.8341188076,
+      "aqarVsAppraiser": 61,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 781207,
+            "sqm": 49,
+            "pricePerSqm": 15943,
+            "date": "2026-07-15",
+            "source": "Bayut"
+          },
+          {
+            "price": 1598900,
+            "sqm": 100,
+            "pricePerSqm": 15989,
+            "date": "2026-07-11",
+            "source": "Bayut"
+          },
+          {
+            "price": 1156306,
+            "sqm": 71,
+            "pricePerSqm": 16286,
+            "date": "2026-07-05",
+            "source": "Property Finder"
+          },
+          {
+            "price": 3114300,
+            "sqm": 175,
+            "pricePerSqm": 17796,
+            "date": "2026-07-01",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 882098,
+            "sqm": 49,
+            "pricePerSqm": 18002,
+            "date": "2026-06-17",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 712464,
+            "sqm": 48,
+            "pricePerSqm": 14843,
+            "date": "2026-06-17",
+            "source": "Property Finder"
+          },
+          {
+            "price": 1234025,
+            "sqm": 65,
+            "pricePerSqm": 18985,
+            "date": "2026-06-13",
+            "source": "Bayut"
+          },
+          {
+            "price": 2762200,
+            "sqm": 140,
+            "pricePerSqm": 19730,
+            "date": "2026-05-25",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 17550,
+        "count": 8,
+        "districtInfo": {
+          "nameEn": "Dubai Marina",
+          "nameAr": "Dubai Marina",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "stable",
+        "vacancyRate": 7,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:10.390Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    },
+    {
+      "propertyRef": "GEN-1784773850648-29",
+      "propertyType": "villa",
+      "city": "dubai",
+      "district": "Palm Jumeirah",
+      "area": 433,
+      "actualSalePrice": 2481090,
+      "saleDate": "2026-07-11",
+      "scrapedFrom": "Generated (No live data)",
+      "aqarValuation": 9726912,
+      "aqarVsActual": 292,
+      "appraiserValuation": 2501577.934896875,
+      "aqarVsAppraiser": 284.4,
+      "valuationDetails": {
+        "sales": [
+          {
+            "price": 6590856,
+            "sqm": 303,
+            "pricePerSqm": 21752,
+            "date": "2026-07-16",
+            "source": "Dubizzle"
+          },
+          {
+            "price": 7631275,
+            "sqm": 383,
+            "pricePerSqm": 19925,
+            "date": "2026-07-15",
+            "source": "Property Finder"
+          },
+          {
+            "price": 4776318,
+            "sqm": 207,
+            "pricePerSqm": 23074,
+            "date": "2026-06-27",
+            "source": "Bayut"
+          },
+          {
+            "price": 4756827,
+            "sqm": 237,
+            "pricePerSqm": 20071,
+            "date": "2026-05-29",
+            "source": "Bayut"
+          },
+          {
+            "price": 7556310,
+            "sqm": 339,
+            "pricePerSqm": 22290,
+            "date": "2026-05-27",
+            "source": "Property Finder"
+          },
+          {
+            "price": 8879591,
+            "sqm": 379,
+            "pricePerSqm": 23429,
+            "date": "2026-05-25",
+            "source": "Bayut"
+          }
+        ],
+        "avgPricePerSqm": 22464,
+        "count": 6,
+        "districtInfo": {
+          "nameEn": "Palm Jumeirah",
+          "nameAr": "Palm Jumeirah",
+          "classification": "luxury",
+          "accuracy": "algorithmic",
+          "coastal": true,
+          "cityCenter": false
+        },
+        "marketTrend": "rising",
+        "vacancyRate": 7,
+        "capRate": 6.9,
+        "scrapedAt": "2026-07-23T02:31:11.076Z",
+        "dataSource": "algorithmic",
+        "methodology": "Generated using smart algorithm based on city averages, district classification, coastal proximity, and city center proximity"
+      }
+    }
+  ]
+}
