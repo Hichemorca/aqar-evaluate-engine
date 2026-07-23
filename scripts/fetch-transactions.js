@@ -7,20 +7,6 @@ const path = require('path');
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const OUTPUT_FILE = path.join(DATA_DIR, 'fetched-transactions.json');
 
-// قائمة مصادر البيانات
-const SOURCES = [
-  {
-    name: 'Dubai Land Department',
-    url: 'https://www.dubailand.gov.ae/en/open-data/real-estate-transactions/',
-    type: 'csv'
-  },
-  {
-    name: 'data.gov.ae',
-    url: 'https://data.gov.ae/api/3/action/package_search?q=real+estate+transactions',
-    type: 'api'
-  }
-];
-
 async function fetchDLDTransactions() {
   console.log('🔍 Fetching DLD transactions...');
   
@@ -161,9 +147,9 @@ async function main() {
   const govData = await fetchDataGovAe();
   allTransactions = allTransactions.concat(govData.filter(Boolean));
   
-  // إذا لم نجد بيانات حقيقية كافية، استخدم البيانات المولدة
-  if (allTransactions.length < 200) {
-    const needed = 200 - allTransactions.length;
+  // إذا لم نجد بيانات حقيقية كافية، نولد 500 صفقة
+  if (allTransactions.length < 500) {
+    const needed = 500 - allTransactions.length;
     console.log(`⚠️ Insufficient real data (${allTransactions.length}). Generating ${needed} supplementary records...`);
     const generated = generateSampleData(needed);
     allTransactions = allTransactions.concat(generated);
@@ -173,7 +159,7 @@ async function main() {
   const unique = [];
   const seen = new Set();
   for (const t of allTransactions) {
-    const key = `${t.district}-${t.area}-${t.actualSalePrice}`;
+    const key = `${t.district}-${t.area}-${Math.round(t.actualSalePrice / 1000)}`;
     if (!seen.has(key)) {
       seen.add(key);
       unique.push(t);
@@ -193,20 +179,29 @@ function generateSampleData(count) {
     'Dubai Creek Harbour', 'Al Barsha', 'The Springs', 'The Meadows',
     'Deira', 'Bur Dubai', 'Damac Hills', 'Mirdif', 'Al Furjan',
     'Discovery Gardens', 'Motor City', 'Dubai Sports City',
-    'Dubai Silicon Oasis', 'International City', 'Al Nahda'
+    'Dubai Silicon Oasis', 'International City', 'Al Nahda',
+    'Al Qusais', 'Al Karama', 'Bluewaters Island', 'City Walk',
+    'DIFC', 'Jumeirah Beach Residence', 'La Mer', 'Sobha Hartland',
+    'The Greens', 'Tilal Al Ghaf', 'Al Warqa', 'Port de La Mer',
+    'Mohammed Bin Rashid City', 'Palm Jebel Ali', 'Dubai South'
   ];
-  const types = ['apartment', 'villa', 'townhouse', 'office', 'retail'];
+  const types = ['apartment', 'villa', 'townhouse', 'office', 'retail', 'warehouse', 'land'];
   const data = [];
   
   for (let i = 0; i < count; i++) {
     const type = types[Math.floor(Math.random() * types.length)];
     const district = districts[Math.floor(Math.random() * districts.length)];
-    const sqm = type === 'villa' ? Math.floor(Math.random() * 300) + 180 :
-                type === 'townhouse' ? Math.floor(Math.random() * 200) + 120 :
-                type === 'office' ? Math.floor(Math.random() * 350) + 80 :
-                type === 'retail' ? Math.floor(Math.random() * 150) + 40 :
-                Math.floor(Math.random() * 120) + 50;
-    const pricePerSqm = 3500 + Math.floor(Math.random() * 12000);
+    let sqm;
+    switch(type) {
+      case 'villa': sqm = Math.floor(Math.random() * 400) + 150; break;
+      case 'townhouse': sqm = Math.floor(Math.random() * 250) + 100; break;
+      case 'office': sqm = Math.floor(Math.random() * 500) + 50; break;
+      case 'retail': sqm = Math.floor(Math.random() * 200) + 30; break;
+      case 'warehouse': sqm = Math.floor(Math.random() * 1000) + 200; break;
+      case 'land': sqm = Math.floor(Math.random() * 2000) + 300; break;
+      default: sqm = Math.floor(Math.random() * 150) + 40;
+    }
+    const pricePerSqm = 2500 + Math.floor(Math.random() * 15000);
     const daysAgo = Math.floor(Math.random() * 60);
     
     data.push({
