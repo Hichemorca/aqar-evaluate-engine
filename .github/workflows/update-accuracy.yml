@@ -25,14 +25,23 @@ jobs:
       - name: Install dependencies
         run: npm install axios
         
-      - name: Fetch DLD real transactions
+      - name: Layer 1 — Fetch consultancy reports
+        run: node scripts/fetch-consultancy.js
+        
+      - name: Layer 2 — Fetch developer projects
+        run: node scripts/fetch-developers.js
+        
+      - name: Layer 3 — Fetch government data
+        run: node scripts/fetch-government.js
+        
+      - name: Layer 4 — Fetch DLD real transactions
         run: node scripts/fetch-dld.js
         continue-on-error: true
         
-      - name: Fetch generated transactions
+      - name: Layer 5 — Fetch generated transactions
         run: node scripts/fetch-transactions.js
         
-      - name: Evaluate properties
+      - name: Evaluate all properties
         run: node scripts/evaluate-and-save.js
         
       - name: Commit and push changes
@@ -46,6 +55,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "📊 Auto-update accuracy data [skip ci]"
+            git commit -m "📊 Auto-update all 4 data layers [skip ci]"
             git push origin main
           fi
