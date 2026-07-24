@@ -859,7 +859,7 @@ function buildDecisionEngineLink(result, propData) {
   if (scrapedDistrictData?.districtInfo?.classification) params.set('classification', scrapedDistrictData.districtInfo.classification);
   params.set('source', 'valuation_engine');
   params.set('referrer', 'aqar_valuation');
-  return `https://aqar-engine.netlify.app/?${params.toString()}`;
+  return `https://aqar-decision-engine.netlify.app/?${params.toString()}`;
 }
 
 function displayResult(result, valuations, propData) {
