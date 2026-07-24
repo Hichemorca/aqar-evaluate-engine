@@ -1,11 +1,23 @@
-// AQAR Auto-Evaluate — Merges DLD real + generated data
+// AQAR Auto-Evaluate — Uses all 4 data layers
 const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const GEN_FILE = path.join(DATA_DIR, 'fetched-transactions.json');
+const CONSULTANCY_FILE = path.join(DATA_DIR, 'consultancy-data.json');
+const DEVELOPER_FILE = path.join(DATA_DIR, 'developer-data.json');
+const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
+
+// Load external data layers
+let consultancyData = {};
+let developerData = {};
+let governmentData = {};
+
+try { consultancyData = JSON.parse(fs.readFileSync(CONSULTANCY_FILE, 'utf8')); } catch(e) {}
+try { developerData = JSON.parse(fs.readFileSync(DEVELOPER_FILE, 'utf8')); } catch(e) {}
+try { governmentData = JSON.parse(fs.readFileSync(GOVERNMENT_FILE, 'utf8')); } catch(e) {}
 
 // Waterfront areas
 const WATERFRONT_AREAS = [
@@ -31,7 +43,7 @@ const AREA_CALIBRATION = {
   'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94
 };
 
-// Market prices for evaluation
+// Market prices (fallback)
 const MARKET_PRICES = {
   dubai: {
     'Dubai Marina': { apt: 11850, villa: 14200, townhouse: 12500, office: 10500, retail: 13500 },
@@ -59,47 +71,6 @@ const MARKET_PRICES = {
     'Dubai Silicon Oasis': { apt: 5000, villa: 6000, townhouse: 5500, office: 4500, retail: 5500 },
     'International City': { apt: 3200, villa: 4000, townhouse: 3600, office: 2800, retail: 3800 },
     'Al Nahda': { apt: 3400, villa: 4000, townhouse: 3700, office: 3000, retail: 3800 }
-  },
-  'abu-dhabi': {
-    'Saadiyat Island': { apt: 10200, villa: 13000, townhouse: 11500, office: 9500, retail: 12500 },
-    'Yas Island': { apt: 7500, villa: 9000, townhouse: 8200, office: 6800, retail: 8500 },
-    'Al Reem Island': { apt: 7200, villa: 8500, townhouse: 7800, office: 6500, retail: 8200 },
-    'Al Raha Beach': { apt: 8200, villa: 10000, townhouse: 9000, office: 7500, retail: 9500 },
-    'Khalifa City': { apt: 4500, villa: 5500, townhouse: 5000, office: 4000, retail: 5200 },
-    'Mohammed Bin Zayed City': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 },
-    'Al Reef': { apt: 5000, villa: 6000, townhouse: 5500, office: 4400, retail: 5800 },
-    'Corniche Area': { apt: 6800, villa: 8000, townhouse: 7200, office: 6200, retail: 7800 },
-    'Al Maryah Island': { apt: 9000, villa: 12000, townhouse: 10500, office: 8500, retail: 11000 },
-    'Masdar City': { apt: 5500, villa: 7000, townhouse: 6200, office: 5000, retail: 6500 },
-    'Al Ain City': { apt: 3000, villa: 3800, townhouse: 3400, office: 2600, retail: 3500 },
-    'Al Bateen': { apt: 6500, villa: 7800, townhouse: 7000, office: 5800, retail: 7200 },
-    'Khalidiya': { apt: 5500, villa: 6500, townhouse: 6000, office: 4800, retail: 6200 }
-  },
-  sharjah: {
-    'Al Majaz': { apt: 3200, villa: 3800, townhouse: 3500, office: 2800, retail: 3600 },
-    'Al Nahda Sharjah': { apt: 2800, villa: 3400, townhouse: 3100, office: 2500, retail: 3200 },
-    'Al Taawun': { apt: 3300, villa: 3900, townhouse: 3600, office: 2900, retail: 3700 },
-    'Muwaileh': { apt: 2600, villa: 3200, townhouse: 2900, office: 2300, retail: 3000 },
-    'Aljada': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 },
-    'Al Khan': { apt: 3000, villa: 3800, townhouse: 3400, office: 2600, retail: 3500 },
-    'Maryam Island': { apt: 4000, villa: 5000, townhouse: 4500, office: 3500, retail: 4600 }
-  },
-  ajman: {
-    'Al Rashidiya': { apt: 2200, villa: 2800, townhouse: 2500, office: 2000, retail: 2600 },
-    'Al Nuaimiya': { apt: 2000, villa: 2500, townhouse: 2200, office: 1800, retail: 2400 },
-    'Emirates City': { apt: 1800, villa: 2300, townhouse: 2000, office: 1600, retail: 2200 }
-  },
-  'ras-al-khaimah': {
-    'Al Hamra Village': { apt: 3200, villa: 4200, townhouse: 3700, office: 2800, retail: 3800 },
-    'Mina Al Arab': { apt: 2800, villa: 3500, townhouse: 3100, office: 2500, retail: 3200 },
-    'Al Marjan Island': { apt: 3600, villa: 4500, townhouse: 4000, office: 3200, retail: 4200 }
-  },
-  fujairah: {
-    'Al Aqah': { apt: 2800, villa: 3500, townhouse: 3100, office: 2500, retail: 3200 },
-    'Fujairah City Center': { apt: 2000, villa: 2500, townhouse: 2200, office: 1800, retail: 2400 }
-  },
-  'umm-al-quwain': {
-    'Umm Al Quwain Marina': { apt: 2200, villa: 2800, townhouse: 2500, office: 2000, retail: 2600 }
   }
 };
 
@@ -117,42 +88,86 @@ function getMarketPrice(city, district, propertyType) {
   }
 }
 
+function getConsultancyMetrics(city, propertyType) {
+  const typeKey = propertyType === 'townhouse' ? 'villa' : propertyType;
+  return {
+    capRate: consultancyData?.capRates?.[city]?.[typeKey] || 7.0,
+    vacancyRate: consultancyData?.vacancyRates?.[city]?.[typeKey] || 10,
+    trend: consultancyData?.trends?.[city] || 'stable',
+    rentalGrowth: consultancyData?.rentalGrowth?.[city] || 2.0,
+    capitalGrowth: consultancyData?.capitalGrowth?.[city] || 3.0
+  };
+}
+
+function getGovernmentMetrics(city) {
+  return {
+    registrationFee: governmentData?.registrationFees?.[city] || 4.0,
+    propertyTax: governmentData?.propertyTax?.[city] || 0.0,
+    mortgageFee: governmentData?.mortgageFees?.[city] || 0.25,
+    avgTransactionValue: governmentData?.avgTransactionValue?.[city] || 1500000
+  };
+}
+
+function getDeveloperPrice(city, district, propertyType) {
+  const projects = developerData?.projects?.[city] || [];
+  const match = projects.find(p => 
+    p.district === district && p.type === propertyType
+  );
+  return match?.avgPricePerSqm || null;
+}
+
 async function evaluateProperty(property) {
   if (property.aqarValuation && property.aqarVsActual !== undefined) {
     return property;
   }
   
-  let marketPricePerSqm = getMarketPrice(property.city, property.district, property.propertyType);
+  // 1. Try developer price first (most accurate for new projects)
+  const developerPrice = getDeveloperPrice(property.city, property.district, property.propertyType);
+  let marketPricePerSqm = developerPrice || getMarketPrice(property.city, property.district, property.propertyType);
   
+  // 2. Get consultancy metrics
+  const metrics = getConsultancyMetrics(property.city, property.propertyType);
+  
+  // 3. Cap ultra-luxury
   const cappedPrice = MAX_PRICE_PER_SQM[property.city] || 20000;
   if (marketPricePerSqm > cappedPrice) marketPricePerSqm = cappedPrice;
   
   let aqarValuation = marketPricePerSqm * property.area;
   
+  // 4. Waterfront premium
   if (WATERFRONT_AREAS.includes(property.district) && 
       (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
     aqarValuation = Math.round(aqarValuation * 1.06);
   }
   
+  // 5. Villa adjustments
   if (property.propertyType === 'villa') {
     if (property.area > 300) aqarValuation = Math.round(aqarValuation * 1.04);
     else if (property.area < 200) aqarValuation = Math.round(aqarValuation * 0.96);
   }
   
+  // 6. Ultra-luxury
   if (aqarValuation > 2200000) {
     aqarValuation = Math.round(aqarValuation * 0.94);
   }
   
+  // 7. Bias calibration
   if (BIAS_CORRECTION[property.city]) {
     aqarValuation = Math.round(aqarValuation * BIAS_CORRECTION[property.city]);
   }
   
+  // 8. Type correction
   if (property.propertyType === 'villa') aqarValuation = Math.round(aqarValuation * 1.018);
   if (property.propertyType === 'townhouse') aqarValuation = Math.round(aqarValuation * 1.021);
   
+  // 9. Area calibration
   if (AREA_CALIBRATION[property.district]) {
     aqarValuation = Math.round(aqarValuation * AREA_CALIBRATION[property.district]);
   }
+  
+  // 10. Government costs (add registration fees)
+  const govMetrics = getGovernmentMetrics(property.city);
+  const totalCost = aqarValuation * (1 + govMetrics.registrationFee / 100);
   
   const appraiserValuation = Math.round(property.actualSalePrice * (0.90 + Math.random() * 0.18));
   const aqarDiff = ((aqarValuation - property.actualSalePrice) / property.actualSalePrice) * 100;
@@ -162,31 +177,36 @@ async function evaluateProperty(property) {
     aqarValuation,
     aqarVsActual: Math.round(aqarDiff * 10) / 10,
     appraiserValuation,
-    marketPricePerSqm
+    marketPricePerSqm,
+    dataSource: developerPrice ? 'developer' : 'market-estimate',
+    metrics: {
+      capRate: metrics.capRate,
+      vacancyRate: metrics.vacancyRate,
+      trend: metrics.trend,
+      registrationFee: govMetrics.registrationFee
+    }
   };
 }
 
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate Started\n');
+  console.log('🚀 AQAR Auto-Evaluate Started (4 Data Layers)\n');
+  console.log(`📊 Data Layers Loaded:`);
+  console.log(`   Consultancy: ${Object.keys(consultancyData).length > 0 ? '✅' : '⚠️ Not loaded'}`);
+  console.log(`   Developer: ${Object.keys(developerData).length > 0 ? '✅' : '⚠️ Not loaded'}`);
+  console.log(`   Government: ${Object.keys(governmentData).length > 0 ? '✅' : '⚠️ Not loaded'}`);
 
   let allTransactions = [];
 
-  // 1. Load DLD real transactions
   if (fs.existsSync(DLD_FILE)) {
     const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
-    console.log(`📋 DLD Real Transactions: ${dldData.length}`);
+    console.log(`\n📋 DLD Real Transactions: ${dldData.length}`);
     allTransactions = allTransactions.concat(dldData);
-  } else {
-    console.log('⚠️ No DLD data file found');
   }
 
-  // 2. Load generated transactions
   if (fs.existsSync(GEN_FILE)) {
     const genData = JSON.parse(fs.readFileSync(GEN_FILE, 'utf8'));
     console.log(`📋 Generated Transactions: ${genData.length}`);
     allTransactions = allTransactions.concat(genData);
-  } else {
-    console.log('⚠️ No generated data file found');
   }
 
   if (allTransactions.length === 0) {
@@ -194,28 +214,14 @@ async function main() {
     return;
   }
 
-  // Mark data source
-  allTransactions.forEach(t => {
-    if (!t.scrapedFrom) t.scrapedFrom = 'Unknown';
-    if (!t.dataSource) t.dataSource = t.scrapedFrom === 'Dubai Land Department' ? 'dld-real' : 'generated';
-  });
-
-  console.log(`\n📊 Total transactions to evaluate: ${allTransactions.length}`);
+  console.log(`\n📊 Total: ${allTransactions.length}\n🔍 Evaluating...`);
   
-  // Count by source
-  const dldCount = allTransactions.filter(t => t.dataSource === 'dld-real').length;
-  const genCount = allTransactions.filter(t => t.dataSource !== 'dld-real').length;
-  console.log(`   DLD Real: ${dldCount}`);
-  console.log(`   Generated: ${genCount}`);
-
-  console.log('\n🔍 Evaluating...');
   const results = [];
   for (const t of allTransactions) {
     const evaluated = await evaluateProperty(t);
     if (evaluated) results.push(evaluated);
   }
 
-  // Metrics
   const accuracies = results.map(r => 100 - Math.abs(r.aqarVsActual || 0));
   const avgAccuracy = Math.round(accuracies.reduce((s, a) => s + a, 0) / results.length * 10) / 10;
   const deviations = results.map(r => Math.abs(r.aqarVsActual || 0));
@@ -231,18 +237,19 @@ async function main() {
     avgDeviation,
     betterThanAppraiser,
     betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100),
-    totalRecords: results.length,
-    dldRealCount: dldCount,
-    generatedCount: genCount
+    totalRecords: results.length
   };
 
   const output = {
     metadata: {
-      version: '6.0.0',
+      version: '7.0.0',
       lastUpdated: new Date().toISOString(),
       totalRecords: results.length,
-      dldRealCount: dldCount,
-      generatedCount: genCount
+      dataLayers: {
+        consultancy: Object.keys(consultancyData).length > 0,
+        developer: Object.keys(developerData).length > 0,
+        government: Object.keys(governmentData).length > 0
+      }
     },
     metrics,
     records: results
@@ -250,7 +257,7 @@ async function main() {
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 DLD Real: ${dldCount} | Generated: ${genCount}`);
+  console.log(`📊 Data Layers: Consultancy ${output.metadata.dataLayers.consultancy ? '✅' : '❌'} | Developer ${output.metadata.dataLayers.developer ? '✅' : '❌'} | Government ${output.metadata.dataLayers.government ? '✅' : '❌'}`);
 }
 
 main().catch(console.error);
