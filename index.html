@@ -862,6 +862,7 @@ function buildDecisionEngineLink(result, propData) {
   return `https://aqar-decision-engine.netlify.app/?${params.toString()}`;
 }
 
+
 function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
