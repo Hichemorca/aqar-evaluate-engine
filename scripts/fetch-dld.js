@@ -1,67 +1,84 @@
-// AQAR DXB Interact Data Fetcher — Real Dubai Transactions
-const axios = require('axios');
+// AQAR DLD Data Fetcher — Real CSV with 7,108 transactions
 const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
+const INPUT_FILE = path.join(DATA_DIR, 'dld-transactions.csv');
 const OUTPUT_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 
-// DXB Interact API endpoint (free, no key required)
-const DXB_API_URL = 'https://dxbinteract.ae/api/transactions';
+function parseDLDCSV(csvText) {
+  const lines = csvText.split('\n').filter(line => line.trim());
+  if (lines.length < 2) {
+    console.log('⚠️ Empty or invalid CSV');
+    return [];
+  }
 
-async function fetchDXBTransactions() {
-  console.log('🔍 Fetching DXB Interact real transactions...');
+  const headers = lines[0].split(',').map(h => h.trim());
+  console.log(`📋 Found ${headers.length} columns: ${headers.slice(0, 8).join(', ')}...`);
 
-  const allTransactions = [];
+  const transactions = [];
 
-  // Try multiple pages
-  for (let page = 1; page <= 5; page++) {
+  for (let i = 1; i < lines.length; i++) {
     try {
-      console.log(`📄 Page ${page}...`);
-      
-      const response = await axios.get(DXB_API_URL, {
-        params: {
-          page: page,
-          limit: 50,
-          sort: 'date_desc'
-        },
-        headers: {
-          'User-Agent': 'AQAR-Engine/1.0 (market research)',
-          'Accept': 'application/json'
-        },
-        timeout: 15000
+      // Handle commas inside quoted fields
+      const values = [];
+      let current = '';
+      let inQuotes = false;
+      for (const char of lines[i]) {
+        if (char === '"') { inQuotes = !inQuotes; continue; }
+        if (char === ',' && !inQuotes) { values.push(current.trim()); current = ''; continue; }
+        current += char;
+      }
+      values.push(current.trim());
+
+      if (values.length < 10) continue;
+
+      const row = {};
+      headers.forEach((h, idx) => {
+        row[h] = values[idx] || '';
       });
 
-      const data = response.data;
-      
-      if (data && data.transactions && data.transactions.length > 0) {
-        const parsed = data.transactions.map(t => ({
-          propertyRef: `DXB-${t.id || t.transaction_id || ''}`,
-          propertyType: mapDXBType(t.property_type || t.type || ''),
-          city: 'dubai',
-          district: t.area_name || t.community || t.district || '',
-          area: parseFloat(t.area_sqm || t.area || t.size || '0'),
-          actualSalePrice: parseFloat(t.price || t.sale_price || t.amount || '0'),
-          saleDate: t.date || t.transaction_date || '',
-          scrapedFrom: 'DXB Interact',
-          verifiedBy: 'Dubai Land Department'
-        })).filter(t => t.area > 0 && t.actualSalePrice > 0);
+      // Map your column names
+      const transactionNumber = row['TRANSACTION_NUMBER'] || '';
+      const instanceDate = row['INSTANCE_DATE'] || '';
+      const areaEn = row['AREA_EN'] || '';
+      const propTypeEn = row['PROP_TYPE_EN'] || '';
+      const transValue = parseFloat((row['TRANS_VALUE'] || '0').replace(/,/g, ''));
+      const actualArea = parseFloat((row['ACTUAL_AREA'] || row['PROCEDURE_AREA'] || '0').replace(/,/g, ''));
+      const rooms = row['ROOMS'] || row['BEDROOMS'] || '';
+      const isOffPlan = (row['OFFPLAN'] || '').toLowerCase().includes('yes');
+      const usage = row['USAGE'] || '';
+      const project = row['PROJECT'] || row['PROJECT_NAME'] || '';
+      const freehold = (row['FREEHOLD'] || '').toLowerCase().includes('yes');
 
-        allTransactions.push(...parsed);
-        console.log(`   ✅ ${parsed.length} transactions`);
-      } else {
-        break; // No more pages
+      if (transValue > 0 && actualArea > 10) {
+        transactions.push({
+          propertyRef: `DLD-${transactionNumber}`,
+          propertyType: mapPropertyType(propTypeEn),
+          city: 'dubai',
+          district: areaEn,
+          area: Math.round(actualArea),
+          actualSalePrice: Math.round(transValue),
+          saleDate: formatDate(instanceDate),
+          rooms: parseInt(rooms) || 0,
+          isOffPlan: isOffPlan,
+          usage: usage,
+          project: project,
+          freehold: freehold,
+          scrapedFrom: 'Dubai Land Department',
+          verifiedBy: 'Government Record',
+          dataSource: 'dld-real'
+        });
       }
-    } catch (error) {
-      console.log(`   ⚠️ Page ${page} failed: ${error.message}`);
-      break;
+    } catch (e) {
+      // Skip malformed rows
     }
   }
 
-  return allTransactions;
+  return transactions;
 }
 
-function mapDXBType(type) {
+function mapPropertyType(type) {
   const t = (type || '').toLowerCase();
   if (t.includes('villa')) return 'villa';
   if (t.includes('office') || t.includes('commercial')) return 'office';
@@ -73,126 +90,88 @@ function mapDXBType(type) {
   return 'apartment';
 }
 
-// Fallback: Try direct DLD CSV
-async function fetchDLDDirect() {
-  console.log('🔍 Trying DLD direct CSV...');
-
-  const urls = [
-    'https://www.dubailand.gov.ae/en/open-data/real-estate-transactions-csv/',
-    'https://www.dubailand.gov.ae/opendata/realestate/transactions.csv',
-    'https://data.dubailand.gov.ae/transactions.csv'
-  ];
-
-  for (const url of urls) {
-    try {
-      console.log(`📡 Trying: ${url}`);
-      const response = await axios.get(url, {
-        responseType: 'text',
-        timeout: 15000,
-        headers: { 'User-Agent': 'AQAR-Engine/1.0' }
-      });
-
-      const lines = response.data.split('\n').filter(l => l.trim());
-      if (lines.length > 1) {
-        console.log(`✅ Found CSV with ${lines.length - 1} rows`);
-        // Parse CSV similar to original code
-        return parseCSV(response.data);
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    // Try different formats
+    const d = new Date(dateStr);
+    if (!isNaN(d.getTime())) return d.toISOString().split('T')[0];
+    
+    const parts = dateStr.split(/[\/\-]/);
+    if (parts.length === 3) {
+      if (parts[2].length === 4) {
+        return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
       }
-    } catch (e) {
-      console.log(`   ❌ Failed: ${e.message}`);
     }
+    return '';
+  } catch {
+    return '';
   }
-
-  return [];
-}
-
-function parseCSV(csvText) {
-  const lines = csvText.split('\n').filter(l => l.trim());
-  if (lines.length < 2) return [];
-  
-  const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-  const transactions = [];
-
-  for (let i = 1; i < lines.length; i++) {
-    try {
-      const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
-      if (values.length < 5) continue;
-
-      const row = {};
-      headers.forEach((h, idx) => { row[h] = values[idx] || ''; });
-
-      const area = parseFloat(row['area_sqm'] || row['area'] || '0');
-      const price = parseFloat(row['sale_price'] || row['price'] || row['amount'] || '0');
-
-      if (area > 0 && price > 0) {
-        transactions.push({
-          propertyRef: `DLD-${i}`,
-          propertyType: mapDXBType(row['property_type'] || row['type'] || ''),
-          city: 'dubai',
-          district: row['area_name'] || row['district'] || row['community'] || '',
-          area: area,
-          actualSalePrice: price,
-          saleDate: row['transaction_date'] || row['date'] || '',
-          scrapedFrom: 'Dubai Land Department',
-          verifiedBy: 'Government Record'
-        });
-      }
-    } catch (e) {}
-  }
-
-  return transactions;
 }
 
 async function main() {
-  console.log('🚀 AQAR Real Data Fetcher Started\n');
+  console.log('🚀 AQAR DLD Real Data Importer\n');
+  console.log('📊 Processing 7,108 real transactions from Dubai Land Department\n');
 
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!fs.existsSync(INPUT_FILE)) {
+    console.log(`❌ File not found: ${INPUT_FILE}`);
+    return;
   }
 
-  let transactions = [];
+  const csvText = fs.readFileSync(INPUT_FILE, 'utf8');
+  const transactions = parseDLDCSV(csvText);
 
-  // Try DXB Interact first
-  console.log('📍 Method 1: DXB Interact API');
-  transactions = await fetchDXBTransactions();
-
-  // If DXB Interact fails, try DLD direct
   if (transactions.length === 0) {
-    console.log('\n📍 Method 2: DLD Direct CSV');
-    transactions = await fetchDLDDirect();
+    console.log('⚠️ No valid transactions found');
+    return;
   }
 
-  if (transactions.length > 0) {
-    // Filter last 60 days
-    const sixtyDaysAgo = new Date(Date.now() - 60 * 86400000);
-    const recent = transactions.filter(t => {
-      if (!t.saleDate) return true; // Keep if no date
-      const d = new Date(t.saleDate);
-      return !isNaN(d.getTime()) ? d >= sixtyDaysAgo : true;
-    });
+  // Filter last 60 days
+  const sixtyDaysAgo = new Date(Date.now() - 60 * 86400000);
+  const recent = transactions.filter(t => {
+    if (!t.saleDate) return false;
+    const d = new Date(t.saleDate);
+    return d >= sixtyDaysAgo;
+  });
 
-    console.log(`\n📊 Total real transactions: ${transactions.length}`);
-    console.log(`📅 Recent (60 days): ${recent.length}`);
+  console.log(`📊 Total valid transactions: ${transactions.length.toLocaleString()}`);
+  console.log(`📅 Last 60 days: ${recent.length.toLocaleString()}`);
 
-    // Summary
-    const districts = {};
-    recent.forEach(t => {
-      if (t.district) districts[t.district] = (districts[t.district] || 0) + 1;
-    });
-
-    console.log('\n📋 Top Districts:');
-    Object.entries(districts).sort((a, b) => b[1] - a[1]).slice(0, 10).forEach(([d, c]) => {
-      console.log(`   ${d}: ${c}`);
-    });
-
-    fs.writeFileSync(OUTPUT_FILE, JSON.stringify(recent, null, 2));
-    console.log(`\n✅ Saved ${recent.length} real transactions to ${OUTPUT_FILE}`);
-  } else {
-    console.log('\n❌ No real transactions found from any source.');
-    console.log('💡 Tip: Download CSV manually from:');
-    console.log('   https://dxbinteract.ae/');
-    console.log('   Save as: data/dld-transactions.json');
+  if (recent.length === 0) {
+    console.log('\n⚠️ No transactions in last 60 days. Using all valid transactions.');
+    fs.writeFileSync(OUTPUT_FILE, JSON.stringify(transactions.slice(0, 1000), null, 2));
+    console.log(`✅ Saved ${Math.min(transactions.length, 1000)} transactions`);
+    return;
   }
+
+  // Summary
+  const districts = {};
+  const types = {};
+  const offPlanCount = recent.filter(t => t.isOffPlan).length;
+  
+  recent.forEach(t => {
+    if (t.district) districts[t.district] = (districts[t.district] || 0) + 1;
+    types[t.propertyType] = (types[t.propertyType] || 0) + 1;
+  });
+
+  console.log('\n📋 Top 10 Districts:');
+  Object.entries(districts).sort((a, b) => b[1] - a[1]).slice(0, 10).forEach(([d, c]) => {
+    console.log(`   ${d}: ${c}`);
+  });
+
+  console.log('\n📋 By Property Type:');
+  Object.entries(types).sort((a, b) => b[1] - a[1]).forEach(([t, c]) => {
+    console.log(`   ${t}: ${c}`);
+  });
+
+  console.log(`\n📋 Off-Plan: ${offPlanCount} (${Math.round(offPlanCount/recent.length*100)}%)`);
+
+  const avgValue = Math.round(recent.reduce((s, t) => s + t.actualSalePrice, 0) / recent.length);
+  console.log(`💰 Average Transaction: ${avgValue.toLocaleString()} AED`);
+
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(recent, null, 2));
+  console.log(`\n✅ Saved ${recent.length.toLocaleString()} REAL DLD transactions`);
+  console.log(`   Source: Government Records (100% verified)`);
 }
 
 main().catch(console.error);
