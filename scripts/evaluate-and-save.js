@@ -1,4 +1,4 @@
-// AQAR Auto-Evaluate — Uses all 4 data layers
+// AQAR Auto-Evaluate — With DLD Real Data Filtering
 const fs = require('fs');
 const path = require('path');
 
@@ -93,26 +93,13 @@ function getConsultancyMetrics(city, propertyType) {
   return {
     capRate: consultancyData?.capRates?.[city]?.[typeKey] || 7.0,
     vacancyRate: consultancyData?.vacancyRates?.[city]?.[typeKey] || 10,
-    trend: consultancyData?.trends?.[city] || 'stable',
-    rentalGrowth: consultancyData?.rentalGrowth?.[city] || 2.0,
-    capitalGrowth: consultancyData?.capitalGrowth?.[city] || 3.0
-  };
-}
-
-function getGovernmentMetrics(city) {
-  return {
-    registrationFee: governmentData?.registrationFees?.[city] || 4.0,
-    propertyTax: governmentData?.propertyTax?.[city] || 0.0,
-    mortgageFee: governmentData?.mortgageFees?.[city] || 0.25,
-    avgTransactionValue: governmentData?.avgTransactionValue?.[city] || 1500000
+    trend: consultancyData?.trends?.[city] || 'stable'
   };
 }
 
 function getDeveloperPrice(city, district, propertyType) {
   const projects = developerData?.projects?.[city] || [];
-  const match = projects.find(p => 
-    p.district === district && p.type === propertyType
-  );
+  const match = projects.find(p => p.district === district && p.type === propertyType);
   return match?.avgPricePerSqm || null;
 }
 
@@ -121,53 +108,36 @@ async function evaluateProperty(property) {
     return property;
   }
   
-  // 1. Try developer price first (most accurate for new projects)
   const developerPrice = getDeveloperPrice(property.city, property.district, property.propertyType);
   let marketPricePerSqm = developerPrice || getMarketPrice(property.city, property.district, property.propertyType);
   
-  // 2. Get consultancy metrics
-  const metrics = getConsultancyMetrics(property.city, property.propertyType);
-  
-  // 3. Cap ultra-luxury
   const cappedPrice = MAX_PRICE_PER_SQM[property.city] || 20000;
   if (marketPricePerSqm > cappedPrice) marketPricePerSqm = cappedPrice;
   
   let aqarValuation = marketPricePerSqm * property.area;
   
-  // 4. Waterfront premium
   if (WATERFRONT_AREAS.includes(property.district) && 
       (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
     aqarValuation = Math.round(aqarValuation * 1.06);
   }
   
-  // 5. Villa adjustments
   if (property.propertyType === 'villa') {
     if (property.area > 300) aqarValuation = Math.round(aqarValuation * 1.04);
     else if (property.area < 200) aqarValuation = Math.round(aqarValuation * 0.96);
   }
   
-  // 6. Ultra-luxury
-  if (aqarValuation > 2200000) {
-    aqarValuation = Math.round(aqarValuation * 0.94);
-  }
+  if (aqarValuation > 2200000) aqarValuation = Math.round(aqarValuation * 0.94);
   
-  // 7. Bias calibration
   if (BIAS_CORRECTION[property.city]) {
     aqarValuation = Math.round(aqarValuation * BIAS_CORRECTION[property.city]);
   }
   
-  // 8. Type correction
   if (property.propertyType === 'villa') aqarValuation = Math.round(aqarValuation * 1.018);
   if (property.propertyType === 'townhouse') aqarValuation = Math.round(aqarValuation * 1.021);
   
-  // 9. Area calibration
   if (AREA_CALIBRATION[property.district]) {
     aqarValuation = Math.round(aqarValuation * AREA_CALIBRATION[property.district]);
   }
-  
-  // 10. Government costs (add registration fees)
-  const govMetrics = getGovernmentMetrics(property.city);
-  const totalCost = aqarValuation * (1 + govMetrics.registrationFee / 100);
   
   const appraiserValuation = Math.round(property.actualSalePrice * (0.90 + Math.random() * 0.18));
   const aqarDiff = ((aqarValuation - property.actualSalePrice) / property.actualSalePrice) * 100;
@@ -178,31 +148,65 @@ async function evaluateProperty(property) {
     aqarVsActual: Math.round(aqarDiff * 10) / 10,
     appraiserValuation,
     marketPricePerSqm,
-    dataSource: developerPrice ? 'developer' : 'market-estimate',
-    metrics: {
-      capRate: metrics.capRate,
-      vacancyRate: metrics.vacancyRate,
-      trend: metrics.trend,
-      registrationFee: govMetrics.registrationFee
-    }
+    dataSource: developerPrice ? 'developer' : (property.dataSource || 'market-estimate')
   };
 }
 
+function filterDLDTransactions(transactions) {
+  const before = transactions.length;
+  
+  const filtered = transactions.filter(t => {
+    // Remove very small transactions (< 100,000 AED)
+    if (t.actualSalePrice < 100000) return false;
+    
+    // Remove very large transactions (> 100M AED)
+    if (t.actualSalePrice > 100000000) return false;
+    
+    // Remove suspicious price per sqm
+    const pricePerSqm = t.actualSalePrice / Math.max(1, t.area);
+    if (pricePerSqm < 300) return false;   // Too cheap
+    if (pricePerSqm > 60000) return false;  // Too expensive
+    
+    // Remove land
+    if (t.propertyType === 'land') return false;
+    
+    // Remove off-plan
+    if (t.isOffPlan === true) return false;
+    
+    // Remove warehouse/industrial
+    if (t.propertyType === 'warehouse') return false;
+    
+    return true;
+  });
+  
+  const removed = before - filtered.length;
+  console.log(`\n🧹 DLD Data Cleaning:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${removed.toLocaleString()} (${Math.round(removed/before*100)}%)`);
+  console.log(`   Reasons: <100K, >100M, land, off-plan, extreme price/sqm`);
+  
+  return filtered;
+}
+
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate Started (4 Data Layers)\n');
-  console.log(`📊 Data Layers Loaded:`);
-  console.log(`   Consultancy: ${Object.keys(consultancyData).length > 0 ? '✅' : '⚠️ Not loaded'}`);
-  console.log(`   Developer: ${Object.keys(developerData).length > 0 ? '✅' : '⚠️ Not loaded'}`);
-  console.log(`   Government: ${Object.keys(governmentData).length > 0 ? '✅' : '⚠️ Not loaded'}`);
+  console.log('🚀 AQAR Auto-Evaluate Started (Real DLD Data)\n');
 
   let allTransactions = [];
 
+  // Load DLD real transactions
   if (fs.existsSync(DLD_FILE)) {
     const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
-    console.log(`\n📋 DLD Real Transactions: ${dldData.length}`);
-    allTransactions = allTransactions.concat(dldData);
+    console.log(`📋 DLD Real Transactions (raw): ${dldData.length.toLocaleString()}`);
+    
+    // FILTER non-market transactions
+    const filteredDLD = filterDLDTransactions(dldData);
+    allTransactions = allTransactions.concat(filteredDLD);
+  } else {
+    console.log('⚠️ No DLD data file found');
   }
 
+  // Load generated transactions (for non-Dubai emirates)
   if (fs.existsSync(GEN_FILE)) {
     const genData = JSON.parse(fs.readFileSync(GEN_FILE, 'utf8'));
     console.log(`📋 Generated Transactions: ${genData.length}`);
@@ -214,8 +218,14 @@ async function main() {
     return;
   }
 
-  console.log(`\n📊 Total: ${allTransactions.length}\n🔍 Evaluating...`);
+  console.log(`\n📊 Total to evaluate: ${allTransactions.length.toLocaleString()}`);
   
+  const dldCount = allTransactions.filter(t => t.dataSource === 'dld-real').length;
+  const genCount = allTransactions.filter(t => t.dataSource !== 'dld-real').length;
+  console.log(`   DLD Real: ${dldCount.toLocaleString()}`);
+  console.log(`   Generated: ${genCount.toLocaleString()}`);
+
+  console.log('\n🔍 Evaluating...');
   const results = [];
   for (const t of allTransactions) {
     const evaluated = await evaluateProperty(t);
@@ -237,19 +247,19 @@ async function main() {
     avgDeviation,
     betterThanAppraiser,
     betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100),
-    totalRecords: results.length
+    totalRecords: results.length,
+    dldRealCount: dldCount,
+    generatedCount: genCount
   };
 
   const output = {
     metadata: {
-      version: '7.0.0',
+      version: '8.0.0',
       lastUpdated: new Date().toISOString(),
       totalRecords: results.length,
-      dataLayers: {
-        consultancy: Object.keys(consultancyData).length > 0,
-        developer: Object.keys(developerData).length > 0,
-        government: Object.keys(governmentData).length > 0
-      }
+      dldRealCount: dldCount,
+      generatedCount: genCount,
+      dataQuality: 'DLD transactions filtered for market-rate sales'
     },
     metrics,
     records: results
@@ -257,7 +267,7 @@ async function main() {
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 Data Layers: Consultancy ${output.metadata.dataLayers.consultancy ? '✅' : '❌'} | Developer ${output.metadata.dataLayers.developer ? '✅' : '❌'} | Government ${output.metadata.dataLayers.government ? '✅' : '❌'}`);
+  console.log(`📊 DLD Real: ${dldCount.toLocaleString()} | Generated: ${genCount.toLocaleString()}`);
 }
 
 main().catch(console.error);
