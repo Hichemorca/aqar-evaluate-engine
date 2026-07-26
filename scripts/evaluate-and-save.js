@@ -1,4 +1,4 @@
-// AQAR Auto-Evaluate — DLD Median Only (No Adjustments)
+// AQAR Auto-Evaluate — Sub-Group Medians (District + Type + Size)
 const fs = require('fs');
 const path = require('path');
 
@@ -17,14 +17,14 @@ function filterNonSaleTransactions(transactions) {
     if (type && !type.includes('sale') && !type.includes('بيع') && !type.includes('sell')) return false;
     return true;
   });
-  console.log(`🧹 Stage 1 — Non-Sale: ${before} → ${filtered.length}`);
+  console.log(`🧹 S1 Non-Sale: ${before} → ${filtered.length}`);
   return filtered;
 }
 
 function filterMissingData(transactions) {
   const before = transactions.length;
   const filtered = transactions.filter(t => t.district && t.district !== 'Unknown' && t.propertyType && t.propertyType !== 'Unknown' && t.area > 0 && t.actualSalePrice > 0);
-  console.log(`🧹 Stage 2 — Missing: ${before} → ${filtered.length}`);
+  console.log(`🧹 S2 Missing: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -32,14 +32,14 @@ function filterInvalidAreas(transactions) {
   const before = transactions.length;
   const limits = { apartment: { min: 30, max: 1000 }, villa: { min: 100, max: 5000 }, townhouse: { min: 80, max: 2000 }, office: { min: 30, max: 10000 }, retail: { min: 20, max: 5000 }, warehouse: { min: 100, max: 50000 }, land: { min: 100, max: 100000 } };
   const filtered = transactions.filter(t => { const l = limits[t.propertyType] || { min: 30, max: 5000 }; return t.area >= l.min && t.area <= l.max; });
-  console.log(`🧹 Stage 3 — Invalid Areas: ${before} → ${filtered.length}`);
+  console.log(`🧹 S3 Area: ${before} → ${filtered.length}`);
   return filtered;
 }
 
 function filterInvalidPrices(transactions) {
   const before = transactions.length;
   const filtered = transactions.filter(t => t.pricePerSqm > 0);
-  console.log(`🧹 Stage 4 — Invalid Prices: ${before} → ${filtered.length}`);
+  console.log(`🧹 S4 Price: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -55,7 +55,7 @@ function filterOutliers(transactions) {
     const lo = q1 - 1.5 * iqr, hi = q3 + 1.5 * iqr;
     group.forEach(t => { if (t.pricePerSqm >= lo && t.pricePerSqm <= hi) filtered.push(t); });
   });
-  console.log(`🧹 Stage 5 — IQR Outliers: ${before} → ${filtered.length}`);
+  console.log(`🧹 S5 IQR: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -67,7 +67,7 @@ function filterReadyOnly(transactions) {
     if (status.includes('off-plan') || status.includes('offplan') || status.includes('under construction') || status.includes('launched')) return false;
     return true;
   });
-  console.log(`🧹 Stage 6 — Ready Only: ${before} → ${filtered.length}`);
+  console.log(`🧹 S6 Ready: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -82,7 +82,7 @@ function filterDuplicates(transactions) {
     seen.add(key);
     return true;
   });
-  console.log(`🧹 Stage 7 — Duplicates: ${before} → ${filtered.length}`);
+  console.log(`🧹 S7 Dups: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -90,7 +90,7 @@ function filterLast60Days(transactions) {
   const before = transactions.length;
   const sixtyDaysAgo = new Date(Date.now() - 60 * 86400000);
   const filtered = transactions.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= sixtyDaysAgo; });
-  console.log(`🧹 Stage 8 — Last 60 Days: ${before} → ${filtered.length}`);
+  console.log(`🧹 S8 60d: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -100,13 +100,13 @@ function validateGroupCounts(transactions) {
   transactions.forEach(t => { const k = `${t.district}__${t.propertyType}`; if (!groups[k]) groups[k] = []; groups[k].push(t); });
   const filtered = [];
   Object.entries(groups).forEach(([k, g]) => { if (g.length >= 3) filtered.push(...g); });
-  console.log(`🧹 Stage 9 — Groups: ${before} → ${filtered.length} (${Object.keys(groups).length} groups)`);
+  console.log(`🧹 S9 Groups: ${before} → ${filtered.length} (${Object.keys(groups).length} groups)`);
   return filtered;
 }
 
 function applyAllFilters(transactions) {
   console.log('\n' + '='.repeat(50));
-  console.log(`🧹 9-STAGE CLEANING — Input: ${transactions.length.toLocaleString()}`);
+  console.log(`🧹 9-STAGE — Input: ${transactions.length.toLocaleString()}`);
   console.log('='.repeat(50));
   let data = transactions;
   data = filterNonSaleTransactions(data);
@@ -120,19 +120,37 @@ function applyAllFilters(transactions) {
   data = filterLast60Days(data);
   data = validateGroupCounts(data);
   console.log('='.repeat(50));
-  console.log(`📊 FINAL: ${data.length.toLocaleString()} clean transactions\n`);
+  console.log(`📊 FINAL: ${data.length.toLocaleString()} clean\n`);
   return data;
 }
 
-async function evaluateProperty(property, dldStats) {
-  const key = `${property.district}__${property.propertyType}`;
-  const stats = dldStats[key];
+function getSizeCategory(area) {
+  if (area < 80) return 'small';
+  if (area > 200) return 'large';
+  return 'medium';
+}
+
+async function evaluateProperty(property, dldStats, subGroupMedians) {
+  // Try sub-group first (district + type + size)
+  const sizeCat = getSizeCategory(property.area);
+  const subKey = `${property.district}__${property.propertyType}__${sizeCat}`;
+  const subStats = subGroupMedians[subKey];
   
   let marketPricePerSqm;
-  if (stats && stats.count >= 5) {
-    marketPricePerSqm = Math.round(stats.median);
+  let usedSubGroup = false;
+  
+  if (subStats && subStats.count >= 5) {
+    marketPricePerSqm = Math.round(subStats.median);
+    usedSubGroup = true;
   } else {
-    return null; // Skip — insufficient data
+    // Fall back to main group
+    const mainKey = `${property.district}__${property.propertyType}`;
+    const mainStats = dldStats[mainKey];
+    if (mainStats && mainStats.count >= 5) {
+      marketPricePerSqm = Math.round(mainStats.median);
+    } else {
+      return null;
+    }
   }
   
   let aqarValuation = marketPricePerSqm * property.area;
@@ -146,12 +164,13 @@ async function evaluateProperty(property, dldStats) {
     aqarVsActual: Math.round(aqarDiff * 10) / 10,
     appraiserValuation,
     marketPricePerSqm,
-    usedDldMedian: true
+    usedSubGroup,
+    sizeCategory: sizeCat
   };
 }
 
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate — DLD Median Only\n');
+  console.log('🚀 AQAR — Sub-Group Medians\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
@@ -161,11 +180,11 @@ async function main() {
   const cleaned = applyAllFilters(dldData);
   cleaned.forEach(t => { t.dataSource = 'dld-real-cleaned'; t.city = t.city || 'dubai'; });
 
-  console.log(`📋 Generated: SKIPPED (using DLD real data only)\n`);
+  console.log(`📋 Generated: SKIPPED\n`);
 
-  if (cleaned.length === 0) { console.log('❌ No transactions after cleaning'); return; }
+  if (cleaned.length === 0) { console.log('❌ No transactions'); return; }
 
-  // Calculate DLD median
+  // Main group statistics
   const dldStats = {};
   cleaned.forEach(t => {
     const key = `${t.district}__${t.propertyType}`;
@@ -173,24 +192,43 @@ async function main() {
     dldStats[key].prices.push(t.pricePerSqm);
     dldStats[key].count++;
   });
-
   Object.keys(dldStats).forEach(key => {
     const prices = dldStats[key].prices.sort((a, b) => a - b);
     const mid = Math.floor(prices.length / 2);
     dldStats[key].median = prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid];
   });
 
-  const groupsWithMedian = Object.values(dldStats).filter(s => s.count >= 5).length;
-  console.log(`📊 DLD Price Stats: ${Object.keys(dldStats).length} groups, ${groupsWithMedian} with median\n🔍 Evaluating...`);
+  // Sub-group statistics (district + type + size)
+  const subGroups = {};
+  cleaned.forEach(t => {
+    const sizeCat = getSizeCategory(t.area);
+    const key = `${t.district}__${t.propertyType}__${sizeCat}`;
+    if (!subGroups[key]) subGroups[key] = { prices: [], count: 0 };
+    subGroups[key].prices.push(t.pricePerSqm);
+    subGroups[key].count++;
+  });
+  
+  const subGroupMedians = {};
+  Object.keys(subGroups).forEach(key => {
+    const prices = subGroups[key].prices.sort((a, b) => a - b);
+    const mid = Math.floor(prices.length / 2);
+    subGroupMedians[key] = {
+      median: prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid],
+      count: subGroups[key].count
+    };
+  });
+
+  console.log(`📊 Groups: ${Object.keys(dldStats).length} main, ${Object.keys(subGroupMedians).length} sub (by size)\n🔍 Evaluating ${cleaned.length.toLocaleString()}...`);
 
   const results = [];
   for (const t of cleaned) {
-    const evaluated = await evaluateProperty(t, dldStats);
+    const evaluated = await evaluateProperty(t, dldStats, subGroupMedians);
     if (evaluated) results.push(evaluated);
   }
 
-  if (results.length === 0) { console.log('❌ No valid evaluations'); return; }
+  if (results.length === 0) { console.log('❌ No evaluations'); return; }
 
+  const usedSub = results.filter(r => r.usedSubGroup).length;
   const accuracies = results.map(r => 100 - Math.abs(r.aqarVsActual || 0));
   const avgAccuracy = Math.round(accuracies.reduce((s, a) => s + a, 0) / results.length * 10) / 10;
   const deviations = results.map(r => Math.abs(r.aqarVsActual || 0));
@@ -201,13 +239,13 @@ async function main() {
     return aqarDev <= appraiserDev;
   }).length;
 
-  const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length };
+  const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length, usedSubGroups: usedSub };
 
-  const output = { metadata: { version: '12.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'DLD Median Only — No Adjustments', dataSource: 'DLD Real Transactions Only' }, metrics, records: results };
+  const output = { metadata: { version: '13.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'Sub-Group Medians (District + Type + Size)', usedSubGroups: usedSub, subGroupsCount: Object.keys(subGroupMedians).length }, metrics, records: results };
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 Evaluated: ${results.length.toLocaleString()} properties using DLD Median`);
+  console.log(`📊 Sub-Groups Used: ${usedSub.toLocaleString()} | Groups: ${Object.keys(subGroupMedians).length}`);
 }
 
 main().catch(console.error);
