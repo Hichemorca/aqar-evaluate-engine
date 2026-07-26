@@ -21,9 +21,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
           
-      - name: Install dependencies
+      - name: Install Node dependencies
         run: npm install axios
+        
+      - name: Install Python dependencies
+        run: pip install xgboost pandas numpy scikit-learn
         
       - name: Layer 1 — Fetch consultancy reports
         run: node scripts/fetch-consultancy.js
@@ -41,6 +49,10 @@ jobs:
       - name: Layer 5 — Fetch generated transactions
         run: node scripts/fetch-transactions.js
         
+      - name: Layer 6 — Train ML model
+        run: python scripts/train-model.py
+        continue-on-error: true
+        
       - name: Evaluate all properties
         run: node scripts/evaluate-and-save.js
         
@@ -55,6 +67,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "📊 Auto-update all 4 data layers [skip ci]"
+            git commit -m "📊 Auto-update all data layers + ML training [skip ci]"
             git push origin main
           fi
