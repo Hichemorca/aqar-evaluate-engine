@@ -1,10 +1,9 @@
-// AQAR Auto-Evaluate — DLD Real Data Only with Field Adjustments
+// AQAR Auto-Evaluate — DLD Median Only (No Adjustments)
 const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
-const GEN_FILE = path.join(DATA_DIR, 'fetched-transactions.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 
 // ===== 9-STAGE CLEANING =====
@@ -125,32 +124,6 @@ function applyAllFilters(transactions) {
   return data;
 }
 
-// Fallback prices
-const MARKET_PRICES = {
-  dubai: {
-    'Dubai Marina': { apt: 11850, villa: 14200 }, 'Palm Jumeirah': { apt: 16500, villa: 22000 }, 'Downtown Dubai': { apt: 13200, villa: 18000 },
-    'Business Bay': { apt: 9200, villa: 12000 }, 'Jumeirah Village Circle': { apt: 6200, villa: 7200 }, 'Jumeirah Lake Towers': { apt: 7200, villa: 8500 },
-    'Dubai Hills Estate': { apt: 8200, villa: 9500 }, 'Arabian Ranches': { apt: 6500, villa: 7500 }, 'Emirates Hills': { apt: 9500, villa: 14000 },
-    'Emaar Beachfront': { apt: 14500, villa: 18500 }, 'Dubai Creek Harbour': { apt: 8800, villa: 11000 }, 'Al Barsha': { apt: 5500, villa: 6500 },
-    'The Springs': { apt: 6500, villa: 7500 }, 'The Meadows': { apt: 7000, villa: 8200 }, 'Deira': { apt: 3500, villa: 4200 },
-    'Bur Dubai': { apt: 4000, villa: 4800 }, 'Damac Hills': { apt: 5800, villa: 6800 }, 'Mirdif': { apt: 4500, villa: 5500 },
-    'Al Furjan': { apt: 5000, villa: 6000 }, 'Discovery Gardens': { apt: 3800, villa: 4500 }, 'Motor City': { apt: 5200, villa: 6200 },
-    'Dubai Sports City': { apt: 4800, villa: 5800 }, 'Dubai Silicon Oasis': { apt: 5000, villa: 6000 }, 'International City': { apt: 3200, villa: 4000 },
-    'Al Nahda': { apt: 3400, villa: 4000 }
-  }
-};
-
-function getFallbackPrice(city, district, propertyType) {
-  const cityData = MARKET_PRICES[city];
-  if (!cityData) return 5000;
-  const d = cityData[district] || Object.values(cityData)[0];
-  if (propertyType === 'villa') return d.villa || d.apt * 1.3;
-  if (propertyType === 'townhouse') return (d.villa || d.apt * 1.3) * 0.88;
-  if (propertyType === 'office') return d.apt * 0.9;
-  if (propertyType === 'retail') return d.apt * 1.2;
-  return d.apt;
-}
-
 async function evaluateProperty(property, dldStats) {
   const key = `${property.district}__${property.propertyType}`;
   const stats = dldStats[key];
@@ -159,73 +132,10 @@ async function evaluateProperty(property, dldStats) {
   if (stats && stats.count >= 5) {
     marketPricePerSqm = Math.round(stats.median);
   } else {
-    marketPricePerSqm = getFallbackPrice(property.city, property.district, property.propertyType);
+    return null; // Skip — insufficient data
   }
-  
-  const maxPrice = { dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500, 'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500 };
-  if (marketPricePerSqm > (maxPrice[property.city] || 20000)) marketPricePerSqm = maxPrice[property.city] || 20000;
   
   let aqarValuation = marketPricePerSqm * property.area;
-  
-  // ===== DLD FIELD ADJUSTMENTS =====
-  
-  // Rooms (each room beyond 2 = +3%)
-  const rooms = property.rooms || 0;
-  if (rooms > 0) {
-    aqarValuation = Math.round(aqarValuation * (1 + (rooms - 2) * 0.03));
-  }
-  
-  // Parking (each spot = +2%)
-  const parking = property.parking || 0;
-  if (parking > 0) {
-    aqarValuation = Math.round(aqarValuation * (1 + parking * 0.02));
-  }
-  
-  // Near Metro (+5%)
-  const metro = (property.nearestMetro || '').toString().toLowerCase();
-  if (metro && metro !== 'no' && metro !== 'none' && metro !== 'n/a' && metro !== '' && metro.length > 2) {
-    aqarValuation = Math.round(aqarValuation * 1.05);
-  }
-  
-  // Near Mall (+3%)
-  const mall = (property.nearestMall || '').toString().toLowerCase();
-  if (mall && mall !== 'no' && mall !== 'none' && mall !== 'n/a' && mall !== '' && mall.length > 2) {
-    aqarValuation = Math.round(aqarValuation * 1.03);
-  }
-  
-  // Premium Developer (+5%)
-  const project = ((property.masterProject || '') + ' ' + (property.project || '')).toLowerCase();
-  const premiumDevs = ['emaar', 'damac', 'nakheel', 'meraas', 'sobh', 'aldar', 'select', 'ellin', 'omniyat'];
-  if (premiumDevs.some(d => project.includes(d))) {
-    aqarValuation = Math.round(aqarValuation * 1.05);
-  }
-  
-  // Waterfront
-  const waterfrontAreas = ['Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island', 'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'];
-  if (waterfrontAreas.includes(property.district) && (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
-    aqarValuation = Math.round(aqarValuation * 1.06);
-  }
-  
-  // Villa size
-  if (property.propertyType === 'villa') {
-    if (property.area > 300) aqarValuation = Math.round(aqarValuation * 1.04);
-    else if (property.area < 200) aqarValuation = Math.round(aqarValuation * 0.96);
-  }
-  
-  // Ultra-luxury cap
-  if (aqarValuation > 2200000) aqarValuation = Math.round(aqarValuation * 0.94);
-  
-  // Bias
-  const bias = { dubai: 1.013, 'abu-dhabi': 1.027, sharjah: 1.025, ajman: 1.012, 'ras-al-khaimah': 1.002, fujairah: 1.018, 'umm-al-quwain': 1.016 };
-  if (bias[property.city]) aqarValuation = Math.round(aqarValuation * bias[property.city]);
-  
-  // Type correction
-  if (property.propertyType === 'villa') aqarValuation = Math.round(aqarValuation * 1.018);
-  if (property.propertyType === 'townhouse') aqarValuation = Math.round(aqarValuation * 1.021);
-  
-  // Area calibration
-  const areaCal = { 'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94, 'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94 };
-  if (areaCal[property.district]) aqarValuation = Math.round(aqarValuation * areaCal[property.district]);
   
   const appraiserValuation = Math.round(property.actualSalePrice * (0.92 + Math.random() * 0.16));
   const aqarDiff = ((aqarValuation - property.actualSalePrice) / property.actualSalePrice) * 100;
@@ -236,35 +146,28 @@ async function evaluateProperty(property, dldStats) {
     aqarVsActual: Math.round(aqarDiff * 10) / 10,
     appraiserValuation,
     marketPricePerSqm,
-    usedDldMedian: !!(stats && stats.count >= 5)
+    usedDldMedian: true
   };
 }
 
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate — DLD Real Data + Field Adjustments\n');
+  console.log('🚀 AQAR Auto-Evaluate — DLD Median Only\n');
 
-  let allTransactions = [];
+  if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
-  // Load DLD
-  if (fs.existsSync(DLD_FILE)) {
-    const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
-    console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
-    const cleaned = applyAllFilters(dldData);
-    cleaned.forEach(t => { t.dataSource = 'dld-real-cleaned'; t.city = t.city || 'dubai'; });
-    allTransactions = allTransactions.concat(cleaned);
-  } else {
-    console.log('❌ No DLD data file found');
-    return;
-  }
+  const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
+  console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
+  
+  const cleaned = applyAllFilters(dldData);
+  cleaned.forEach(t => { t.dataSource = 'dld-real-cleaned'; t.city = t.city || 'dubai'; });
 
-  // SKIP generated transactions
   console.log(`📋 Generated: SKIPPED (using DLD real data only)\n`);
 
-  if (allTransactions.length === 0) { console.log('❌ No transactions'); return; }
+  if (cleaned.length === 0) { console.log('❌ No transactions after cleaning'); return; }
 
-  // Calculate DLD median prices
+  // Calculate DLD median
   const dldStats = {};
-  allTransactions.forEach(t => {
+  cleaned.forEach(t => {
     const key = `${t.district}__${t.propertyType}`;
     if (!dldStats[key]) dldStats[key] = { prices: [], count: 0 };
     dldStats[key].prices.push(t.pricePerSqm);
@@ -275,19 +178,19 @@ async function main() {
     const prices = dldStats[key].prices.sort((a, b) => a - b);
     const mid = Math.floor(prices.length / 2);
     dldStats[key].median = prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid];
-    dldStats[key].avg = Math.round(prices.reduce((s, p) => s + p, 0) / prices.length);
   });
 
   const groupsWithMedian = Object.values(dldStats).filter(s => s.count >= 5).length;
-  console.log(`📊 DLD Price Stats: ${Object.keys(dldStats).length} groups, ${groupsWithMedian} with median\n🔍 Evaluating ${allTransactions.length.toLocaleString()} transactions...`);
+  console.log(`📊 DLD Price Stats: ${Object.keys(dldStats).length} groups, ${groupsWithMedian} with median\n🔍 Evaluating...`);
 
   const results = [];
-  for (const t of allTransactions) {
+  for (const t of cleaned) {
     const evaluated = await evaluateProperty(t, dldStats);
     if (evaluated) results.push(evaluated);
   }
 
-  const usedMedian = results.filter(r => r.usedDldMedian).length;
+  if (results.length === 0) { console.log('❌ No valid evaluations'); return; }
+
   const accuracies = results.map(r => 100 - Math.abs(r.aqarVsActual || 0));
   const avgAccuracy = Math.round(accuracies.reduce((s, a) => s + a, 0) / results.length * 10) / 10;
   const deviations = results.map(r => Math.abs(r.aqarVsActual || 0));
@@ -298,13 +201,13 @@ async function main() {
     return aqarDev <= appraiserDev;
   }).length;
 
-  const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length, usedDldMedian: usedMedian };
+  const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length };
 
-  const output = { metadata: { version: '11.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'DLD real data only + field adjustments (rooms, parking, metro, mall, developer)', usedDldMedianGroups: groupsWithMedian, dataSource: 'DLD Real Transactions Only' }, metrics, records: results };
+  const output = { metadata: { version: '12.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'DLD Median Only — No Adjustments', dataSource: 'DLD Real Transactions Only' }, metrics, records: results };
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 Used DLD Median: ${usedMedian.toLocaleString()} | Data: 100% DLD Real`);
+  console.log(`📊 Evaluated: ${results.length.toLocaleString()} properties using DLD Median`);
 }
 
 main().catch(console.error);
