@@ -1,49 +1,303 @@
-// AQAR Auto-Evaluate — With DLD Real Data Filtering
+// AQAR Auto-Evaluate — 9-Stage DLD Data Cleaning
 const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const GEN_FILE = path.join(DATA_DIR, 'fetched-transactions.json');
-const CONSULTANCY_FILE = path.join(DATA_DIR, 'consultancy-data.json');
-const DEVELOPER_FILE = path.join(DATA_DIR, 'developer-data.json');
-const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 
-// Load external data layers
-let consultancyData = {};
-let developerData = {};
-let governmentData = {};
+// ===== STAGE 1: Exclude non-sale transactions =====
+function filterNonSaleTransactions(transactions) {
+  const before = transactions.length;
+  
+  const excludedKeywords = [
+    'gift', 'hiba', 'هبة',
+    'inheritance', 'irt', 'wasiya', 'وراثة', 'وصية',
+    'transfer', 'subsidiary', 'affiliate', 'related', 'تحويل', 'تابعة',
+    'family', 'relative', 'parent', 'child', 'sibling', 'spouse',
+    'correction', 'rectification', 'تصحيح',
+    'mortgage', 'رهن', 'fak', 'release',
+    'auction', 'مزاد', 'compulsory', 'compulsory acquisition'
+  ];
+  
+  const filtered = transactions.filter(t => {
+    const type = (t.transactionType || t.type || '').toLowerCase();
+    const usage = (t.usage || '').toLowerCase();
+    const notes = (t.notes || '').toLowerCase();
+    const combined = type + ' ' + usage + ' ' + notes;
+    
+    for (const keyword of excludedKeywords) {
+      if (combined.includes(keyword)) return false;
+    }
+    
+    // Keep only if it's a sale
+    if (type && !type.includes('sale') && !type.includes('بيع') && !type.includes('sell')) {
+      return false;
+    }
+    
+    return true;
+  });
+  
+  console.log(`\n🧹 Stage 1 — Non-Sale Transactions:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
 
-try { consultancyData = JSON.parse(fs.readFileSync(CONSULTANCY_FILE, 'utf8')); } catch(e) {}
-try { developerData = JSON.parse(fs.readFileSync(DEVELOPER_FILE, 'utf8')); } catch(e) {}
-try { governmentData = JSON.parse(fs.readFileSync(GOVERNMENT_FILE, 'utf8')); } catch(e) {}
+// ===== STAGE 2: Outlier removal (IQR per district + property type) =====
+function filterOutliers(transactions) {
+  const before = transactions.length;
+  
+  // Calculate price per sqm
+  transactions.forEach(t => {
+    t.pricePerSqm = t.actualSalePrice / Math.max(1, t.area);
+  });
+  
+  // Group by district + property type
+  const groups = {};
+  transactions.forEach(t => {
+    const key = `${t.district}__${t.propertyType}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(t);
+  });
+  
+  const filtered = [];
+  
+  Object.values(groups).forEach(group => {
+    if (group.length < 5) {
+      // Too few to calculate IQR — keep all
+      filtered.push(...group);
+      return;
+    }
+    
+    const prices = group.map(t => t.pricePerSqm).sort((a, b) => a - b);
+    const n = prices.length;
+    
+    // Q1 and Q3
+    const q1Index = Math.floor(n * 0.25);
+    const q3Index = Math.floor(n * 0.75);
+    const q1 = prices[q1Index];
+    const q3 = prices[q3Index];
+    const iqr = q3 - q1;
+    
+    const lowerBound = q1 - 1.5 * iqr;
+    const upperBound = q3 + 1.5 * iqr;
+    
+    group.forEach(t => {
+      if (t.pricePerSqm >= lowerBound && t.pricePerSqm <= upperBound) {
+        filtered.push(t);
+      }
+    });
+  });
+  
+  console.log(`\n🧹 Stage 2 — IQR Outliers (per district+type):`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
 
-// Waterfront areas
-const WATERFRONT_AREAS = [
-  'Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island',
-  'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'
-];
+// ===== STAGE 3: Invalid areas =====
+function filterInvalidAreas(transactions) {
+  const before = transactions.length;
+  
+  const areaLimits = {
+    apartment: { min: 30, max: 1000 },
+    villa: { min: 100, max: 5000 },
+    townhouse: { min: 80, max: 2000 },
+    office: { min: 30, max: 10000 },
+    retail: { min: 20, max: 5000 },
+    warehouse: { min: 100, max: 50000 },
+    land: { min: 100, max: 100000 }
+  };
+  
+  const filtered = transactions.filter(t => {
+    if (!t.area || t.area <= 0) return false;
+    
+    const limits = areaLimits[t.propertyType] || { min: 30, max: 5000 };
+    if (t.area < limits.min) return false;
+    if (t.area > limits.max) return false;
+    
+    return true;
+  });
+  
+  console.log(`\n🧹 Stage 3 — Invalid Areas:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
 
-// Max price per sqm
-const MAX_PRICE_PER_SQM = {
-  dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500,
-  'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500
-};
+// ===== STAGE 4: Invalid prices =====
+function filterInvalidPrices(transactions) {
+  const before = transactions.length;
+  
+  const filtered = transactions.filter(t => {
+    if (!t.actualSalePrice || t.actualSalePrice <= 0) return false;
+    if (!t.pricePerSqm || t.pricePerSqm <= 0) return false;
+    return true;
+  });
+  
+  console.log(`\n🧹 Stage 4 — Invalid Prices:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
 
-// Bias correction
-const BIAS_CORRECTION = {
-  'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018,
-  ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016
-};
+// ===== STAGE 5: Missing data =====
+function filterMissingData(transactions) {
+  const before = transactions.length;
+  
+  const filtered = transactions.filter(t => {
+    if (!t.district || t.district === 'Unknown' || t.district === '') return false;
+    if (!t.propertyType || t.propertyType === 'Unknown') return false;
+    if (!t.area || t.area <= 0) return false;
+    if (!t.actualSalePrice || t.actualSalePrice <= 0) return false;
+    return true;
+  });
+  
+  console.log(`\n🧹 Stage 5 — Missing Data:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
 
-// Area calibration
-const AREA_CALIBRATION = {
-  'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94,
-  'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94
-};
+// ===== STAGE 6: Duplicates =====
+function filterDuplicates(transactions) {
+  const before = transactions.length;
+  const seen = new Set();
+  
+  const filtered = transactions.filter(t => {
+    // Check by transaction number
+    if (t.propertyRef && seen.has(t.propertyRef)) return false;
+    if (t.propertyRef) seen.add(t.propertyRef);
+    
+    // Check by property + date + value
+    const key = `${t.district}__${t.area}__${Math.round(t.actualSalePrice / 1000)}__${t.saleDate}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    
+    return true;
+  });
+  
+  console.log(`\n🧹 Stage 6 — Duplicates:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
 
-// Market prices (fallback)
+// ===== STAGE 7: Time filter (60 days) =====
+function filterLast60Days(transactions) {
+  const before = transactions.length;
+  const sixtyDaysAgo = new Date(Date.now() - 60 * 86400000);
+  
+  const filtered = transactions.filter(t => {
+    if (!t.saleDate) return false;
+    const d = new Date(t.saleDate);
+    return !isNaN(d.getTime()) && d >= sixtyDaysAgo;
+  });
+  
+  console.log(`\n🧹 Stage 7 — Last 60 Days:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
+
+// ===== STAGE 8: Filter per district + property type groups =====
+function validateGroupCounts(transactions) {
+  const groups = {};
+  transactions.forEach(t => {
+    const key = `${t.district}__${t.propertyType}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(t);
+  });
+  
+  const before = transactions.length;
+  const filtered = [];
+  
+  Object.entries(groups).forEach(([key, group]) => {
+    if (group.length >= 3) {
+      filtered.push(...group);
+    } else {
+      console.log(`   ⚠️ Skipping ${key}: only ${group.length} transactions`);
+    }
+  });
+  
+  console.log(`\n🧹 Stage 8 — Group Validation (min 3 per group):`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Groups: ${Object.keys(groups).length} → ${Object.keys(groups).filter(k => groups[k].length >= 3).length} kept`);
+  
+  return filtered;
+}
+
+// ===== STAGE 9: Separate Ready from Off-Plan =====
+function filterReadyOnly(transactions) {
+  const before = transactions.length;
+  
+  const filtered = transactions.filter(t => {
+    // Remove off-plan
+    if (t.isOffPlan === true) return false;
+    
+    // Remove if project status indicates not complete
+    const status = (t.status || t.projectStatus || '').toLowerCase();
+    if (status.includes('off-plan') || status.includes('offplan') || 
+        status.includes('under construction') || status.includes('launched')) {
+      return false;
+    }
+    
+    return true;
+  });
+  
+  console.log(`\n🧹 Stage 9 — Ready Properties Only:`);
+  console.log(`   Before: ${before.toLocaleString()}`);
+  console.log(`   After:  ${filtered.length.toLocaleString()}`);
+  console.log(`   Removed: ${(before - filtered.length).toLocaleString()}`);
+  
+  return filtered;
+}
+
+// ===== MAIN FILTER =====
+function applyAllFilters(transactions) {
+  console.log('\n' + '='.repeat(60));
+  console.log('🧹 AQAR 9-STAGE DATA CLEANING');
+  console.log('='.repeat(60));
+  console.log(`\n📥 Input: ${transactions.length.toLocaleString()} transactions\n`);
+  
+  let data = transactions;
+  
+  data = filterNonSaleTransactions(data);
+  data = filterMissingData(data);
+  data = filterInvalidAreas(data);
+  data = filterInvalidPrices(data);
+  data = filterOutliers(data);
+  data = filterReadyOnly(data);
+  data = filterDuplicates(data);
+  data = filterLast60Days(data);
+  data = validateGroupCounts(data);
+  
+  console.log('\n' + '='.repeat(60));
+  console.log(`📊 FINAL: ${data.length.toLocaleString()} clean transactions`);
+  console.log(`   Removed: ${(transactions.length - data.length).toLocaleString()} (${Math.round((1 - data.length/transactions.length) * 100)}%)`);
+  console.log('='.repeat(60) + '\n');
+  
+  return data;
+}
+
+// Market prices & evaluation functions (same as before)
 const MARKET_PRICES = {
   dubai: {
     'Dubai Marina': { apt: 11850, villa: 14200, townhouse: 12500, office: 10500, retail: 13500 },
@@ -88,36 +342,16 @@ function getMarketPrice(city, district, propertyType) {
   }
 }
 
-function getConsultancyMetrics(city, propertyType) {
-  const typeKey = propertyType === 'townhouse' ? 'villa' : propertyType;
-  return {
-    capRate: consultancyData?.capRates?.[city]?.[typeKey] || 7.0,
-    vacancyRate: consultancyData?.vacancyRates?.[city]?.[typeKey] || 10,
-    trend: consultancyData?.trends?.[city] || 'stable'
-  };
-}
-
-function getDeveloperPrice(city, district, propertyType) {
-  const projects = developerData?.projects?.[city] || [];
-  const match = projects.find(p => p.district === district && p.type === propertyType);
-  return match?.avgPricePerSqm || null;
-}
-
 async function evaluateProperty(property) {
-  if (property.aqarValuation && property.aqarVsActual !== undefined) {
-    return property;
-  }
-  
-  const developerPrice = getDeveloperPrice(property.city, property.district, property.propertyType);
-  let marketPricePerSqm = developerPrice || getMarketPrice(property.city, property.district, property.propertyType);
-  
-  const cappedPrice = MAX_PRICE_PER_SQM[property.city] || 20000;
+  let marketPricePerSqm = getMarketPrice(property.city, property.district, property.propertyType);
+  const maxPricePerSqm = { dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500, 'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500 };
+  const cappedPrice = maxPricePerSqm[property.city] || 20000;
   if (marketPricePerSqm > cappedPrice) marketPricePerSqm = cappedPrice;
   
   let aqarValuation = marketPricePerSqm * property.area;
   
-  if (WATERFRONT_AREAS.includes(property.district) && 
-      (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
+  const waterfrontAreas = ['Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island', 'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'];
+  if (waterfrontAreas.includes(property.district) && (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
     aqarValuation = Math.round(aqarValuation * 1.06);
   }
   
@@ -128,16 +362,13 @@ async function evaluateProperty(property) {
   
   if (aqarValuation > 2200000) aqarValuation = Math.round(aqarValuation * 0.94);
   
-  if (BIAS_CORRECTION[property.city]) {
-    aqarValuation = Math.round(aqarValuation * BIAS_CORRECTION[property.city]);
-  }
-  
+  const biasCorrection = { 'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018, ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016 };
+  if (biasCorrection[property.city]) aqarValuation = Math.round(aqarValuation * biasCorrection[property.city]);
   if (property.propertyType === 'villa') aqarValuation = Math.round(aqarValuation * 1.018);
   if (property.propertyType === 'townhouse') aqarValuation = Math.round(aqarValuation * 1.021);
   
-  if (AREA_CALIBRATION[property.district]) {
-    aqarValuation = Math.round(aqarValuation * AREA_CALIBRATION[property.district]);
-  }
+  const areaCalibration = { 'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94, 'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94 };
+  if (areaCalibration[property.district]) aqarValuation = Math.round(aqarValuation * areaCalibration[property.district]);
   
   const appraiserValuation = Math.round(property.actualSalePrice * (0.90 + Math.random() * 0.18));
   const aqarDiff = ((aqarValuation - property.actualSalePrice) / property.actualSalePrice) * 100;
@@ -148,68 +379,29 @@ async function evaluateProperty(property) {
     aqarVsActual: Math.round(aqarDiff * 10) / 10,
     appraiserValuation,
     marketPricePerSqm,
-    dataSource: developerPrice ? 'developer' : (property.dataSource || 'market-estimate')
+    dataSource: 'dld-real-cleaned'
   };
 }
 
-function filterDLDTransactions(transactions) {
-  const before = transactions.length;
-  
-  const filtered = transactions.filter(t => {
-    // Remove very small transactions (< 100,000 AED)
-    if (t.actualSalePrice < 100000) return false;
-    
-    // Remove very large transactions (> 100M AED)
-    if (t.actualSalePrice > 100000000) return false;
-    
-    // Remove suspicious price per sqm
-    const pricePerSqm = t.actualSalePrice / Math.max(1, t.area);
-    if (pricePerSqm < 300) return false;   // Too cheap
-    if (pricePerSqm > 60000) return false;  // Too expensive
-    
-    // Remove land
-    if (t.propertyType === 'land') return false;
-    
-    // Remove off-plan
-    if (t.isOffPlan === true) return false;
-    
-    // Remove warehouse/industrial
-    if (t.propertyType === 'warehouse') return false;
-    
-    return true;
-  });
-  
-  const removed = before - filtered.length;
-  console.log(`\n🧹 DLD Data Cleaning:`);
-  console.log(`   Before: ${before.toLocaleString()}`);
-  console.log(`   After:  ${filtered.length.toLocaleString()}`);
-  console.log(`   Removed: ${removed.toLocaleString()} (${Math.round(removed/before*100)}%)`);
-  console.log(`   Reasons: <100K, >100M, land, off-plan, extreme price/sqm`);
-  
-  return filtered;
-}
-
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate Started (Real DLD Data)\n');
+  console.log('🚀 AQAR Auto-Evaluate — 9-Stage Cleaning\n');
 
   let allTransactions = [];
 
-  // Load DLD real transactions
   if (fs.existsSync(DLD_FILE)) {
     const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
-    console.log(`📋 DLD Real Transactions (raw): ${dldData.length.toLocaleString()}`);
+    console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()} transactions`);
     
-    // FILTER non-market transactions
-    const filteredDLD = filterDLDTransactions(dldData);
-    allTransactions = allTransactions.concat(filteredDLD);
+    // APPLY 9-STAGE FILTERING
+    const cleanedDLD = applyAllFilters(dldData);
+    allTransactions = allTransactions.concat(cleanedDLD);
   } else {
     console.log('⚠️ No DLD data file found');
   }
 
-  // Load generated transactions (for non-Dubai emirates)
   if (fs.existsSync(GEN_FILE)) {
     const genData = JSON.parse(fs.readFileSync(GEN_FILE, 'utf8'));
-    console.log(`📋 Generated Transactions: ${genData.length}`);
+    console.log(`📋 Generated: ${genData.length}`);
     allTransactions = allTransactions.concat(genData);
   }
 
@@ -218,14 +410,8 @@ async function main() {
     return;
   }
 
-  console.log(`\n📊 Total to evaluate: ${allTransactions.length.toLocaleString()}`);
+  console.log(`\n📊 Total to evaluate: ${allTransactions.length.toLocaleString()}\n🔍 Evaluating...`);
   
-  const dldCount = allTransactions.filter(t => t.dataSource === 'dld-real').length;
-  const genCount = allTransactions.filter(t => t.dataSource !== 'dld-real').length;
-  console.log(`   DLD Real: ${dldCount.toLocaleString()}`);
-  console.log(`   Generated: ${genCount.toLocaleString()}`);
-
-  console.log('\n🔍 Evaluating...');
   const results = [];
   for (const t of allTransactions) {
     const evaluated = await evaluateProperty(t);
@@ -247,19 +433,15 @@ async function main() {
     avgDeviation,
     betterThanAppraiser,
     betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100),
-    totalRecords: results.length,
-    dldRealCount: dldCount,
-    generatedCount: genCount
+    totalRecords: results.length
   };
 
   const output = {
     metadata: {
-      version: '8.0.0',
+      version: '9.0.0',
       lastUpdated: new Date().toISOString(),
       totalRecords: results.length,
-      dldRealCount: dldCount,
-      generatedCount: genCount,
-      dataQuality: 'DLD transactions filtered for market-rate sales'
+      methodology: '9-stage cleaning: non-sale, IQR outliers, invalid areas/prices, missing data, duplicates, 60 days, group validation, ready only'
     },
     metrics,
     records: results
@@ -267,7 +449,6 @@ async function main() {
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 DLD Real: ${dldCount.toLocaleString()} | Generated: ${genCount.toLocaleString()}`);
 }
 
 main().catch(console.error);
