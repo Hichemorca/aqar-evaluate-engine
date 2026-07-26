@@ -1,4 +1,4 @@
-// AQAR Auto-Evaluate — Uses DLD Real Median Prices
+// AQAR Auto-Evaluate — DLD Real Data Only with Field Adjustments
 const fs = require('fs');
 const path = require('path');
 
@@ -18,14 +18,14 @@ function filterNonSaleTransactions(transactions) {
     if (type && !type.includes('sale') && !type.includes('بيع') && !type.includes('sell')) return false;
     return true;
   });
-  console.log(`🧹 Stage 1 — Non-Sale: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 1 — Non-Sale: ${before} → ${filtered.length}`);
   return filtered;
 }
 
 function filterMissingData(transactions) {
   const before = transactions.length;
   const filtered = transactions.filter(t => t.district && t.district !== 'Unknown' && t.propertyType && t.propertyType !== 'Unknown' && t.area > 0 && t.actualSalePrice > 0);
-  console.log(`🧹 Stage 2 — Missing: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 2 — Missing: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -33,14 +33,14 @@ function filterInvalidAreas(transactions) {
   const before = transactions.length;
   const limits = { apartment: { min: 30, max: 1000 }, villa: { min: 100, max: 5000 }, townhouse: { min: 80, max: 2000 }, office: { min: 30, max: 10000 }, retail: { min: 20, max: 5000 }, warehouse: { min: 100, max: 50000 }, land: { min: 100, max: 100000 } };
   const filtered = transactions.filter(t => { const l = limits[t.propertyType] || { min: 30, max: 5000 }; return t.area >= l.min && t.area <= l.max; });
-  console.log(`🧹 Stage 3 — Invalid Areas: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 3 — Invalid Areas: ${before} → ${filtered.length}`);
   return filtered;
 }
 
 function filterInvalidPrices(transactions) {
   const before = transactions.length;
   const filtered = transactions.filter(t => t.pricePerSqm > 0);
-  console.log(`🧹 Stage 4 — Invalid Prices: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 4 — Invalid Prices: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -56,7 +56,7 @@ function filterOutliers(transactions) {
     const lo = q1 - 1.5 * iqr, hi = q3 + 1.5 * iqr;
     group.forEach(t => { if (t.pricePerSqm >= lo && t.pricePerSqm <= hi) filtered.push(t); });
   });
-  console.log(`🧹 Stage 5 — IQR Outliers: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 5 — IQR Outliers: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -68,7 +68,7 @@ function filterReadyOnly(transactions) {
     if (status.includes('off-plan') || status.includes('offplan') || status.includes('under construction') || status.includes('launched')) return false;
     return true;
   });
-  console.log(`🧹 Stage 6 — Ready Only: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 6 — Ready Only: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -83,7 +83,7 @@ function filterDuplicates(transactions) {
     seen.add(key);
     return true;
   });
-  console.log(`🧹 Stage 7 — Duplicates: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 7 — Duplicates: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -91,7 +91,7 @@ function filterLast60Days(transactions) {
   const before = transactions.length;
   const sixtyDaysAgo = new Date(Date.now() - 60 * 86400000);
   const filtered = transactions.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= sixtyDaysAgo; });
-  console.log(`🧹 Stage 8 — Last 60 Days: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 8 — Last 60 Days: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -101,7 +101,7 @@ function validateGroupCounts(transactions) {
   transactions.forEach(t => { const k = `${t.district}__${t.propertyType}`; if (!groups[k]) groups[k] = []; groups[k].push(t); });
   const filtered = [];
   Object.entries(groups).forEach(([k, g]) => { if (g.length >= 3) filtered.push(...g); });
-  console.log(`🧹 Stage 9 — Groups: ${before} → ${filtered.length} (${Object.keys(groups).length} groups, removed ${before - filtered.length})`);
+  console.log(`🧹 Stage 9 — Groups: ${before} → ${filtered.length} (${Object.keys(groups).length} groups)`);
   return filtered;
 }
 
@@ -121,7 +121,7 @@ function applyAllFilters(transactions) {
   data = filterLast60Days(data);
   data = validateGroupCounts(data);
   console.log('='.repeat(50));
-  console.log(`📊 FINAL: ${data.length.toLocaleString()} clean (removed ${transactions.length - data.length})\n`);
+  console.log(`📊 FINAL: ${data.length.toLocaleString()} clean transactions\n`);
   return data;
 }
 
@@ -167,23 +167,63 @@ async function evaluateProperty(property, dldStats) {
   
   let aqarValuation = marketPricePerSqm * property.area;
   
+  // ===== DLD FIELD ADJUSTMENTS =====
+  
+  // Rooms (each room beyond 2 = +3%)
+  const rooms = property.rooms || 0;
+  if (rooms > 0) {
+    aqarValuation = Math.round(aqarValuation * (1 + (rooms - 2) * 0.03));
+  }
+  
+  // Parking (each spot = +2%)
+  const parking = property.parking || 0;
+  if (parking > 0) {
+    aqarValuation = Math.round(aqarValuation * (1 + parking * 0.02));
+  }
+  
+  // Near Metro (+5%)
+  const metro = (property.nearestMetro || '').toString().toLowerCase();
+  if (metro && metro !== 'no' && metro !== 'none' && metro !== 'n/a' && metro !== '' && metro.length > 2) {
+    aqarValuation = Math.round(aqarValuation * 1.05);
+  }
+  
+  // Near Mall (+3%)
+  const mall = (property.nearestMall || '').toString().toLowerCase();
+  if (mall && mall !== 'no' && mall !== 'none' && mall !== 'n/a' && mall !== '' && mall.length > 2) {
+    aqarValuation = Math.round(aqarValuation * 1.03);
+  }
+  
+  // Premium Developer (+5%)
+  const project = ((property.masterProject || '') + ' ' + (property.project || '')).toLowerCase();
+  const premiumDevs = ['emaar', 'damac', 'nakheel', 'meraas', 'sobh', 'aldar', 'select', 'ellin', 'omniyat'];
+  if (premiumDevs.some(d => project.includes(d))) {
+    aqarValuation = Math.round(aqarValuation * 1.05);
+  }
+  
+  // Waterfront
   const waterfrontAreas = ['Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island', 'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'];
   if (waterfrontAreas.includes(property.district) && (property.propertyType === 'villa' || property.propertyType === 'townhouse')) {
     aqarValuation = Math.round(aqarValuation * 1.06);
   }
   
+  // Villa size
   if (property.propertyType === 'villa') {
     if (property.area > 300) aqarValuation = Math.round(aqarValuation * 1.04);
     else if (property.area < 200) aqarValuation = Math.round(aqarValuation * 0.96);
   }
   
+  // Ultra-luxury cap
   if (aqarValuation > 2200000) aqarValuation = Math.round(aqarValuation * 0.94);
   
-  const bias = { 'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018, ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016 };
+  // Bias
+  const bias = { dubai: 1.013, 'abu-dhabi': 1.027, sharjah: 1.025, ajman: 1.012, 'ras-al-khaimah': 1.002, fujairah: 1.018, 'umm-al-quwain': 1.016 };
   if (bias[property.city]) aqarValuation = Math.round(aqarValuation * bias[property.city]);
+  
+  // Type correction
   if (property.propertyType === 'villa') aqarValuation = Math.round(aqarValuation * 1.018);
   if (property.propertyType === 'townhouse') aqarValuation = Math.round(aqarValuation * 1.021);
   
+  // Area calibration
   const areaCal = { 'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94, 'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94 };
   if (areaCal[property.district]) aqarValuation = Math.round(aqarValuation * areaCal[property.district]);
   
@@ -201,29 +241,30 @@ async function evaluateProperty(property, dldStats) {
 }
 
 async function main() {
-  console.log('🚀 AQAR Auto-Evaluate — DLD Median Prices\n');
+  console.log('🚀 AQAR Auto-Evaluate — DLD Real Data + Field Adjustments\n');
 
   let allTransactions = [];
 
+  // Load DLD
   if (fs.existsSync(DLD_FILE)) {
     const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
     console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
     const cleaned = applyAllFilters(dldData);
     cleaned.forEach(t => { t.dataSource = 'dld-real-cleaned'; t.city = t.city || 'dubai'; });
     allTransactions = allTransactions.concat(cleaned);
+  } else {
+    console.log('❌ No DLD data file found');
+    return;
   }
 
-  if (fs.existsSync(GEN_FILE)) {
-    const genData = JSON.parse(fs.readFileSync(GEN_FILE, 'utf8'));
-    console.log(`📋 Generated: ${genData.length}`);
-    allTransactions = allTransactions.concat(genData);
-  }
+  // SKIP generated transactions
+  console.log(`📋 Generated: SKIPPED (using DLD real data only)\n`);
 
   if (allTransactions.length === 0) { console.log('❌ No transactions'); return; }
 
-  // Calculate DLD median prices per district+type
+  // Calculate DLD median prices
   const dldStats = {};
-  allTransactions.filter(t => t.dataSource === 'dld-real-cleaned').forEach(t => {
+  allTransactions.forEach(t => {
     const key = `${t.district}__${t.propertyType}`;
     if (!dldStats[key]) dldStats[key] = { prices: [], count: 0 };
     dldStats[key].prices.push(t.pricePerSqm);
@@ -238,7 +279,7 @@ async function main() {
   });
 
   const groupsWithMedian = Object.values(dldStats).filter(s => s.count >= 5).length;
-  console.log(`\n📊 DLD Price Stats: ${Object.keys(dldStats).length} groups, ${groupsWithMedian} with median (≥5 samples)\n🔍 Evaluating ${allTransactions.length.toLocaleString()} transactions...`);
+  console.log(`📊 DLD Price Stats: ${Object.keys(dldStats).length} groups, ${groupsWithMedian} with median\n🔍 Evaluating ${allTransactions.length.toLocaleString()} transactions...`);
 
   const results = [];
   for (const t of allTransactions) {
@@ -259,11 +300,11 @@ async function main() {
 
   const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length, usedDldMedian: usedMedian };
 
-  const output = { metadata: { version: '10.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'DLD median prices + 9-stage cleaning', usedDldMedianGroups: groupsWithMedian }, metrics, records: results };
+  const output = { metadata: { version: '11.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'DLD real data only + field adjustments (rooms, parking, metro, mall, developer)', usedDldMedianGroups: groupsWithMedian, dataSource: 'DLD Real Transactions Only' }, metrics, records: results };
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 Used DLD Median: ${usedMedian.toLocaleString()} properties`);
+  console.log(`📊 Used DLD Median: ${usedMedian.toLocaleString()} | Data: 100% DLD Real`);
 }
 
 main().catch(console.error);
