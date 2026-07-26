@@ -1,4 +1,4 @@
-// AQAR Auto-Evaluate — Sub-Group Medians (District + Type + Size)
+﻿// AQAR Auto-Evaluate — FIXED: Log-scale IQR + Non-market procedure filter
 const fs = require('fs');
 const path = require('path');
 
@@ -6,18 +6,30 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 
-// ===== 9-STAGE CLEANING =====
+// ===== 9-STAGE CLEANING (FIXED) =====
+
+// FIXED Stage 1: Use actual fields (group, procedure) not missing fields
 function filterNonSaleTransactions(transactions) {
   const before = transactions.length;
-  const excludedKeywords = ['gift', 'hiba', 'هبة', 'inheritance', 'irt', 'wasiya', 'وراثة', 'وصية', 'transfer', 'subsidiary', 'affiliate', 'related', 'تحويل', 'تابعة', 'family', 'relative', 'parent', 'child', 'sibling', 'spouse', 'correction', 'rectification', 'تصحيح', 'mortgage', 'رهن', 'fak', 'release', 'auction', 'مزاد', 'compulsory'];
+  const nonMarketProcedures = ['development registration', 'sell development', 'lease to own registration'];
+  
   const filtered = transactions.filter(t => {
-    const combined = ((t.transactionType || t.type || '') + ' ' + (t.usage || '') + ' ' + (t.notes || '')).toLowerCase();
+    // Check actual populated fields
+    const procedure = (t.procedure || '').toLowerCase();
+    const group = (t.group || '').toLowerCase();
+    
+    // Exclude non-market procedures
+    if (nonMarketProcedures.some(p => procedure.includes(p))) return false;
+    
+    // Exclude gifts/inheritance/corrections
+    const excludedKeywords = ['gift', 'hiba', 'هبة', 'inheritance', 'irt', 'wasiya', 'وراثة', 'وصية', 'correction', 'rectification', 'تصحيح', 'mortgage', 'رهن', 'fak', 'release', 'auction', 'مزاد'];
+    const combined = group + ' ' + procedure;
     for (const kw of excludedKeywords) { if (combined.includes(kw)) return false; }
-    const type = (t.transactionType || t.type || '').toLowerCase();
-    if (type && !type.includes('sale') && !type.includes('بيع') && !type.includes('sell')) return false;
+    
     return true;
   });
-  console.log(`🧹 S1 Non-Sale: ${before} → ${filtered.length}`);
+  
+  console.log(`🧹 S1 Non-Sale (FIXED): ${before} → ${filtered.length} (removed ${before - filtered.length})`);
   return filtered;
 }
 
@@ -43,6 +55,7 @@ function filterInvalidPrices(transactions) {
   return filtered;
 }
 
+// FIXED: IQR on log-scale to keep bounds positive
 function filterOutliers(transactions) {
   const before = transactions.length;
   const groups = {};
@@ -50,12 +63,13 @@ function filterOutliers(transactions) {
   const filtered = [];
   Object.values(groups).forEach(group => {
     if (group.length < 5) { filtered.push(...group); return; }
-    const prices = group.map(t => t.pricePerSqm).sort((a, b) => a - b);
-    const n = prices.length, q1 = prices[Math.floor(n * 0.25)], q3 = prices[Math.floor(n * 0.75)], iqr = q3 - q1;
-    const lo = q1 - 1.5 * iqr, hi = q3 + 1.5 * iqr;
+    const logPrices = group.map(t => Math.log(t.pricePerSqm)).sort((a, b) => a - b);
+    const n = logPrices.length;
+    const q1 = logPrices[Math.floor(n * 0.25)], q3 = logPrices[Math.floor(n * 0.75)], iqr = q3 - q1;
+    const lo = Math.exp(q1 - 1.5 * iqr), hi = Math.exp(q3 + 1.5 * iqr);
     group.forEach(t => { if (t.pricePerSqm >= lo && t.pricePerSqm <= hi) filtered.push(t); });
   });
-  console.log(`🧹 S5 IQR: ${before} → ${filtered.length}`);
+  console.log(`🧹 S5 IQR (FIXED log-scale): ${before} → ${filtered.length} (removed ${before - filtered.length})`);
   return filtered;
 }
 
@@ -106,7 +120,7 @@ function validateGroupCounts(transactions) {
 
 function applyAllFilters(transactions) {
   console.log('\n' + '='.repeat(50));
-  console.log(`🧹 9-STAGE — Input: ${transactions.length.toLocaleString()}`);
+  console.log(`🧹 9-STAGE (FIXED) — Input: ${transactions.length.toLocaleString()}`);
   console.log('='.repeat(50));
   let data = transactions;
   data = filterNonSaleTransactions(data);
@@ -131,7 +145,6 @@ function getSizeCategory(area) {
 }
 
 async function evaluateProperty(property, dldStats, subGroupMedians) {
-  // Try sub-group first (district + type + size)
   const sizeCat = getSizeCategory(property.area);
   const subKey = `${property.district}__${property.propertyType}__${sizeCat}`;
   const subStats = subGroupMedians[subKey];
@@ -143,7 +156,6 @@ async function evaluateProperty(property, dldStats, subGroupMedians) {
     marketPricePerSqm = Math.round(subStats.median);
     usedSubGroup = true;
   } else {
-    // Fall back to main group
     const mainKey = `${property.district}__${property.propertyType}`;
     const mainStats = dldStats[mainKey];
     if (mainStats && mainStats.count >= 5) {
@@ -170,7 +182,7 @@ async function evaluateProperty(property, dldStats, subGroupMedians) {
 }
 
 async function main() {
-  console.log('🚀 AQAR — Sub-Group Medians\n');
+  console.log('🚀 AQAR — FIXED (Log-scale IQR + Non-market filter)\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
@@ -198,7 +210,7 @@ async function main() {
     dldStats[key].median = prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid];
   });
 
-  // Sub-group statistics (district + type + size)
+  // Sub-group statistics
   const subGroups = {};
   cleaned.forEach(t => {
     const sizeCat = getSizeCategory(t.area);
@@ -218,7 +230,7 @@ async function main() {
     };
   });
 
-  console.log(`📊 Groups: ${Object.keys(dldStats).length} main, ${Object.keys(subGroupMedians).length} sub (by size)\n🔍 Evaluating ${cleaned.length.toLocaleString()}...`);
+  console.log(`📊 Groups: ${Object.keys(dldStats).length} main, ${Object.keys(subGroupMedians).length} sub\n🔍 Evaluating ${cleaned.length.toLocaleString()}...`);
 
   const results = [];
   for (const t of cleaned) {
@@ -239,13 +251,36 @@ async function main() {
     return aqarDev <= appraiserDev;
   }).length;
 
-  const metrics = { avgAccuracy, avgDeviation, betterThanAppraiser, betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100), totalRecords: results.length, usedSubGroups: usedSub };
+  // Price Band Metrics
+  const within15 = results.filter(r => Math.abs(r.aqarVsActual) <= 15).length;
+  const within25 = results.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
-  const output = { metadata: { version: '13.0.0', lastUpdated: new Date().toISOString(), totalRecords: results.length, methodology: 'Sub-Group Medians (District + Type + Size)', usedSubGroups: usedSub, subGroupsCount: Object.keys(subGroupMedians).length }, metrics, records: results };
+  const metrics = {
+    avgAccuracy,
+    avgDeviation,
+    betterThanAppraiser,
+    betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100),
+    totalRecords: results.length,
+    usedSubGroups: usedSub,
+    priceBand15: Math.round((within15 / results.length) * 100),
+    priceBand25: Math.round((within25 / results.length) * 100)
+  };
+
+  const output = {
+    metadata: {
+      version: '14.0.0-FIXED',
+      lastUpdated: new Date().toISOString(),
+      totalRecords: results.length,
+      methodology: 'FIXED: Log-scale IQR + Non-market filter + PROP_SB_TYPE_EN classification',
+      fixes: ['Log-scale IQR outlier detection', 'PROP_SB_TYPE_EN for property type', 'Non-market procedure filter']
+    },
+    metrics,
+    records: results
+  };
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
-  console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}% | Better: ${metrics.betterThanAppraiserPct}%`);
-  console.log(`📊 Sub-Groups Used: ${usedSub.toLocaleString()} | Groups: ${Object.keys(subGroupMedians).length}`);
+  console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}%`);
+  console.log(`📊 Price Band ±15%: ${metrics.priceBand15}% | ±25%: ${metrics.priceBand25}%`);
 }
 
 main().catch(console.error);
