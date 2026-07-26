@@ -282,6 +282,7 @@ function applyAllFilters(transactions) {
   data = filterNonSaleTransactions(data);
   data = filterMissingData(data);
   data = filterInvalidAreas(data);
+  data.forEach(t => { t.pricePerSqm = t.actualSalePrice / Math.max(1, t.area); });
   data = filterInvalidPrices(data);
   data = filterOutliers(data);
   data = filterReadyOnly(data);
