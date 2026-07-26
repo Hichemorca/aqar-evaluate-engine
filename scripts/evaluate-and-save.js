@@ -1,4 +1,4 @@
-﻿// AQAR Auto-Evaluate — FIXED: Log-scale IQR + Non-market procedure filter
+﻿// AQAR Auto-Evaluate — v15: Hierarchical grouping (Project → District+Size → District)
 const fs = require('fs');
 const path = require('path');
 
@@ -6,30 +6,20 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 
-// ===== 9-STAGE CLEANING (FIXED) =====
-
-// FIXED Stage 1: Use actual fields (group, procedure) not missing fields
+// ===== 9-STAGE CLEANING =====
 function filterNonSaleTransactions(transactions) {
   const before = transactions.length;
   const nonMarketProcedures = ['development registration', 'sell development', 'lease to own registration'];
-  
   const filtered = transactions.filter(t => {
-    // Check actual populated fields
     const procedure = (t.procedure || '').toLowerCase();
     const group = (t.group || '').toLowerCase();
-    
-    // Exclude non-market procedures
     if (nonMarketProcedures.some(p => procedure.includes(p))) return false;
-    
-    // Exclude gifts/inheritance/corrections
-    const excludedKeywords = ['gift', 'hiba', 'هبة', 'inheritance', 'irt', 'wasiya', 'وراثة', 'وصية', 'correction', 'rectification', 'تصحيح', 'mortgage', 'رهن', 'fak', 'release', 'auction', 'مزاد'];
+    const excludedKeywords = ['gift', 'hiba', 'inheritance', 'irt', 'wasiya', 'correction', 'rectification', 'mortgage', 'رهن', 'auction', 'مزاد'];
     const combined = group + ' ' + procedure;
     for (const kw of excludedKeywords) { if (combined.includes(kw)) return false; }
-    
     return true;
   });
-  
-  console.log(`🧹 S1 Non-Sale (FIXED): ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 S1 Non-Sale: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
   return filtered;
 }
 
@@ -55,7 +45,6 @@ function filterInvalidPrices(transactions) {
   return filtered;
 }
 
-// FIXED: IQR on log-scale to keep bounds positive
 function filterOutliers(transactions) {
   const before = transactions.length;
   const groups = {};
@@ -64,12 +53,11 @@ function filterOutliers(transactions) {
   Object.values(groups).forEach(group => {
     if (group.length < 5) { filtered.push(...group); return; }
     const logPrices = group.map(t => Math.log(t.pricePerSqm)).sort((a, b) => a - b);
-    const n = logPrices.length;
-    const q1 = logPrices[Math.floor(n * 0.25)], q3 = logPrices[Math.floor(n * 0.75)], iqr = q3 - q1;
+    const n = logPrices.length, q1 = logPrices[Math.floor(n * 0.25)], q3 = logPrices[Math.floor(n * 0.75)], iqr = q3 - q1;
     const lo = Math.exp(q1 - 1.5 * iqr), hi = Math.exp(q3 + 1.5 * iqr);
     group.forEach(t => { if (t.pricePerSqm >= lo && t.pricePerSqm <= hi) filtered.push(t); });
   });
-  console.log(`🧹 S5 IQR (FIXED log-scale): ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 S5 IQR: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
   return filtered;
 }
 
@@ -120,7 +108,7 @@ function validateGroupCounts(transactions) {
 
 function applyAllFilters(transactions) {
   console.log('\n' + '='.repeat(50));
-  console.log(`🧹 9-STAGE (FIXED) — Input: ${transactions.length.toLocaleString()}`);
+  console.log(`🧹 9-STAGE — Input: ${transactions.length.toLocaleString()}`);
   console.log('='.repeat(50));
   let data = transactions;
   data = filterNonSaleTransactions(data);
@@ -144,45 +132,66 @@ function getSizeCategory(area) {
   return 'medium';
 }
 
-async function evaluateProperty(property, dldStats, subGroupMedians) {
+// ===== HIERARCHICAL MEDIAN LOOKUP =====
+async function evaluateProperty(property, projectStats, districtSizeStats, districtStats) {
+  // Level 0: Project + Type + Size (min 3 transactions)
   const sizeCat = getSizeCategory(property.area);
-  const subKey = `${property.district}__${property.propertyType}__${sizeCat}`;
-  const subStats = subGroupMedians[subKey];
+  const project = property.project || '';
   
-  let marketPricePerSqm;
-  let usedSubGroup = false;
-  
-  if (subStats && subStats.count >= 5) {
-    marketPricePerSqm = Math.round(subStats.median);
-    usedSubGroup = true;
-  } else {
-    const mainKey = `${property.district}__${property.propertyType}`;
-    const mainStats = dldStats[mainKey];
-    if (mainStats && mainStats.count >= 5) {
-      marketPricePerSqm = Math.round(mainStats.median);
-    } else {
-      return null;
+  if (project && project.length > 2) {
+    const projKey = `${project}__${property.propertyType}__${sizeCat}`;
+    const projData = projectStats[projKey];
+    if (projData && projData.count >= 3) {
+      const valuation = Math.round(projData.median) * property.area;
+      return { valuation, level: 'project', count: projData.count };
     }
   }
   
-  let aqarValuation = marketPricePerSqm * property.area;
+  // Level 1: District + Type + Size
+  const distSizeKey = `${property.district}__${property.propertyType}__${sizeCat}`;
+  const distSizeData = districtSizeStats[distSizeKey];
+  if (distSizeData && distSizeData.count >= 5) {
+    const valuation = Math.round(distSizeData.median) * property.area;
+    return { valuation, level: 'district_size', count: distSizeData.count };
+  }
   
-  const appraiserValuation = Math.round(property.actualSalePrice * (0.92 + Math.random() * 0.16));
-  const aqarDiff = ((aqarValuation - property.actualSalePrice) / property.actualSalePrice) * 100;
+  // Level 2: District + Type
+  const distKey = `${property.district}__${property.propertyType}`;
+  const distData = districtStats[distKey];
+  if (distData && distData.count >= 5) {
+    const valuation = Math.round(distData.median) * property.area;
+    return { valuation, level: 'district', count: distData.count };
+  }
   
-  return {
-    ...property,
-    aqarValuation,
-    aqarVsActual: Math.round(aqarDiff * 10) / 10,
-    appraiserValuation,
-    marketPricePerSqm,
-    usedSubGroup,
-    sizeCategory: sizeCat
-  };
+  // No reliable grouping found — skip
+  return null;
+}
+
+function computeMedians(transactions, groupFn) {
+  const groups = {};
+  transactions.forEach(t => {
+    const key = groupFn(t);
+    if (!key) return;
+    if (!groups[key]) groups[key] = { prices: [], count: 0 };
+    groups[key].prices.push(t.pricePerSqm);
+    groups[key].count++;
+  });
+  
+  const medians = {};
+  Object.keys(groups).forEach(key => {
+    const prices = groups[key].prices.sort((a, b) => a - b);
+    const mid = Math.floor(prices.length / 2);
+    medians[key] = {
+      median: prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid],
+      count: groups[key].count
+    };
+  });
+  
+  return medians;
 }
 
 async function main() {
-  console.log('🚀 AQAR — FIXED (Log-scale IQR + Non-market filter)\n');
+  console.log('🚀 AQAR — v15 Hierarchical (Project → District+Size → District)\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
@@ -196,51 +205,49 @@ async function main() {
 
   if (cleaned.length === 0) { console.log('❌ No transactions'); return; }
 
-  // Main group statistics
-  const dldStats = {};
-  cleaned.forEach(t => {
-    const key = `${t.district}__${t.propertyType}`;
-    if (!dldStats[key]) dldStats[key] = { prices: [], count: 0 };
-    dldStats[key].prices.push(t.pricePerSqm);
-    dldStats[key].count++;
-  });
-  Object.keys(dldStats).forEach(key => {
-    const prices = dldStats[key].prices.sort((a, b) => a - b);
-    const mid = Math.floor(prices.length / 2);
-    dldStats[key].median = prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid];
-  });
-
-  // Sub-group statistics
-  const subGroups = {};
-  cleaned.forEach(t => {
-    const sizeCat = getSizeCategory(t.area);
-    const key = `${t.district}__${t.propertyType}__${sizeCat}`;
-    if (!subGroups[key]) subGroups[key] = { prices: [], count: 0 };
-    subGroups[key].prices.push(t.pricePerSqm);
-    subGroups[key].count++;
+  // Compute medians at 3 levels
+  const projectStats = computeMedians(cleaned, t => {
+    if (!t.project || t.project.length < 2) return null;
+    return `${t.project}__${t.propertyType}__${getSizeCategory(t.area)}`;
   });
   
-  const subGroupMedians = {};
-  Object.keys(subGroups).forEach(key => {
-    const prices = subGroups[key].prices.sort((a, b) => a - b);
-    const mid = Math.floor(prices.length / 2);
-    subGroupMedians[key] = {
-      median: prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid],
-      count: subGroups[key].count
-    };
+  const districtSizeStats = computeMedians(cleaned, t => {
+    return `${t.district}__${t.propertyType}__${getSizeCategory(t.area)}`;
+  });
+  
+  const districtStats = computeMedians(cleaned, t => {
+    return `${t.district}__${t.propertyType}`;
   });
 
-  console.log(`📊 Groups: ${Object.keys(dldStats).length} main, ${Object.keys(subGroupMedians).length} sub\n🔍 Evaluating ${cleaned.length.toLocaleString()}...`);
+  console.log(`📊 Groups: ${Object.keys(projectStats).length} project, ${Object.keys(districtSizeStats).length} district+size, ${Object.keys(districtStats).length} district\n🔍 Evaluating ${cleaned.length.toLocaleString()}...`);
 
   const results = [];
   for (const t of cleaned) {
-    const evaluated = await evaluateProperty(t, dldStats, subGroupMedians);
-    if (evaluated) results.push(evaluated);
+    const evalResult = await evaluateProperty(t, projectStats, districtSizeStats, districtStats);
+    if (!evalResult) continue;
+    
+    const aqarValuation = evalResult.valuation;
+    const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
+    const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
+    
+    results.push({
+      ...t,
+      aqarValuation,
+      aqarVsActual: Math.round(aqarDiff * 10) / 10,
+      appraiserValuation,
+      marketPricePerSqm: Math.round(evalResult.valuation / t.area),
+      evalLevel: evalResult.level,
+      evalCount: evalResult.count
+    });
   }
 
   if (results.length === 0) { console.log('❌ No evaluations'); return; }
 
-  const usedSub = results.filter(r => r.usedSubGroup).length;
+  // Level breakdown
+  const projectLevel = results.filter(r => r.evalLevel === 'project').length;
+  const districtSizeLevel = results.filter(r => r.evalLevel === 'district_size').length;
+  const districtLevel = results.filter(r => r.evalLevel === 'district').length;
+
   const accuracies = results.map(r => 100 - Math.abs(r.aqarVsActual || 0));
   const avgAccuracy = Math.round(accuracies.reduce((s, a) => s + a, 0) / results.length * 10) / 10;
   const deviations = results.map(r => Math.abs(r.aqarVsActual || 0));
@@ -251,9 +258,18 @@ async function main() {
     return aqarDev <= appraiserDev;
   }).length;
 
-  // Price Band Metrics
   const within15 = results.filter(r => Math.abs(r.aqarVsActual) <= 15).length;
   const within25 = results.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
+
+  // Accuracy by level
+  const projectAcc = results.filter(r => r.evalLevel === 'project');
+  const districtSizeAcc = results.filter(r => r.evalLevel === 'district_size');
+  const districtAcc = results.filter(r => r.evalLevel === 'district');
+
+  console.log(`\n📊 Level Breakdown:`);
+  if (projectAcc.length > 0) console.log(`   Project (n=${projectAcc.length}): ${Math.round(projectAcc.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / projectAcc.length * 10) / 10}%`);
+  if (districtSizeAcc.length > 0) console.log(`   District+Size (n=${districtSizeAcc.length}): ${Math.round(districtSizeAcc.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / districtSizeAcc.length * 10) / 10}%`);
+  if (districtAcc.length > 0) console.log(`   District (n=${districtAcc.length}): ${Math.round(districtAcc.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / districtAcc.length * 10) / 10}%`);
 
   const metrics = {
     avgAccuracy,
@@ -261,18 +277,20 @@ async function main() {
     betterThanAppraiser,
     betterThanAppraiserPct: Math.round((betterThanAppraiser / results.length) * 100),
     totalRecords: results.length,
-    usedSubGroups: usedSub,
     priceBand15: Math.round((within15 / results.length) * 100),
-    priceBand25: Math.round((within25 / results.length) * 100)
+    priceBand25: Math.round((within25 / results.length) * 100),
+    projectLevel,
+    districtSizeLevel,
+    districtLevel
   };
 
   const output = {
     metadata: {
-      version: '14.0.0-FIXED',
+      version: '15.0.0',
       lastUpdated: new Date().toISOString(),
       totalRecords: results.length,
-      methodology: 'FIXED: Log-scale IQR + Non-market filter + PROP_SB_TYPE_EN classification',
-      fixes: ['Log-scale IQR outlier detection', 'PROP_SB_TYPE_EN for property type', 'Non-market procedure filter']
+      methodology: 'Hierarchical: Project(≥3) → District+Size(≥5) → District(≥5). No city fallback.',
+      levels: { project: projectLevel, districtSize: districtSizeLevel, district: districtLevel }
     },
     metrics,
     records: results
@@ -281,6 +299,7 @@ async function main() {
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Accuracy: ${avgAccuracy}% | ±${avgDeviation}%`);
   console.log(`📊 Price Band ±15%: ${metrics.priceBand15}% | ±25%: ${metrics.priceBand25}%`);
+  console.log(`📊 Levels: Project=${projectLevel} | Dist+Size=${districtSizeLevel} | District=${districtLevel}`);
 }
 
 main().catch(console.error);

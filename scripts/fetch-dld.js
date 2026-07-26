@@ -1,4 +1,4 @@
-﻿// AQAR DLD Data Fetcher — FIXED: Reads PROP_SB_TYPE_EN for correct property type
+﻿// AQAR DLD Data Fetcher — FIXED v2: Land classification + PROP_SB_TYPE_EN
 const fs = require('fs');
 const path = require('path');
 
@@ -42,7 +42,6 @@ function parseDLDCSV(csvText) {
       
       if (transValue <= 0 || actualArea <= 0) continue;
 
-      // FIXED: Read PROP_SB_TYPE_EN first, fallback to PROP_TYPE_EN
       const subType = row['PROP_SB_TYPE_EN'] || '';
       const mainType = row['PROP_TYPE_EN'] || '';
 
@@ -52,8 +51,8 @@ function parseDLDCSV(csvText) {
         instanceDate: row['INSTANCE_DATE'] || '',
         saleDate: formatDate(row['INSTANCE_DATE'] || ''),
         
-        // FIXED: Use sub-type for accurate classification
-        propertyType: mapPropertyType(subType || mainType),
+        // FIXED v2: If main type is Land, classify as land regardless of sub-type
+        propertyType: mapPropertyType(mainType, subType),
         propSubType: subType || mainType,
         usage: row['USAGE_EN'] || '',
         district: row['AREA_EN'] || '',
@@ -93,18 +92,26 @@ function parseDLDCSV(csvText) {
   return transactions;
 }
 
-// FIXED: Handle Flat, Villa, Office, Shop, Hotel Apartment, etc.
-function mapPropertyType(type) {
-  const t = (type || '').toLowerCase();
-  if (t.includes('villa')) return 'villa';
-  if (t.includes('office') || t.includes('commercial')) return 'office';
-  if (t.includes('retail') || t.includes('shop')) return 'retail';
-  if (t.includes('land') || t.includes('plot')) return 'land';
-  if (t.includes('warehouse') || t.includes('industrial') || t.includes('workshop')) return 'warehouse';
-  if (t.includes('flat') || t.includes('apartment') || t.includes('hotel apartment') || t.includes('hotel room')) return 'apartment';
-  if (t.includes('townhouse') || t.includes('town')) return 'townhouse';
-  // If PROP_TYPE_EN says "Building", use it as office
-  if (t.includes('building')) return 'office';
+// FIXED v2: Check mainType first — if it's Land, return land immediately
+function mapPropertyType(mainType, subType) {
+  const main = (mainType || '').toLowerCase();
+  const sub = (subType || '').toLowerCase();
+  
+  // If main type is Land, it's land regardless of sub-type (zoning)
+  if (main === 'land') return 'land';
+  
+  // Otherwise, use sub-type for accurate classification
+  if (sub.includes('villa')) return 'villa';
+  if (sub.includes('office') || sub.includes('commercial')) return 'office';
+  if (sub.includes('retail') || sub.includes('shop')) return 'retail';
+  if (sub.includes('warehouse') || sub.includes('industrial') || sub.includes('workshop')) return 'warehouse';
+  if (sub.includes('flat') || sub.includes('apartment') || sub.includes('hotel apartment') || sub.includes('hotel room')) return 'apartment';
+  if (sub.includes('townhouse') || sub.includes('town')) return 'townhouse';
+  
+  // Fallback to main type
+  if (main === 'building') return 'office';
+  if (main === 'unit') return 'apartment';
+  
   return 'apartment';
 }
 
@@ -124,7 +131,7 @@ function formatDate(dateStr) {
 }
 
 async function main() {
-  console.log('🚀 AQAR DLD CSV Importer — FIXED (PROP_SB_TYPE_EN)\n');
+  console.log('🚀 AQAR DLD CSV Importer — FIXED v2 (Land + PROP_SB_TYPE_EN)\n');
 
   if (!fs.existsSync(INPUT_FILE)) {
     console.log(`❌ File not found: ${INPUT_FILE}`);
@@ -139,20 +146,23 @@ async function main() {
     return;
   }
 
-  // Summary by actual property type
+  // Summary by property type
   const typeCount = {};
   transactions.forEach(t => {
     typeCount[t.propertyType] = (typeCount[t.propertyType] || 0) + 1;
   });
 
+  const withProject = transactions.filter(t => t.project && t.project.length > 2).length;
+
   console.log(`📊 Total: ${transactions.length.toLocaleString()} transactions\n`);
-  console.log('📋 By Property Type (FIXED):');
+  console.log('📋 By Property Type (FIXED v2):');
   Object.entries(typeCount).sort((a, b) => b[1] - a[1]).forEach(([t, c]) => {
     console.log(`   ${t}: ${c.toLocaleString()}`);
   });
+  console.log(`\n📋 With Project: ${withProject.toLocaleString()} (${Math.round(withProject/transactions.length*100)}%)`);
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(transactions, null, 2));
-  console.log(`\n✅ Saved ${transactions.length.toLocaleString()} transactions with CORRECT property types`);
+  console.log(`\n✅ Saved ${transactions.length.toLocaleString()} transactions`);
 }
 
 main().catch(console.error);
