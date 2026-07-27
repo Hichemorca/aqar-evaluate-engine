@@ -1,4 +1,4 @@
-﻿// AQAR Market Intelligence Engine v1.0
+﻿// AQAR Market Intelligence Engine v2.0 — Unified Cleaning
 const fs = require('fs');
 const path = require('path');
 
@@ -6,12 +6,43 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const INPUT_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'market-intelligence.json');
 
-function loadData() {
-  if (!fs.existsSync(INPUT_FILE)) {
-    console.log('❌ No DLD data found');
-    return [];
-  }
-  return JSON.parse(fs.readFileSync(INPUT_FILE, 'utf8'));
+function cleanData(data) {
+  // Same 9-stage cleaning as evaluate-and-save.js
+  const nonMarketProcedures = ['development registration', 'sell development', 'lease to own registration'];
+  
+  let cleaned = data.filter(t => {
+    const procedure = (t.procedure || '').toLowerCase();
+    if (nonMarketProcedures.some(p => procedure.includes(p))) return false;
+    if (!t.district || t.district === 'Unknown') return false;
+    if (!t.propertyType || t.propertyType === 'Unknown') return false;
+    if (!t.area || t.area <= 0) return false;
+    if (!t.actualSalePrice || t.actualSalePrice <= 0) return false;
+    if (t.isOffPlan === true) return false;
+    return true;
+  });
+
+  // IQR on log-scale per district+type
+  const groups = {};
+  cleaned.forEach(t => {
+    const k = `${t.district}__${t.propertyType}`;
+    if (!groups[k]) groups[k] = [];
+    groups[k].push(t);
+  });
+
+  const filtered = [];
+  Object.values(groups).forEach(group => {
+    if (group.length < 5) { filtered.push(...group); return; }
+    const logPrices = group.map(t => Math.log(t.actualSalePrice / t.area)).sort((a, b) => a - b);
+    const n = logPrices.length;
+    const q1 = logPrices[Math.floor(n * 0.25)], q3 = logPrices[Math.floor(n * 0.75)], iqr = q3 - q1;
+    const lo = Math.exp(q1 - 1.5 * iqr), hi = Math.exp(q3 + 1.5 * iqr);
+    group.forEach(t => {
+      const ppsm = t.actualSalePrice / t.area;
+      if (ppsm >= lo && ppsm <= hi) filtered.push(t);
+    });
+  });
+
+  return filtered;
 }
 
 function analyzeMarket(data) {
@@ -21,9 +52,7 @@ function analyzeMarket(data) {
     bestInvestmentDistricts: [],
     fastestGrowing: [],
     highRiskAreas: [],
-    recoveryZones: [],
     liquidityIndex: [],
-    buyerSellerIndex: [],
     marketIndicators: {}
   };
 
@@ -53,13 +82,11 @@ function analyzeMarket(data) {
       return d >= sixtyDaysAgo && d < thirtyDaysAgo;
     });
 
-    const recentMedian = recent.length > 0
-      ? recent.map(t => t.actualSalePrice / t.area).sort((a, b) => a - b)[Math.floor(recent.length / 2)]
-      : median;
+    // Minimum sample per window
+    if (recent.length < 15 || older.length < 15) return;
 
-    const olderMedian = older.length > 0
-      ? older.map(t => t.actualSalePrice / t.area).sort((a, b) => a - b)[Math.floor(older.length / 2)]
-      : median;
+    const recentMedian = recent.map(t => t.actualSalePrice / t.area).sort((a, b) => a - b)[Math.floor(recent.length / 2)];
+    const olderMedian = older.map(t => t.actualSalePrice / t.area).sort((a, b) => a - b)[Math.floor(older.length / 2)];
 
     const momentum = olderMedian > 0 ? ((recentMedian - olderMedian) / olderMedian) * 100 : 0;
 
@@ -81,68 +108,36 @@ function analyzeMarket(data) {
     });
   });
 
-  // Filter extreme values
   districtMetrics = districtMetrics.filter(d =>
     d.transactionCount >= 30 &&
-    Math.abs(d.priceMomentum) < 200 &&
-    d.volatility < 200
+    Math.abs(d.priceMomentum) < 100 &&
+    d.volatility < 100
   );
 
   districtMetrics.sort((a, b) => b.transactionCount - a.transactionCount);
 
-  // Best Investment Districts
   results.bestInvestmentDistricts = districtMetrics
-    .filter(d => d.priceMomentum > 2 && d.volatility < 25 && d.transactionCount > 20)
+    .filter(d => d.priceMomentum > 1 && d.volatility < 30 && d.transactionCount > 20)
     .sort((a, b) => b.priceMomentum - a.priceMomentum)
     .slice(0, 10)
-    .map(d => ({
-      ...d,
-      investmentScore: Math.round((d.priceMomentum * 3 + d.activityRatio - d.volatility * 0.5) * 10) / 10
-    }));
+    .map(d => ({ ...d, investmentScore: Math.round((d.priceMomentum * 2 + d.activityRatio - d.volatility * 0.3) * 10) / 10 }));
 
-  // Fastest Growing
   results.fastestGrowing = districtMetrics
-    .filter(d => d.transactionCount > 10)
+    .filter(d => d.transactionCount > 20)
     .sort((a, b) => b.priceMomentum - a.priceMomentum)
     .slice(0, 10);
 
-  // High Risk Areas
   results.highRiskAreas = districtMetrics
-    .filter(d => d.volatility > 20 && d.priceMomentum > 3)
+    .filter(d => d.volatility > 25)
     .sort((a, b) => b.volatility - a.volatility)
     .slice(0, 10)
-    .map(d => ({
-      ...d,
-      bubbleRiskScore: Math.round((d.volatility * 2 + Math.abs(d.priceMomentum) * 2) * 10) / 10
-    }));
+    .map(d => ({ ...d, bubbleRiskScore: Math.round(d.volatility * 2 * 10) / 10 }));
 
-  // Recovery Zones
-  results.recoveryZones = districtMetrics
-    .filter(d => d.priceMomentum > 1 && d.priceMomentum < 5 && d.volatility < 20)
-    .sort((a, b) => a.priceMomentum - b.priceMomentum)
-    .slice(0, 10);
-
-  // Liquidity Index
   results.liquidityIndex = districtMetrics
     .sort((a, b) => b.transactionCount - a.transactionCount)
     .slice(0, 15)
-    .map(d => ({
-      district: d.district,
-      transactionCount: d.transactionCount,
-      liquidityScore: Math.round((d.transactionCount / 100) * 10) / 10
-    }));
+    .map(d => ({ district: d.district, transactionCount: d.transactionCount, liquidityScore: Math.round((d.transactionCount / 100) * 10) / 10 }));
 
-  // Buyer vs Seller
-  const buyerSellerRatio = districtMetrics.map(d => ({
-    district: d.district,
-    activityRatio: d.activityRatio,
-    marketCondition: d.priceMomentum > 5 ? 'Seller Market' :
-                     d.priceMomentum < -2 ? 'Buyer Market' : 'Balanced',
-    strength: d.priceMomentum > 5 ? 'Sellers' : d.priceMomentum < -2 ? 'Buyers' : 'Neutral'
-  }));
-  results.buyerSellerIndex = buyerSellerRatio;
-
-  // Overall Market Indicators
   const allMomentum = districtMetrics.map(d => d.priceMomentum);
   const avgMomentum = allMomentum.reduce((s, m) => s + m, 0) / allMomentum.length;
 
@@ -150,10 +145,7 @@ function analyzeMarket(data) {
     averagePriceMomentum: Math.round(avgMomentum * 10) / 10,
     totalActiveDistricts: districtMetrics.length,
     totalTransactions: data.length,
-    marketCondition: avgMomentum > 3 ? 'Strong Seller Market' :
-                     avgMomentum > 1 ? 'Moderate Seller Market' :
-                     avgMomentum > -1 ? 'Balanced Market' :
-                     avgMomentum > -3 ? 'Moderate Buyer Market' : 'Strong Buyer Market',
+    marketCondition: avgMomentum > 3 ? 'Strong Seller Market' : avgMomentum > 1 ? 'Moderate Seller Market' : avgMomentum > -1 ? 'Balanced Market' : avgMomentum > -3 ? 'Moderate Buyer Market' : 'Strong Buyer Market',
     topPerformer: results.fastestGrowing[0]?.district || 'N/A',
     mostLiquid: results.liquidityIndex[0]?.district || 'N/A',
     highestRisk: results.highRiskAreas[0]?.district || 'N/A'
@@ -163,36 +155,29 @@ function analyzeMarket(data) {
 }
 
 function main() {
-  console.log('🚀 AQAR Market Intelligence Engine v1.0\n');
+  console.log('🚀 AQAR Market Intelligence Engine v2.0 (Unified Cleaning)\n');
 
-  const data = loadData();
-  if (data.length === 0) {
-    console.log('❌ No data to analyze');
-    return;
-  }
+  if (!fs.existsSync(INPUT_FILE)) { console.log('❌ No DLD data'); return; }
 
-  console.log(`📊 Analyzing ${data.length.toLocaleString()} transactions...`);
+  const rawData = JSON.parse(fs.readFileSync(INPUT_FILE, 'utf8'));
+  console.log(`📋 Raw: ${rawData.length.toLocaleString()}`);
+
+  const data = cleanData(rawData);
+  console.log(`📊 Cleaned: ${data.length.toLocaleString()}\n`);
 
   const intelligence = analyzeMarket(data);
-
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(intelligence, null, 2));
 
-  console.log('\n📊 MARKET INTELLIGENCE REPORT');
+  console.log('📊 MARKET INTELLIGENCE REPORT');
   console.log('='.repeat(50));
   console.log(`\n📈 Market Condition: ${intelligence.marketIndicators.marketCondition}`);
   console.log(`📊 Avg Price Momentum: ${intelligence.marketIndicators.averagePriceMomentum}%`);
   console.log(`🏆 Top Performer: ${intelligence.marketIndicators.topPerformer}`);
   console.log(`💧 Most Liquid: ${intelligence.marketIndicators.mostLiquid}`);
-  console.log(`⚠️ Highest Risk: ${intelligence.marketIndicators.highestRisk}`);
 
   console.log('\n📋 Top 5 Investment Districts:');
   intelligence.bestInvestmentDistricts.slice(0, 5).forEach((d, i) => {
     console.log(`   ${i + 1}. ${d.district} — Score: ${d.investmentScore} (Momentum: ${d.priceMomentum}%)`);
-  });
-
-  console.log('\n📋 Top 5 Fastest Growing:');
-  intelligence.fastestGrowing.slice(0, 5).forEach((d, i) => {
-    console.log(`   ${i + 1}. ${d.district} — ${d.priceMomentum}% growth`);
   });
 
   console.log('\n⚠️ Top 5 High Risk Areas:');
@@ -203,8 +188,4 @@ function main() {
   console.log(`\n✅ Saved to ${OUTPUT_FILE}`);
 }
 
-try {
-  main();
-} catch (e) {
-  console.error(e);
-}
+try { main(); } catch (e) { console.error(e); }

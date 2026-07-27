@@ -52,12 +52,12 @@ jobs:
       - name: Layer 6 — Market Intelligence Analysis
         run: node scripts/market-intelligence.js
         
-      - name: Layer 7 — Train ML model
+      - name: Layer 7 — Evaluate all properties
+        run: node scripts/evaluate-and-save.js
+        
+      - name: Layer 8 — Train ML model
         run: python scripts/train-model.py
         continue-on-error: true
-        
-      - name: Evaluate all properties
-        run: node scripts/evaluate-and-save.js
         
       - name: Commit and push changes
         run: |
@@ -66,10 +66,10 @@ jobs:
           git stash
           git pull --rebase origin main
           git stash pop || true
-          git add data/
+          git add data/ models/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "📊 Auto-update all data layers + Market Intelligence [skip ci]"
+            git commit -m "📊 Auto-update all data layers + Market Intelligence + ML [skip ci]"
             git push origin main
           fi
