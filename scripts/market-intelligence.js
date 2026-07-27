@@ -219,4 +219,8 @@ function main() {
   console.log(`\n✅ Saved to ${OUTPUT_FILE}`);
 }
 
-main().catch(console.error);
+try {
+  main();
+} catch(e) {
+  console.error(e);
+}
