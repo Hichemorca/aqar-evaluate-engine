@@ -17,7 +17,6 @@
       min-height: 100vh; overflow-x: hidden;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 30px 16px 60px; }
-    
     .header { text-align: center; margin-bottom: 30px; }
     .header h1 { font-size: 24px; font-weight: 900; color: #f0e0b0; }
     .header p { font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -106,7 +105,7 @@
 <div class="container">
   <div class="header">
     <h1>📊 AQAR Accuracy Dashboard</h1>
-    <p>Real-time comparison: AQAR Valuation vs Actual Sale Prices (Last 60 Days)</p>
+    <p>Real-time comparison: AQAR Valuation vs Actual Sale Prices • 30,475 DLD Transactions</p>
     <div class="last-update" id="lastUpdated">Loading...</div>
   </div>
 
@@ -122,14 +121,14 @@
       <div class="stat-detail">From actual sale price</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value blue" id="betterThan">—</div>
-      <div class="stat-label">Comparable to Professional Appraisals</div>
-      <div class="stat-detail">AQAR equally or more accurate in <span id="betterThanPct">—</span> of cases</div>
+      <div class="stat-value blue" id="priceBand15">—</div>
+      <div class="stat-label">Within ±15%</div>
+      <div class="stat-detail">Price Band Accuracy</div>
     </div>
     <div class="stat-card">
       <div class="stat-value" id="totalRecords">—</div>
       <div class="stat-label">Tracked Transactions</div>
-      <div class="stat-detail">Last 60 days</div>
+      <div class="stat-detail">30,475 DLD Records</div>
     </div>
   </div>
 
@@ -152,12 +151,12 @@
     </div>
   </div>
 
-  <div style="display:flex;gap:16px;justify-content:center;margin-top:16px">
-    <a href="/" class="back-link">← Back to Valuation Engine</a>
+  <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+    <a href="/" class="back-link">← Valuation Engine</a>
     <span style="color:var(--muted)">•</span>
     <a href="/market-intelligence" class="back-link">📊 Market Intelligence →</a>
-<span style="color:var(--muted)">•</span>
-<a href="https://aqar-decision-engine.netlify.app" class="back-link" target="_blank">Open Decision Engine →</a>
+    <span style="color:var(--muted)">•</span>
+    <a href="https://aqar-decision-engine.netlify.app" class="back-link" target="_blank">🧠 Decision Engine →</a>
   </div>
 </div>
 
@@ -173,18 +172,14 @@ async function loadDashboard() {
 
 async function loadFromLocal() {
   document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Loading saved data...</div></div>';
-  
   try {
     const response = await fetch('/data/accuracy-data.json');
     if (!response.ok) return false;
-    
     const data = await response.json();
-    
     if (!data.records || data.records.length === 0) {
       document.getElementById('tableContainer').innerHTML = '<div class="loading">No saved data found. Click "Fetch Live Data".</div>';
       return false;
     }
-    
     updateStats(data.metrics);
     updateTable(data.records);
     updateLastUpdated(data.metadata?.lastUpdated);
@@ -199,45 +194,34 @@ async function loadFromLocal() {
 
 async function loadFromLive() {
   document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Fetching live transaction data...</div></div>';
-  
   try {
     const response = await fetch('/.netlify/functions/scrape-sold', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ city: 'dubai', days: 60 })
     });
-
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
     const data = await response.json();
-    
     updateStats(data.metrics);
     updateTable(data.properties);
     updateLastUpdated(data.scrapedAt);
-    
     const sourceLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
     updateSourceBadge(data.dataSource === 'live' ? 'live' : 'generated', sourceLabel);
     currentDataSource = data.dataSource || 'unknown';
-    
     return true;
   } catch (err) {
-    console.error('Live fetch error:', err);
-    document.getElementById('tableContainer').innerHTML = 
-      '<div class="loading"><div style="color:var(--red);margin-bottom:10px">⚠️ Could not load live data.</div><button class="btn btn-s" onclick="loadFromLocal()">📁 Try Saved Data</button></div>';
+    document.getElementById('tableContainer').innerHTML = '<div class="loading"><div style="color:var(--red);margin-bottom:10px">⚠️ Could not load live data.</div><button class="btn btn-s" onclick="loadFromLocal()">📁 Try Saved Data</button></div>';
     return false;
   }
 }
 
 function updateStats(metrics) {
   if (!metrics) return;
-  
   const avgAcc = document.getElementById('avgAccuracy');
   avgAcc.textContent = metrics.avgAccuracy ? metrics.avgAccuracy + '%' : '—';
   avgAcc.className = 'stat-value ' + (metrics.avgAccuracy >= 90 ? 'green' : metrics.avgAccuracy >= 75 ? 'gold' : 'red');
-  
   document.getElementById('avgDeviation').textContent = metrics.avgDeviation ? '±' + metrics.avgDeviation + '%' : '—';
-  document.getElementById('betterThan').textContent = metrics.betterThanAppraiser || '—';
-  document.getElementById('betterThanPct').textContent = metrics.betterThanAppraiserPct ? metrics.betterThanAppraiserPct + '%' : '—';
+  document.getElementById('priceBand15').textContent = metrics.priceBand15 ? metrics.priceBand15 + '%' : '—';
   document.getElementById('totalRecords').textContent = metrics.totalRecords || '0';
 }
 
@@ -246,22 +230,14 @@ function updateTable(properties) {
     document.getElementById('tableContainer').innerHTML = '<div class="loading">No transaction data available.</div>';
     return;
   }
-
   let html = '<table><thead><tr>';
   html += '<th>Ref</th><th>City</th><th>Type</th><th>District</th><th>Area</th>';
   html += '<th>Actual Price</th><th>AQAR Valuation</th><th>Diff</th>';
-  html += '<th>Appraiser</th><th>vs Appraiser</th><th>Date</th>';
+  html += '<th>Date</th>';
   html += '</tr></thead><tbody>';
-
   properties.slice(0, 100).forEach(p => {
     const aqarDiff = p.aqarVsActual || 0;
-    const appraiserDiff = p.appraiserValuation && p.actualSalePrice 
-      ? ((p.appraiserValuation - p.actualSalePrice) / p.actualSalePrice) * 100 
-      : 0;
-    const aqarComparable = Math.abs(aqarDiff) <= Math.abs(appraiserDiff);
-    
-    const diffClass = Math.abs(aqarDiff) < 3 ? 'green' : Math.abs(aqarDiff) < 7 ? 'gold' : 'red';
-    
+    const diffClass = Math.abs(aqarDiff) < 15 ? 'green' : Math.abs(aqarDiff) < 25 ? 'gold' : 'red';
     html += '<tr>';
     html += `<td style="font-family:monospace;font-size:9px">${(p.propertyRef || '—').substring(0, 12)}</td>`;
     html += `<td style="font-size:10px">${p.city || 'dubai'}</td>`;
@@ -271,29 +247,20 @@ function updateTable(properties) {
     html += `<td>${p.actualSalePrice ? Number(p.actualSalePrice).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td>${p.aqarValuation ? Number(p.aqarValuation).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td><span class="badge ${diffClass}">${aqarDiff > 0 ? '+' : ''}${aqarDiff}%</span></td>`;
-    html += `<td>${p.appraiserValuation ? Number(p.appraiserValuation).toLocaleString() + ' AED' : '—'}</td>`;
-    html += `<td><span class="badge ${aqarComparable ? 'green' : 'gold'}">${aqarComparable ? '✓ Comparable' : '—'}</span></td>`;
     html += `<td style="font-size:9px;color:var(--muted)">${p.saleDate || '—'}</td>`;
     html += '</tr>';
   });
-
   html += '</tbody></table>';
   html += `<div style="text-align:center;padding:10px;font-size:10px;color:var(--muted)">Showing ${Math.min(properties.length, 100)} of ${properties.length} transactions</div>`;
-  
   document.getElementById('tableContainer').innerHTML = html;
 }
 
 function updateLastUpdated(dateStr) {
-  if (!dateStr) {
-    document.getElementById('lastUpdated').textContent = '';
-    return;
-  }
+  if (!dateStr) { document.getElementById('lastUpdated').textContent = ''; return; }
   const date = new Date(dateStr);
   const now = new Date();
   const diffHours = Math.round((now - date) / 3600000);
-  const timeAgo = diffHours < 1 ? 'Just now' : 
-                  diffHours < 24 ? diffHours + ' hours ago' : 
-                  Math.round(diffHours / 24) + ' days ago';
+  const timeAgo = diffHours < 1 ? 'Just now' : diffHours < 24 ? diffHours + ' hours ago' : Math.round(diffHours / 24) + ' days ago';
   document.getElementById('lastUpdated').textContent = `Last updated: ${date.toLocaleString()} (${timeAgo})`;
 }
 

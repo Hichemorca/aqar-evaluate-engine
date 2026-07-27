@@ -86,11 +86,12 @@
   </div>
 
   <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
-  <a href="/" class="back-link">← Valuation Engine</a>
-  <span style="color:var(--muted)">•</span>
-  <a href="/accuracy-dashboard" class="back-link">📊 Accuracy Dashboard</a>
-  <span style="color:var(--muted)">•</span>
-  <a href="https://aqar-decision-engine.netlify.app" class="back-link" target="_blank">🧠 Decision Engine →</a>
+    <a href="/" class="back-link">← Valuation Engine</a>
+    <span style="color:var(--muted)">•</span>
+    <a href="/accuracy-dashboard" class="back-link">📊 Accuracy Dashboard</a>
+    <span style="color:var(--muted)">•</span>
+    <a href="https://aqar-decision-engine.netlify.app" class="back-link" target="_blank">🧠 Decision Engine →</a>
+  </div>
 </div>
 
 <script>
@@ -104,7 +105,6 @@ async function loadData() {
     document.getElementById('topPerformer').textContent = data.marketIndicators?.topPerformer || '—';
     document.getElementById('mostLiquid').textContent = data.marketIndicators?.mostLiquid || '—';
 
-    // Investment Table
     let invHTML = '<table><thead><tr><th>#</th><th>District</th><th>Score</th><th>Momentum</th><th>Volatility</th><th>Transactions</th></tr></thead><tbody>';
     (data.bestInvestmentDistricts || []).slice(0, 10).forEach((d, i) => {
       invHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td>${d.investmentScore}</td><td><span class="badge ${d.priceMomentum > 0 ? 'green' : 'red'}">${d.priceMomentum > 0 ? '+' : ''}${d.priceMomentum}%</span></td><td>${d.volatility}%</td><td>${d.transactionCount}</td></tr>`;
@@ -112,7 +112,6 @@ async function loadData() {
     invHTML += '</tbody></table>';
     document.getElementById('investmentTable').innerHTML = invHTML;
 
-    // Growing Table
     let growHTML = '<table><thead><tr><th>#</th><th>District</th><th>Growth</th><th>Transactions</th></tr></thead><tbody>';
     (data.fastestGrowing || []).slice(0, 10).forEach((d, i) => {
       growHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td><span class="badge green">+${d.priceMomentum}%</span></td><td>${d.transactionCount}</td></tr>`;
@@ -120,7 +119,6 @@ async function loadData() {
     growHTML += '</tbody></table>';
     document.getElementById('growingTable').innerHTML = growHTML;
 
-    // Risk Table
     let riskHTML = '<table><thead><tr><th>#</th><th>District</th><th>Bubble Risk</th><th>Volatility</th><th>Transactions</th></tr></thead><tbody>';
     (data.highRiskAreas || []).slice(0, 10).forEach((d, i) => {
       riskHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td><span class="badge red">${d.bubbleRiskScore}</span></td><td>${d.volatility}%</td><td>${d.transactionCount}</td></tr>`;
