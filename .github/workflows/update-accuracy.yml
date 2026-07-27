@@ -49,7 +49,10 @@ jobs:
       - name: Layer 5 — Fetch generated transactions
         run: node scripts/fetch-transactions.js
         
-      - name: Layer 6 — Train ML model
+      - name: Layer 6 — Market Intelligence Analysis
+        run: node scripts/market-intelligence.js
+        
+      - name: Layer 7 — Train ML model
         run: python scripts/train-model.py
         continue-on-error: true
         
@@ -67,6 +70,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "📊 Auto-update all data layers + ML training [skip ci]"
+            git commit -m "📊 Auto-update all data layers + Market Intelligence [skip ci]"
             git push origin main
           fi
