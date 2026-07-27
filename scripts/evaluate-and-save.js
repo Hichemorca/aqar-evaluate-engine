@@ -1,4 +1,4 @@
-﻿// AQAR Auto-Evaluate — v16: Time-Weighted + Project-Level + 90-Day + Ultra-Luxury Filter
+﻿// AQAR Auto-Evaluate — v17: Fixed Time-Weighted Median + 120-Day Window
 const fs = require('fs');
 const path = require('path');
 
@@ -90,13 +90,10 @@ function filterDuplicates(transactions) {
 }
 
 function filterUltraLuxury(transactions) {
-  // Exclude ultra-luxury from evaluation (keep in market data)
   const before = transactions.length;
   const filtered = transactions.filter(t => {
     const pricePerSqm = t.actualSalePrice / Math.max(1, t.area);
-    // Exclude properties > 50,000 AED/sqm (ultra-luxury outliers)
     if (pricePerSqm > 50000) return false;
-    // Exclude properties > 50M AED total
     if (t.actualSalePrice > 50000000) return false;
     return true;
   });
@@ -140,7 +137,7 @@ function getSizeCategory(area) {
   return 'medium';
 }
 
-// ===== TIME-WEIGHTED MEDIAN =====
+// ===== FIXED TIME-WEIGHTED MEDIAN =====
 function computeMedians(transactions, groupFn) {
   const groups = {};
   transactions.forEach(t => {
@@ -154,20 +151,27 @@ function computeMedians(transactions, groupFn) {
   Object.keys(groups).forEach(key => {
     const items = groups[key];
     const count = items.length;
-    const sorted = items.sort((a, b) => new Date(b.saleDate) - new Date(a.saleDate));
+    
+    // FIXED: Sort by PRICE (not date) for correct weighted median
+    const sorted = items.sort((a, b) => a.pricePerSqm - b.pricePerSqm);
+    
+    // Time-based weights
     const now = new Date();
     const weights = sorted.map(t => {
       const saleDate = new Date(t.saleDate);
       const ageDays = isNaN(saleDate.getTime()) ? 90 : (now - saleDate) / 86400000;
       return Math.max(0.3, 1 - ageDays / 180);
     });
+    
     const totalWeight = weights.reduce((s, w) => s + w, 0);
     const targetWeight = totalWeight / 2;
+    
     let cumWeight = 0, weightedMedian = sorted[0].pricePerSqm;
     for (let i = 0; i < sorted.length; i++) {
       cumWeight += weights[i];
       if (cumWeight >= targetWeight) { weightedMedian = sorted[i].pricePerSqm; break; }
     }
+    
     medians[key] = { median: weightedMedian, count };
   });
   return medians;
@@ -178,14 +182,12 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   const project = property.project || '';
   
   if (project && project.length > 2) {
-    // Level 0: Project + Type + Size (min 3)
     const projSizeKey = `${project}__${property.propertyType}__${sizeCat}`;
     const projSizeData = projectSizeStats[projSizeKey];
     if (projSizeData && projSizeData.count >= 3) {
       return { valuation: Math.round(projSizeData.median) * property.area, level: 'project_size', count: projSizeData.count };
     }
     
-    // Level 0.5: Project + Type only (min 5)
     const projKey = `${project}__${property.propertyType}`;
     const projData = projectStats[projKey];
     if (projData && projData.count >= 5) {
@@ -193,14 +195,12 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
     }
   }
   
-  // Level 1: District + Type + Size (min 5)
   const distSizeKey = `${property.district}__${property.propertyType}__${sizeCat}`;
   const distSizeData = districtSizeStats[distSizeKey];
   if (distSizeData && distSizeData.count >= 5) {
     return { valuation: Math.round(distSizeData.median) * property.area, level: 'district_size', count: distSizeData.count };
   }
   
-  // Level 2: District + Type (min 5)
   const distKey = `${property.district}__${property.propertyType}`;
   const distData = districtStats[distKey];
   if (distData && distData.count >= 5) {
@@ -211,7 +211,7 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
 }
 
 async function main() {
-  console.log('🚀 AQAR — v16 All Improvements\n');
+  console.log('🚀 AQAR — v17 Fixed Weighted Median + 120-Day\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
@@ -223,7 +223,6 @@ async function main() {
 
   if (cleaned.length === 0) { console.log('❌ No transactions'); return; }
 
-  // Compute 4 levels
   const projectSizeStats = computeMedians(cleaned, t => {
     if (!t.project || t.project.length < 2) return null;
     return `${t.project}__${t.propertyType}__${getSizeCategory(t.area)}`;
@@ -253,18 +252,19 @@ async function main() {
   const allAvgAcc = Math.round(allAcc.reduce((s, a) => s + a, 0) / allResults.length * 10) / 10;
   const allDeviations = allResults.map(r => Math.abs(r.aqarVsActual || 0));
   const allAvgDev = Math.round(allDeviations.reduce((s, d) => s + d, 0) / allResults.length * 10) / 10;
+  const allWithin10 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 10).length;
   const allWithin15 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 15).length;
   const allWithin25 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
-  const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length };
-  const marketOutput = { metadata: { version: '16.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'All improvements', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
+  const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length };
+  const marketOutput = { metadata: { version: '17.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'Fixed weighted median + 120-day', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
-  console.log(`📊 Market Data: ${allResults.length} records | Accuracy: ${allAvgAcc}%`);
+  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}%`);
 
-  // ===== 90-DAY EVALUATION =====
-  console.log('\n🔍 90-Day Evaluation...');
-  const ninetyDaysAgo = new Date(Date.now() - 90 * 86400000);
-  const evalData = cleaned.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= ninetyDaysAgo; });
+  // ===== 120-DAY EVALUATION =====
+  console.log('\n🔍 120-Day Evaluation...');
+  const days120Ago = new Date(Date.now() - 120 * 86400000);
+  const evalData = cleaned.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= days120Ago; });
 
   const evalResults = [];
   for (const t of evalData) {
@@ -280,6 +280,7 @@ async function main() {
   const evalAvgAcc = Math.round(evalAcc.reduce((s, a) => s + a, 0) / evalResults.length * 10) / 10;
   const evalDeviations = evalResults.map(r => Math.abs(r.aqarVsActual || 0));
   const evalAvgDev = Math.round(evalDeviations.reduce((s, d) => s + d, 0) / evalResults.length * 10) / 10;
+  const evalWithin10 = evalResults.filter(r => Math.abs(r.aqarVsActual) <= 10).length;
   const evalWithin15 = evalResults.filter(r => Math.abs(r.aqarVsActual) <= 15).length;
   const evalWithin25 = evalResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
@@ -287,17 +288,17 @@ async function main() {
   evalResults.forEach(r => { levels[r.evalLevel] = (levels[r.evalLevel] || 0) + 1; });
   console.log('\n📊 Level Breakdown:');
   Object.entries(levels).sort((a, b) => b[1] - a[1]).forEach(([l, c]) => {
-    const levelResults = evalResults.filter(r => r.evalLevel === l);
-    const levelAcc = Math.round(levelResults.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / levelResults.length * 10) / 10;
-    console.log(`   ${l} (n=${c}): ${levelAcc}%`);
+    const lr = evalResults.filter(r => r.evalLevel === l);
+    const la = Math.round(lr.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / lr.length * 10) / 10;
+    console.log(`   ${l} (n=${c}): ${la}%`);
   });
 
-  const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels };
-  const evalOutput = { metadata: { version: '16.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'All improvements', dataSource: 'DLD Real (90 days)' }, metrics: evalMetrics, records: evalResults };
+  const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels };
+  const evalOutput = { metadata: { version: '17.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'Fixed weighted median + 120-day', dataSource: 'DLD Real (120 days)' }, metrics: evalMetrics, records: evalResults };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
-  console.log(`\n📊 90-Day: ${evalResults.length} records | Accuracy: ${evalAvgAcc}% | ±${evalAvgDev}%`);
-  console.log(`📊 Full Market: ${allResults.length} records | Accuracy: ${allAvgAcc}%`);
+  console.log(`\n📊 120-Day: ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}%`);
+  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}%`);
 }
 
 main().catch(console.error);
