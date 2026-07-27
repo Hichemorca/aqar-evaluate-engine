@@ -53,7 +53,7 @@ function analyzeMarket(data) {
   const districtMetrics = [];
   
   Object.entries(districts).forEach(([district, transactions]) => {
-    if (transactions.length < 10) return; // Skip small samples
+    if (transactions.length < 30) return; // Skip districts with fewer than 30 transactions
     
     const prices = transactions.map(t => t.actualSalePrice / t.area);
     const median = prices.sort((a, b) => a - b)[Math.floor(prices.length / 2)];
@@ -104,7 +104,12 @@ function analyzeMarket(data) {
 
   // Sort and categorize
   districtMetrics.sort((a, b) => b.transactionCount - a.transactionCount);
-
+  // Filter out extreme outliers (districts with < 30 transactions or > 500% momentum)
+districtMetrics = districtMetrics.filter(d => 
+  d.transactionCount >= 30 && 
+  Math.abs(d.priceMomentum) < 200 && 
+  d.volatility < 200
+);
   // Best Investment Districts (high momentum + high activity + moderate volatility)
   results.bestInvestmentDistricts = districtMetrics
     .filter(d => d.priceMomentum > 2 && d.volatility < 25 && d.transactionCount > 20)
