@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQAR Market Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4920e; --green: #00b86e; --red: #ff3c5a; --blue: #3c8cdc;
+      --text: #e8edf5; --muted: #8a9ab0; --bg: #060d1a;
+      --card: rgba(4, 10, 24, 0.55);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; overflow-x: hidden;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 30px 16px 60px; }
+    
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { font-size: 24px; font-weight: 900; color: #f0e0b0; }
+    .header p { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card {
+      background: var(--card); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 20px; text-align: center;
+    }
+    .stat-value { font-size: 28px; font-weight: 900; }
+    .stat-value.green { color: var(--green); }
+    .stat-value.gold { color: var(--gold); }
+    .stat-value.red { color: var(--red); }
+    .stat-value.blue { color: var(--blue); }
+    .stat-label { font-size: 12px; font-weight: 700; color: #dce8f5; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .section {
+      background: var(--card); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 20px; margin-bottom: 20px;
+    }
+    .section-title { font-size: 15px; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    th { color: var(--muted); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
+    tr:hover td { background: rgba(212,146,14,0.03); }
+
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 700; }
+    .badge.green { background: rgba(0,184,110,0.15); color: var(--green); }
+    .badge.red { background: rgba(255,60,90,0.15); color: var(--red); }
+    .badge.gold { background: rgba(212,146,14,0.15); color: var(--gold); }
+
+    .loading { text-align: center; padding: 40px; color: var(--muted); }
+    .back-link { display: inline-block; margin-top: 20px; color: var(--muted); font-size: 12px; text-decoration: none; }
+    .back-link:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>📊 AQAR Market Intelligence</h1>
+    <p>Real-time market analysis based on 30,475 DLD transactions</p>
+  </div>
+
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="stat-value gold" id="marketCondition">—</div><div class="stat-label">Market Condition</div></div>
+    <div class="stat-card"><div class="stat-value blue" id="avgMomentum">—</div><div class="stat-label">Avg Price Momentum</div></div>
+    <div class="stat-card"><div class="stat-value green" id="topPerformer">—</div><div class="stat-label">Top Performer</div></div>
+    <div class="stat-card"><div class="stat-value" id="mostLiquid">—</div><div class="stat-label">Most Liquid</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📋 Top 10 Investment Districts</div>
+    <div id="investmentTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🚀 Fastest Growing Areas</div>
+    <div id="growingTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚠️ High Risk Areas (Bubble Risk)</div>
+    <div id="riskTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div style="display:flex;gap:16px;justify-content:center;margin-top:16px">
+    <a href="/" class="back-link">← Back to Valuation Engine</a>
+    <span style="color:var(--muted)">•</span>
+    <a href="/accuracy-dashboard" class="back-link">Accuracy Dashboard →</a>
+  </div>
+</div>
+
+<script>
+async function loadData() {
+  try {
+    const res = await fetch('/data/market-intelligence.json');
+    const data = await res.json();
+
+    document.getElementById('marketCondition').textContent = data.marketIndicators?.marketCondition || '—';
+    document.getElementById('avgMomentum').textContent = (data.marketIndicators?.averagePriceMomentum || 0) + '%';
+    document.getElementById('topPerformer').textContent = data.marketIndicators?.topPerformer || '—';
+    document.getElementById('mostLiquid').textContent = data.marketIndicators?.mostLiquid || '—';
+
+    // Investment Table
+    let invHTML = '<table><thead><tr><th>#</th><th>District</th><th>Score</th><th>Momentum</th><th>Volatility</th><th>Transactions</th></tr></thead><tbody>';
+    (data.bestInvestmentDistricts || []).slice(0, 10).forEach((d, i) => {
+      invHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td>${d.investmentScore}</td><td><span class="badge ${d.priceMomentum > 0 ? 'green' : 'red'}">${d.priceMomentum > 0 ? '+' : ''}${d.priceMomentum}%</span></td><td>${d.volatility}%</td><td>${d.transactionCount}</td></tr>`;
+    });
+    invHTML += '</tbody></table>';
+    document.getElementById('investmentTable').innerHTML = invHTML;
+
+    // Growing Table
+    let growHTML = '<table><thead><tr><th>#</th><th>District</th><th>Growth</th><th>Transactions</th></tr></thead><tbody>';
+    (data.fastestGrowing || []).slice(0, 10).forEach((d, i) => {
+      growHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td><span class="badge green">+${d.priceMomentum}%</span></td><td>${d.transactionCount}</td></tr>`;
+    });
+    growHTML += '</tbody></table>';
+    document.getElementById('growingTable').innerHTML = growHTML;
+
+    // Risk Table
+    let riskHTML = '<table><thead><tr><th>#</th><th>District</th><th>Bubble Risk</th><th>Volatility</th><th>Transactions</th></tr></thead><tbody>';
+    (data.highRiskAreas || []).slice(0, 10).forEach((d, i) => {
+      riskHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td><span class="badge red">${d.bubbleRiskScore}</span></td><td>${d.volatility}%</td><td>${d.transactionCount}</td></tr>`;
+    });
+    riskHTML += '</tbody></table>';
+    document.getElementById('riskTable').innerHTML = riskHTML;
+
+  } catch(e) {
+    document.getElementById('investmentTable').innerHTML = '<div class="loading">No data available</div>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>
