@@ -50,7 +50,7 @@ function analyzeMarket(data) {
   });
 
   // Calculate metrics per district
-  const districtMetrics = [];
+  let districtMetrics = [];
   
   Object.entries(districts).forEach(([district, transactions]) => {
     if (transactions.length < 30) return; // Skip districts with fewer than 30 transactions
