@@ -1,0 +1,20 @@
+{
+  "modelAccuracy": 67.4,
+  "mape": 32.6,
+  "r2": 0.707,
+  "trainingSamples": 27635,
+  "features": [
+    "area",
+    "rooms",
+    "parking",
+    "project_te",
+    "district_te",
+    "type_te",
+    "hasMetro",
+    "hasMall",
+    "daysSinceStart"
+  ],
+  "previousAccuracy": 78.2,
+  "trainedAt": "2026-07-27T20:13:15.187156",
+  "modelVersion": "2.0.0"
+}

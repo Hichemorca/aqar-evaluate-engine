@@ -1,1041 +1,346 @@
 {
-  "generatedAt": "2026-07-27T19:42:20.113Z",
-  "totalTransactions": 30475,
+  "generatedAt": "2026-07-27T20:13:11.418Z",
+  "totalTransactions": 27669,
   "bestInvestmentDistricts": [
     {
-      "district": "Um Suqaim Third",
-      "medianPricePerSqm": 29710,
-      "transactionCount": 53,
-      "recentTransactions": 13,
-      "priceMomentum": 69.6,
-      "volatility": 24.9,
-      "activityRatio": 25,
-      "investmentScore": 221.4
-    },
-    {
-      "district": "DUBAI SCIENCE PARK",
-      "medianPricePerSqm": 15000,
-      "transactionCount": 100,
-      "recentTransactions": 8,
-      "priceMomentum": 19.5,
-      "volatility": 18.1,
-      "activityRatio": 8,
-      "investmentScore": 57.5
-    },
-    {
-      "district": "Al Yelayiss 5",
-      "medianPricePerSqm": 15947,
-      "transactionCount": 904,
-      "recentTransactions": 14,
-      "priceMomentum": 17.7,
-      "volatility": 12.8,
-      "activityRatio": 2,
-      "investmentScore": 48.7
-    },
-    {
-      "district": "Me'Aisem Second",
-      "medianPricePerSqm": 19190,
-      "transactionCount": 593,
-      "recentTransactions": 12,
-      "priceMomentum": 12.7,
-      "volatility": 14.6,
-      "activityRatio": 2,
-      "investmentScore": 32.8
-    },
-    {
-      "district": "SERENA",
-      "medianPricePerSqm": 13868,
-      "transactionCount": 48,
-      "recentTransactions": 6,
-      "priceMomentum": 12.4,
-      "volatility": 10.4,
-      "activityRatio": 13,
-      "investmentScore": 45
-    },
-    {
-      "district": "ARABIAN RANCHES II",
-      "medianPricePerSqm": 15385,
-      "transactionCount": 46,
-      "recentTransactions": 5,
-      "priceMomentum": 10.4,
-      "volatility": 22.3,
-      "activityRatio": 11,
-      "investmentScore": 31.1
+      "district": "MOTOR CITY",
+      "medianPricePerSqm": 11242,
+      "transactionCount": 360,
+      "recentTransactions": 32,
+      "priceMomentum": 11.4,
+      "volatility": 24.3,
+      "activityRatio": 9,
+      "investmentScore": 24.5
     },
     {
       "district": "DUBAI SOUTH",
-      "medianPricePerSqm": 11585,
-      "transactionCount": 480,
-      "recentTransactions": 54,
-      "priceMomentum": 9.9,
-      "volatility": 23.3,
+      "medianPricePerSqm": 11681,
+      "transactionCount": 435,
+      "recentTransactions": 50,
+      "priceMomentum": 11,
+      "volatility": 17.4,
       "activityRatio": 11,
-      "investmentScore": 29.1
+      "investmentScore": 27.8
     },
     {
-      "district": "Dubai Investment Park Second",
-      "medianPricePerSqm": 21765,
-      "transactionCount": 93,
-      "recentTransactions": 1,
-      "priceMomentum": 7.5,
-      "volatility": 18.5,
-      "activityRatio": 1,
-      "investmentScore": 14.3
+      "district": "DUBAI HILLS",
+      "medianPricePerSqm": 25000,
+      "transactionCount": 537,
+      "recentTransactions": 63,
+      "priceMomentum": 9.4,
+      "volatility": 22.8,
+      "activityRatio": 12,
+      "investmentScore": 24
     },
     {
-      "district": "Nad Al Shiba First",
-      "medianPricePerSqm": 23290,
-      "transactionCount": 157,
-      "recentTransactions": 14,
-      "priceMomentum": 6.8,
-      "volatility": 16.4,
-      "activityRatio": 9,
-      "investmentScore": 21.2
+      "district": "DUBAI PRODUCTION CITY",
+      "medianPricePerSqm": 10727,
+      "transactionCount": 412,
+      "recentTransactions": 66,
+      "priceMomentum": 6.7,
+      "volatility": 26.9,
+      "activityRatio": 16,
+      "investmentScore": 21.3
     },
     {
-      "district": "THE LAKES",
-      "medianPricePerSqm": 25310,
-      "transactionCount": 51,
-      "recentTransactions": 9,
-      "priceMomentum": 6.6,
-      "volatility": 23.3,
-      "activityRatio": 18,
-      "investmentScore": 26.2
+      "district": "TOWN SQUARE",
+      "medianPricePerSqm": 14242,
+      "transactionCount": 309,
+      "recentTransactions": 40,
+      "priceMomentum": 3.4,
+      "volatility": 15.9,
+      "activityRatio": 13,
+      "investmentScore": 15
+    },
+    {
+      "district": "THE GREENS",
+      "medianPricePerSqm": 20161,
+      "transactionCount": 218,
+      "recentTransactions": 31,
+      "priceMomentum": 3.1,
+      "volatility": 25,
+      "activityRatio": 14,
+      "investmentScore": 12.7
     }
   ],
   "fastestGrowing": [
     {
-      "district": "Muhaisanah First",
-      "medianPricePerSqm": 14085,
-      "transactionCount": 37,
-      "recentTransactions": 6,
-      "priceMomentum": 194.5,
-      "volatility": 39.1,
-      "activityRatio": 16
-    },
-    {
-      "district": "JUMEIRAH GOLF",
-      "medianPricePerSqm": 21628,
-      "transactionCount": 121,
-      "recentTransactions": 20,
-      "priceMomentum": 70.2,
-      "volatility": 44,
-      "activityRatio": 17
-    },
-    {
-      "district": "Um Suqaim Third",
-      "medianPricePerSqm": 29710,
-      "transactionCount": 53,
-      "recentTransactions": 13,
-      "priceMomentum": 69.6,
-      "volatility": 24.9,
-      "activityRatio": 25
-    },
-    {
-      "district": "Hor Al Anz",
-      "medianPricePerSqm": 10776,
-      "transactionCount": 63,
-      "recentTransactions": 13,
-      "priceMomentum": 45.2,
-      "volatility": 89.1,
-      "activityRatio": 21
-    },
-    {
-      "district": "SUFOUH GARDENS",
-      "medianPricePerSqm": 17736,
-      "transactionCount": 33,
-      "recentTransactions": 2,
-      "priceMomentum": 29,
-      "volatility": 114.1,
-      "activityRatio": 6
-    },
-    {
       "district": "BARSHA HEIGHTS",
-      "medianPricePerSqm": 21494,
-      "transactionCount": 167,
+      "medianPricePerSqm": 21503,
+      "transactionCount": 166,
       "recentTransactions": 28,
       "priceMomentum": 22.3,
-      "volatility": 38.9,
+      "volatility": 38.3,
       "activityRatio": 17
     },
     {
-      "district": "DUBAI SCIENCE PARK",
-      "medianPricePerSqm": 15000,
-      "transactionCount": 100,
-      "recentTransactions": 8,
-      "priceMomentum": 19.5,
-      "volatility": 18.1,
-      "activityRatio": 8
+      "district": "PALM JUMEIRAH",
+      "medianPricePerSqm": 30745,
+      "transactionCount": 417,
+      "recentTransactions": 51,
+      "priceMomentum": 19.4,
+      "volatility": 52.8,
+      "activityRatio": 12
     },
     {
-      "district": "Al Yelayiss 5",
-      "medianPricePerSqm": 15947,
-      "transactionCount": 904,
-      "recentTransactions": 14,
-      "priceMomentum": 17.7,
-      "volatility": 12.8,
-      "activityRatio": 2
+      "district": "DUBAI MARINA",
+      "medianPricePerSqm": 20312,
+      "transactionCount": 961,
+      "recentTransactions": 159,
+      "priceMomentum": 12.8,
+      "volatility": 42.9,
+      "activityRatio": 17
     },
     {
-      "district": "Marsa Dubai",
-      "medianPricePerSqm": 36458,
-      "transactionCount": 39,
-      "recentTransactions": 5,
-      "priceMomentum": 16,
-      "volatility": 39.3,
+      "district": "JUMEIRAH BEACH RESIDENCE",
+      "medianPricePerSqm": 16923,
+      "transactionCount": 186,
+      "recentTransactions": 24,
+      "priceMomentum": 11.9,
+      "volatility": 30.4,
       "activityRatio": 13
     },
     {
-      "district": "DUBAI LAND RESIDENCE COMPLEX",
-      "medianPricePerSqm": 8953,
-      "transactionCount": 339,
-      "recentTransactions": 36,
-      "priceMomentum": 13.6,
-      "volatility": 46,
+      "district": "MOTOR CITY",
+      "medianPricePerSqm": 11242,
+      "transactionCount": 360,
+      "recentTransactions": 32,
+      "priceMomentum": 11.4,
+      "volatility": 24.3,
+      "activityRatio": 9
+    },
+    {
+      "district": "DUBAI SOUTH",
+      "medianPricePerSqm": 11681,
+      "transactionCount": 435,
+      "recentTransactions": 50,
+      "priceMomentum": 11,
+      "volatility": 17.4,
       "activityRatio": 11
+    },
+    {
+      "district": "DUBAI LAND RESIDENCE COMPLEX",
+      "medianPricePerSqm": 9176,
+      "transactionCount": 321,
+      "recentTransactions": 34,
+      "priceMomentum": 10.8,
+      "volatility": 44.1,
+      "activityRatio": 11
+    },
+    {
+      "district": "DUBAI HILLS",
+      "medianPricePerSqm": 25000,
+      "transactionCount": 537,
+      "recentTransactions": 63,
+      "priceMomentum": 9.4,
+      "volatility": 22.8,
+      "activityRatio": 12
+    },
+    {
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "medianPricePerSqm": 14371,
+      "transactionCount": 342,
+      "recentTransactions": 33,
+      "priceMomentum": 7.1,
+      "volatility": 31,
+      "activityRatio": 10
+    },
+    {
+      "district": "BUSINESS BAY",
+      "medianPricePerSqm": 20741,
+      "transactionCount": 1745,
+      "recentTransactions": 241,
+      "priceMomentum": 6.7,
+      "volatility": 37.9,
+      "activityRatio": 14
     }
   ],
   "highRiskAreas": [
     {
-      "district": "SUFOUH GARDENS",
-      "medianPricePerSqm": 17736,
-      "transactionCount": 33,
-      "recentTransactions": 2,
-      "priceMomentum": 29,
-      "volatility": 114.1,
-      "activityRatio": 6,
-      "bubbleRiskScore": 286.2
-    },
-    {
-      "district": "DUBAI MARINA",
-      "medianPricePerSqm": 21045,
-      "transactionCount": 1120,
-      "recentTransactions": 188,
-      "priceMomentum": 8.3,
-      "volatility": 105.3,
-      "activityRatio": 17,
-      "bubbleRiskScore": 227.2
-    },
-    {
-      "district": "Jumeirah First",
-      "medianPricePerSqm": 15771,
-      "transactionCount": 56,
-      "recentTransactions": 6,
-      "priceMomentum": 5.6,
-      "volatility": 97.9,
-      "activityRatio": 11,
-      "bubbleRiskScore": 207
-    },
-    {
-      "district": "Hor Al Anz",
-      "medianPricePerSqm": 10776,
-      "transactionCount": 63,
-      "recentTransactions": 13,
-      "priceMomentum": 45.2,
-      "volatility": 89.1,
-      "activityRatio": 21,
-      "bubbleRiskScore": 268.6
-    },
-    {
-      "district": "JUMEIRAH BEACH RESIDENCE",
-      "medianPricePerSqm": 17576,
-      "transactionCount": 219,
-      "recentTransactions": 28,
-      "priceMomentum": 11.3,
-      "volatility": 74.9,
-      "activityRatio": 13,
-      "bubbleRiskScore": 172.4
-    },
-    {
-      "district": "Madinat Al Mataar",
-      "medianPricePerSqm": 9689,
-      "transactionCount": 261,
-      "recentTransactions": 25,
-      "priceMomentum": 12.3,
-      "volatility": 67.7,
-      "activityRatio": 10,
-      "bubbleRiskScore": 160
-    },
-    {
-      "district": "Abu Hail",
-      "medianPricePerSqm": 6466,
-      "transactionCount": 33,
-      "recentTransactions": 4,
-      "priceMomentum": 3.8,
-      "volatility": 67.4,
+      "district": "PALM JUMEIRAH",
+      "medianPricePerSqm": 30745,
+      "transactionCount": 417,
+      "recentTransactions": 51,
+      "priceMomentum": 19.4,
+      "volatility": 52.8,
       "activityRatio": 12,
-      "bubbleRiskScore": 142.4
+      "bubbleRiskScore": 105.6
     },
     {
       "district": "MEYDAN ONE",
-      "medianPricePerSqm": 21667,
-      "transactionCount": 522,
-      "recentTransactions": 73,
-      "priceMomentum": 3.8,
-      "volatility": 50.9,
+      "medianPricePerSqm": 21818,
+      "transactionCount": 503,
+      "recentTransactions": 68,
+      "priceMomentum": 2.7,
+      "volatility": 50.5,
       "activityRatio": 14,
-      "bubbleRiskScore": 109.4
+      "bubbleRiskScore": 101
     },
     {
-      "district": "JUMEIRAH VILLAGE TRIANGLE",
-      "medianPricePerSqm": 14713,
-      "transactionCount": 372,
-      "recentTransactions": 37,
-      "priceMomentum": 8.3,
-      "volatility": 49.1,
-      "activityRatio": 10,
-      "bubbleRiskScore": 114.8
+      "district": "DUBAI LAND RESIDENCE COMPLEX",
+      "medianPricePerSqm": 9176,
+      "transactionCount": 321,
+      "recentTransactions": 34,
+      "priceMomentum": 10.8,
+      "volatility": 44.1,
+      "activityRatio": 11,
+      "bubbleRiskScore": 88.2
+    },
+    {
+      "district": "JUMEIRAH LAKES TOWERS",
+      "medianPricePerSqm": 16606,
+      "transactionCount": 805,
+      "recentTransactions": 75,
+      "priceMomentum": -4,
+      "volatility": 43.3,
+      "activityRatio": 9,
+      "bubbleRiskScore": 86.6
+    },
+    {
+      "district": "DUBAI MARINA",
+      "medianPricePerSqm": 20312,
+      "transactionCount": 961,
+      "recentTransactions": 159,
+      "priceMomentum": 12.8,
+      "volatility": 42.9,
+      "activityRatio": 17,
+      "bubbleRiskScore": 85.8
+    },
+    {
+      "district": "BURJ KHALIFA",
+      "medianPricePerSqm": 28571,
+      "transactionCount": 892,
+      "recentTransactions": 117,
+      "priceMomentum": -1.1,
+      "volatility": 41.2,
+      "activityRatio": 13,
+      "bubbleRiskScore": 82.4
+    },
+    {
+      "district": "BARSHA HEIGHTS",
+      "medianPricePerSqm": 21503,
+      "transactionCount": 166,
+      "recentTransactions": 28,
+      "priceMomentum": 22.3,
+      "volatility": 38.3,
+      "activityRatio": 17,
+      "bubbleRiskScore": 76.6
     },
     {
       "district": "BUSINESS BAY",
-      "medianPricePerSqm": 20625,
-      "transactionCount": 1846,
-      "recentTransactions": 255,
-      "priceMomentum": 4.9,
-      "volatility": 46,
+      "medianPricePerSqm": 20741,
+      "transactionCount": 1745,
+      "recentTransactions": 241,
+      "priceMomentum": 6.7,
+      "volatility": 37.9,
       "activityRatio": 14,
-      "bubbleRiskScore": 101.8
-    }
-  ],
-  "recoveryZones": [
+      "bubbleRiskScore": 75.8
+    },
     {
-      "district": "TOWN SQUARE",
-      "medianPricePerSqm": 14167,
-      "transactionCount": 326,
-      "recentTransactions": 43,
-      "priceMomentum": 2.4,
-      "volatility": 17.3,
-      "activityRatio": 13
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "medianPricePerSqm": 14371,
+      "transactionCount": 342,
+      "recentTransactions": 33,
+      "priceMomentum": 7.1,
+      "volatility": 31,
+      "activityRatio": 10,
+      "bubbleRiskScore": 62
+    },
+    {
+      "district": "INTERNATIONAL CITY PH 1",
+      "medianPricePerSqm": 7159,
+      "transactionCount": 659,
+      "recentTransactions": 70,
+      "priceMomentum": 2.9,
+      "volatility": 30.5,
+      "activityRatio": 11,
+      "bubbleRiskScore": 61
     }
   ],
   "liquidityIndex": [
     {
       "district": "JUMEIRAH VILLAGE CIRCLE",
-      "transactionCount": 2426,
-      "liquidityScore": 24.3
+      "transactionCount": 2287,
+      "liquidityScore": 22.9
     },
     {
       "district": "BUSINESS BAY",
-      "transactionCount": 1846,
-      "liquidityScore": 18.5
+      "transactionCount": 1745,
+      "liquidityScore": 17.5
     },
     {
       "district": "DUBAI MARINA",
-      "transactionCount": 1120,
-      "liquidityScore": 11.2
+      "transactionCount": 961,
+      "liquidityScore": 9.6
     },
     {
       "district": "BURJ KHALIFA",
-      "transactionCount": 939,
-      "liquidityScore": 9.4
-    },
-    {
-      "district": "Al Yelayiss 5",
-      "transactionCount": 904,
-      "liquidityScore": 9
+      "transactionCount": 892,
+      "liquidityScore": 8.9
     },
     {
       "district": "JUMEIRAH LAKES TOWERS",
-      "transactionCount": 857,
-      "liquidityScore": 8.6
+      "transactionCount": 805,
+      "liquidityScore": 8.1
     },
     {
       "district": "ARJAN",
-      "transactionCount": 749,
-      "liquidityScore": 7.5
+      "transactionCount": 726,
+      "liquidityScore": 7.3
     },
     {
       "district": "INTERNATIONAL CITY PH 1",
-      "transactionCount": 716,
-      "liquidityScore": 7.2
+      "transactionCount": 659,
+      "liquidityScore": 6.6
     },
     {
       "district": "DUBAI CREEK HARBOUR",
-      "transactionCount": 706,
-      "liquidityScore": 7.1
-    },
-    {
-      "district": "Madinat Hind 4",
-      "transactionCount": 689,
-      "liquidityScore": 6.9
+      "transactionCount": 653,
+      "liquidityScore": 6.5
     },
     {
       "district": "DISCOVERY GARDENS",
-      "transactionCount": 630,
-      "liquidityScore": 6.3
-    },
-    {
-      "district": "DUBAI SPORTS CITY",
-      "transactionCount": 623,
+      "transactionCount": 616,
       "liquidityScore": 6.2
     },
     {
       "district": "AL FURJAN",
-      "transactionCount": 620,
-      "liquidityScore": 6.2
-    },
-    {
-      "district": "Me'Aisem Second",
-      "transactionCount": 593,
+      "transactionCount": 589,
       "liquidityScore": 5.9
     },
     {
-      "district": "DUBAI HILLS",
-      "transactionCount": 583,
-      "liquidityScore": 5.8
-    }
-  ],
-  "buyerSellerIndex": [
-    {
-      "district": "JUMEIRAH VILLAGE CIRCLE",
-      "activityRatio": 16,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "BUSINESS BAY",
-      "activityRatio": 14,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "DUBAI MARINA",
-      "activityRatio": 17,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "BURJ KHALIFA",
-      "activityRatio": 14,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Al Yelayiss 5",
-      "activityRatio": 2,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "JUMEIRAH LAKES TOWERS",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "ARJAN",
-      "activityRatio": 11,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "INTERNATIONAL CITY PH 1",
-      "activityRatio": 11,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "DUBAI CREEK HARBOUR",
-      "activityRatio": 18,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
       "district": "Madinat Hind 4",
-      "activityRatio": 12,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "DISCOVERY GARDENS",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
+      "transactionCount": 587,
+      "liquidityScore": 5.9
     },
     {
       "district": "DUBAI SPORTS CITY",
-      "activityRatio": 15,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "AL FURJAN",
-      "activityRatio": 11,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Me'Aisem Second",
-      "activityRatio": 2,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "DUBAI HILLS",
-      "activityRatio": 12,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
+      "transactionCount": 574,
+      "liquidityScore": 5.7
     },
     {
       "district": "MAJAN",
-      "activityRatio": 3,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
+      "transactionCount": 565,
+      "liquidityScore": 5.7
     },
     {
       "district": "Al Hebiah Fifth",
-      "activityRatio": 17,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
+      "transactionCount": 543,
+      "liquidityScore": 5.4
     },
     {
-      "district": "SOBHA HEARTLAND",
-      "activityRatio": 13,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "MEYDAN ONE",
-      "activityRatio": 14,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "DUBAI SOUTH",
-      "activityRatio": 11,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "PALM JUMEIRAH",
-      "activityRatio": 13,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "DUBAI PRODUCTION CITY",
-      "activityRatio": 16,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "DAMAC HILLS",
-      "activityRatio": 13,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "MOTOR CITY",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "JUMEIRAH VILLAGE TRIANGLE",
-      "activityRatio": 10,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Me'Aisem First",
-      "activityRatio": 9,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "DUBAI LAND RESIDENCE COMPLEX",
-      "activityRatio": 11,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "TOWN SQUARE",
-      "activityRatio": 13,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "LIWAN",
-      "activityRatio": 11,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Al Yufrah 1",
-      "activityRatio": 11,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "INTERNATIONAL CITY PH 2 & 3",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "EMIRATE LIVING",
-      "activityRatio": 14,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Madinat Al Mataar",
-      "activityRatio": 10,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Al Yelayiss 1",
-      "activityRatio": 13,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Hadaeq Sheikh Mohammed Bin Rashid",
-      "activityRatio": 9,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "DUBAI STUDIO CITY",
-      "activityRatio": 16,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "THE GREENS",
-      "activityRatio": 15,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "DUBAI HEALTHCARE CITY - PHASE 2",
-      "activityRatio": 11,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Al Yelayiss 2",
-      "activityRatio": 14,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "JUMEIRAH BEACH RESIDENCE",
-      "activityRatio": 13,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Palm Jabal Ali",
-      "activityRatio": 7,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "DUBAI INVESTMENT PARK SECOND",
-      "activityRatio": 7,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Wadi Al Safa 5",
-      "activityRatio": 11,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Wadi Al Safa 3",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "BARSHA HEIGHTS",
-      "activityRatio": 17,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "DUBAI HARBOUR",
-      "activityRatio": 13,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Nad Al Shiba First",
-      "activityRatio": 9,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Wadi Al Safa 7",
-      "activityRatio": 10,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Warsan Fourth",
-      "activityRatio": 0,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "ARABIAN RANCHES I",
-      "activityRatio": 13,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "CITY WALK",
-      "activityRatio": 11,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "REMRAAM",
-      "activityRatio": 9,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "EMAAR SOUTH",
-      "activityRatio": 7,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "AL BARARI",
-      "activityRatio": 2,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Al Hebiah Fourth",
-      "activityRatio": 17,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "MEYDAN AVENUE",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "JUMEIRAH GOLF",
-      "activityRatio": 17,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "VILLANOVA",
-      "activityRatio": 15,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Al Hebiah Sixth",
-      "activityRatio": 6,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "MIRA",
-      "activityRatio": 20,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Al Hebiah Third",
-      "activityRatio": 11,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "DUBAI SCIENCE PARK",
-      "activityRatio": 8,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "MBR DISTRICT 1",
-      "activityRatio": 10,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "JABEL ALI HILLS",
-      "activityRatio": 11,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Dubai Investment Park Second",
-      "activityRatio": 1,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Mirdif",
-      "activityRatio": 21,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "MUDON",
-      "activityRatio": 16,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "JUMEIRAH PARK",
-      "activityRatio": 9,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Al Satwa",
-      "activityRatio": 15,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "THE FIELD",
-      "activityRatio": 13,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "DOWN TOWN JABAL ALI",
-      "activityRatio": 11,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "JADDAF WATERFRONT",
-      "activityRatio": 12,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "AL KHAIL HEIGHTS",
-      "activityRatio": 5,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "DUBAI WATER CANAL",
-      "activityRatio": 19,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "THE VALLEY",
-      "activityRatio": 5,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Hor Al Anz",
-      "activityRatio": 21,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Zaabeel Second",
-      "activityRatio": 18,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "LIVING LEGENDS",
-      "activityRatio": 19,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "ARABIAN RANCHES III",
-      "activityRatio": 9,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Jumeirah First",
-      "activityRatio": 11,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "LA MER",
-      "activityRatio": 18,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Al Kifaf",
-      "activityRatio": 13,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Um Suqaim Third",
-      "activityRatio": 25,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "TECOM SITE A",
-      "activityRatio": 13,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "MBR DISTRICT 7",
-      "activityRatio": 15,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "THE LAKES",
-      "activityRatio": 18,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "THE VILLA",
-      "activityRatio": 6,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "BLUEWATERS",
-      "activityRatio": 6,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "SERENA",
-      "activityRatio": 13,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Ghadeer Al tair",
-      "activityRatio": 9,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "ARABIAN RANCHES II",
-      "activityRatio": 11,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "TILAL AL GHAF",
-      "activityRatio": 21,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Nad Al Hamar",
-      "activityRatio": 7,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "GARDEN VIEW",
-      "activityRatio": 0,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "Marsa Dubai",
-      "activityRatio": 13,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Al Wasl",
-      "activityRatio": 13,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Warsan First",
-      "activityRatio": 11,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Um Suqaim First",
-      "activityRatio": 3,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Muhaisanah First",
-      "activityRatio": 16,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "JUMEIRAH ISLANDS",
-      "activityRatio": 0,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Abu Hail",
-      "activityRatio": 12,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
-    },
-    {
-      "district": "SUFOUH GARDENS",
-      "activityRatio": 6,
-      "marketCondition": "Seller Market",
-      "strength": "Sellers"
-    },
-    {
-      "district": "Al Warsan Third",
-      "activityRatio": 16,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "JUMEIRAH LIVING",
-      "activityRatio": 3,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Al Rashidiya",
-      "activityRatio": 13,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Palm Deira",
-      "activityRatio": 29,
-      "marketCondition": "Buyer Market",
-      "strength": "Buyers"
-    },
-    {
-      "district": "Dubai Investment Park First",
-      "activityRatio": 7,
-      "marketCondition": "Balanced",
-      "strength": "Neutral"
+      "district": "DUBAI HILLS",
+      "transactionCount": 537,
+      "liquidityScore": 5.4
     }
   ],
   "marketIndicators": {
-    "averagePriceMomentum": -0.2,
-    "totalActiveDistricts": 107,
-    "totalTransactions": 30475,
-    "marketCondition": "Balanced Market",
-    "topPerformer": "Muhaisanah First",
+    "averagePriceMomentum": 1.6,
+    "totalActiveDistricts": 38,
+    "totalTransactions": 27669,
+    "marketCondition": "Moderate Seller Market",
+    "topPerformer": "BARSHA HEIGHTS",
     "mostLiquid": "JUMEIRAH VILLAGE CIRCLE",
-    "highestRisk": "SUFOUH GARDENS"
+    "highestRisk": "PALM JUMEIRAH"
   }
 }
