@@ -1,4 +1,4 @@
-﻿// AQAR OSM Data Fetcher — Real Data from OpenStreetMap
+﻿// AQAR OSM Data Fetcher — Real Data from OpenStreetMap with Optimized Timeout
 const axios = require('axios');
 
 // ===== FACILITY TYPES =====
@@ -90,26 +90,41 @@ function setCache(key, data) {
   gisCache.set(key, { data, timestamp: Date.now() });
 }
 
-// ===== OSM QUERY =====
+// ===== OSM QUERY WITH OPTIMIZED TIMEOUT =====
 async function queryOverpass(query) {
-  // استخدام Overpass API مع مهلة أطول
-  const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+  // محاولة استخدام خوادم متعددة
+  const servers = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.openstreetmap.ru/api/interpreter'
+  ];
   
-  console.log(`🌍 Querying Overpass API...`);
+  let lastError = null;
   
-  try {
-    const response = await axios.get(url, {
-      timeout: 25000, // 25 ثانية
-      headers: {
-        'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)'
+  for (const server of servers) {
+    try {
+      const url = `${server}?data=${encodeURIComponent(query)}`;
+      console.log(`🌍 Querying: ${server}`);
+      
+      const response = await axios.get(url, {
+        timeout: 45000, // 45 ثانية
+        headers: {
+          'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)'
+        }
+      });
+      
+      if (response.data && response.data.elements) {
+        console.log(`✅ Overpass API responded from ${server}`);
+        return response.data;
       }
-    });
-    console.log(`✅ Overpass API responded`);
-    return response.data;
-  } catch (error) {
-    console.log(`⚠️ Overpass API error: ${error.message}`);
-    return null;
+    } catch (error) {
+      console.log(`⚠️ Server ${server} failed: ${error.message}`);
+      lastError = error;
+    }
   }
+  
+  console.log(`❌ All Overpass servers failed: ${lastError?.message}`);
+  return null;
 }
 
 // ===== FETCH FACILITIES =====
@@ -124,24 +139,20 @@ async function fetchFacilities(lat, lng, radius = 500) {
 
   console.log(`🔍 OSM: Fetching facilities around ${lat}, ${lng} (${radius}m)`);
 
-  // بناء استعلام OSM مبسط
-  const tags = [];
+  // بناء استعلام مبسط ومحسن
+  const facilityQueries = [];
+  
   Object.values(FACILITY_TYPES).forEach(type => {
     type.tags.forEach(tag => {
-      tags.push(`["${tag}"]`);
+      facilityQueries.push(`node["${tag}"](around:${radius},${lat},${lng});`);
+      facilityQueries.push(`way["${tag}"](around:${radius},${lat},${lng});`);
     });
   });
 
-  // استعلام مبسط للحصول على المرافق
   const query = `
-    [out:json][timeout:25];
+    [out:json][timeout:45];
     (
-      ${Object.values(FACILITY_TYPES).map(type => 
-        type.tags.map(tag => `node["${tag}"](around:${radius},${lat},${lng});`).join('')
-      ).join('')}
-      ${Object.values(FACILITY_TYPES).map(type => 
-        type.tags.map(tag => `way["${tag}"](around:${radius},${lat},${lng});`).join('')
-      ).join('')}
+      ${facilityQueries.join('')}
     );
     out body;
     >;
@@ -156,7 +167,8 @@ async function fetchFacilities(lat, lng, radius = 500) {
       facilities: {},
       totalScore: 0,
       count: 0,
-      source: 'empty'
+      source: 'empty',
+      error: 'No data from Overpass API'
     };
   }
 
@@ -171,7 +183,6 @@ async function fetchFacilities(lat, lng, radius = 500) {
 
   elements.forEach(el => {
     const tags = el.tags || {};
-    // التحقق من كل نوع
     for (const [key, type] of Object.entries(FACILITY_TYPES)) {
       const matched = type.tags.some(tag => {
         const [k, v] = tag.split('=');
@@ -180,7 +191,6 @@ async function fetchFacilities(lat, lng, radius = 500) {
       if (matched) {
         results[key].count += 1;
         totalCount += 1;
-        // حساب المسافة التقريبية
         if (el.lat && el.lon) {
           const dist = haversine(lat, lng, el.lat, el.lon);
           if (results[key].distance === null || dist < results[key].distance) {
@@ -192,13 +202,12 @@ async function fetchFacilities(lat, lng, radius = 500) {
     }
   });
 
-  // حساب النقاط لكل نوع
+  // حساب النقاط
   let totalScore = 0;
   Object.keys(results).forEach(key => {
     const r = results[key];
-    const maxDist = 500;
+    const maxDist = radius;
     if (r.count > 0) {
-      // النقاط تعتمد على القرب والعدد
       const distanceFactor = r.distance !== null ? Math.max(0, 1 - (r.distance / maxDist)) : 0.5;
       const countFactor = Math.min(1, r.count / 3);
       r.score = Math.min(1, r.weight * distanceFactor * (1 + countFactor * 0.5));
@@ -219,7 +228,6 @@ async function fetchFacilities(lat, lng, radius = 500) {
     source: 'osm'
   };
 
-  // تخزين في الكاش
   setCache(cacheKey, result);
   console.log(`✅ OSM: Found ${totalCount} facilities, score: ${(result.totalScore * 100).toFixed(1)}%`);
 
@@ -242,7 +250,7 @@ async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 8000,
+      timeout: 10000,
       headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)' }
     });
     if (response.data && response.data.length > 0) {
@@ -266,7 +274,7 @@ async function reverseGeocode(lat, lng) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 8000,
+      timeout: 10000,
       headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)' }
     });
     if (response.data) {

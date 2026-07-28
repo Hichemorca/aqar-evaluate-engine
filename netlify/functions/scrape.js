@@ -205,119 +205,6 @@ function generateSalesFallback(city, district, propertyType, count) {
   return sales;
 }
 
-// ===== GENERATE MOCK GIS DATA (FALLBACK) =====
-function generateMockGISData(lat, lng, radius) {
-  console.log(`📍 Generating mock GIS data for ${lat}, ${lng}`);
-  
-  // تحديد نوع المنطقة بناءً على الإحداثيات
-  const isDowntown = lat > 25.19 && lat < 25.21 && lng > 55.27 && lng < 55.29;
-  const isMarina = lat > 25.07 && lat < 25.09 && lng > 55.12 && lng < 55.15;
-  const isPalm = lat > 25.10 && lat < 25.13 && lng > 55.13 && lng < 55.16;
-  const isDeira = lat > 25.26 && lat < 25.28 && lng > 55.31 && lng < 55.33;
-  const isBusinessBay = lat > 25.18 && lat < 25.20 && lng > 55.25 && lng < 55.27;
-  
-  let facilities = {};
-  
-  if (isDowntown) {
-    facilities = {
-      metro: { count: 3, distance: 150, score: 0.45, weight: 0.15 },
-      tram: { count: 1, distance: 300, score: 0.15, weight: 0.10 },
-      mall: { count: 2, distance: 200, score: 0.40, weight: 0.12 },
-      supermarket: { count: 3, distance: 250, score: 0.25, weight: 0.08 },
-      school: { count: 2, distance: 400, score: 0.15, weight: 0.10 },
-      university: { count: 0, distance: null, score: 0, weight: 0.08 },
-      hospital: { count: 1, distance: 500, score: 0.12, weight: 0.08 },
-      clinic: { count: 3, distance: 300, score: 0.18, weight: 0.05 },
-      park: { count: 1, distance: 350, score: 0.15, weight: 0.10 },
-      beach: { count: 0, distance: null, score: 0, weight: 0.08 },
-      mosque: { count: 2, distance: 200, score: 0.12, weight: 0.04 },
-      police: { count: 1, distance: 600, score: 0.06, weight: 0.03 },
-      bus: { count: 5, distance: 100, score: 0.20, weight: 0.05 }
-    };
-  } else if (isMarina || isPalm) {
-    facilities = {
-      metro: { count: 2, distance: 200, score: 0.35, weight: 0.15 },
-      tram: { count: 2, distance: 150, score: 0.30, weight: 0.10 },
-      mall: { count: 3, distance: 180, score: 0.45, weight: 0.12 },
-      supermarket: { count: 4, distance: 200, score: 0.30, weight: 0.08 },
-      school: { count: 2, distance: 500, score: 0.12, weight: 0.10 },
-      university: { count: 0, distance: null, score: 0, weight: 0.08 },
-      hospital: { count: 1, distance: 600, score: 0.10, weight: 0.08 },
-      clinic: { count: 4, distance: 250, score: 0.20, weight: 0.05 },
-      park: { count: 1, distance: 300, score: 0.15, weight: 0.10 },
-      beach: { count: 2, distance: 100, score: 0.30, weight: 0.08 },
-      mosque: { count: 1, distance: 400, score: 0.08, weight: 0.04 },
-      police: { count: 1, distance: 700, score: 0.05, weight: 0.03 },
-      bus: { count: 3, distance: 150, score: 0.18, weight: 0.05 }
-    };
-  } else if (isDeira) {
-    facilities = {
-      metro: { count: 2, distance: 300, score: 0.25, weight: 0.15 },
-      tram: { count: 0, distance: null, score: 0, weight: 0.10 },
-      mall: { count: 2, distance: 250, score: 0.30, weight: 0.12 },
-      supermarket: { count: 5, distance: 150, score: 0.35, weight: 0.08 },
-      school: { count: 3, distance: 300, score: 0.20, weight: 0.10 },
-      university: { count: 1, distance: 600, score: 0.08, weight: 0.08 },
-      hospital: { count: 2, distance: 200, score: 0.20, weight: 0.08 },
-      clinic: { count: 6, distance: 150, score: 0.25, weight: 0.05 },
-      park: { count: 0, distance: null, score: 0, weight: 0.10 },
-      beach: { count: 0, distance: null, score: 0, weight: 0.08 },
-      mosque: { count: 5, distance: 100, score: 0.20, weight: 0.04 },
-      police: { count: 2, distance: 300, score: 0.10, weight: 0.03 },
-      bus: { count: 8, distance: 80, score: 0.25, weight: 0.05 }
-    };
-  } else if (isBusinessBay) {
-    facilities = {
-      metro: { count: 1, distance: 400, score: 0.15, weight: 0.15 },
-      tram: { count: 0, distance: null, score: 0, weight: 0.10 },
-      mall: { count: 1, distance: 300, score: 0.15, weight: 0.12 },
-      supermarket: { count: 2, distance: 350, score: 0.15, weight: 0.08 },
-      school: { count: 1, distance: 500, score: 0.10, weight: 0.10 },
-      university: { count: 0, distance: null, score: 0, weight: 0.08 },
-      hospital: { count: 1, distance: 450, score: 0.12, weight: 0.08 },
-      clinic: { count: 2, distance: 300, score: 0.15, weight: 0.05 },
-      park: { count: 0, distance: null, score: 0, weight: 0.10 },
-      beach: { count: 0, distance: null, score: 0, weight: 0.08 },
-      mosque: { count: 1, distance: 300, score: 0.08, weight: 0.04 },
-      police: { count: 1, distance: 500, score: 0.06, weight: 0.03 },
-      bus: { count: 2, distance: 200, score: 0.12, weight: 0.05 }
-    };
-  } else {
-    // منطقة عامة - بيانات معقولة
-    facilities = {
-      metro: { count: 1, distance: 500, score: 0.12, weight: 0.15 },
-      tram: { count: 0, distance: null, score: 0, weight: 0.10 },
-      mall: { count: 1, distance: 400, score: 0.15, weight: 0.12 },
-      supermarket: { count: 2, distance: 300, score: 0.20, weight: 0.08 },
-      school: { count: 2, distance: 350, score: 0.18, weight: 0.10 },
-      university: { count: 0, distance: null, score: 0, weight: 0.08 },
-      hospital: { count: 0, distance: null, score: 0, weight: 0.08 },
-      clinic: { count: 1, distance: 400, score: 0.08, weight: 0.05 },
-      park: { count: 1, distance: 300, score: 0.15, weight: 0.10 },
-      beach: { count: 0, distance: null, score: 0, weight: 0.08 },
-      mosque: { count: 2, distance: 200, score: 0.15, weight: 0.04 },
-      police: { count: 0, distance: null, score: 0, weight: 0.03 },
-      bus: { count: 3, distance: 150, score: 0.18, weight: 0.05 }
-    };
-  }
-  
-  let totalScore = 0;
-  Object.values(facilities).forEach(f => totalScore += (f.score || 0));
-  
-  const count = Object.values(facilities).reduce((sum, f) => sum + (f.count || 0), 0);
-  
-  return {
-    facilities,
-    totalScore: Math.min(1, totalScore),
-    count,
-    queriedAt: new Date().toISOString(),
-    lat,
-    lng,
-    radius,
-    source: 'mock'
-  };
-}
-
 // ===== GIS FUNCTIONS =====
 async function getGISData(lat, lng, radius = 500) {
   const cacheKey = `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
@@ -333,11 +220,15 @@ async function getGISData(lat, lng, radius = 500) {
     gisCache.set(cacheKey, { data: result, timestamp: Date.now() });
     return result;
   } catch (error) {
-    console.log(`⚠️ GIS fetch failed: ${error.message}`);
-    // استخدام بيانات وهمية عند فشل OSM
-    const mockData = generateMockGISData(lat, lng, radius);
-    gisCache.set(cacheKey, { data: mockData, timestamp: Date.now() });
-    return mockData;
+    console.log(`❌ GIS fetch failed: ${error.message}`);
+    // Return empty result without mock data
+    return {
+      facilities: {},
+      totalScore: 0,
+      count: 0,
+      error: error.message,
+      source: 'error'
+    };
   }
 }
 
