@@ -1,106 +1,85 @@
-﻿// AQAR OSM Data Fetcher — OpenStreetMap Overpass API
+﻿// AQAR OSM Data Fetcher — Real Data from OpenStreetMap
 const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
-const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
-
-// ===== TYPES OF FACILITIES =====
+// ===== FACILITY TYPES =====
 const FACILITY_TYPES = {
   metro: {
     tags: ['railway=station', 'railway=subway', 'station=subway'],
-    label: '🚇 Metro Station',
-    weight: 0.15,
-    radius: 800
+    label: '🚇 Metro',
+    weight: 0.15
   },
   tram: {
     tags: ['railway=tram_stop', 'railway=tram'],
-    label: '🚊 Tram Stop',
-    weight: 0.10,
-    radius: 500
+    label: '🚊 Tram',
+    weight: 0.10
   },
   mall: {
-    tags: ['shop=mall', 'shop=department_store', 'building=retail'],
+    tags: ['shop=mall', 'shop=department_store'],
     label: '🛍️ Shopping Mall',
-    weight: 0.12,
-    radius: 1000
+    weight: 0.12
   },
   supermarket: {
     tags: ['shop=supermarket', 'shop=grocery'],
     label: '🛒 Supermarket',
-    weight: 0.08,
-    radius: 500
+    weight: 0.08
   },
   school: {
-    tags: ['amenity=school', 'amenity=kindergarten', 'amenity=college'],
+    tags: ['amenity=school', 'amenity=kindergarten'],
     label: '🏫 School',
-    weight: 0.10,
-    radius: 800
+    weight: 0.10
   },
   university: {
     tags: ['amenity=university', 'amenity=college'],
     label: '🎓 University',
-    weight: 0.08,
-    radius: 1000
+    weight: 0.08
   },
   hospital: {
-    tags: ['amenity=hospital', 'amenity=clinic', 'healthcare=hospital'],
+    tags: ['amenity=hospital', 'healthcare=hospital'],
     label: '🏥 Hospital',
-    weight: 0.08,
-    radius: 1000
+    weight: 0.08
   },
   clinic: {
     tags: ['amenity=clinic', 'amenity=doctors', 'healthcare=clinic'],
-    label: '🏥 Clinic',
-    weight: 0.05,
-    radius: 500
+    label: '🩺 Clinic',
+    weight: 0.05
   },
   park: {
-    tags: ['leisure=park', 'leisure=garden', 'leisure=playground'],
+    tags: ['leisure=park', 'leisure=garden'],
     label: '🌳 Park',
-    weight: 0.10,
-    radius: 500
+    weight: 0.10
   },
   beach: {
     tags: ['natural=beach', 'leisure=beach_resort'],
     label: '🏖️ Beach',
-    weight: 0.08,
-    radius: 1000
+    weight: 0.08
   },
   mosque: {
-    tags: ['amenity=mosque', 'amenity=place_of_worship', 'religion=muslim'],
+    tags: ['amenity=mosque', 'place_of_worship=mosque'],
     label: '🕌 Mosque',
-    weight: 0.04,
-    radius: 500
+    weight: 0.04
   },
   police: {
     tags: ['amenity=police'],
     label: '👮 Police Station',
-    weight: 0.03,
-    radius: 1000
+    weight: 0.03
   },
   bus: {
     tags: ['highway=bus_stop', 'amenity=bus_station'],
     label: '🚌 Bus Stop',
-    weight: 0.05,
-    radius: 300
+    weight: 0.05
   }
 };
 
 // ===== CACHE =====
-let cache = {};
-if (fs.existsSync(OSM_CACHE_FILE)) {
-  try { cache = JSON.parse(fs.readFileSync(OSM_CACHE_FILE, 'utf8')); } catch(e) {}
-}
+const gisCache = new Map();
 const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 function getCacheKey(lat, lng, radius) {
-  return `${Math.round(lat * 1000)},${Math.round(lng * 1000)},${radius}`;
+  return `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
 }
 
 function getCached(key) {
-  const entry = cache[key];
+  const entry = gisCache.get(key);
   if (entry && (Date.now() - entry.timestamp) < CACHE_TTL) {
     return entry.data;
   }
@@ -108,48 +87,61 @@ function getCached(key) {
 }
 
 function setCache(key, data) {
-  cache[key] = { data, timestamp: Date.now() };
-  try {
-    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-    fs.writeFileSync(OSM_CACHE_FILE, JSON.stringify(cache, null, 2));
-  } catch(e) {}
+  gisCache.set(key, { data, timestamp: Date.now() });
 }
 
 // ===== OSM QUERY =====
 async function queryOverpass(query) {
+  // استخدام Overpass API مع مهلة أطول
   const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+  
+  console.log(`🌍 Querying Overpass API...`);
+  
   try {
-    const response = await axios.get(url, { timeout: 30000 });
+    const response = await axios.get(url, {
+      timeout: 25000, // 25 ثانية
+      headers: {
+        'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)'
+      }
+    });
+    console.log(`✅ Overpass API responded`);
     return response.data;
   } catch (error) {
-    console.log(`⚠️ OSM query failed: ${error.message}`);
+    console.log(`⚠️ Overpass API error: ${error.message}`);
     return null;
   }
 }
 
+// ===== FETCH FACILITIES =====
 async function fetchFacilities(lat, lng, radius = 500) {
   const cacheKey = getCacheKey(lat, lng, radius);
   const cached = getCached(cacheKey);
+  
   if (cached) {
-    console.log(`✅ OSM: Using cached data for ${lat}, ${lng}`);
+    console.log(`✅ GIS: Using cached data for ${lat}, ${lng}`);
     return cached;
   }
 
   console.log(`🔍 OSM: Fetching facilities around ${lat}, ${lng} (${radius}m)`);
 
-  // Build query: find all facilities within radius
-  const allTags = Object.values(FACILITY_TYPES).flatMap(f => f.tags);
-  const tagQuery = allTags.map(t => `node["${t}"]`).join(';');
-  
+  // بناء استعلام OSM مبسط
+  const tags = [];
+  Object.values(FACILITY_TYPES).forEach(type => {
+    type.tags.forEach(tag => {
+      tags.push(`["${tag}"]`);
+    });
+  });
+
+  // استعلام مبسط للحصول على المرافق
   const query = `
     [out:json][timeout:25];
     (
-      ${tagQuery}
-      (around:${radius},${lat},${lng});
-      way${allTags.map(t => `["${t}"]`).join(';')}
-      (around:${radius},${lat},${lng});
-      relation${allTags.map(t => `["${t}"]`).join(';')}
-      (around:${radius},${lat},${lng});
+      ${Object.values(FACILITY_TYPES).map(type => 
+        type.tags.map(tag => `node["${tag}"](around:${radius},${lat},${lng});`).join('')
+      ).join('')}
+      ${Object.values(FACILITY_TYPES).map(type => 
+        type.tags.map(tag => `way["${tag}"](around:${radius},${lat},${lng});`).join('')
+      ).join('')}
     );
     out body;
     >;
@@ -157,33 +149,38 @@ async function fetchFacilities(lat, lng, radius = 500) {
   `;
 
   const data = await queryOverpass(query);
-  if (!data) {
-    // Return empty result but don't cache failures
-    return { facilities: {}, count: 0 };
+  
+  if (!data || !data.elements) {
+    console.log('⚠️ No data from Overpass API');
+    return {
+      facilities: {},
+      totalScore: 0,
+      count: 0,
+      source: 'empty'
+    };
   }
 
-  // Process results
+  // معالجة النتائج
   const results = {};
-  let totalCount = 0;
-
-  // Initialize all facility types
   Object.keys(FACILITY_TYPES).forEach(key => {
-    results[key] = { count: 0, distance: null, weight: FACILITY_TYPES[key].weight };
+    results[key] = { count: 0, distance: null, score: 0, weight: FACILITY_TYPES[key].weight };
   });
 
-  // Count elements by type
   const elements = data.elements || [];
+  let totalCount = 0;
+
   elements.forEach(el => {
     const tags = el.tags || {};
-    for (const [key, config] of Object.entries(FACILITY_TYPES)) {
-      const matched = config.tags.some(tag => {
+    // التحقق من كل نوع
+    for (const [key, type] of Object.entries(FACILITY_TYPES)) {
+      const matched = type.tags.some(tag => {
         const [k, v] = tag.split('=');
         return tags[k] === v;
       });
       if (matched) {
         results[key].count += 1;
         totalCount += 1;
-        // Estimate distance (simplified: if we have lat/lng)
+        // حساب المسافة التقريبية
         if (el.lat && el.lon) {
           const dist = haversine(lat, lng, el.lat, el.lon);
           if (results[key].distance === null || dist < results[key].distance) {
@@ -195,14 +192,16 @@ async function fetchFacilities(lat, lng, radius = 500) {
     }
   });
 
-  // Calculate score
+  // حساب النقاط لكل نوع
   let totalScore = 0;
   Object.keys(results).forEach(key => {
     const r = results[key];
-    const maxDist = FACILITY_TYPES[key]?.radius || 500;
+    const maxDist = 500;
     if (r.count > 0) {
+      // النقاط تعتمد على القرب والعدد
       const distanceFactor = r.distance !== null ? Math.max(0, 1 - (r.distance / maxDist)) : 0.5;
-      r.score = Math.min(1, r.weight * distanceFactor * Math.min(r.count, 3));
+      const countFactor = Math.min(1, r.count / 3);
+      r.score = Math.min(1, r.weight * distanceFactor * (1 + countFactor * 0.5));
     } else {
       r.score = 0;
     }
@@ -216,9 +215,11 @@ async function fetchFacilities(lat, lng, radius = 500) {
     queriedAt: new Date().toISOString(),
     lat,
     lng,
-    radius
+    radius,
+    source: 'osm'
   };
 
+  // تخزين في الكاش
   setCache(cacheKey, result);
   console.log(`✅ OSM: Found ${totalCount} facilities, score: ${(result.totalScore * 100).toFixed(1)}%`);
 
@@ -227,22 +228,22 @@ async function fetchFacilities(lat, lng, radius = 500) {
 
 // ===== HAVERSINE =====
 function haversine(lat1, lng1, lat2, lng2) {
-  const R = 6371; // Earth radius in km
+  const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLng = (lng2 - lng1) * Math.PI / 180;
   const a = Math.sin(dLat / 2) ** 2 +
     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
     Math.sin(dLng / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000; // meters
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
 }
 
-// ===== GEOCODING (Nominatim) =====
+// ===== GEOCODING =====
 async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 3000,
-      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
+      timeout: 8000,
+      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)' }
     });
     if (response.data && response.data.length > 0) {
       const result = response.data[0];
@@ -265,8 +266,8 @@ async function reverseGeocode(lat, lng) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 5000,
-      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
+      timeout: 8000,
+      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)' }
     });
     if (response.data) {
       return {
@@ -281,16 +282,15 @@ async function reverseGeocode(lat, lng) {
   }
 }
 
-// ===== MAIN EXPORT =====
+// ===== EXPORTS =====
 module.exports = {
   fetchFacilities,
   geocodeAddress,
   reverseGeocode,
-  FACILITY_TYPES,
-  haversine
+  FACILITY_TYPES
 };
 
-// If run directly, test with Dubai Marina
+// اختبار
 if (require.main === module) {
   const dubaiMarina = { lat: 25.0734, lng: 55.1312 };
   fetchFacilities(dubaiMarina.lat, dubaiMarina.lng, 500).then(console.log);
