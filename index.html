@@ -200,11 +200,11 @@
   <div class="brand">
     <div class="tag">AQAR Valuation Intelligence <span class="beta-badge">BETA</span></div>
     <div class="title">Real Estate Valuation Engine</div>
-    <div class="sub">4 Valuation Methods • Smart Market Data • UAE</div>
+    <div class="sub">4 Valuation Methods • 3 Data Layers • UAE</div>
   </div>
 
   <div style="background:rgba(212,146,14,0.08);border:1px solid rgba(212,146,14,0.2);border-radius:10px;padding:12px;margin-bottom:16px;font-size:11px;color:var(--gold)">
-    ⚠️ <b>Beta:</b> Click "Scrape Live Data" first (takes 3-5s), then "Calculate". For best results, enter all available data.
+    ⚠️ <b>Beta:</b> Click "Scrape Live Data" first (takes 3-5s), then "Calculate". Uses DLD + Live Portals + Consultancy layers.
   </div>
 
   <!-- Property Info -->
@@ -433,7 +433,7 @@
 
   <div class="footer-links">
     <a href="/accuracy-dashboard">📊 Accuracy Dashboard</a> — 
-    See how AQAR compares to actual sale prices
+    <a href="/market-intelligence">📈 Market Intelligence</a>
   </div>
 
 </div>
@@ -451,6 +451,32 @@ const UAE_DISTRICTS = {
 };
 
 let scrapedDistrictData = null;
+
+// ===== PORTALS LAYER WEIGHTS =====
+function getPortalWeights(evalLevel, propertyType) {
+  const levelWeights = {
+    project_size:  { dld: 0.90, portals: 0.10 },
+    project:       { dld: 0.85, portals: 0.15 },
+    district_size: { dld: 0.75, portals: 0.25 },
+    district:      { dld: 0.65, portals: 0.35 }
+  };
+  
+  const typeAdjustments = {
+    apartment: { portals: 0 },
+    villa:     { portals: -0.05 },
+    office:    { portals: +0.05 },
+    retail:    { portals: +0.10 },
+    land:      { portals: 0 }
+  };
+  
+  const base = levelWeights.district_size;
+  const adj = typeAdjustments[propertyType] || typeAdjustments.apartment;
+  
+  return {
+    dld: Math.max(0.5, Math.min(0.9, base.dld)),
+    portals: Math.max(0.1, Math.min(0.5, base.portals + adj.portals))
+  };
+}
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -554,7 +580,7 @@ async function scrapeRealData() {
 
   btn.disabled = true;
   btn.innerHTML = '<span class="loading"></span> Analyzing market...';
-  status.innerHTML = '<span style="color:var(--muted)">Fetching comparable sales (3-5s)...</span>';
+  status.innerHTML = '<span style="color:var(--muted)">Fetching comparable sales from 3 sources...</span>';
 
   try {
     const response = await fetch('/.netlify/functions/scrape', {
@@ -585,7 +611,7 @@ async function scrapeRealData() {
     }
     document.getElementById('scrapedComps').innerHTML = compsHTML;
 
-    const srcLabel = data.dataSource === 'algorithmic' ? '🤖 AI-Generated' : '📊 Market Data';
+    const srcLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
     status.innerHTML = `<span class="status-badge success">✅ ${data.count} comparable sales • ${srcLabel}</span>`;
     showToast(`Found ${data.count} comparable sales in ${district}`);
   } catch (err) {
@@ -701,6 +727,13 @@ function salesComparisonApproach(data) {
   
   let value = avgPrice * data.area;
   
+  // ===== PORTALS LAYER BLENDING =====
+  if (data.scrapedData && data.scrapedData.avgPricePerSqm && data.scrapedData.count > 0) {
+    const portalsPrice = data.scrapedData.avgPricePerSqm * data.area;
+    const weights = getPortalWeights('district_size', data.propType);
+    value = Math.round(value * weights.dld + portalsPrice * weights.portals);
+  }
+  
   const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
   value *= conditionFactors[data.condition] || 1.00;
   const age = 2026 - data.yearBuilt;
@@ -748,13 +781,13 @@ function salesComparisonApproach(data) {
 
   value = Math.round(value);
   
-  let details = `Based on avg ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
+  let details = `Based on DLD + Live Portals data: ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
   if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
   if (data.viewType) details += ` View: ${data.viewType}.`;
   details += ` Condition: ${data.condition}, Age: ${age}y.`;
 
   return {
-    method: 'Sales Comparison Approach', value, weight: 0.40,
+    method: 'Sales Comparison (DLD + Portals)', value, weight: 0.40,
     confidence: (data.scrapedData?.count || 0) > 3 ? 'high' : 'medium',
     details, perSqm: avgPrice
   };
@@ -854,14 +887,11 @@ function buildDecisionEngineLink(result, propData) {
   if (propData.avgPriceSqm > 0) params.set('pricePerSqm', propData.avgPriceSqm);
   if (scrapedDistrictData?.capRate) params.set('capRate', scrapedDistrictData.capRate);
   if (scrapedDistrictData?.vacancyRate) params.set('vacancy', scrapedDistrictData.vacancyRate);
-  if (scrapedDistrictData?.marketTrend) params.set('trend', scrapedDistrictData.marketTrend);
   if (propData.annualRent > 0) params.set('rent', propData.annualRent);
-  if (scrapedDistrictData?.districtInfo?.classification) params.set('classification', scrapedDistrictData.districtInfo.classification);
   params.set('source', 'valuation_engine');
   params.set('referrer', 'aqar_valuation');
   return `https://aqar-decision-engine.netlify.app/?${params.toString()}`;
 }
-
 
 function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
