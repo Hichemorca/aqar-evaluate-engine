@@ -117,14 +117,31 @@ function setCache(key, data) {
 
 // ===== OSM QUERY =====
 async function queryOverpass(query) {
-  const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
-  try {
-    const response = await axios.get(url, { timeout: 10000 });
-    return response.data;
-  } catch (error) {
-    console.log(`⚠️ OSM query failed: ${error.message}`);
-    return null;
+  // Try multiple servers for redundancy
+  const servers = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.openstreetmap.ru/api/interpreter'
+  ];
+  
+  for (const server of servers) {
+    try {
+      const url = `${server}?data=${encodeURIComponent(query)}`;
+      console.log(`🌍 Querying: ${server}`);
+      const response = await axios.get(url, { 
+        timeout: 30000,
+        headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
+      });
+      if (response.data && response.data.elements) {
+        console.log(`✅ Success from ${server}`);
+        return response.data;
+      }
+    } catch (error) {
+      console.log(`⚠️ Server ${server} failed: ${error.message}`);
+    }
   }
+  console.log('❌ All Overpass servers failed');
+  return null;
 }
 
 async function fetchFacilities(lat, lng, radius = 500) {
@@ -139,17 +156,18 @@ async function fetchFacilities(lat, lng, radius = 500) {
 
   // Build query: find all facilities within radius
   const allTags = Object.values(FACILITY_TYPES).flatMap(f => f.tags);
-  const tagQuery = allTags.map(t => `node["${t}"]`).join(';');
+  
+  // Build separate queries for nodes and ways
+  const nodeQueries = allTags.map(t => `node["${t}"](around:${radius},${lat},${lng});`).join('');
+  const wayQueries = allTags.map(t => `way["${t}"](around:${radius},${lat},${lng});`).join('');
+  const relationQueries = allTags.map(t => `relation["${t}"](around:${radius},${lat},${lng});`).join('');
   
   const query = `
-    [out:json][timeout:25];
+    [out:json][timeout:30];
     (
-      ${tagQuery}
-      (around:${radius},${lat},${lng});
-      way${allTags.map(t => `["${t}"]`).join(';')}
-      (around:${radius},${lat},${lng});
-      relation${allTags.map(t => `["${t}"]`).join(';')}
-      (around:${radius},${lat},${lng});
+      ${nodeQueries}
+      ${wayQueries}
+      ${relationQueries}
     );
     out body;
     >;
@@ -159,7 +177,7 @@ async function fetchFacilities(lat, lng, radius = 500) {
   const data = await queryOverpass(query);
   if (!data) {
     // Return empty result but don't cache failures
-    return { facilities: {}, count: 0 };
+    return { facilities: {}, count: 0, totalScore: 0, source: 'error', error: 'No data from Overpass' };
   }
 
   // Process results
@@ -168,7 +186,7 @@ async function fetchFacilities(lat, lng, radius = 500) {
 
   // Initialize all facility types
   Object.keys(FACILITY_TYPES).forEach(key => {
-    results[key] = { count: 0, distance: null, weight: FACILITY_TYPES[key].weight };
+    results[key] = { count: 0, distance: null, weight: FACILITY_TYPES[key].weight, score: 0 };
   });
 
   // Count elements by type
@@ -183,7 +201,7 @@ async function fetchFacilities(lat, lng, radius = 500) {
       if (matched) {
         results[key].count += 1;
         totalCount += 1;
-        // Estimate distance (simplified: if we have lat/lng)
+        // Estimate distance
         if (el.lat && el.lon) {
           const dist = haversine(lat, lng, el.lat, el.lon);
           if (results[key].distance === null || dist < results[key].distance) {
@@ -202,7 +220,8 @@ async function fetchFacilities(lat, lng, radius = 500) {
     const maxDist = FACILITY_TYPES[key]?.radius || 500;
     if (r.count > 0) {
       const distanceFactor = r.distance !== null ? Math.max(0, 1 - (r.distance / maxDist)) : 0.5;
-      r.score = Math.min(1, r.weight * distanceFactor * Math.min(r.count, 3));
+      const countFactor = Math.min(1, r.count / 3);
+      r.score = Math.min(1, r.weight * distanceFactor * (1 + countFactor * 0.5));
     } else {
       r.score = 0;
     }
@@ -216,7 +235,8 @@ async function fetchFacilities(lat, lng, radius = 500) {
     queriedAt: new Date().toISOString(),
     lat,
     lng,
-    radius
+    radius,
+    source: 'osm'
   };
 
   setCache(cacheKey, result);
@@ -241,7 +261,7 @@ async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 5000,
+      timeout: 10000,
       headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
     });
     if (response.data && response.data.length > 0) {
@@ -265,7 +285,7 @@ async function reverseGeocode(lat, lng) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 5000,
+      timeout: 10000,
       headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
     });
     if (response.data) {

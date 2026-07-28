@@ -49,13 +49,17 @@ jobs:
       - name: Layer 5 — Fetch generated transactions
         run: node scripts/fetch-transactions.js
         
-      - name: Layer 6 — Market Intelligence Analysis
+      - name: Layer 6 — Fetch OSM GIS Data (NEW)
+        run: node scripts/fetch-osm-data.js
+        continue-on-error: true
+        
+      - name: Layer 7 — Market Intelligence Analysis
         run: node scripts/market-intelligence.js
         
-      - name: Layer 7 — Evaluate all properties
+      - name: Layer 8 — Evaluate all properties
         run: node scripts/evaluate-and-save.js
         
-      - name: Layer 8 — Train ML model
+      - name: Layer 9 — Train ML model
         run: python scripts/train-model.py
         continue-on-error: true
         
@@ -70,6 +74,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "📊 Auto-update all data layers + Market Intelligence + ML [skip ci]"
+            git commit -m "📊 Auto-update all data layers + OSM GIS + Market Intelligence + ML [skip ci]"
             git push origin main
           fi

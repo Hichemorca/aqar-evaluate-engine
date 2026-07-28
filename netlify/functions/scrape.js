@@ -1,7 +1,8 @@
 // AQAR Valuation Engine — Live Scraping with ScrapingBee + GIS Integration
 const axios = require('axios');
 const path = require('path');
-const { fetchFacilities, geocodeAddress, reverseGeocode, FACILITY_TYPES } = require(path.join(__dirname, '../../scripts/fetch-osm'));
+const fs = require('fs');
+const { geocodeAddress, reverseGeocode, FACILITY_TYPES } = require(path.join(__dirname, '../../scripts/fetch-osm'));
 
 const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_KEY || '';
 const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
@@ -14,7 +15,129 @@ const CACHE_TTL = 24 * 60 * 60 * 1000;
 const gisCache = new Map();
 const GIS_CACHE_TTL = 24 * 60 * 60 * 1000;
 
-// UAE Market Prices — fallback if scraping fails
+// OSM Cache file path
+const OSM_CACHE_PATH = path.join(__dirname, '../../data/osm-cache.json');
+let osmCache = null;
+
+// ===== LOAD OSM CACHE =====
+function loadOSMCache() {
+  if (osmCache) return osmCache;
+  try {
+    if (fs.existsSync(OSM_CACHE_PATH)) {
+      const data = fs.readFileSync(OSM_CACHE_PATH, 'utf8');
+      osmCache = JSON.parse(data);
+      console.log(`✅ Loaded OSM cache: ${Object.keys(osmCache.data || {}).length} districts`);
+      return osmCache;
+    }
+  } catch (error) {
+    console.log(`⚠️ Could not load OSM cache: ${error.message}`);
+  }
+  return null;
+}
+
+// ===== HAVERSINE =====
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
+}
+
+// ===== GIS FUNCTIONS (Reading from cached file) =====
+async function getGISData(lat, lng, radius = 500) {
+  const cacheKey = `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
+  const cached = gisCache.get(cacheKey);
+  if (cached && (Date.now() - cached.timestamp) < GIS_CACHE_TTL) {
+    console.log('✅ GIS: Using cached data');
+    return cached.data;
+  }
+
+  const cache = loadOSMCache();
+  if (!cache || !cache.data) {
+    console.log('⚠️ No OSM cache available');
+    return {
+      facilities: {},
+      totalScore: 0,
+      count: 0,
+      source: 'no-cache',
+      error: 'OSM data not available'
+    };
+  }
+
+  // Find closest district
+  let closestDistrict = null;
+  let closestDistance = Infinity;
+
+  for (const [district, data] of Object.entries(cache.data)) {
+    const dist = haversine(lat, lng, data.lat, data.lng);
+    if (dist < closestDistance) {
+      closestDistance = dist;
+      closestDistrict = district;
+    }
+  }
+
+  if (closestDistrict && closestDistance < 3000) {
+    console.log(`📍 Using cached data for ${closestDistrict} (${Math.round(closestDistance)}m away)`);
+    const districtData = cache.data[closestDistrict];
+    const result = {
+      ...districtData,
+      lat,
+      lng,
+      radius,
+      source: 'cached',
+      closestDistrict,
+      closestDistance: Math.round(closestDistance)
+    };
+    gisCache.set(cacheKey, { data: result, timestamp: Date.now() });
+    return result;
+  }
+
+  console.log('⚠️ No nearby district found in cache');
+  return {
+    facilities: {},
+    totalScore: 0,
+    count: 0,
+    source: 'no-match',
+    error: 'No matching district found in cache'
+  };
+}
+
+async function getGISFromAddress(address) {
+  const geocodeResult = await geocodeAddress(address);
+  if (!geocodeResult) return null;
+  
+  const gisData = await getGISData(geocodeResult.lat, geocodeResult.lng);
+  return {
+    ...geocodeResult,
+    ...gisData
+  };
+}
+
+function getProximityMultiplier(gisData) {
+  if (!gisData || !gisData.totalScore) return 1;
+  const multiplier = 1 + (gisData.totalScore * 0.5);
+  return Math.min(1.5, Math.max(1.0, multiplier));
+}
+
+function getFacilitySummary(gisData) {
+  if (!gisData || !gisData.facilities) return 'No GIS data available';
+  
+  const summary = [];
+  for (const [key, data] of Object.entries(gisData.facilities)) {
+    if (data.count > 0) {
+      const label = FACILITY_TYPES[key]?.label || key;
+      const dist = data.distance !== null ? `${data.distance}m` : 'nearby';
+      summary.push(`${label}: ${data.count} (${dist})`);
+    }
+  }
+  
+  return summary.length > 0 ? summary.join(' • ') : 'No nearby facilities found';
+}
+
+// ===== UAE MARKET PRICES =====
 const UAE_MARKET = {
   dubai: {
     'Dubai Marina': { apt: 11850, villa: 14200, townhouse: 12500, office: 10500, retail: 13500 },
@@ -205,66 +328,6 @@ function generateSalesFallback(city, district, propertyType, count) {
   return sales;
 }
 
-// ===== GIS FUNCTIONS =====
-async function getGISData(lat, lng, radius = 500) {
-  const cacheKey = `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
-  const cached = gisCache.get(cacheKey);
-  if (cached && (Date.now() - cached.timestamp) < GIS_CACHE_TTL) {
-    console.log('✅ GIS: Using cached data');
-    return cached.data;
-  }
-
-  try {
-    console.log(`🌍 Fetching real OSM data for ${lat}, ${lng} with radius ${radius}m`);
-    const result = await fetchFacilities(lat, lng, radius);
-    gisCache.set(cacheKey, { data: result, timestamp: Date.now() });
-    return result;
-  } catch (error) {
-    console.log(`❌ GIS fetch failed: ${error.message}`);
-    // Return empty result without mock data
-    return {
-      facilities: {},
-      totalScore: 0,
-      count: 0,
-      error: error.message,
-      source: 'error'
-    };
-  }
-}
-
-async function getGISFromAddress(address) {
-  const geocodeResult = await geocodeAddress(address);
-  if (!geocodeResult) return null;
-  
-  const gisData = await getGISData(geocodeResult.lat, geocodeResult.lng);
-  return {
-    ...geocodeResult,
-    ...gisData
-  };
-}
-
-function getProximityMultiplier(gisData) {
-  if (!gisData || !gisData.totalScore) return 1;
-  
-  const multiplier = 1 + (gisData.totalScore * 0.5);
-  return Math.min(1.5, Math.max(1.0, multiplier));
-}
-
-function getFacilitySummary(gisData) {
-  if (!gisData || !gisData.facilities) return 'No GIS data available';
-  
-  const summary = [];
-  for (const [key, data] of Object.entries(gisData.facilities)) {
-    if (data.count > 0) {
-      const label = FACILITY_TYPES[key]?.label || key;
-      const dist = data.distance !== null ? `${data.distance}m` : 'nearby';
-      summary.push(`${label}: ${data.count} (${dist})`);
-    }
-  }
-  
-  return summary.length > 0 ? summary.join(' • ') : 'No nearby facilities found';
-}
-
 // ===== MAIN EXPORT =====
 exports.handler = async (event) => {
   const headers = {
@@ -285,7 +348,6 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body);
     const { city, district, propertyType, lat, lng, address, radius, reverse, gisOnly } = body;
 
-    // ===== GIS-ONLY MODE =====
     if (gisOnly) {
       let gisResult = null;
       
@@ -320,7 +382,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // ===== REVERSE GEOCODING =====
     if (reverse && lat && lng) {
       const result = await reverseGeocode(parseFloat(lat), parseFloat(lng));
       return {
@@ -330,7 +391,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // ===== MAIN SCRAPING LOGIC =====
     if (!city || !district) {
       return {
         statusCode: 400,

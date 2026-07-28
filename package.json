@@ -7,7 +7,7 @@
     "build": "echo 'No build step required'",
     "fetch": "node scripts/fetch-transactions.js",
     "evaluate": "node scripts/evaluate-and-save.js",
-    "fetch-osm": "node scripts/fetch-osm.js"
+    "fetch-osm": "node scripts/fetch-osm-data.js"
   },
   "dependencies": {
     "axios": "^1.7.0",
