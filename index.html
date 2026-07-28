@@ -701,13 +701,6 @@ function salesComparisonApproach(data) {
   
   let value = avgPrice * data.area;
   
-  // ===== PORTALS LAYER BLENDING =====
-  if (data.scrapedData && data.scrapedData.avgPricePerSqm && data.scrapedData.count > 0) {
-    const portalsPrice = data.scrapedData.avgPricePerSqm * data.area;
-    const weights = getPortalWeights('district_size', data.propType);
-    value = Math.round(value * weights.dld + portalsPrice * weights.portals);
-  }
-  
   const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
   value *= conditionFactors[data.condition] || 1.00;
   const age = 2026 - data.yearBuilt;
@@ -763,7 +756,7 @@ let details = `Based on ${comparableCount} comparable sales (${confidenceLevel} 
   details += ` Condition: ${data.condition}, Age: ${age}y.`;
 
   return {
-    method: 'Sales Comparison (DLD + Portals)', value, weight: 0.40,
+    method: 'Sales Comparison Approach', value, weight: 0.40,
     confidence: (data.scrapedData?.count || 0) > 3 ? 'high' : 'medium',
     details, perSqm: avgPrice
   };
@@ -872,6 +865,16 @@ function buildDecisionEngineLink(result, propData) {
 function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
+  const confidenceLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
+  const explainHTML = `
+  <div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8">
+    <b>📋 Why this valuation?</b><br>
+    • Based on <b>${scrapedDistrictData?.count || 'multiple'}</b> comparable sales in ${propData.district}<br>
+    • Data confidence: <b>${confidenceLevel}</b><br>
+    • Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>
+    • Valuation range reflects natural market variation
+  </div>
+`;
   let vHTML = '';
   valuations.forEach(v => {
     const confColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
