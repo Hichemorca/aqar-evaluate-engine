@@ -14,7 +14,7 @@ const CACHE_TTL = 24 * 60 * 60 * 1000;
 const gisCache = new Map();
 const GIS_CACHE_TTL = 24 * 60 * 60 * 1000;
 
-// OSM Cache file path
+// OSM Cache file path - updated to read from functions folder
 const OSM_CACHE_PATH = path.join(__dirname, 'osm-cache.json');
 let osmCache = null;
 
@@ -27,6 +27,8 @@ function loadOSMCache() {
       osmCache = JSON.parse(data);
       console.log(`✅ Loaded OSM cache: ${Object.keys(osmCache.data || {}).length} districts`);
       return osmCache;
+    } else {
+      console.log(`❌ OSM cache file not found at: ${OSM_CACHE_PATH}`);
     }
   } catch (error) {
     console.log(`⚠️ Could not load OSM cache: ${error.message}`);
@@ -105,14 +107,47 @@ async function getGISData(lat, lng, radius = 500) {
   };
 }
 
+// ===== IMPROVED GIS FROM ADDRESS =====
 async function getGISFromAddress(address) {
-  // تحسين مطابقة العناوين
   const cache = loadOSMCache();
-  if (!cache || !cache.data) return null;
+  if (!cache || !cache.data) {
+    console.log('⚠️ No OSM cache available');
+    return null;
+  }
 
   const addressLower = address.toLowerCase().trim();
-  
-  // قائمة المرادفات للمناطق
+  console.log(`🔍 Searching for: "${addressLower}" in ${Object.keys(cache.data).length} districts`);
+
+  // ===== 1. EXACT MATCH =====
+  for (const [district, data] of Object.entries(cache.data)) {
+    if (district.toLowerCase() === addressLower) {
+      console.log(`✅ Exact match found: ${district}`);
+      return { ...data, district, displayName: district, source: 'exact' };
+    }
+  }
+
+  // ===== 2. PARTIAL MATCH =====
+  let bestMatch = null;
+  let bestScore = 0;
+
+  for (const [district, data] of Object.entries(cache.data)) {
+    const districtLower = district.toLowerCase();
+    // إذا كان الاسم يحتوي على المنطقة أو العكس
+    if (addressLower.includes(districtLower) || districtLower.includes(addressLower)) {
+      const score = Math.max(districtLower.length, addressLower.length);
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = { ...data, district, displayName: district, source: 'partial' };
+      }
+    }
+  }
+
+  if (bestMatch) {
+    console.log(`✅ Partial match found: ${bestMatch.district} (score: ${bestScore})`);
+    return bestMatch;
+  }
+
+  // ===== 3. SYNONYMS =====
   const synonyms = {
     'dubai marina': 'Dubai Marina',
     'marina': 'Dubai Marina',
@@ -147,54 +182,24 @@ async function getGISFromAddress(address) {
     'international city': 'International City',
     'nahda': 'Al Nahda',
     'al nahda': 'Al Nahda',
-    'emaaar beachfront': 'Emaar Beachfront',
     'creek harbour': 'Dubai Creek Harbour',
     'dubai creek': 'Dubai Creek Harbour'
   };
 
-  // البحث عن تطابق مباشر
-  let bestMatch = null;
-  let bestScore = 0;
-
-  for (const [district, data] of Object.entries(cache.data)) {
-    const districtLower = district.toLowerCase();
-    // تطابق تام أو جزئي
-    if (addressLower.includes(districtLower) || districtLower.includes(addressLower)) {
-      const score = Math.max(districtLower.length, addressLower.length);
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = { ...data, district };
+  for (const [synonym, district] of Object.entries(synonyms)) {
+    if (addressLower.includes(synonym)) {
+      const data = cache.data[district];
+      if (data) {
+        console.log(`✅ Synonym match: "${synonym}" → "${district}"`);
+        return { ...data, district, displayName: district, source: 'synonym' };
       }
     }
   }
 
-  // إذا لم يتم العثور على تطابق، جرب المرادفات
-  if (!bestMatch) {
-    for (const [synonym, district] of Object.entries(synonyms)) {
-      if (addressLower.includes(synonym)) {
-        const data = cache.data[district];
-        if (data) {
-          bestMatch = { ...data, district };
-          console.log(`📍 Matched synonym "${synonym}" to district "${district}"`);
-          break;
-        }
-      }
-    }
-  }
-
-  if (bestMatch) {
-    console.log(`📍 Matched address to district: ${bestMatch.district}`);
-    return {
-      ...bestMatch,
-      displayName: bestMatch.district,
-      source: 'cached'
-    };
-  }
-
-  // إذا لم يتم العثور على تطابق، استخدم المنطقة الأولى كتخمين
+  // ===== 4. FALLBACK: Use first district =====
   const firstDistrict = Object.keys(cache.data)[0];
   if (firstDistrict) {
-    console.log(`⚠️ No exact match, using first district: ${firstDistrict}`);
+    console.log(`⚠️ No match found, using fallback: ${firstDistrict}`);
     const data = cache.data[firstDistrict];
     return {
       ...data,
@@ -204,6 +209,7 @@ async function getGISFromAddress(address) {
     };
   }
 
+  console.log('❌ No match found at all');
   return null;
 }
 
