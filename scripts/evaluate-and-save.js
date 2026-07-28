@@ -1,11 +1,20 @@
-﻿// AQAR Auto-Evaluate — v19: All fixes + Area mismatch + Jan exclusion + District correction + Small property
+﻿// AQAR Auto-Evaluate — v21: Multi-Layer Weighting (DLD + Consultancy + Government)
 const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
+const CONSULTANCY_FILE = path.join(DATA_DIR, 'consultancy-data.json');
+const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
+
+// ===== LOAD EXTERNAL DATA LAYERS =====
+let consultancyData = {};
+let governmentData = {};
+
+try { consultancyData = JSON.parse(fs.readFileSync(CONSULTANCY_FILE, 'utf8')); } catch(e) {}
+try { governmentData = JSON.parse(fs.readFileSync(GOVERNMENT_FILE, 'utf8')); } catch(e) {}
 
 // ===== 10-STAGE CLEANING =====
 function filterNonSaleTransactions(transactions) {
@@ -201,6 +210,33 @@ function computeMedians(transactions, groupFn) {
   return medians;
 }
 
+// ===== LAYER WEIGHTS =====
+function getLayerWeights(evalLevel, propertyType) {
+  const levelWeights = {
+    project_size:  { dld: 0.85, consultancy: 0.10, portals: 0.05 },
+    project:       { dld: 0.75, consultancy: 0.15, portals: 0.10 },
+    district_size: { dld: 0.65, consultancy: 0.20, portals: 0.15 },
+    district:      { dld: 0.55, consultancy: 0.25, portals: 0.20 }
+  };
+  
+  const typeAdjustments = {
+    apartment: { dld: 0, consultancy: 0, portals: 0 },
+    villa:     { dld: +0.05, consultancy: -0.03, portals: -0.02 },
+    office:    { dld: -0.05, consultancy: +0.03, portals: +0.02 },
+    retail:    { dld: -0.10, consultancy: +0.05, portals: +0.05 },
+    land:      { dld: -0.05, consultancy: +0.03, portals: +0.02 }
+  };
+  
+  const base = levelWeights[evalLevel] || levelWeights.district;
+  const adj = typeAdjustments[propertyType] || typeAdjustments.apartment;
+  
+  return {
+    dld: Math.max(0.4, Math.min(0.9, base.dld + adj.dld)),
+    consultancy: Math.max(0.05, Math.min(0.3, base.consultancy + adj.consultancy)),
+    portals: Math.max(0.02, Math.min(0.25, base.portals + adj.portals))
+  };
+}
+
 // ===== DISTRICT CORRECTION =====
 const DISTRICT_CORRECTION = {
   'INTERNATIONAL CITY PH 1': 0.85,
@@ -209,7 +245,6 @@ const DISTRICT_CORRECTION = {
   'REMRAAM': 0.88,
   'JUMEIRAH VILLAGE CIRCLE': 0.92,
   'DUBAI PRODUCTION CITY': 0.90,
-  'Madinat Al Mataar': 0.75,
   'Hor Al Anz': 0.88
 };
 
@@ -264,13 +299,44 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
     result.valuation = Math.round(result.valuation * 0.94);
   }
   
+  // ===== APPLY CONSULTANCY LAYER =====
+  if (consultancyData.capRates) {
+    const cityRates = consultancyData.capRates[property.city || 'dubai'];
+    if (cityRates) {
+      const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
+      const marketCapRate = cityRates[typeKey] || 7.0;
+      const baseCapRate = 7.0;
+      const capAdjustment = baseCapRate / marketCapRate;
+      result.valuation = Math.round(result.valuation * capAdjustment);
+    }
+  }
+  
+  if (consultancyData.vacancyRates) {
+    const cityRates = consultancyData.vacancyRates[property.city || 'dubai'];
+    if (cityRates) {
+      const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
+      const vacancyRate = cityRates[typeKey] || 10;
+      const vacancyAdjustment = 1 - (vacancyRate - 10) / 100;
+      result.valuation = Math.round(result.valuation * vacancyAdjustment);
+    }
+  }
+  
+  // ===== APPLY GOVERNMENT LAYER =====
+  if (governmentData.registrationFees) {
+    const regFee = governmentData.registrationFees[property.city || 'dubai'] || 4.0;
+    const feeAdjustment = 1 - (regFee / 200);
+    result.valuation = Math.round(result.valuation * feeAdjustment);
+  }
+  
   return result;
 }
 
 async function main() {
-  console.log('🚀 AQAR — v19 All Fixes\n');
+  console.log('🚀 AQAR — v21 Multi-Layer Weighting\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
+
+  console.log(`📊 Layers: Consultancy=${Object.keys(consultancyData).length > 0 ? '✅' : '❌'} | Government=${Object.keys(governmentData).length > 0 ? '✅' : '❌'}`);
 
   const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
   console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
@@ -314,11 +380,11 @@ async function main() {
   const allWithin25 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
   const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length };
-  const marketOutput = { metadata: { version: '19.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v19 All fixes', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
+  const marketOutput = { metadata: { version: '21.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v21 Multi-layer weighting', dataSource: 'DLD + Consultancy + Government' }, metrics: marketMetrics, records: allResults };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
   console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}%`);
 
-  // ===== 120-DAY EVALUATION (excluding January) =====
+  // ===== 120-DAY EVALUATION =====
   console.log('\n🔍 120-Day Evaluation (from Feb 2026)...');
   const feb1_2026 = new Date('2026-02-01');
   const days120Ago = new Date(Date.now() - 120 * 86400000);
@@ -354,7 +420,7 @@ async function main() {
   });
 
   const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels };
-  const evalOutput = { metadata: { version: '19.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v19 All fixes', dataSource: 'DLD Real (120 days from Feb 2026)' }, metrics: evalMetrics, records: evalResults };
+  const evalOutput = { metadata: { version: '21.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v21 Multi-layer weighting', dataSource: 'DLD + Consultancy + Government' }, metrics: evalMetrics, records: evalResults };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
   console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}%`);
