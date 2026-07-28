@@ -1,4 +1,4 @@
-﻿// AQAR Auto-Evaluate — v20: Apartment + Villa Only
+﻿// AQAR Auto-Evaluate — v19: All fixes + Area mismatch + Jan exclusion + District correction + Small property
 const fs = require('fs');
 const path = require('path');
 
@@ -114,13 +114,6 @@ function filterUltraLuxury(transactions) {
   return filtered;
 }
 
-function filterPropertyTypes(transactions) {
-  const before = transactions.length;
-  const filtered = transactions.filter(t => ['apartment', 'villa', 'townhouse'].includes(t.propertyType));
-  console.log(`🧹 S8.5 Apartment+Villa Only: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
-  return filtered;
-}
-
 function validateGroupCounts(transactions) {
   const before = transactions.length;
   const groups = {};
@@ -146,7 +139,6 @@ function applyAllFilters(transactions) {
   data = filterReadyOnly(data);
   data = filterDuplicates(data);
   data = filterUltraLuxury(data);
-  data = filterPropertyTypes(data);
   data = validateGroupCounts(data);
   console.log('='.repeat(50));
   console.log(`📊 FINAL: ${data.length.toLocaleString()} clean\n`);
@@ -217,6 +209,7 @@ const DISTRICT_CORRECTION = {
   'REMRAAM': 0.88,
   'JUMEIRAH VILLAGE CIRCLE': 0.92,
   'DUBAI PRODUCTION CITY': 0.90,
+  'Madinat Al Mataar': 0.75,
   'Hor Al Anz': 0.88
 };
 
@@ -261,10 +254,12 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   
   if (!result) return null;
   
+  // Apply district correction
   if (DISTRICT_CORRECTION[property.district]) {
     result.valuation = Math.round(result.valuation * DISTRICT_CORRECTION[property.district]);
   }
   
+  // Small apartment correction
   if (property.area < 80 && property.propertyType === 'apartment') {
     result.valuation = Math.round(result.valuation * 0.94);
   }
@@ -273,7 +268,7 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
 }
 
 async function main() {
-  console.log('🚀 AQAR — v20 Apartment+Villa Only\n');
+  console.log('🚀 AQAR — v19 All Fixes\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
@@ -319,11 +314,11 @@ async function main() {
   const allWithin25 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
   const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length };
-  const marketOutput = { metadata: { version: '20.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v20 Apartment+Villa only', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
+  const marketOutput = { metadata: { version: '19.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v19 All fixes', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
   console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}%`);
 
-  // ===== 120-DAY EVALUATION =====
+  // ===== 120-DAY EVALUATION (excluding January) =====
   console.log('\n🔍 120-Day Evaluation (from Feb 2026)...');
   const feb1_2026 = new Date('2026-02-01');
   const days120Ago = new Date(Date.now() - 120 * 86400000);
@@ -359,7 +354,7 @@ async function main() {
   });
 
   const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels };
-  const evalOutput = { metadata: { version: '20.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v20 Apartment+Villa only', dataSource: 'DLD Real (120 days from Feb 2026)' }, metrics: evalMetrics, records: evalResults };
+  const evalOutput = { metadata: { version: '19.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v19 All fixes', dataSource: 'DLD Real (120 days from Feb 2026)' }, metrics: evalMetrics, records: evalResults };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
   console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}%`);
