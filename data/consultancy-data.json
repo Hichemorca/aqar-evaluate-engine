@@ -1,138 +1,58 @@
 {
-  "lastUpdated": "2026-07-23",
-  "sources": [
-    "JLL MENA",
-    "CBRE Middle East",
-    "Knight Frank UAE",
-    "Savills"
-  ],
-  "capRates": {
-    "dubai": {
-      "apartment": 7.2,
-      "villa": 6.5,
-      "office": 7.8,
-      "retail": 8.2,
-      "warehouse": 8.5
-    },
-    "abu-dhabi": {
-      "apartment": 7.5,
-      "villa": 7,
-      "office": 8,
-      "retail": 8.5,
-      "warehouse": 9
-    },
-    "sharjah": {
-      "apartment": 8,
-      "villa": 7.5,
-      "office": 8.5,
-      "retail": 9,
-      "warehouse": 9.5
-    },
-    "ajman": {
-      "apartment": 8.5,
-      "villa": 8,
-      "office": 9,
-      "retail": 9.5,
-      "warehouse": 10
-    },
-    "ras-al-khaimah": {
-      "apartment": 8,
-      "villa": 7.5,
-      "office": 8.5,
-      "retail": 9,
-      "warehouse": 9.5
-    },
-    "fujairah": {
-      "apartment": 8.5,
-      "villa": 8,
-      "office": 9,
-      "retail": 9.5,
-      "warehouse": 10
-    },
-    "umm-al-quwain": {
-      "apartment": 9,
-      "villa": 8.5,
-      "office": 9.5,
-      "retail": 10,
-      "warehouse": 10.5
-    }
+  "lastUpdated": "2026-07-28",
+  "sources": ["JLL MENA", "CBRE Middle East", "Knight Frank UAE", "Savills"],
+  "capRatesByDistrict": {
+    "Dubai Marina": { "apartment": 6.5, "villa": 6.0, "office": 7.0, "retail": 7.5 },
+    "Palm Jumeirah": { "apartment": 5.5, "villa": 5.0, "office": 6.5, "retail": 7.0 },
+    "Downtown Dubai": { "apartment": 6.0, "villa": 5.5, "office": 6.5, "retail": 7.0 },
+    "Business Bay": { "apartment": 7.0, "villa": 6.5, "office": 7.5, "retail": 8.0 },
+    "Jumeirah Village Circle": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "Jumeirah Lake Towers": { "apartment": 7.5, "villa": 7.0, "office": 8.0, "retail": 8.5 },
+    "Dubai Hills Estate": { "apartment": 7.0, "villa": 6.5, "office": 7.5, "retail": 8.0 },
+    "Arabian Ranches": { "apartment": 7.5, "villa": 7.0, "office": 8.0, "retail": 8.5 },
+    "Emirates Hills": { "apartment": 5.5, "villa": 5.0, "office": 6.0, "retail": 6.5 },
+    "Emaar Beachfront": { "apartment": 5.5, "villa": 5.0, "office": 6.0, "retail": 6.5 },
+    "Dubai Creek Harbour": { "apartment": 6.5, "villa": 6.0, "office": 7.0, "retail": 7.5 },
+    "Al Barsha": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "The Springs": { "apartment": 7.5, "villa": 7.0, "office": 8.0, "retail": 8.5 },
+    "The Meadows": { "apartment": 7.0, "villa": 6.5, "office": 7.5, "retail": 8.0 },
+    "Deira": { "apartment": 9.0, "villa": 8.5, "office": 9.5, "retail": 10.0 },
+    "Bur Dubai": { "apartment": 8.5, "villa": 8.0, "office": 9.0, "retail": 9.5 },
+    "Damac Hills": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "Mirdif": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "Al Furjan": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "Discovery Gardens": { "apartment": 8.5, "villa": 8.0, "office": 9.0, "retail": 9.5 },
+    "Motor City": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "Dubai Sports City": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "Dubai Silicon Oasis": { "apartment": 8.0, "villa": 7.5, "office": 8.5, "retail": 9.0 },
+    "International City": { "apartment": 9.5, "villa": 9.0, "office": 10.0, "retail": 10.5 },
+    "Al Nahda": { "apartment": 8.5, "villa": 8.0, "office": 9.0, "retail": 9.5 },
+    "default": { "apartment": 7.2, "villa": 6.5, "townhouse": 7.0, "office": 7.8, "retail": 8.2, "warehouse": 8.5, "land": 6.0 }
   },
-  "vacancyRates": {
-    "dubai": {
-      "apartment": 10,
-      "villa": 6,
-      "office": 15,
-      "retail": 12,
-      "warehouse": 10
-    },
-    "abu-dhabi": {
-      "apartment": 12,
-      "villa": 8,
-      "office": 18,
-      "retail": 14,
-      "warehouse": 12
-    },
-    "sharjah": {
-      "apartment": 14,
-      "villa": 10,
-      "office": 20,
-      "retail": 16,
-      "warehouse": 14
-    },
-    "ajman": {
-      "apartment": 18,
-      "villa": 14,
-      "office": 25,
-      "retail": 20,
-      "warehouse": 18
-    },
-    "ras-al-khaimah": {
-      "apartment": 15,
-      "villa": 11,
-      "office": 22,
-      "retail": 17,
-      "warehouse": 15
-    },
-    "fujairah": {
-      "apartment": 16,
-      "villa": 12,
-      "office": 23,
-      "retail": 18,
-      "warehouse": 16
-    },
-    "umm-al-quwain": {
-      "apartment": 20,
-      "villa": 16,
-      "office": 28,
-      "retail": 22,
-      "warehouse": 20
-    }
+  "vacancyRatesByDistrict": {
+    "Dubai Marina": { "apartment": 8, "villa": 5, "office": 12, "retail": 8 },
+    "Palm Jumeirah": { "apartment": 6, "villa": 4, "office": 15, "retail": 6 },
+    "Downtown Dubai": { "apartment": 7, "villa": 5, "office": 10, "retail": 5 },
+    "Business Bay": { "apartment": 10, "villa": 8, "office": 15, "retail": 10 },
+    "Jumeirah Village Circle": { "apartment": 12, "villa": 8, "office": 18, "retail": 12 },
+    "International City": { "apartment": 18, "villa": 15, "office": 22, "retail": 18 },
+    "Deira": { "apartment": 15, "villa": 12, "office": 20, "retail": 15 },
+    "Bur Dubai": { "apartment": 12, "villa": 10, "office": 18, "retail": 12 },
+    "default": { "apartment": 10, "villa": 6, "townhouse": 7, "office": 15, "retail": 12, "warehouse": 10, "land": 5 }
   },
   "trends": {
     "dubai": "stable",
     "abu-dhabi": "stable",
-    "sharjah": "rising",
-    "ajman": "stable",
-    "ras-al-khaimah": "rising",
-    "fujairah": "stable",
-    "umm-al-quwain": "stable"
+    "sharjah": "rising"
   },
   "rentalGrowth": {
     "dubai": 3.5,
     "abu-dhabi": 2.8,
-    "sharjah": 4.2,
-    "ajman": 2,
-    "ras-al-khaimah": 3.8,
-    "fujairah": 2.5,
-    "umm-al-quwain": 1.5
+    "sharjah": 4.2
   },
   "capitalGrowth": {
-    "dubai": 4,
+    "dubai": 4.0,
     "abu-dhabi": 3.2,
-    "sharjah": 3.5,
-    "ajman": 2,
-    "ras-al-khaimah": 3,
-    "fujairah": 2.5,
-    "umm-al-quwain": 1.5
+    "sharjah": 3.5
   }
 }

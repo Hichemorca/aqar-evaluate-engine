@@ -299,27 +299,29 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
     result.valuation = Math.round(result.valuation * 0.94);
   }
   
-  // ===== APPLY CONSULTANCY LAYER =====
-  if (consultancyData.capRates) {
-    const cityRates = consultancyData.capRates[property.city || 'dubai'];
-    if (cityRates) {
-      const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
-      const marketCapRate = cityRates[typeKey] || 7.0;
-      const baseCapRate = 7.0;
-      const capAdjustment = baseCapRate / marketCapRate;
-      result.valuation = Math.round(result.valuation * capAdjustment);
-    }
+  // ===== APPLY CONSULTANCY LAYER (by district) =====
+if (consultancyData.capRatesByDistrict) {
+  const districtRates = consultancyData.capRatesByDistrict[property.district] || 
+                        consultancyData.capRatesByDistrict['default'];
+  if (districtRates) {
+    const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
+    const marketCapRate = districtRates[typeKey] || districtRates['apartment'] || 7.0;
+    const baseCapRate = 7.0;
+    const capAdjustment = baseCapRate / marketCapRate;
+    result.valuation = Math.round(result.valuation * capAdjustment);
   }
-  
-  if (consultancyData.vacancyRates) {
-    const cityRates = consultancyData.vacancyRates[property.city || 'dubai'];
-    if (cityRates) {
-      const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
-      const vacancyRate = cityRates[typeKey] || 10;
-      const vacancyAdjustment = 1 - (vacancyRate - 10) / 100;
-      result.valuation = Math.round(result.valuation * vacancyAdjustment);
-    }
+}
+
+if (consultancyData.vacancyRatesByDistrict) {
+  const districtRates = consultancyData.vacancyRatesByDistrict[property.district] || 
+                        consultancyData.vacancyRatesByDistrict['default'];
+  if (districtRates) {
+    const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
+    const vacancyRate = districtRates[typeKey] || districtRates['apartment'] || 10;
+    const vacancyAdjustment = 1 - (vacancyRate - 10) / 100;
+    result.valuation = Math.round(result.valuation * vacancyAdjustment);
   }
+}
   
   // ===== APPLY GOVERNMENT LAYER =====
   if (governmentData.registrationFees) {
