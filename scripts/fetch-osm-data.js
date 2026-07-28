@@ -1,4 +1,5 @@
 ﻿// AQAR OSM Data Fetcher — Pre-fetch all Dubai districts via GitHub Actions
+// Optimized: Smaller queries, better error handling, retry logic
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -35,21 +36,16 @@ const DUBAI_DISTRICTS = {
   'Dubai Creek Harbour': { lat: 25.2200, lng: 55.3300 }
 };
 
-// ===== FACILITY TYPES =====
+// ===== FACILITY TYPES (simplified) =====
 const FACILITY_TYPES = {
-  metro: { tags: ['railway=station', 'railway=subway'], label: '🚇 Metro', weight: 0.15 },
-  tram: { tags: ['railway=tram_stop'], label: '🚊 Tram', weight: 0.10 },
-  mall: { tags: ['shop=mall', 'shop=department_store'], label: '🛍️ Shopping Mall', weight: 0.12 },
-  supermarket: { tags: ['shop=supermarket', 'shop=grocery'], label: '🛒 Supermarket', weight: 0.08 },
-  school: { tags: ['amenity=school', 'amenity=kindergarten'], label: '🏫 School', weight: 0.10 },
-  university: { tags: ['amenity=university', 'amenity=college'], label: '🎓 University', weight: 0.08 },
+  metro: { tags: ['railway=station'], label: '🚇 Metro', weight: 0.15 },
+  mall: { tags: ['shop=mall'], label: '🛍️ Shopping Mall', weight: 0.12 },
+  supermarket: { tags: ['shop=supermarket'], label: '🛒 Supermarket', weight: 0.08 },
+  school: { tags: ['amenity=school'], label: '🏫 School', weight: 0.10 },
   hospital: { tags: ['amenity=hospital'], label: '🏥 Hospital', weight: 0.08 },
-  clinic: { tags: ['amenity=clinic', 'amenity=doctors'], label: '🩺 Clinic', weight: 0.05 },
-  park: { tags: ['leisure=park', 'leisure=garden'], label: '🌳 Park', weight: 0.10 },
-  beach: { tags: ['natural=beach', 'leisure=beach_resort'], label: '🏖️ Beach', weight: 0.08 },
+  park: { tags: ['leisure=park'], label: '🌳 Park', weight: 0.10 },
   mosque: { tags: ['amenity=mosque'], label: '🕌 Mosque', weight: 0.04 },
-  police: { tags: ['amenity=police'], label: '👮 Police Station', weight: 0.03 },
-  bus: { tags: ['highway=bus_stop', 'amenity=bus_station'], label: '🚌 Bus Stop', weight: 0.05 }
+  bus: { tags: ['highway=bus_stop'], label: '🚌 Bus Stop', weight: 0.05 }
 };
 
 // ===== HAVERSINE =====
@@ -63,89 +59,90 @@ function haversine(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
 }
 
-// ===== QUERY OVERPASS =====
-async function queryOverpass(query) {
+// ===== QUERY OVERPASS (with retry) =====
+async function queryOverpass(query, retries = 2) {
   const servers = [
     'https://overpass-api.de/api/interpreter',
     'https://overpass.kumi.systems/api/interpreter'
   ];
   
-  for (const server of servers) {
-    try {
-      const url = `${server}?data=${encodeURIComponent(query)}`;
-      console.log(`🌍 Querying: ${server}`);
-      const response = await axios.get(url, {
-        timeout: 60000,
-        headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
-      });
-      if (response.data && response.data.elements) {
-        return response.data;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    for (const server of servers) {
+      try {
+        const url = `${server}?data=${encodeURIComponent(query)}`;
+        console.log(`🌍 Querying: ${server} (attempt ${attempt + 1})`);
+        const response = await axios.get(url, {
+          timeout: 20000,
+          headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
+        });
+        if (response.data && response.data.elements) {
+          console.log(`✅ Success from ${server}`);
+          return response.data;
+        }
+      } catch (error) {
+        console.log(`⚠️ ${server} failed: ${error.message}`);
+        await new Promise(r => setTimeout(r, 2000));
       }
-    } catch (error) {
-      console.log(`⚠️ Server failed: ${error.message}`);
     }
   }
   return null;
 }
 
-// ===== FETCH FACILITIES FOR DISTRICT =====
+// ===== FETCH FACILITIES FOR DISTRICT (one type at a time) =====
 async function fetchFacilitiesForDistrict(district, lat, lng, radius = 1000) {
   console.log(`🔍 Fetching facilities for ${district}...`);
   
-  const facilityQueries = [];
-  Object.values(FACILITY_TYPES).forEach(type => {
-    type.tags.forEach(tag => {
-      facilityQueries.push(`node["${tag}"](around:${radius},${lat},${lng});`);
-      facilityQueries.push(`way["${tag}"](around:${radius},${lat},${lng});`);
-    });
-  });
-
-  const query = `
-    [out:json][timeout:60];
-    (
-      ${facilityQueries.join('')}
-    );
-    out body;
-    >;
-    out skel qt;
-  `;
-
-  const data = await queryOverpass(query);
-  
-  if (!data || !data.elements) {
-    console.log(`⚠️ No data for ${district}`);
-    return null;
-  }
-
   const results = {};
   Object.keys(FACILITY_TYPES).forEach(key => {
     results[key] = { count: 0, distance: null, score: 0, weight: FACILITY_TYPES[key].weight };
   });
 
-  const elements = data.elements || [];
   let totalCount = 0;
 
-  elements.forEach(el => {
-    const tags = el.tags || {};
-    for (const [key, type] of Object.entries(FACILITY_TYPES)) {
-      const matched = type.tags.some(tag => {
-        const [k, v] = tag.split('=');
-        return tags[k] === v;
-      });
-      if (matched) {
-        results[key].count += 1;
-        totalCount += 1;
-        if (el.lat && el.lon) {
-          const dist = haversine(lat, lng, el.lat, el.lon);
-          if (results[key].distance === null || dist < results[key].distance) {
-            results[key].distance = Math.round(dist);
+  // Fetch each facility type separately (smaller queries)
+  for (const [key, type] of Object.entries(FACILITY_TYPES)) {
+    const tag = type.tags[0];
+    const query = `
+      [out:json][timeout:20];
+      (
+        node["${tag}"](around:${radius},${lat},${lng});
+        way["${tag}"](around:${radius},${lat},${lng});
+      );
+      out body;
+      >;
+      out skel qt;
+    `;
+
+    const data = await queryOverpass(query);
+    if (!data || !data.elements) {
+      continue;
+    }
+
+    const elements = data.elements || [];
+    let count = 0;
+    let minDistance = null;
+
+    elements.forEach(el => {
+      if (el.lat && el.lon) {
+        const dist = haversine(lat, lng, el.lat, el.lon);
+        if (dist <= radius) {
+          count++;
+          if (minDistance === null || dist < minDistance) {
+            minDistance = Math.round(dist);
           }
         }
-        break;
       }
-    }
-  });
+    });
 
+    results[key].count = count;
+    results[key].distance = minDistance;
+    totalCount += count;
+
+    // Wait between requests to avoid rate limiting
+    await new Promise(r => setTimeout(r, 500));
+  }
+
+  // Calculate scores
   let totalScore = 0;
   Object.keys(results).forEach(key => {
     const r = results[key];
@@ -159,6 +156,8 @@ async function fetchFacilitiesForDistrict(district, lat, lng, radius = 1000) {
     }
     totalScore += r.score;
   });
+
+  console.log(`✅ ${district}: ${totalCount} facilities found`);
 
   return {
     district,
@@ -175,7 +174,7 @@ async function fetchFacilitiesForDistrict(district, lat, lng, radius = 1000) {
 
 // ===== MAIN =====
 async function main() {
-  console.log('🚀 AQAR OSM Data Pre-fetcher\n');
+  console.log('🚀 AQAR OSM Data Pre-fetcher (Optimized)\n');
   console.log(`📊 Fetching data for ${Object.keys(DUBAI_DISTRICTS).length} districts...`);
 
   if (!fs.existsSync(DATA_DIR)) {
@@ -186,15 +185,45 @@ async function main() {
   let successCount = 0;
 
   for (const [district, coords] of Object.entries(DUBAI_DISTRICTS)) {
-    const data = await fetchFacilitiesForDistrict(district, coords.lat, coords.lng);
-    if (data) {
-      results[district] = data;
-      successCount++;
-      console.log(`✅ ${district}: ${data.count} facilities found`);
-    } else {
-      console.log(`❌ ${district}: No data`);
+    try {
+      const data = await fetchFacilitiesForDistrict(district, coords.lat, coords.lng);
+      if (data && data.count > 0) {
+        results[district] = data;
+        successCount++;
+        console.log(`✅ ${district}: ${data.count} facilities found`);
+      } else {
+        console.log(`⚠️ ${district}: No facilities found, using empty data`);
+        // Still save empty data to avoid re-fetching
+        results[district] = {
+          district,
+          lat: coords.lat,
+          lng: coords.lng,
+          facilities: {},
+          totalScore: 0,
+          count: 0,
+          queriedAt: new Date().toISOString(),
+          radius: 1000,
+          source: 'empty'
+        };
+      }
+    } catch (error) {
+      console.log(`❌ ${district}: Error - ${error.message}`);
+      // Save empty data to avoid re-fetching
+      results[district] = {
+        district,
+        lat: coords.lat,
+        lng: coords.lng,
+        facilities: {},
+        totalScore: 0,
+        count: 0,
+        queriedAt: new Date().toISOString(),
+        radius: 1000,
+        source: 'error',
+        error: error.message
+      };
     }
-    await new Promise(r => setTimeout(r, 1000));
+    // Wait between districts to avoid rate limiting
+    await new Promise(r => setTimeout(r, 2000));
   }
 
   const output = {
@@ -207,7 +236,7 @@ async function main() {
 
   fs.writeFileSync(OSM_CACHE_FILE, JSON.stringify(output, null, 2));
   console.log(`\n✅ Saved to ${OSM_CACHE_FILE}`);
-  console.log(`📊 ${successCount}/${Object.keys(DUBAI_DISTRICTS).length} districts successful`);
+  console.log(`📊 ${successCount}/${Object.keys(DUBAI_DISTRICTS).length} districts have data`);
 }
 
 main().catch(console.error);
