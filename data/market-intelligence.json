@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T21:40:44.982Z",
+  "generatedAt": "2026-07-28T02:32:54.309Z",
   "totalTransactions": 27669,
   "bestInvestmentDistricts": [
     {
@@ -250,10 +250,10 @@
       "district": "INTERNATIONAL CITY PH 1",
       "medianPricePerSqm": 7159,
       "transactionCount": 659,
-      "recentTransactions": 70,
+      "recentTransactions": 69,
       "priceMomentum": 2.9,
       "volatility": 30.5,
-      "activityRatio": 11,
+      "activityRatio": 10,
       "bubbleRiskScore": 61
     }
   ],
