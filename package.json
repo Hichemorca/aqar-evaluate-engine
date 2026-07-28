@@ -1,12 +1,13 @@
 {
   "name": "aqar-valuation-engine",
   "version": "2.0.0",
-  "description": "AQAR Valuation Intelligence Engine — Real Estate Valuation Platform",
+  "description": "AQAR Valuation Intelligence Engine — Real Estate Valuation Platform with GIS Integration",
   "main": "index.html",
   "scripts": {
     "build": "echo 'No build step required'",
     "fetch": "node scripts/fetch-transactions.js",
-    "evaluate": "node scripts/evaluate-and-save.js"
+    "evaluate": "node scripts/evaluate-and-save.js",
+    "fetch-osm": "node scripts/fetch-osm.js"
   },
   "dependencies": {
     "axios": "^1.7.0",

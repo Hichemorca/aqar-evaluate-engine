@@ -3,8 +3,15 @@
 
 [functions]
   node_bundler = "esbuild"
+  external_node_modules = ["axios"]
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[[redirects]]
+  from = "/data/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true

@@ -61,6 +61,7 @@
       outline: none; border-color: rgba(212,146,14,0.5);
       background: rgba(4,10,24,0.65); box-shadow: 0 0 0 2px rgba(212,146,14,0.1);
     }
+    .fg input:read-only { opacity: 0.7; cursor: not-allowed; }
     .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
     .fg .error { border-color: rgba(255,60,90,0.6) !important; }
 
@@ -179,6 +180,14 @@
     .scrape-comps th { color: var(--muted); font-weight: 600; padding: 5px 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
     .scrape-comps td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
 
+    .gis-facility-row {
+      display: flex; justify-content: space-between; padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 11px;
+    }
+    .gis-facility-row .label { color: #dce8f5; }
+    .gis-facility-row .value { color: var(--gold); font-weight: 600; }
+
     .footer-links { text-align: center; margin-top: 30px; font-size: 11px; color: var(--muted); }
     .footer-links a { color: var(--muted); text-decoration: underline; margin: 0 8px; }
     .footer-links a:hover { color: var(--gold); }
@@ -282,6 +291,58 @@
     </div>
   </div>
 
+  <!-- ===== GIS SECTION ===== -->
+  <div class="section" id="gisSection">
+    <div class="section-title">📍 Location & Nearby Facilities (GIS)</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">
+      أدخل موقع العقار لتحليل قربه من المرافق الحيوية (مترو، مولات، مدارس، مستشفيات، حدائق)
+    </div>
+    
+    <div class="row">
+      <div class="fg">
+        <label>🔍 ابحث عن الموقع</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="text" id="gisAddress" placeholder="مثال: Dubai Marina, Dubai" style="flex:3" oninput="onGISAddressChange()">
+          <button class="btn-s" onclick="detectLocation()" style="flex:0;padding:10px 16px;font-size:12px">📍 تحديد تلقائي</button>
+        </div>
+        <div class="note" id="gisStatus">اكتب اسم المنطقة أو استخدم التحديد التلقائي</div>
+      </div>
+    </div>
+    
+    <div class="row" id="gisCoordsRow" style="display:none">
+      <div class="fg"><label>🌐 خط العرض</label><input type="text" id="gisLat" readonly style="background:rgba(255,255,255,0.05)"></div>
+      <div class="fg"><label>🌐 خط الطول</label><input type="text" id="gisLng" readonly style="background:rgba(255,255,255,0.05)"></div>
+    </div>
+    
+    <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
+      <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 المرافق القريبة</div>
+      <div id="gisFacilitiesList" style="font-size:11px;color:var(--muted);line-height:1.8"></div>
+      <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
+    </div>
+    
+    <div id="gisMap" style="margin-top:10px;height:200px;border-radius:12px;background:rgba(255,255,255,0.03);display:none;border:1px solid rgba(255,255,255,0.06);overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">
+        🗺️ خريطة الموقع (قيد التطوير)
+      </div>
+    </div>
+    
+    <div class="row" style="margin-top:10px">
+      <div class="fg">
+        <label>📏 نصف قطر البحث (متر)</label>
+        <select id="gisRadius" onchange="onGISRadiusChange()">
+          <option value="300">300m</option>
+          <option value="500" selected>500m</option>
+          <option value="800">800m</option>
+          <option value="1000">1km</option>
+          <option value="1500">1.5km</option>
+        </select>
+      </div>
+      <div class="fg" style="display:flex;align-items:flex-end">
+        <button class="btn-s" onclick="fetchGISData()" style="width:100%;padding:10px;font-size:12px">🔍 تحليل المرافق</button>
+      </div>
+    </div>
+  </div>
+
   <div class="section">
     <div class="section-title">🔍 Market Data <span style="font-size:10px;color:var(--muted);font-weight:400">(Run first!)</span></div>
     <div class="row">
@@ -337,6 +398,8 @@ const UAE_DISTRICTS = {
 };
 
 let scrapedDistrictData = null;
+let gisData = null;
+let gisLoading = false;
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.checkbox-item').forEach(item => {
@@ -370,19 +433,228 @@ function onPropertyTypeChange() {
 
 function showToast(msg, d=3000) { const existing = document.querySelector('.toast'); if (existing) existing.remove(); const toast = document.createElement('div'); toast.className = 'toast'; toast.textContent = msg; document.body.appendChild(toast); setTimeout(() => toast.remove(), d); }
 
+// ===== GIS FUNCTIONS =====
+function onGISAddressChange() {
+  const address = document.getElementById('gisAddress').value.trim();
+  if (address.length > 3) {
+    clearTimeout(window.gisTimeout);
+    window.gisTimeout = setTimeout(() => fetchGISData(), 800);
+  }
+}
+
+function onGISRadiusChange() {
+  if (gisData) {
+    fetchGISData();
+  }
+}
+
+function detectLocation() {
+  const status = document.getElementById('gisStatus');
+  status.innerHTML = '📍 جاري تحديد الموقع...';
+  
+  if (!navigator.geolocation) {
+    status.innerHTML = '⚠️ متصفحك لا يدعم تحديد الموقع';
+    return;
+  }
+  
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
+      document.getElementById('gisLat').value = latitude.toFixed(6);
+      document.getElementById('gisLng').value = longitude.toFixed(6);
+      document.getElementById('gisCoordsRow').style.display = 'flex';
+      status.innerHTML = '✅ تم تحديد الموقع بنجاح';
+      
+      try {
+        const response = await fetch('/.netlify/functions/scrape', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lat: latitude, lng: longitude, reverse: true })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data.address) {
+            document.getElementById('gisAddress').value = data.address;
+          }
+        }
+      } catch(e) {}
+      
+      fetchGISData();
+    },
+    (error) => {
+      status.innerHTML = `⚠️ ${error.message}`;
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+async function fetchGISData() {
+  if (gisLoading) return;
+  
+  const address = document.getElementById('gisAddress').value.trim();
+  const lat = document.getElementById('gisLat').value.trim();
+  const lng = document.getElementById('gisLng').value.trim();
+  const radius = parseInt(document.getElementById('gisRadius').value) || 500;
+  
+  if (!address && !lat && !lng) {
+    showToast('الرجاء إدخال عنوان أو استخدام التحديد التلقائي');
+    return;
+  }
+  
+  gisLoading = true;
+  const status = document.getElementById('gisStatus');
+  status.innerHTML = '⏳ جاري تحليل الموقع والمرافق...';
+  
+  try {
+    const body = {};
+    if (lat && lng) {
+      body.lat = parseFloat(lat);
+      body.lng = parseFloat(lng);
+    } else {
+      body.address = address;
+    }
+    body.radius = radius;
+    body.gisOnly = true;
+    
+    const response = await fetch('/.netlify/functions/scrape', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    
+    if (data.gisData) {
+      gisData = data.gisData;
+      displayGISResult(gisData, data.proximityMultiplier);
+      status.innerHTML = '✅ تم تحليل المرافق بنجاح';
+    } else {
+      status.innerHTML = '⚠️ لم يتم العثور على بيانات للموقع المحدد';
+    }
+  } catch (error) {
+    status.innerHTML = `⚠️ فشل تحليل الموقع: ${error.message}`;
+  } finally {
+    gisLoading = false;
+  }
+}
+
+function displayGISResult(gisData, multiplier) {
+  const container = document.getElementById('gisResult');
+  const list = document.getElementById('gisFacilitiesList');
+  const scoreDisplay = document.getElementById('gisScoreDisplay');
+  
+  container.style.display = 'block';
+  
+  if (!gisData || !gisData.facilities) {
+    list.innerHTML = 'لا توجد مرافق قريبة ضمن نطاق البحث';
+    scoreDisplay.textContent = 'تأثير على التقييم: 0%';
+    return;
+  }
+  
+  const facilities = gisData.facilities;
+  let html = '';
+  let totalScore = 0;
+  
+  for (const [key, data] of Object.entries(facilities)) {
+    const label = getFacilityLabel(key);
+    const icon = getFacilityIcon(key);
+    if (data.count > 0) {
+      const distText = data.distance !== null ? `(${data.distance}m)` : '';
+      const scorePct = (data.score * 100).toFixed(0);
+      html += `<div class="gis-facility-row">
+        <span class="label">${icon} ${label}</span>
+        <span class="value">${data.count} ${distText} • +${scorePct}%</span>
+      </div>`;
+      totalScore += data.score || 0;
+    }
+  }
+  
+  if (!html) {
+    html = 'لا توجد مرافق قريبة ضمن نطاق البحث';
+  }
+  
+  list.innerHTML = html;
+  
+  const multiplierPct = multiplier ? ((multiplier - 1) * 100).toFixed(0) : '0';
+  scoreDisplay.innerHTML = `
+    <span style="color:var(--gold)">⭐ تأثير الموقع على التقييم: +${multiplierPct}%</span>
+    <span style="font-size:10px;color:var(--muted);margin-left:12px">
+      (بناءً على ${gisData.count || 0} مرفق قريب)
+    </span>
+  `;
+}
+
+function getFacilityLabel(key) {
+  const labels = {
+    metro: 'مترو',
+    tram: 'ترام',
+    mall: 'مول تجاري',
+    supermarket: 'سوبرماركت',
+    school: 'مدرسة',
+    university: 'جامعة',
+    hospital: 'مستشفى',
+    clinic: 'عيادة',
+    park: 'حديقة',
+    beach: 'شاطئ',
+    mosque: 'مسجد',
+    police: 'مركز شرطة',
+    bus: 'موقف باص'
+  };
+  return labels[key] || key;
+}
+
+function getFacilityIcon(key) {
+  const icons = {
+    metro: '🚇',
+    tram: '🚊',
+    mall: '🛍️',
+    supermarket: '🛒',
+    school: '🏫',
+    university: '🎓',
+    hospital: '🏥',
+    clinic: '🩺',
+    park: '🌳',
+    beach: '🏖️',
+    mosque: '🕌',
+    police: '👮',
+    bus: '🚌'
+  };
+  return icons[key] || '📍';
+}
+
+// ===== SCRAPING =====
 async function scrapeRealData() {
   const city = document.getElementById('city').value, district = document.getElementById('district').value.trim(), propType = document.getElementById('propType').value;
   const btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
   if (!city || !district) { status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; showToast('Please select a city and enter a district name'); return; }
   btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...';
   status.innerHTML = '<span style="color:var(--muted)">Fetching comparable sales from DLD + live listings...</span>';
+  
+  // Include GIS data if available
+  const lat = document.getElementById('gisLat').value.trim();
+  const lng = document.getElementById('gisLng').value.trim();
+  
   try {
-    const response = await fetch('/.netlify/functions/scrape', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ city, district, propertyType: propType || 'apartment' }) });
+    const body = { city, district, propertyType: propType || 'apartment' };
+    if (lat && lng) {
+      body.lat = parseFloat(lat);
+      body.lng = parseFloat(lng);
+      body.radius = parseInt(document.getElementById('gisRadius').value) || 500;
+    }
+    
+    const response = await fetch('/.netlify/functions/scrape', { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify(body) 
+    });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json(); scrapedDistrictData = data;
+    const data = await response.json();
+    scrapedDistrictData = data;
     document.getElementById('avgPriceSqm').value = data.avgPricePerSqm || 0;
     document.getElementById('recentSalesCount').value = data.count || 0;
     document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    
     let compsHTML = '';
     if (data.sales && data.sales.length > 0) {
       compsHTML = '<table><thead><tr><th>Price</th><th>Area</th><th>AED/sqm</th><th>Date</th></tr></thead><tbody>';
@@ -390,6 +662,13 @@ async function scrapeRealData() {
       compsHTML += '</tbody></table>';
     }
     document.getElementById('scrapedComps').innerHTML = compsHTML;
+    
+    // Display GIS data if returned
+    if (data.gisData) {
+      gisData = data.gisData;
+      displayGISResult(gisData, data.proximityMultiplier);
+    }
+    
     const srcLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
     status.innerHTML = `<span class="status-badge success">✅ ${data.count} comparable sales • ${srcLabel}</span>`;
     showToast(`Found ${data.count} comparable sales in ${district}`);
@@ -407,27 +686,42 @@ function getFallbackPrice(city, district) {
   const cr = rates[city] || rates.dubai; return cr[cd] || cr.default || 6000;
 }
 
-function runValuation() {
-  const area = parseFloat(document.getElementById('area').value);
-  if (!area || area < 10) { document.getElementById('area').classList.add('error'); document.getElementById('area').focus(); showToast('Area must be at least 10 sqm'); setTimeout(() => document.getElementById('area').classList.remove('error'), 3000); return; }
-  document.getElementById('btnValuate').disabled = true; document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
-  setTimeout(() => {
-    const propData = collectPropertyData(), valuations = [];
-    const salesComp = salesComparisonApproach(propData); if (salesComp) valuations.push(salesComp);
-    const incomeVal = incomeCapitalizationApproach(propData); if (incomeVal) valuations.push(incomeVal);
-    const costVal = costApproach(propData); if (costVal) valuations.push(costVal);
-    const dcfVal = dcfApproach(propData); if (dcfVal) valuations.push(dcfVal);
-    if (valuations.length === 0) { showToast('Insufficient data. Run "Scrape" first.'); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
-    const finalResult = calculateWeightedValue(valuations, propData); displayResult(finalResult, valuations, propData);
-    document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Recalculate Valuation';
-    saveToHistory(finalResult, propData);
-  }, 800);
-}
-
+// ===== VALUATION =====
 function collectPropertyData() {
   const features = []; document.querySelectorAll('#featuresGroup input:checked').forEach(cb => features.push(cb.value));
   const isLand = document.getElementById('propType').value === 'land';
-  return { city: document.getElementById('city').value, district: document.getElementById('district').value.trim(), propType: document.getElementById('propType').value, area: Math.max(10, parseFloat(document.getElementById('area').value) || 0), bedrooms: parseInt(document.getElementById('bedrooms').value) || 0, yearBuilt: isLand ? 2026 : Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value) || 2020)), condition: isLand ? 'good' : document.getElementById('condition').value, features, avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value) || 0, annualRent: parseFloat(document.getElementById('annualRent').value) || 0, annualExpenses: parseFloat(document.getElementById('annualExpenses').value) || 0, landValue: parseFloat(document.getElementById('landValue').value) || 0, constructionCost: parseFloat(document.getElementById('constructionCost').value) || 0, scrapedData: scrapedDistrictData, finishQuality: document.getElementById('finishQuality').value, viewType: document.getElementById('viewType').value, floorLevel: document.getElementById('floorLevel').value, streetPosition: document.getElementById('streetPosition').value, buildingCondition: document.getElementById('buildingCondition').value, furnishedStatus: document.getElementById('furnishedStatus').value };
+  
+  const gisLat = document.getElementById('gisLat').value.trim();
+  const gisLng = document.getElementById('gisLng').value.trim();
+  const gisAddress = document.getElementById('gisAddress').value.trim();
+  
+  return { 
+    city: document.getElementById('city').value, 
+    district: document.getElementById('district').value.trim(), 
+    propType: document.getElementById('propType').value, 
+    area: Math.max(10, parseFloat(document.getElementById('area').value) || 0), 
+    bedrooms: parseInt(document.getElementById('bedrooms').value) || 0, 
+    yearBuilt: isLand ? 2026 : Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value) || 2020)), 
+    condition: isLand ? 'good' : document.getElementById('condition').value, 
+    features, 
+    avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value) || 0, 
+    annualRent: parseFloat(document.getElementById('annualRent').value) || 0, 
+    annualExpenses: parseFloat(document.getElementById('annualExpenses').value) || 0, 
+    landValue: parseFloat(document.getElementById('landValue').value) || 0, 
+    constructionCost: parseFloat(document.getElementById('constructionCost').value) || 0, 
+    scrapedData: scrapedDistrictData, 
+    finishQuality: document.getElementById('finishQuality').value, 
+    viewType: document.getElementById('viewType').value, 
+    floorLevel: document.getElementById('floorLevel').value, 
+    streetPosition: document.getElementById('streetPosition').value, 
+    buildingCondition: document.getElementById('buildingCondition').value, 
+    furnishedStatus: document.getElementById('furnishedStatus').value,
+    gisLat: gisLat ? parseFloat(gisLat) : null,
+    gisLng: gisLng ? parseFloat(gisLng) : null,
+    gisAddress: gisAddress,
+    gisData: gisData,
+    gisRadius: parseInt(document.getElementById('gisRadius').value) || 500
+  };
 }
 
 function salesComparisonApproach(data) {
@@ -454,12 +748,24 @@ function salesComparisonApproach(data) {
   if (data.propType === 'townhouse') value = Math.round(value * 1.021);
   const areaCalibration = { 'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94, 'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94 };
   if (areaCalibration[data.district]) value = Math.round(value * areaCalibration[data.district]);
+  
+  // ===== GIS PROXIMITY =====
+  let gisMultiplier = 1;
+  let gisDetails = '';
+  if (data.gisData && data.gisData.totalScore) {
+    gisMultiplier = 1 + (data.gisData.totalScore * 0.5);
+    gisMultiplier = Math.min(1.5, Math.max(1.0, gisMultiplier));
+    value = Math.round(value * gisMultiplier);
+    gisDetails = ` | GIS: +${((gisMultiplier - 1) * 100).toFixed(0)}% (${data.gisData.count || 0} facilities)`;
+  }
+  
   value = Math.round(value);
   const comparableCount = data.scrapedData?.count || 0;
   const confidenceLevel = comparableCount >= 10 ? 'High' : comparableCount >= 5 ? 'Medium' : 'Basic';
   let details = `Based on ${comparableCount} comparable sales (${confidenceLevel} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
-  if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`; if (data.viewType) details += ` View: ${data.viewType}.`; details += ` Condition: ${data.condition}, Age: ${age}y.`;
-  return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
+  if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`; if (data.viewType) details += ` View: ${data.viewType}.`; details += ` Condition: ${data.condition}, Age: ${age}y.${gisDetails}`;
+  
+  return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice, gisMultiplier };
 }
 
 function incomeCapitalizationApproach(data) {
@@ -517,13 +823,31 @@ function displayResult(result, valuations, propData) {
   section.classList.remove('hidden'); section.scrollIntoView({ behavior: 'smooth' });
 }
 
+function runValuation() {
+  const area = parseFloat(document.getElementById('area').value);
+  if (!area || area < 10) { document.getElementById('area').classList.add('error'); document.getElementById('area').focus(); showToast('Area must be at least 10 sqm'); setTimeout(() => document.getElementById('area').classList.remove('error'), 3000); return; }
+  document.getElementById('btnValuate').disabled = true; document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
+  setTimeout(() => {
+    const propData = collectPropertyData(), valuations = [];
+    const salesComp = salesComparisonApproach(propData); if (salesComp) valuations.push(salesComp);
+    const incomeVal = incomeCapitalizationApproach(propData); if (incomeVal) valuations.push(incomeVal);
+    const costVal = costApproach(propData); if (costVal) valuations.push(costVal);
+    const dcfVal = dcfApproach(propData); if (dcfVal) valuations.push(dcfVal);
+    if (valuations.length === 0) { showToast('Insufficient data. Run "Scrape" first.'); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
+    const finalResult = calculateWeightedValue(valuations, propData); displayResult(finalResult, valuations, propData);
+    document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Recalculate Valuation';
+    saveToHistory(finalResult, propData);
+  }, 800);
+}
+
 function resetAll() {
   document.getElementById('city').value = ''; document.getElementById('district').value = ''; document.getElementById('districtList').innerHTML = ''; document.getElementById('propType').value = 'apartment'; document.getElementById('area').value = '120'; document.getElementById('bedrooms').value = '2'; document.getElementById('yearBuilt').value = '2020'; document.getElementById('condition').value = 'good';
   document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; document.getElementById('annualRent').value = ''; document.getElementById('annualExpenses').value = ''; document.getElementById('landValue').value = ''; document.getElementById('constructionCost').value = '';
   document.getElementById('finishQuality').value = ''; document.getElementById('viewType').value = ''; document.getElementById('floorLevel').value = ''; document.getElementById('streetPosition').value = ''; document.getElementById('buildingCondition').value = ''; document.getElementById('furnishedStatus').value = '';
+  document.getElementById('gisAddress').value = ''; document.getElementById('gisLat').value = ''; document.getElementById('gisLng').value = ''; document.getElementById('gisCoordsRow').style.display = 'none'; document.getElementById('gisResult').style.display = 'none'; document.getElementById('gisStatus').innerHTML = 'اكتب اسم المنطقة أو استخدم التحديد التلقائي';
   document.getElementById('scrapeStatus').innerHTML = ''; document.getElementById('scrapedComps').innerHTML = ''; document.getElementById('resultSection').classList.add('hidden'); document.getElementById('resultSection').innerHTML = '';
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
-  scrapedDistrictData = null; onPropertyTypeChange(); window.scrollTo({ top: 0, behavior: 'smooth' }); showToast('All fields cleared');
+  scrapedDistrictData = null; gisData = null; onPropertyTypeChange(); window.scrollTo({ top: 0, behavior: 'smooth' }); showToast('All fields cleared');
 }
 
 function saveToHistory(result, propData) {

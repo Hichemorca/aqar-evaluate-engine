@@ -1,5 +1,6 @@
-// AQAR Valuation Engine — Live Scraping with ScrapingBee
+// AQAR Valuation Engine — Live Scraping with ScrapingBee + GIS Integration
 const axios = require('axios');
+const { fetchFacilities, geocodeAddress, reverseGeocode, FACILITY_TYPES } = require('./fetch-osm');
 
 const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_KEY || '';
 const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
@@ -7,6 +8,10 @@ const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
 // Cache: 24 hours
 const cache = new Map();
 const CACHE_TTL = 24 * 60 * 60 * 1000;
+
+// GIS Cache
+const gisCache = new Map();
+const GIS_CACHE_TTL = 24 * 60 * 60 * 1000;
 
 // UAE Market Prices — fallback if scraping fails
 const UAE_MARKET = {
@@ -43,11 +48,40 @@ const UAE_MARKET = {
     'Al Reem Island': { apt: 7200, villa: 8500, townhouse: 7800, office: 6500, retail: 8200 },
     'Al Raha Beach': { apt: 8200, villa: 10000, townhouse: 9000, office: 7500, retail: 9500 },
     'Khalifa City': { apt: 4500, villa: 5500, townhouse: 5000, office: 4000, retail: 5200 },
-    'Mohammed Bin Zayed City': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 }
+    'Mohammed Bin Zayed City': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 },
+    'Al Reef': { apt: 5000, villa: 6000, townhouse: 5500, office: 4400, retail: 5800 },
+    'Corniche Area': { apt: 6800, villa: 8000, townhouse: 7200, office: 6200, retail: 7800 },
+    'Al Maryah Island': { apt: 9000, villa: 12000, townhouse: 10500, office: 8500, retail: 11000 },
+    'Masdar City': { apt: 5500, villa: 7000, townhouse: 6200, office: 5000, retail: 6500 },
+    'Al Ain City': { apt: 3000, villa: 3800, townhouse: 3400, office: 2600, retail: 3500 },
+    'Al Bateen': { apt: 6500, villa: 7800, townhouse: 7000, office: 5800, retail: 7200 },
+    'Khalidiya': { apt: 5500, villa: 6500, townhouse: 6000, office: 4800, retail: 6200 }
   },
   sharjah: {
     'Al Majaz': { apt: 3200, villa: 3800, townhouse: 3500, office: 2800, retail: 3600 },
-    'Aljada': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 }
+    'Al Nahda Sharjah': { apt: 2800, villa: 3400, townhouse: 3100, office: 2500, retail: 3200 },
+    'Al Taawun': { apt: 3300, villa: 3900, townhouse: 3600, office: 2900, retail: 3700 },
+    'Muwaileh': { apt: 2600, villa: 3200, townhouse: 2900, office: 2300, retail: 3000 },
+    'Aljada': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 },
+    'Al Khan': { apt: 3000, villa: 3800, townhouse: 3400, office: 2600, retail: 3500 },
+    'Maryam Island': { apt: 4000, villa: 5000, townhouse: 4500, office: 3500, retail: 4600 }
+  },
+  ajman: {
+    'Al Rashidiya': { apt: 2200, villa: 2800, townhouse: 2500, office: 2000, retail: 2600 },
+    'Al Nuaimiya': { apt: 2000, villa: 2500, townhouse: 2200, office: 1800, retail: 2400 },
+    'Emirates City': { apt: 1800, villa: 2300, townhouse: 2000, office: 1600, retail: 2200 }
+  },
+  'ras-al-khaimah': {
+    'Al Hamra Village': { apt: 3200, villa: 4200, townhouse: 3700, office: 2800, retail: 3800 },
+    'Mina Al Arab': { apt: 2800, villa: 3500, townhouse: 3100, office: 2500, retail: 3200 },
+    'Al Marjan Island': { apt: 3600, villa: 4500, townhouse: 4000, office: 3200, retail: 4200 }
+  },
+  fujairah: {
+    'Al Aqah': { apt: 2800, villa: 3500, townhouse: 3100, office: 2500, retail: 3200 },
+    'Fujairah City Center': { apt: 2000, villa: 2500, townhouse: 2200, office: 1800, retail: 2400 }
+  },
+  'umm-al-quwain': {
+    'Umm Al Quwain Marina': { apt: 2200, villa: 2800, townhouse: 2500, office: 2000, retail: 2600 }
   }
 };
 
@@ -170,6 +204,64 @@ function generateSalesFallback(city, district, propertyType, count) {
   return sales;
 }
 
+// ===== GIS FUNCTIONS =====
+async function getGISData(lat, lng, radius = 500) {
+  const cacheKey = `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
+  const cached = gisCache.get(cacheKey);
+  if (cached && (Date.now() - cached.timestamp) < GIS_CACHE_TTL) {
+    console.log('✅ GIS: Using cached data');
+    return cached.data;
+  }
+
+  try {
+    const result = await fetchFacilities(lat, lng, radius);
+    gisCache.set(cacheKey, { data: result, timestamp: Date.now() });
+    return result;
+  } catch (error) {
+    console.log(`⚠️ GIS fetch failed: ${error.message}`);
+    return {
+      facilities: {},
+      totalScore: 0,
+      count: 0,
+      error: error.message
+    };
+  }
+}
+
+async function getGISFromAddress(address) {
+  const geocodeResult = await geocodeAddress(address);
+  if (!geocodeResult) return null;
+  
+  const gisData = await getGISData(geocodeResult.lat, geocodeResult.lng);
+  return {
+    ...geocodeResult,
+    ...gisData
+  };
+}
+
+function getProximityMultiplier(gisData) {
+  if (!gisData || !gisData.totalScore) return 1;
+  
+  // Base multiplier: 1 + (score * 0.5) — max 1.5x
+  const multiplier = 1 + (gisData.totalScore * 0.5);
+  return Math.min(1.5, Math.max(1.0, multiplier));
+}
+
+function getFacilitySummary(gisData) {
+  if (!gisData || !gisData.facilities) return 'No GIS data available';
+  
+  const summary = [];
+  for (const [key, data] of Object.entries(gisData.facilities)) {
+    if (data.count > 0) {
+      const label = FACILITY_TYPES[key]?.label || key;
+      const dist = data.distance !== null ? `${data.distance}m` : 'nearby';
+      summary.push(`${label}: ${data.count} (${dist})`);
+    }
+  }
+  
+  return summary.length > 0 ? summary.join(' • ') : 'No nearby facilities found';
+}
+
 // ===== MAIN EXPORT =====
 exports.handler = async (event) => {
   const headers = {
@@ -187,17 +279,79 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { city, district, propertyType } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    const { city, district, propertyType, lat, lng, address, radius, reverse, gisOnly } = body;
 
+    // ===== GIS-ONLY MODE =====
+    if (gisOnly) {
+      let gisResult = null;
+      
+      if (lat && lng) {
+        console.log(`📍 GIS Only: ${lat}, ${lng}`);
+        gisResult = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
+      } else if (address) {
+        console.log(`📍 GIS Only: ${address}`);
+        const geocode = await geocodeAddress(address);
+        if (geocode) {
+          gisResult = await getGISData(geocode.lat, geocode.lng, parseInt(radius) || 500);
+          gisResult.displayName = geocode.displayName;
+        }
+      }
+      
+      if (gisResult) {
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({
+            gisData: gisResult,
+            proximityMultiplier: getProximityMultiplier(gisResult),
+            facilitySummary: getFacilitySummary(gisResult)
+          })
+        };
+      }
+      
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ error: 'No GIS data found' })
+      };
+    }
+
+    // ===== REVERSE GEOCODING =====
+    if (reverse && lat && lng) {
+      const result = await reverseGeocode(parseFloat(lat), parseFloat(lng));
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ address: result?.displayName || null })
+      };
+    }
+
+    // ===== MAIN SCRAPING LOGIC =====
     if (!city || !district) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'City and district required', sales: [], count: 0 }) };
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'City and district required', sales: [], count: 0 })
+      };
     }
 
     const cacheKey = `${city}-${district}-${propertyType}`;
     const cached = cache.get(cacheKey);
     if (cached && (Date.now() - cached.timestamp) < CACHE_TTL) {
       console.log('✅ Serving from cache');
-      return { statusCode: 200, headers, body: JSON.stringify(cached.data) };
+      let responseData = cached.data;
+      
+      // If coordinates provided, add GIS data
+      if (lat && lng) {
+        console.log(`📍 Adding GIS data for ${lat}, ${lng}`);
+        const gisData = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
+        responseData.gisData = gisData;
+        responseData.proximityMultiplier = getProximityMultiplier(gisData);
+        responseData.facilitySummary = getFacilitySummary(gisData);
+      }
+      
+      return { statusCode: 200, headers, body: JSON.stringify(responseData) };
     }
 
     let allSales = [];
@@ -253,6 +407,28 @@ exports.handler = async (event) => {
       district,
       dataSource
     };
+
+    // ===== GIS DATA (if coordinates provided) =====
+    if (lat && lng) {
+      console.log(`📍 Fetching GIS data for ${lat}, ${lng}`);
+      const gisData = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
+      result.gisData = gisData;
+      result.proximityMultiplier = getProximityMultiplier(gisData);
+      result.facilitySummary = getFacilitySummary(gisData);
+    } else if (address) {
+      console.log(`📍 Geocoding address: ${address}`);
+      const gisResult = await getGISFromAddress(address);
+      if (gisResult) {
+        result.gisData = gisResult;
+        result.proximityMultiplier = getProximityMultiplier(gisResult);
+        result.facilitySummary = getFacilitySummary(gisResult);
+        result.geocodedLocation = {
+          lat: gisResult.lat,
+          lng: gisResult.lng,
+          displayName: gisResult.displayName
+        };
+      }
+    }
 
     cache.set(cacheKey, { data: result, timestamp: Date.now() });
 
