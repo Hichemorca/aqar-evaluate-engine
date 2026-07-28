@@ -237,17 +237,6 @@ function getLayerWeights(evalLevel, propertyType) {
   };
 }
 
-// ===== DISTRICT CORRECTION =====
-const DISTRICT_CORRECTION = {
-  'INTERNATIONAL CITY PH 1': 0.85,
-  'INTERNATIONAL CITY PH 2': 0.85,
-  'INTERNATIONAL CITY PH 3': 0.85,
-  'REMRAAM': 0.88,
-  'JUMEIRAH VILLAGE CIRCLE': 0.92,
-  'DUBAI PRODUCTION CITY': 0.90,
-  'Hor Al Anz': 0.88
-};
-
 // ===== EVALUATE =====
 async function evaluateProperty(property, projectSizeStats, projectStats, districtSizeStats, districtStats) {
   const sizeCat = getSizeCategory(property.area, property.propertyType);
@@ -289,20 +278,10 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   
   if (!result) return null;
   
-  // Apply district correction
-  if (DISTRICT_CORRECTION[property.district]) {
-    result.valuation = Math.round(result.valuation * DISTRICT_CORRECTION[property.district]);
-  }
-  
-  // Small apartment correction
-  if (property.area < 80 && property.propertyType === 'apartment') {
-    result.valuation = Math.round(result.valuation * 0.94);
-  }
-  
   // ===== APPLY CONSULTANCY LAYER (by district) =====
-if (consultancyData.capRatesByDistrict) {
-  const districtRates = consultancyData.capRatesByDistrict[property.district] || 
-                        consultancyData.capRatesByDistrict['default'];
+if (consultancyData.capRates) {
+  const districtRates = consultancyData.capRates[property.district] || 
+                        consultancyData.capRates['default'];
   if (districtRates) {
     const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
     const marketCapRate = districtRates[typeKey] || districtRates['apartment'] || 7.0;
@@ -312,9 +291,9 @@ if (consultancyData.capRatesByDistrict) {
   }
 }
 
-if (consultancyData.vacancyRatesByDistrict) {
-  const districtRates = consultancyData.vacancyRatesByDistrict[property.district] || 
-                        consultancyData.vacancyRatesByDistrict['default'];
+if (consultancyData.vacancyRates) {
+  const districtRates = consultancyData.vacancyRates[property.district] || 
+                        consultancyData.vacancyRates['default'];
   if (districtRates) {
     const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
     const vacancyRate = districtRates[typeKey] || districtRates['apartment'] || 10;
@@ -322,13 +301,6 @@ if (consultancyData.vacancyRatesByDistrict) {
     result.valuation = Math.round(result.valuation * vacancyAdjustment);
   }
 }
-  
-  // ===== APPLY GOVERNMENT LAYER =====
-  if (governmentData.registrationFees) {
-    const regFee = governmentData.registrationFees[property.city || 'dubai'] || 4.0;
-    const feeAdjustment = 1 - (regFee / 200);
-    result.valuation = Math.round(result.valuation * feeAdjustment);
-  }
   
   return result;
 }
