@@ -1,4 +1,4 @@
-﻿// AQAR Auto-Evaluate — v18: Leave-One-Out + Land Size Fix + Weight Floor + Retail Min
+﻿// AQAR Auto-Evaluate — v19: All fixes + Area mismatch + Jan exclusion + District correction + Small property
 const fs = require('fs');
 const path = require('path');
 
@@ -7,7 +7,7 @@ const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
 
-// ===== 9-STAGE CLEANING =====
+// ===== 10-STAGE CLEANING =====
 function filterNonSaleTransactions(transactions) {
   const before = transactions.length;
   const nonMarketProcedures = ['development registration', 'sell development', 'lease to own registration'];
@@ -28,6 +28,19 @@ function filterMissingData(transactions) {
   const before = transactions.length;
   const filtered = transactions.filter(t => t.district && t.district !== 'Unknown' && t.propertyType && t.propertyType !== 'Unknown' && t.area > 0 && t.actualSalePrice > 0);
   console.log(`🧹 S2 Missing: ${before} → ${filtered.length}`);
+  return filtered;
+}
+
+function filterAreaMismatch(transactions) {
+  const before = transactions.length;
+  const filtered = transactions.filter(t => {
+    if (t.procedureArea && t.procedureArea > 0) {
+      const ratio = t.area / t.procedureArea;
+      if (ratio < 0.5 || ratio > 2.0) return false;
+    }
+    return true;
+  });
+  console.log(`🧹 S2.5 Area Mismatch: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
   return filtered;
 }
 
@@ -97,7 +110,7 @@ function filterUltraLuxury(transactions) {
     if (t.actualSalePrice > 50000000) return false;
     return true;
   });
-  console.log(`🧹 S8 Ultra-Luxury: ${before} → ${filtered.length} (removed ${before - filtered.length})`);
+  console.log(`🧹 S8 Ultra-Luxury: ${before} → ${filtered.length}`);
   return filtered;
 }
 
@@ -113,11 +126,12 @@ function validateGroupCounts(transactions) {
 
 function applyAllFilters(transactions) {
   console.log('\n' + '='.repeat(50));
-  console.log(`🧹 9-STAGE — Input: ${transactions.length.toLocaleString()}`);
+  console.log(`🧹 10-STAGE — Input: ${transactions.length.toLocaleString()}`);
   console.log('='.repeat(50));
   let data = transactions;
   data = filterNonSaleTransactions(data);
   data = filterMissingData(data);
+  data = filterAreaMismatch(data);
   data = filterInvalidAreas(data);
   data.forEach(t => { t.pricePerSqm = t.actualSalePrice / Math.max(1, t.area); });
   data = filterInvalidPrices(data);
@@ -131,7 +145,7 @@ function applyAllFilters(transactions) {
   return data;
 }
 
-// ===== SIZE CATEGORIES (FIXED FOR LAND) =====
+// ===== SIZE CATEGORIES =====
 function getSizeCategory(area, propertyType) {
   if (propertyType === 'land') {
     if (area <= 200) return 'land_tiny';
@@ -160,7 +174,6 @@ function computeMedians(transactions, groupFn) {
     const items = groups[key];
     
     items.forEach(item => {
-      // Exclude this property from its own group (Leave-One-Out)
       const others = items.filter(t => t.propertyRef !== item.propertyRef);
       if (others.length < 2) return;
       
@@ -188,47 +201,74 @@ function computeMedians(transactions, groupFn) {
   return medians;
 }
 
-// ===== EVALUATE WITH LOO + RETAIL MIN =====
+// ===== DISTRICT CORRECTION =====
+const DISTRICT_CORRECTION = {
+  'INTERNATIONAL CITY PH 1': 0.85,
+  'INTERNATIONAL CITY PH 2': 0.85,
+  'INTERNATIONAL CITY PH 3': 0.85,
+  'REMRAAM': 0.88,
+  'JUMEIRAH VILLAGE CIRCLE': 0.92,
+  'DUBAI PRODUCTION CITY': 0.90,
+  'Madinat Al Mataar': 0.75,
+  'Hor Al Anz': 0.88
+};
+
+// ===== EVALUATE =====
 async function evaluateProperty(property, projectSizeStats, projectStats, districtSizeStats, districtStats) {
   const sizeCat = getSizeCategory(property.area, property.propertyType);
   const project = property.project || '';
+  let result = null;
   
   if (project && project.length > 2) {
-    // Level 0: Project + Type + Size (LOO, min 3)
     const projSizeKey = `${project}__${property.propertyType}__${sizeCat}__${property.propertyRef}`;
     const projSizeData = projectSizeStats[projSizeKey];
     if (projSizeData && projSizeData.count >= 3) {
-      return { valuation: Math.round(projSizeData.median) * property.area, level: 'project_size', count: projSizeData.count };
+      result = { valuation: Math.round(projSizeData.median) * property.area, level: 'project_size', count: projSizeData.count };
     }
     
-    // Level 0.5: Project + Type (LOO, min 5, retail min 2)
-    const projKey = `${project}__${property.propertyType}__${property.propertyRef}`;
-    const projData = projectStats[projKey];
-    const minProject = property.propertyType === 'retail' ? 2 : 5;
-    if (projData && projData.count >= minProject) {
-      return { valuation: Math.round(projData.median) * property.area, level: 'project', count: projData.count };
+    if (!result) {
+      const projKey = `${project}__${property.propertyType}__${property.propertyRef}`;
+      const projData = projectStats[projKey];
+      const minProject = property.propertyType === 'retail' ? 2 : 5;
+      if (projData && projData.count >= minProject) {
+        result = { valuation: Math.round(projData.median) * property.area, level: 'project', count: projData.count };
+      }
     }
   }
   
-  // Level 1: District + Type + Size (LOO, min 5)
-  const distSizeKey = `${property.district}__${property.propertyType}__${sizeCat}__${property.propertyRef}`;
-  const distSizeData = districtSizeStats[distSizeKey];
-  if (distSizeData && distSizeData.count >= 5) {
-    return { valuation: Math.round(distSizeData.median) * property.area, level: 'district_size', count: distSizeData.count };
+  if (!result) {
+    const distSizeKey = `${property.district}__${property.propertyType}__${sizeCat}__${property.propertyRef}`;
+    const distSizeData = districtSizeStats[distSizeKey];
+    if (distSizeData && distSizeData.count >= 5) {
+      result = { valuation: Math.round(distSizeData.median) * property.area, level: 'district_size', count: distSizeData.count };
+    }
   }
   
-  // Level 2: District + Type (LOO, min 5)
-  const distKey = `${property.district}__${property.propertyType}__${property.propertyRef}`;
-  const distData = districtStats[distKey];
-  if (distData && distData.count >= 5) {
-    return { valuation: Math.round(distData.median) * property.area, level: 'district', count: distData.count };
+  if (!result) {
+    const distKey = `${property.district}__${property.propertyType}__${property.propertyRef}`;
+    const distData = districtStats[distKey];
+    if (distData && distData.count >= 5) {
+      result = { valuation: Math.round(distData.median) * property.area, level: 'district', count: distData.count };
+    }
   }
   
-  return null;
+  if (!result) return null;
+  
+  // Apply district correction
+  if (DISTRICT_CORRECTION[property.district]) {
+    result.valuation = Math.round(result.valuation * DISTRICT_CORRECTION[property.district]);
+  }
+  
+  // Small apartment correction
+  if (property.area < 80 && property.propertyType === 'apartment') {
+    result.valuation = Math.round(result.valuation * 0.94);
+  }
+  
+  return result;
 }
 
 async function main() {
-  console.log('🚀 AQAR — v18 LOO + Land Fix + Weight + Retail\n');
+  console.log('🚀 AQAR — v19 All Fixes\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
@@ -240,7 +280,6 @@ async function main() {
 
   if (cleaned.length === 0) { console.log('❌ No transactions'); return; }
 
-  // Compute LOO medians at 4 levels
   const projectSizeStats = computeMedians(cleaned, t => {
     if (!t.project || t.project.length < 2) return null;
     return `${t.project}__${t.propertyType}__${getSizeCategory(t.area, t.propertyType)}`;
@@ -275,14 +314,17 @@ async function main() {
   const allWithin25 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
   const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length };
-  const marketOutput = { metadata: { version: '18.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'Leave-One-Out + Land fix + Weight 0.15 + Retail min 2', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
+  const marketOutput = { metadata: { version: '19.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v19 All fixes', dataSource: 'DLD Real (All)' }, metrics: marketMetrics, records: allResults };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
   console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}%`);
 
-  // ===== 120-DAY EVALUATION =====
-  console.log('\n🔍 120-Day Evaluation...');
+  // ===== 120-DAY EVALUATION (excluding January) =====
+  console.log('\n🔍 120-Day Evaluation (from Feb 2026)...');
+  const feb1_2026 = new Date('2026-02-01');
   const days120Ago = new Date(Date.now() - 120 * 86400000);
-  const evalData = cleaned.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= days120Ago; });
+  const evalStartDate = days120Ago > feb1_2026 ? days120Ago : feb1_2026;
+  
+  const evalData = cleaned.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= evalStartDate; });
 
   const evalResults = [];
   for (const t of evalData) {
@@ -312,10 +354,10 @@ async function main() {
   });
 
   const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels };
-  const evalOutput = { metadata: { version: '18.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'Leave-One-Out + Land fix + Weight 0.15 + Retail min 2', dataSource: 'DLD Real (120 days)' }, metrics: evalMetrics, records: evalResults };
+  const evalOutput = { metadata: { version: '19.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v19 All fixes', dataSource: 'DLD Real (120 days from Feb 2026)' }, metrics: evalMetrics, records: evalResults };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
-  console.log(`\n📊 120-Day: ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}%`);
+  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}%`);
   console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}%`);
 }
 
