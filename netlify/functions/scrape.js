@@ -78,7 +78,8 @@ async function getGISData(lat, lng, radius = 500) {
     }
   }
 
-  if (closestDistrict && closestDistance < 3000) {
+  // زيادة المسافة المسموحة من 3000 إلى 5000 متر (5km)
+  if (closestDistrict && closestDistance < 5000) {
     console.log(`📍 Using cached data for ${closestDistrict} (${Math.round(closestDistance)}m away)`);
     const districtData = cache.data[closestDistrict];
     const result = {
@@ -105,21 +106,78 @@ async function getGISData(lat, lng, radius = 500) {
 }
 
 async function getGISFromAddress(address) {
-  // Simplified: try to find matching district by name
+  // تحسين مطابقة العناوين
   const cache = loadOSMCache();
   if (!cache || !cache.data) return null;
 
-  const addressLower = address.toLowerCase();
+  const addressLower = address.toLowerCase().trim();
+  
+  // قائمة المرادفات للمناطق
+  const synonyms = {
+    'dubai marina': 'Dubai Marina',
+    'marina': 'Dubai Marina',
+    'palm': 'Palm Jumeirah',
+    'palm jumeirah': 'Palm Jumeirah',
+    'downtown': 'Downtown Dubai',
+    'business bay': 'Business Bay',
+    'jvc': 'Jumeirah Village Circle',
+    'jumeirah village': 'Jumeirah Village Circle',
+    'jlt': 'Jumeirah Lake Towers',
+    'jumeirah lake towers': 'Jumeirah Lake Towers',
+    'dubai hills': 'Dubai Hills Estate',
+    'arabian ranches': 'Arabian Ranches',
+    'emirates hills': 'Emirates Hills',
+    'springs': 'The Springs',
+    'the springs': 'The Springs',
+    'meadows': 'The Meadows',
+    'the meadows': 'The Meadows',
+    'barsha': 'Al Barsha',
+    'al barsha': 'Al Barsha',
+    'deira': 'Deira',
+    'bur dubai': 'Bur Dubai',
+    'damac hills': 'Damac Hills',
+    'mirdif': 'Mirdif',
+    'furjan': 'Al Furjan',
+    'al furjan': 'Al Furjan',
+    'discovery gardens': 'Discovery Gardens',
+    'motor city': 'Motor City',
+    'dubai sports city': 'Dubai Sports City',
+    'dso': 'Dubai Silicon Oasis',
+    'dubai silicon oasis': 'Dubai Silicon Oasis',
+    'international city': 'International City',
+    'nahda': 'Al Nahda',
+    'al nahda': 'Al Nahda',
+    'emaaar beachfront': 'Emaar Beachfront',
+    'creek harbour': 'Dubai Creek Harbour',
+    'dubai creek': 'Dubai Creek Harbour'
+  };
+
+  // البحث عن تطابق مباشر
   let bestMatch = null;
   let bestScore = 0;
 
   for (const [district, data] of Object.entries(cache.data)) {
     const districtLower = district.toLowerCase();
+    // تطابق تام أو جزئي
     if (addressLower.includes(districtLower) || districtLower.includes(addressLower)) {
-      const score = districtLower.length;
+      const score = Math.max(districtLower.length, addressLower.length);
       if (score > bestScore) {
         bestScore = score;
         bestMatch = { ...data, district };
+      }
+    }
+  }
+
+  // إذا لم يتم العثور على تطابق، جرب المرادفات
+  if (!bestMatch) {
+    for (const [synonym, district] of Object.entries(synonyms)) {
+      if (addressLower.includes(synonym)) {
+        const data = cache.data[district];
+        if (data) {
+          bestMatch = { ...data, district };
+          console.log(`📍 Matched synonym "${synonym}" to district "${district}"`);
+          break;
+        }
       }
     }
   }
@@ -133,28 +191,17 @@ async function getGISFromAddress(address) {
     };
   }
 
-  // If no match, use geocoding only (simplified)
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&accept-language=en`;
-    const response = await axios.get(url, {
-      timeout: 5000,
-      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
-    });
-    if (response.data && response.data.length > 0) {
-      const result = response.data[0];
-      const lat = parseFloat(result.lat);
-      const lng = parseFloat(result.lon);
-      const gisData = await getGISData(lat, lng);
-      return {
-        ...gisData,
-        displayName: result.display_name,
-        lat,
-        lng,
-        source: 'geocoded'
-      };
-    }
-  } catch (error) {
-    console.log(`⚠️ Geocoding failed: ${error.message}`);
+  // إذا لم يتم العثور على تطابق، استخدم المنطقة الأولى كتخمين
+  const firstDistrict = Object.keys(cache.data)[0];
+  if (firstDistrict) {
+    console.log(`⚠️ No exact match, using first district: ${firstDistrict}`);
+    const data = cache.data[firstDistrict];
+    return {
+      ...data,
+      district: firstDistrict,
+      displayName: firstDistrict,
+      source: 'fallback'
+    };
   }
 
   return null;
