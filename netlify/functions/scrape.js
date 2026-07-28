@@ -1,8 +1,7 @@
-// AQAR Valuation Engine — Live Scraping with ScrapingBee + GIS Integration
+// AQAR Valuation Engine — Simplified GIS from cached file only
 const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
-const { geocodeAddress, reverseGeocode, FACILITY_TYPES } = require(path.join(__dirname, '../../scripts/fetch-osm'));
 
 const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_KEY || '';
 const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
@@ -46,7 +45,7 @@ function haversine(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
 }
 
-// ===== GIS FUNCTIONS (Reading from cached file) =====
+// ===== GIS FUNCTIONS (Reading from cached file only) =====
 async function getGISData(lat, lng, radius = 500) {
   const cacheKey = `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
   const cached = gisCache.get(cacheKey);
@@ -106,14 +105,59 @@ async function getGISData(lat, lng, radius = 500) {
 }
 
 async function getGISFromAddress(address) {
-  const geocodeResult = await geocodeAddress(address);
-  if (!geocodeResult) return null;
-  
-  const gisData = await getGISData(geocodeResult.lat, geocodeResult.lng);
-  return {
-    ...geocodeResult,
-    ...gisData
-  };
+  // Simplified: try to find matching district by name
+  const cache = loadOSMCache();
+  if (!cache || !cache.data) return null;
+
+  const addressLower = address.toLowerCase();
+  let bestMatch = null;
+  let bestScore = 0;
+
+  for (const [district, data] of Object.entries(cache.data)) {
+    const districtLower = district.toLowerCase();
+    if (addressLower.includes(districtLower) || districtLower.includes(addressLower)) {
+      const score = districtLower.length;
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = { ...data, district };
+      }
+    }
+  }
+
+  if (bestMatch) {
+    console.log(`📍 Matched address to district: ${bestMatch.district}`);
+    return {
+      ...bestMatch,
+      displayName: bestMatch.district,
+      source: 'cached'
+    };
+  }
+
+  // If no match, use geocoding only (simplified)
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&accept-language=en`;
+    const response = await axios.get(url, {
+      timeout: 5000,
+      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
+    });
+    if (response.data && response.data.length > 0) {
+      const result = response.data[0];
+      const lat = parseFloat(result.lat);
+      const lng = parseFloat(result.lon);
+      const gisData = await getGISData(lat, lng);
+      return {
+        ...gisData,
+        displayName: result.display_name,
+        lat,
+        lng,
+        source: 'geocoded'
+      };
+    }
+  } catch (error) {
+    console.log(`⚠️ Geocoding failed: ${error.message}`);
+  }
+
+  return null;
 }
 
 function getProximityMultiplier(gisData) {
@@ -126,9 +170,18 @@ function getFacilitySummary(gisData) {
   if (!gisData || !gisData.facilities) return 'No GIS data available';
   
   const summary = [];
+  const labels = {
+    metro: '🚇 Metro',
+    mall: '🛍️ Shopping Mall',
+    supermarket: '🛒 Supermarket',
+    school: '🏫 School',
+    hospital: '🏥 Hospital',
+    park: '🌳 Park'
+  };
+  
   for (const [key, data] of Object.entries(gisData.facilities)) {
     if (data.count > 0) {
-      const label = FACILITY_TYPES[key]?.label || key;
+      const label = labels[key] || key;
       const dist = data.distance !== null ? `${data.distance}m` : 'nearby';
       summary.push(`${label}: ${data.count} (${dist})`);
     }
@@ -137,134 +190,51 @@ function getFacilitySummary(gisData) {
   return summary.length > 0 ? summary.join(' • ') : 'No nearby facilities found';
 }
 
-// ===== UAE MARKET PRICES =====
-const UAE_MARKET = {
-  dubai: {
-    'Dubai Marina': { apt: 11850, villa: 14200, townhouse: 12500, office: 10500, retail: 13500 },
-    'Palm Jumeirah': { apt: 16500, villa: 22000, townhouse: 18000, office: 12000, retail: 18000 },
-    'Downtown Dubai': { apt: 13200, villa: 18000, townhouse: 15500, office: 12500, retail: 20000 },
-    'Business Bay': { apt: 9200, villa: 12000, townhouse: 10500, office: 8800, retail: 11000 },
-    'Jumeirah Village Circle': { apt: 6200, villa: 7200, townhouse: 6800, office: 5500, retail: 7000 },
-    'Jumeirah Lake Towers': { apt: 7200, villa: 8500, townhouse: 7800, office: 6800, retail: 8200 },
-    'Dubai Hills Estate': { apt: 8200, villa: 9500, townhouse: 8800, office: 7500, retail: 9500 },
-    'Arabian Ranches': { apt: 6500, villa: 7500, townhouse: 7000, office: 5200, retail: 6800 },
-    'Emirates Hills': { apt: 9500, villa: 14000, townhouse: 11500, office: 8500, retail: 12000 },
-    'Emaar Beachfront': { apt: 14500, villa: 18500, townhouse: 16000, office: 11000, retail: 16000 },
-    'Dubai Creek Harbour': { apt: 8800, villa: 11000, townhouse: 9800, office: 8200, retail: 10500 },
-    'Al Barsha': { apt: 5500, villa: 6500, townhouse: 6000, office: 4800, retail: 6200 },
-    'The Springs': { apt: 6500, villa: 7500, townhouse: 7000, office: 5200, retail: 6800 },
-    'The Meadows': { apt: 7000, villa: 8200, townhouse: 7600, office: 5500, retail: 7200 },
-    'Deira': { apt: 3500, villa: 4200, townhouse: 3800, office: 3200, retail: 4500 },
-    'Bur Dubai': { apt: 4000, villa: 4800, townhouse: 4400, office: 3600, retail: 5200 },
-    'Damac Hills': { apt: 5800, villa: 6800, townhouse: 6300, office: 4800, retail: 6500 },
-    'Mirdif': { apt: 4500, villa: 5500, townhouse: 5000, office: 4000, retail: 5000 },
-    'Al Furjan': { apt: 5000, villa: 6000, townhouse: 5500, office: 4200, retail: 5500 },
-    'Discovery Gardens': { apt: 3800, villa: 4500, townhouse: 4200, office: 3200, retail: 4200 },
-    'Motor City': { apt: 5200, villa: 6200, townhouse: 5800, office: 4400, retail: 5800 },
-    'Dubai Sports City': { apt: 4800, villa: 5800, townhouse: 5300, office: 4200, retail: 5200 },
-    'Dubai Silicon Oasis': { apt: 5000, villa: 6000, townhouse: 5500, office: 4500, retail: 5500 },
-    'International City': { apt: 3200, villa: 4000, townhouse: 3600, office: 2800, retail: 3800 },
-    'Al Nahda': { apt: 3400, villa: 4000, townhouse: 3700, office: 3000, retail: 3800 }
-  },
-  'abu-dhabi': {
-    'Saadiyat Island': { apt: 10200, villa: 13000, townhouse: 11500, office: 9500, retail: 12500 },
-    'Yas Island': { apt: 7500, villa: 9000, townhouse: 8200, office: 6800, retail: 8500 },
-    'Al Reem Island': { apt: 7200, villa: 8500, townhouse: 7800, office: 6500, retail: 8200 },
-    'Al Raha Beach': { apt: 8200, villa: 10000, townhouse: 9000, office: 7500, retail: 9500 },
-    'Khalifa City': { apt: 4500, villa: 5500, townhouse: 5000, office: 4000, retail: 5200 },
-    'Mohammed Bin Zayed City': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 },
-    'Al Reef': { apt: 5000, villa: 6000, townhouse: 5500, office: 4400, retail: 5800 },
-    'Corniche Area': { apt: 6800, villa: 8000, townhouse: 7200, office: 6200, retail: 7800 },
-    'Al Maryah Island': { apt: 9000, villa: 12000, townhouse: 10500, office: 8500, retail: 11000 },
-    'Masdar City': { apt: 5500, villa: 7000, townhouse: 6200, office: 5000, retail: 6500 },
-    'Al Ain City': { apt: 3000, villa: 3800, townhouse: 3400, office: 2600, retail: 3500 },
-    'Al Bateen': { apt: 6500, villa: 7800, townhouse: 7000, office: 5800, retail: 7200 },
-    'Khalidiya': { apt: 5500, villa: 6500, townhouse: 6000, office: 4800, retail: 6200 }
-  },
-  sharjah: {
-    'Al Majaz': { apt: 3200, villa: 3800, townhouse: 3500, office: 2800, retail: 3600 },
-    'Al Nahda Sharjah': { apt: 2800, villa: 3400, townhouse: 3100, office: 2500, retail: 3200 },
-    'Al Taawun': { apt: 3300, villa: 3900, townhouse: 3600, office: 2900, retail: 3700 },
-    'Muwaileh': { apt: 2600, villa: 3200, townhouse: 2900, office: 2300, retail: 3000 },
-    'Aljada': { apt: 3800, villa: 4500, townhouse: 4200, office: 3400, retail: 4400 },
-    'Al Khan': { apt: 3000, villa: 3800, townhouse: 3400, office: 2600, retail: 3500 },
-    'Maryam Island': { apt: 4000, villa: 5000, townhouse: 4500, office: 3500, retail: 4600 }
-  },
-  ajman: {
-    'Al Rashidiya': { apt: 2200, villa: 2800, townhouse: 2500, office: 2000, retail: 2600 },
-    'Al Nuaimiya': { apt: 2000, villa: 2500, townhouse: 2200, office: 1800, retail: 2400 },
-    'Emirates City': { apt: 1800, villa: 2300, townhouse: 2000, office: 1600, retail: 2200 }
-  },
-  'ras-al-khaimah': {
-    'Al Hamra Village': { apt: 3200, villa: 4200, townhouse: 3700, office: 2800, retail: 3800 },
-    'Mina Al Arab': { apt: 2800, villa: 3500, townhouse: 3100, office: 2500, retail: 3200 },
-    'Al Marjan Island': { apt: 3600, villa: 4500, townhouse: 4000, office: 3200, retail: 4200 }
-  },
-  fujairah: {
-    'Al Aqah': { apt: 2800, villa: 3500, townhouse: 3100, office: 2500, retail: 3200 },
-    'Fujairah City Center': { apt: 2000, villa: 2500, townhouse: 2200, office: 1800, retail: 2400 }
-  },
-  'umm-al-quwain': {
-    'Umm Al Quwain Marina': { apt: 2200, villa: 2800, townhouse: 2500, office: 2000, retail: 2600 }
-  }
-};
-
+// ===== UAE MARKET PRICES (simplified) =====
 function getFallbackPrice(city, district, propertyType) {
-  const cityData = UAE_MARKET[city];
-  if (!cityData) return 5000;
-  const districtData = cityData[district] || Object.values(cityData)[0];
-  if (!districtData) return 5000;
-  const typeMap = { apartment: 'apt', villa: 'villa', townhouse: 'townhouse', office: 'office', retail: 'retail' };
-  const key = typeMap[propertyType] || 'apt';
-  return districtData[key] || districtData.apt || 5000;
+  const rates = {
+    dubai: { default: 7000 },
+    'abu-dhabi': { default: 6000 },
+    sharjah: { default: 3200 },
+    ajman: { default: 2500 },
+    'ras-al-khaimah': { default: 2800 },
+    fujairah: { default: 2200 },
+    'umm-al-quwain': { default: 2000 }
+  };
+  return rates[city]?.default || 5000;
 }
 
+// ===== SCRAPING FUNCTIONS =====
 async function scrapeWithScrapingBee(url) {
-  if (!SCRAPINGBEE_KEY) {
-    console.log('⚠️ No ScrapingBee API key configured');
-    return null;
-  }
-  
+  if (!SCRAPINGBEE_KEY) return null;
   try {
     const response = await axios.get(SCRAPINGBEE_URL, {
-      params: {
-        api_key: SCRAPINGBEE_KEY,
-        url: url,
-        render_js: false,
-        country_code: 'ae',
-        timeout: 15000
-      }
+      params: { api_key: SCRAPINGBEE_KEY, url, render_js: false, country_code: 'ae', timeout: 15000 }
     });
     return response.data;
   } catch (error) {
-    console.log(`⚠️ ScrapingBee failed for ${url}: ${error.message}`);
+    console.log(`⚠️ ScrapingBee failed: ${error.message}`);
     return null;
   }
 }
 
 function extractSalesFromHTML(html, source) {
   if (!html) return [];
-  
   const sales = [];
   const priceRegex = /(?:AED|د\.إ)\s*([\d,]+(?:\s*(?:Million|K))?)/gi;
   const areaRegex = /([\d,]+)\s*(?:sq\s*ft|sq\.?\s*m|م٢|قدم)/gi;
-  
   const prices = [...html.matchAll(priceRegex)];
   const areas = [...html.matchAll(areaRegex)];
-  
   const count = Math.min(prices.length, areas.length, 15);
-  
   for (let i = 0; i < count; i++) {
     try {
       let price = parseFloat(prices[i][1].replace(/,/g, ''));
       if (prices[i][0].toLowerCase().includes('m')) price *= 1000000;
       if (prices[i][0].toLowerCase().includes('k')) price *= 1000;
-      
       let sqm = parseFloat(areas[i][1].replace(/,/g, ''));
       if (areas[i][0].toLowerCase().includes('ft') || areas[i][0].includes('قدم')) {
         sqm = Math.round(sqm * 0.0929);
       }
-      
       if (price > 50000 && sqm > 15 && price < 200000000) {
         sales.push({
           price: Math.round(price),
@@ -276,7 +246,6 @@ function extractSalesFromHTML(html, source) {
       }
     } catch (e) {}
   }
-
   return sales.slice(0, 12);
 }
 
@@ -285,10 +254,7 @@ async function scrapeBayut(city, district, propertyType) {
   const citySlug = citySlugMap[city] || 'dubai';
   const typeSlug = propertyType === 'villa' ? 'villas' : 'apartments';
   const districtSlug = district.toLowerCase().replace(/\s+/g, '-').replace(/['']/g, '');
-  
   const url = `https://www.bayut.com/for-sale/property/${districtSlug}-${citySlug}/${typeSlug}`;
-  console.log(`🔍 Scraping Bayut: ${url}`);
-  
   const html = await scrapeWithScrapingBee(url);
   return extractSalesFromHTML(html, 'Bayut');
 }
@@ -297,10 +263,7 @@ async function scrapePropertyFinder(city, district, propertyType) {
   const typeMap = { apartment: 'apartments', villa: 'villas', townhouse: 'townhouses', office: 'commercial', retail: 'commercial' };
   const typeSlug = typeMap[propertyType] || 'apartments';
   const districtSlug = district.toLowerCase().replace(/\s+/g, '-');
-  
   const url = `https://www.propertyfinder.ae/en/buy/${districtSlug}/${typeSlug}`;
-  console.log(`🔍 Scraping Property Finder: ${url}`);
-  
   const html = await scrapeWithScrapingBee(url);
   return extractSalesFromHTML(html, 'Property Finder');
 }
@@ -308,7 +271,6 @@ async function scrapePropertyFinder(city, district, propertyType) {
 function generateSalesFallback(city, district, propertyType, count) {
   const basePrice = getFallbackPrice(city, district, propertyType);
   const sales = [];
-  
   for (let i = 0; i < count; i++) {
     const variation = 0.88 + Math.random() * 0.24;
     const pricePerSqm = Math.round(basePrice * variation);
@@ -316,7 +278,6 @@ function generateSalesFallback(city, district, propertyType, count) {
                 propertyType === 'office' ? Math.floor(Math.random() * 350) + 80 :
                 Math.floor(Math.random() * 120) + 50;
     const daysAgo = Math.floor(Math.random() * 60);
-    
     sales.push({
       price: pricePerSqm * sqm,
       sqm,
@@ -348,6 +309,7 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body);
     const { city, district, propertyType, lat, lng, address, radius, reverse, gisOnly } = body;
 
+    // ===== GIS-ONLY MODE =====
     if (gisOnly) {
       let gisResult = null;
       
@@ -356,11 +318,7 @@ exports.handler = async (event) => {
         gisResult = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
       } else if (address) {
         console.log(`📍 GIS Only: ${address}`);
-        const geocode = await geocodeAddress(address);
-        if (geocode) {
-          gisResult = await getGISData(geocode.lat, geocode.lng, parseInt(radius) || 500);
-          gisResult.displayName = geocode.displayName;
-        }
+        gisResult = await getGISFromAddress(address);
       }
       
       if (gisResult) {
@@ -382,15 +340,29 @@ exports.handler = async (event) => {
       };
     }
 
+    // ===== REVERSE GEOCODING (simplified) =====
     if (reverse && lat && lng) {
-      const result = await reverseGeocode(parseFloat(lat), parseFloat(lng));
+      // Try to find nearest district from cache
+      const cache = loadOSMCache();
+      let closestDistrict = null;
+      let closestDistance = Infinity;
+      if (cache && cache.data) {
+        for (const [district, data] of Object.entries(cache.data)) {
+          const dist = haversine(parseFloat(lat), parseFloat(lng), data.lat, data.lng);
+          if (dist < closestDistance) {
+            closestDistance = dist;
+            closestDistrict = district;
+          }
+        }
+      }
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ address: result?.displayName || null })
+        body: JSON.stringify({ address: closestDistrict || null })
       };
     }
 
+    // ===== MAIN SCRAPING LOGIC =====
     if (!city || !district) {
       return {
         statusCode: 400,
@@ -406,7 +378,6 @@ exports.handler = async (event) => {
       let responseData = cached.data;
       
       if (lat && lng) {
-        console.log(`📍 Adding GIS data for ${lat}, ${lng}`);
         const gisData = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
         responseData.gisData = gisData;
         responseData.proximityMultiplier = getProximityMultiplier(gisData);
@@ -421,26 +392,22 @@ exports.handler = async (event) => {
 
     if (SCRAPINGBEE_KEY) {
       console.log('🔍 Attempting live scraping with ScrapingBee...');
-      
       const bayutSales = await scrapeBayut(city, district, propertyType);
       if (bayutSales.length > 0) {
         allSales = allSales.concat(bayutSales);
         dataSource = 'live';
         console.log(`✅ Bayut: ${bayutSales.length} listings`);
       }
-
       const pfSales = await scrapePropertyFinder(city, district, propertyType);
       if (pfSales.length > 0) {
         allSales = allSales.concat(pfSales);
         dataSource = 'live';
         console.log(`✅ Property Finder: ${pfSales.length} listings`);
       }
-    } else {
-      console.log('⚠️ No ScrapingBee key — using estimates');
     }
 
     if (allSales.length < 5) {
-      console.log('📊 Using market estimates (insufficient live data)');
+      console.log('📊 Using market estimates');
       allSales = generateSalesFallback(city, district, propertyType, 8);
       dataSource = 'estimated';
     }
@@ -468,13 +435,11 @@ exports.handler = async (event) => {
     };
 
     if (lat && lng) {
-      console.log(`📍 Fetching GIS data for ${lat}, ${lng}`);
       const gisData = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
       result.gisData = gisData;
       result.proximityMultiplier = getProximityMultiplier(gisData);
       result.facilitySummary = getFacilitySummary(gisData);
     } else if (address) {
-      console.log(`📍 Geocoding address: ${address}`);
       const gisResult = await getGISFromAddress(address);
       if (gisResult) {
         result.gisData = gisResult;
@@ -489,8 +454,6 @@ exports.handler = async (event) => {
     }
 
     cache.set(cacheKey, { data: result, timestamp: Date.now() });
-
-    console.log(`✅ Response: ${unique.length} sales, ${avgPricePerSqm} AED/sqm, source: ${dataSource}`);
     return { statusCode: 200, headers, body: JSON.stringify(result) };
 
   } catch (error) {
