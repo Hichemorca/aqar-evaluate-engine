@@ -119,7 +119,7 @@ function setCache(key, data) {
 async function queryOverpass(query) {
   const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
   try {
-    const response = await axios.get(url, { timeout: 10000 });
+    const response = await axios.get(url, { timeout: 30000 });
     return response.data;
   } catch (error) {
     console.log(`⚠️ OSM query failed: ${error.message}`);
@@ -241,7 +241,7 @@ async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&accept-language=en`;
   try {
     const response = await axios.get(url, {
-      timeout: 5000,
+      timeout: 3000,
       headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
     });
     if (response.data && response.data.length > 0) {
