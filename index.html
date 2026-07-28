@@ -452,32 +452,6 @@ const UAE_DISTRICTS = {
 
 let scrapedDistrictData = null;
 
-// ===== PORTALS LAYER WEIGHTS =====
-function getPortalWeights(evalLevel, propertyType) {
-  const levelWeights = {
-    project_size:  { dld: 0.90, portals: 0.10 },
-    project:       { dld: 0.85, portals: 0.15 },
-    district_size: { dld: 0.75, portals: 0.25 },
-    district:      { dld: 0.65, portals: 0.35 }
-  };
-  
-  const typeAdjustments = {
-    apartment: { portals: 0 },
-    villa:     { portals: -0.05 },
-    office:    { portals: +0.05 },
-    retail:    { portals: +0.10 },
-    land:      { portals: 0 }
-  };
-  
-  const base = levelWeights.district_size;
-  const adj = typeAdjustments[propertyType] || typeAdjustments.apartment;
-  
-  return {
-    dld: Math.max(0.5, Math.min(0.9, base.dld)),
-    portals: Math.max(0.1, Math.min(0.5, base.portals + adj.portals))
-  };
-}
-
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.checkbox-item').forEach(item => {
@@ -781,7 +755,9 @@ function salesComparisonApproach(data) {
 
   value = Math.round(value);
   
-  let details = `Based on DLD + Live Portals data: ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
+  const comparableCount = data.scrapedData?.count || 0;
+const confidenceLevel = comparableCount >= 10 ? 'High' : comparableCount >= 5 ? 'Medium' : 'Basic';
+let details = `Based on ${comparableCount} comparable sales (${confidenceLevel} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
   if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
   if (data.viewType) details += ` View: ${data.viewType}.`;
   details += ` Condition: ${data.condition}, Age: ${age}y.`;

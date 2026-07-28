@@ -210,33 +210,6 @@ function computeMedians(transactions, groupFn) {
   return medians;
 }
 
-// ===== LAYER WEIGHTS =====
-function getLayerWeights(evalLevel, propertyType) {
-  const levelWeights = {
-    project_size:  { dld: 0.85, consultancy: 0.10, portals: 0.05 },
-    project:       { dld: 0.75, consultancy: 0.15, portals: 0.10 },
-    district_size: { dld: 0.65, consultancy: 0.20, portals: 0.15 },
-    district:      { dld: 0.55, consultancy: 0.25, portals: 0.20 }
-  };
-  
-  const typeAdjustments = {
-    apartment: { dld: 0, consultancy: 0, portals: 0 },
-    villa:     { dld: +0.05, consultancy: -0.03, portals: -0.02 },
-    office:    { dld: -0.05, consultancy: +0.03, portals: +0.02 },
-    retail:    { dld: -0.10, consultancy: +0.05, portals: +0.05 },
-    land:      { dld: -0.05, consultancy: +0.03, portals: +0.02 }
-  };
-  
-  const base = levelWeights[evalLevel] || levelWeights.district;
-  const adj = typeAdjustments[propertyType] || typeAdjustments.apartment;
-  
-  return {
-    dld: Math.max(0.4, Math.min(0.9, base.dld + adj.dld)),
-    consultancy: Math.max(0.05, Math.min(0.3, base.consultancy + adj.consultancy)),
-    portals: Math.max(0.02, Math.min(0.25, base.portals + adj.portals))
-  };
-}
-
 // ===== EVALUATE =====
 async function evaluateProperty(property, projectSizeStats, projectStats, districtSizeStats, districtStats) {
   const sizeCat = getSizeCategory(property.area, property.propertyType);
