@@ -1,5 +1,4 @@
-﻿// AQAR OSM Data Fetcher — Pre-fetch all Dubai districts via GitHub Actions
-// Optimized: Smaller queries, better error handling, retry logic
+﻿// AQAR OSM Data Fetcher — Simplified query
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -7,7 +6,7 @@ const path = require('path');
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
 
-// ===== DUBAI DISTRICTS WITH COORDINATES =====
+// ===== DUBAI DISTRICTS =====
 const DUBAI_DISTRICTS = {
   'Dubai Marina': { lat: 25.0734, lng: 55.1312 },
   'Palm Jumeirah': { lat: 25.1100, lng: 55.1400 },
@@ -36,19 +35,16 @@ const DUBAI_DISTRICTS = {
   'Dubai Creek Harbour': { lat: 25.2200, lng: 55.3300 }
 };
 
-// ===== FACILITY TYPES (simplified) =====
+// ===== SIMPLIFIED FACILITY TYPES =====
 const FACILITY_TYPES = {
-  metro: { tags: ['railway=station'], label: '🚇 Metro', weight: 0.15 },
-  mall: { tags: ['shop=mall'], label: '🛍️ Shopping Mall', weight: 0.12 },
-  supermarket: { tags: ['shop=supermarket'], label: '🛒 Supermarket', weight: 0.08 },
-  school: { tags: ['amenity=school'], label: '🏫 School', weight: 0.10 },
-  hospital: { tags: ['amenity=hospital'], label: '🏥 Hospital', weight: 0.08 },
-  park: { tags: ['leisure=park'], label: '🌳 Park', weight: 0.10 },
-  mosque: { tags: ['amenity=mosque'], label: '🕌 Mosque', weight: 0.04 },
-  bus: { tags: ['highway=bus_stop'], label: '🚌 Bus Stop', weight: 0.05 }
+  metro: { tag: 'railway=station', label: '🚇 Metro', weight: 0.15 },
+  mall: { tag: 'shop=mall', label: '🛍️ Shopping Mall', weight: 0.12 },
+  supermarket: { tag: 'shop=supermarket', label: '🛒 Supermarket', weight: 0.08 },
+  school: { tag: 'amenity=school', label: '🏫 School', weight: 0.10 },
+  hospital: { tag: 'amenity=hospital', label: '🏥 Hospital', weight: 0.08 },
+  park: { tag: 'leisure=park', label: '🌳 Park', weight: 0.10 }
 };
 
-// ===== HAVERSINE =====
 function haversine(lat1, lng1, lat2, lng2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -59,70 +55,44 @@ function haversine(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
 }
 
-// ===== QUERY OVERPASS (with retry) =====
-async function queryOverpass(query, retries = 2) {
-  const servers = [
-    'https://overpass-api.de/api/interpreter',
-    'https://overpass.kumi.systems/api/interpreter'
-  ];
-  
-  for (let attempt = 0; attempt <= retries; attempt++) {
-    for (const server of servers) {
-      try {
-        const url = `${server}?data=${encodeURIComponent(query)}`;
-        console.log(`🌍 Querying: ${server} (attempt ${attempt + 1})`);
-        const response = await axios.get(url, {
-          timeout: 20000,
-          headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
-        });
-        if (response.data && response.data.elements) {
-          console.log(`✅ Success from ${server}`);
-          return response.data;
-        }
-      } catch (error) {
-        console.log(`⚠️ ${server} failed: ${error.message}`);
-        await new Promise(r => setTimeout(r, 2000));
-      }
-    }
+async function queryOverpass(query) {
+  const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+  try {
+    const response = await axios.get(url, {
+      timeout: 15000,
+      headers: { 'User-Agent': 'AQAR-Valuation-Engine/2.0' }
+    });
+    return response.data;
+  } catch (error) {
+    return null;
   }
-  return null;
 }
 
-// ===== FETCH FACILITIES FOR DISTRICT (one type at a time) =====
-async function fetchFacilitiesForDistrict(district, lat, lng, radius = 1000) {
-  console.log(`🔍 Fetching facilities for ${district}...`);
+async function fetchFacilitiesForDistrict(district, lat, lng, radius = 800) {
+  console.log(`🔍 Fetching ${district}...`);
   
   const results = {};
   Object.keys(FACILITY_TYPES).forEach(key => {
-    results[key] = { count: 0, distance: null, score: 0, weight: FACILITY_TYPES[key].weight };
+    results[key] = { count: 0, distance: null, score: 0 };
   });
 
   let totalCount = 0;
 
-  // Fetch each facility type separately (smaller queries)
   for (const [key, type] of Object.entries(FACILITY_TYPES)) {
-    const tag = type.tags[0];
+    // استعلام بسيط جداً
     const query = `
-      [out:json][timeout:20];
-      (
-        node["${tag}"](around:${radius},${lat},${lng});
-        way["${tag}"](around:${radius},${lat},${lng});
-      );
+      [out:json][timeout:10];
+      node["${type.tag}"](around:${radius},${lat},${lng});
       out body;
-      >;
-      out skel qt;
     `;
 
     const data = await queryOverpass(query);
-    if (!data || !data.elements) {
-      continue;
-    }
+    if (!data || !data.elements) continue;
 
-    const elements = data.elements || [];
     let count = 0;
     let minDistance = null;
 
-    elements.forEach(el => {
+    data.elements.forEach(el => {
       if (el.lat && el.lon) {
         const dist = haversine(lat, lng, el.lat, el.lon);
         if (dist <= radius) {
@@ -138,26 +108,22 @@ async function fetchFacilitiesForDistrict(district, lat, lng, radius = 1000) {
     results[key].distance = minDistance;
     totalCount += count;
 
-    // Wait between requests to avoid rate limiting
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 300));
   }
 
-  // Calculate scores
+  // حساب النقاط
   let totalScore = 0;
   Object.keys(results).forEach(key => {
     const r = results[key];
-    const maxDist = radius;
+    const weight = FACILITY_TYPES[key].weight;
     if (r.count > 0) {
-      const distanceFactor = r.distance !== null ? Math.max(0, 1 - (r.distance / maxDist)) : 0.5;
-      const countFactor = Math.min(1, r.count / 3);
-      r.score = Math.min(1, r.weight * distanceFactor * (1 + countFactor * 0.5));
-    } else {
-      r.score = 0;
+      const distanceFactor = r.distance !== null ? Math.max(0, 1 - (r.distance / radius)) : 0.5;
+      r.score = Math.min(1, weight * distanceFactor * Math.min(r.count, 3));
     }
     totalScore += r.score;
   });
 
-  console.log(`✅ ${district}: ${totalCount} facilities found`);
+  console.log(`   ${district}: ${totalCount} facilities`);
 
   return {
     district,
@@ -172,10 +138,8 @@ async function fetchFacilitiesForDistrict(district, lat, lng, radius = 1000) {
   };
 }
 
-// ===== MAIN =====
 async function main() {
-  console.log('🚀 AQAR OSM Data Pre-fetcher (Optimized)\n');
-  console.log(`📊 Fetching data for ${Object.keys(DUBAI_DISTRICTS).length} districts...`);
+  console.log('🚀 AQAR OSM Data Pre-fetcher (Simplified)\n');
 
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -185,45 +149,12 @@ async function main() {
   let successCount = 0;
 
   for (const [district, coords] of Object.entries(DUBAI_DISTRICTS)) {
-    try {
-      const data = await fetchFacilitiesForDistrict(district, coords.lat, coords.lng);
-      if (data && data.count > 0) {
-        results[district] = data;
-        successCount++;
-        console.log(`✅ ${district}: ${data.count} facilities found`);
-      } else {
-        console.log(`⚠️ ${district}: No facilities found, using empty data`);
-        // Still save empty data to avoid re-fetching
-        results[district] = {
-          district,
-          lat: coords.lat,
-          lng: coords.lng,
-          facilities: {},
-          totalScore: 0,
-          count: 0,
-          queriedAt: new Date().toISOString(),
-          radius: 1000,
-          source: 'empty'
-        };
-      }
-    } catch (error) {
-      console.log(`❌ ${district}: Error - ${error.message}`);
-      // Save empty data to avoid re-fetching
-      results[district] = {
-        district,
-        lat: coords.lat,
-        lng: coords.lng,
-        facilities: {},
-        totalScore: 0,
-        count: 0,
-        queriedAt: new Date().toISOString(),
-        radius: 1000,
-        source: 'error',
-        error: error.message
-      };
+    const data = await fetchFacilitiesForDistrict(district, coords.lat, coords.lng);
+    if (data) {
+      results[district] = data;
+      if (data.count > 0) successCount++;
     }
-    // Wait between districts to avoid rate limiting
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(r => setTimeout(r, 1000));
   }
 
   const output = {
