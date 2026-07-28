@@ -1,7 +1,8 @@
 // AQAR Valuation Engine — Live Scraping with ScrapingBee + GIS Integration
 const axios = require('axios');
-const { fetchFacilities, geocodeAddress, reverseGeocode, FACILITY_TYPES } = require('../../scripts/fetch-osm');
-
+// استبدال السطر 3
+const path = require('path');
+const { fetchFacilities, geocodeAddress, reverseGeocode, FACILITY_TYPES } = require(path.join(__dirname, '../../scripts/fetch-osm'));
 const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_KEY || '';
 const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
 
