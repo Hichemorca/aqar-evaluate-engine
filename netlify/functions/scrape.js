@@ -328,22 +328,13 @@ async function getGISData(lat, lng, radius = 500) {
   }
 
   try {
-    console.log(`🌍 Fetching OSM data for ${lat}, ${lng} with radius ${radius}m`);
+    console.log(`🌍 Fetching real OSM data for ${lat}, ${lng} with radius ${radius}m`);
     const result = await fetchFacilities(lat, lng, radius);
-    
-    // إذا لم يتم العثور على بيانات، استخدم mock data
-    if (!result || result.count === 0) {
-      console.log('⚠️ No OSM data found, using mock data');
-      const mockData = generateMockGISData(lat, lng, radius);
-      gisCache.set(cacheKey, { data: mockData, timestamp: Date.now() });
-      return mockData;
-    }
-    
     gisCache.set(cacheKey, { data: result, timestamp: Date.now() });
     return result;
   } catch (error) {
     console.log(`⚠️ GIS fetch failed: ${error.message}`);
-    // Fallback: generate mock data
+    // استخدام بيانات وهمية عند فشل OSM
     const mockData = generateMockGISData(lat, lng, radius);
     gisCache.set(cacheKey, { data: mockData, timestamp: Date.now() });
     return mockData;
@@ -364,7 +355,6 @@ async function getGISFromAddress(address) {
 function getProximityMultiplier(gisData) {
   if (!gisData || !gisData.totalScore) return 1;
   
-  // Base multiplier: 1 + (score * 0.5) — max 1.5x
   const multiplier = 1 + (gisData.totalScore * 0.5);
   return Math.min(1.5, Math.max(1.0, multiplier));
 }
@@ -478,7 +468,6 @@ exports.handler = async (event) => {
     let allSales = [];
     let dataSource = 'estimated';
 
-    // Try live scraping
     if (SCRAPINGBEE_KEY) {
       console.log('🔍 Attempting live scraping with ScrapingBee...');
       
@@ -499,14 +488,12 @@ exports.handler = async (event) => {
       console.log('⚠️ No ScrapingBee key — using estimates');
     }
 
-    // Fallback if scraping failed
     if (allSales.length < 5) {
       console.log('📊 Using market estimates (insufficient live data)');
       allSales = generateSalesFallback(city, district, propertyType, 8);
       dataSource = 'estimated';
     }
 
-    // Deduplicate
     const seen = new Set();
     const unique = allSales.filter(s => {
       const key = `${Math.round(s.price/10000)}-${s.sqm}`;
@@ -529,7 +516,6 @@ exports.handler = async (event) => {
       dataSource
     };
 
-    // ===== GIS DATA (if coordinates provided) =====
     if (lat && lng) {
       console.log(`📍 Fetching GIS data for ${lat}, ${lng}`);
       const gisData = await getGISData(parseFloat(lat), parseFloat(lng), parseInt(radius) || 500);
