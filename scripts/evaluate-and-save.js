@@ -1,4 +1,4 @@
-﻿﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration (with enriched data)
+﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration (with enriched data)
 const fs = require('fs');
 const path = require('path');
 
@@ -209,19 +209,12 @@ function haversine(lat1, lng1, lat2, lng2) {
 
 // ===== GIS PROXIMITY SCORE =====
 function getGISScoreFromTransaction(transaction) {
-  // إذا كانت الصفقة تحتوي على إحداثيات مباشرة، استخدمها
+  // فقط استخدم الإحداثيات الدقيقة للعقار نفسه إن كانت متوفرة
   if (transaction.hasGis && transaction.gisScore !== null && transaction.gisScore !== undefined) {
     return transaction.gisScore;
   }
   
-  // وإلا، حاول استخدام اسم المنطقة
-  if (osmCache && osmCache.data) {
-    const districtData = osmCache.data[transaction.district];
-    if (districtData) {
-      return districtData.totalScore || 0;
-    }
-  }
-  
+  // لا نستخدم متوسط المنطقة كـ fallback لأنه يُدخل ضوضاء في النتائج
   return null;
 }
 
