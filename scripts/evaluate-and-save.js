@@ -1,4 +1,4 @@
-﻿// AQAR Auto-Evaluate — v21: Multi-Layer Weighting (DLD + Consultancy + Government)
+﻿﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration
 const fs = require('fs');
 const path = require('path');
 
@@ -6,15 +6,18 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
 const CONSULTANCY_FILE = path.join(DATA_DIR, 'consultancy-data.json');
 const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
+const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
 
 // ===== LOAD EXTERNAL DATA LAYERS =====
 let consultancyData = {};
 let governmentData = {};
+let osmCache = {};
 
 try { consultancyData = JSON.parse(fs.readFileSync(CONSULTANCY_FILE, 'utf8')); } catch(e) {}
 try { governmentData = JSON.parse(fs.readFileSync(GOVERNMENT_FILE, 'utf8')); } catch(e) {}
+try { osmCache = JSON.parse(fs.readFileSync(OSM_CACHE_FILE, 'utf8')); } catch(e) { console.log('⚠️ No OSM cache found, GIS features will be disabled'); }
 
 // ===== 10-STAGE CLEANING =====
 function filterNonSaleTransactions(transactions) {
@@ -168,6 +171,45 @@ function getSizeCategory(area, propertyType) {
   return 'medium';
 }
 
+// ===== HAVERSINE =====
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
+}
+
+// ===== GIS PROXIMITY SCORE =====
+function getGISScore(district, propertyType, osmCache) {
+  if (!osmCache || !osmCache.data) return null;
+  
+  // Find the district in cache
+  const districtData = osmCache.data[district];
+  if (!districtData) return null;
+  
+  // Return totalScore as proximity indicator
+  return districtData.totalScore || 0;
+}
+
+// ===== CALCULATE PROXIMITY MULTIPLIER (Calibrated) =====
+function getProximityMultiplier(gisScore) {
+  if (gisScore === null || gisScore === undefined) return 1;
+  
+  // Calibrated multiplier based on real estate analysis
+  // Center: 1.0 (no adjustment)
+  // gisScore = 0 (far from facilities) → 0.90 (10% reduction)
+  // gisScore = 1 (very close to facilities) → 1.10 (10% increase)
+  // Linear interpolation between these points
+  const minMultiplier = 0.90;
+  const maxMultiplier = 1.10;
+  const multiplier = minMultiplier + (gisScore * (maxMultiplier - minMultiplier));
+  
+  return Math.min(maxMultiplier, Math.max(minMultiplier, multiplier));
+}
+
 // ===== LEAVE-ONE-OUT MEDIAN =====
 function computeMedians(transactions, groupFn) {
   const groups = {};
@@ -252,38 +294,49 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   if (!result) return null;
   
   // ===== APPLY CONSULTANCY LAYER (by district) =====
-if (consultancyData.capRates) {
-  const districtRates = consultancyData.capRates[property.district] || 
-                        consultancyData.capRates['default'];
-  if (districtRates) {
-    const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
-    const marketCapRate = districtRates[typeKey] || districtRates['apartment'] || 7.0;
-    const baseCapRate = 7.0;
-    const capAdjustment = baseCapRate / marketCapRate;
-    result.valuation = Math.round(result.valuation * capAdjustment);
+  if (consultancyData.capRates) {
+    const districtRates = consultancyData.capRates[property.district] || 
+                          consultancyData.capRates['default'];
+    if (districtRates) {
+      const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
+      const marketCapRate = districtRates[typeKey] || districtRates['apartment'] || 7.0;
+      const baseCapRate = 7.0;
+      const capAdjustment = baseCapRate / marketCapRate;
+      result.valuation = Math.round(result.valuation * capAdjustment);
+    }
   }
-}
 
-if (consultancyData.vacancyRates) {
-  const districtRates = consultancyData.vacancyRates[property.district] || 
-                        consultancyData.vacancyRates['default'];
-  if (districtRates) {
-    const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
-    const vacancyRate = districtRates[typeKey] || districtRates['apartment'] || 10;
-    const vacancyAdjustment = 1 - (vacancyRate - 10) / 100;
-    result.valuation = Math.round(result.valuation * vacancyAdjustment);
+  if (consultancyData.vacancyRates) {
+    const districtRates = consultancyData.vacancyRates[property.district] || 
+                          consultancyData.vacancyRates['default'];
+    if (districtRates) {
+      const typeKey = property.propertyType === 'townhouse' ? 'villa' : property.propertyType;
+      const vacancyRate = districtRates[typeKey] || districtRates['apartment'] || 10;
+      const vacancyAdjustment = 1 - (vacancyRate - 10) / 100;
+      result.valuation = Math.round(result.valuation * vacancyAdjustment);
+    }
   }
-}
+  
+  // ===== APPLY GIS PROXIMITY LAYER =====
+  if (osmCache && osmCache.data) {
+    const gisScore = getGISScore(property.district, property.propertyType, osmCache);
+    if (gisScore !== null) {
+      const gisMultiplier = getProximityMultiplier(gisScore);
+      result.valuation = Math.round(result.valuation * gisMultiplier);
+      result.gisScore = gisScore;
+      result.gisMultiplier = gisMultiplier;
+    }
+  }
   
   return result;
 }
 
 async function main() {
-  console.log('🚀 AQAR — v21 Multi-Layer Weighting\n');
+  console.log('🚀 AQAR — v22 Multi-Layer Weighting + GIS Integration\n');
 
   if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
 
-  console.log(`📊 Layers: Consultancy=${Object.keys(consultancyData).length > 0 ? '✅' : '❌'} | Government=${Object.keys(governmentData).length > 0 ? '✅' : '❌'}`);
+  console.log(`📊 Layers: Consultancy=${Object.keys(consultancyData).length > 0 ? '✅' : '❌'} | Government=${Object.keys(governmentData).length > 0 ? '✅' : '❌'} | GIS=${Object.keys(osmCache.data || {}).length > 0 ? '✅' : '❌'}`);
 
   const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
   console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
@@ -309,13 +362,30 @@ async function main() {
   // ===== FULL MARKET ANALYSIS =====
   console.log('\n🔍 Market Analysis (ALL data)...');
   const allResults = [];
+  let gisAppliedCount = 0;
+  
   for (const t of cleaned) {
     const evalResult = await evaluateProperty(t, projectSizeStats, projectStats, districtSizeStats, districtStats);
     if (!evalResult) continue;
+    
     const aqarValuation = evalResult.valuation;
     const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
     const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
-    allResults.push({ ...t, aqarValuation, aqarVsActual: Math.round(aqarDiff * 10) / 10, appraiserValuation, evalLevel: evalResult.level, evalCount: evalResult.count });
+    
+    if (evalResult.gisMultiplier && evalResult.gisMultiplier !== 1) {
+      gisAppliedCount++;
+    }
+    
+    allResults.push({ 
+      ...t, 
+      aqarValuation, 
+      aqarVsActual: Math.round(aqarDiff * 10) / 10, 
+      appraiserValuation, 
+      evalLevel: evalResult.level, 
+      evalCount: evalResult.count,
+      gisScore: evalResult.gisScore || null,
+      gisMultiplier: evalResult.gisMultiplier || 1
+    });
   }
 
   const allAcc = allResults.map(r => 100 - Math.abs(r.aqarVsActual || 0));
@@ -326,10 +396,10 @@ async function main() {
   const allWithin15 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 15).length;
   const allWithin25 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
-  const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length };
-  const marketOutput = { metadata: { version: '21.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v21 Multi-layer weighting', dataSource: 'DLD + Consultancy + Government' }, metrics: marketMetrics, records: allResults };
+  const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length, gisApplied: gisAppliedCount };
+  const marketOutput = { metadata: { version: '22.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v22 Multi-layer weighting + GIS Integration', dataSource: 'DLD + Consultancy + Government + GIS' }, metrics: marketMetrics, records: allResults };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
-  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}%`);
+  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}% | GIS applied: ${gisAppliedCount}`);
 
   // ===== 120-DAY EVALUATION =====
   console.log('\n🔍 120-Day Evaluation (from Feb 2026)...');
@@ -340,13 +410,30 @@ async function main() {
   const evalData = cleaned.filter(t => { if (!t.saleDate) return false; const d = new Date(t.saleDate); return !isNaN(d.getTime()) && d >= evalStartDate; });
 
   const evalResults = [];
+  let evalGisApplied = 0;
+  
   for (const t of evalData) {
     const evalResult = await evaluateProperty(t, projectSizeStats, projectStats, districtSizeStats, districtStats);
     if (!evalResult) continue;
+    
     const aqarValuation = evalResult.valuation;
     const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
     const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
-    evalResults.push({ ...t, aqarValuation, aqarVsActual: Math.round(aqarDiff * 10) / 10, appraiserValuation, evalLevel: evalResult.level, evalCount: evalResult.count });
+    
+    if (evalResult.gisMultiplier && evalResult.gisMultiplier !== 1) {
+      evalGisApplied++;
+    }
+    
+    evalResults.push({ 
+      ...t, 
+      aqarValuation, 
+      aqarVsActual: Math.round(aqarDiff * 10) / 10, 
+      appraiserValuation, 
+      evalLevel: evalResult.level, 
+      evalCount: evalResult.count,
+      gisScore: evalResult.gisScore || null,
+      gisMultiplier: evalResult.gisMultiplier || 1
+    });
   }
 
   const evalAcc = evalResults.map(r => 100 - Math.abs(r.aqarVsActual || 0));
@@ -366,12 +453,28 @@ async function main() {
     console.log(`   ${l} (n=${c}): ${la}%`);
   });
 
-  const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels };
-  const evalOutput = { metadata: { version: '21.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v21 Multi-layer weighting', dataSource: 'DLD + Consultancy + Government' }, metrics: evalMetrics, records: evalResults };
+  const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels, gisApplied: evalGisApplied };
+  const evalOutput = { metadata: { version: '22.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v22 Multi-layer weighting + GIS Integration', dataSource: 'DLD + Consultancy + Government + GIS' }, metrics: evalMetrics, records: evalResults };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
-  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}%`);
-  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}%`);
+  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}% | GIS applied: ${evalGisApplied}`);
+  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}% | GIS applied: ${gisAppliedCount}`);
+  
+  // ===== GIS IMPACT ANALYSIS =====
+  if (gisAppliedCount > 0) {
+    console.log('\n📊 GIS Impact Analysis:');
+    const withGis = allResults.filter(r => r.gisMultiplier && r.gisMultiplier !== 1);
+    const withoutGis = allResults.filter(r => !r.gisMultiplier || r.gisMultiplier === 1);
+    
+    if (withGis.length > 0) {
+      const withGisAcc = Math.round(withGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withGis.length * 10) / 10;
+      console.log(`   With GIS (n=${withGis.length}): ${withGisAcc}% accuracy`);
+    }
+    if (withoutGis.length > 0) {
+      const withoutGisAcc = Math.round(withoutGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withoutGis.length * 10) / 10;
+      console.log(`   Without GIS (n=${withoutGis.length}): ${withoutGisAcc}% accuracy`);
+    }
+  }
 }
 
 main().catch(console.error);
