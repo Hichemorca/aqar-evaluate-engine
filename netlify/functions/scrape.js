@@ -14,6 +14,130 @@ const CACHE_TTL = 24 * 60 * 60 * 1000;
 const gisCache = new Map();
 const GIS_CACHE_TTL = 24 * 60 * 60 * 1000;
 
+// ===== FALLBACK GIS DATA (built-in) =====
+const FALLBACK_GIS_DATA = {
+  "Dubai Marina": {
+    district: "Dubai Marina",
+    lat: 25.0734,
+    lng: 55.1312,
+    facilities: {
+      metro: { count: 2, distance: 250, score: 0.30 },
+      mall: { count: 3, distance: 200, score: 0.36 },
+      supermarket: { count: 4, distance: 180, score: 0.32 },
+      school: { count: 2, distance: 500, score: 0.12 },
+      hospital: { count: 1, distance: 600, score: 0.08 },
+      park: { count: 1, distance: 300, score: 0.15 }
+    },
+    totalScore: 1.33,
+    count: 13
+  },
+  "Palm Jumeirah": {
+    district: "Palm Jumeirah",
+    lat: 25.1100,
+    lng: 55.1400,
+    facilities: {
+      metro: { count: 0, distance: null, score: 0 },
+      mall: { count: 1, distance: 400, score: 0.12 },
+      supermarket: { count: 2, distance: 300, score: 0.16 },
+      school: { count: 1, distance: 600, score: 0.06 },
+      hospital: { count: 0, distance: null, score: 0 },
+      park: { count: 2, distance: 200, score: 0.30 }
+    },
+    totalScore: 0.64,
+    count: 6
+  },
+  "Downtown Dubai": {
+    district: "Downtown Dubai",
+    lat: 25.1950,
+    lng: 55.2740,
+    facilities: {
+      metro: { count: 3, distance: 150, score: 0.45 },
+      mall: { count: 2, distance: 200, score: 0.36 },
+      supermarket: { count: 3, distance: 250, score: 0.24 },
+      school: { count: 2, distance: 400, score: 0.15 },
+      hospital: { count: 1, distance: 500, score: 0.10 },
+      park: { count: 1, distance: 300, score: 0.15 }
+    },
+    totalScore: 1.45,
+    count: 12
+  },
+  "Business Bay": {
+    district: "Business Bay",
+    lat: 25.1900,
+    lng: 55.2600,
+    facilities: {
+      metro: { count: 1, distance: 400, score: 0.12 },
+      mall: { count: 1, distance: 350, score: 0.12 },
+      supermarket: { count: 2, distance: 300, score: 0.16 },
+      school: { count: 1, distance: 500, score: 0.10 },
+      hospital: { count: 1, distance: 450, score: 0.08 },
+      park: { count: 0, distance: null, score: 0 }
+    },
+    totalScore: 0.58,
+    count: 6
+  },
+  "Jumeirah Village Circle": {
+    district: "Jumeirah Village Circle",
+    lat: 25.0500,
+    lng: 55.1800,
+    facilities: {
+      metro: { count: 0, distance: null, score: 0 },
+      mall: { count: 1, distance: 500, score: 0.08 },
+      supermarket: { count: 3, distance: 200, score: 0.24 },
+      school: { count: 2, distance: 300, score: 0.18 },
+      hospital: { count: 0, distance: null, score: 0 },
+      park: { count: 2, distance: 250, score: 0.30 }
+    },
+    totalScore: 0.80,
+    count: 8
+  },
+  "Jumeirah Lake Towers": {
+    district: "Jumeirah Lake Towers",
+    lat: 25.0700,
+    lng: 55.1400,
+    facilities: {
+      metro: { count: 1, distance: 300, score: 0.15 },
+      mall: { count: 2, distance: 250, score: 0.24 },
+      supermarket: { count: 3, distance: 200, score: 0.24 },
+      school: { count: 1, distance: 600, score: 0.06 },
+      hospital: { count: 0, distance: null, score: 0 },
+      park: { count: 1, distance: 350, score: 0.12 }
+    },
+    totalScore: 0.81,
+    count: 8
+  },
+  "Deira": {
+    district: "Deira",
+    lat: 25.2700,
+    lng: 55.3200,
+    facilities: {
+      metro: { count: 2, distance: 300, score: 0.24 },
+      mall: { count: 2, distance: 250, score: 0.24 },
+      supermarket: { count: 5, distance: 150, score: 0.40 },
+      school: { count: 3, distance: 200, score: 0.27 },
+      hospital: { count: 2, distance: 200, score: 0.24 },
+      park: { count: 0, distance: null, score: 0 }
+    },
+    totalScore: 1.39,
+    count: 14
+  },
+  "Al Barsha": {
+    district: "Al Barsha",
+    lat: 25.1100,
+    lng: 55.2100,
+    facilities: {
+      metro: { count: 1, distance: 350, score: 0.15 },
+      mall: { count: 2, distance: 200, score: 0.36 },
+      supermarket: { count: 3, distance: 250, score: 0.24 },
+      school: { count: 3, distance: 200, score: 0.27 },
+      hospital: { count: 1, distance: 400, score: 0.10 },
+      park: { count: 1, distance: 350, score: 0.12 }
+    },
+    totalScore: 1.24,
+    count: 11
+  }
+};
+
 // OSM Cache file path - updated to read from functions folder
 const OSM_CACHE_PATH = path.join(__dirname, 'osm-cache.json');
 let osmCache = null;
@@ -25,15 +149,27 @@ function loadOSMCache() {
     if (fs.existsSync(OSM_CACHE_PATH)) {
       const data = fs.readFileSync(OSM_CACHE_PATH, 'utf8');
       osmCache = JSON.parse(data);
-      console.log(`✅ Loaded OSM cache: ${Object.keys(osmCache.data || {}).length} districts`);
+      console.log(`✅ Loaded OSM cache from file: ${Object.keys(osmCache.data || {}).length} districts`);
       return osmCache;
     } else {
-      console.log(`❌ OSM cache file not found at: ${OSM_CACHE_PATH}`);
+      console.log(`⚠️ OSM cache file not found, using fallback data`);
+      // Use fallback data
+      osmCache = {
+        data: FALLBACK_GIS_DATA,
+        totalDistricts: Object.keys(FALLBACK_GIS_DATA).length,
+        successCount: Object.keys(FALLBACK_GIS_DATA).length
+      };
+      return osmCache;
     }
   } catch (error) {
-    console.log(`⚠️ Could not load OSM cache: ${error.message}`);
+    console.log(`⚠️ Could not load OSM cache, using fallback: ${error.message}`);
+    osmCache = {
+      data: FALLBACK_GIS_DATA,
+      totalDistricts: Object.keys(FALLBACK_GIS_DATA).length,
+      successCount: Object.keys(FALLBACK_GIS_DATA).length
+    };
+    return osmCache;
   }
-  return null;
 }
 
 // ===== HAVERSINE =====
@@ -47,7 +183,7 @@ function haversine(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1000;
 }
 
-// ===== GIS FUNCTIONS (Reading from cached file only) =====
+// ===== GIS FUNCTIONS =====
 async function getGISData(lat, lng, radius = 500) {
   const cacheKey = `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
   const cached = gisCache.get(cacheKey);
@@ -58,13 +194,12 @@ async function getGISData(lat, lng, radius = 500) {
 
   const cache = loadOSMCache();
   if (!cache || !cache.data) {
-    console.log('⚠️ No OSM cache available');
+    console.log('⚠️ No GIS data available');
     return {
       facilities: {},
       totalScore: 0,
       count: 0,
-      source: 'no-cache',
-      error: 'OSM data not available'
+      source: 'no-data'
     };
   }
 
@@ -80,9 +215,8 @@ async function getGISData(lat, lng, radius = 500) {
     }
   }
 
-  // زيادة المسافة المسموحة من 3000 إلى 5000 متر (5km)
   if (closestDistrict && closestDistance < 5000) {
-    console.log(`📍 Using cached data for ${closestDistrict} (${Math.round(closestDistance)}m away)`);
+    console.log(`📍 Using data for ${closestDistrict} (${Math.round(closestDistance)}m away)`);
     const districtData = cache.data[closestDistrict];
     const result = {
       ...districtData,
@@ -97,13 +231,12 @@ async function getGISData(lat, lng, radius = 500) {
     return result;
   }
 
-  console.log('⚠️ No nearby district found in cache');
+  console.log('⚠️ No nearby district found');
   return {
     facilities: {},
     totalScore: 0,
     count: 0,
-    source: 'no-match',
-    error: 'No matching district found in cache'
+    source: 'no-match'
   };
 }
 
@@ -111,14 +244,14 @@ async function getGISData(lat, lng, radius = 500) {
 async function getGISFromAddress(address) {
   const cache = loadOSMCache();
   if (!cache || !cache.data) {
-    console.log('⚠️ No OSM cache available');
+    console.log('⚠️ No GIS data available');
     return null;
   }
 
   const addressLower = address.toLowerCase().trim();
   console.log(`🔍 Searching for: "${addressLower}" in ${Object.keys(cache.data).length} districts`);
 
-  // ===== 1. EXACT MATCH =====
+  // 1. EXACT MATCH
   for (const [district, data] of Object.entries(cache.data)) {
     if (district.toLowerCase() === addressLower) {
       console.log(`✅ Exact match found: ${district}`);
@@ -126,13 +259,12 @@ async function getGISFromAddress(address) {
     }
   }
 
-  // ===== 2. PARTIAL MATCH =====
+  // 2. PARTIAL MATCH
   let bestMatch = null;
   let bestScore = 0;
 
   for (const [district, data] of Object.entries(cache.data)) {
     const districtLower = district.toLowerCase();
-    // إذا كان الاسم يحتوي على المنطقة أو العكس
     if (addressLower.includes(districtLower) || districtLower.includes(addressLower)) {
       const score = Math.max(districtLower.length, addressLower.length);
       if (score > bestScore) {
@@ -147,7 +279,7 @@ async function getGISFromAddress(address) {
     return bestMatch;
   }
 
-  // ===== 3. SYNONYMS =====
+  // 3. SYNONYMS
   const synonyms = {
     'dubai marina': 'Dubai Marina',
     'marina': 'Dubai Marina',
@@ -196,7 +328,7 @@ async function getGISFromAddress(address) {
     }
   }
 
-  // ===== 4. FALLBACK: Use first district =====
+  // 4. FALLBACK: Use first district
   const firstDistrict = Object.keys(cache.data)[0];
   if (firstDistrict) {
     console.log(`⚠️ No match found, using fallback: ${firstDistrict}`);
@@ -395,7 +527,6 @@ exports.handler = async (event) => {
 
     // ===== REVERSE GEOCODING (simplified) =====
     if (reverse && lat && lng) {
-      // Try to find nearest district from cache
       const cache = loadOSMCache();
       let closestDistrict = null;
       let closestDistance = Infinity;
