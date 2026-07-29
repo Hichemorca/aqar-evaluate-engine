@@ -15,7 +15,7 @@ const gisCache = new Map();
 const GIS_CACHE_TTL = 24 * 60 * 60 * 1000;
 
 // OSM Cache file path
-const OSM_CACHE_PATH = path.join(__dirname, '../../data/osm-cache.json');
+const OSM_CACHE_PATH = path.join(__dirname, 'osm-cache.json');
 let osmCache = null;
 
 // ===== LOAD OSM CACHE =====
