@@ -174,7 +174,10 @@ async function loadFromLocal() {
   document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Loading saved data...</div></div>';
   try {
     const response = await fetch('/data/accuracy-data.json');
-    if (!response.ok) return false;
+    if (!response.ok) {
+      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Could not load saved data. Click "Fetch Live Data" to load from source.</div>';
+      return false;
+    }
     const data = await response.json();
     if (!data.records || data.records.length === 0) {
       document.getElementById('tableContainer').innerHTML = '<div class="loading">No saved data found. Click "Fetch Live Data".</div>';

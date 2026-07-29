@@ -127,7 +127,10 @@ async function loadData() {
     document.getElementById('riskTable').innerHTML = riskHTML;
 
   } catch(e) {
-    document.getElementById('investmentTable').innerHTML = '<div class="loading">No data available</div>';
+    const errorMsg = '⚠️ Could not load market data. Please check your connection or try again later.';
+    document.getElementById('investmentTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
+    document.getElementById('growingTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
+    document.getElementById('riskTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
   }
 }
 

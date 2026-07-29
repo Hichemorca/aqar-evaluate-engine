@@ -11,7 +11,7 @@
   status = 200
 
 [[redirects]]
-  from = "/data/*"
+  from = "/data-api/*"
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
