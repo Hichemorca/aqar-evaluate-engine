@@ -1,9 +1,10 @@
-﻿﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration
+﻿﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration (with enriched data)
 const fs = require('fs');
 const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
+const DLD_ENRICHED_FILE = path.join(DATA_DIR, 'dld-transactions-enriched.json');
 const CONSULTANCY_FILE = path.join(DATA_DIR, 'consultancy-data.json');
 const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
 const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
@@ -18,6 +19,30 @@ let osmCache = {};
 try { consultancyData = JSON.parse(fs.readFileSync(CONSULTANCY_FILE, 'utf8')); } catch(e) {}
 try { governmentData = JSON.parse(fs.readFileSync(GOVERNMENT_FILE, 'utf8')); } catch(e) {}
 try { osmCache = JSON.parse(fs.readFileSync(OSM_CACHE_FILE, 'utf8')); } catch(e) { console.log('⚠️ No OSM cache found, GIS features will be disabled'); }
+
+// ===== LOAD DLD DATA (prefer enriched if available) =====
+let dldData = [];
+let usingEnriched = false;
+
+if (fs.existsSync(DLD_ENRICHED_FILE)) {
+  try {
+    dldData = JSON.parse(fs.readFileSync(DLD_ENRICHED_FILE, 'utf8'));
+    usingEnriched = true;
+    console.log(`✅ Using enriched DLD data with GIS coordinates (${dldData.length.toLocaleString()} transactions)`);
+  } catch(e) {
+    console.log(`⚠️ Failed to load enriched data, falling back to basic: ${e.message}`);
+  }
+}
+
+if (!usingEnriched || dldData.length === 0) {
+  if (fs.existsSync(DLD_FILE)) {
+    dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
+    console.log(`📋 Using basic DLD data (${dldData.length.toLocaleString()} transactions)`);
+  } else {
+    console.log('❌ No DLD data found');
+    process.exit(1);
+  }
+}
 
 // ===== 10-STAGE CLEANING =====
 function filterNonSaleTransactions(transactions) {
@@ -183,15 +208,21 @@ function haversine(lat1, lng1, lat2, lng2) {
 }
 
 // ===== GIS PROXIMITY SCORE =====
-function getGISScore(district, propertyType, osmCache) {
-  if (!osmCache || !osmCache.data) return null;
+function getGISScoreFromTransaction(transaction) {
+  // إذا كانت الصفقة تحتوي على إحداثيات مباشرة، استخدمها
+  if (transaction.hasGis && transaction.gisScore !== null && transaction.gisScore !== undefined) {
+    return transaction.gisScore;
+  }
   
-  // Find the district in cache
-  const districtData = osmCache.data[district];
-  if (!districtData) return null;
+  // وإلا، حاول استخدام اسم المنطقة
+  if (osmCache && osmCache.data) {
+    const districtData = osmCache.data[transaction.district];
+    if (districtData) {
+      return districtData.totalScore || 0;
+    }
+  }
   
-  // Return totalScore as proximity indicator
-  return districtData.totalScore || 0;
+  return null;
 }
 
 // ===== CALCULATE PROXIMITY MULTIPLIER (Calibrated) =====
@@ -202,7 +233,6 @@ function getProximityMultiplier(gisScore) {
   // Center: 1.0 (no adjustment)
   // gisScore = 0 (far from facilities) → 0.90 (10% reduction)
   // gisScore = 1 (very close to facilities) → 1.10 (10% increase)
-  // Linear interpolation between these points
   const minMultiplier = 0.90;
   const maxMultiplier = 1.10;
   const multiplier = minMultiplier + (gisScore * (maxMultiplier - minMultiplier));
@@ -318,14 +348,12 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   }
   
   // ===== APPLY GIS PROXIMITY LAYER =====
-  if (osmCache && osmCache.data) {
-    const gisScore = getGISScore(property.district, property.propertyType, osmCache);
-    if (gisScore !== null) {
-      const gisMultiplier = getProximityMultiplier(gisScore);
-      result.valuation = Math.round(result.valuation * gisMultiplier);
-      result.gisScore = gisScore;
-      result.gisMultiplier = gisMultiplier;
-    }
+  const gisScore = getGISScoreFromTransaction(property);
+  if (gisScore !== null && gisScore !== undefined) {
+    const gisMultiplier = getProximityMultiplier(gisScore);
+    result.valuation = Math.round(result.valuation * gisMultiplier);
+    result.gisScore = gisScore;
+    result.gisMultiplier = gisMultiplier;
   }
   
   return result;
@@ -334,11 +362,9 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
 async function main() {
   console.log('🚀 AQAR — v22 Multi-Layer Weighting + GIS Integration\n');
 
-  if (!fs.existsSync(DLD_FILE)) { console.log('❌ No DLD data'); return; }
-
   console.log(`📊 Layers: Consultancy=${Object.keys(consultancyData).length > 0 ? '✅' : '❌'} | Government=${Object.keys(governmentData).length > 0 ? '✅' : '❌'} | GIS=${Object.keys(osmCache.data || {}).length > 0 ? '✅' : '❌'}`);
+  console.log(`📋 Using ${usingEnriched ? 'enriched' : 'basic'} DLD data`);
 
-  const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
   console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
   
   const cleaned = applyAllFilters(dldData);
@@ -363,6 +389,7 @@ async function main() {
   console.log('\n🔍 Market Analysis (ALL data)...');
   const allResults = [];
   let gisAppliedCount = 0;
+  let gisAvailableCount = 0;
   
   for (const t of cleaned) {
     const evalResult = await evaluateProperty(t, projectSizeStats, projectStats, districtSizeStats, districtStats);
@@ -371,6 +398,11 @@ async function main() {
     const aqarValuation = evalResult.valuation;
     const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
     const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
+    
+    // Track GIS availability
+    if (t.hasGis && t.gisScore !== null && t.gisScore !== undefined) {
+      gisAvailableCount++;
+    }
     
     if (evalResult.gisMultiplier && evalResult.gisMultiplier !== 1) {
       gisAppliedCount++;
@@ -396,10 +428,31 @@ async function main() {
   const allWithin15 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 15).length;
   const allWithin25 = allResults.filter(r => Math.abs(r.aqarVsActual) <= 25).length;
 
-  const marketMetrics = { avgAccuracy: allAvgAcc, avgDeviation: allAvgDev, priceBand10: Math.round((allWithin10 / allResults.length) * 100), priceBand15: Math.round((allWithin15 / allResults.length) * 100), priceBand25: Math.round((allWithin25 / allResults.length) * 100), totalRecords: allResults.length, gisApplied: gisAppliedCount };
-  const marketOutput = { metadata: { version: '22.0.0', lastUpdated: new Date().toISOString(), totalRecords: allResults.length, methodology: 'v22 Multi-layer weighting + GIS Integration', dataSource: 'DLD + Consultancy + Government + GIS' }, metrics: marketMetrics, records: allResults };
+  const marketMetrics = { 
+    avgAccuracy: allAvgAcc, 
+    avgDeviation: allAvgDev, 
+    priceBand10: Math.round((allWithin10 / allResults.length) * 100), 
+    priceBand15: Math.round((allWithin15 / allResults.length) * 100), 
+    priceBand25: Math.round((allWithin25 / allResults.length) * 100), 
+    totalRecords: allResults.length, 
+    gisAvailable: gisAvailableCount,
+    gisApplied: gisAppliedCount 
+  };
+  
+  const marketOutput = { 
+    metadata: { 
+      version: '22.0.0', 
+      lastUpdated: new Date().toISOString(), 
+      totalRecords: allResults.length, 
+      methodology: 'v22 Multi-layer weighting + GIS Integration', 
+      dataSource: 'DLD + Consultancy + Government + GIS',
+      dataType: usingEnriched ? 'enriched' : 'basic'
+    }, 
+    metrics: marketMetrics, 
+    records: allResults 
+  };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
-  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}% | GIS applied: ${gisAppliedCount}`);
+  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount}`);
 
   // ===== 120-DAY EVALUATION =====
   console.log('\n🔍 120-Day Evaluation (from Feb 2026)...');
@@ -411,6 +464,7 @@ async function main() {
 
   const evalResults = [];
   let evalGisApplied = 0;
+  let evalGisAvailable = 0;
   
   for (const t of evalData) {
     const evalResult = await evaluateProperty(t, projectSizeStats, projectStats, districtSizeStats, districtStats);
@@ -419,6 +473,10 @@ async function main() {
     const aqarValuation = evalResult.valuation;
     const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
     const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
+    
+    if (t.hasGis && t.gisScore !== null && t.gisScore !== undefined) {
+      evalGisAvailable++;
+    }
     
     if (evalResult.gisMultiplier && evalResult.gisMultiplier !== 1) {
       evalGisApplied++;
@@ -453,27 +511,47 @@ async function main() {
     console.log(`   ${l} (n=${c}): ${la}%`);
   });
 
-  const evalMetrics = { avgAccuracy: evalAvgAcc, avgDeviation: evalAvgDev, priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), totalRecords: evalResults.length, levels, gisApplied: evalGisApplied };
-  const evalOutput = { metadata: { version: '22.0.0', lastUpdated: new Date().toISOString(), totalRecords: evalResults.length, methodology: 'v22 Multi-layer weighting + GIS Integration', dataSource: 'DLD + Consultancy + Government + GIS' }, metrics: evalMetrics, records: evalResults };
+  const evalMetrics = { 
+    avgAccuracy: evalAvgAcc, 
+    avgDeviation: evalAvgDev, 
+    priceBand10: Math.round((evalWithin10 / evalResults.length) * 100), 
+    priceBand15: Math.round((evalWithin15 / evalResults.length) * 100), 
+    priceBand25: Math.round((evalWithin25 / evalResults.length) * 100), 
+    totalRecords: evalResults.length, 
+    levels,
+    gisAvailable: evalGisAvailable,
+    gisApplied: evalGisApplied 
+  };
+  
+  const evalOutput = { 
+    metadata: { 
+      version: '22.0.0', 
+      lastUpdated: new Date().toISOString(), 
+      totalRecords: evalResults.length, 
+      methodology: 'v22 Multi-layer weighting + GIS Integration', 
+      dataSource: 'DLD + Consultancy + Government + GIS',
+      dataType: usingEnriched ? 'enriched' : 'basic'
+    }, 
+    metrics: evalMetrics, 
+    records: evalResults 
+  };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
-  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}% | GIS applied: ${evalGisApplied}`);
-  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}% | GIS applied: ${gisAppliedCount}`);
+  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}% | GIS available: ${evalGisAvailable} | GIS applied: ${evalGisApplied}`);
+  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount}`);
   
   // ===== GIS IMPACT ANALYSIS =====
-  if (gisAppliedCount > 0) {
+  const withGis = allResults.filter(r => r.gisMultiplier && r.gisMultiplier !== 1);
+  const withoutGis = allResults.filter(r => !r.gisMultiplier || r.gisMultiplier === 1);
+  
+  if (withGis.length > 0) {
     console.log('\n📊 GIS Impact Analysis:');
-    const withGis = allResults.filter(r => r.gisMultiplier && r.gisMultiplier !== 1);
-    const withoutGis = allResults.filter(r => !r.gisMultiplier || r.gisMultiplier === 1);
-    
-    if (withGis.length > 0) {
-      const withGisAcc = Math.round(withGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withGis.length * 10) / 10;
-      console.log(`   With GIS (n=${withGis.length}): ${withGisAcc}% accuracy`);
-    }
-    if (withoutGis.length > 0) {
-      const withoutGisAcc = Math.round(withoutGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withoutGis.length * 10) / 10;
-      console.log(`   Without GIS (n=${withoutGis.length}): ${withoutGisAcc}% accuracy`);
-    }
+    const withGisAcc = Math.round(withGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withGis.length * 10) / 10;
+    console.log(`   With GIS applied (n=${withGis.length}): ${withGisAcc}% accuracy`);
+  }
+  if (withoutGis.length > 0) {
+    const withoutGisAcc = Math.round(withoutGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withoutGis.length * 10) / 10;
+    console.log(`   Without GIS (n=${withoutGis.length}): ${withoutGisAcc}% accuracy`);
   }
 }
 
