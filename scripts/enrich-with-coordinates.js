@@ -1,0 +1,214 @@
+﻿// AQAR Enrich with Coordinates — Create dld-transactions-enriched.json with lat/lng
+const fs = require('fs');
+const path = require('path');
+
+const DATA_DIR = path.join(__dirname, '..', 'data');
+const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
+const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
+const OUTPUT_FILE = path.join(DATA_DIR, 'dld-transactions-enriched.json');
+
+// ===== LOAD DATA =====
+console.log('🚀 AQAR Enrich with Coordinates (Creating enriched dataset)\n');
+
+if (!fs.existsSync(DLD_FILE)) {
+  console.log('❌ DLD file not found');
+  process.exit(1);
+}
+
+if (!fs.existsSync(OSM_CACHE_FILE)) {
+  console.log('❌ OSM cache file not found');
+  process.exit(1);
+}
+
+const dldData = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
+const osmCache = JSON.parse(fs.readFileSync(OSM_CACHE_FILE, 'utf8'));
+
+console.log(`📋 DLD transactions: ${dldData.length.toLocaleString()}`);
+console.log(`📋 OSM districts: ${Object.keys(osmCache.data || {}).length}`);
+
+// ===== BUILD DISTRICT MAP WITH ALIASES =====
+const districtMap = {};
+
+// 1. Primary names (exact match)
+for (const [district, data] of Object.entries(osmCache.data || {})) {
+  districtMap[district] = {
+    lat: data.lat,
+    lng: data.lng,
+    totalScore: data.totalScore || 0,
+    facilities: data.facilities || {},
+    matchedBy: 'exact'
+  };
+}
+
+// 2. Aliases (common variations)
+const aliases = {
+  // Dubai
+  'Dubai Marina': ['Dubai Marina', 'Marina', 'Dubai Marina Residence'],
+  'Palm Jumeirah': ['Palm Jumeirah', 'Palm', 'The Palm', 'Palm Jumeirah Island'],
+  'Downtown Dubai': ['Downtown Dubai', 'Downtown', 'Dubai Downtown', 'Burj Khalifa'],
+  'Business Bay': ['Business Bay', 'Business Bay Dubai'],
+  'Jumeirah Village Circle': ['JVC', 'Jumeirah Village Circle', 'Jumeirah Village'],
+  'Jumeirah Lake Towers': ['JLT', 'Jumeirah Lake Towers', 'Lake Towers'],
+  'Dubai Hills Estate': ['Dubai Hills', 'Dubai Hills Estate', 'Dubai Hills Residence'],
+  'Arabian Ranches': ['Arabian Ranches', 'Arabian Ranches I', 'Arabian Ranches II', 'Arabian Ranches III', 'Arabian Ranches Polo Club'],
+  'Emirates Hills': ['Emirates Hills', 'Emirates Hills Dubai'],
+  'The Springs': ['The Springs', 'Springs', 'Springs Dubai'],
+  'The Meadows': ['The Meadows', 'Meadows', 'Meadows Dubai'],
+  'Al Barsha': ['Al Barsha', 'Barsha', 'Al Barsha First', 'Al Barsha Second', 'Al Barsha Third', 'Al Barshaa South First'],
+  'Deira': ['Deira', 'Deira Dubai'],
+  'Bur Dubai': ['Bur Dubai', 'Bur Dubai Area'],
+  'Damac Hills': ['Damac Hills', 'Damac Hills Dubai'],
+  'Mirdif': ['Mirdif', 'Mirdif Dubai'],
+  'Al Furjan': ['Al Furjan', 'Furjan'],
+  'Discovery Gardens': ['Discovery Gardens', 'Discovery'],
+  'Motor City': ['Motor City', 'Motor City Dubai'],
+  'Dubai Sports City': ['Dubai Sports City', 'Sports City'],
+  'Dubai Silicon Oasis': ['DSO', 'Dubai Silicon Oasis', 'Silicon Oasis'],
+  'International City': ['International City', 'IC', 'Dubai International City'],
+  'Al Nahda': ['Al Nahda', 'Nahda', 'Al Nahda Dubai'],
+  'Emaar Beachfront': ['Emaar Beachfront', 'Emaar Beach'],
+  'Dubai Creek Harbour': ['Dubai Creek Harbour', 'Creek Harbour'],
+  
+  // Abu Dhabi
+  'Saadiyat Island': ['Saadiyat Island', 'Saadiyat'],
+  'Yas Island': ['Yas Island', 'Yas'],
+  'Al Reem Island': ['Al Reem Island', 'Reem Island'],
+  'Khalifa City': ['Khalifa City', 'Khalifa'],
+  'Abu Dhabi Corniche': ['Corniche', 'Abu Dhabi Corniche'],
+  'Al Ain City': ['Al Ain City', 'Al Ain'],
+  
+  // Sharjah
+  'Al Majaz': ['Al Majaz', 'Majaz'],
+  'Aljada': ['Aljada', 'Jada'],
+  'Al Taawun': ['Al Taawun', 'Taawun'],
+  
+  // Ajman
+  'Al Rashidiya Ajman': ['Al Rashidiya', 'Rashidiya Ajman'],
+  'Al Nuaimiya': ['Al Nuaimiya', 'Nuaimiya'],
+  
+  // Ras Al Khaimah
+  'Al Hamra Village': ['Al Hamra', 'Hamra Village'],
+  'Al Marjan Island': ['Al Marjan', 'Marjan Island'],
+  'Mina Al Arab': ['Mina Al Arab', 'Mina Arab'],
+  
+  // Fujairah
+  'Fujairah City Center': ['Fujairah City', 'Fujairah'],
+  
+  // Umm Al Quwain
+  'Umm Al Quwain Marina': ['Umm Al Quwain', 'UAQ Marina']
+};
+
+// Add aliases to map
+for (const [primary, aliasList] of Object.entries(aliases)) {
+  if (districtMap[primary]) {
+    for (const alias of aliasList) {
+      if (!districtMap[alias]) {
+        districtMap[alias] = {
+          ...districtMap[primary],
+          matchedBy: 'alias'
+        };
+      }
+    }
+  }
+}
+
+console.log(`📊 District map built: ${Object.keys(districtMap).length} entries (${Object.keys(osmCache.data || {}).length} primary + aliases)`);
+
+// ===== HELPER: Find best match =====
+function findBestMatch(district, districtMap) {
+  if (!district) return null;
+  const lowerDistrict = district.toLowerCase().trim();
+  
+  // 1. Exact match (case insensitive)
+  for (const [key, value] of Object.entries(districtMap)) {
+    if (key.toLowerCase() === lowerDistrict) {
+      return value;
+    }
+  }
+  
+  // 2. Partial match (if district contains key or key contains district)
+  let bestMatch = null;
+  let bestScore = 0;
+  
+  for (const [key, value] of Object.entries(districtMap)) {
+    const lowerKey = key.toLowerCase();
+    if (lowerDistrict.includes(lowerKey) || lowerKey.includes(lowerDistrict)) {
+      const score = Math.max(lowerKey.length, lowerDistrict.length);
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = value;
+      }
+    }
+  }
+  
+  return bestMatch;
+}
+
+// ===== ENRICH TRANSACTIONS =====
+let enrichedCount = 0;
+let missingCount = 0;
+const missingDistricts = new Set();
+const matchStats = { exact: 0, alias: 0, partial: 0 };
+
+const enrichedData = dldData.map(t => {
+  const district = t.district || '';
+  const match = findBestMatch(district, districtMap);
+  
+  if (match) {
+    enrichedCount++;
+    if (match.matchedBy === 'exact') matchStats.exact++;
+    else if (match.matchedBy === 'alias') matchStats.alias++;
+    else matchStats.partial++;
+    
+    return {
+      ...t,
+      lat: match.lat,
+      lng: match.lng,
+      gisScore: match.totalScore,
+      gisFacilities: match.facilities,
+      gisMatchedBy: match.matchedBy || 'partial',
+      hasGis: true
+    };
+  } else {
+    missingCount++;
+    missingDistricts.add(district);
+    return {
+      ...t,
+      lat: null,
+      lng: null,
+      gisScore: null,
+      gisFacilities: null,
+      gisMatchedBy: null,
+      hasGis: false
+    };
+  }
+});
+
+console.log(`\n📊 Match Statistics:`);
+console.log(`   Exact matches: ${matchStats.exact}`);
+console.log(`   Alias matches: ${matchStats.alias}`);
+console.log(`   Partial matches: ${matchStats.partial}`);
+console.log(`   Total enriched: ${enrichedCount.toLocaleString()} (${(enrichedCount/dldData.length*100).toFixed(1)}%)`);
+console.log(`   Missing: ${missingCount.toLocaleString()} (${(missingCount/dldData.length*100).toFixed(1)}%)`);
+
+// ===== SHOW SAMPLE MISSING DISTRICTS =====
+if (missingDistricts.size > 0) {
+  console.log(`\n⚠️ Missing districts (${missingDistricts.size}):`);
+  const sorted = Array.from(missingDistricts).sort();
+  sorted.slice(0, 20).forEach(d => console.log(`   - ${d}`));
+  if (sorted.length > 20) {
+    console.log(`   ... and ${sorted.length - 20} more`);
+  }
+}
+
+// ===== SAVE ENRICHED DATA =====
+fs.writeFileSync(OUTPUT_FILE, JSON.stringify(enrichedData, null, 2));
+console.log(`\n✅ Saved enriched data to: ${OUTPUT_FILE}`);
+
+// ===== SUMMARY =====
+console.log('\n📊 Summary:');
+console.log(`   Total transactions: ${dldData.length.toLocaleString()}`);
+console.log(`   With coordinates: ${enrichedCount.toLocaleString()}`);
+console.log(`   Without coordinates: ${missingCount.toLocaleString()}`);
+console.log(`   Missing districts: ${missingDistricts.size}`);
+console.log(`\n✅ File created: ${OUTPUT_FILE}`);
