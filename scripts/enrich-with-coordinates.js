@@ -132,6 +132,30 @@ const additionalAliases = {
   'Abu Hail': ['Abu Hail', 'Abu Hail Dubai'],
   'Al Buteen': ['Al Buteen', 'Buteen'],
   'Al Dhagaya': ['Al Dhagaya', 'Dhagaya'],
+  'Al Jaddaf': ['Al Jaddaf', 'Jaddaf'],
+  'Al Khawaneej': ['Al Khawaneej', 'Khawaneej'],
+  'Al Lusaily': ['Al Lusaily', 'Lusaily'],
+  'Al Manara': ['Al Manara', 'Manara'],
+  'Al Merkad': ['Al Merkad', 'Merkad'],
+  'Al Mina': ['Al Mina', 'Mina Dubai'],
+  'Al Mizhar': ['Al Mizhar', 'Mizhar Dubai'],
+  'Al Muhaisnah': ['Al Muhaisnah', 'Muhaisnah'],
+  'Al Nahda Second': ['Al Nahda Second', 'Nahda Second'],
+  'Al Nahda First': ['Al Nahda First', 'Nahda First'],
+  'Al Qudra': ['Al Qudra', 'Qudra'],
+  'Al Rashidiya Dubai': ['Al Rashidiya', 'Rashidiya Dubai'],
+  'Al Satwa': ['Al Satwa', 'Satwa'],
+  'Al Shafar': ['Al Shafar', 'Shafar'],
+  'Al Suq Al Kabeer': ['Al Suq Al Kabeer', 'Suq Al Kabeer'],
+  'Al Tayer': ['Al Tayer', 'Tayer'],
+  'Al Warqa First': ['Al Warqa First', 'Warqa First'],
+  'Al Warqa Second': ['Al Warqa Second', 'Warqa Second'],
+  'Al Warqa Third': ['Al Warqa Third', 'Warqa Third'],
+  'Al Warqa Fourth': ['Al Warqa Fourth', 'Warqa Fourth'],
+  'Al Warqa Fifth': ['Al Warqa Fifth', 'Warqa Fifth'],
+  'Al Warqa Sixth': ['Al Warqa Sixth', 'Warqa Sixth'],
+  'Al Warqa Seventh': ['Al Warqa Seventh', 'Warqa Seventh'],
+  'Al Warqa Eighth': ['Al Warqa Eighth', 'Warqa Eighth'],
   
   // Abu Dhabi
   'Al Shahama': ['Al Shahama', 'Shahama'],
@@ -143,6 +167,16 @@ const additionalAliases = {
   'Baniyas': ['Baniyas', 'Bani Yas'],
   'Mushrif': ['Mushrif'],
   'Hudayriyat': ['Hudayriyat Island', 'Hudayriyat'],
+  'Al Raha': ['Al Raha', 'Raha'],
+  'Al Bandar': ['Al Bandar', 'Bandar'],
+  'Al Seef': ['Al Seef', 'Seef Abu Dhabi'],
+  'Al Nahyan': ['Al Nahyan', 'Nahyan'],
+  'Al Manhal': ['Al Manhal', 'Manhal'],
+  'Al Mushrif': ['Al Mushrif', 'Mushrif Abu Dhabi'],
+  'Al Rowdah': ['Al Rowdah', 'Rowdah'],
+  'Al Saadah': ['Al Saadah', 'Saadah'],
+  'Al Salam': ['Al Salam', 'Salam'],
+  'Al Dhafra': ['Al Dhafra', 'Dhafra'],
   
   // Sharjah
   'Al Ghuwair': ['Al Ghuwair', 'Ghuwair'],
@@ -152,6 +186,12 @@ const additionalAliases = {
   'Al Zahia': ['Al Zahia', 'Zahia'],
   'Tilal City': ['Tilal City'],
   'University City Sharjah': ['University City', 'Sharjah University'],
+  'Al Sajaa': ['Al Sajaa', 'Sajaa'],
+  'Al Muwailih': ['Al Muwailih', 'Muwailih'],
+  'Al Muzaira': ['Al Muzaira', 'Muzaira'],
+  'Al Nakhil': ['Al Nakhil', 'Nakhil'],
+  'Al Qarayen': ['Al Qarayen', 'Qarayen'],
+  'Al Tawun': ['Al Tawun', 'Tawun'],
   
   // Ajman
   'Ajman Downtown': ['Ajman Downtown', 'Downtown Ajman'],
@@ -159,21 +199,43 @@ const additionalAliases = {
   'Al Jurf': ['Al Jurf', 'Jurf'],
   'Al Mowaihat': ['Al Mowaihat', 'Mowaihat'],
   'City Towers Ajman': ['City Towers', 'Ajman Towers'],
+  'Al Zorah': ['Al Zorah', 'Zorah'],
+  'Al Yasmeen': ['Al Yasmeen', 'Yasmeen'],
+  'Al Rawda': ['Al Rawda', 'Rawda Ajman'],
   
   // Ras Al Khaimah
   'Al Nakheel': ['Al Nakheel', 'Nakheel RAK'],
   'Dafan Al Khor': ['Dafan Al Khor'],
   'RAK City': ['RAK City'],
+  'Al Dhait': ['Al Dhait', 'Dhait'],
+  'Al Dhait South': ['Al Dhait South', 'Dhait South'],
+  'Al Hamra': ['Al Hamra', 'Hamra'],
+  'Al Jazeera': ['Al Jazeera', 'Jazeera RAK'],
+  'Al Khor': ['Al Khor', 'Khor RAK'],
+  'Al Mamourah': ['Al Mamourah', 'Mamourah'],
+  'Al Mairid': ['Al Mairid', 'Mairid'],
+  'Al Rams': ['Al Rams', 'Rams'],
+  'Al Sawan': ['Al Sawan', 'Sawan'],
   
   // Fujairah
   'Al Faseel': ['Al Faseel', 'Faseel'],
   'Dibba': ['Dibba', 'Dibba Fujairah'],
   'Murbah': ['Murbah', 'Mirbah'],
   'Sharm': ['Sharm', 'Sharm Fujairah'],
+  'Al Hail': ['Al Hail', 'Hail Fujairah'],
+  'Al Mashreq': ['Al Mashreq', 'Mashreq'],
+  'Al Minazif': ['Al Minazif', 'Minazif'],
+  'Al Qurayyah': ['Al Qurayyah', 'Qurayyah'],
+  'Al Subaykhah': ['Al Subaykhah', 'Subaykhah'],
+  'Al Turayf': ['Al Turayf', 'Turayf'],
   
   // Umm Al Quwain
   'Al Raas': ['Al Raas', 'Raas'],
-  'King Shaheen Street': ['King Shaheen Street']
+  'King Shaheen Street': ['King Shaheen Street'],
+  'Al Hadeethah': ['Al Hadeethah', 'Hadeethah'],
+  'Al Muwahid': ['Al Muwahid', 'Muwahid'],
+  'Al Qimah': ['Al Qimah', 'Qimah'],
+  'Al Rafaah': ['Al Rafaah', 'Rafaah']
 };
 
 // Add aliases to map
@@ -199,22 +261,20 @@ for (const [primary, aliasList] of Object.entries(additionalAliases)) {
     let lng = 55.0;
     
     // تحديد إحداثيات تقريبية حسب الإمارة
-    if (primary.includes('Sharjah') || aliases[primary]?.some(a => a.includes('Sharjah'))) {
-      lat = 25.3;
-      lng = 55.4;
-    } else if (primary.includes('Ajman') || aliases[primary]?.some(a => a.includes('Ajman'))) {
+    const lowerPrimary = primary.toLowerCase();
+    if (lowerPrimary.includes('sharjah') || lowerPrimary.includes('ajman')) {
       lat = 25.4;
       lng = 55.4;
-    } else if (primary.includes('RAK') || primary.includes('Ras Al Khaimah')) {
+    } else if (lowerPrimary.includes('rak') || lowerPrimary.includes('ras al khaimah') || lowerPrimary.includes('al hamra') || lowerPrimary.includes('al marjan') || lowerPrimary.includes('mina al arab')) {
       lat = 25.7;
       lng = 55.8;
-    } else if (primary.includes('Fujairah')) {
+    } else if (lowerPrimary.includes('fujairah') || lowerPrimary.includes('dibba') || lowerPrimary.includes('al aqah')) {
       lat = 25.1;
       lng = 56.3;
-    } else if (primary.includes('Umm Al Quwain') || primary.includes('UAQ')) {
+    } else if (lowerPrimary.includes('umm al quwain') || lowerPrimary.includes('uaq') || lowerPrimary.includes('al raas')) {
       lat = 25.5;
       lng = 55.5;
-    } else if (primary.includes('Abu Dhabi') || primary.includes('Al Ain')) {
+    } else if (lowerPrimary.includes('abu dhabi') || lowerPrimary.includes('al ain') || lowerPrimary.includes('saadiyat') || lowerPrimary.includes('yas') || lowerPrimary.includes('reem') || lowerPrimary.includes('khalifa')) {
       lat = 24.4;
       lng = 54.4;
     }
