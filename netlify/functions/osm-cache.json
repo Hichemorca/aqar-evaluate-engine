@@ -1,465 +1,282 @@
-﻿{
-  "generatedAt": "2026-07-29T14:00:00.000Z",
+{
+  "generatedAt": "2026-07-29T02:15:49.422Z",
   "totalDistricts": 25,
-  "successCount": 25,
+  "successCount": 0,
   "data": {
     "Dubai Marina": {
       "district": "Dubai Marina",
       "lat": 25.0734,
       "lng": 55.1312,
-      "facilities": {
-        "metro": { "count": 2, "distance": 350, "score": 0.30 },
-        "mall": { "count": 3, "distance": 200, "score": 0.36 },
-        "supermarket": { "count": 5, "distance": 150, "score": 0.40 },
-        "school": { "count": 3, "distance": 450, "score": 0.15 },
-        "hospital": { "count": 1, "distance": 550, "score": 0.10 },
-        "park": { "count": 2, "distance": 250, "score": 0.24 }
-      },
-      "totalScore": 1.55,
-      "count": 16,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:07:30.784Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Palm Jumeirah": {
       "district": "Palm Jumeirah",
-      "lat": 25.1100,
-      "lng": 55.1400,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 2, "distance": 300, "score": 0.24 },
-        "supermarket": { "count": 3, "distance": 250, "score": 0.24 },
-        "school": { "count": 2, "distance": 550, "score": 0.12 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 3, "distance": 150, "score": 0.45 }
-      },
-      "totalScore": 1.05,
-      "count": 10,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.11,
+      "lng": 55.14,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:07:34.204Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Downtown Dubai": {
       "district": "Downtown Dubai",
-      "lat": 25.1950,
-      "lng": 55.2740,
-      "facilities": {
-        "metro": { "count": 3, "distance": 100, "score": 0.45 },
-        "mall": { "count": 3, "distance": 150, "score": 0.45 },
-        "supermarket": { "count": 4, "distance": 200, "score": 0.32 },
-        "school": { "count": 3, "distance": 350, "score": 0.27 },
-        "hospital": { "count": 2, "distance": 400, "score": 0.20 },
-        "park": { "count": 2, "distance": 200, "score": 0.30 }
-      },
-      "totalScore": 1.99,
-      "count": 17,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.195,
+      "lng": 55.274,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:07:51.190Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Business Bay": {
       "district": "Business Bay",
-      "lat": 25.1900,
-      "lng": 55.2600,
-      "facilities": {
-        "metro": { "count": 2, "distance": 250, "score": 0.30 },
-        "mall": { "count": 2, "distance": 200, "score": 0.36 },
-        "supermarket": { "count": 3, "distance": 200, "score": 0.24 },
-        "school": { "count": 2, "distance": 450, "score": 0.15 },
-        "hospital": { "count": 1, "distance": 350, "score": 0.12 },
-        "park": { "count": 1, "distance": 300, "score": 0.15 }
-      },
-      "totalScore": 1.32,
-      "count": 11,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.19,
+      "lng": 55.26,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:07:55.606Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Jumeirah Village Circle": {
       "district": "Jumeirah Village Circle",
-      "lat": 25.0500,
-      "lng": 55.1800,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 400, "score": 0.12 },
-        "supermarket": { "count": 4, "distance": 150, "score": 0.32 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 1, "distance": 400, "score": 0.12 },
-        "park": { "count": 3, "distance": 200, "score": 0.30 }
-      },
-      "totalScore": 1.13,
-      "count": 12,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.05,
+      "lng": 55.18,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:08:37.110Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Jumeirah Lake Towers": {
       "district": "Jumeirah Lake Towers",
-      "lat": 25.0700,
-      "lng": 55.1400,
-      "facilities": {
-        "metro": { "count": 1, "distance": 300, "score": 0.15 },
-        "mall": { "count": 2, "distance": 200, "score": 0.36 },
-        "supermarket": { "count": 4, "distance": 150, "score": 0.32 },
-        "school": { "count": 2, "distance": 550, "score": 0.12 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 1, "distance": 300, "score": 0.15 }
-      },
-      "totalScore": 1.10,
-      "count": 10,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.07,
+      "lng": 55.14,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:08:40.316Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Dubai Hills Estate": {
       "district": "Dubai Hills Estate",
-      "lat": 25.1200,
-      "lng": 55.2200,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 350, "score": 0.12 },
-        "supermarket": { "count": 2, "distance": 250, "score": 0.20 },
-        "school": { "count": 4, "distance": 150, "score": 0.40 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 4, "distance": 100, "score": 0.60 }
-      },
-      "totalScore": 1.32,
-      "count": 11,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.12,
+      "lng": 55.22,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:09:24.145Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Arabian Ranches": {
       "district": "Arabian Ranches",
-      "lat": 25.0400,
-      "lng": 55.2300,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 2, "distance": 300, "score": 0.16 },
-        "school": { "count": 4, "distance": 150, "score": 0.40 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 4, "distance": 100, "score": 0.60 }
-      },
-      "totalScore": 1.16,
-      "count": 10,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.04,
+      "lng": 55.23,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:09:40.306Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Emirates Hills": {
       "district": "Emirates Hills",
-      "lat": 25.0600,
-      "lng": 55.2000,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 1, "distance": 400, "score": 0.08 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 3, "distance": 150, "score": 0.45 }
-      },
-      "totalScore": 0.80,
-      "count": 7,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.06,
+      "lng": 55.2,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:09:44.725Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "The Springs": {
       "district": "The Springs",
-      "lat": 25.0800,
-      "lng": 55.2100,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 400, "score": 0.12 },
-        "supermarket": { "count": 2, "distance": 250, "score": 0.20 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 2, "distance": 200, "score": 0.30 }
-      },
-      "totalScore": 0.89,
-      "count": 8,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.08,
+      "lng": 55.21,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:10:34.709Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "The Meadows": {
       "district": "The Meadows",
-      "lat": 25.0700,
-      "lng": 55.2200,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 1, "distance": 350, "score": 0.08 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 2, "distance": 200, "score": 0.30 }
-      },
-      "totalScore": 0.65,
-      "count": 6,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.07,
+      "lng": 55.22,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:10:46.870Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Al Barsha": {
       "district": "Al Barsha",
-      "lat": 25.1100,
-      "lng": 55.2100,
-      "facilities": {
-        "metro": { "count": 2, "distance": 200, "score": 0.30 },
-        "mall": { "count": 3, "distance": 150, "score": 0.45 },
-        "supermarket": { "count": 4, "distance": 150, "score": 0.32 },
-        "school": { "count": 4, "distance": 200, "score": 0.40 },
-        "hospital": { "count": 2, "distance": 300, "score": 0.24 },
-        "park": { "count": 2, "distance": 250, "score": 0.24 }
-      },
-      "totalScore": 1.95,
-      "count": 17,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.11,
+      "lng": 55.21,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:11:01.661Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Deira": {
       "district": "Deira",
-      "lat": 25.2700,
-      "lng": 55.3200,
-      "facilities": {
-        "metro": { "count": 3, "distance": 150, "score": 0.45 },
-        "mall": { "count": 3, "distance": 200, "score": 0.36 },
-        "supermarket": { "count": 6, "distance": 100, "score": 0.48 },
-        "school": { "count": 4, "distance": 200, "score": 0.40 },
-        "hospital": { "count": 3, "distance": 150, "score": 0.36 },
-        "park": { "count": 1, "distance": 300, "score": 0.15 }
-      },
-      "totalScore": 2.20,
-      "count": 20,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.27,
+      "lng": 55.32,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:11:17.831Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Bur Dubai": {
       "district": "Bur Dubai",
-      "lat": 25.2500,
-      "lng": 55.3100,
-      "facilities": {
-        "metro": { "count": 2, "distance": 200, "score": 0.30 },
-        "mall": { "count": 2, "distance": 250, "score": 0.24 },
-        "supermarket": { "count": 4, "distance": 150, "score": 0.32 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 2, "distance": 200, "score": 0.24 },
-        "park": { "count": 0, "distance": null, "score": 0 }
-      },
-      "totalScore": 1.37,
-      "count": 13,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.25,
+      "lng": 55.31,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:11:37.421Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Damac Hills": {
       "district": "Damac Hills",
-      "lat": 25.0300,
-      "lng": 55.1700,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 2, "distance": 300, "score": 0.16 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 3, "distance": 150, "score": 0.45 }
-      },
-      "totalScore": 0.88,
-      "count": 8,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.03,
+      "lng": 55.17,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:11:41.268Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Mirdif": {
       "district": "Mirdif",
-      "lat": 25.2100,
-      "lng": 55.4100,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 350, "score": 0.12 },
-        "supermarket": { "count": 3, "distance": 200, "score": 0.24 },
-        "school": { "count": 4, "distance": 150, "score": 0.40 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 2, "distance": 250, "score": 0.24 }
-      },
-      "totalScore": 1.00,
-      "count": 10,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.21,
+      "lng": 55.41,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:12:19.515Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Al Furjan": {
       "district": "Al Furjan",
-      "lat": 25.0200,
-      "lng": 55.1500,
-      "facilities": {
-        "metro": { "count": 1, "distance": 350, "score": 0.15 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 2, "distance": 250, "score": 0.20 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 1, "distance": 300, "score": 0.15 }
-      },
-      "totalScore": 0.77,
-      "count": 7,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.02,
+      "lng": 55.15,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:12:30.538Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Discovery Gardens": {
       "district": "Discovery Gardens",
-      "lat": 25.0100,
-      "lng": 55.1400,
-      "facilities": {
-        "metro": { "count": 1, "distance": 300, "score": 0.15 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 2, "distance": 200, "score": 0.20 },
-        "school": { "count": 2, "distance": 300, "score": 0.18 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 1, "distance": 250, "score": 0.15 }
-      },
-      "totalScore": 0.68,
-      "count": 6,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.01,
+      "lng": 55.14,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:13:09.736Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Motor City": {
       "district": "Motor City",
-      "lat": 25.0400,
-      "lng": 55.1900,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 2, "distance": 250, "score": 0.16 },
-        "school": { "count": 2, "distance": 300, "score": 0.18 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 2, "distance": 200, "score": 0.30 }
-      },
-      "totalScore": 0.64,
-      "count": 6,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.04,
+      "lng": 55.19,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:13:45.103Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Dubai Sports City": {
       "district": "Dubai Sports City",
-      "lat": 25.0300,
-      "lng": 55.2000,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 2, "distance": 250, "score": 0.16 },
-        "school": { "count": 2, "distance": 300, "score": 0.18 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 3, "distance": 150, "score": 0.45 }
-      },
-      "totalScore": 0.79,
-      "count": 7,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.03,
+      "lng": 55.2,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:14:03.042Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Dubai Silicon Oasis": {
       "district": "Dubai Silicon Oasis",
-      "lat": 25.1300,
-      "lng": 55.3800,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 350, "score": 0.12 },
-        "supermarket": { "count": 2, "distance": 250, "score": 0.20 },
-        "school": { "count": 3, "distance": 200, "score": 0.27 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 2, "distance": 250, "score": 0.24 }
-      },
-      "totalScore": 0.83,
-      "count": 8,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.13,
+      "lng": 55.38,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:14:23.825Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "International City": {
       "district": "International City",
-      "lat": 25.1600,
-      "lng": 55.4700,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 0, "distance": null, "score": 0 },
-        "supermarket": { "count": 3, "distance": 200, "score": 0.24 },
-        "school": { "count": 2, "distance": 300, "score": 0.18 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 1, "distance": 300, "score": 0.15 }
-      },
-      "totalScore": 0.57,
-      "count": 6,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.16,
+      "lng": 55.47,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:14:33.412Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Al Nahda": {
       "district": "Al Nahda",
-      "lat": 25.2900,
-      "lng": 55.3700,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 350, "score": 0.12 },
-        "supermarket": { "count": 3, "distance": 200, "score": 0.24 },
-        "school": { "count": 2, "distance": 300, "score": 0.18 },
-        "hospital": { "count": 1, "distance": 350, "score": 0.12 },
-        "park": { "count": 0, "distance": null, "score": 0 }
-      },
-      "totalScore": 0.66,
-      "count": 7,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.29,
+      "lng": 55.37,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:15:37.720Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Emaar Beachfront": {
       "district": "Emaar Beachfront",
-      "lat": 25.0800,
-      "lng": 55.1200,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 350, "score": 0.12 },
-        "supermarket": { "count": 1, "distance": 300, "score": 0.08 },
-        "school": { "count": 0, "distance": null, "score": 0 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 1, "distance": 250, "score": 0.15 }
-      },
-      "totalScore": 0.35,
-      "count": 3,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.08,
+      "lng": 55.12,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:15:42.766Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     },
     "Dubai Creek Harbour": {
       "district": "Dubai Creek Harbour",
-      "lat": 25.2200,
-      "lng": 55.3300,
-      "facilities": {
-        "metro": { "count": 0, "distance": null, "score": 0 },
-        "mall": { "count": 1, "distance": 350, "score": 0.12 },
-        "supermarket": { "count": 1, "distance": 300, "score": 0.08 },
-        "school": { "count": 1, "distance": 400, "score": 0.10 },
-        "hospital": { "count": 0, "distance": null, "score": 0 },
-        "park": { "count": 1, "distance": 250, "score": 0.15 }
-      },
-      "totalScore": 0.45,
-      "count": 4,
-      "queriedAt": "2026-07-29T14:00:00.000Z",
+      "lat": 25.22,
+      "lng": 55.33,
+      "facilities": {},
+      "totalScore": 0,
+      "count": 0,
+      "queriedAt": "2026-07-29T02:15:47.407Z",
       "radius": 800,
-      "source": "real"
+      "source": "empty"
     }
-  },
-  "facilityTypes": {
-    "metro": { "tag": "railway=station", "label": "🚇 Metro", "weight": 0.15 },
-    "mall": { "tag": "shop=mall", "label": "🛍️ Shopping Mall", "weight": 0.12 },
-    "supermarket": { "tag": "shop=supermarket", "label": "🛒 Supermarket", "weight": 0.08 },
-    "school": { "tag": "amenity=school", "label": "🏫 School", "weight": 0.10 },
-    "hospital": { "tag": "amenity=hospital", "label": "🏥 Hospital", "weight": 0.08 },
-    "park": { "tag": "leisure=park", "label": "🌳 Park", "weight": 0.10 }
   }
 }
