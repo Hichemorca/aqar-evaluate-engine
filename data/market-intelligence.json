@@ -1,52 +1,52 @@
 {
-  "generatedAt": "2026-07-29T12:47:38.718Z",
+  "generatedAt": "2026-07-30T08:08:12.934Z",
   "totalTransactions": 27669,
   "bestInvestmentDistricts": [
-    {
-      "district": "MOTOR CITY",
-      "medianPricePerSqm": 11242,
-      "transactionCount": 360,
-      "recentTransactions": 28,
-      "priceMomentum": 14.7,
-      "volatility": 24.3,
-      "activityRatio": 8,
-      "investmentScore": 30.1
-    },
     {
       "district": "DUBAI SOUTH",
       "medianPricePerSqm": 11681,
       "transactionCount": 435,
-      "recentTransactions": 48,
-      "priceMomentum": 11,
+      "recentTransactions": 44,
+      "priceMomentum": 15.8,
       "volatility": 17.4,
-      "activityRatio": 11,
-      "investmentScore": 27.8
+      "activityRatio": 10,
+      "investmentScore": 36.4
+    },
+    {
+      "district": "MOTOR CITY",
+      "medianPricePerSqm": 11242,
+      "transactionCount": 360,
+      "recentTransactions": 25,
+      "priceMomentum": 11.4,
+      "volatility": 24.3,
+      "activityRatio": 7,
+      "investmentScore": 22.5
     },
     {
       "district": "DUBAI HILLS",
       "medianPricePerSqm": 25000,
       "transactionCount": 537,
-      "recentTransactions": 60,
-      "priceMomentum": 9.3,
+      "recentTransactions": 58,
+      "priceMomentum": 7.7,
       "volatility": 22.8,
       "activityRatio": 11,
-      "investmentScore": 22.8
+      "investmentScore": 19.6
     },
     {
       "district": "TOWN SQUARE",
       "medianPricePerSqm": 14242,
       "transactionCount": 309,
-      "recentTransactions": 38,
-      "priceMomentum": 4,
+      "recentTransactions": 37,
+      "priceMomentum": 4.2,
       "volatility": 15.9,
       "activityRatio": 12,
-      "investmentScore": 15.2
+      "investmentScore": 15.6
     },
     {
       "district": "THE GREENS",
       "medianPricePerSqm": 20161,
       "transactionCount": 218,
-      "recentTransactions": 29,
+      "recentTransactions": 28,
       "priceMomentum": 3.1,
       "volatility": 25,
       "activityRatio": 13,
@@ -66,41 +66,21 @@
       "district": "DUBAI HARBOUR",
       "medianPricePerSqm": 36522,
       "transactionCount": 154,
-      "recentTransactions": 20,
+      "recentTransactions": 18,
       "priceMomentum": 2.5,
       "volatility": 16.4,
-      "activityRatio": 13,
-      "investmentScore": 13.1
-    },
-    {
-      "district": "Al Hebiah Fifth",
-      "medianPricePerSqm": 17622,
-      "transactionCount": 543,
-      "recentTransactions": 89,
-      "priceMomentum": 2,
-      "volatility": 13.7,
-      "activityRatio": 16,
-      "investmentScore": 15.9
+      "activityRatio": 12,
+      "investmentScore": 12.1
     },
     {
       "district": "DUBAI SPORTS CITY",
       "medianPricePerSqm": 10690,
       "transactionCount": 574,
-      "recentTransactions": 73,
-      "priceMomentum": 1.2,
+      "recentTransactions": 68,
+      "priceMomentum": 2.2,
       "volatility": 28.7,
-      "activityRatio": 13,
-      "investmentScore": 6.8
-    },
-    {
-      "district": "Al Hebiah Fourth",
-      "medianPricePerSqm": 25322,
-      "transactionCount": 118,
-      "recentTransactions": 15,
-      "priceMomentum": 1.1,
-      "volatility": 17.3,
-      "activityRatio": 13,
-      "investmentScore": 10
+      "activityRatio": 12,
+      "investmentScore": 7.8
     }
   ],
   "fastestGrowing": [
@@ -108,10 +88,10 @@
       "district": "PALM JUMEIRAH",
       "medianPricePerSqm": 30745,
       "transactionCount": 417,
-      "recentTransactions": 45,
+      "recentTransactions": 42,
       "priceMomentum": 28.9,
       "volatility": 52.8,
-      "activityRatio": 11
+      "activityRatio": 10
     },
     {
       "district": "BARSHA HEIGHTS",
@@ -123,58 +103,49 @@
       "activityRatio": 16
     },
     {
-      "district": "MOTOR CITY",
-      "medianPricePerSqm": 11242,
-      "transactionCount": 360,
-      "recentTransactions": 28,
-      "priceMomentum": 14.7,
-      "volatility": 24.3,
-      "activityRatio": 8
+      "district": "DUBAI SOUTH",
+      "medianPricePerSqm": 11681,
+      "transactionCount": 435,
+      "recentTransactions": 44,
+      "priceMomentum": 15.8,
+      "volatility": 17.4,
+      "activityRatio": 10
     },
     {
       "district": "DUBAI MARINA",
       "medianPricePerSqm": 20312,
       "transactionCount": 961,
-      "recentTransactions": 147,
-      "priceMomentum": 12.1,
+      "recentTransactions": 139,
+      "priceMomentum": 14.3,
       "volatility": 42.9,
-      "activityRatio": 15
+      "activityRatio": 14
     },
     {
-      "district": "DUBAI SOUTH",
-      "medianPricePerSqm": 11681,
-      "transactionCount": 435,
-      "recentTransactions": 48,
-      "priceMomentum": 11,
-      "volatility": 17.4,
-      "activityRatio": 11
+      "district": "MOTOR CITY",
+      "medianPricePerSqm": 11242,
+      "transactionCount": 360,
+      "recentTransactions": 25,
+      "priceMomentum": 11.4,
+      "volatility": 24.3,
+      "activityRatio": 7
     },
     {
       "district": "DUBAI LAND RESIDENCE COMPLEX",
       "medianPricePerSqm": 9176,
       "transactionCount": 321,
-      "recentTransactions": 32,
+      "recentTransactions": 30,
       "priceMomentum": 10.8,
       "volatility": 44.1,
-      "activityRatio": 10
+      "activityRatio": 9
     },
     {
       "district": "DUBAI HILLS",
       "medianPricePerSqm": 25000,
       "transactionCount": 537,
-      "recentTransactions": 60,
-      "priceMomentum": 9.3,
+      "recentTransactions": 58,
+      "priceMomentum": 7.7,
       "volatility": 22.8,
       "activityRatio": 11
-    },
-    {
-      "district": "JUMEIRAH VILLAGE TRIANGLE",
-      "medianPricePerSqm": 14371,
-      "transactionCount": 342,
-      "recentTransactions": 33,
-      "priceMomentum": 7.1,
-      "volatility": 31,
-      "activityRatio": 10
     },
     {
       "district": "JUMEIRAH BEACH RESIDENCE",
@@ -186,11 +157,20 @@
       "activityRatio": 11
     },
     {
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "medianPricePerSqm": 14371,
+      "transactionCount": 342,
+      "recentTransactions": 32,
+      "priceMomentum": 6.5,
+      "volatility": 31,
+      "activityRatio": 9
+    },
+    {
       "district": "TOWN SQUARE",
       "medianPricePerSqm": 14242,
       "transactionCount": 309,
-      "recentTransactions": 38,
-      "priceMomentum": 4,
+      "recentTransactions": 37,
+      "priceMomentum": 4.2,
       "volatility": 15.9,
       "activityRatio": 12
     }
@@ -200,18 +180,18 @@
       "district": "PALM JUMEIRAH",
       "medianPricePerSqm": 30745,
       "transactionCount": 417,
-      "recentTransactions": 45,
+      "recentTransactions": 42,
       "priceMomentum": 28.9,
       "volatility": 52.8,
-      "activityRatio": 11,
+      "activityRatio": 10,
       "bubbleRiskScore": 105.6
     },
     {
       "district": "MEYDAN ONE",
       "medianPricePerSqm": 21818,
       "transactionCount": 503,
-      "recentTransactions": 64,
-      "priceMomentum": 2.7,
+      "recentTransactions": 63,
+      "priceMomentum": 1.9,
       "volatility": 50.5,
       "activityRatio": 13,
       "bubbleRiskScore": 101
@@ -230,18 +210,18 @@
       "district": "DUBAI LAND RESIDENCE COMPLEX",
       "medianPricePerSqm": 9176,
       "transactionCount": 321,
-      "recentTransactions": 32,
+      "recentTransactions": 30,
       "priceMomentum": 10.8,
       "volatility": 44.1,
-      "activityRatio": 10,
+      "activityRatio": 9,
       "bubbleRiskScore": 88.2
     },
     {
       "district": "JUMEIRAH LAKES TOWERS",
       "medianPricePerSqm": 16606,
       "transactionCount": 805,
-      "recentTransactions": 68,
-      "priceMomentum": -3.5,
+      "recentTransactions": 65,
+      "priceMomentum": -1.4,
       "volatility": 43.3,
       "activityRatio": 8,
       "bubbleRiskScore": 86.6
@@ -250,20 +230,20 @@
       "district": "DUBAI MARINA",
       "medianPricePerSqm": 20312,
       "transactionCount": 961,
-      "recentTransactions": 147,
-      "priceMomentum": 12.1,
+      "recentTransactions": 139,
+      "priceMomentum": 14.3,
       "volatility": 42.9,
-      "activityRatio": 15,
+      "activityRatio": 14,
       "bubbleRiskScore": 85.8
     },
     {
       "district": "BURJ KHALIFA",
       "medianPricePerSqm": 28571,
       "transactionCount": 892,
-      "recentTransactions": 112,
-      "priceMomentum": -2.3,
+      "recentTransactions": 107,
+      "priceMomentum": -5.7,
       "volatility": 41.2,
-      "activityRatio": 13,
+      "activityRatio": 12,
       "bubbleRiskScore": 82.4
     },
     {
@@ -280,20 +260,20 @@
       "district": "BUSINESS BAY",
       "medianPricePerSqm": 20741,
       "transactionCount": 1745,
-      "recentTransactions": 228,
-      "priceMomentum": 2,
+      "recentTransactions": 217,
+      "priceMomentum": 0.2,
       "volatility": 37.9,
-      "activityRatio": 13,
+      "activityRatio": 12,
       "bubbleRiskScore": 75.8
     },
     {
       "district": "JUMEIRAH VILLAGE TRIANGLE",
       "medianPricePerSqm": 14371,
       "transactionCount": 342,
-      "recentTransactions": 33,
-      "priceMomentum": 7.1,
+      "recentTransactions": 32,
+      "priceMomentum": 6.5,
       "volatility": 31,
-      "activityRatio": 10,
+      "activityRatio": 9,
       "bubbleRiskScore": 62
     }
   ],
@@ -375,8 +355,8 @@
     }
   ],
   "marketIndicators": {
-    "averagePriceMomentum": 1.4,
-    "totalActiveDistricts": 43,
+    "averagePriceMomentum": 1.3,
+    "totalActiveDistricts": 42,
     "totalTransactions": 27669,
     "marketCondition": "Moderate Seller Market",
     "topPerformer": "PALM JUMEIRAH",
