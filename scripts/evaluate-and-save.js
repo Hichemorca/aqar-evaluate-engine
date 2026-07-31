@@ -213,24 +213,29 @@ function getGISScoreFromTransaction(transaction) {
   if (transaction.hasGis && transaction.gisScore !== null && transaction.gisScore !== undefined) {
     return transaction.gisScore;
   }
-  
-  // لا نستخدم متوسط المنطقة كـ fallback لأنه يُدخل ضوضاء في النتائج
   return null;
 }
 
-// ===== CALCULATE PROXIMITY MULTIPLIER (Calibrated) =====
+// ===== CALCULATE PROXIMITY MULTIPLIER (Re-calibrated based on actual data) =====
 function getProximityMultiplier(gisScore) {
   if (gisScore === null || gisScore === undefined) return 1;
   
-  // Calibrated multiplier based on real estate analysis
-  // Center: 1.0 (no adjustment)
-  // gisScore = 0 (far from facilities) → 0.90 (10% reduction)
-  // gisScore = 1 (very close to facilities) → 1.10 (10% increase)
-  const minMultiplier = 0.90;
-  const maxMultiplier = 1.10;
-  const multiplier = minMultiplier + (gisScore * (maxMultiplier - minMultiplier));
+  // المعامل المُشتق من البيانات الفعلية (تحليل كلود):
+  // b = +1.56% (القريبة تبالغ أكثر من البعيدة)
+  // لذا نطبق تخفيضاً طفيفاً للتعويض
+  // gisScore = 0.4 (قريب) → تخفيض ~0.62%
+  // gisScore = 0 (بعيد) → لا تغيير
   
-  return Math.min(maxMultiplier, Math.max(minMultiplier, multiplier));
+  // المعامل المحايد هو 1.0
+  // نطبق تخفيضاً متناسباً مع gisScore
+  const calibrationFactor = -0.0156; // -1.56% كحد أقصى
+  
+  // gisScore يتراوح بين 0 و 1 (في بياناتنا 0 أو 0.4)
+  const adjustment = gisScore * calibrationFactor;
+  const multiplier = 1 + adjustment;
+  
+  // حدود آمنة (تخفيض بين 0% و -1.56%)
+  return Math.min(1.01, Math.max(0.98, multiplier));
 }
 
 // ===== VIEW TYPE MULTIPLIER (Multiple Selection Support) =====
@@ -409,7 +414,7 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
     result.viewTypes = property.viewTypes;
   }
   
-  // ===== APPLY GIS PROXIMITY LAYER =====
+  // ===== APPLY GIS PROXIMITY LAYER (Re-calibrated) =====
   const gisScore = getGISScoreFromTransaction(property);
   if (gisScore !== null && gisScore !== undefined) {
     const gisMultiplier = getProximityMultiplier(gisScore);
@@ -482,7 +487,7 @@ async function main() {
       appraiserValuation, 
       evalLevel: evalResult.level, 
       evalCount: evalResult.count,
-      gisScore: evalResult.gisScore || null,
+      gisScore: evalResult.gisScore ?? null,
       gisMultiplier: evalResult.gisMultiplier || 1,
       viewMultiplier: evalResult.viewMultiplier || 1,
       viewTypes: evalResult.viewTypes || []
@@ -564,7 +569,7 @@ async function main() {
       appraiserValuation, 
       evalLevel: evalResult.level, 
       evalCount: evalResult.count,
-      gisScore: evalResult.gisScore || null,
+      gisScore: evalResult.gisScore ?? null,
       gisMultiplier: evalResult.gisMultiplier || 1,
       viewMultiplier: evalResult.viewMultiplier || 1,
       viewTypes: evalResult.viewTypes || []
@@ -618,20 +623,46 @@ async function main() {
   console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}% | GIS available: ${evalGisAvailable} | GIS applied: ${evalGisApplied} | View applied: ${evalViewApplied}`);
   console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount} | View applied: ${viewAppliedCount}`);
   
-  // ===== GIS IMPACT ANALYSIS =====
+  // ===== GIS IMPACT ANALYSIS (مع تحليل الأخطاء) =====
   const withGis = allResults.filter(r => r.gisMultiplier && r.gisMultiplier !== 1);
   const withoutGis = allResults.filter(r => !r.gisMultiplier || r.gisMultiplier === 1);
-  
+
   if (withGis.length > 0) {
     console.log('\n📊 GIS Impact Analysis:');
     const withGisAcc = Math.round(withGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withGis.length * 10) / 10;
     console.log(`   With GIS applied (n=${withGis.length}): ${withGisAcc}% accuracy`);
+    
+    // تحليل الانحياز (bias)
+    const withGisBias = Math.round(withGis.reduce((s, r) => s + (r.aqarVsActual || 0), 0) / withGis.length * 10) / 10;
+    console.log(`   Mean signed error (bias): ${withGisBias}%`);
+    console.log(`   Mean absolute error: ${Math.round(100 - withGisAcc)}%`);
   }
   if (withoutGis.length > 0) {
     const withoutGisAcc = Math.round(withoutGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withoutGis.length * 10) / 10;
     console.log(`   Without GIS (n=${withoutGis.length}): ${withoutGisAcc}% accuracy`);
+    const withoutGisBias = Math.round(withoutGis.reduce((s, r) => s + (r.aqarVsActual || 0), 0) / withoutGis.length * 10) / 10;
+    console.log(`   Mean signed error (bias): ${withoutGisBias}%`);
   }
-  
+
+  // تحليل تفصيلي حسب درجة القرب
+  console.log('\n📊 GIS Breakdown by Score:');
+  const gisGroups = {};
+  allResults.forEach(r => {
+    const score = r.gisScore !== undefined && r.gisScore !== null ? r.gisScore : 'no_gis';
+    if (!gisGroups[score]) gisGroups[score] = [];
+    gisGroups[score].push(r);
+  });
+  Object.entries(gisGroups).sort((a, b) => {
+    if (a[0] === 'no_gis') return 1;
+    if (b[0] === 'no_gis') return -1;
+    return parseFloat(a[0]) - parseFloat(b[0]);
+  }).forEach(([score, records]) => {
+    const acc = Math.round(records.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / records.length * 10) / 10;
+    const bias = Math.round(records.reduce((s, r) => s + (r.aqarVsActual || 0), 0) / records.length * 10) / 10;
+    const label = score === 'no_gis' ? 'No GIS' : `GIS = ${score}`;
+    console.log(`   ${label} (n=${records.length}): ${acc}% accuracy, bias: ${bias}%`);
+  });
+
   // ===== VIEW TYPE IMPACT ANALYSIS =====
   const withView = allResults.filter(r => r.viewMultiplier && r.viewMultiplier !== 1);
   const withoutView = allResults.filter(r => !r.viewMultiplier || r.viewMultiplier === 1);
