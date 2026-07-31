@@ -496,6 +496,7 @@ const DISTRICT_COORDS = {
 let scrapedDistrictData = null;
 let gisData = null;
 let gisLoading = false;
+let gisFetchTimeout = null;
 
 // ===== GIS MAP VARIABLES =====
 let gisMapInstance = null;
@@ -540,7 +541,8 @@ function selectDistrict(district) {
     if (gisMapInstance) {
       gisMapInstance.setView([coords.lat, coords.lng], 14);
     }
-    fetchGISData();
+    // Use debounced fetch
+    debouncedFetchGISData();
   }
 }
 
@@ -682,19 +684,19 @@ function initGISMap() {
       const lat = e.latlng.lat;
       const lng = e.latlng.lng;
       updateMapMarker(lat, lng);
-      fetchGISData();
+      debouncedFetchGISData();
     });
     
     gisMarker.on('dragend', function(e) {
       const pos = e.target.getLatLng();
       updateMapMarker(pos.lat, pos.lng);
-      fetchGISData();
+      debouncedFetchGISData();
     });
     
     mapInitialized = true;
     
-    // Initial fetch for default location
-    setTimeout(() => fetchGISData(), 500);
+    // Initial fetch for default location (with delay)
+    setTimeout(() => debouncedFetchGISData(), 500);
     
   } catch (error) {
     console.warn('Leaflet map initialization failed:', error);
@@ -703,6 +705,18 @@ function initGISMap() {
       mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>';
     }
   }
+}
+
+// ===== DEBOUNCED GIS FETCH =====
+function debouncedFetchGISData() {
+  // Clear any pending timeout
+  if (gisFetchTimeout) {
+    clearTimeout(gisFetchTimeout);
+  }
+  // Set a new timeout with 800ms delay
+  gisFetchTimeout = setTimeout(() => {
+    fetchGISData();
+  }, 800);
 }
 
 // ===== OVERPASS API =====
@@ -735,7 +749,13 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
       body: `data=${encodeURIComponent(query)}`
     });
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) {
+      if (response.status === 429) {
+        console.warn('⚠️ Overpass API rate limit hit. Please wait a moment.');
+        return null;
+      }
+      throw new Error(`HTTP ${response.status}`);
+    }
 
     const data = await response.json();
     const pois = [];
