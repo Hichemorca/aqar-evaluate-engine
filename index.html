@@ -92,11 +92,6 @@
     .autocomplete-list .item:hover {
       background: rgba(212,146,14,0.08);
     }
-    .autocomplete-list .item .sub {
-      font-size: 9px;
-      color: var(--muted);
-      margin-left: 8px;
-    }
 
     .btn {
       display: block; width: 100%; padding: 13px; border-radius: 10px; border: none;
@@ -539,14 +534,12 @@ function selectDistrict(district) {
   document.getElementById('selectedDistrictDisplay').textContent = district;
   document.getElementById('districtAutocomplete').style.display = 'none';
   
-  // Get coordinates and update map
   const coords = getDistrictCoords(district);
   if (coords) {
     updateMapMarker(coords.lat, coords.lng);
     if (gisMapInstance) {
       gisMapInstance.setView([coords.lat, coords.lng], 14);
     }
-    // Auto-fetch GIS data
     fetchGISData();
   }
 }
@@ -654,6 +647,12 @@ function addPOIsToMap(pois) {
 
 function initGISMap() {
   try {
+    const mapContainer = document.getElementById('gisMap');
+    if (!mapContainer) {
+      console.warn('GIS Map container not found');
+      return;
+    }
+    
     const defaultLat = 25.2048;
     const defaultLng = 55.2708;
     
@@ -829,15 +828,12 @@ async function fetchGISData() {
   }
   
   gisLoading = true;
-  const status = document.getElementById('gisStatus');
-  status.innerHTML = '⏳ Fetching real facility data from OpenStreetMap...';
   
   try {
     const locationLat = parseFloat(lat);
     const locationLng = parseFloat(lng);
     
     if (isNaN(locationLat) || isNaN(locationLng)) {
-      status.innerHTML = '⚠️ Invalid coordinates';
       gisLoading = false;
       return;
     }
@@ -857,9 +853,7 @@ async function fetchGISData() {
 
       displayGISResult(gisData, 1 + result.totalScore * 0.05);
       addPOIsToMap(result.pois);
-      status.innerHTML = `✅ Found ${result.count} real facilities near this location from OpenStreetMap`;
     } else {
-      status.innerHTML = `⚠️ No facilities found within 1km. Try a different location.`;
       document.getElementById('gisResult').style.display = 'none';
       poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
       poiMarkers = [];
@@ -867,7 +861,6 @@ async function fetchGISData() {
 
   } catch (error) {
     console.error('GIS Error:', error);
-    status.innerHTML = `⚠️ Error fetching data: ${error.message}`;
   } finally {
     gisLoading = false;
   }
@@ -1336,7 +1329,6 @@ function resetAll() {
   document.getElementById('gisLng').value = '';
   document.getElementById('gisCoordsRow').style.display = 'none';
   document.getElementById('gisResult').style.display = 'none';
-  document.getElementById('gisStatus').innerHTML = 'Select a district from the list, then drag the marker to pinpoint the exact location.';
   
   if (mapInitialized && gisMapInstance) {
     const defaultLat = 25.2048;
