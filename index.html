@@ -31,7 +31,7 @@
       overflow-x: hidden;
     }
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: 0 auto;
       padding: 30px 16px 60px;
     }
@@ -224,7 +224,7 @@
 
     /* GIS Map */
     #gisMap {
-      height: 320px;
+      height: 350px;
       border-radius: 10px;
       margin-top: 6px;
       background: #0a1628;
@@ -242,29 +242,6 @@
       font-size: 12px;
       font-weight: 600;
     }
-    .gis-loading {
-      height: 320px;
-      border-radius: 10px;
-      margin-top: 6px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 12px;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .gis-loading .spinner {
-      width: 24px;
-      height: 24px;
-      border: 2px solid rgba(212, 146, 14, 0.2);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
 
     .gis-info {
       font-size: 10px;
@@ -275,6 +252,95 @@
     }
     .gis-info strong {
       color: var(--text);
+    }
+
+    /* POI Legend */
+    .poi-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+    }
+    .poi-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      color: var(--muted);
+    }
+    .poi-legend-item .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .poi-legend-item .dot.school { background: #f39c12; }
+    .poi-legend-item .dot.hospital { background: #e74c3c; }
+    .poi-legend-item .dot.supermarket { background: #2ecc71; }
+    .poi-legend-item .dot.metro { background: #3498db; }
+    .poi-legend-item .dot.park { background: #27ae60; }
+    .poi-legend-item .dot.gym { background: #9b59b6; }
+    .poi-legend-item .dot.cafe { background: #f1c40f; }
+    .poi-legend-item .dot.restaurant { background: #e67e22; }
+
+    /* Proximity Score */
+    .proximity-score {
+      margin-top: 10px;
+      padding: 12px 16px;
+      background: rgba(212,146,14,0.06);
+      border: 1px solid rgba(212,146,14,0.12);
+      border-radius: 10px;
+      display: none;
+    }
+    .proximity-score .score-value {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--gold);
+    }
+    .proximity-score .score-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .proximity-score .score-detail {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .proximity-score .score-detail span {
+      color: var(--text);
+    }
+
+    /* POI List */
+    .poi-list {
+      margin-top: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+    }
+    .poi-list .poi-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .poi-list .poi-item .poi-name {
+      color: var(--text);
+    }
+    .poi-list .poi-item .poi-dist {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .poi-list .poi-item .poi-type {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-right: 8px;
     }
 
     .btn {
@@ -304,6 +370,17 @@
       cursor: not-allowed;
       transform: none;
     }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      padding: 8px 16px;
+      width: auto;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
 
     .result-box {
       margin-top: 20px;
@@ -329,6 +406,10 @@
     }
     .result-box .detail .highlight {
       color: var(--text);
+    }
+    .result-box .detail .proximity-impact {
+      color: var(--green);
+      font-weight: 600;
     }
     .result-box.error {
       background: rgba(255, 60, 90, 0.06);
@@ -358,20 +439,26 @@
       color: var(--muted);
     }
 
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(212,146,14,0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     @media (max-width: 640px) {
-      .header h1 {
-        font-size: 22px;
-      }
-      .checkbox-group label {
-        font-size: 10px;
-        padding: 3px 8px;
-      }
-      .result-box .value {
-        font-size: 26px;
-      }
-      #gisMap {
-        height: 240px;
-      }
+      .header h1 { font-size: 22px; }
+      .checkbox-group label { font-size: 10px; padding: 3px 8px; }
+      .result-box .value { font-size: 26px; }
+      #gisMap { height: 260px; }
+      .poi-legend { gap: 4px; }
+      .poi-legend-item { font-size: 8px; }
     }
   </style>
 </head>
@@ -481,7 +568,37 @@
 
       <!-- GIS Map Container -->
       <div id="gisMap"></div>
-      <div class="gis-info" id="gisInfo">📍 Select a district to view location on map</div>
+      <div class="gis-info" id="gisInfo">📍 Select a district to view location and nearby facilities</div>
+
+      <!-- POI Legend -->
+      <div class="poi-legend" id="poiLegend">
+        <span class="poi-legend-item"><span class="dot school"></span> Schools</span>
+        <span class="poi-legend-item"><span class="dot hospital"></span> Hospitals</span>
+        <span class="poi-legend-item"><span class="dot supermarket"></span> Supermarkets</span>
+        <span class="poi-legend-item"><span class="dot metro"></span> Metro</span>
+        <span class="poi-legend-item"><span class="dot park"></span> Parks</span>
+        <span class="poi-legend-item"><span class="dot gym"></span> Gyms</span>
+        <span class="poi-legend-item"><span class="dot cafe"></span> Cafes</span>
+        <span class="poi-legend-item"><span class="dot restaurant"></span> Restaurants</span>
+      </div>
+
+      <!-- Proximity Score -->
+      <div class="proximity-score" id="proximityScore">
+        <div>
+          <span class="score-value" id="proximityScoreValue">—</span>
+          <span class="score-label"> / 100 — Proximity Score</span>
+        </div>
+        <div class="score-detail" id="proximityScoreDetail">
+          Based on <span id="poiCount">0</span> nearby facilities within 1km
+        </div>
+      </div>
+
+      <!-- POI List -->
+      <div class="poi-list" id="poiList"></div>
+
+      <button class="btn btn-secondary" onclick="refreshPOIs()" style="margin-top:8px;">
+        🔄 Refresh Nearby Facilities
+      </button>
     </div>
 
     <!-- ===== VIEW TYPE ===== -->
@@ -573,10 +690,12 @@
     let dubaiDistricts = [];
     let map = null;
     let mapMarker = null;
+    let poiMarkers = [];
+    let currentPOIs = [];
+    let currentCoords = null;
 
     // Extended district coordinates
     const DISTRICT_COORDS = {
-      // Major communities
       'dubai marina': { lat: 25.0802, lng: 55.1416 },
       'palm jumeirah': { lat: 25.1181, lng: 55.1425 },
       'downtown dubai': { lat: 25.1972, lng: 55.2741 },
@@ -607,12 +726,10 @@
       'nad al sheba': { lat: 25.1800, lng: 55.3400 },
       'al quoz': { lat: 25.1200, lng: 55.2300 },
       'al safa': { lat: 25.1900, lng: 55.2500 },
-      // MBR City variations
       'mbr city': { lat: 25.1150, lng: 55.3650 },
       'mbr district 7': { lat: 25.1150, lng: 55.3650 },
       'mohamed bin rashed city': { lat: 25.1150, lng: 55.3650 },
       'mohammed bin rashid city': { lat: 25.1150, lng: 55.3650 },
-      // Additional
       'arjan': { lat: 25.0800, lng: 55.3100 },
       'liwan': { lat: 25.1700, lng: 55.4300 },
       'al jaddaf': { lat: 25.1950, lng: 55.3100 },
@@ -638,6 +755,18 @@
       'bluewaters island': { lat: 25.0800, lng: 55.1200 },
       'festival city': { lat: 25.2300, lng: 55.3400 },
       'dubai healthcare city': { lat: 25.2100, lng: 55.3200 },
+    };
+
+    // POI type colors and icons
+    const POI_TYPES = {
+      school: { color: '#f39c12', label: '🏫 School', weight: 15 },
+      hospital: { color: '#e74c3c', label: '🏥 Hospital', weight: 20 },
+      supermarket: { color: '#2ecc71', label: '🛒 Supermarket', weight: 12 },
+      metro: { color: '#3498db', label: '🚇 Metro', weight: 25 },
+      park: { color: '#27ae60', label: '🌳 Park', weight: 10 },
+      gym: { color: '#9b59b6', label: '🏋️ Gym', weight: 8 },
+      cafe: { color: '#f1c40f', label: '☕ Cafe', weight: 5 },
+      restaurant: { color: '#e67e22', label: '🍽️ Restaurant', weight: 5 },
     };
 
     async function loadDistricts() {
@@ -681,7 +810,6 @@
         console.log('⚠️ Could not load coordinates file, using fallback...');
       }
 
-      // Extended fallback
       dubaiDistricts = [
         'Al Barsha', 'Al Barsha South', 'Al Barsha Heights', 'Al Furjan',
         'Al Jaddaf', 'Al Karama', 'Al Khawaneej', 'Al Mamzar',
@@ -765,22 +893,211 @@
     }
 
     // ============================================================
-    // 2. GIS MAP — Leaflet integration
+    // 2. GIS MAP — Leaflet integration with POIs
     // ============================================================
 
     function getDistrictCoordinates(district) {
       const key = district.toLowerCase();
-      // Try exact match first
       if (DISTRICT_COORDS[key]) {
         return DISTRICT_COORDS[key];
       }
-      // Try fuzzy match
       for (const [k, v] of Object.entries(DISTRICT_COORDS)) {
         if (key.includes(k) || k.includes(key)) {
           return v;
         }
       }
       return null;
+    }
+
+    function haversineDistance(lat1, lng1, lat2, lng2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLng/2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    async function fetchPOIs(lat, lng, radius = 1000) {
+      const types = ['school', 'hospital', 'supermarket', 'metro', 'park', 'gym', 'cafe', 'restaurant'];
+      const allPOIs = [];
+
+      for (const type of types) {
+        const query = `
+          [out:json];
+          (
+            node["amenity"="${type}"](around:${radius},${lat},${lng});
+            node["shop"="${type}"](around:${radius},${lat},${lng});
+            node["railway"="${type}"](around:${radius},${lat},${lng});
+            node["leisure"="${type}"](around:${radius},${lat},${lng});
+            way["amenity"="${type}"](around:${radius},${lat},${lng});
+            way["leisure"="${type}"](around:${radius},${lat},${lng});
+          );
+          out center;
+        `;
+
+        try {
+          const response = await fetch('https://overpass-api.de/api/interpreter', {
+            method: 'POST',
+            body: query,
+          });
+          if (response.ok) {
+            const data = await response.json();
+            data.elements.forEach(el => {
+              const poiLat = el.lat || el.center?.lat;
+              const poiLng = el.lon || el.center?.lng;
+              if (poiLat && poiLng) {
+                const dist = haversineDistance(lat, lng, poiLat, poiLng);
+                if (dist <= radius / 1000) {
+                  allPOIs.push({
+                    type: type,
+                    name: el.tags?.name || `${type} (${el.id})`,
+                    lat: poiLat,
+                    lng: poiLng,
+                    distance: dist,
+                  });
+                }
+              }
+            });
+          }
+        } catch (e) {
+          console.log(`⚠️ Error fetching ${type}:`, e.message);
+        }
+      }
+
+      // Sort by distance
+      allPOIs.sort((a, b) => a.distance - b.distance);
+      return allPOIs;
+    }
+
+    function getPOIIcon(type) {
+      const colors = {
+        school: '#f39c12',
+        hospital: '#e74c3c',
+        supermarket: '#2ecc71',
+        metro: '#3498db',
+        park: '#27ae60',
+        gym: '#9b59b6',
+        cafe: '#f1c40f',
+        restaurant: '#e67e22',
+      };
+      const emojis = {
+        school: '🏫',
+        hospital: '🏥',
+        supermarket: '🛒',
+        metro: '🚇',
+        park: '🌳',
+        gym: '🏋️',
+        cafe: '☕',
+        restaurant: '🍽️',
+      };
+      return L.divIcon({
+        className: 'custom-poi-icon',
+        html: `<div style="background:${colors[type] || '#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 2px 6px rgba(0,0,0,0.3);border:2px solid rgba(255,255,255,0.2);">${emojis[type] || '📍'}</div>`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
+        popupAnchor: [0, -11],
+      });
+    }
+
+    function displayPOIs(pois) {
+      const listEl = document.getElementById('poiList');
+      const scoreEl = document.getElementById('proximityScore');
+      const countEl = document.getElementById('poiCount');
+
+      if (!pois || pois.length === 0) {
+        listEl.style.display = 'none';
+        scoreEl.style.display = 'none';
+        return;
+      }
+
+      // Show POI list
+      listEl.style.display = 'block';
+      listEl.innerHTML = pois.slice(0, 20).map(p => `
+        <div class="poi-item">
+          <span>
+            <span class="poi-type">${POI_TYPES[p.type]?.label || p.type}</span>
+            <span class="poi-name">${p.name}</span>
+          </span>
+          <span class="poi-dist">${(p.distance * 1000).toFixed(0)}m</span>
+        </div>
+      `).join('');
+
+      if (pois.length > 20) {
+        listEl.innerHTML += `<div class="poi-item" style="text-align:center;color:var(--muted);font-size:9px;">+ ${pois.length - 20} more facilities</div>`;
+      }
+
+      // Calculate proximity score
+      let score = 0;
+      let totalWeight = 0;
+      let count = 0;
+      const maxDist = 1; // 1km
+
+      pois.forEach(p => {
+        const weight = POI_TYPES[p.type]?.weight || 5;
+        const distFactor = 1 - (p.distance / maxDist);
+        const contribution = weight * Math.max(0, distFactor);
+        score += contribution;
+        totalWeight += weight;
+        count++;
+      });
+
+      const normalizedScore = totalWeight > 0 ? Math.min(100, (score / totalWeight) * 100) : 0;
+      const finalScore = Math.round(normalizedScore);
+
+      // Show score
+      scoreEl.style.display = 'block';
+      document.getElementById('proximityScoreValue').textContent = finalScore;
+      countEl.textContent = count;
+
+      // Score color
+      const scoreColor = finalScore >= 70 ? 'var(--green)' : finalScore >= 40 ? 'var(--gold)' : 'var(--red)';
+      document.getElementById('proximityScoreValue').style.color = scoreColor;
+
+      // Store for valuation
+      window.currentProximityScore = finalScore;
+      window.currentPOICount = count;
+    }
+
+    async function updateGISLocation(district) {
+      const coords = getDistrictCoordinates(district);
+      const infoEl = document.getElementById('gisInfo');
+
+      if (coords) {
+        currentCoords = coords;
+        initMap(coords.lat, coords.lng, district);
+
+        // Fetch POIs
+        infoEl.innerHTML = '📍 <strong>' + district + '</strong> — Loading nearby facilities...';
+        const pois = await fetchPOIs(coords.lat, coords.lng, 1000);
+        currentPOIs = pois;
+
+        // Add POI markers
+        poiMarkers.forEach(m => map.removeLayer(m));
+        poiMarkers = [];
+
+        pois.forEach(p => {
+          const icon = getPOIIcon(p.type);
+          const marker = L.marker([p.lat, p.lng], { icon })
+            .addTo(map)
+            .bindPopup(`
+              <strong>${POI_TYPES[p.type]?.label || p.type}</strong><br />
+              ${p.name}<br />
+              <span style="font-size:10px;color:#888;">${(p.distance * 1000).toFixed(0)}m away</span>
+            `);
+          poiMarkers.push(marker);
+        });
+
+        displayPOIs(pois);
+        infoEl.innerHTML = `📍 <strong>${district}</strong> — ${pois.length} facilities found within 1km`;
+
+      } else {
+        infoEl.innerHTML = `⚠️ No coordinates found for <strong>${district}</strong>`;
+        if (!map) {
+          initMap(25.2048, 55.2708, 'Dubai (default)');
+        }
+      }
     }
 
     function initMap(lat, lng, district) {
@@ -811,42 +1128,21 @@
         `)
         .openPopup();
 
-      // Add a circle for 1km radius
+      // 1km radius circle
       L.circle([lat, lng], {
         radius: 1000,
         color: '#d4920e',
         fillColor: '#d4920e',
-        fillOpacity: 0.08,
+        fillOpacity: 0.06,
         weight: 1.5,
         dashArray: '4 4',
       }).addTo(map);
-
-      // Update info
-      document.getElementById('gisInfo').innerHTML = `
-        📍 <strong>${district}</strong> &nbsp;|&nbsp;
-        📌 ${lat.toFixed(4)}, ${lng.toFixed(4)} &nbsp;|&nbsp;
-        🔵 1km radius shown
-      `;
     }
 
-    function updateGISLocation(district) {
-      const coords = getDistrictCoordinates(district);
-
-      if (coords) {
-        initMap(coords.lat, coords.lng, district);
-      } else {
-        document.getElementById('gisInfo').innerHTML = `
-          ⚠️ No coordinates found for <strong>${district}</strong>
-          <span style="color:var(--muted);margin-left:6px;">— GIS data will be applied for nearby facilities.</span>
-        `;
-        // Still show a default map at Dubai center
-        if (!map) {
-          initMap(25.2048, 55.2708, 'Dubai (default)');
-          document.getElementById('gisInfo').innerHTML = `
-            📍 <strong>${district}</strong> &nbsp;|&nbsp;
-            ⚠️ No coordinates found — showing default Dubai map
-          `;
-        }
+    function refreshPOIs() {
+      const district = document.getElementById('selectedDistrict').value;
+      if (district && currentCoords) {
+        updateGISLocation(district);
       }
     }
 
@@ -901,7 +1197,7 @@
     }
 
     // ============================================================
-    // 5. VALUATION CALCULATION (simulated)
+    // 5. VALUATION CALCULATION (with proximity impact)
     // ============================================================
 
     function calculateValuation() {
@@ -929,6 +1225,10 @@
       const amenityChecks = document.querySelectorAll('#amenitiesGroup input[type="checkbox"]:checked');
       const amenities = Array.from(amenityChecks).map(cb => cb.value);
 
+      // Get proximity score
+      const proximityScore = window.currentProximityScore || 50;
+      const poiCount = window.currentPOICount || 0;
+
       if (area < 10) {
         showError('Please enter a valid area (minimum 10 sqm).');
         btn.disabled = false;
@@ -942,12 +1242,14 @@
         return;
       }
 
+      // Base price
       const basePrices = {
         apartment: 12000, villa: 18000, townhouse: 15000,
         office: 10000, retail: 14000, land: 5000, warehouse: 6000
       };
       let base = (basePrices[propertyType] || 10000) * area;
 
+      // Bedroom adjustment
       let bedMultiplier = 1;
       if (bedrooms === 0) bedMultiplier = 0.85;
       else if (bedrooms === 1) bedMultiplier = 1;
@@ -956,6 +1258,7 @@
       else if (bedrooms >= 4) bedMultiplier = 1.22;
       base *= bedMultiplier;
 
+      // View multiplier
       let viewMultiplier = 1;
       if (viewTypes.includes('unknown') || viewTypes.includes('internal')) {
         viewMultiplier = 0.95;
@@ -974,29 +1277,42 @@
       }
       base *= viewMultiplier;
 
+      // Furnishing
       if (furnishing === 'furnished') base *= 1.05;
       else if (furnishing === 'semi-furnished') base *= 1.025;
 
+      // Condition
       if (condition === 'under-construction') base *= 0.85;
       else if (condition === 'off-plan') base *= 0.75;
 
+      // Year built
       const ageFactor = 1 + (2026 - yearBuilt) * 0.002;
       base /= ageFactor;
 
+      // Amenities
       const amenityCount = amenities.length;
       base *= (1 + amenityCount * 0.008);
 
+      // District premium
       const premiumDistricts = ['Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Emirates Hills'];
       const highPremium = ['Emirates Hills', 'Palm Jumeirah', 'Jumeirah Golf Estates'];
       if (highPremium.some(d => selectedDistrict.includes(d))) base *= 1.12;
       else if (premiumDistricts.some(d => selectedDistrict.includes(d))) base *= 1.08;
       else if (selectedDistrict.includes('Jumeirah')) base *= 1.05;
 
+      // ===== PROXIMITY IMPACT =====
+      // Proximity score 0-100 → multiplier 0.90 to 1.10
+      const proximityMultiplier = 0.90 + (proximityScore / 100) * 0.20;
+      const baseWithoutProximity = base;
+      base *= proximityMultiplier;
+
+      // Approach
       if (approach === 'income') base *= 0.98;
       else if (approach === 'cost') base *= 1.02;
 
       const valuation = Math.round(base / 1000) * 1000;
 
+      // Show result with proximity impact
       resultValue.textContent = `${valuation.toLocaleString()} AED`;
       resultDetail.innerHTML = `
         <div><span class="label">Property:</span> <span class="highlight">${propertyType}</span></div>
@@ -1006,9 +1322,16 @@
         <div><span class="label">View Types:</span> <span class="highlight">${viewTypes.length ? viewTypes.join(', ') : 'None'}</span></div>
         <div><span class="label">Amenities:</span> <span class="highlight">${amenities.length ? amenities.length + ' selected' : 'None'}</span></div>
         <div><span class="label">Approach:</span> <span class="highlight">${approach.replace('-', ' ')}</span></div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05);">
+          <span class="label">🏪 Nearby Facilities:</span> <span class="highlight">${poiCount} found within 1km</span><br />
+          <span class="label">📍 Proximity Score:</span> <span class="highlight">${proximityScore}/100</span><br />
+          <span class="label">📈 Proximity Impact:</span> 
+          <span class="proximity-impact">${proximityScore >= 70 ? '✅ +' : proximityScore >= 40 ? '➖ ' : '⚠️ −'} 
+          ${Math.round((proximityMultiplier - 1) * 100)}%</span>
+          ${proximityScore >= 70 ? ' — Excellent location' : proximityScore >= 40 ? ' — Average location' : ' — Limited nearby facilities'}
+        </div>
         <div style="margin-top:6px;font-size:10px;color:var(--muted);">
-          ⚠️ This is a simulated valuation for demonstration purposes.
-          Actual values will be generated by the AQAR backend engine.
+          ⚠️ This is a simulated valuation. Proximity score is based on real OpenStreetMap data.
         </div>
       `;
       resultBox.className = 'result-box';
@@ -1041,11 +1364,10 @@
       if (unknown) unknown.checked = false;
       if (internal) internal.checked = false;
 
-      // Initialize map at Dubai center as default
       setTimeout(() => {
         if (!map) {
           initMap(25.2048, 55.2708, 'Dubai');
-          document.getElementById('gisInfo').innerHTML = '📍 Dubai — Select a district to view location';
+          document.getElementById('gisInfo').innerHTML = '📍 Dubai — Select a district to view location and nearby facilities';
         }
       }, 500);
     });
