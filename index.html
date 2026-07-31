@@ -168,7 +168,7 @@
     }
 
     .district-suggestions {
-      max-height: 180px;
+      max-height: 220px;
       overflow-y: auto;
       background: var(--bg);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -177,20 +177,37 @@
       display: none;
     }
     .district-suggestions .item {
-      padding: 6px 12px;
+      padding: 8px 12px;
       cursor: pointer;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text);
       transition: background 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .district-suggestions .item:hover {
       background: rgba(212, 146, 14, 0.08);
     }
-    .district-suggestions .no-results {
-      padding: 8px 12px;
+    .district-suggestions .item .fuzzy-badge {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 9px;
+      background: rgba(255,255,255,0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .district-suggestions .no-results {
+      padding: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+    .district-suggestions .loading-suggestions {
+      padding: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
     }
 
     .selected-display {
@@ -302,6 +319,13 @@
       color: var(--muted);
     }
 
+    /* District count badge */
+    .district-count {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
     @media (max-width: 640px) {
       .header h1 {
         font-size: 22px;
@@ -405,12 +429,13 @@
 
       <div class="form-group">
         <label>District / Area <span class="hint">(Search Dubai districts)</span></label>
-        <input type="text" id="districtSearch" placeholder="Type to search district name..." oninput="filterDistricts(this.value)" />
+        <input type="text" id="districtSearch" placeholder="Type to search district name..." oninput="filterDistricts(this.value)" autocomplete="off" />
         <div class="district-suggestions" id="districtSuggestions"></div>
         <input type="hidden" id="selectedDistrict" value="" />
         <div class="selected-display">
           Selected: <span id="selectedDistrictDisplay">None</span>
         </div>
+        <div class="district-count" id="districtCount">Loading districts...</div>
       </div>
 
       <div class="form-group">
@@ -504,45 +529,140 @@
 
   <script>
     // ============================================================
-    // 1. DISTRICT SEARCH (Dubai districts only)
+    // 1. DISTRICT SEARCH — Load from DLD data + fallback
     // ============================================================
 
     let dubaiDistricts = [];
+    let districtsLoaded = false;
 
     async function loadDistricts() {
+      const countEl = document.getElementById('districtCount');
+      countEl.textContent = 'Loading districts from DLD data...';
+
+      try {
+        // FIRST: Try to load from DLD transactions (most complete)
+        const response = await fetch('/data/dld-transactions.json');
+        if (response.ok) {
+          const data = await response.json();
+          const districts = new Set();
+          data.forEach(t => {
+            if (t.district && t.district !== 'Unknown' && t.district !== '') {
+              districts.add(t.district);
+            }
+          });
+          if (districts.size > 10) {
+            dubaiDistricts = Array.from(districts).sort();
+            districtsLoaded = true;
+            countEl.textContent = `✅ Loaded ${dubaiDistricts.length} districts from DLD data`;
+            console.log(`✅ Loaded ${dubaiDistricts.length} districts from DLD data`);
+            return;
+          }
+        }
+      } catch (e) {
+        console.log('⚠️ Could not load from DLD data, trying coordinates file...');
+      }
+
+      // SECOND: Try district-coordinates.json
       try {
         const res = await fetch('/data/district-coordinates.json');
-        const data = await res.json();
-        dubaiDistricts = Object.keys(data).sort();
-      } catch (_) {
-        // fallback list
-        dubaiDistricts = [
-          'Al Barsha', 'Al Furjan', 'Arabian Ranches', 'Business Bay',
-          'Discovery Gardens', 'Downtown Dubai', 'Dubai Creek Harbour',
-          'Dubai Hills Estate', 'Dubai Marina', 'Dubai Silicon Oasis',
-          'Dubai South', 'Dubai Studio City', 'Emirates Hills',
-          'International City', 'Jumeirah', 'Jumeirah Beach Residence',
-          'Jumeirah Village Circle', 'Mirdif', 'Palm Jumeirah',
-          'The Greens', 'Umm Suqeim'
-        ].sort();
+        if (res.ok) {
+          const data = await res.json();
+          const keys = Object.keys(data);
+          if (keys.length > 10) {
+            dubaiDistricts = keys.sort();
+            districtsLoaded = true;
+            countEl.textContent = `✅ Loaded ${dubaiDistricts.length} districts from coordinates file`;
+            console.log(`✅ Loaded ${dubaiDistricts.length} districts from coordinates file`);
+            return;
+          }
+        }
+      } catch (e) {
+        console.log('⚠️ Could not load coordinates file, using fallback...');
       }
+
+      // THIRD: Extended fallback list (comprehensive Dubai districts)
+      dubaiDistricts = [
+        // Major communities
+        'Al Barsha', 'Al Barsha South', 'Al Barsha Heights', 'Al Furjan',
+        'Al Jaddaf', 'Al Karama', 'Al Khawaneej', 'Al Mamzar',
+        'Al Mankhool', 'Al Nahda', 'Al Qusais', 'Al Quoz',
+        'Al Rashidiya', 'Al Safa', 'Al Satwa', 'Al Sufouh',
+        'Al Twar', 'Al Warqa', 'Arabian Ranches', 'Arabian Ranches 2',
+        'Arabian Ranches 3', 'Arjan', 'Barsha Heights', 'Bawadi',
+        'Bluewaters Island', 'Bur Dubai', 'Business Bay',
+        'Damac Hills', 'Damac Hills 2', 'Deira', 'Discovery Gardens',
+        'Downtown Dubai', 'Dubai Creek Harbour', 'Dubai Hills Estate',
+        'Dubai Investment Park', 'Dubai Land', 'Dubai Marina',
+        'Dubai Silicon Oasis', 'Dubai South', 'Dubai Sports City',
+        'Dubai Studio City', 'Emirates Hills', 'Emirates Living',
+        'Festival City', 'Garhoud', 'Greens', 'Jebel Ali',
+        'Jebel Ali Village', 'Jumeirah', 'Jumeirah Beach Residence',
+        'Jumeirah Golf Estates', 'Jumeirah Islands', 'Jumeirah Lake Towers',
+        'Jumeirah Park', 'Jumeirah Village Circle', 'Jumeirah Village Triangle',
+        'Liwan', 'MBR City', 'Meadows', 'Mirdif', 'Mohammed Bin Rashid City',
+        'Mohamed Bin Rashed City', 'Motor City', 'Mudon', 'Nad Al Sheba',
+        'Palm Jumeirah', 'Remraam', 'Serena', 'The Villa',
+        'Tilal Al Ghaf', 'Town Square', 'Umm Al Sheif', 'Umm Suqeim',
+        'Victory Heights', 'Warsan', 'Zabeel', 'Zabeel Park'
+      ].sort();
+
+      districtsLoaded = true;
+      countEl.textContent = `📋 Using ${dubaiDistricts.length} districts (fallback list)`;
+      console.log(`📋 Using fallback list (${dubaiDistricts.length} districts)`);
     }
 
     function filterDistricts(query) {
       const container = document.getElementById('districtSuggestions');
+      const countEl = document.getElementById('districtCount');
+
       if (!query || query.length < 2) {
         container.style.display = 'none';
         return;
       }
-      const filtered = dubaiDistricts.filter(d =>
-        d.toLowerCase().includes(query.toLowerCase())
+
+      const lowerQuery = query.toLowerCase().trim();
+
+      // البحث عن تطابق تام أو جزئي
+      let filtered = dubaiDistricts.filter(d =>
+        d.toLowerCase().includes(lowerQuery)
       );
+
+      // إذا لم تكن هناك نتائج، حاول البحث عن تطابق تقريبي (إزالة المسافات، تشابه الحروف)
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="no-results">No districts found</div>';
+        const normalizedQuery = lowerQuery.replace(/\s+/g, '').replace(/[^a-z]/g, '');
+        const fuzzyMatches = dubaiDistricts.filter(d => {
+          const normalized = d.toLowerCase().replace(/\s+/g, '').replace(/[^a-z]/g, '');
+          return normalized.includes(normalizedQuery) || normalizedQuery.includes(normalized);
+        });
+        if (fuzzyMatches.length > 0) {
+          container.innerHTML = fuzzyMatches.map(d =>
+            `<div class="item" onclick="selectDistrict('${d}')">
+              ${d}
+              <span class="fuzzy-badge">fuzzy match</span>
+            </div>`
+          ).join('');
+          container.style.display = 'block';
+          return;
+        }
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="no-results">
+            😕 No districts found for "<strong>${query}</strong>"
+            <br><span style="font-size:10px;color:var(--muted);">Try: Downtown, Marina, Jumeirah, Palm, etc.</span>
+          </div>
+        `;
       } else {
-        container.innerHTML = filtered.map(d =>
+        // Show top 15 results
+        const display = filtered.slice(0, 15);
+        const remaining = filtered.length - 15;
+        container.innerHTML = display.map(d =>
           `<div class="item" onclick="selectDistrict('${d}')">${d}</div>`
         ).join('');
+        if (remaining > 0) {
+          container.innerHTML += `<div class="no-results" style="font-size:10px;color:var(--muted);">+ ${remaining} more districts...</div>`;
+        }
       }
       container.style.display = 'block';
     }
@@ -561,12 +681,23 @@
       el.className = 'gis-map-placeholder active';
     }
 
-    // close suggestions on click outside
+    // Close suggestions on click outside
     document.addEventListener('click', function(e) {
       const container = document.getElementById('districtSuggestions');
       const input = document.getElementById('districtSearch');
       if (!container.contains(e.target) && e.target !== input) {
         container.style.display = 'none';
+      }
+    });
+
+    // Keyboard support: Enter to select first result
+    document.getElementById('districtSearch').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const container = document.getElementById('districtSuggestions');
+        const firstItem = container.querySelector('.item');
+        if (firstItem) {
+          firstItem.click();
+        }
       }
     });
 
@@ -734,8 +865,10 @@
       base *= (1 + amenityCount * 0.008);
 
       // district premium (simulated)
-      const premiumDistricts = ['Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Emirates Hills'];
-      if (premiumDistricts.includes(selectedDistrict)) base *= 1.08;
+      const premiumDistricts = ['Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Emirates Hills', 'Jumeirah', 'Jumeirah Beach Residence'];
+      const highPremium = ['Emirates Hills', 'Palm Jumeirah', 'Jumeirah Golf Estates'];
+      if (highPremium.some(d => selectedDistrict.includes(d))) base *= 1.12;
+      else if (premiumDistricts.some(d => selectedDistrict.includes(d))) base *= 1.08;
       else if (selectedDistrict.includes('Jumeirah')) base *= 1.05;
 
       // approach adjustment (simulated)
@@ -751,6 +884,8 @@
         <div><span class="label">Area:</span> <span class="highlight">${area} sqm</span></div>
         <div><span class="label">Bedrooms:</span> <span class="highlight">${bedrooms === 0 ? 'Studio' : bedrooms}</span></div>
         <div><span class="label">District:</span> <span class="highlight">${selectedDistrict}</span></div>
+        <div><span class="label">View Types:</span> <span class="highlight">${viewTypes.length ? viewTypes.join(', ') : 'None'}</span></div>
+        <div><span class="label">Amenities:</span> <span class="highlight">${amenities.length ? amenities.length + ' selected' : 'None'}</span></div>
         <div><span class="label">Approach:</span> <span class="highlight">${approach.replace('-', ' ')}</span></div>
         <div style="margin-top:6px;font-size:10px;color:var(--muted);">
           ⚠️ This is a simulated valuation for demonstration purposes.
