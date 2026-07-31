@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AQAR Valuation Engine</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
       --gold: #d4920e;
@@ -203,12 +205,6 @@
       font-size: 12px;
       text-align: center;
     }
-    .district-suggestions .loading-suggestions {
-      padding: 12px;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-    }
 
     .selected-display {
       font-size: 11px;
@@ -220,22 +216,65 @@
       font-weight: 600;
     }
 
-    .gis-map-placeholder {
-      height: 180px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px dashed rgba(255, 255, 255, 0.08);
+    .district-count {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* GIS Map */
+    #gisMap {
+      height: 320px;
       border-radius: 10px;
+      margin-top: 6px;
+      background: #0a1628;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      z-index: 1;
+    }
+    #gisMap .leaflet-control-attribution {
+      font-size: 8px;
+      color: var(--muted);
+      background: rgba(0,0,0,0.6);
+    }
+    #gisMap .leaflet-popup-content {
+      color: #0a1628;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .gis-loading {
+      height: 320px;
+      border-radius: 10px;
+      margin-top: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--muted);
       font-size: 12px;
-      margin-top: 6px;
-      transition: all 0.3s;
+      flex-direction: column;
+      gap: 8px;
     }
-    .gis-map-placeholder.active {
-      background: rgba(212, 146, 14, 0.05);
-      border: 1px solid rgba(212, 146, 14, 0.15);
+    .gis-loading .spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(212, 146, 14, 0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .gis-info {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 6px;
+      text-align: center;
+      padding: 4px 0;
+    }
+    .gis-info strong {
+      color: var(--text);
     }
 
     .btn {
@@ -319,13 +358,6 @@
       color: var(--muted);
     }
 
-    /* District count badge */
-    .district-count {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
     @media (max-width: 640px) {
       .header h1 {
         font-size: 22px;
@@ -336,6 +368,9 @@
       }
       .result-box .value {
         font-size: 26px;
+      }
+      #gisMap {
+        height: 240px;
       }
     }
   </style>
@@ -444,9 +479,9 @@
         <input type="hidden" id="searchRadius" value="1000" />
       </div>
 
-      <div class="gis-map-placeholder" id="gisMap">
-        🗺️ GIS map will be displayed here (district selection will be used for location data)
-      </div>
+      <!-- GIS Map Container -->
+      <div id="gisMap"></div>
+      <div class="gis-info" id="gisInfo">📍 Select a district to view location on map</div>
     </div>
 
     <!-- ===== VIEW TYPE ===== -->
@@ -527,20 +562,89 @@
 
   </div>
 
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
     // ============================================================
     // 1. DISTRICT SEARCH — Load from DLD data + fallback
     // ============================================================
 
     let dubaiDistricts = [];
-    let districtsLoaded = false;
+    let map = null;
+    let mapMarker = null;
+
+    // Extended district coordinates
+    const DISTRICT_COORDS = {
+      // Major communities
+      'dubai marina': { lat: 25.0802, lng: 55.1416 },
+      'palm jumeirah': { lat: 25.1181, lng: 55.1425 },
+      'downtown dubai': { lat: 25.1972, lng: 55.2741 },
+      'business bay': { lat: 25.1855, lng: 55.2604 },
+      'emirates hills': { lat: 25.0677, lng: 55.1691 },
+      'jumeirah village circle': { lat: 25.0551, lng: 55.2057 },
+      'jumeirah beach residence': { lat: 25.0780, lng: 55.1340 },
+      'jumeirah': { lat: 25.2070, lng: 55.2300 },
+      'al barsha': { lat: 25.1166, lng: 55.1953 },
+      'al furjan': { lat: 25.0322, lng: 55.1511 },
+      'arabian ranches': { lat: 25.0556, lng: 55.2531 },
+      'dubai creek harbour': { lat: 25.2078, lng: 55.3350 },
+      'dubai hills estate': { lat: 25.0900, lng: 55.2300 },
+      'dubai silicon oasis': { lat: 25.1296, lng: 55.3750 },
+      'dubai south': { lat: 24.9500, lng: 55.1500 },
+      'dubai studio city': { lat: 25.0370, lng: 55.2800 },
+      'international city': { lat: 25.2100, lng: 55.4300 },
+      'mirdif': { lat: 25.2370, lng: 55.4100 },
+      'the greens': { lat: 25.1100, lng: 55.2100 },
+      'umm suqeim': { lat: 25.1540, lng: 55.2200 },
+      'dubai land': { lat: 25.0470, lng: 55.3100 },
+      'dubai sports city': { lat: 25.0300, lng: 55.2900 },
+      'motor city': { lat: 25.0350, lng: 55.3000 },
+      'damac hills': { lat: 25.0200, lng: 55.2700 },
+      'jumeirah golf estates': { lat: 25.0200, lng: 55.2000 },
+      'al barari': { lat: 25.0800, lng: 55.4000 },
+      'dubai investment park': { lat: 25.0100, lng: 55.1400 },
+      'nad al sheba': { lat: 25.1800, lng: 55.3400 },
+      'al quoz': { lat: 25.1200, lng: 55.2300 },
+      'al safa': { lat: 25.1900, lng: 55.2500 },
+      // MBR City variations
+      'mbr city': { lat: 25.1150, lng: 55.3650 },
+      'mbr district 7': { lat: 25.1150, lng: 55.3650 },
+      'mohamed bin rashed city': { lat: 25.1150, lng: 55.3650 },
+      'mohammed bin rashid city': { lat: 25.1150, lng: 55.3650 },
+      // Additional
+      'arjan': { lat: 25.0800, lng: 55.3100 },
+      'liwan': { lat: 25.1700, lng: 55.4300 },
+      'al jaddaf': { lat: 25.1950, lng: 55.3100 },
+      'al khawaneej': { lat: 25.2300, lng: 55.4700 },
+      'al mamzar': { lat: 25.3000, lng: 55.3300 },
+      'al nahda': { lat: 25.2800, lng: 55.3700 },
+      'al qusais': { lat: 25.2700, lng: 55.3900 },
+      'al rashidiya': { lat: 25.2400, lng: 55.4000 },
+      'al satwa': { lat: 25.2100, lng: 55.2600 },
+      'al sufouh': { lat: 25.1000, lng: 55.1500 },
+      'al twar': { lat: 25.2900, lng: 55.3900 },
+      'al warqa': { lat: 25.2600, lng: 55.4200 },
+      'deira': { lat: 25.2700, lng: 55.3100 },
+      'garhoud': { lat: 25.2300, lng: 55.3500 },
+      'jebel ali': { lat: 24.9800, lng: 55.0300 },
+      'jumeirah islands': { lat: 25.1400, lng: 55.1600 },
+      'jumeirah lake towers': { lat: 25.0700, lng: 55.1400 },
+      'jumeirah park': { lat: 25.0600, lng: 55.1900 },
+      'jumeirah village triangle': { lat: 25.0500, lng: 55.2000 },
+      'the meadows': { lat: 25.0600, lng: 55.2200 },
+      'the villa': { lat: 25.0700, lng: 55.3800 },
+      'zabeel': { lat: 25.2100, lng: 55.2800 },
+      'bluewaters island': { lat: 25.0800, lng: 55.1200 },
+      'festival city': { lat: 25.2300, lng: 55.3400 },
+      'dubai healthcare city': { lat: 25.2100, lng: 55.3200 },
+    };
 
     async function loadDistricts() {
       const countEl = document.getElementById('districtCount');
       countEl.textContent = 'Loading districts from DLD data...';
 
       try {
-        // FIRST: Try to load from DLD transactions (most complete)
         const response = await fetch('/data/dld-transactions.json');
         if (response.ok) {
           const data = await response.json();
@@ -552,7 +656,6 @@
           });
           if (districts.size > 10) {
             dubaiDistricts = Array.from(districts).sort();
-            districtsLoaded = true;
             countEl.textContent = `✅ Loaded ${dubaiDistricts.length} districts from DLD data`;
             console.log(`✅ Loaded ${dubaiDistricts.length} districts from DLD data`);
             return;
@@ -562,7 +665,6 @@
         console.log('⚠️ Could not load from DLD data, trying coordinates file...');
       }
 
-      // SECOND: Try district-coordinates.json
       try {
         const res = await fetch('/data/district-coordinates.json');
         if (res.ok) {
@@ -570,7 +672,6 @@
           const keys = Object.keys(data);
           if (keys.length > 10) {
             dubaiDistricts = keys.sort();
-            districtsLoaded = true;
             countEl.textContent = `✅ Loaded ${dubaiDistricts.length} districts from coordinates file`;
             console.log(`✅ Loaded ${dubaiDistricts.length} districts from coordinates file`);
             return;
@@ -580,9 +681,8 @@
         console.log('⚠️ Could not load coordinates file, using fallback...');
       }
 
-      // THIRD: Extended fallback list (comprehensive Dubai districts)
+      // Extended fallback
       dubaiDistricts = [
-        // Major communities
         'Al Barsha', 'Al Barsha South', 'Al Barsha Heights', 'Al Furjan',
         'Al Jaddaf', 'Al Karama', 'Al Khawaneej', 'Al Mamzar',
         'Al Mankhool', 'Al Nahda', 'Al Qusais', 'Al Quoz',
@@ -599,35 +699,30 @@
         'Jebel Ali Village', 'Jumeirah', 'Jumeirah Beach Residence',
         'Jumeirah Golf Estates', 'Jumeirah Islands', 'Jumeirah Lake Towers',
         'Jumeirah Park', 'Jumeirah Village Circle', 'Jumeirah Village Triangle',
-        'Liwan', 'MBR City', 'Meadows', 'Mirdif', 'Mohammed Bin Rashid City',
-        'Mohamed Bin Rashed City', 'Motor City', 'Mudon', 'Nad Al Sheba',
+        'Liwan', 'MBR City', 'MBR District 7', 'Meadows', 'Mirdif',
+        'Mohamed Bin Rashed City', 'Mohammed Bin Rashid City',
+        'Motor City', 'Mudon', 'Nad Al Sheba',
         'Palm Jumeirah', 'Remraam', 'Serena', 'The Villa',
         'Tilal Al Ghaf', 'Town Square', 'Umm Al Sheif', 'Umm Suqeim',
         'Victory Heights', 'Warsan', 'Zabeel', 'Zabeel Park'
       ].sort();
 
-      districtsLoaded = true;
       countEl.textContent = `📋 Using ${dubaiDistricts.length} districts (fallback list)`;
       console.log(`📋 Using fallback list (${dubaiDistricts.length} districts)`);
     }
 
     function filterDistricts(query) {
       const container = document.getElementById('districtSuggestions');
-      const countEl = document.getElementById('districtCount');
-
       if (!query || query.length < 2) {
         container.style.display = 'none';
         return;
       }
 
       const lowerQuery = query.toLowerCase().trim();
-
-      // البحث عن تطابق تام أو جزئي
       let filtered = dubaiDistricts.filter(d =>
         d.toLowerCase().includes(lowerQuery)
       );
 
-      // إذا لم تكن هناك نتائج، حاول البحث عن تطابق تقريبي (إزالة المسافات، تشابه الحروف)
       if (filtered.length === 0) {
         const normalizedQuery = lowerQuery.replace(/\s+/g, '').replace(/[^a-z]/g, '');
         const fuzzyMatches = dubaiDistricts.filter(d => {
@@ -647,14 +742,8 @@
       }
 
       if (filtered.length === 0) {
-        container.innerHTML = `
-          <div class="no-results">
-            😕 No districts found for "<strong>${query}</strong>"
-            <br><span style="font-size:10px;color:var(--muted);">Try: Downtown, Marina, Jumeirah, Palm, etc.</span>
-          </div>
-        `;
+        container.innerHTML = `<div class="no-results">😕 No districts found for "<strong>${query}</strong>"</div>`;
       } else {
-        // Show top 15 results
         const display = filtered.slice(0, 15);
         const remaining = filtered.length - 15;
         container.innerHTML = display.map(d =>
@@ -675,34 +764,94 @@
       updateGISLocation(district);
     }
 
-    function updateGISLocation(district) {
-      const el = document.getElementById('gisMap');
-      el.innerHTML = `📍 District: <strong>${district}</strong> — GIS data will be applied for nearby facilities and location scoring.`;
-      el.className = 'gis-map-placeholder active';
-    }
+    // ============================================================
+    // 2. GIS MAP — Leaflet integration
+    // ============================================================
 
-    // Close suggestions on click outside
-    document.addEventListener('click', function(e) {
-      const container = document.getElementById('districtSuggestions');
-      const input = document.getElementById('districtSearch');
-      if (!container.contains(e.target) && e.target !== input) {
-        container.style.display = 'none';
+    function getDistrictCoordinates(district) {
+      const key = district.toLowerCase();
+      // Try exact match first
+      if (DISTRICT_COORDS[key]) {
+        return DISTRICT_COORDS[key];
       }
-    });
-
-    // Keyboard support: Enter to select first result
-    document.getElementById('districtSearch').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const container = document.getElementById('districtSuggestions');
-        const firstItem = container.querySelector('.item');
-        if (firstItem) {
-          firstItem.click();
+      // Try fuzzy match
+      for (const [k, v] of Object.entries(DISTRICT_COORDS)) {
+        if (key.includes(k) || k.includes(key)) {
+          return v;
         }
       }
-    });
+      return null;
+    }
+
+    function initMap(lat, lng, district) {
+      if (!map) {
+        map = L.map('gisMap', {
+          center: [lat, lng],
+          zoom: 14,
+          zoomControl: true,
+          fadeAnimation: true,
+          zoomAnimation: true,
+        });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors',
+          maxZoom: 19,
+        }).addTo(map);
+      } else {
+        map.setView([lat, lng], 14);
+      }
+
+      if (mapMarker) {
+        map.removeLayer(mapMarker);
+      }
+      mapMarker = L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(`
+          <strong>📍 ${district}</strong><br />
+          <span style="font-size:11px;color:#555;">Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}</span>
+        `)
+        .openPopup();
+
+      // Add a circle for 1km radius
+      L.circle([lat, lng], {
+        radius: 1000,
+        color: '#d4920e',
+        fillColor: '#d4920e',
+        fillOpacity: 0.08,
+        weight: 1.5,
+        dashArray: '4 4',
+      }).addTo(map);
+
+      // Update info
+      document.getElementById('gisInfo').innerHTML = `
+        📍 <strong>${district}</strong> &nbsp;|&nbsp;
+        📌 ${lat.toFixed(4)}, ${lng.toFixed(4)} &nbsp;|&nbsp;
+        🔵 1km radius shown
+      `;
+    }
+
+    function updateGISLocation(district) {
+      const coords = getDistrictCoordinates(district);
+
+      if (coords) {
+        initMap(coords.lat, coords.lng, district);
+      } else {
+        document.getElementById('gisInfo').innerHTML = `
+          ⚠️ No coordinates found for <strong>${district}</strong>
+          <span style="color:var(--muted);margin-left:6px;">— GIS data will be applied for nearby facilities.</span>
+        `;
+        // Still show a default map at Dubai center
+        if (!map) {
+          initMap(25.2048, 55.2708, 'Dubai (default)');
+          document.getElementById('gisInfo').innerHTML = `
+            📍 <strong>${district}</strong> &nbsp;|&nbsp;
+            ⚠️ No coordinates found — showing default Dubai map
+          `;
+        }
+      }
+    }
 
     // ============================================================
-    // 2. VIEW TYPE — multi-select with clear on unknown/internal
+    // 3. VIEW TYPE — multi-select with clear on unknown/internal
     // ============================================================
 
     function handleViewChange() {
@@ -725,7 +874,7 @@
     }
 
     // ============================================================
-    // 3. APPROACH — dynamic based on property type
+    // 4. APPROACH — dynamic based on property type
     // ============================================================
 
     function updateApproaches() {
@@ -746,14 +895,13 @@
           <option value="cost">Cost Approach</option>
         `;
       }
-      // restore if still valid
       if (sel.querySelector(`option[value="${current}"]`)) {
         sel.value = current;
       }
     }
 
     // ============================================================
-    // 4. VALUATION CALCULATION (simulated)
+    // 5. VALUATION CALCULATION (simulated)
     // ============================================================
 
     function calculateValuation() {
@@ -766,26 +914,21 @@
       btn.textContent = '⏳ Calculating...';
       resultBox.style.display = 'none';
 
-      // gather inputs
       const propertyType = document.getElementById('propertyType').value;
       const area = parseFloat(document.getElementById('area').value) || 0;
       const bedrooms = parseInt(document.getElementById('bedrooms').value) || 0;
-      const bathrooms = parseInt(document.getElementById('bathrooms').value) || 1;
       const yearBuilt = parseInt(document.getElementById('yearBuilt').value) || 2020;
       const furnishing = document.getElementById('furnishing').value;
       const condition = document.getElementById('condition').value;
       const selectedDistrict = document.getElementById('selectedDistrict').value;
       const approach = document.getElementById('approach').value;
 
-      // view types
       const viewChecks = document.querySelectorAll('#viewTypeGroup input[type="checkbox"]:checked');
       const viewTypes = Array.from(viewChecks).map(cb => cb.value);
 
-      // amenities
       const amenityChecks = document.querySelectorAll('#amenitiesGroup input[type="checkbox"]:checked');
       const amenities = Array.from(amenityChecks).map(cb => cb.value);
 
-      // --- VALIDATION ---
       if (area < 10) {
         showError('Please enter a valid area (minimum 10 sqm).');
         btn.disabled = false;
@@ -799,23 +942,12 @@
         return;
       }
 
-      // --- SIMULATE VALUATION ---
-      // This is a placeholder — in production, this would call the backend.
-      // For demo purposes, we generate a realistic-looking value.
-
-      // base price per sqm by type
       const basePrices = {
-        apartment: 12000,
-        villa: 18000,
-        townhouse: 15000,
-        office: 10000,
-        retail: 14000,
-        land: 5000,
-        warehouse: 6000
+        apartment: 12000, villa: 18000, townhouse: 15000,
+        office: 10000, retail: 14000, land: 5000, warehouse: 6000
       };
       let base = (basePrices[propertyType] || 10000) * area;
 
-      // bedroom adjustment: studio (0) is ~15% lower than 1-bed
       let bedMultiplier = 1;
       if (bedrooms === 0) bedMultiplier = 0.85;
       else if (bedrooms === 1) bedMultiplier = 1;
@@ -824,20 +956,14 @@
       else if (bedrooms >= 4) bedMultiplier = 1.22;
       base *= bedMultiplier;
 
-      // view multiplier
       let viewMultiplier = 1;
       if (viewTypes.includes('unknown') || viewTypes.includes('internal')) {
         viewMultiplier = 0.95;
       } else {
         const impacts = {
-          'sea': 1.12,
-          'golf': 1.10,
-          'marina': 1.10,
-          'lagoon': 1.08,
-          'garden': 1.06,
-          'park': 1.04,
-          'landmark': 1.03,
-          'main-road': 1.01
+          'sea': 1.12, 'golf': 1.10, 'marina': 1.10,
+          'lagoon': 1.08, 'garden': 1.06, 'park': 1.04,
+          'landmark': 1.03, 'main-road': 1.01
         };
         const sorted = viewTypes.map(v => impacts[v] || 1).sort((a, b) => b - a);
         sorted.forEach((imp, i) => {
@@ -848,36 +974,29 @@
       }
       base *= viewMultiplier;
 
-      // furnishing
       if (furnishing === 'furnished') base *= 1.05;
       else if (furnishing === 'semi-furnished') base *= 1.025;
 
-      // condition
       if (condition === 'under-construction') base *= 0.85;
       else if (condition === 'off-plan') base *= 0.75;
 
-      // year built (newer is better)
       const ageFactor = 1 + (2026 - yearBuilt) * 0.002;
       base /= ageFactor;
 
-      // amenities (small bump)
       const amenityCount = amenities.length;
       base *= (1 + amenityCount * 0.008);
 
-      // district premium (simulated)
-      const premiumDistricts = ['Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Emirates Hills', 'Jumeirah', 'Jumeirah Beach Residence'];
+      const premiumDistricts = ['Dubai Marina', 'Palm Jumeirah', 'Downtown Dubai', 'Emirates Hills'];
       const highPremium = ['Emirates Hills', 'Palm Jumeirah', 'Jumeirah Golf Estates'];
       if (highPremium.some(d => selectedDistrict.includes(d))) base *= 1.12;
       else if (premiumDistricts.some(d => selectedDistrict.includes(d))) base *= 1.08;
       else if (selectedDistrict.includes('Jumeirah')) base *= 1.05;
 
-      // approach adjustment (simulated)
       if (approach === 'income') base *= 0.98;
       else if (approach === 'cost') base *= 1.02;
 
       const valuation = Math.round(base / 1000) * 1000;
 
-      // --- SHOW RESULT ---
       resultValue.textContent = `${valuation.toLocaleString()} AED`;
       resultDetail.innerHTML = `
         <div><span class="label">Property:</span> <span class="highlight">${propertyType}</span></div>
@@ -910,18 +1029,25 @@
     }
 
     // ============================================================
-    // 5. INIT
+    // 6. INIT
     // ============================================================
 
     document.addEventListener('DOMContentLoaded', function() {
       loadDistricts();
       updateApproaches();
 
-      // ensure unknown/internal are unchecked by default
       const unknown = document.querySelector('#viewTypeGroup input[value="unknown"]');
       const internal = document.querySelector('#viewTypeGroup input[value="internal"]');
       if (unknown) unknown.checked = false;
       if (internal) internal.checked = false;
+
+      // Initialize map at Dubai center as default
+      setTimeout(() => {
+        if (!map) {
+          initMap(25.2048, 55.2708, 'Dubai');
+          document.getElementById('gisInfo').innerHTML = '📍 Dubai — Select a district to view location';
+        }
+      }, 500);
     });
   </script>
 
