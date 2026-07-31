@@ -233,6 +233,67 @@ function getProximityMultiplier(gisScore) {
   return Math.min(maxMultiplier, Math.max(minMultiplier, multiplier));
 }
 
+// ===== VIEW TYPE MULTIPLIER (Multiple Selection Support) =====
+function calculateViewMultiplier(viewTypes) {
+  if (!viewTypes || viewTypes.length === 0) return 1;
+  
+  // تحقق من وجود Unknown أو Internal
+  if (viewTypes.includes('unknown') || viewTypes.includes('internal')) {
+    return 0.95; // تخفيض 5% للإطلالة الداخلية أو غير المعروفة
+  }
+  
+  // تأثيرات كل نوع إطلالة (محدثة مع فصل garden و park)
+  const viewImpacts = {
+    'sea': 1.12,        // +12%
+    'golf': 1.10,       // +10%
+    'marina': 1.10,     // +10%
+    'lagoon': 1.08,     // +8%
+    'garden': 1.06,     // +6% (خاصة)
+    'park': 1.04,       // +4% (عامة)
+    'landmark': 1.03,   // +3%
+    'main-road': 1.01   // +1%
+  };
+  
+  // ترتيب التأثيرات تنازلياً
+  const sortedImpacts = viewTypes
+    .map(v => viewImpacts[v] || 1)
+    .sort((a, b) => b - a);
+  
+  // أعلى قيمة × 100% + الباقي × 50%
+  let totalMultiplier = 1;
+  sortedImpacts.forEach((impact, index) => {
+    if (index === 0) {
+      totalMultiplier = impact;
+    } else {
+      totalMultiplier += (impact - 1) * 0.5;
+    }
+  });
+  
+  return Math.min(totalMultiplier, 1.20); // الحد الأقصى +20%
+}
+
+// ===== AVAILABLE APPROACHES BY PROPERTY TYPE =====
+function getAvailableApproaches(propertyType) {
+  // Apartment و Land: فقط Sales Comparison و Income
+  if (propertyType === 'apartment' || propertyType === 'land') {
+    return ['sales-comparison', 'income'];
+  }
+  // الباقي: جميع المناهج
+  return ['sales-comparison', 'income', 'cost'];
+}
+
+// ===== AMENITIES FILTER (remove view-related items) =====
+const ALLOWED_AMENITIES = [
+  'pool', 'gym', 'security', 'parking', 'balcony', 
+  'maid-room', 'study', 'concierge', 'elevator', 
+  'central-ac', 'furnished', 'smart-home', 'private-garden'
+];
+
+function filterAmenities(amenities) {
+  if (!amenities || !Array.isArray(amenities)) return [];
+  return amenities.filter(a => ALLOWED_AMENITIES.includes(a));
+}
+
 // ===== LEAVE-ONE-OUT MEDIAN =====
 function computeMedians(transactions, groupFn) {
   const groups = {};
@@ -340,6 +401,14 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
     }
   }
   
+  // ===== APPLY VIEW TYPE MULTIPLIER (Multiple Selection) =====
+  if (property.viewTypes && property.viewTypes.length > 0) {
+    const viewMultiplier = calculateViewMultiplier(property.viewTypes);
+    result.valuation = Math.round(result.valuation * viewMultiplier);
+    result.viewMultiplier = viewMultiplier;
+    result.viewTypes = property.viewTypes;
+  }
+  
   // ===== APPLY GIS PROXIMITY LAYER =====
   const gisScore = getGISScoreFromTransaction(property);
   if (gisScore !== null && gisScore !== undefined) {
@@ -383,6 +452,7 @@ async function main() {
   const allResults = [];
   let gisAppliedCount = 0;
   let gisAvailableCount = 0;
+  let viewAppliedCount = 0;
   
   for (const t of cleaned) {
     const evalResult = await evaluateProperty(t, projectSizeStats, projectStats, districtSizeStats, districtStats);
@@ -401,6 +471,10 @@ async function main() {
       gisAppliedCount++;
     }
     
+    if (evalResult.viewMultiplier && evalResult.viewMultiplier !== 1) {
+      viewAppliedCount++;
+    }
+    
     allResults.push({ 
       ...t, 
       aqarValuation, 
@@ -409,7 +483,9 @@ async function main() {
       evalLevel: evalResult.level, 
       evalCount: evalResult.count,
       gisScore: evalResult.gisScore || null,
-      gisMultiplier: evalResult.gisMultiplier || 1
+      gisMultiplier: evalResult.gisMultiplier || 1,
+      viewMultiplier: evalResult.viewMultiplier || 1,
+      viewTypes: evalResult.viewTypes || []
     });
   }
 
@@ -429,7 +505,8 @@ async function main() {
     priceBand25: Math.round((allWithin25 / allResults.length) * 100), 
     totalRecords: allResults.length, 
     gisAvailable: gisAvailableCount,
-    gisApplied: gisAppliedCount 
+    gisApplied: gisAppliedCount,
+    viewApplied: viewAppliedCount
   };
   
   const marketOutput = { 
@@ -437,7 +514,7 @@ async function main() {
       version: '22.0.0', 
       lastUpdated: new Date().toISOString(), 
       totalRecords: allResults.length, 
-      methodology: 'v22 Multi-layer weighting + GIS Integration', 
+      methodology: 'v22 Multi-layer weighting + GIS Integration + View Type Multiplier', 
       dataSource: 'DLD + Consultancy + Government + GIS',
       dataType: usingEnriched ? 'enriched' : 'basic'
     }, 
@@ -445,7 +522,7 @@ async function main() {
     records: allResults 
   };
   fs.writeFileSync(MARKET_OUTPUT_FILE, JSON.stringify(marketOutput, null, 2));
-  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount}`);
+  console.log(`📊 Market: ${allResults.length} records | ${allAvgAcc}% | ±${allAvgDev}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount} | View applied: ${viewAppliedCount}`);
 
   // ===== 120-DAY EVALUATION =====
   console.log('\n🔍 120-Day Evaluation (from Feb 2026)...');
@@ -458,6 +535,7 @@ async function main() {
   const evalResults = [];
   let evalGisApplied = 0;
   let evalGisAvailable = 0;
+  let evalViewApplied = 0;
   
   for (const t of evalData) {
     const evalResult = await evaluateProperty(t, projectSizeStats, projectStats, districtSizeStats, districtStats);
@@ -475,6 +553,10 @@ async function main() {
       evalGisApplied++;
     }
     
+    if (evalResult.viewMultiplier && evalResult.viewMultiplier !== 1) {
+      evalViewApplied++;
+    }
+    
     evalResults.push({ 
       ...t, 
       aqarValuation, 
@@ -483,7 +565,9 @@ async function main() {
       evalLevel: evalResult.level, 
       evalCount: evalResult.count,
       gisScore: evalResult.gisScore || null,
-      gisMultiplier: evalResult.gisMultiplier || 1
+      gisMultiplier: evalResult.gisMultiplier || 1,
+      viewMultiplier: evalResult.viewMultiplier || 1,
+      viewTypes: evalResult.viewTypes || []
     });
   }
 
@@ -513,7 +597,8 @@ async function main() {
     totalRecords: evalResults.length, 
     levels,
     gisAvailable: evalGisAvailable,
-    gisApplied: evalGisApplied 
+    gisApplied: evalGisApplied,
+    viewApplied: evalViewApplied
   };
   
   const evalOutput = { 
@@ -521,7 +606,7 @@ async function main() {
       version: '22.0.0', 
       lastUpdated: new Date().toISOString(), 
       totalRecords: evalResults.length, 
-      methodology: 'v22 Multi-layer weighting + GIS Integration', 
+      methodology: 'v22 Multi-layer weighting + GIS Integration + View Type Multiplier', 
       dataSource: 'DLD + Consultancy + Government + GIS',
       dataType: usingEnriched ? 'enriched' : 'basic'
     }, 
@@ -530,8 +615,8 @@ async function main() {
   };
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(evalOutput, null, 2));
 
-  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}% | GIS available: ${evalGisAvailable} | GIS applied: ${evalGisApplied}`);
-  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount}`);
+  console.log(`\n📊 120-Day (from Feb): ${evalResults.length} records | ${evalAvgAcc}% | ±${evalAvgDev}% | GIS available: ${evalGisAvailable} | GIS applied: ${evalGisApplied} | View applied: ${evalViewApplied}`);
+  console.log(`📊 Full Market: ${allResults.length} records | ${allAvgAcc}% | GIS available: ${gisAvailableCount} | GIS applied: ${gisAppliedCount} | View applied: ${viewAppliedCount}`);
   
   // ===== GIS IMPACT ANALYSIS =====
   const withGis = allResults.filter(r => r.gisMultiplier && r.gisMultiplier !== 1);
@@ -545,6 +630,20 @@ async function main() {
   if (withoutGis.length > 0) {
     const withoutGisAcc = Math.round(withoutGis.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withoutGis.length * 10) / 10;
     console.log(`   Without GIS (n=${withoutGis.length}): ${withoutGisAcc}% accuracy`);
+  }
+  
+  // ===== VIEW TYPE IMPACT ANALYSIS =====
+  const withView = allResults.filter(r => r.viewMultiplier && r.viewMultiplier !== 1);
+  const withoutView = allResults.filter(r => !r.viewMultiplier || r.viewMultiplier === 1);
+  
+  if (withView.length > 0) {
+    console.log('\n📊 View Type Impact Analysis:');
+    const withViewAcc = Math.round(withView.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withView.length * 10) / 10;
+    console.log(`   With View Type applied (n=${withView.length}): ${withViewAcc}% accuracy`);
+  }
+  if (withoutView.length > 0) {
+    const withoutViewAcc = Math.round(withoutView.reduce((s, r) => s + (100 - Math.abs(r.aqarVsActual)), 0) / withoutView.length * 10) / 10;
+    console.log(`   Without View Type (n=${withoutView.length}): ${withoutViewAcc}% accuracy`);
   }
 }
 
