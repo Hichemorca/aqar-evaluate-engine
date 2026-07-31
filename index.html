@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AQAR Valuation Intelligence Engine</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
     :root {
       --gold: #d4920e; --green: #00b86e; --red: #ff3c5a; --blue: #3c8cdc;
@@ -196,6 +198,16 @@
     .text-muted { color: var(--muted); font-size: 10px; }
     .mt-2 { margin-top: 8px; }
 
+    /* Leaflet map container overrides */
+    #gisMap .leaflet-control-attribution {
+      font-size: 8px;
+      background: rgba(0,0,0,0.5);
+      color: var(--muted);
+    }
+    #gisMap .leaflet-control-attribution a {
+      color: var(--gold);
+    }
+
     @media (max-width: 500px) {
       .row { flex-direction: column; gap: 0; }
       #app-container { padding: 20px 10px 40px; }
@@ -217,6 +229,13 @@
     📊 Based on 30,475 DLD transactions • 86.3% accuracy
   </div>
 
+  <!-- Demo Version Banner -->
+  <div style="background: rgba(212, 146, 14, 0.12); border: 1px solid rgba(212, 146, 14, 0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; text-align: center; backdrop-filter: blur(4px);">
+    <span style="font-size: 12px; font-weight: 600; color: var(--gold);">
+      🧪 نسخة تجريبية — البيانات متاحة لإمارة دبي فقط &nbsp;|&nbsp; Demo Version — Dubai Data Only
+    </span>
+  </div>
+
   <div class="section" style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);">
     <div class="section-title">🧠 How AQAR Works</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;font-size:10px;color:var(--muted);line-height:1.6">
@@ -230,7 +249,7 @@
   <div class="section">
     <div class="section-title">🏠 Property Information</div>
     <div class="row">
-      <div class="fg">
+      <div class="fg" style="display:none;">
         <label>📍 City</label>
         <select id="city" onchange="onCityChange()">
           <option value="">Select Emirate...</option>
@@ -243,18 +262,26 @@
           <option value="umm-al-quwain">Umm Al Quwain • أم القيوين</option>
         </select>
       </div>
-      <div class="fg">
-        <label>📍 District / Area</label>
-        <input type="text" id="district" list="districtList" placeholder="Select city first..." oninput="this.value = this.value.replace(/^\s+/, '')" autocomplete="off" onchange="autoFillGIS()">
-        <datalist id="districtList"></datalist>
-        <div class="note">Select from list or type any area name</div>
-      </div>
+      <!-- District moved to GIS section -->
     </div>
     <div class="row">
       <div class="fg"><label>🏗️ Property Type</label><select id="propType" onchange="onPropertyTypeChange()"><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="townhouse">Townhouse</option><option value="office">Office</option><option value="retail">Retail / Shop</option><option value="warehouse">Warehouse</option><option value="land">Land</option></select></div>
       <div class="fg"><label>📐 Total Area (sqm)</label><input type="number" id="area" placeholder="e.g. 150" value="120" min="10"></div>
     </div>
-    <div class="row" id="rowBedrooms"><div class="fg"><label>🛏️ Bedrooms</label><input type="number" id="bedrooms" value="2" min="0"></div></div>
+    <div class="row" id="rowBedrooms">
+      <div class="fg">
+        <label>🛏️ Bedrooms</label>
+        <select id="bedrooms">
+          <option value="0">Studio (Studio)</option>
+          <option value="1">1 Bedroom</option>
+          <option value="2" selected>2 Bedrooms</option>
+          <option value="3">3 Bedrooms</option>
+          <option value="4">4 Bedrooms</option>
+          <option value="5">5 Bedrooms</option>
+          <option value="6">6+ Bedrooms</option>
+        </select>
+      </div>
+    </div>
     <div class="row" id="rowYearCondition">
       <div class="fg"><label>📅 Year Built</label><input type="number" id="yearBuilt" value="2020" min="1970" max="2026"></div>
       <div class="fg"><label>⭐ Condition</label><select id="condition"><option value="excellent">Excellent</option><option value="good" selected>Good</option><option value="fair">Fair</option><option value="needs-renovation">Needs Renovation</option></select></div>
@@ -267,7 +294,7 @@
         <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="parking">🚗 Parking</label>
         <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="security">👮 Security</label>
         <label class="checkbox-item" data-types="apartment,office"><input type="checkbox" value="elevator">🛗 Elevator</label>
-        <label class="checkbox-item" data-types="apartment,villa,townhouse,office"><input type="checkbox" value="view">🌅 View</label>
+        <!-- Removed View checkbox from features -->
         <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="ac">❄️ Central AC</label>
         <label class="checkbox-item" data-types="apartment"><input type="checkbox" value="gym">💪 Gym</label>
       </div>
@@ -279,7 +306,19 @@
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Fields vary by property type. Leave empty if unknown.</div>
     <div class="row">
       <div class="fg" id="fgFinishQuality"><label>⭐ Finish Quality</label><select id="finishQuality"><option value="">Unknown</option><option value="luxury">Luxury / High-end</option><option value="good">Good / Standard</option><option value="normal">Normal / Average</option><option value="basic">Basic / Economy</option><option value="poor">Poor / Needs Work</option></select></div>
-      <div class="fg" id="fgViewType"><label>🌅 View Type</label><select id="viewType"><option value="">Unknown</option><option value="sea">Full Sea / Waterfront</option><option value="partial-sea">Partial Sea View</option><option value="city">City Skyline</option><option value="garden">Garden / Park</option><option value="street">Street / Main Road</option><option value="internal">Internal / No View</option></select></div>
+      <div class="fg" id="fgViewType">
+        <label>🌅 View Type</label>
+        <div class="checkbox-group" id="viewTypeGroup">
+          <label class="checkbox-item" id="view-sea-label"><input type="checkbox" value="sea" id="view-sea" onchange="handleViewTypeChange(this)">🌊 Full Sea / Waterfront</label>
+          <label class="checkbox-item" id="view-partial-sea-label"><input type="checkbox" value="partial-sea" id="view-partial-sea" onchange="handleViewTypeChange(this)">🌊 Partial Sea View</label>
+          <label class="checkbox-item" id="view-city-label"><input type="checkbox" value="city" id="view-city" onchange="handleViewTypeChange(this)">🏙️ City Skyline</label>
+          <label class="checkbox-item" id="view-garden-label"><input type="checkbox" value="garden" id="view-garden" onchange="handleViewTypeChange(this)">🌳 Garden View (Private)</label>
+          <label class="checkbox-item" id="view-park-label"><input type="checkbox" value="park" id="view-park" onchange="handleViewTypeChange(this)">🌳 Park View (Public)</label>
+          <label class="checkbox-item" id="view-street-label"><input type="checkbox" value="street" id="view-street" onchange="handleViewTypeChange(this)">🛣️ Street / Main Road</label>
+          <label class="checkbox-item" id="view-unknown-label"><input type="checkbox" value="unknown" id="view-unknown" onchange="handleViewTypeChange(this)">❓ Unknown</label>
+          <label class="checkbox-item" id="view-internal-label"><input type="checkbox" value="internal" id="view-internal" onchange="handleViewTypeChange(this)">🚫 Internal / No View</label>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="fg" id="fgFloorLevel"><label>🏢 Floor Level</label><select id="floorLevel"><option value="">Unknown</option><option value="ground">Ground Floor</option><option value="low">Low Floor (1-3)</option><option value="mid">Mid Floor (4-10)</option><option value="high">High Floor (11-20)</option><option value="very-high">Very High (21+)</option><option value="penthouse">Penthouse</option></select></div>
@@ -298,13 +337,20 @@
       Enter property location for proximity analysis (Metro, Malls, Schools, Hospitals, Parks)
     </div>
     
+    <!-- District moved here from Property Information -->
+    <div class="fg">
+      <label>📍 District / Area</label>
+      <input type="text" id="district" list="districtList" placeholder="Select city first..." oninput="this.value = this.value.replace(/^\s+/, '')" autocomplete="off" onchange="autoFillGIS()">
+      <datalist id="districtList"></datalist>
+      <div class="note">Select from list or type any area name</div>
+    </div>
+    
     <div class="row">
       <div class="fg">
         <label>🔍 Search Location</label>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <input type="text" id="gisAddress" placeholder="e.g. Dubai Marina, Dubai" style="flex:3" oninput="onGISAddressChange()">
           <button class="btn-s" onclick="detectLocation()" style="flex:0;padding:10px 16px;font-size:12px">📍 Auto Detect</button>
-          <button class="btn-s" onclick="autoFillGIS()" style="flex:0;padding:10px 16px;font-size:12px">🏠 From District</button>
         </div>
         <div class="note" id="gisStatus">Enter address or use auto-detect</div>
       </div>
@@ -321,20 +367,18 @@
       <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
     </div>
     
-    <div id="gisMap" style="margin-top:10px;height:200px;border-radius:12px;background:rgba(255,255,255,0.03);display:none;border:1px solid rgba(255,255,255,0.06);overflow:hidden">
-      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">
-        🗺️ Map (Coming Soon)
-      </div>
-    </div>
+    <!-- Map container (replaces placeholder) -->
+    <div id="gisMap" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     
+    <!-- Radius selector (hidden, default to 1000m) -->
     <div class="row" style="margin-top:10px">
-      <div class="fg">
+      <div class="fg" style="display:none;">
         <label>📏 Search Radius (meters)</label>
         <select id="gisRadius" onchange="onGISRadiusChange()">
           <option value="300">300m</option>
-          <option value="500" selected>500m</option>
+          <option value="500">500m</option>
           <option value="800">800m</option>
-          <option value="1000">1km</option>
+          <option value="1000" selected>1km</option>
           <option value="1500">1.5km</option>
         </select>
       </div>
@@ -387,6 +431,9 @@
 
 </div>
 
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 <script>
 const UAE_DISTRICTS = {
   dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"],
@@ -402,13 +449,177 @@ let scrapedDistrictData = null;
 let gisData = null;
 let gisLoading = false;
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.checkbox-item').forEach(item => {
-    item.addEventListener('click', function(e) { e.preventDefault(); const cb = this.querySelector('input'); cb.checked = !cb.checked; this.classList.toggle('checked', cb.checked); });
+// ===== VIEW TYPE CHECKBOX LOGIC =====
+function handleViewTypeChange(changedCheckbox) {
+  const group = document.getElementById('viewTypeGroup');
+  const allCheckboxes = group.querySelectorAll('input[type="checkbox"]');
+  
+  const exclusiveValues = ['unknown', 'internal'];
+  const normalValues = ['sea', 'partial-sea', 'city', 'garden', 'park', 'street'];
+  
+  // If the changed checkbox is 'unknown' or 'internal' and is checked
+  if (exclusiveValues.includes(changedCheckbox.value) && changedCheckbox.checked) {
+    // Uncheck all other checkboxes
+    allCheckboxes.forEach(cb => {
+      if (cb !== changedCheckbox && cb.checked) {
+        cb.checked = false;
+        cb.closest('.checkbox-item').classList.remove('checked');
+      }
+    });
+  }
+  // If the changed checkbox is a normal value and is checked
+  else if (normalValues.includes(changedCheckbox.value) && changedCheckbox.checked) {
+    // Uncheck 'unknown' and 'internal' if they are checked
+    allCheckboxes.forEach(cb => {
+      if (exclusiveValues.includes(cb.value) && cb.checked) {
+        cb.checked = false;
+        cb.closest('.checkbox-item').classList.remove('checked');
+      }
+    });
+  }
+  
+  // Update the visual state of all checkboxes
+  allCheckboxes.forEach(cb => {
+    const label = cb.closest('.checkbox-item');
+    if (cb.checked) {
+      label.classList.add('checked');
+    } else {
+      label.classList.remove('checked');
+    }
   });
+}
+
+// Function to get selected view types
+function getSelectedViewTypes() {
+  return Array.from(document.querySelectorAll('#viewTypeGroup input[type="checkbox"]:checked'))
+    .map(el => el.value);
+}
+
+// ===== GIS MAP VARIABLES =====
+let gisMapInstance = null;
+let gisMarker = null;
+let gisCircleLayer = null;
+let mapInitialized = false;
+
+// ===== UPDATE MAP MARKER =====
+function updateMapMarker(lat, lng) {
+  if (!mapInitialized) return;
+  
+  const newLat = parseFloat(lat);
+  const newLng = parseFloat(lng);
+  if (isNaN(newLat) || isNaN(newLng)) return;
+  
+  // Update marker position
+  if (gisMarker) {
+    gisMarker.setLatLng([newLat, newLng]);
+  }
+  
+  // Update circle position
+  if (gisCircleLayer) {
+    gisCircleLayer.setLatLng([newLat, newLng]);
+  }
+  
+  // Update the input fields
+  document.getElementById('gisLat').value = newLat.toFixed(6);
+  document.getElementById('gisLng').value = newLng.toFixed(6);
+  document.getElementById('gisCoordsRow').style.display = 'flex';
+}
+
+// ===== INIT MAP =====
+function initGISMap() {
+  try {
+    // Default center: Dubai
+    const defaultLat = 25.2048;
+    const defaultLng = 55.2708;
+    
+    // Initialize map
+    gisMapInstance = L.map('gisMap').setView([defaultLat, defaultLng], 11);
+    
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(gisMapInstance);
+    
+    // Create draggable marker
+    gisMarker = L.marker([defaultLat, defaultLng], {
+      draggable: true
+    }).addTo(gisMapInstance);
+    
+    // Create circle with gold color
+    gisCircleLayer = L.circle([defaultLat, defaultLng], {
+      radius: 1000,
+      color: '#d4920e',
+      fillColor: '#d4920e',
+      fillOpacity: 0.1,
+      weight: 2
+    }).addTo(gisMapInstance);
+    
+    // Set initial coordinates in the input fields
+    document.getElementById('gisLat').value = defaultLat.toFixed(6);
+    document.getElementById('gisLng').value = defaultLng.toFixed(6);
+    document.getElementById('gisCoordsRow').style.display = 'flex';
+    
+    // Handle map click
+    gisMapInstance.on('click', function(e) {
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+      updateMapMarker(lat, lng);
+      // Trigger GIS data fetch
+      fetchGISData();
+    });
+    
+    // Handle marker drag end
+    gisMarker.on('dragend', function(e) {
+      const pos = e.target.getLatLng();
+      updateMapMarker(pos.lat, pos.lng);
+      // Trigger GIS data fetch
+      fetchGISData();
+    });
+    
+    mapInitialized = true;
+    
+    // Trigger initial GIS data fetch
+    setTimeout(() => fetchGISData(), 500);
+    
+  } catch (error) {
+    console.warn('Leaflet map initialization failed:', error);
+    // Show a fallback message in the map container
+    const mapContainer = document.getElementById('gisMap');
+    if (mapContainer) {
+      mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable (error loading library)</div>';
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Set default city to Dubai
+  document.getElementById('city').value = 'dubai';
+  
+  // Set default radius to 1000m (1km)
+  document.getElementById('gisRadius').value = '1000';
+  
+  // Initialize checkboxes behavior
+  document.querySelectorAll('.checkbox-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      const cb = this.querySelector('input');
+      cb.checked = !cb.checked;
+      this.classList.toggle('checked', cb.checked);
+      // If this is a view type checkbox, trigger the handler
+      if (this.closest('#viewTypeGroup')) {
+        handleViewTypeChange(cb);
+      }
+    });
+  });
+  
   onPropertyTypeChange();
-  document.getElementById('district').addEventListener('blur', function() { this.value = this.value.trim(); });
+  document.getElementById('district').addEventListener('blur', function() {
+    this.value = this.value.trim();
+  });
   document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  
+  // Initialize map after a short delay to ensure DOM is ready
+  setTimeout(initGISMap, 100);
 });
 
 function onCityChange() {
@@ -607,6 +818,10 @@ async function fetchGISData() {
     if (data.gisData) {
       gisData = data.gisData;
       displayGISResult(gisData, data.proximityMultiplier);
+      // Update map marker if coordinates are available
+      if (data.gisData.lat && data.gisData.lng) {
+        updateMapMarker(data.gisData.lat, data.gisData.lng);
+      }
       status.innerHTML = '✅ Facilities analyzed successfully';
     } else {
       status.innerHTML = '⚠️ No facility data found for this location';
@@ -746,6 +961,10 @@ async function scrapeRealData() {
     if (data.gisData) {
       gisData = data.gisData;
       displayGISResult(gisData, data.proximityMultiplier);
+      // Update map marker if coordinates are available
+      if (data.gisData.lat && data.gisData.lng) {
+        updateMapMarker(data.gisData.lat, data.gisData.lng);
+      }
     }
     
     const srcLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
@@ -776,6 +995,47 @@ function getFallbackPrice(city, district) {
   return cr[cd] || cr.default || 6000;
 }
 
+// ===== CALCULATE VIEW MULTIPLIER =====
+function calculateViewMultiplier(viewTypes) {
+  if (!viewTypes || viewTypes.length === 0) return 1.0;
+  
+  // If 'unknown' or 'internal' is selected, return 1.0 (no adjustment)
+  if (viewTypes.includes('unknown') || viewTypes.includes('internal')) return 1.0;
+  
+  const viewFactors = { 
+    sea: 1.15, 
+    'partial-sea': 1.08, 
+    city: 1.05, 
+    garden: 1.04, 
+    park: 1.02, 
+    street: 0.97 
+  };
+  
+  // Filter to only valid view types that exist in the factors map
+  const validTypes = viewTypes.filter(type => viewFactors.hasOwnProperty(type));
+  if (validTypes.length === 0) return 1.0;
+  
+  // Sort by factor value descending (highest first)
+  validTypes.sort((a, b) => viewFactors[b] - viewFactors[a]);
+  
+  // Apply highest factor at 100%, others at 50% of their premium
+  let multiplier = 1.0;
+  let isFirst = true;
+  
+  for (const type of validTypes) {
+    const factor = viewFactors[type];
+    if (isFirst) {
+      multiplier *= factor;
+      isFirst = false;
+    } else {
+      // Apply only 50% of the premium (factor - 1)
+      multiplier += (factor - 1) * 0.5;
+    }
+  }
+  
+  return Math.max(0.8, Math.min(1.25, multiplier)); // Clamp between reasonable bounds
+}
+
 // ===== VALUATION =====
 function collectPropertyData() {
   const features = [];
@@ -802,7 +1062,7 @@ function collectPropertyData() {
     constructionCost: parseFloat(document.getElementById('constructionCost').value) || 0,
     scrapedData: scrapedDistrictData,
     finishQuality: document.getElementById('finishQuality').value,
-    viewType: document.getElementById('viewType').value,
+    viewTypes: getSelectedViewTypes(),
     floorLevel: document.getElementById('floorLevel').value,
     streetPosition: document.getElementById('streetPosition').value,
     buildingCondition: document.getElementById('buildingCondition').value,
@@ -822,6 +1082,12 @@ function salesComparisonApproach(data) {
   const cappedPrice = maxPricePerSqm[data.city] || 20000;
   if (avgPrice > cappedPrice) avgPrice = cappedPrice;
   let value = avgPrice * data.area;
+  
+  // Studio discount logic
+  if (data.bedrooms === 0 && data.propType === 'apartment') {
+    value *= 0.80; // 20% discount for studio compared to 1-bedroom (midpoint of 15-25% range)
+  }
+  
   const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
   value *= conditionFactors[data.condition] || 1.00;
   const age = 2026 - data.yearBuilt;
@@ -829,8 +1095,11 @@ function salesComparisonApproach(data) {
   value += data.features.length * (data.area * 50);
   const finishFactors = { luxury: 1.15, good: 1.05, normal: 1.00, basic: 0.92, poor: 0.80 };
   if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1.00;
-  const viewFactors = { sea: 1.15, 'partial-sea': 1.08, city: 1.05, garden: 1.03, street: 0.97, internal: 0.92 };
-  if (data.viewType) value *= viewFactors[data.viewType] || 1.00;
+  
+  // View Type multiplier using new multi-select logic
+  const viewMultiplier = calculateViewMultiplier(data.viewTypes || []);
+  value *= viewMultiplier;
+  
   const floorFactors = { penthouse: 1.12, 'very-high': 1.06, high: 1.03, mid: 1.00, low: 0.97, ground: 0.92 };
   if (data.floorLevel) value *= floorFactors[data.floorLevel] || 1.00;
   const streetFactors = { main: 1.08, corner: 1.05, secondary: 1.00, quiet: 0.96 };
@@ -855,7 +1124,7 @@ function salesComparisonApproach(data) {
   const areaCalibration = { 'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94, 'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94 };
   if (areaCalibration[data.district]) value = Math.round(value * areaCalibration[data.district]);
   
-  // ===== GIS PROXIMITY =====
+  // GIS PROXIMITY
   let gisMultiplier = 1;
   let gisDetails = '';
   if (data.gisData && data.gisData.totalScore) {
@@ -870,7 +1139,7 @@ function salesComparisonApproach(data) {
   const confidenceLevel = comparableCount >= 10 ? 'High' : comparableCount >= 5 ? 'Medium' : 'Basic';
   let details = `Based on ${comparableCount} comparable sales (${confidenceLevel} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
   if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
-  if (data.viewType) details += ` View: ${data.viewType}.`;
+  if (data.viewTypes && data.viewTypes.length > 0) details += ` Views: ${data.viewTypes.join(', ')}.`;
   details += ` Condition: ${data.condition}, Age: ${age}y.${gisDetails}`;
   
   return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice, gisMultiplier };
@@ -1065,7 +1334,7 @@ function runValuation() {
 }
 
 function resetAll() {
-  document.getElementById('city').value = '';
+  document.getElementById('city').value = 'dubai';
   document.getElementById('district').value = '';
   document.getElementById('districtList').innerHTML = '';
   document.getElementById('propType').value = 'apartment';
@@ -1080,7 +1349,13 @@ function resetAll() {
   document.getElementById('landValue').value = '';
   document.getElementById('constructionCost').value = '';
   document.getElementById('finishQuality').value = '';
-  document.getElementById('viewType').value = '';
+  
+  // Reset view type checkboxes
+  document.querySelectorAll('#viewTypeGroup input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.checkbox-item').classList.remove('checked');
+  });
+  
   document.getElementById('floorLevel').value = '';
   document.getElementById('streetPosition').value = '';
   document.getElementById('buildingCondition').value = '';
@@ -1093,6 +1368,22 @@ function resetAll() {
   document.getElementById('gisCoordsRow').style.display = 'none';
   document.getElementById('gisResult').style.display = 'none';
   document.getElementById('gisStatus').innerHTML = 'Enter address or use auto-detect';
+  
+  // Reset map to default position if initialized
+  if (mapInitialized && gisMapInstance) {
+    const defaultLat = 25.2048;
+    const defaultLng = 55.2708;
+    gisMapInstance.setView([defaultLat, defaultLng], 11);
+    if (gisMarker) {
+      gisMarker.setLatLng([defaultLat, defaultLng]);
+    }
+    if (gisCircleLayer) {
+      gisCircleLayer.setLatLng([defaultLat, defaultLng]);
+    }
+    document.getElementById('gisLat').value = defaultLat.toFixed(6);
+    document.getElementById('gisLng').value = defaultLng.toFixed(6);
+    document.getElementById('gisCoordsRow').style.display = 'flex';
+  }
   
   document.getElementById('scrapeStatus').innerHTML = '';
   document.getElementById('scrapedComps').innerHTML = '';
