@@ -17,7 +17,7 @@
       min-height: 100vh; overflow-x: hidden;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 30px 16px 60px; }
-    
+
     .header { text-align: center; margin-bottom: 30px; }
     .header h1 { font-size: 24px; font-weight: 900; color: #f0e0b0; }
     .header p { font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -33,12 +33,20 @@
     .stat-value.red { color: var(--red); }
     .stat-value.blue { color: var(--blue); }
     .stat-label { font-size: 12px; font-weight: 700; color: #dce8f5; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .stat-sub { font-size: 10px; color: var(--muted); margin-top: 4px; }
 
     .section {
       background: var(--card); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px; padding: 20px; margin-bottom: 20px;
     }
-    .section-title { font-size: 15px; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
+    .section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .section-title { font-size: 15px; font-weight: 900; color: var(--gold); }
+    .section-note { font-size: 10px; color: var(--muted); margin-top: 2px; max-width: 640px; line-height: 1.5; }
+
+    select.period-filter {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--text);
+      font-size: 11px; font-family: inherit; padding: 6px 10px; border-radius: 8px; cursor: pointer;
+    }
 
     table { width: 100%; border-collapse: collapse; font-size: 11px; }
     th { color: var(--muted); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -49,10 +57,21 @@
     .badge.green { background: rgba(0,184,110,0.15); color: var(--green); }
     .badge.red { background: rgba(255,60,90,0.15); color: var(--red); }
     .badge.gold { background: rgba(212,146,14,0.15); color: var(--gold); }
+    .badge.muted { background: rgba(138,154,176,0.15); color: var(--muted); }
+
+    .warn-flag { color: var(--gold); cursor: help; font-size: 10px; margin-left: 4px; }
+    .conf { font-size: 10px; color: var(--muted); }
 
     .loading { text-align: center; padding: 40px; color: var(--muted); }
     .back-link { display: inline-block; margin-top: 20px; color: var(--muted); font-size: 12px; text-decoration: none; }
     .back-link:hover { color: var(--gold); }
+
+    .methodology { font-size: 11px; line-height: 1.6; color: #c3cfe0; }
+    .methodology h4 { color: var(--gold); font-size: 11px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .methodology .m-block { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .methodology .m-label { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .methodology .m-limit { color: var(--gold); opacity: 0.85; }
+    details.methodology-toggle summary { cursor: pointer; font-size: 12px; font-weight: 700; color: var(--gold); padding: 4px 0; }
   </style>
 </head>
 <body>
@@ -60,29 +79,64 @@
 <div class="container">
   <div class="header">
     <h1>📊 AQAR Market Intelligence</h1>
-    <p>Full market analysis based on 30,475 DLD transactions (all time)</p>
+    <p id="headerSubtitle">Loading market data…</p>
   </div>
 
   <div class="stats-grid" id="statsGrid">
-    <div class="stat-card"><div class="stat-value gold" id="marketCondition">—</div><div class="stat-label">Market Condition</div></div>
-    <div class="stat-card"><div class="stat-value blue" id="avgMomentum">—</div><div class="stat-label">Avg Price Momentum</div></div>
+    <div class="stat-card">
+      <div class="stat-value gold" id="marketCondition">—</div>
+      <div class="stat-label">Market Condition</div>
+      <div class="stat-sub" id="marketConditionSub"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value blue" id="avgGrowth">—</div>
+      <div class="stat-label">Avg Price Growth (Observed)</div>
+      <div class="stat-sub" id="avgGrowthSub"></div>
+    </div>
     <div class="stat-card"><div class="stat-value green" id="topPerformer">—</div><div class="stat-label">Top Performer</div></div>
     <div class="stat-card"><div class="stat-value" id="mostLiquid">—</div><div class="stat-label">Most Liquid</div></div>
   </div>
 
   <div class="section">
-    <div class="section-title">📋 Top 10 Investment Districts</div>
+    <div class="section-head">
+      <div>
+        <div class="section-title">📋 Top 10 Investment Districts</div>
+        <div class="section-note">Composite score: growth (30%), liquidity (25%), inverted volatility (20%), inverted valuation dispersion (10%), data confidence (15%). Rental strength and multi-year history are not included — see Methodology below.</div>
+      </div>
+    </div>
     <div id="investmentTable"><div class="loading">Loading...</div></div>
   </div>
 
   <div class="section">
-    <div class="section-title">🚀 Fastest Growing Areas</div>
+    <div class="section-head">
+      <div>
+        <div class="section-title">🚀 Fastest Growing Areas</div>
+        <div class="section-note">Growth = actual observed price change over the selected period (not extrapolated). Uses the complete available transaction history by default.</div>
+      </div>
+      <select class="period-filter" id="growthPeriodFilter">
+        <option value="full">Full History</option>
+        <option value="last6m">Last 6 Months</option>
+        <option value="last3m">Last 3 Months</option>
+      </select>
+    </div>
     <div id="growingTable"><div class="loading">Loading...</div></div>
   </div>
 
   <div class="section">
-    <div class="section-title">⚠️ High Risk Areas (Bubble Risk)</div>
+    <div class="section-head">
+      <div>
+        <div class="section-title">⚠️ High Risk Areas (Bubble Risk)</div>
+        <div class="section-note">Composite of temporal volatility (35%), positive price acceleration (30%), cross-district growth outlier status (20%), and volume instability (15%), scaled by data confidence. Inventory/rental-based dimensions are not available — see Methodology below.</div>
+      </div>
+    </div>
     <div id="riskTable"><div class="loading">Loading...</div></div>
+  </div>
+
+  <div class="section">
+    <details class="methodology-toggle">
+      <summary>ⓘ Methodology — definitions, calculations, assumptions &amp; limitations</summary>
+      <div class="methodology" id="methodologyPanel" style="margin-top:12px">Loading…</div>
+    </details>
   </div>
 
   <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
@@ -95,38 +149,122 @@
 </div>
 
 <script>
+let marketData = null;
+
+function fmtPct(v) {
+  if (v === null || v === undefined) return '—';
+  return (v > 0 ? '+' : '') + v + '%';
+}
+
+function warnBadge(d) {
+  const flags = [];
+  if (d.smallSampleWarning) flags.push('⚠ small sample (&lt;10 txns/mo avg) — treat with caution');
+  if (d.anomalousMonths && d.anomalousMonths.length) flags.push('⚠ possible bulk-sale anomaly in ' + d.anomalousMonths.join(', '));
+  if (!flags.length) return '';
+  return `<span class="warn-flag" title="${flags.join(' | ')}">⚠</span>`;
+}
+
+function renderInvestmentTable() {
+  let html = '<table><thead><tr><th>#</th><th>District</th><th>Score</th><th>Growth</th><th>Volatility</th><th>Liquidity %ile</th><th>Confidence</th></tr></thead><tbody>';
+  (marketData.bestInvestmentDistricts || []).forEach((d, i) => {
+    html += `<tr>
+      <td>${i + 1}</td>
+      <td>${d.label}${warnBadge(d)}</td>
+      <td>${d.investmentScore}</td>
+      <td><span class="badge ${d.growth.observedPeriodGrowthPct > 0 ? 'green' : 'red'}">${fmtPct(d.growth.observedPeriodGrowthPct)}</span></td>
+      <td>${d.temporalVolatilityPct === null ? '—' : d.temporalVolatilityPct + '%'}</td>
+      <td>${d.liquidityPercentile}</td>
+      <td class="conf">${d.confidenceScore}/100</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('investmentTable').innerHTML = html;
+}
+
+function renderGrowingTable(period) {
+  const rows = [...(marketData.fastestGrowing || [])];
+  // Re-sort by the selected window's observed growth when not "full", since
+  // the precomputed fastestGrowing list is ranked on full-history growth.
+  rows.forEach(d => { d._w = d.windowedGrowth[period]; });
+  const withWindow = rows.filter(d => d._w !== null && d._w !== undefined);
+  withWindow.sort((a, b) => b._w.observedPeriodGrowthPct - a._w.observedPeriodGrowthPct);
+  const top = withWindow.slice(0, 10);
+
+  let html = '<table><thead><tr><th>#</th><th>District</th><th>Growth (Observed)</th><th>Trend (Annualized)</th><th>Period</th><th>Confidence</th><th>Transactions</th></tr></thead><tbody>';
+  top.forEach((d, i) => {
+    const w = d._w;
+    html += `<tr>
+      <td>${i + 1}</td>
+      <td>${d.label}${warnBadge(d)}</td>
+      <td><span class="badge green">${fmtPct(w.observedPeriodGrowthPct)}</span></td>
+      <td class="conf">${fmtPct(w.annualizedPct)} (R²=${w.r2})</td>
+      <td class="conf">${w.periodLabel}</td>
+      <td class="conf">${d.confidenceScore}/100</td>
+      <td>${d.transactionCount}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('growingTable').innerHTML = html;
+}
+
+function renderRiskTable() {
+  let html = '<table><thead><tr><th>#</th><th>District</th><th>Bubble Risk</th><th>Volatility</th><th>Acceleration</th><th>Confidence</th><th>Transactions</th></tr></thead><tbody>';
+  (marketData.highRiskAreas || []).forEach((d, i) => {
+    html += `<tr>
+      <td>${i + 1}</td>
+      <td>${d.label}${warnBadge(d)}</td>
+      <td><span class="badge red">${d.bubbleRiskScore}</span></td>
+      <td>${d.temporalVolatilityPct}%</td>
+      <td>${fmtPct(d.priceAccelerationPct)}</td>
+      <td class="conf">${d.confidenceScore}/100</td>
+      <td>${d.transactionCount}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('riskTable').innerHTML = html;
+}
+
+function renderMethodologyPanel() {
+  const m = marketData.methodology || {};
+  let html = '';
+  Object.entries(m).forEach(([key, def]) => {
+    html += `<div class="m-block">
+      <h4>${key}</h4>
+      <div><span class="m-label">Definition:</span> ${def.definition}</div>
+      <div><span class="m-label">Calculation:</span> ${def.calculation}</div>
+      ${def.variables && def.variables.length ? `<div><span class="m-label">Variables:</span> ${def.variables.join(', ')}</div>` : ''}
+      ${def.assumptions && def.assumptions.length ? `<div><span class="m-label">Assumptions:</span> ${def.assumptions.join(' ')}</div>` : ''}
+      ${def.limitations && def.limitations.length ? `<div class="m-limit"><span class="m-label">Limitations:</span> ${def.limitations.join(' ')}</div>` : ''}
+    </div>`;
+  });
+  document.getElementById('methodologyPanel').innerHTML = html || 'No methodology metadata available.';
+}
+
 async function loadData() {
   try {
     const res = await fetch('/data/market-intelligence.json');
-    const data = await res.json();
+    marketData = await res.json();
 
-    document.getElementById('marketCondition').textContent = data.marketIndicators?.marketCondition || '—';
-    document.getElementById('avgMomentum').textContent = (data.marketIndicators?.averagePriceMomentum || 0) + '%';
-    document.getElementById('topPerformer').textContent = data.marketIndicators?.topPerformer || '—';
-    document.getElementById('mostLiquid').textContent = data.marketIndicators?.mostLiquid || '—';
+    document.getElementById('headerSubtitle').textContent =
+      `Full market analysis based on ${marketData.totalTransactions.toLocaleString()} DLD transactions (${marketData.dataWindow.firstTransactionDate} to ${marketData.dataWindow.lastTransactionDate}) — ${marketData.qualifyingDistricts} qualifying district/type segments`;
 
-    let invHTML = '<table><thead><tr><th>#</th><th>District</th><th>Score</th><th>Momentum</th><th>Volatility</th><th>Transactions</th></tr></thead><tbody>';
-    (data.bestInvestmentDistricts || []).slice(0, 10).forEach((d, i) => {
-      invHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td>${d.investmentScore}</td><td><span class="badge ${d.priceMomentum > 0 ? 'green' : 'red'}">${d.priceMomentum > 0 ? '+' : ''}${d.priceMomentum}%</span></td><td>${d.volatility}%</td><td>${d.transactionCount}</td></tr>`;
-    });
-    invHTML += '</tbody></table>';
-    document.getElementById('investmentTable').innerHTML = invHTML;
+    const mi = marketData.marketIndicators || {};
+    document.getElementById('marketCondition').textContent = mi.marketCondition || '—';
+    document.getElementById('marketConditionSub').textContent = 'based on annualized trend — indicative, see Methodology';
+    document.getElementById('avgGrowth').textContent = fmtPct(mi.averageObservedPeriodGrowthPct);
+    document.getElementById('avgGrowthSub').textContent = `Trend (annualized): ${fmtPct(mi.averageAnnualizedTrendPct)}`;
+    document.getElementById('topPerformer').textContent = mi.topPerformer || '—';
+    document.getElementById('mostLiquid').textContent = mi.mostLiquid || '—';
 
-    let growHTML = '<table><thead><tr><th>#</th><th>District</th><th>Growth</th><th>Transactions</th></tr></thead><tbody>';
-    (data.fastestGrowing || []).slice(0, 10).forEach((d, i) => {
-      growHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td><span class="badge green">+${d.priceMomentum}%</span></td><td>${d.transactionCount}</td></tr>`;
-    });
-    growHTML += '</tbody></table>';
-    document.getElementById('growingTable').innerHTML = growHTML;
+    renderInvestmentTable();
+    renderGrowingTable('full');
+    renderRiskTable();
+    renderMethodologyPanel();
 
-    let riskHTML = '<table><thead><tr><th>#</th><th>District</th><th>Bubble Risk</th><th>Volatility</th><th>Transactions</th></tr></thead><tbody>';
-    (data.highRiskAreas || []).slice(0, 10).forEach((d, i) => {
-      riskHTML += `<tr><td>${i+1}</td><td>${d.district}</td><td><span class="badge red">${d.bubbleRiskScore}</span></td><td>${d.volatility}%</td><td>${d.transactionCount}</td></tr>`;
-    });
-    riskHTML += '</tbody></table>';
-    document.getElementById('riskTable').innerHTML = riskHTML;
+    document.getElementById('growthPeriodFilter').addEventListener('change', (e) => renderGrowingTable(e.target.value));
 
-  } catch(e) {
+  } catch (e) {
+    console.error(e);
     const errorMsg = '⚠️ Could not load market data. Please check your connection or try again later.';
     document.getElementById('investmentTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
     document.getElementById('growingTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
