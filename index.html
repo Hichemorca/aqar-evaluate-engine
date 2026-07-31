@@ -65,7 +65,38 @@
     }
     .fg input:read-only { opacity: 0.7; cursor: not-allowed; }
     .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
-    .fg .error { border-color: rgba(255,60,90,0.6) !important; }
+
+    /* Autocomplete styles */
+    .autocomplete-container { position: relative; }
+    .autocomplete-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #0a1628;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0 0 9px 9px;
+      z-index: 1000;
+      display: none;
+    }
+    .autocomplete-list .item {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 12px;
+      color: var(--text);
+      transition: background 0.15s;
+    }
+    .autocomplete-list .item:hover {
+      background: rgba(212,146,14,0.08);
+    }
+    .autocomplete-list .item .sub {
+      font-size: 9px;
+      color: var(--muted);
+      margin-left: 8px;
+    }
 
     .btn {
       display: block; width: 100%; padding: 13px; border-radius: 10px; border: none;
@@ -198,7 +229,6 @@
     .text-muted { color: var(--muted); font-size: 10px; }
     .mt-2 { margin-top: 8px; }
 
-    /* Leaflet map container overrides */
     #gisMap .leaflet-control-attribution {
       font-size: 8px;
       background: rgba(0,0,0,0.5);
@@ -206,6 +236,16 @@
     }
     #gisMap .leaflet-control-attribution a {
       color: var(--gold);
+    }
+
+    .selected-display {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .selected-display span {
+      color: var(--text);
+      font-weight: 600;
     }
 
     @media (max-width: 500px) {
@@ -252,17 +292,9 @@
       <div class="fg" style="display:none;">
         <label>📍 City</label>
         <select id="city" onchange="onCityChange()">
-          <option value="">Select Emirate...</option>
-          <option value="dubai">Dubai • دبي</option>
-          <option value="abu-dhabi">Abu Dhabi • أبوظبي</option>
-          <option value="sharjah">Sharjah • الشارقة</option>
-          <option value="ajman">Ajman • عجمان</option>
-          <option value="ras-al-khaimah">Ras Al Khaimah • رأس الخيمة</option>
-          <option value="fujairah">Fujairah • الفجيرة</option>
-          <option value="umm-al-quwain">Umm Al Quwain • أم القيوين</option>
+          <option value="dubai" selected>Dubai • دبي</option>
         </select>
       </div>
-      <!-- District moved to GIS section -->
     </div>
     <div class="row">
       <div class="fg"><label>🏗️ Property Type</label><select id="propType" onchange="onPropertyTypeChange()"><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="townhouse">Townhouse</option><option value="office">Office</option><option value="retail">Retail / Shop</option><option value="warehouse">Warehouse</option><option value="land">Land</option></select></div>
@@ -294,7 +326,6 @@
         <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="parking">🚗 Parking</label>
         <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="security">👮 Security</label>
         <label class="checkbox-item" data-types="apartment,office"><input type="checkbox" value="elevator">🛗 Elevator</label>
-        <!-- Removed View checkbox from features -->
         <label class="checkbox-item" data-types="apartment,villa,townhouse,office,retail"><input type="checkbox" value="ac">❄️ Central AC</label>
         <label class="checkbox-item" data-types="apartment"><input type="checkbox" value="gym">💪 Gym</label>
       </div>
@@ -309,14 +340,14 @@
       <div class="fg" id="fgViewType">
         <label>🌅 View Type</label>
         <div class="checkbox-group" id="viewTypeGroup">
-          <label class="checkbox-item" id="view-sea-label"><input type="checkbox" value="sea" id="view-sea" onchange="handleViewTypeChange(this)">🌊 Full Sea / Waterfront</label>
-          <label class="checkbox-item" id="view-partial-sea-label"><input type="checkbox" value="partial-sea" id="view-partial-sea" onchange="handleViewTypeChange(this)">🌊 Partial Sea View</label>
-          <label class="checkbox-item" id="view-city-label"><input type="checkbox" value="city" id="view-city" onchange="handleViewTypeChange(this)">🏙️ City Skyline</label>
-          <label class="checkbox-item" id="view-garden-label"><input type="checkbox" value="garden" id="view-garden" onchange="handleViewTypeChange(this)">🌳 Garden View (Private)</label>
-          <label class="checkbox-item" id="view-park-label"><input type="checkbox" value="park" id="view-park" onchange="handleViewTypeChange(this)">🌳 Park View (Public)</label>
-          <label class="checkbox-item" id="view-street-label"><input type="checkbox" value="street" id="view-street" onchange="handleViewTypeChange(this)">🛣️ Street / Main Road</label>
-          <label class="checkbox-item" id="view-unknown-label"><input type="checkbox" value="unknown" id="view-unknown" onchange="handleViewTypeChange(this)">❓ Unknown</label>
-          <label class="checkbox-item" id="view-internal-label"><input type="checkbox" value="internal" id="view-internal" onchange="handleViewTypeChange(this)">🚫 Internal / No View</label>
+          <label class="checkbox-item"><input type="checkbox" value="sea" onchange="handleViewTypeChange(this)">🌊 Full Sea / Waterfront</label>
+          <label class="checkbox-item"><input type="checkbox" value="partial-sea" onchange="handleViewTypeChange(this)">🌊 Partial Sea View</label>
+          <label class="checkbox-item"><input type="checkbox" value="city" onchange="handleViewTypeChange(this)">🏙️ City Skyline</label>
+          <label class="checkbox-item"><input type="checkbox" value="garden" onchange="handleViewTypeChange(this)">🌳 Garden View (Private)</label>
+          <label class="checkbox-item"><input type="checkbox" value="park" onchange="handleViewTypeChange(this)">🌳 Park View (Public)</label>
+          <label class="checkbox-item"><input type="checkbox" value="street" onchange="handleViewTypeChange(this)">🛣️ Street / Main Road</label>
+          <label class="checkbox-item"><input type="checkbox" value="unknown" onchange="handleViewTypeChange(this)">❓ Unknown</label>
+          <label class="checkbox-item"><input type="checkbox" value="internal" onchange="handleViewTypeChange(this)">🚫 Internal / No View</label>
         </div>
       </div>
     </div>
@@ -334,26 +365,20 @@
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Nearby Facilities (GIS)</div>
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">
-      Enter property location for proximity analysis (Metro, Malls, Schools, Hospitals, Parks)
+      Select a district from the list below, then drag the marker on the map to pinpoint the exact location.
     </div>
     
-    <!-- District moved here from Property Information -->
+    <!-- Autocomplete District Search -->
     <div class="fg">
       <label>📍 District / Area</label>
-      <input type="text" id="district" list="districtList" placeholder="Select city first..." oninput="this.value = this.value.replace(/^\s+/, '')" autocomplete="off" onchange="autoFillGIS()">
-      <datalist id="districtList"></datalist>
-      <div class="note">Select from list or type any area name</div>
-    </div>
-    
-    <div class="row">
-      <div class="fg">
-        <label>🔍 Search Location</label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <input type="text" id="gisAddress" placeholder="e.g. Dubai Marina, Dubai" style="flex:3" oninput="onGISAddressChange()">
-          <button class="btn-s" onclick="detectLocation()" style="flex:0;padding:10px 16px;font-size:12px">📍 Auto Detect</button>
-        </div>
-        <div class="note" id="gisStatus">Enter address or use auto-detect</div>
+      <div class="autocomplete-container">
+        <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" oninput="filterDistricts(this.value)" onfocus="this.select()">
+        <div class="autocomplete-list" id="districtAutocomplete"></div>
       </div>
+      <div class="selected-display">
+        Selected: <span id="selectedDistrictDisplay">None</span>
+      </div>
+      <input type="hidden" id="selectedDistrict" value="">
     </div>
     
     <div class="row" id="gisCoordsRow" style="display:none">
@@ -367,24 +392,14 @@
       <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
     </div>
     
-    <!-- Map container (replaces placeholder) -->
+    <!-- Map container -->
     <div id="gisMap" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     
-    <!-- Radius selector (hidden, default to 1000m) -->
-    <div class="row" style="margin-top:10px">
-      <div class="fg" style="display:none;">
-        <label>📏 Search Radius (meters)</label>
-        <select id="gisRadius" onchange="onGISRadiusChange()">
-          <option value="300">300m</option>
-          <option value="500">500m</option>
-          <option value="800">800m</option>
-          <option value="1000" selected>1km</option>
-          <option value="1500">1.5km</option>
-        </select>
-      </div>
-      <div class="fg" style="display:flex;align-items:flex-end">
-        <button class="btn-s" onclick="fetchGISData()" style="width:100%;padding:10px;font-size:12px">🔍 Analyze Facilities</button>
-      </div>
+    <!-- Hidden radius (fixed to 1km) -->
+    <input type="hidden" id="gisRadius" value="1000">
+    
+    <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">
+      📌 Drag the gold marker on the map to pinpoint the exact property location
     </div>
   </div>
 
@@ -435,19 +450,115 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script>
+// ===== UAE DISTRICTS =====
 const UAE_DISTRICTS = {
-  dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"],
-  'abu-dhabi': ["Saadiyat Island","Yas Island","Al Reem Island","Al Raha Beach","Khalifa City","Mohammed Bin Zayed City","Al Reef","Corniche Area","Al Maryah Island","Masdar City","Al Ain City","Al Bateen","Al Dana","Al Falah","Al Ghadeer","Al Shamkha","Baniyas","Hudayriyat Island","Jubail Island","Khalidiya","Mushrif","Nurai Island","Ramhan Island","Shakhbout City","Zayed City"],
-  sharjah: ["Al Majaz","Al Nahda","Al Taawun","Muwaileh","Aljada","Al Khan","Maryam Island","Al Ghuwair","Al Mamzar","Al Qasimia","Al Rahmaniya","Al Suyoh","Al Zahia","Tilal City","University City"],
-  ajman: ["Al Rashidiya","Al Nuaimiya","Emirates City","Ajman Downtown","Ajman One","Al Jurf","Al Mowaihat","City Towers","Corniche Ajman"],
-  'ras-al-khaimah': ["Al Hamra Village","Mina Al Arab","Al Marjan Island","Al Nakheel","Dafan Al Khor","RAK City Center"],
-  fujairah: ["Al Aqah","Fujairah City Center","Al Faseel","Dibba","Murbah","Sharm"],
-  'umm-al-quwain': ["Umm Al Quwain Marina","Al Salamah","Al Raas","King Shaheen Street"]
+  dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"]
 };
 
+// ===== DISTRICT COORDINATES =====
+const DISTRICT_COORDS = {
+  'dubai marina': { lat: 25.0802, lng: 55.1416 },
+  'palm jumeirah': { lat: 25.1181, lng: 55.1425 },
+  'downtown dubai': { lat: 25.1972, lng: 55.2741 },
+  'business bay': { lat: 25.1855, lng: 55.2604 },
+  'jumeirah village circle': { lat: 25.0551, lng: 55.2057 },
+  'jumeirah lake towers': { lat: 25.0700, lng: 55.1400 },
+  'dubai hills estate': { lat: 25.0900, lng: 55.2300 },
+  'arabian ranches': { lat: 25.0556, lng: 55.2531 },
+  'emirates hills': { lat: 25.0677, lng: 55.1691 },
+  'the springs': { lat: 25.0700, lng: 55.2100 },
+  'the meadows': { lat: 25.0600, lng: 55.2200 },
+  'al barsha': { lat: 25.1166, lng: 55.1953 },
+  'deira': { lat: 25.2700, lng: 55.3100 },
+  'bur dubai': { lat: 25.2500, lng: 55.3100 },
+  'damac hills': { lat: 25.0200, lng: 55.2700 },
+  'dubai creek harbour': { lat: 25.2078, lng: 55.3350 },
+  'emaar beachfront': { lat: 25.0850, lng: 55.1300 },
+  'mirdif': { lat: 25.2370, lng: 55.4100 },
+  'al furjan': { lat: 25.0322, lng: 55.1511 },
+  'discovery gardens': { lat: 25.0500, lng: 55.1600 },
+  'motor city': { lat: 25.0350, lng: 55.3000 },
+  'dubai sports city': { lat: 25.0300, lng: 55.2900 },
+  'dubai silicon oasis': { lat: 25.1296, lng: 55.3750 },
+  'international city': { lat: 25.2100, lng: 55.4300 },
+  'al nahda': { lat: 25.2800, lng: 55.3700 },
+  'al qusais': { lat: 25.2700, lng: 55.3900 },
+  'al karama': { lat: 25.2300, lng: 55.3000 },
+  'bluewaters island': { lat: 25.0800, lng: 55.1200 },
+  'city walk': { lat: 25.2100, lng: 55.2700 },
+  'dubai south': { lat: 24.9500, lng: 55.1500 },
+  'jumeirah beach residence': { lat: 25.0780, lng: 55.1340 },
+  'la mer': { lat: 25.2200, lng: 55.2600 },
+  'mohammed bin rashid city': { lat: 25.1150, lng: 55.3650 },
+  'palm jebel ali': { lat: 25.0800, lng: 55.0200 },
+  'sobha hartland': { lat: 25.1900, lng: 55.3000 },
+  'the greens': { lat: 25.1100, lng: 55.2100 },
+  'tilal al ghaf': { lat: 25.0800, lng: 55.3500 },
+  'al warqa': { lat: 25.2600, lng: 55.4200 }
+};
+
+// ===== GLOBALS =====
 let scrapedDistrictData = null;
 let gisData = null;
 let gisLoading = false;
+
+// ===== GIS MAP VARIABLES =====
+let gisMapInstance = null;
+let gisMarker = null;
+let gisCircleLayer = null;
+let poiMarkers = [];
+let mapInitialized = false;
+let dubaiDistrictsList = [];
+
+// ===== AUTOCOMPLETE =====
+function filterDistricts(query) {
+  const container = document.getElementById('districtAutocomplete');
+  const input = document.getElementById('districtInput');
+  
+  if (!query || query.length < 1) {
+    container.style.display = 'none';
+    return;
+  }
+  
+  const q = query.toLowerCase().trim();
+  const results = dubaiDistrictsList.filter(d => d.toLowerCase().includes(q));
+  
+  if (results.length === 0) {
+    container.innerHTML = '<div class="item" style="color:var(--muted);cursor:default;">No districts found</div>';
+  } else {
+    container.innerHTML = results.slice(0, 15).map(d => 
+      `<div class="item" onclick="selectDistrict('${d}')">${d}</div>`
+    ).join('');
+  }
+  container.style.display = 'block';
+}
+
+function selectDistrict(district) {
+  document.getElementById('districtInput').value = district;
+  document.getElementById('selectedDistrict').value = district;
+  document.getElementById('selectedDistrictDisplay').textContent = district;
+  document.getElementById('districtAutocomplete').style.display = 'none';
+  
+  // Get coordinates and update map
+  const coords = getDistrictCoords(district);
+  if (coords) {
+    updateMapMarker(coords.lat, coords.lng);
+    if (gisMapInstance) {
+      gisMapInstance.setView([coords.lat, coords.lng], 14);
+    }
+    // Auto-fetch GIS data
+    fetchGISData();
+  }
+}
+
+function getDistrictCoords(district) {
+  const key = district.toLowerCase();
+  if (DISTRICT_COORDS[key]) return DISTRICT_COORDS[key];
+  for (const [k, v] of Object.entries(DISTRICT_COORDS)) {
+    if (key.includes(k) || k.includes(key)) return v;
+  }
+  return null;
+}
 
 // ===== VIEW TYPE CHECKBOX LOGIC =====
 function handleViewTypeChange(changedCheckbox) {
@@ -457,9 +568,7 @@ function handleViewTypeChange(changedCheckbox) {
   const exclusiveValues = ['unknown', 'internal'];
   const normalValues = ['sea', 'partial-sea', 'city', 'garden', 'park', 'street'];
   
-  // If the changed checkbox is 'unknown' or 'internal' and is checked
   if (exclusiveValues.includes(changedCheckbox.value) && changedCheckbox.checked) {
-    // Uncheck all other checkboxes
     allCheckboxes.forEach(cb => {
       if (cb !== changedCheckbox && cb.checked) {
         cb.checked = false;
@@ -467,9 +576,7 @@ function handleViewTypeChange(changedCheckbox) {
       }
     });
   }
-  // If the changed checkbox is a normal value and is checked
   else if (normalValues.includes(changedCheckbox.value) && changedCheckbox.checked) {
-    // Uncheck 'unknown' and 'internal' if they are checked
     allCheckboxes.forEach(cb => {
       if (exclusiveValues.includes(cb.value) && cb.checked) {
         cb.checked = false;
@@ -478,7 +585,6 @@ function handleViewTypeChange(changedCheckbox) {
     });
   }
   
-  // Update the visual state of all checkboxes
   allCheckboxes.forEach(cb => {
     const label = cb.closest('.checkbox-item');
     if (cb.checked) {
@@ -489,19 +595,12 @@ function handleViewTypeChange(changedCheckbox) {
   });
 }
 
-// Function to get selected view types
 function getSelectedViewTypes() {
   return Array.from(document.querySelectorAll('#viewTypeGroup input[type="checkbox"]:checked'))
     .map(el => el.value);
 }
 
-// ===== GIS MAP VARIABLES =====
-let gisMapInstance = null;
-let gisMarker = null;
-let gisCircleLayer = null;
-let mapInitialized = false;
-
-// ===== UPDATE MAP MARKER =====
+// ===== MAP FUNCTIONS =====
 function updateMapMarker(lat, lng) {
   if (!mapInitialized) return;
   
@@ -509,43 +608,65 @@ function updateMapMarker(lat, lng) {
   const newLng = parseFloat(lng);
   if (isNaN(newLat) || isNaN(newLng)) return;
   
-  // Update marker position
   if (gisMarker) {
     gisMarker.setLatLng([newLat, newLng]);
   }
-  
-  // Update circle position
   if (gisCircleLayer) {
     gisCircleLayer.setLatLng([newLat, newLng]);
   }
   
-  // Update the input fields
   document.getElementById('gisLat').value = newLat.toFixed(6);
   document.getElementById('gisLng').value = newLng.toFixed(6);
   document.getElementById('gisCoordsRow').style.display = 'flex';
 }
 
-// ===== INIT MAP =====
+function addPOIsToMap(pois) {
+  poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
+  poiMarkers = [];
+  
+  if (!pois || pois.length === 0) return;
+  
+  const emojis = {
+    school: '🏫', hospital: '🏥', supermarket: '🛒',
+    metro: '🚇', park: '🌳', gym: '🏋️',
+    cafe: '☕', restaurant: '🍽️'
+  };
+  const colors = {
+    school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71',
+    metro: '#3498db', park: '#27ae60', gym: '#9b59b6',
+    cafe: '#f1c40f', restaurant: '#e67e22'
+  };
+  
+  pois.slice(0, 30).forEach(p => {
+    const icon = L.divIcon({
+      className: 'custom-poi-icon',
+      html: `<div style="background:${colors[p.type] || '#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);">${emojis[p.type] || '📍'}</div>`,
+      iconSize: [22, 22],
+      iconAnchor: [11, 11],
+      popupAnchor: [0, -11],
+    });
+    const marker = L.marker([p.lat, p.lng], { icon })
+      .addTo(gisMapInstance)
+      .bindPopup(`<strong>${p.type.charAt(0).toUpperCase() + p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance * 1000).toFixed(0)}m away</span>`);
+    poiMarkers.push(marker);
+  });
+}
+
 function initGISMap() {
   try {
-    // Default center: Dubai
     const defaultLat = 25.2048;
     const defaultLng = 55.2708;
     
-    // Initialize map
     gisMapInstance = L.map('gisMap').setView([defaultLat, defaultLng], 11);
     
-    // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(gisMapInstance);
     
-    // Create draggable marker
     gisMarker = L.marker([defaultLat, defaultLng], {
       draggable: true
     }).addTo(gisMapInstance);
     
-    // Create circle with gold color
     gisCircleLayer = L.circle([defaultLat, defaultLng], {
       radius: 1000,
       color: '#d4920e',
@@ -554,280 +675,199 @@ function initGISMap() {
       weight: 2
     }).addTo(gisMapInstance);
     
-    // Set initial coordinates in the input fields
     document.getElementById('gisLat').value = defaultLat.toFixed(6);
     document.getElementById('gisLng').value = defaultLng.toFixed(6);
     document.getElementById('gisCoordsRow').style.display = 'flex';
     
-    // Handle map click
     gisMapInstance.on('click', function(e) {
       const lat = e.latlng.lat;
       const lng = e.latlng.lng;
       updateMapMarker(lat, lng);
-      // Trigger GIS data fetch
       fetchGISData();
     });
     
-    // Handle marker drag end
     gisMarker.on('dragend', function(e) {
       const pos = e.target.getLatLng();
       updateMapMarker(pos.lat, pos.lng);
-      // Trigger GIS data fetch
       fetchGISData();
     });
     
     mapInitialized = true;
     
-    // Trigger initial GIS data fetch
+    // Initial fetch for default location
     setTimeout(() => fetchGISData(), 500);
     
   } catch (error) {
     console.warn('Leaflet map initialization failed:', error);
-    // Show a fallback message in the map container
     const mapContainer = document.getElementById('gisMap');
     if (mapContainer) {
-      mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable (error loading library)</div>';
+      mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>';
     }
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Set default city to Dubai
-  document.getElementById('city').value = 'dubai';
-  
-  // Set default radius to 1000m (1km)
-  document.getElementById('gisRadius').value = '1000';
-  
-  // Initialize checkboxes behavior
-  document.querySelectorAll('.checkbox-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      const cb = this.querySelector('input');
-      cb.checked = !cb.checked;
-      this.classList.toggle('checked', cb.checked);
-      // If this is a view type checkbox, trigger the handler
-      if (this.closest('#viewTypeGroup')) {
-        handleViewTypeChange(cb);
-      }
+// ===== OVERPASS API =====
+async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
+  const osmQueries = [
+    `node["amenity"="school"](around:${radius},${lat},${lng});`,
+    `way["amenity"="school"](around:${radius},${lat},${lng});`,
+    `node["amenity"="hospital"](around:${radius},${lat},${lng});`,
+    `way["amenity"="hospital"](around:${radius},${lat},${lng});`,
+    `node["shop"="supermarket"](around:${radius},${lat},${lng});`,
+    `way["shop"="supermarket"](around:${radius},${lat},${lng});`,
+    `node["railway"="station"](around:${radius},${lat},${lng});`,
+    `way["railway"="station"](around:${radius},${lat},${lng});`,
+    `node["leisure"="park"](around:${radius},${lat},${lng});`,
+    `way["leisure"="park"](around:${radius},${lat},${lng});`,
+    `node["leisure"="fitness_centre"](around:${radius},${lat},${lng});`,
+    `way["leisure"="fitness_centre"](around:${radius},${lat},${lng});`,
+    `node["amenity"="cafe"](around:${radius},${lat},${lng});`,
+    `way["amenity"="cafe"](around:${radius},${lat},${lng});`,
+    `node["amenity"="restaurant"](around:${radius},${lat},${lng});`,
+    `way["amenity"="restaurant"](around:${radius},${lat},${lng});`
+  ];
+
+  const query = `[out:json][timeout:25];(${osmQueries.join('')});out center;`;
+
+  try {
+    const response = await fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `data=${encodeURIComponent(query)}`
     });
-  });
-  
-  onPropertyTypeChange();
-  document.getElementById('district').addEventListener('blur', function() {
-    this.value = this.value.trim();
-  });
-  document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  
-  // Initialize map after a short delay to ensure DOM is ready
-  setTimeout(initGISMap, 100);
-});
 
-function onCityChange() {
-  updateDistrictList();
-  const city = document.getElementById('city').value;
-  const inp = document.getElementById('district');
-  if (city && UAE_DISTRICTS[city]) {
-    inp.placeholder = `e.g. ${UAE_DISTRICTS[city][0]}`;
-  } else {
-    inp.placeholder = 'Enter district name';
-  }
-  
-  // Auto-fill GIS when city changes (if district already has value)
-  const district = document.getElementById('district').value.trim();
-  if (district && city) {
-    autoFillGIS();
-  }
-}
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-function updateDistrictList() {
-  const city = document.getElementById('city').value;
-  const dl = document.getElementById('districtList');
-  dl.innerHTML = '';
-  if (city && UAE_DISTRICTS[city]) {
-    UAE_DISTRICTS[city].forEach(d => {
-      const o = document.createElement('option');
-      o.value = d;
-      dl.appendChild(o);
-    });
-  }
-}
-
-function onPropertyTypeChange() {
-  const type = document.getElementById('propType').value;
-  const isLand = type === 'land', isWarehouse = type === 'warehouse';
-  const isApartment = type === 'apartment', isVilla = type === 'villa', isTownhouse = type === 'townhouse', isOffice = type === 'office', isRetail = type === 'retail';
-  document.getElementById('rowBedrooms').style.display = (isApartment||isVilla||isTownhouse) ? 'flex' : 'none';
-  document.getElementById('rowFeatures').style.display = (!isLand && !isWarehouse) ? 'block' : 'none';
-  document.getElementById('rowYearCondition').style.display = isLand ? 'none' : 'flex';
-  document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
-  document.getElementById('costSection').style.display = isLand ? 'none' : 'block';
-  document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
-    const types = item.dataset.types || '';
-    item.style.display = types.includes(type) ? 'flex' : 'none';
-    if (!types.includes(type)) {
-      const cb = item.querySelector('input');
-      if (cb && cb.checked) {
-        cb.checked = false;
-        item.classList.remove('checked');
-      }
-    }
-  });
-  document.getElementById('fgFinishQuality').style.display = (!isLand && !isWarehouse) ? '' : 'none';
-  document.getElementById('fgViewType').style.display = (isApartment||isVilla||isTownhouse||isOffice) ? '' : 'none';
-  document.getElementById('fgFloorLevel').style.display = (isApartment||isOffice) ? '' : 'none';
-  document.getElementById('fgStreetPosition').style.display = (isVilla||isTownhouse||isOffice||isRetail) ? '' : 'none';
-  document.getElementById('fgBuildingCondition').style.display = (!isLand) ? '' : 'none';
-  document.getElementById('fgFurnishedStatus').style.display = (isApartment||isVilla||isTownhouse||isOffice) ? '' : 'none';
-}
-
-function showToast(msg, d=3000) {
-  const existing = document.querySelector('.toast');
-  if (existing) existing.remove();
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = msg;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), d);
-}
-
-// ===== AUTO-FILL GIS FROM DISTRICT =====
-function autoFillGIS() {
-  const district = document.getElementById('district').value.trim();
-  const city = document.getElementById('city').value;
-  
-  if (!district) {
-    showToast('Please select a district first');
-    return;
-  }
-  
-  // Build full address
-  let fullAddress = district;
-  if (city) {
-    const cityNames = {
-      'dubai': 'Dubai',
-      'abu-dhabi': 'Abu Dhabi',
-      'sharjah': 'Sharjah',
-      'ajman': 'Ajman',
-      'ras-al-khaimah': 'Ras Al Khaimah',
-      'fujairah': 'Fujairah',
-      'umm-al-quwain': 'Umm Al Quwain'
+    const data = await response.json();
+    const pois = [];
+    const facilities = {
+      school: { count: 0, distance: null, score: 0 },
+      hospital: { count: 0, distance: null, score: 0 },
+      supermarket: { count: 0, distance: null, score: 0 },
+      metro: { count: 0, distance: null, score: 0 },
+      park: { count: 0, distance: null, score: 0 },
+      gym: { count: 0, distance: null, score: 0 },
+      cafe: { count: 0, distance: null, score: 0 },
+      restaurant: { count: 0, distance: null, score: 0 }
     };
-    fullAddress = `${district}, ${cityNames[city] || city}`;
+    const weights = { school: 15, hospital: 20, supermarket: 12, metro: 25, park: 10, gym: 8, cafe: 5, restaurant: 5 };
+
+    const typeMap = {
+      'school': 'school', 'hospital': 'hospital', 'supermarket': 'supermarket',
+      'station': 'metro', 'park': 'park', 'fitness_centre': 'gym',
+      'cafe': 'cafe', 'restaurant': 'restaurant'
+    };
+
+    data.elements.forEach(el => {
+      const poiLat = el.lat || el.center?.lat;
+      const poiLng = el.lon || el.center?.lng;
+      if (!poiLat || !poiLng) return;
+
+      let type = null;
+      const tags = el.tags || {};
+
+      if (tags.amenity === 'school' || tags.amenity === 'hospital' || tags.amenity === 'cafe' || tags.amenity === 'restaurant') {
+        type = typeMap[tags.amenity] || tags.amenity;
+      } else if (tags.shop === 'supermarket') {
+        type = 'supermarket';
+      } else if (tags.railway === 'station') {
+        type = 'metro';
+      } else if (tags.leisure === 'park' || tags.leisure === 'fitness_centre') {
+        type = typeMap[tags.leisure] || tags.leisure;
+      }
+
+      if (!type || !facilities[type]) return;
+
+      const dist = haversineDistance(lat, lng, poiLat, poiLng);
+      if (dist <= radius / 1000) {
+        const name = tags.name || tags['name:en'] || `${type} (${el.id})`;
+        pois.push({ type, name, lat: poiLat, lng: poiLng, distance: dist });
+        facilities[type].count++;
+        if (facilities[type].distance === null || dist < facilities[type].distance) {
+          facilities[type].distance = Math.round(dist * 1000);
+        }
+      }
+    });
+
+    let totalScore = 0;
+    for (const [type, data] of Object.entries(facilities)) {
+      if (data.count > 0) {
+        const weight = weights[type] || 5;
+        const distFactor = Math.max(0, 1 - (data.distance / 1000));
+        data.score = Math.round((weight * distFactor) * 10) / 10;
+        totalScore += data.score;
+      }
+    }
+
+    return { pois, facilities, totalScore, count: pois.length };
+  } catch (error) {
+    console.warn('⚠️ Overpass API error:', error.message);
+    return null;
   }
-  
-  // Set the GIS address field
-  document.getElementById('gisAddress').value = fullAddress;
-  document.getElementById('gisStatus').innerHTML = `📍 Auto-filled from district: ${fullAddress}`;
-  
-  // Auto-fetch GIS data
-  fetchGISData();
+}
+
+function haversineDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng/2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 // ===== GIS FUNCTIONS =====
-function onGISAddressChange() {
-  const address = document.getElementById('gisAddress').value.trim();
-  if (address.length > 3) {
-    clearTimeout(window.gisTimeout);
-    window.gisTimeout = setTimeout(() => fetchGISData(), 800);
-  }
-}
-
-function onGISRadiusChange() {
-  if (gisData) {
-    fetchGISData();
-  }
-}
-
-function detectLocation() {
-  const status = document.getElementById('gisStatus');
-  status.innerHTML = '📍 Detecting your location...';
-  
-  if (!navigator.geolocation) {
-    status.innerHTML = '⚠️ Your browser does not support location detection';
-    return;
-  }
-  
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      const { latitude, longitude } = position.coords;
-      document.getElementById('gisLat').value = latitude.toFixed(6);
-      document.getElementById('gisLng').value = longitude.toFixed(6);
-      document.getElementById('gisCoordsRow').style.display = 'flex';
-      status.innerHTML = '✅ Location detected successfully';
-      
-      try {
-        const response = await fetch('/.netlify/functions/scrape', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ lat: latitude, lng: longitude, reverse: true })
-        });
-        if (response.ok) {
-          const data = await response.json();
-          if (data.address) {
-            document.getElementById('gisAddress').value = data.address;
-          }
-        }
-      } catch(e) {}
-      
-      fetchGISData();
-    },
-    (error) => {
-      status.innerHTML = `⚠️ ${error.message}`;
-    },
-    { enableHighAccuracy: true, timeout: 10000 }
-  );
-}
-
 async function fetchGISData() {
   if (gisLoading) return;
   
-  const address = document.getElementById('gisAddress').value.trim();
   const lat = document.getElementById('gisLat').value.trim();
   const lng = document.getElementById('gisLng').value.trim();
-  const radius = parseInt(document.getElementById('gisRadius').value) || 500;
+  const radius = 1000;
   
-  if (!address && !lat && !lng) {
-    showToast('Please enter an address or use auto-detect');
+  if (!lat || !lng) {
     return;
   }
   
   gisLoading = true;
   const status = document.getElementById('gisStatus');
-  status.innerHTML = '⏳ Analyzing location and facilities...';
+  status.innerHTML = '⏳ Fetching real facility data from OpenStreetMap...';
   
   try {
-    const body = {};
-    if (lat && lng) {
-      body.lat = parseFloat(lat);
-      body.lng = parseFloat(lng);
-    } else {
-      body.address = address;
+    const locationLat = parseFloat(lat);
+    const locationLng = parseFloat(lng);
+    
+    if (isNaN(locationLat) || isNaN(locationLng)) {
+      status.innerHTML = '⚠️ Invalid coordinates';
+      gisLoading = false;
+      return;
     }
-    body.radius = radius;
-    body.gisOnly = true;
-    
-    const response = await fetch('/.netlify/functions/scrape', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    
-    if (data.gisData) {
-      gisData = data.gisData;
-      displayGISResult(gisData, data.proximityMultiplier);
-      // Update map marker if coordinates are available
-      if (data.gisData.lat && data.gisData.lng) {
-        updateMapMarker(data.gisData.lat, data.gisData.lng);
-      }
-      status.innerHTML = '✅ Facilities analyzed successfully';
+
+    // Fetch POIs from OpenStreetMap
+    const result = await fetchPOIsFromOSM(locationLat, locationLng, radius);
+
+    if (result && result.count > 0) {
+      gisData = {
+        facilities: result.facilities,
+        count: result.count,
+        totalScore: result.totalScore,
+        lat: locationLat,
+        lng: locationLng,
+        pois: result.pois
+      };
+
+      displayGISResult(gisData, 1 + result.totalScore * 0.05);
+      addPOIsToMap(result.pois);
+      status.innerHTML = `✅ Found ${result.count} real facilities near this location from OpenStreetMap`;
     } else {
-      status.innerHTML = '⚠️ No facility data found for this location';
+      status.innerHTML = `⚠️ No facilities found within 1km. Try a different location.`;
+      document.getElementById('gisResult').style.display = 'none';
+      poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
+      poiMarkers = [];
     }
+
   } catch (error) {
-    status.innerHTML = `⚠️ Analysis failed: ${error.message}`;
+    console.error('GIS Error:', error);
+    status.innerHTML = `⚠️ Error fetching data: ${error.message}`;
   } finally {
     gisLoading = false;
   }
@@ -874,54 +914,36 @@ function displayGISResult(gisData, multiplier) {
   scoreDisplay.innerHTML = `
     <span style="color:var(--gold)">⭐ Location impact on valuation: +${multiplierPct}%</span>
     <span style="font-size:10px;color:var(--muted);margin-left:12px">
-      (based on ${gisData.count || 0} nearby facilities)
+      (based on ${gisData.count || 0} nearby facilities from OpenStreetMap)
     </span>
   `;
 }
 
 function getFacilityLabel(key) {
   const labels = {
-    metro: 'Metro',
-    tram: 'Tram',
-    mall: 'Shopping Mall',
-    supermarket: 'Supermarket',
-    school: 'School',
-    university: 'University',
-    hospital: 'Hospital',
-    clinic: 'Clinic',
-    park: 'Park',
-    beach: 'Beach',
-    mosque: 'Mosque',
-    police: 'Police Station',
-    bus: 'Bus Stop'
+    metro: 'Metro', supermarket: 'Supermarket', school: 'School',
+    hospital: 'Hospital', park: 'Park', gym: 'Gym / Fitness Center',
+    cafe: 'Cafe', restaurant: 'Restaurant'
   };
   return labels[key] || key;
 }
 
 function getFacilityIcon(key) {
   const icons = {
-    metro: '🚇',
-    tram: '🚊',
-    mall: '🛍️',
-    supermarket: '🛒',
-    school: '🏫',
-    university: '🎓',
-    hospital: '🏥',
-    clinic: '🩺',
-    park: '🌳',
-    beach: '🏖️',
-    mosque: '🕌',
-    police: '👮',
-    bus: '🚌'
+    metro: '🚇', supermarket: '🛒', school: '🏫',
+    hospital: '🏥', park: '🌳', gym: '🏋️',
+    cafe: '☕', restaurant: '🍽️'
   };
   return icons[key] || '📍';
 }
 
 // ===== SCRAPING =====
 async function scrapeRealData() {
-  const city = document.getElementById('city').value, district = document.getElementById('district').value.trim(), propType = document.getElementById('propType').value;
+  const city = 'dubai';
+  const district = document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value;
+  const propType = document.getElementById('propType').value;
   const btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
-  if (!city || !district) { status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; showToast('Please select a city and enter a district name'); return; }
+  if (!district) { status.innerHTML = '<span class="status-badge error">⚠️ Please select a district</span>'; showToast('Please select a district from the list'); return; }
   btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...';
   status.innerHTML = '<span style="color:var(--muted)">Fetching comparable sales from DLD + live listings...</span>';
   
@@ -933,7 +955,7 @@ async function scrapeRealData() {
     if (lat && lng) {
       body.lat = parseFloat(lat);
       body.lng = parseFloat(lng);
-      body.radius = parseInt(document.getElementById('gisRadius').value) || 500;
+      body.radius = 1000;
     }
     
     const response = await fetch('/.netlify/functions/scrape', {
@@ -958,15 +980,6 @@ async function scrapeRealData() {
     }
     document.getElementById('scrapedComps').innerHTML = compsHTML;
     
-    if (data.gisData) {
-      gisData = data.gisData;
-      displayGISResult(gisData, data.proximityMultiplier);
-      // Update map marker if coordinates are available
-      if (data.gisData.lat && data.gisData.lng) {
-        updateMapMarker(data.gisData.lat, data.gisData.lng);
-      }
-    }
-    
     const srcLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
     status.innerHTML = `<span class="status-badge success">✅ ${data.count} comparable sales • ${srcLabel}</span>`;
     showToast(`Found ${data.count} comparable sales in ${district}`);
@@ -983,42 +996,27 @@ async function scrapeRealData() {
 function getFallbackPrice(city, district) {
   const cd = (district||'').trim().toLowerCase();
   const rates = {
-    dubai: { 'dubai marina': 11850, 'palm jumeirah': 16500, 'downtown dubai': 13200, 'business bay': 9200, default: 7000 },
-    'abu-dhabi': { 'saadiyat island': 10200, 'yas island': 7500, 'al reem island': 7200, default: 6000 },
-    sharjah: { default: 3200 },
-    ajman: { default: 2500 },
-    'ras-al-khaimah': { default: 2800 },
-    fujairah: { default: 2200 },
-    'umm-al-quwain': { default: 2000 }
+    'dubai marina': 11850, 'palm jumeirah': 16500, 'downtown dubai': 13200, 
+    'business bay': 9200, 'jumeirah village circle': 8500, 'dubai hills estate': 10500,
+    'arabian ranches': 9500, 'emirates hills': 18500, 'al barsha': 7800,
+    'deira': 4500, 'bur dubai': 5200, 'damac hills': 8500, 'dubai creek harbour': 11500,
+    'mirdif': 5500, 'al furjan': 7200, 'discovery gardens': 6500,
+    'jumeirah beach residence': 12500, 'the greens': 8800, 'dubai silicon oasis': 6200,
+    'international city': 4800
   };
-  const cr = rates[city] || rates.dubai;
-  return cr[cd] || cr.default || 6000;
+  return rates[cd] || 7000;
 }
 
 // ===== CALCULATE VIEW MULTIPLIER =====
 function calculateViewMultiplier(viewTypes) {
   if (!viewTypes || viewTypes.length === 0) return 1.0;
-  
-  // If 'unknown' or 'internal' is selected, return 1.0 (no adjustment)
   if (viewTypes.includes('unknown') || viewTypes.includes('internal')) return 1.0;
   
-  const viewFactors = { 
-    sea: 1.15, 
-    'partial-sea': 1.08, 
-    city: 1.05, 
-    garden: 1.04, 
-    park: 1.02, 
-    street: 0.97 
-  };
-  
-  // Filter to only valid view types that exist in the factors map
+  const viewFactors = { sea: 1.15, 'partial-sea': 1.08, city: 1.05, garden: 1.04, park: 1.02, street: 0.97 };
   const validTypes = viewTypes.filter(type => viewFactors.hasOwnProperty(type));
   if (validTypes.length === 0) return 1.0;
   
-  // Sort by factor value descending (highest first)
   validTypes.sort((a, b) => viewFactors[b] - viewFactors[a]);
-  
-  // Apply highest factor at 100%, others at 50% of their premium
   let multiplier = 1.0;
   let isFirst = true;
   
@@ -1028,12 +1026,11 @@ function calculateViewMultiplier(viewTypes) {
       multiplier *= factor;
       isFirst = false;
     } else {
-      // Apply only 50% of the premium (factor - 1)
       multiplier += (factor - 1) * 0.5;
     }
   }
   
-  return Math.max(0.8, Math.min(1.25, multiplier)); // Clamp between reasonable bounds
+  return Math.max(0.8, Math.min(1.25, multiplier));
 }
 
 // ===== VALUATION =====
@@ -1042,13 +1039,9 @@ function collectPropertyData() {
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => features.push(cb.value));
   const isLand = document.getElementById('propType').value === 'land';
   
-  const gisLat = document.getElementById('gisLat').value.trim();
-  const gisLng = document.getElementById('gisLng').value.trim();
-  const gisAddress = document.getElementById('gisAddress').value.trim();
-  
   return {
-    city: document.getElementById('city').value,
-    district: document.getElementById('district').value.trim(),
+    city: 'dubai',
+    district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
     propType: document.getElementById('propType').value,
     area: Math.max(10, parseFloat(document.getElementById('area').value) || 0),
     bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
@@ -1067,25 +1060,20 @@ function collectPropertyData() {
     streetPosition: document.getElementById('streetPosition').value,
     buildingCondition: document.getElementById('buildingCondition').value,
     furnishedStatus: document.getElementById('furnishedStatus').value,
-    gisLat: gisLat ? parseFloat(gisLat) : null,
-    gisLng: gisLng ? parseFloat(gisLng) : null,
-    gisAddress: gisAddress,
     gisData: gisData,
-    gisRadius: parseInt(document.getElementById('gisRadius').value) || 500
+    gisRadius: 1000
   };
 }
 
 function salesComparisonApproach(data) {
   if (!data.avgPriceSqm && !data.scrapedData) return null;
-  let avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice(data.city, data.district);
-  const maxPricePerSqm = { dubai: 25000, 'abu-dhabi': 18000, sharjah: 8000, ajman: 5500, 'ras-al-khaimah': 7000, fujairah: 5500, 'umm-al-quwain': 4500 };
-  const cappedPrice = maxPricePerSqm[data.city] || 20000;
-  if (avgPrice > cappedPrice) avgPrice = cappedPrice;
+  let avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice('dubai', data.district);
+  const maxPricePerSqm = 25000;
+  if (avgPrice > maxPricePerSqm) avgPrice = maxPricePerSqm;
   let value = avgPrice * data.area;
   
-  // Studio discount logic
   if (data.bedrooms === 0 && data.propType === 'apartment') {
-    value *= 0.80; // 20% discount for studio compared to 1-bedroom (midpoint of 15-25% range)
+    value *= 0.80;
   }
   
   const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
@@ -1096,7 +1084,6 @@ function salesComparisonApproach(data) {
   const finishFactors = { luxury: 1.15, good: 1.05, normal: 1.00, basic: 0.92, poor: 0.80 };
   if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1.00;
   
-  // View Type multiplier using new multi-select logic
   const viewMultiplier = calculateViewMultiplier(data.viewTypes || []);
   value *= viewMultiplier;
   
@@ -1108,30 +1095,11 @@ function salesComparisonApproach(data) {
   if (data.buildingCondition) value *= buildingFactors[data.buildingCondition] || 1.00;
   const furnishedFactors = { furnished: 1.04, 'semi-furnished': 1.02, unfurnished: 0.98 };
   if (data.furnishedStatus) value *= furnishedFactors[data.furnishedStatus] || 1.00;
-  const waterfrontAreas = ['Dubai Marina', 'Palm Jumeirah', 'Emaar Beachfront', 'Al Marjan Island', 'Al Raha Beach', 'Saadiyat Island', 'Mina Al Arab', 'Al Aqah'];
-  if (waterfrontAreas.includes(data.district) && (data.propType === 'villa' || data.propType === 'townhouse')) {
-    value = Math.round(value * 1.06);
-  }
-  if (data.propType === 'villa') {
-    if (data.area > 300) value = Math.round(value * 1.04);
-    else if (data.area < 200) value = Math.round(value * 0.96);
-  }
-  if (value > 2200000) value = Math.round(value * 0.95);
-  const biasCorrection = { 'abu-dhabi': 1.027, sharjah: 1.025, dubai: 1.013, fujairah: 1.018, ajman: 1.012, 'ras-al-khaimah': 1.002, 'umm-al-quwain': 1.016 };
-  if (biasCorrection[data.city]) value = Math.round(value * biasCorrection[data.city]);
-  if (data.propType === 'villa') value = Math.round(value * 1.018);
-  if (data.propType === 'townhouse') value = Math.round(value * 1.021);
-  const areaCalibration = { 'Al Bateen': 0.90, 'Al Aqah': 0.93, 'Al Marjan Island': 0.94, 'Al Hamra Village': 0.95, 'Umm Al Quwain Marina': 0.94 };
-  if (areaCalibration[data.district]) value = Math.round(value * areaCalibration[data.district]);
   
-  // GIS PROXIMITY
-  let gisMultiplier = 1;
-  let gisDetails = '';
   if (data.gisData && data.gisData.totalScore) {
-    gisMultiplier = 1 + (data.gisData.totalScore * 0.5);
-    gisMultiplier = Math.min(1.5, Math.max(1.0, gisMultiplier));
-    value = Math.round(value * gisMultiplier);
-    gisDetails = ` | GIS: +${((gisMultiplier - 1) * 100).toFixed(0)}% (${data.gisData.count || 0} facilities)`;
+    const gisMultiplier = 1 + (data.gisData.totalScore * 0.5);
+    const finalGisMultiplier = Math.min(1.5, Math.max(1.0, gisMultiplier));
+    value = Math.round(value * finalGisMultiplier);
   }
   
   value = Math.round(value);
@@ -1140,9 +1108,9 @@ function salesComparisonApproach(data) {
   let details = `Based on ${comparableCount} comparable sales (${confidenceLevel} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
   if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
   if (data.viewTypes && data.viewTypes.length > 0) details += ` Views: ${data.viewTypes.join(', ')}.`;
-  details += ` Condition: ${data.condition}, Age: ${age}y.${gisDetails}`;
+  details += ` Condition: ${data.condition}, Age: ${age}y.`;
   
-  return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice, gisMultiplier };
+  return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
 }
 
 function incomeCapitalizationApproach(data) {
@@ -1158,6 +1126,8 @@ function incomeCapitalizationApproach(data) {
 }
 
 function costApproach(data) {
+  if (data.propType === 'apartment' || data.propType === 'land') return null;
+  
   const buildCostPerSqm = data.constructionCost || 3000;
   const buildCost = buildCostPerSqm * data.area;
   let landValue = data.landValue || (data.avgPriceSqm ? Math.round(data.avgPriceSqm * data.area * 0.30) : Math.round(buildCost * 0.35));
@@ -1335,8 +1305,10 @@ function runValuation() {
 
 function resetAll() {
   document.getElementById('city').value = 'dubai';
-  document.getElementById('district').value = '';
-  document.getElementById('districtList').innerHTML = '';
+  document.getElementById('districtInput').value = '';
+  document.getElementById('selectedDistrict').value = '';
+  document.getElementById('selectedDistrictDisplay').textContent = 'None';
+  document.getElementById('districtAutocomplete').style.display = 'none';
   document.getElementById('propType').value = 'apartment';
   document.getElementById('area').value = '120';
   document.getElementById('bedrooms').value = '2';
@@ -1350,7 +1322,6 @@ function resetAll() {
   document.getElementById('constructionCost').value = '';
   document.getElementById('finishQuality').value = '';
   
-  // Reset view type checkboxes
   document.querySelectorAll('#viewTypeGroup input[type="checkbox"]').forEach(cb => {
     cb.checked = false;
     cb.closest('.checkbox-item').classList.remove('checked');
@@ -1361,28 +1332,23 @@ function resetAll() {
   document.getElementById('buildingCondition').value = '';
   document.getElementById('furnishedStatus').value = '';
   
-  // Reset GIS fields
-  document.getElementById('gisAddress').value = '';
   document.getElementById('gisLat').value = '';
   document.getElementById('gisLng').value = '';
   document.getElementById('gisCoordsRow').style.display = 'none';
   document.getElementById('gisResult').style.display = 'none';
-  document.getElementById('gisStatus').innerHTML = 'Enter address or use auto-detect';
+  document.getElementById('gisStatus').innerHTML = 'Select a district from the list, then drag the marker to pinpoint the exact location.';
   
-  // Reset map to default position if initialized
   if (mapInitialized && gisMapInstance) {
     const defaultLat = 25.2048;
     const defaultLng = 55.2708;
     gisMapInstance.setView([defaultLat, defaultLng], 11);
-    if (gisMarker) {
-      gisMarker.setLatLng([defaultLat, defaultLng]);
-    }
-    if (gisCircleLayer) {
-      gisCircleLayer.setLatLng([defaultLat, defaultLng]);
-    }
+    if (gisMarker) gisMarker.setLatLng([defaultLat, defaultLng]);
+    if (gisCircleLayer) gisCircleLayer.setLatLng([defaultLat, defaultLng]);
     document.getElementById('gisLat').value = defaultLat.toFixed(6);
     document.getElementById('gisLng').value = defaultLng.toFixed(6);
     document.getElementById('gisCoordsRow').style.display = 'flex';
+    poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
+    poiMarkers = [];
   }
   
   document.getElementById('scrapeStatus').innerHTML = '';
@@ -1415,6 +1381,81 @@ function saveToHistory(result, propData) {
     localStorage.setItem('aqar_history', JSON.stringify(history.slice(0, 5)));
   } catch(e) {}
 }
+
+function showToast(msg, d=3000) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), d);
+}
+
+function onPropertyTypeChange() {
+  const type = document.getElementById('propType').value;
+  const isLand = type === 'land', isWarehouse = type === 'warehouse';
+  const isApartment = type === 'apartment', isVilla = type === 'villa', isTownhouse = type === 'townhouse', isOffice = type === 'office', isRetail = type === 'retail';
+  document.getElementById('rowBedrooms').style.display = (isApartment||isVilla||isTownhouse) ? 'flex' : 'none';
+  document.getElementById('rowFeatures').style.display = (!isLand && !isWarehouse) ? 'block' : 'none';
+  document.getElementById('rowYearCondition').style.display = isLand ? 'none' : 'flex';
+  document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
+  document.getElementById('costSection').style.display = (isLand || isApartment) ? 'none' : 'block';
+  document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
+    const types = item.dataset.types || '';
+    item.style.display = types.includes(type) ? 'flex' : 'none';
+    if (!types.includes(type)) {
+      const cb = item.querySelector('input');
+      if (cb && cb.checked) {
+        cb.checked = false;
+        item.classList.remove('checked');
+      }
+    }
+  });
+  document.getElementById('fgFinishQuality').style.display = (!isLand && !isWarehouse) ? '' : 'none';
+  document.getElementById('fgViewType').style.display = (isApartment||isVilla||isTownhouse||isOffice) ? '' : 'none';
+  document.getElementById('fgFloorLevel').style.display = (isApartment||isOffice) ? '' : 'none';
+  document.getElementById('fgStreetPosition').style.display = (isVilla||isTownhouse||isOffice||isRetail) ? '' : 'none';
+  document.getElementById('fgBuildingCondition').style.display = (!isLand) ? '' : 'none';
+  document.getElementById('fgFurnishedStatus').style.display = (isApartment||isVilla||isTownhouse||isOffice) ? '' : 'none';
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize district list
+  dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
+  
+  // Set default city
+  document.getElementById('city').value = 'dubai';
+  document.getElementById('gisRadius').value = '1000';
+  
+  // Initialize checkboxes behavior
+  document.querySelectorAll('.checkbox-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      const cb = this.querySelector('input');
+      cb.checked = !cb.checked;
+      this.classList.toggle('checked', cb.checked);
+      if (this.closest('#viewTypeGroup')) {
+        handleViewTypeChange(cb);
+      }
+    });
+  });
+  
+  onPropertyTypeChange();
+  document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  
+  // Close autocomplete on outside click
+  document.addEventListener('click', function(e) {
+    const container = document.getElementById('districtAutocomplete');
+    const input = document.getElementById('districtInput');
+    if (e.target !== input && !container.contains(e.target)) {
+      container.style.display = 'none';
+    }
+  });
+  
+  setTimeout(initGISMap, 100);
+});
 </script>
 </body>
 </html>
