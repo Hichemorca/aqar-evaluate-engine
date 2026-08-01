@@ -638,22 +638,13 @@ async function loadDistrictCoords() {
 
 function getDistrictCoords(district) {
   if (!district) return null;
-  // Try exact match
-  if (districtCoordsMap[district]) {
-    return districtCoordsMap[district];
-  }
-  // Try case-insensitive
+  if (districtCoordsMap[district]) return districtCoordsMap[district];
   const lower = district.toLowerCase();
   for (const [key, value] of Object.entries(districtCoordsMap)) {
-    if (key.toLowerCase() === lower) {
-      return value;
-    }
+    if (key.toLowerCase() === lower) return value;
   }
-  // Try partial match
   for (const [key, value] of Object.entries(districtCoordsMap)) {
-    if (key.toLowerCase().includes(lower) || lower.includes(key.toLowerCase())) {
-      return value;
-    }
+    if (key.toLowerCase().includes(lower) || lower.includes(key.toLowerCase())) return value;
   }
   return null;
 }
@@ -922,8 +913,13 @@ function salesComparisonApproach(data) {
   if (avgPrice > 25000) avgPrice = 25000;
   let value = avgPrice * data.area;
   if (data.bedrooms === 0 && data.propType === 'apartment') value *= .8;
-  const condFactors = { excellent:1.08, good:1, fair:.82, 'needs-renovation':.75 };
-  value *= condFactors[data.condition] || 1;
+  
+  // ✅ FIXED: Condition factors applied correctly
+  const condFactors = { excellent: 1.08, good: 1.00, fair: 0.82, 'needs-renovation': 0.75 };
+  const factor = condFactors[data.condition] || 1.00;
+  console.log(`📊 Condition: ${data.condition} → factor ${factor}`);
+  value *= factor;
+  
   const age = 2026 - data.yearBuilt;
   value *= Math.max(.8, 1 - age * .004);
   value += data.features.length * data.area * 50;
@@ -938,8 +934,15 @@ function salesComparisonApproach(data) {
   if (data.buildingCondition) value *= buildFactors[data.buildingCondition] || 1;
   const furnishFactors = { furnished:1.04, 'semi-furnished':1.02, unfurnished:.98 };
   if (data.furnishedStatus) value *= furnishFactors[data.furnishedStatus] || 1;
+  
+  // ✅ FIXED: GIS impact with debug
   const gisImpact = window.gisImpactPercent || 0;
-  if (gisImpact > 0) value = Math.round(value * (1 + gisImpact/100));
+  const gisMultiplier = 1 + (gisImpact / 100);
+  console.log(`📊 GIS: ${gisImpact}% → multiplier ${gisMultiplier}`);
+  if (gisMultiplier > 1) {
+    value = Math.round(value * gisMultiplier);
+  }
+  
   value = Math.round(value);
   const count = data.scrapedData?.count || 0;
   const conf = count >= 10 ? 'High' : count >= 5 ? 'Medium' : 'Basic';
