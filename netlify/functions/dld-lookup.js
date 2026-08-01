@@ -1,7 +1,7 @@
 ﻿const fs = require('fs');
 const path = require('path');
-const LOOKUP_PATH = path.join(process.cwd(), 'data', 'dld-price-lookup.json');
 
+// ===== SIZE CATEGORIES =====
 function getSizeCategory(area, propertyType) {
   if (propertyType === 'land') {
     if (area <= 200) return 'land_tiny';
@@ -32,7 +32,28 @@ exports.handler = async (event) => {
       };
     }
 
-    if (!fs.existsSync(LOOKUP_PATH)) {
+    // ===== TRY MULTIPLE PATHS =====
+    let lookupContent = null;
+    const possiblePaths = [
+      path.join(process.cwd(), 'data', 'dld-price-lookup.json'),
+      path.join(__dirname, '..', '..', 'data', 'dld-price-lookup.json'),
+      path.join('/var/task', 'data', 'dld-price-lookup.json'),  // Netlify path
+      path.join(__dirname, 'data', 'dld-price-lookup.json'),
+      'data/dld-price-lookup.json'
+    ];
+
+    for (const p of possiblePaths) {
+      try {
+        if (fs.existsSync(p)) {
+          lookupContent = fs.readFileSync(p, 'utf8');
+          console.log('✅ Found lookup file at:', p);
+          break;
+        }
+      } catch (e) {}
+    }
+
+    if (!lookupContent) {
+      console.error('❌ Lookup file not found. Tried paths:', possiblePaths);
       return {
         statusCode: 200,
         headers,
@@ -40,8 +61,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const raw = fs.readFileSync(LOOKUP_PATH, 'utf8');
-    const lookup = JSON.parse(raw);
+    const lookup = JSON.parse(lookupContent);
     const tables = lookup.tables;
 
     const sizeCat = getSizeCategory(parseFloat(area), propertyType);
@@ -51,12 +71,11 @@ exports.handler = async (event) => {
 
     const districtLower = district.toLowerCase().trim();
 
-    // ===== 1. البحث في districtSize (الأولوية) =====
+    // ===== 1. Search in districtSize =====
     if (tables.districtSize) {
       const keys = Object.keys(tables.districtSize);
       for (const key of keys) {
         const keyLower = key.toLowerCase();
-        // التحقق: المفتاح يحتوي على اسم المنطقة، النوع، والحجم
         if (keyLower.includes(districtLower) && 
             key.includes(propertyType) && 
             key.includes(sizeCat) && 
@@ -69,7 +88,7 @@ exports.handler = async (event) => {
       }
     }
 
-    // ===== 2. البحث في district (بدون حجم) =====
+    // ===== 2. Search in district =====
     if (!match && tables.district) {
       const keys = Object.keys(tables.district);
       for (const key of keys) {
@@ -85,7 +104,7 @@ exports.handler = async (event) => {
       }
     }
 
-    // ===== 3. البحث في projectSize (كحل أخير) =====
+    // ===== 3. Search in projectSize =====
     if (!match && tables.projectSize) {
       const keys = Object.keys(tables.projectSize);
       for (const key of keys) {
@@ -102,7 +121,7 @@ exports.handler = async (event) => {
       }
     }
 
-    // ===== 4. البحث في project (كحل أخير) =====
+    // ===== 4. Search in project =====
     if (!match && tables.project) {
       const keys = Object.keys(tables.project);
       for (const key of keys) {
@@ -140,9 +159,9 @@ exports.handler = async (event) => {
         avgPricePerSqm: match.medianPricePerSqm,
         count: match.count,
         level: level,
+        matchedKey: matchedKey,
         source: 'dld',
         weight: 1.0,
-        matchedKey: matchedKey,
         generatedAt: lookup.generatedAt
       })
     };
@@ -154,7 +173,8 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({
         found: false,
-        error: error.message
+        error: error.message,
+        stack: error.stack
       })
     };
   }
