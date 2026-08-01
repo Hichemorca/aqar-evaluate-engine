@@ -988,12 +988,12 @@ async function scrapeRealData() {
   
   btn.disabled = true; 
   btn.innerHTML = '<span class="loading"></span> Analyzing market...';
-  status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data first...</span>';
+  status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data...</span>';
   
   const lat = document.getElementById('gisLat').value.trim();
   const lng = document.getElementById('gisLng').value.trim();
   
-  // ===== STEP 1: Try DLD Lookup first =====
+  // ===== STEP 1: Try DLD Lookup only =====
   try {
     const lookupParams = new URLSearchParams({
       district: district,
@@ -1042,10 +1042,10 @@ async function scrapeRealData() {
     }
   } catch (lookupErr) {
     console.log('⚠️ DLD Lookup error:', lookupErr.message);
-    status.innerHTML = '<span style="color:var(--muted)">⚠️ DLD lookup failed, trying live scrape...</span>';
+    status.innerHTML = '<span style="color:var(--muted)">⚠️ DLD lookup failed...</span>';
   }
   
-  // ===== STEP 2: No DLD data - Show clear message and stop =====
+  // ===== STEP 2: No DLD data - Show clear message =====
   status.innerHTML = `<span class="status-badge warning">⚠️ لا توجد بيانات DLD كافية لهذا العقار حاليًا — لا يمكن حساب تقييم موثوق</span><br>
                      <span style="font-size:10px;color:var(--muted);">⚠️ No sufficient DLD data for this property — reliable valuation not possible</span>`;
   document.getElementById('avgPriceSqm').value = '';
