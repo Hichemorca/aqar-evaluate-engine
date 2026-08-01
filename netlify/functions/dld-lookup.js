@@ -15,9 +15,10 @@ function getSizeCategory(area, propertyType) {
   return 'medium';
 }
 
-// ===== LOAD DLD DATA FROM FUNCTIONS FOLDER =====
+// ===== LOAD DLD DATA =====
 function loadDLDData() {
-  const filePath = path.join(__dirname, 'dld-transactions.json');
+  // المسار الصحيح في Netlify
+  const filePath = '/var/task/data/dld-transactions.json';
   
   console.log('🔍 Looking for file at:', filePath);
   
@@ -28,7 +29,7 @@ function loadDLDData() {
   
   try {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    console.log(`✅ Loaded ${data.length} transactions from: ${filePath}`);
+    console.log(`✅ Loaded ${data.length} transactions`);
     return data;
   } catch (e) {
     console.error('❌ Error reading file:', e.message);
@@ -99,6 +100,7 @@ function buildLookup(transactions) {
     }
   }
   
+  console.log(`✅ Built ${Object.keys(result.districtSize).length} districtSize groups, ${Object.keys(result.district).length} district groups`);
   return result;
 }
 
