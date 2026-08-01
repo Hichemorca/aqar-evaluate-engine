@@ -5,68 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AQAR Valuation Intelligence Engine</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
     :root {
-      --gold: #d4920e; --green: #00b86e; --red: #ff3c5a; --blue: #3c8cdc;
-      --text: #e8edf5; --muted: #8a9ab0; --bg: #060d1a;
-      --card: rgba(4, 10, 24, 0.55);
+      --gold: #d4920e; --green: #00b86e; --red: #ff3c5a;
+      --blue: #3c8cdc; --text: #e8edf5; --muted: #8a9ab0;
+      --bg: #060d1a; --card: rgba(4,10,24,0.55);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
-      min-height: 100vh; overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
     #app-container { max-width: 720px; margin: 0 auto; padding: 30px 16px 60px; }
-    
     .brand { text-align: center; margin-bottom: 8px; }
     .brand .tag {
-      font-size: 10px; letter-spacing: 5px; color: var(--gold); font-weight: 700;
-      text-transform: uppercase; text-shadow: 0 0 18px rgba(212,146,14,0.5);
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(212,146,14,0.5);
     }
     .brand .title { font-size: 22px; font-weight: 900; color: #f0e0b0; margin: 4px 0; }
     .brand .sub { font-size: 11px; color: var(--muted); font-weight: 300; }
     .beta-badge {
-      display: inline-block; padding: 4px 10px; border-radius: 12px;
-      background: rgba(212,146,14,0.15); color: var(--gold);
-      font-size: 10px; font-weight: 700; letter-spacing: 1px;
-      border: 1px solid rgba(212,146,14,0.3); margin-left: 8px;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: rgba(212,146,14,0.15);
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border: 1px solid rgba(212,146,14,0.3);
+      margin-left: 8px;
     }
-
     .section {
-      background: var(--card); backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 20px; margin-bottom: 16px;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
     }
     .section-title {
-      font-size: 14px; font-weight: 900; color: var(--gold);
-      margin-bottom: 14px; letter-spacing: 0.5px;
-      display: flex; align-items: center; gap: 8px;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .row { display: flex; gap: 10px; flex-wrap: wrap; }
     .fg { flex: 1; min-width: 160px; margin-bottom: 10px; }
     .fg label {
-      display: block; font-size: 10px; font-weight: 700; color: #b0c0d8;
-      margin-bottom: 4px; letter-spacing: 0.3px; text-transform: uppercase;
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #b0c0d8;
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
     }
     .fg input, .fg select {
-      width: 100%; padding: 10px 12px; border-radius: 9px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 9px;
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(4,10,24,0.50); backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px); color: var(--text);
-      font-size: 14px; font-family: 'Inter', sans-serif;
+      background: rgba(4,10,24,0.5);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--text);
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
       transition: border 0.2s, background 0.2s;
     }
     .fg input:focus, .fg select:focus {
-      outline: none; border-color: rgba(212,146,14,0.5);
-      background: rgba(4,10,24,0.65); box-shadow: 0 0 0 2px rgba(212,146,14,0.1);
+      outline: none;
+      border-color: rgba(212,146,14,0.5);
+      background: rgba(4,10,24,0.65);
+      box-shadow: 0 0 0 2px rgba(212,146,14,0.1);
     }
-    .fg input:read-only { opacity: 0.7; cursor: not-allowed; }
+    .fg input:read-only { opacity: .7; cursor: not-allowed; }
     .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
-
-    /* Autocomplete styles */
     .autocomplete-container { position: relative; }
     .autocomplete-list {
       position: absolute;
@@ -87,162 +116,215 @@
       border-bottom: 1px solid rgba(255,255,255,0.03);
       font-size: 12px;
       color: var(--text);
-      transition: background 0.15s;
+      transition: background .15s;
     }
-    .autocomplete-list .item:hover {
-      background: rgba(212,146,14,0.08);
-    }
-
+    .autocomplete-list .item:hover { background: rgba(212,146,14,0.08); }
     .btn {
-      display: block; width: 100%; padding: 13px; border-radius: 10px; border: none;
-      font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer;
-      transition: all 0.22s; margin-top: 8px; text-align: center;
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all .22s;
+      margin-top: 8px;
+      text-align: center;
     }
     .btn-p {
-      background: linear-gradient(135deg, #d4920e, #a86c08); color: #000;
+      background: linear-gradient(135deg, #d4920e, #a86c08);
+      color: #000;
       box-shadow: 0 4px 18px rgba(212,146,14,0.25);
     }
     .btn-p:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,146,14,0.4); }
-    .btn-p:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-p:disabled { opacity: .3; cursor: not-allowed; }
     .btn-s {
-      background: rgba(4,10,24,0.45); backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px); color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.10); margin-top: 6px;
-      font-size: 13px; padding: 10px;
+      background: rgba(4,10,24,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-top: 6px;
+      font-size: 13px;
+      padding: 10px;
     }
     .btn-s:hover { border-color: rgba(212,146,14,0.4); color: var(--gold); }
     .btn-reset {
-      background: transparent; border: 1px solid rgba(255,60,90,0.2); color: rgba(255,60,90,0.7);
-      font-size: 12px; padding: 8px; margin-top: 6px;
+      background: transparent;
+      border: 1px solid rgba(255,60,90,0.2);
+      color: rgba(255,60,90,0.7);
+      font-size: 12px;
+      padding: 8px;
+      margin-top: 6px;
     }
     .btn-reset:hover { border-color: rgba(255,60,90,0.5); color: var(--red); background: rgba(255,60,90,0.05); }
-
     .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
     .checkbox-item {
-      display: flex; align-items: center; gap: 5px;
-      padding: 6px 12px; border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(4,10,24,0.35); cursor: pointer;
-      font-size: 11px; color: var(--muted); transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(4,10,24,0.35);
+      cursor: pointer;
+      font-size: 11px;
+      color: var(--muted);
+      transition: all .2s;
       user-select: none;
     }
     .checkbox-item:hover { border-color: rgba(212,146,14,0.35); }
     .checkbox-item.checked { border-color: var(--gold); color: var(--gold); background: rgba(212,146,14,0.1); }
     .checkbox-item input { display: none; }
-
     .hidden { display: none !important; }
-
+    .text-center { text-align: center; }
+    .text-muted { color: var(--muted); font-size: 10px; }
+    .mt-2 { margin-top: 8px; }
     .status-badge {
-      display: inline-block; padding: 4px 10px; border-radius: 10px;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
     }
     .status-badge.success { background: rgba(0,184,110,0.15); color: var(--green); }
     .status-badge.warning { background: rgba(212,146,14,0.15); color: var(--gold); }
     .status-badge.error { background: rgba(255,60,90,0.15); color: var(--red); }
-
     .toast {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: rgba(212,146,14,0.95); color: #000; padding: 12px 24px;
-      border-radius: 10px; font-size: 13px; font-weight: 700; z-index: 1000;
-      animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
-      pointer-events: none; max-width: 90vw; text-align: center;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(212,146,14,0.95);
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 1000;
+      animation: toastIn .3s ease, toastOut .3s ease 2.7s forwards;
+      pointer-events: none;
+      max-width: 90vw;
+      text-align: center;
     }
     @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
     @keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
-
     .result-card {
-      background: var(--card); backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 24px; margin-top: 20px;
-      animation: fadeUp 0.4s ease;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 20px;
+      animation: fadeUp .4s ease;
     }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
     .final-value {
-      text-align: center; font-size: 44px; font-weight: 900; color: var(--gold);
-      margin: 10px 0; letter-spacing: -1px;
+      text-align: center;
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--gold);
+      margin: 10px 0;
+      letter-spacing: -1px;
     }
     .confidence-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); margin: 12px 0; overflow: hidden; }
-    .confidence-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+    .confidence-fill { height: 100%; border-radius: 3px; transition: width .8s ease; }
     .confidence-fill.high { background: var(--green); }
     .confidence-fill.medium { background: var(--gold); }
     .confidence-fill.low { background: var(--red); }
-
     .method-card {
-      background: rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 12px; padding: 14px; margin: 10px 0;
+      background: rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 10px 0;
     }
     .method-card .m-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
     }
     .method-card .m-name { font-size: 13px; font-weight: 700; color: #dce8f5; }
     .method-card .m-value { font-size: 22px; font-weight: 900; color: var(--gold); }
     .method-card .m-meta { font-size: 10px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
     .method-card .m-detail { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
-
     .integration-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 14px; border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
       background: linear-gradient(135deg, rgba(212,146,14,0.2), rgba(212,146,14,0.08));
-      border: 1px solid rgba(212,146,14,0.35); color: var(--gold);
-      font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif;
-      cursor: pointer; transition: all 0.22s; text-align: center;
-      text-decoration: none; margin-top: 16px;
+      border: 1px solid rgba(212,146,14,0.35);
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all .22s;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 16px;
     }
     .integration-btn:hover {
       background: linear-gradient(135deg, rgba(212,146,14,0.3), rgba(212,146,14,0.15));
-      border-color: rgba(212,146,14,0.6); box-shadow: 0 4px 20px rgba(212,146,14,0.15);
+      border-color: rgba(212,146,14,0.6);
+      box-shadow: 0 4px 20px rgba(212,146,14,0.15);
       transform: translateY(-2px);
     }
-
     .loading {
-      display: inline-block; width: 20px; height: 20px;
-      border: 2px solid rgba(212,146,14,0.3); border-radius: 50%;
-      border-top-color: var(--gold); animation: spin 0.8s linear infinite;
-      margin-right: 8px; vertical-align: middle;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(212,146,14,0.3);
+      border-radius: 50%;
+      border-top-color: var(--gold);
+      animation: spin .8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
     .scrape-comps { margin-top: 10px; max-height: 300px; overflow-y: auto; }
     .scrape-comps table { width: 100%; border-collapse: collapse; font-size: 11px; }
-    .scrape-comps th { color: var(--muted); font-weight: 600; padding: 5px 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .scrape-comps th {
+      color: var(--muted);
+      font-weight: 600;
+      padding: 5px 8px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
     .scrape-comps td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
-
     .gis-facility-row {
-      display: flex; justify-content: space-between; padding: 3px 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
       border-bottom: 1px solid rgba(255,255,255,0.03);
       font-size: 11px;
     }
     .gis-facility-row .label { color: #dce8f5; }
     .gis-facility-row .value { color: var(--gold); font-weight: 600; }
-
-    .footer-links { text-align: center; margin-top: 30px; font-size: 11px; color: var(--muted); }
-    .footer-links a { color: var(--muted); text-decoration: underline; margin: 0 8px; }
-    .footer-links a:hover { color: var(--gold); }
-
-    .text-center { text-align: center; }
-    .text-muted { color: var(--muted); font-size: 10px; }
-    .mt-2 { margin-top: 8px; }
-
-    #gisMap .leaflet-control-attribution {
-      font-size: 8px;
-      background: rgba(0,0,0,0.5);
-      color: var(--muted);
-    }
-    #gisMap .leaflet-control-attribution a {
-      color: var(--gold);
-    }
-
-    .selected-display {
+    .footer-links {
+      text-align: center;
+      margin-top: 30px;
       font-size: 11px;
       color: var(--muted);
-      margin-top: 6px;
     }
-    .selected-display span {
-      color: var(--text);
-      font-weight: 600;
-    }
-
+    .footer-links a { color: var(--muted); text-decoration: underline; margin: 0 8px; }
+    .footer-links a:hover { color: var(--gold); }
+    #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
+    #gisMap .leaflet-control-attribution a { color: var(--gold); }
+    .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .selected-display span { color: var(--text); font-weight: 600; }
     @media (max-width: 500px) {
       .row { flex-direction: column; gap: 0; }
       #app-container { padding: 20px 10px 40px; }
@@ -250,27 +332,21 @@
   </style>
 </head>
 <body>
-
 <div id="app-container">
-
   <div class="brand">
     <div class="tag">AQAR Valuation Intelligence <span class="beta-badge">BETA</span></div>
     <div class="title">Real Estate Valuation Engine</div>
     <div class="sub">Stop guessing — let the numbers decide.</div>
   </div>
-
   <div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:12px">
-    📅 Data refreshed: <span id="lastDataRefresh">Today</span> • 
+    📅 Data refreshed: <span id="lastDataRefresh">Today</span> •
     📊 Based on 30,475 DLD transactions • 86.3% accuracy
   </div>
-
-  <!-- Demo Version Banner -->
-  <div style="background: rgba(212, 146, 14, 0.12); border: 1px solid rgba(212, 146, 14, 0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; text-align: center; backdrop-filter: blur(4px);">
-    <span style="font-size: 12px; font-weight: 600; color: var(--gold);">
+  <div style="background:rgba(212,146,14,0.12);border:1px solid rgba(212,146,14,0.3);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:center;backdrop-filter:blur(4px);">
+    <span style="font-size:12px;font-weight:600;color:var(--gold);">
       🧪 نسخة تجريبية — البيانات متاحة لإمارة دبي فقط &nbsp;|&nbsp; Demo Version — Dubai Data Only
     </span>
   </div>
-
   <div class="section" style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);">
     <div class="section-title">🧠 How AQAR Works</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;font-size:10px;color:var(--muted);line-height:1.6">
@@ -280,7 +356,6 @@
       <div><b style="color:var(--gold)">4. Decide</b><br>Clear valuation with confidence level and market context</div>
     </div>
   </div>
-
   <div class="section">
     <div class="section-title">🏠 Property Information</div>
     <div class="row">
@@ -292,8 +367,22 @@
       </div>
     </div>
     <div class="row">
-      <div class="fg"><label>🏗️ Property Type</label><select id="propType" onchange="onPropertyTypeChange()"><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="townhouse">Townhouse</option><option value="office">Office</option><option value="retail">Retail / Shop</option><option value="warehouse">Warehouse</option><option value="land">Land</option></select></div>
-      <div class="fg"><label>📐 Total Area (sqm)</label><input type="number" id="area" placeholder="e.g. 150" value="120" min="10"></div>
+      <div class="fg">
+        <label>🏗️ Property Type</label>
+        <select id="propType" onchange="onPropertyTypeChange()">
+          <option value="apartment">Apartment</option>
+          <option value="villa">Villa</option>
+          <option value="townhouse">Townhouse</option>
+          <option value="office">Office</option>
+          <option value="retail">Retail / Shop</option>
+          <option value="warehouse">Warehouse</option>
+          <option value="land">Land</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>📐 Total Area (sqm)</label>
+        <input type="number" id="area" placeholder="e.g. 150" value="120" min="10">
+      </div>
     </div>
     <div class="row" id="rowBedrooms">
       <div class="fg">
@@ -310,8 +399,19 @@
       </div>
     </div>
     <div class="row" id="rowYearCondition">
-      <div class="fg"><label>📅 Year Built</label><input type="number" id="yearBuilt" value="2020" min="1970" max="2026"></div>
-      <div class="fg"><label>⭐ Condition</label><select id="condition"><option value="excellent">Excellent</option><option value="good" selected>Good</option><option value="fair">Fair</option><option value="needs-renovation">Needs Renovation</option></select></div>
+      <div class="fg">
+        <label>📅 Year Built</label>
+        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026">
+      </div>
+      <div class="fg">
+        <label>⭐ Condition</label>
+        <select id="condition">
+          <option value="excellent">Excellent</option>
+          <option value="good" selected>Good</option>
+          <option value="fair">Fair</option>
+          <option value="needs-renovation">Needs Renovation</option>
+        </select>
+      </div>
     </div>
     <div class="fg" id="rowFeatures">
       <label>✨ Features & Amenities</label>
@@ -326,12 +426,21 @@
       </div>
     </div>
   </div>
-
   <div class="section" id="expertSection">
     <div class="section-title">👁️ Expert Assessment (Optional)</div>
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Fields vary by property type. Leave empty if unknown.</div>
     <div class="row">
-      <div class="fg" id="fgFinishQuality"><label>⭐ Finish Quality</label><select id="finishQuality"><option value="">Unknown</option><option value="luxury">Luxury / High-end</option><option value="good">Good / Standard</option><option value="normal">Normal / Average</option><option value="basic">Basic / Economy</option><option value="poor">Poor / Needs Work</option></select></div>
+      <div class="fg" id="fgFinishQuality">
+        <label>⭐ Finish Quality</label>
+        <select id="finishQuality">
+          <option value="">Unknown</option>
+          <option value="luxury">Luxury / High-end</option>
+          <option value="good">Good / Standard</option>
+          <option value="normal">Normal / Average</option>
+          <option value="basic">Basic / Economy</option>
+          <option value="poor">Poor / Needs Work</option>
+        </select>
+      </div>
       <div class="fg" id="fgViewType">
         <label>🌅 View Type</label>
         <div class="checkbox-group" id="viewTypeGroup">
@@ -347,23 +456,56 @@
       </div>
     </div>
     <div class="row">
-      <div class="fg" id="fgFloorLevel"><label>🏢 Floor Level</label><select id="floorLevel"><option value="">Unknown</option><option value="ground">Ground Floor</option><option value="low">Low Floor (1-3)</option><option value="mid">Mid Floor (4-10)</option><option value="high">High Floor (11-20)</option><option value="very-high">Very High (21+)</option><option value="penthouse">Penthouse</option></select></div>
-      <div class="fg" id="fgStreetPosition"><label>📍 Street Position</label><select id="streetPosition"><option value="">Unknown</option><option value="main">Main Street</option><option value="secondary">Secondary Street</option><option value="quiet">Quiet Street</option><option value="corner">Corner Plot</option></select></div>
+      <div class="fg" id="fgFloorLevel">
+        <label>🏢 Floor Level</label>
+        <select id="floorLevel">
+          <option value="">Unknown</option>
+          <option value="ground">Ground Floor</option>
+          <option value="low">Low Floor (1-3)</option>
+          <option value="mid">Mid Floor (4-10)</option>
+          <option value="high">High Floor (11-20)</option>
+          <option value="very-high">Very High (21+)</option>
+          <option value="penthouse">Penthouse</option>
+        </select>
+      </div>
+      <div class="fg" id="fgStreetPosition">
+        <label>📍 Street Position</label>
+        <select id="streetPosition">
+          <option value="">Unknown</option>
+          <option value="main">Main Street</option>
+          <option value="secondary">Secondary Street</option>
+          <option value="quiet">Quiet Street</option>
+          <option value="corner">Corner Plot</option>
+        </select>
+      </div>
     </div>
     <div class="row">
-      <div class="fg" id="fgBuildingCondition"><label>🏗️ Building Condition</label><select id="buildingCondition"><option value="">Unknown</option><option value="excellent">Excellent</option><option value="good">Well Maintained</option><option value="fair">Fair</option><option value="old">Old / Needs Renovation</option></select></div>
-      <div class="fg" id="fgFurnishedStatus"><label>🛋️ Furnished Status</label><select id="furnishedStatus"><option value="">Unknown</option><option value="furnished">Fully Furnished</option><option value="semi-furnished">Semi-Furnished</option><option value="unfurnished">Unfurnished</option></select></div>
+      <div class="fg" id="fgBuildingCondition">
+        <label>🏗️ Building Condition</label>
+        <select id="buildingCondition">
+          <option value="">Unknown</option>
+          <option value="excellent">Excellent</option>
+          <option value="good">Well Maintained</option>
+          <option value="fair">Fair</option>
+          <option value="old">Old / Needs Renovation</option>
+        </select>
+      </div>
+      <div class="fg" id="fgFurnishedStatus">
+        <label>🛋️ Furnished Status</label>
+        <select id="furnishedStatus">
+          <option value="">Unknown</option>
+          <option value="furnished">Fully Furnished</option>
+          <option value="semi-furnished">Semi-Furnished</option>
+          <option value="unfurnished">Unfurnished</option>
+        </select>
+      </div>
     </div>
   </div>
-
-  <!-- ===== GIS SECTION ===== -->
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Nearby Facilities (GIS)</div>
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">
       Select a district from the list below, then drag the marker on the map to pinpoint the exact location.
     </div>
-    
-    <!-- Autocomplete District Search -->
     <div class="fg">
       <label>📍 District / Area</label>
       <div class="autocomplete-container">
@@ -375,29 +517,21 @@
       </div>
       <input type="hidden" id="selectedDistrict" value="">
     </div>
-    
     <div class="row" id="gisCoordsRow" style="display:none">
       <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly style="background:rgba(255,255,255,0.05)"></div>
       <div class="fg"><label>🌐 Longitude</label><input type="text" id="gisLng" readonly style="background:rgba(255,255,255,0.05)"></div>
     </div>
-    
     <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
       <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
       <div id="gisFacilitiesList" style="font-size:11px;color:var(--muted);line-height:1.8"></div>
       <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
     </div>
-    
-    <!-- Map container -->
     <div id="gisMap" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
-    
-    <!-- Hidden radius (fixed to 1km) -->
     <input type="hidden" id="gisRadius" value="1000">
-    
     <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">
       📌 Drag the gold marker on the map to pinpoint the exact property location
     </div>
   </div>
-
   <div class="section">
     <div class="section-title">🔍 Market Data <span style="font-size:10px;color:var(--muted);font-weight:400">(Run first!)</span></div>
     <div class="row">
@@ -408,7 +542,6 @@
     <div id="scrapeStatus" style="font-size:11px;margin-top:8px;text-align:center"></div>
     <div class="scrape-comps" id="scrapedComps"></div>
   </div>
-
   <div class="section" id="incomeSection">
     <div class="section-title">💰 Income Capitalization (Optional)</div>
     <div class="row">
@@ -416,7 +549,6 @@
       <div class="fg"><label>🛠️ Annual Expenses (AED)</label><input type="number" id="annualExpenses" placeholder="~20% of rent"></div>
     </div>
   </div>
-
   <div class="section" id="costSection">
     <div class="section-title">🔨 Cost Approach (Optional)</div>
     <div class="row">
@@ -424,33 +556,23 @@
       <div class="fg"><label>🔨 Build Cost/sqm (AED)</label><input type="number" id="constructionCost" placeholder="e.g. 3000"></div>
     </div>
   </div>
-
   <div style="display:flex;gap:10px">
     <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">🧮 Calculate Full Valuation</button>
     <button class="btn btn-reset" onclick="resetAll()" style="flex:1">🔄 Reset</button>
   </div>
-
   <div id="resultSection" class="hidden"></div>
-
   <div class="footer-links">
     <a href="/accuracy-dashboard">📊 Accuracy (86.3%)</a>
     <a href="/market-intelligence">📈 Market Intelligence</a>
     <a href="https://aqar-decision-engine.netlify.app" target="_blank">🧠 Decision Engine</a>
     <a href="https://github.com/Hichemorca/aqar-evaluate-engine" target="_blank">📂 GitHub</a>
   </div>
-
 </div>
-
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
 <script>
-// ===== UAE DISTRICTS =====
 const UAE_DISTRICTS = {
   dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"]
 };
-
-// ===== DISTRICT COORDINATES =====
 const DISTRICT_COORDS = {
   'dubai marina': { lat: 25.0802, lng: 55.1416 },
   'palm jumeirah': { lat: 25.1181, lng: 55.1425 },
@@ -491,232 +613,79 @@ const DISTRICT_COORDS = {
   'tilal al ghaf': { lat: 25.0800, lng: 55.3500 },
   'al warqa': { lat: 25.2600, lng: 55.4200 }
 };
+let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
+let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
 
-// ===== GLOBALS =====
-let scrapedDistrictData = null;
-let gisData = null;
-let gisLoading = false;
-let gisFetchTimeout = null;
-
-// ===== GIS MAP VARIABLES =====
-let gisMapInstance = null;
-let gisMarker = null;
-let gisCircleLayer = null;
-let poiMarkers = [];
-let mapInitialized = false;
-let dubaiDistrictsList = [];
-
-// ===== AUTOCOMPLETE =====
-function filterDistricts(query) {
-  const container = document.getElementById('districtAutocomplete');
-  const input = document.getElementById('districtInput');
-  
-  if (!query || query.length < 1) {
-    container.style.display = 'none';
-    return;
-  }
-  
-  const q = query.toLowerCase().trim();
-  const results = dubaiDistrictsList.filter(d => d.toLowerCase().includes(q));
-  
-  if (results.length === 0) {
-    container.innerHTML = '<div class="item" style="color:var(--muted);cursor:default;">No districts found</div>';
-  } else {
-    container.innerHTML = results.slice(0, 15).map(d => 
-      `<div class="item" onclick="selectDistrict('${d}')">${d}</div>`
-    ).join('');
-  }
-  container.style.display = 'block';
+function filterDistricts(q) {
+  const c = document.getElementById('districtAutocomplete');
+  if (!q || q.length < 1) { c.style.display = 'none'; return; }
+  const r = dubaiDistrictsList.filter(d => d.toLowerCase().includes(q.toLowerCase().trim()));
+  c.innerHTML = r.length ? r.slice(0,15).map(d => `<div class="item" onclick="selectDistrict('${d}')">${d}</div>`).join('') : '<div class="item" style="color:var(--muted);cursor:default;">No districts found</div>';
+  c.style.display = 'block';
 }
-
-function selectDistrict(district) {
-  document.getElementById('districtInput').value = district;
-  document.getElementById('selectedDistrict').value = district;
-  document.getElementById('selectedDistrictDisplay').textContent = district;
+function selectDistrict(d) {
+  document.getElementById('districtInput').value = d;
+  document.getElementById('selectedDistrict').value = d;
+  document.getElementById('selectedDistrictDisplay').textContent = d;
   document.getElementById('districtAutocomplete').style.display = 'none';
-  
-  const coords = getDistrictCoords(district);
-  if (coords) {
-    updateMapMarker(coords.lat, coords.lng);
-    if (gisMapInstance) {
-      gisMapInstance.setView([coords.lat, coords.lng], 14);
-    }
-    debouncedFetchGISData();
-  }
+  const c = getDistrictCoords(d);
+  if (c) { updateMapMarker(c.lat, c.lng); if (gisMapInstance) gisMapInstance.setView([c.lat, c.lng], 14); debouncedFetchGISData(); }
 }
-
-function getDistrictCoords(district) {
-  const key = district.toLowerCase();
-  if (DISTRICT_COORDS[key]) return DISTRICT_COORDS[key];
-  for (const [k, v] of Object.entries(DISTRICT_COORDS)) {
-    if (key.includes(k) || k.includes(key)) return v;
-  }
+function getDistrictCoords(d) {
+  const k = d.toLowerCase();
+  if (DISTRICT_COORDS[k]) return DISTRICT_COORDS[k];
+  for (const [a,b] of Object.entries(DISTRICT_COORDS)) if (k.includes(a) || a.includes(k)) return b;
   return null;
 }
-
-// ===== VIEW TYPE CHECKBOX LOGIC =====
-function handleViewTypeChange(changedCheckbox) {
-  const group = document.getElementById('viewTypeGroup');
-  const allCheckboxes = group.querySelectorAll('input[type="checkbox"]');
-  
-  const exclusiveValues = ['unknown', 'internal'];
-  const normalValues = ['sea', 'partial-sea', 'city', 'garden', 'park', 'street'];
-  
-  if (exclusiveValues.includes(changedCheckbox.value) && changedCheckbox.checked) {
-    allCheckboxes.forEach(cb => {
-      if (cb !== changedCheckbox && cb.checked) {
-        cb.checked = false;
-        cb.closest('.checkbox-item').classList.remove('checked');
-      }
-    });
-  }
-  else if (normalValues.includes(changedCheckbox.value) && changedCheckbox.checked) {
-    allCheckboxes.forEach(cb => {
-      if (exclusiveValues.includes(cb.value) && cb.checked) {
-        cb.checked = false;
-        cb.closest('.checkbox-item').classList.remove('checked');
-      }
-    });
-  }
-  
-  allCheckboxes.forEach(cb => {
-    const label = cb.closest('.checkbox-item');
-    if (cb.checked) {
-      label.classList.add('checked');
-    } else {
-      label.classList.remove('checked');
-    }
-  });
+function handleViewTypeChange(cb) {
+  const g = document.getElementById('viewTypeGroup'), all = g.querySelectorAll('input[type="checkbox"]'), excl = ['unknown','internal'], norm = ['sea','partial-sea','city','garden','park','street'];
+  if (excl.includes(cb.value) && cb.checked) all.forEach(x => { if (x !== cb && x.checked) { x.checked = false; x.closest('.checkbox-item').classList.remove('checked'); } });
+  else if (norm.includes(cb.value) && cb.checked) all.forEach(x => { if (excl.includes(x.value) && x.checked) { x.checked = false; x.closest('.checkbox-item').classList.remove('checked'); } });
+  all.forEach(x => x.checked ? x.closest('.checkbox-item').classList.add('checked') : x.closest('.checkbox-item').classList.remove('checked'));
 }
-
-function getSelectedViewTypes() {
-  return Array.from(document.querySelectorAll('#viewTypeGroup input[type="checkbox"]:checked'))
-    .map(el => el.value);
-}
-
-// ===== MAP FUNCTIONS =====
+function getSelectedViewTypes() { return Array.from(document.querySelectorAll('#viewTypeGroup input[type="checkbox"]:checked')).map(el => el.value); }
 function updateMapMarker(lat, lng) {
   if (!mapInitialized) return;
-  
-  const newLat = parseFloat(lat);
-  const newLng = parseFloat(lng);
-  if (isNaN(newLat) || isNaN(newLng)) return;
-  
-  if (gisMarker) {
-    gisMarker.setLatLng([newLat, newLng]);
-  }
-  if (gisCircleLayer) {
-    gisCircleLayer.setLatLng([newLat, newLng]);
-  }
-  
-  document.getElementById('gisLat').value = newLat.toFixed(6);
-  document.getElementById('gisLng').value = newLng.toFixed(6);
+  const a = parseFloat(lat), b = parseFloat(lng);
+  if (isNaN(a) || isNaN(b)) return;
+  if (gisMarker) gisMarker.setLatLng([a, b]);
+  if (gisCircleLayer) gisCircleLayer.setLatLng([a, b]);
+  document.getElementById('gisLat').value = a.toFixed(6);
+  document.getElementById('gisLng').value = b.toFixed(6);
   document.getElementById('gisCoordsRow').style.display = 'flex';
 }
-
 function addPOIsToMap(pois) {
-  poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
-  poiMarkers = [];
-  
-  if (!pois || pois.length === 0) return;
-  
-  const emojis = {
-    school: '🏫', hospital: '🏥', supermarket: '🛒',
-    metro: '🚇', park: '🌳', gym: '🏋️',
-    cafe: '☕', restaurant: '🍽️'
-  };
-  const colors = {
-    school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71',
-    metro: '#3498db', park: '#27ae60', gym: '#9b59b6',
-    cafe: '#f1c40f', restaurant: '#e67e22'
-  };
-  
-  pois.slice(0, 30).forEach(p => {
-    const icon = L.divIcon({
-      className: 'custom-poi-icon',
-      html: `<div style="background:${colors[p.type] || '#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);">${emojis[p.type] || '📍'}</div>`,
-      iconSize: [22, 22],
-      iconAnchor: [11, 11],
-      popupAnchor: [0, -11],
-    });
-    const marker = L.marker([p.lat, p.lng], { icon })
-      .addTo(gisMapInstance)
-      .bindPopup(`<strong>${p.type.charAt(0).toUpperCase() + p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance * 1000).toFixed(0)}m away</span>`);
+  poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
+  if (!pois || !pois.length) return;
+  const emojis = { school: '🏫', hospital: '🏥', supermarket: '🛒', metro: '🚇', park: '🌳', gym: '🏋️', cafe: '☕', restaurant: '🍽️' };
+  const colors = { school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71', metro: '#3498db', park: '#27ae60', gym: '#9b59b6', cafe: '#f1c40f', restaurant: '#e67e22' };
+  pois.slice(0,30).forEach(p => {
+    const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div style="background:${colors[p.type]||'#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
+    const marker = L.marker([p.lat, p.lng], { icon }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
     poiMarkers.push(marker);
   });
 }
-
 function initGISMap() {
   try {
-    const mapContainer = document.getElementById('gisMap');
-    if (!mapContainer) {
-      console.warn('GIS Map container not found');
-      return;
-    }
-    
-    const defaultLat = 25.2048;
-    const defaultLng = 55.2708;
-    
-    gisMapInstance = L.map('gisMap').setView([defaultLat, defaultLng], 11);
-    
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(gisMapInstance);
-    
-    gisMarker = L.marker([defaultLat, defaultLng], {
-      draggable: true
-    }).addTo(gisMapInstance);
-    
-    gisCircleLayer = L.circle([defaultLat, defaultLng], {
-      radius: 1000,
-      color: '#d4920e',
-      fillColor: '#d4920e',
-      fillOpacity: 0.1,
-      weight: 2
-    }).addTo(gisMapInstance);
-    
-    document.getElementById('gisLat').value = defaultLat.toFixed(6);
-    document.getElementById('gisLng').value = defaultLng.toFixed(6);
+    const container = document.getElementById('gisMap');
+    if (!container) { console.warn('GIS Map container not found'); return; }
+    const dLat = 25.2048, dLng = 55.2708;
+    gisMapInstance = L.map('gisMap').setView([dLat, dLng], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(gisMapInstance);
+    gisMarker = L.marker([dLat, dLng], { draggable: true }).addTo(gisMapInstance);
+    gisCircleLayer = L.circle([dLat, dLng], { radius: 1000, color: '#d4920e', fillColor: '#d4920e', fillOpacity: 0.1, weight: 2 }).addTo(gisMapInstance);
+    document.getElementById('gisLat').value = dLat.toFixed(6);
+    document.getElementById('gisLng').value = dLng.toFixed(6);
     document.getElementById('gisCoordsRow').style.display = 'flex';
-    
-    gisMapInstance.on('click', function(e) {
-      const lat = e.latlng.lat;
-      const lng = e.latlng.lng;
-      updateMapMarker(lat, lng);
-      debouncedFetchGISData();
-    });
-    
-    gisMarker.on('dragend', function(e) {
-      const pos = e.target.getLatLng();
-      updateMapMarker(pos.lat, pos.lng);
-      debouncedFetchGISData();
-    });
-    
+    gisMapInstance.on('click', e => { updateMapMarker(e.latlng.lat, e.latlng.lng); debouncedFetchGISData(); });
+    gisMarker.on('dragend', e => { const p = e.target.getLatLng(); updateMapMarker(p.lat, p.lng); debouncedFetchGISData(); });
     mapInitialized = true;
-    
     setTimeout(() => debouncedFetchGISData(), 500);
-    
-  } catch (error) {
-    console.warn('Leaflet map initialization failed:', error);
-    const mapContainer = document.getElementById('gisMap');
-    if (mapContainer) {
-      mapContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>';
-    }
-  }
+  } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>'; }
 }
-
-function debouncedFetchGISData() {
-  if (gisFetchTimeout) {
-    clearTimeout(gisFetchTimeout);
-  }
-  gisFetchTimeout = setTimeout(() => {
-    fetchGISData();
-  }, 800);
-}
-
-// ===== OVERPASS API =====
+function debouncedFetchGISData() { if (gisFetchTimeout) clearTimeout(gisFetchTimeout); gisFetchTimeout = setTimeout(() => fetchGISData(), 800); }
 async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
-  const osmQueries = [
+  const qs = [
     `node["amenity"="school"](around:${radius},${lat},${lng});`,
     `way["amenity"="school"](around:${radius},${lat},${lng});`,
     `node["amenity"="hospital"](around:${radius},${lat},${lng});`,
@@ -734,388 +703,144 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
     `node["amenity"="restaurant"](around:${radius},${lat},${lng});`,
     `way["amenity"="restaurant"](around:${radius},${lat},${lng});`
   ];
-
-  const query = `[out:json][timeout:25];(${osmQueries.join('')});out center;`;
-
+  const query = `[out:json][timeout:25];(${qs.join('')});out center;`;
   try {
-    const response = await fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `data=${encodeURIComponent(query)}`
-    });
-
-    if (!response.ok) {
-      if (response.status === 429) {
-        console.warn('⚠️ Overpass API rate limit hit. Please wait a moment.');
-        return null;
-      }
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const data = await response.json();
-    const pois = [];
-    const facilities = {
-      school: { count: 0, distance: null, score: 0 },
-      hospital: { count: 0, distance: null, score: 0 },
-      supermarket: { count: 0, distance: null, score: 0 },
-      metro: { count: 0, distance: null, score: 0 },
-      park: { count: 0, distance: null, score: 0 },
-      gym: { count: 0, distance: null, score: 0 },
-      cafe: { count: 0, distance: null, score: 0 },
-      restaurant: { count: 0, distance: null, score: 0 }
-    };
+    const resp = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}` });
+    if (!resp.ok) { if (resp.status === 429) { console.warn('⚠️ Overpass API rate limit'); return null; } throw new Error(`HTTP ${resp.status}`); }
+    const data = await resp.json();
+    const pois = [], facilities = { school: { count: 0, distance: null, score: 0 }, hospital: { count: 0, distance: null, score: 0 }, supermarket: { count: 0, distance: null, score: 0 }, metro: { count: 0, distance: null, score: 0 }, park: { count: 0, distance: null, score: 0 }, gym: { count: 0, distance: null, score: 0 }, cafe: { count: 0, distance: null, score: 0 }, restaurant: { count: 0, distance: null, score: 0 } };
     const weights = { school: 15, hospital: 20, supermarket: 12, metro: 25, park: 10, gym: 8, cafe: 5, restaurant: 5 };
-
-    const typeMap = {
-      'school': 'school', 'hospital': 'hospital', 'supermarket': 'supermarket',
-      'station': 'metro', 'park': 'park', 'fitness_centre': 'gym',
-      'cafe': 'cafe', 'restaurant': 'restaurant'
-    };
-
+    const typeMap = { 'school':'school','hospital':'hospital','supermarket':'supermarket','station':'metro','park':'park','fitness_centre':'gym','cafe':'cafe','restaurant':'restaurant' };
     data.elements.forEach(el => {
-      const poiLat = el.lat || el.center?.lat;
-      const poiLng = el.lon || el.center?.lng;
-      if (!poiLat || !poiLng) return;
-
-      let type = null;
+      const lat2 = el.lat || el.center?.lat, lng2 = el.lon || el.center?.lng;
+      if (!lat2 || !lng2) return;
       const tags = el.tags || {};
-
-      if (tags.amenity === 'school' || tags.amenity === 'hospital' || tags.amenity === 'cafe' || tags.amenity === 'restaurant') {
-        type = typeMap[tags.amenity] || tags.amenity;
-      } else if (tags.shop === 'supermarket') {
-        type = 'supermarket';
-      } else if (tags.railway === 'station') {
-        type = 'metro';
-      } else if (tags.leisure === 'park' || tags.leisure === 'fitness_centre') {
-        type = typeMap[tags.leisure] || tags.leisure;
-      }
-
+      let type = null;
+      if (tags.amenity === 'school' || tags.amenity === 'hospital' || tags.amenity === 'cafe' || tags.amenity === 'restaurant') type = typeMap[tags.amenity] || tags.amenity;
+      else if (tags.shop === 'supermarket') type = 'supermarket';
+      else if (tags.railway === 'station') type = 'metro';
+      else if (tags.leisure === 'park' || tags.leisure === 'fitness_centre') type = typeMap[tags.leisure] || tags.leisure;
       if (!type || !facilities[type]) return;
-
-      const dist = haversineDistance(lat, lng, poiLat, poiLng);
-      if (dist <= radius / 1000) {
+      const dist = haversineDistance(lat, lng, lat2, lng2);
+      if (dist <= radius/1000) {
         const name = tags.name || tags['name:en'] || `${type} (${el.id})`;
-        pois.push({ type, name, lat: poiLat, lng: poiLng, distance: dist });
+        pois.push({ type, name, lat: lat2, lng: lng2, distance: dist });
         facilities[type].count++;
-        if (facilities[type].distance === null || dist < facilities[type].distance) {
-          facilities[type].distance = Math.round(dist * 1000);
-        }
+        if (facilities[type].distance === null || dist < facilities[type].distance) facilities[type].distance = Math.round(dist*1000);
       }
     });
-
     let totalScore = 0;
-    for (const [type, data] of Object.entries(facilities)) {
-      if (data.count > 0) {
-        const weight = weights[type] || 5;
-        const distFactor = Math.max(0, 1 - (data.distance / 1000));
-        data.score = Math.round((weight * distFactor) * 10) / 10;
-        totalScore += data.score;
-      }
-    }
-
+    for (const [t,d] of Object.entries(facilities)) { if (d.count > 0) { const w = weights[t]||5; const df = Math.max(0,1-(d.distance/1000)); d.score = Math.round((w*df)*10)/10; totalScore += d.score; } }
     return { pois, facilities, totalScore, count: pois.length };
-  } catch (error) {
-    console.warn('⚠️ Overpass API error:', error.message);
-    return null;
-  }
+  } catch(e) { console.warn('⚠️ Overpass API error:', e.message); return null; }
 }
-
 function haversineDistance(lat1, lng1, lat2, lng2) {
   const R = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a = Math.sin(dLat/2) ** 2 +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLng/2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const dLat = (lat2-lat1)*Math.PI/180, dLng = (lng2-lng1)*Math.PI/180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
-
-// ===== GIS FUNCTIONS =====
 async function fetchGISData() {
   if (gisLoading) return;
-  
-  const lat = document.getElementById('gisLat').value.trim();
-  const lng = document.getElementById('gisLng').value.trim();
-  const radius = 1000;
-  
-  if (!lat || !lng) {
-    return;
-  }
-  
+  const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
+  if (!lat || !lng) return;
   gisLoading = true;
-  
   try {
-    const locationLat = parseFloat(lat);
-    const locationLng = parseFloat(lng);
-    
-    if (isNaN(locationLat) || isNaN(locationLng)) {
-      gisLoading = false;
-      return;
-    }
-
-    const result = await fetchPOIsFromOSM(locationLat, locationLng, radius);
-
+    const a = parseFloat(lat), b = parseFloat(lng);
+    if (isNaN(a) || isNaN(b)) { gisLoading = false; return; }
+    const result = await fetchPOIsFromOSM(a, b, 1000);
     if (result && result.count > 0) {
-      gisData = {
-        facilities: result.facilities,
-        count: result.count,
-        totalScore: result.totalScore,
-        lat: locationLat,
-        lng: locationLng,
-        pois: result.pois
-      };
-
+      gisData = { facilities: result.facilities, count: result.count, totalScore: result.totalScore, lat: a, lng: b, pois: result.pois };
       displayGISResult(gisData);
       addPOIsToMap(result.pois);
-    } else {
-      document.getElementById('gisResult').style.display = 'none';
-      poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
-      poiMarkers = [];
-    }
-
-  } catch (error) {
-    console.error('GIS Error:', error);
-  } finally {
-    gisLoading = false;
-  }
+    } else { document.getElementById('gisResult').style.display = 'none'; poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = []; }
+  } catch(e) { console.error('GIS Error:', e); } finally { gisLoading = false; }
 }
-
-// ===== CORRECTED GIS RESULT DISPLAY =====
 function displayGISResult(gisData) {
-  const container = document.getElementById('gisResult');
-  const list = document.getElementById('gisFacilitiesList');
-  const scoreDisplay = document.getElementById('gisScoreDisplay');
-  
+  const container = document.getElementById('gisResult'), list = document.getElementById('gisFacilitiesList'), scoreDisplay = document.getElementById('gisScoreDisplay');
   container.style.display = 'block';
-  
-  if (!gisData || !gisData.facilities) {
-    list.innerHTML = 'No nearby facilities found within search radius';
-    scoreDisplay.textContent = 'Impact on valuation: 0%';
-    return;
-  }
-  
-  const facilities = gisData.facilities;
+  if (!gisData || !gisData.facilities) { list.innerHTML = 'No nearby facilities found'; scoreDisplay.textContent = 'Impact: 0%'; return; }
+  let total = 0;
+  for (const [k,d] of Object.entries(gisData.facilities)) if (d.count > 0) total += d.score;
+  const capped = Math.min(total, 1.5), impact = Math.round((capped/1.5)*12);
   let html = '';
-  
-  // Calculate total facility score contribution
-  let totalFacilityScore = 0;
-  let maxFacilityScore = 0;
-  const facilityScores = {};
-  
-  for (const [key, data] of Object.entries(facilities)) {
-    if (data.count > 0) {
-      facilityScores[key] = data.score;
-      totalFacilityScore += data.score;
-      if (data.score > maxFacilityScore) maxFacilityScore = data.score;
+  for (const [k,d] of Object.entries(gisData.facilities)) {
+    if (d.count > 0) {
+      const label = getFacilityLabel(k), icon = getFacilityIcon(k);
+      const distText = d.distance !== null ? `(${d.distance}m)` : '';
+      const contrib = Math.min(2, (d.score/1.5)*2);
+      html += `<div class="gis-facility-row"><span class="label">${icon} ${label}</span><span class="value">${d.count} ${distText} • +${Math.round(contrib)}%</span></div>`;
     }
   }
-  
-  // Cap total score at 1.5 (max realistic score)
-  const cappedTotal = Math.min(totalFacilityScore, 1.5);
-  const impactPercent = Math.round((cappedTotal / 1.5) * 12); // 0-12% impact
-  
-  // Display each facility with normalized contribution
-  for (const [key, data] of Object.entries(facilities)) {
-    const label = getFacilityLabel(key);
-    const icon = getFacilityIcon(key);
-    if (data.count > 0) {
-      const distText = data.distance !== null ? `(${data.distance}m)` : '';
-      // Normalize facility contribution (max 2% per facility type)
-      const contribution = Math.min(2, (data.score / 1.5) * 2);
-      const contribPct = Math.round(contribution);
-      html += `<div class="gis-facility-row">
-        <span class="label">${icon} ${label}</span>
-        <span class="value">${data.count} ${distText} • +${contribPct}%</span>
-      </div>`;
-    }
-  }
-  
-  if (!html) {
-    html = 'No nearby facilities found within search radius';
-  }
-  
-  list.innerHTML = html;
-  
-  // Store the impact for valuation
-  const impactMultiplier = 1 + (impactPercent / 100);
-  window.gisImpactMultiplier = impactMultiplier;
-  window.gisImpactPercent = impactPercent;
-  
-  scoreDisplay.innerHTML = `
-    <span style="color:var(--gold)">⭐ Location impact on valuation: +${impactPercent}%</span>
-    <span style="font-size:10px;color:var(--muted);margin-left:12px">
-      (based on ${gisData.count || 0} nearby facilities from OpenStreetMap)
-    </span>
-  `;
+  list.innerHTML = html || 'No nearby facilities found';
+  window.gisImpactMultiplier = 1 + impact/100;
+  window.gisImpactPercent = impact;
+  scoreDisplay.innerHTML = `<span style="color:var(--gold)">⭐ Location impact on valuation: +${impact}%</span><span style="font-size:10px;color:var(--muted);margin-left:12px">(based on ${gisData.count||0} nearby facilities)</span>`;
 }
-
-function getFacilityLabel(key) {
-  const labels = {
-    metro: 'Metro', supermarket: 'Supermarket', school: 'School',
-    hospital: 'Hospital', park: 'Park', gym: 'Gym / Fitness Center',
-    cafe: 'Cafe', restaurant: 'Restaurant'
-  };
-  return labels[key] || key;
-}
-
-function getFacilityIcon(key) {
-  const icons = {
-    metro: '🚇', supermarket: '🛒', school: '🏫',
-    hospital: '🏥', park: '🌳', gym: '🏋️',
-    cafe: '☕', restaurant: '🍽️'
-  };
-  return icons[key] || '📍';
-}
-
-// ===== SCRAPING =====
+function getFacilityLabel(k) { const labels = { metro:'Metro', supermarket:'Supermarket', school:'School', hospital:'Hospital', park:'Park', gym:'Gym / Fitness Center', cafe:'Cafe', restaurant:'Restaurant' }; return labels[k]||k; }
+function getFacilityIcon(k) { const icons = { metro:'🚇', supermarket:'🛒', school:'🏫', hospital:'🏥', park:'🌳', gym:'🏋️', cafe:'☕', restaurant:'🍽️' }; return icons[k]||'📍'; }
 async function scrapeRealData() {
   const city = document.getElementById('city').value, district = document.getElementById('districtInput').value.trim(), propType = document.getElementById('propType').value;
-  const area = parseFloat(document.getElementById('area').value) || 0;
-  const project = document.getElementById('project')?.value || '';
-  const btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
-  
-  if (!city || !district) { 
-    status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; 
-    showToast('Please select a city and enter a district name'); 
-    return; 
-  }
-  
-  if (area < 10) {
-    status.innerHTML = '<span class="status-badge error">⚠️ Please enter a valid area</span>';
-    showToast('Please enter a valid area');
-    return;
-  }
-  
-  btn.disabled = true; 
-  btn.innerHTML = '<span class="loading"></span> Analyzing market...';
-  status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data...</span>';
-  
-  const lat = document.getElementById('gisLat').value.trim();
-  const lng = document.getElementById('gisLng').value.trim();
-  
-  // ===== STEP 1: Try DLD Lookup only =====
+  const area = parseFloat(document.getElementById('area').value)||0, btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
+  if (!city || !district) { status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; showToast('Please select a city and enter a district name'); return; }
+  if (area < 10) { status.innerHTML = '<span class="status-badge error">⚠️ Please enter a valid area</span>'; showToast('Please enter a valid area'); return; }
+  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data...</span>';
+  const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
   try {
-    const lookupParams = new URLSearchParams({
-      district: district,
-      propertyType: propType || 'apartment',
-      area: area
-    });
-    if (project && project.length > 2) {
-      lookupParams.append('project', project);
+    const params = new URLSearchParams({ district, propertyType: propType || 'apartment', area });
+    if (lat && lng) { params.append('lat', lat); params.append('lng', lng); }
+    const resp = await fetch(`/.netlify/functions/dld-lookup?${params.toString()}`);
+    const data = await resp.json();
+    if (data.found) {
+      document.getElementById('avgPriceSqm').value = data.avgPricePerSqm;
+      document.getElementById('recentSalesCount').value = data.count;
+      document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A' };
+      const levelNames = { 'project_size':'المشروع + النوع + الحجم', 'project':'المشروع + النوع', 'district_size':'المنطقة + النوع + الحجم', 'district':'المنطقة + النوع', 'district_type':'المنطقة + النوع', 'district_only':'المنطقة فقط' };
+      const confColor = data.confidence === 'high' ? 'success' : data.confidence === 'medium' ? 'warning' : 'error';
+      status.innerHTML = `<span class="status-badge ${confColor}">✅ بيانات DLD حقيقية (${data.count} صفقة مقارنة، مستوى: ${levelNames[data.level]||data.level})</span><span style="font-size:9px;color:var(--muted);margin-left:8px;">⏱️ ${data.timeWindow} يوم • ${data.confidence||'متوسطة'} الثقة</span>`;
+      showToast(`✅ Found ${data.count} DLD comparable sales in ${district}`);
+    } else {
+      status.innerHTML = `<span class="status-badge warning">⚠️ لا توجد بيانات DLD كافية لهذا العقار حاليًا — لا يمكن حساب تقييم موثوق</span><br><span style="font-size:10px;color:var(--muted);">⚠️ No sufficient DLD data for this property — reliable valuation not possible</span>`;
+      document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; scrapedDistrictData = null;
     }
-    if (lat && lng) {
-      lookupParams.append('lat', lat);
-      lookupParams.append('lng', lng);
-    }
-    
-    const lookupResponse = await fetch(`/.netlify/functions/dld-lookup?${lookupParams.toString()}`);
-    const lookupData = await lookupResponse.json();
-    
-    if (lookupData.found === true) {
-      // ✅ DLD data found - use it directly
-      document.getElementById('avgPriceSqm').value = lookupData.avgPricePerSqm;
-      document.getElementById('recentSalesCount').value = lookupData.count;
-      document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      
-      // Store DLD data for valuation
-      scrapedDistrictData = {
-        avgPricePerSqm: lookupData.avgPricePerSqm,
-        count: lookupData.count,
-        dataSource: 'dld',
-        level: lookupData.level,
-        source: 'dld'
-      };
-      
-      const levelNames = {
-        'project_size': 'المشروع + النوع + الحجم',
-        'project': 'المشروع + النوع',
-        'district_size': 'المنطقة + النوع + الحجم',
-        'district': 'المنطقة + النوع'
-      };
-      
-      status.innerHTML = `<span class="status-badge success">✅ بيانات DLD حقيقية (${lookupData.count} صفقة مقارنة، مستوى: ${levelNames[lookupData.level] || lookupData.level})</span>`;
-      showToast(`✅ Found ${lookupData.count} DLD comparable sales in ${district}`);
-      
-      btn.disabled = false;
-      btn.innerHTML = '🔄 Re-Scrape';
-      return;
-    }
-  } catch (lookupErr) {
-    console.log('⚠️ DLD Lookup error:', lookupErr.message);
-    status.innerHTML = '<span style="color:var(--muted)">⚠️ DLD lookup failed...</span>';
-  }
-  
-  // ===== STEP 2: No DLD data - Show clear message =====
-  status.innerHTML = `<span class="status-badge warning">⚠️ لا توجد بيانات DLD كافية لهذا العقار حاليًا — لا يمكن حساب تقييم موثوق</span><br>
-                     <span style="font-size:10px;color:var(--muted);">⚠️ No sufficient DLD data for this property — reliable valuation not possible</span>`;
-  document.getElementById('avgPriceSqm').value = '';
-  document.getElementById('recentSalesCount').value = '';
-  scrapedDistrictData = null;
-  
-  btn.disabled = false;
-  btn.innerHTML = '🔍 Scrape Live Market Data';
+  } catch(e) { console.error('Scrape error:', e); status.innerHTML = '<span class="status-badge error">⚠️ Error fetching data. Please try again.</span>'; }
+  btn.disabled = false; btn.innerHTML = '🔄 Re-Scrape';
 }
-
 function getFallbackPrice(city, district) {
   const cd = (district||'').trim().toLowerCase();
-  const rates = {
-    'dubai marina': 11850, 'palm jumeirah': 16500, 'downtown dubai': 13200, 
-    'business bay': 9200, 'jumeirah village circle': 8500, 'dubai hills estate': 10500,
-    'arabian ranches': 9500, 'emirates hills': 18500, 'al barsha': 7800,
-    'deira': 4500, 'bur dubai': 5200, 'damac hills': 8500, 'dubai creek harbour': 11500,
-    'mirdif': 5500, 'al furjan': 7200, 'discovery gardens': 6500,
-    'jumeirah beach residence': 12500, 'the greens': 8800, 'dubai silicon oasis': 6200,
-    'international city': 4800
-  };
+  const rates = { 'dubai marina':11850, 'palm jumeirah':16500, 'downtown dubai':13200, 'business bay':9200, 'jumeirah village circle':8500, 'dubai hills estate':10500, 'arabian ranches':9500, 'emirates hills':18500, 'al barsha':7800, 'deira':4500, 'bur dubai':5200, 'damac hills':8500, 'dubai creek harbour':11500, 'mirdif':5500, 'al furjan':7200, 'discovery gardens':6500, 'jumeirah beach residence':12500, 'the greens':8800, 'dubai silicon oasis':6200, 'international city':4800 };
   return rates[cd] || 7000;
 }
-
-// ===== CALCULATE VIEW MULTIPLIER =====
 function calculateViewMultiplier(viewTypes) {
-  if (!viewTypes || viewTypes.length === 0) return 1.0;
-  if (viewTypes.includes('unknown') || viewTypes.includes('internal')) return 1.0;
-  
-  const viewFactors = { sea: 1.15, 'partial-sea': 1.08, city: 1.05, garden: 1.04, park: 1.02, street: 0.97 };
-  const validTypes = viewTypes.filter(type => viewFactors.hasOwnProperty(type));
-  if (validTypes.length === 0) return 1.0;
-  
-  validTypes.sort((a, b) => viewFactors[b] - viewFactors[a]);
-  let multiplier = 1.0;
-  let isFirst = true;
-  
-  for (const type of validTypes) {
-    const factor = viewFactors[type];
-    if (isFirst) {
-      multiplier *= factor;
-      isFirst = false;
-    } else {
-      multiplier += (factor - 1) * 0.5;
-    }
-  }
-  
-  return Math.max(0.8, Math.min(1.25, multiplier));
+  if (!viewTypes || !viewTypes.length) return 1;
+  if (viewTypes.includes('unknown') || viewTypes.includes('internal')) return 1;
+  const factors = { sea:1.15, 'partial-sea':1.08, city:1.05, garden:1.04, park:1.02, street:0.97 };
+  const valid = viewTypes.filter(t => factors[t]);
+  if (!valid.length) return 1;
+  valid.sort((a,b) => factors[b] - factors[a]);
+  let mult = 1, first = true;
+  for (const t of valid) { if (first) { mult *= factors[t]; first = false; } else { mult += (factors[t]-1)*0.5; } }
+  return Math.max(0.8, Math.min(1.25, mult));
 }
-
-// ===== VALUATION =====
 function collectPropertyData() {
   const features = [];
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => features.push(cb.value));
   const isLand = document.getElementById('propType').value === 'land';
-  
   return {
     city: document.getElementById('city').value,
     district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
     propType: document.getElementById('propType').value,
-    area: Math.max(10, parseFloat(document.getElementById('area').value) || 0),
-    bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
-    yearBuilt: isLand ? 2026 : Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value) || 2020)),
+    area: Math.max(10, parseFloat(document.getElementById('area').value)||0),
+    bedrooms: parseInt(document.getElementById('bedrooms').value)||0,
+    yearBuilt: isLand ? 2026 : Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value)||2020)),
     condition: isLand ? 'good' : document.getElementById('condition').value,
     features,
-    avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value) || 0,
-    annualRent: parseFloat(document.getElementById('annualRent').value) || 0,
-    annualExpenses: parseFloat(document.getElementById('annualExpenses').value) || 0,
-    landValue: parseFloat(document.getElementById('landValue').value) || 0,
-    constructionCost: parseFloat(document.getElementById('constructionCost').value) || 0,
+    avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value)||0,
+    annualRent: parseFloat(document.getElementById('annualRent').value)||0,
+    annualExpenses: parseFloat(document.getElementById('annualExpenses').value)||0,
+    landValue: parseFloat(document.getElementById('landValue').value)||0,
+    constructionCost: parseFloat(document.getElementById('constructionCost').value)||0,
     scrapedData: scrapedDistrictData,
     finishQuality: document.getElementById('finishQuality').value,
     viewTypes: getSelectedViewTypes(),
@@ -1127,244 +852,138 @@ function collectPropertyData() {
     gisRadius: 1000
   };
 }
-
 function salesComparisonApproach(data) {
-  // Only use real DLD data - no fallback
-  if (!data.avgPriceSqm && !data.scrapedData?.avgPricePerSqm) {
-    return null;
-  }
+  if (!data.avgPriceSqm && !data.scrapedData?.avgPricePerSqm) return null;
   let avgPrice = data.avgPriceSqm || data.scrapedData?.avgPricePerSqm;
   if (!avgPrice || avgPrice <= 0) return null;
-  
-  const maxPricePerSqm = 25000;
-  if (avgPrice > maxPricePerSqm) avgPrice = maxPricePerSqm;
+  if (avgPrice > 25000) avgPrice = 25000;
   let value = avgPrice * data.area;
-  
-  if (data.bedrooms === 0 && data.propType === 'apartment') {
-    value *= 0.80;
-  }
-  
-  const conditionFactors = { excellent: 1.08, good: 1.00, fair: 0.82, 'needs-renovation': 0.75 };
-  value *= conditionFactors[data.condition] || 1.00;
+  if (data.bedrooms === 0 && data.propType === 'apartment') value *= .8;
+  const condFactors = { excellent:1.08, good:1, fair:.82, 'needs-renovation':.75 };
+  value *= condFactors[data.condition] || 1;
   const age = 2026 - data.yearBuilt;
-  value *= Math.max(0.80, 1 - (age * 0.004));
-  value += data.features.length * (data.area * 50);
-  const finishFactors = { luxury: 1.15, good: 1.05, normal: 1.00, basic: 0.92, poor: 0.80 };
-  if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1.00;
-  
-  const viewMultiplier = calculateViewMultiplier(data.viewTypes || []);
-  value *= viewMultiplier;
-  
-  const floorFactors = { penthouse: 1.12, 'very-high': 1.06, high: 1.03, mid: 1.00, low: 0.97, ground: 0.92 };
-  if (data.floorLevel) value *= floorFactors[data.floorLevel] || 1.00;
-  const streetFactors = { main: 1.08, corner: 1.05, secondary: 1.00, quiet: 0.96 };
-  if (data.streetPosition) value *= streetFactors[data.streetPosition] || 1.00;
-  const buildingFactors = { excellent: 1.10, good: 1.03, fair: 0.95, old: 0.82 };
-  if (data.buildingCondition) value *= buildingFactors[data.buildingCondition] || 1.00;
-  const furnishedFactors = { furnished: 1.04, 'semi-furnished': 1.02, unfurnished: 0.98 };
-  if (data.furnishedStatus) value *= furnishedFactors[data.furnishedStatus] || 1.00;
-  
-  // GIS impact: use the normalized impact from displayGISResult
-  const gisImpactPercent = window.gisImpactPercent || 0;
-  const gisMultiplier = 1 + (gisImpactPercent / 100);
-  if (gisMultiplier > 1) {
-    value = Math.round(value * gisMultiplier);
-  }
-  
+  value *= Math.max(.8, 1 - age * .004);
+  value += data.features.length * data.area * 50;
+  const finishFactors = { luxury:1.15, good:1.05, normal:1, basic:.92, poor:.8 };
+  if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1;
+  value *= calculateViewMultiplier(data.viewTypes||[]);
+  const floorFactors = { penthouse:1.12, 'very-high':1.06, high:1.03, mid:1, low:.97, ground:.92 };
+  if (data.floorLevel) value *= floorFactors[data.floorLevel] || 1;
+  const streetFactors = { main:1.08, corner:1.05, secondary:1, quiet:.96 };
+  if (data.streetPosition) value *= streetFactors[data.streetPosition] || 1;
+  const buildFactors = { excellent:1.1, good:1.03, fair:.95, old:.82 };
+  if (data.buildingCondition) value *= buildFactors[data.buildingCondition] || 1;
+  const furnishFactors = { furnished:1.04, 'semi-furnished':1.02, unfurnished:.98 };
+  if (data.furnishedStatus) value *= furnishFactors[data.furnishedStatus] || 1;
+  const gisImpact = window.gisImpactPercent || 0;
+  if (gisImpact > 0) value = Math.round(value * (1 + gisImpact/100));
   value = Math.round(value);
-  const comparableCount = data.scrapedData?.count || 0;
-  const confidenceLevel = comparableCount >= 10 ? 'High' : comparableCount >= 5 ? 'Medium' : 'Basic';
-  let details = `Based on ${comparableCount} comparable sales (${confidenceLevel} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
+  const count = data.scrapedData?.count || 0;
+  const conf = count >= 10 ? 'High' : count >= 5 ? 'Medium' : 'Basic';
+  let details = `Based on ${count} comparable sales (${conf} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
   if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
-  if (data.viewTypes && data.viewTypes.length > 0) details += ` Views: ${data.viewTypes.join(', ')}.`;
+  if (data.viewTypes?.length) details += ` Views: ${data.viewTypes.join(', ')}.`;
   details += ` Condition: ${data.condition}, Age: ${age}y.`;
-  if (gisImpactPercent > 0) details += ` GIS location premium: +${gisImpactPercent}% (${data.gisData?.count || 0} nearby facilities).`;
-  
-  return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
+  if (gisImpact > 0) details += ` GIS premium: +${gisImpact}% (${data.gisData?.count||0} facilities).`;
+  return { method: 'Sales Comparison Approach', value, weight: .4, confidence: count > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
 }
-
 function incomeCapitalizationApproach(data) {
   if (!data.annualRent || data.annualRent <= 0) return null;
-  let annualExpenses = data.annualExpenses || Math.round(data.annualRent * 0.20);
-  const vacancyRate = data.scrapedData?.vacancyRate || 10;
-  const effectiveGross = data.annualRent * (1 - vacancyRate / 100);
-  const noi = effectiveGross - annualExpenses;
+  const expenses = data.annualExpenses || Math.round(data.annualRent * .2);
+  const vacancy = data.scrapedData?.vacancyRate || 10;
+  const noi = data.annualRent * (1 - vacancy/100) - expenses;
   if (noi <= 0) return null;
-  const capRate = data.scrapedData?.capRate ? data.scrapedData.capRate / 100 : 0.07;
-  const value = Math.round(noi / capRate);
-  return { method: 'Income Capitalization Approach', value, weight: 0.35, confidence: 'high', details: `NOI: ${Math.round(noi).toLocaleString()} AED / Cap Rate: ${(capRate*100).toFixed(1)}%.`, perSqm: Math.round(value / data.area), rentalYield: Math.round((data.annualRent / value) * 1000) / 10 };
+  const cap = data.scrapedData?.capRate ? data.scrapedData.capRate/100 : .07;
+  const value = Math.round(noi / cap);
+  return { method: 'Income Capitalization Approach', value, weight: .35, confidence: 'high', details: `NOI: ${Math.round(noi).toLocaleString()} AED / Cap Rate: ${(cap*100).toFixed(1)}%.`, perSqm: Math.round(value/data.area), rentalYield: Math.round((data.annualRent/value)*1000)/10 };
 }
-
 function costApproach(data) {
   if (data.propType === 'apartment' || data.propType === 'land') return null;
-  
-  const buildCostPerSqm = data.constructionCost || 3000;
-  const buildCost = buildCostPerSqm * data.area;
-  let landValue = data.landValue || (data.avgPriceSqm ? Math.round(data.avgPriceSqm * data.area * 0.30) : Math.round(buildCost * 0.35));
-  const totalCost = landValue + buildCost;
+  const build = (data.constructionCost||3000) * data.area;
+  const land = data.landValue || (data.avgPriceSqm ? Math.round(data.avgPriceSqm*data.area*.3) : Math.round(build*.35));
+  const total = land + build;
   const age = Math.min(50, Math.max(0, 2026 - data.yearBuilt));
-  const depreciation = Math.min(0.60, age * 0.015);
-  const conditionFactors = { excellent: 0.95, good: 1.00, fair: 1.10, 'needs-renovation': 1.25 };
-  const conditionAdjustment = conditionFactors[data.condition] || 1.00;
-  const depreciatedValue = Math.round(totalCost * (1 - depreciation) * conditionAdjustment);
-  return { method: 'Cost Approach (Replacement)', value: depreciatedValue, weight: 0.15, confidence: data.constructionCost > 0 ? 'medium' : 'low', details: `Land: ${landValue.toLocaleString()} + Build: ${buildCost.toLocaleString()} AED. Depreciation: ${(depreciation*100).toFixed(1)}%.`, perSqm: Math.round(depreciatedValue / data.area) };
+  const dep = Math.min(.6, age * .015);
+  const cond = { excellent:.95, good:1, fair:1.1, 'needs-renovation':1.25 };
+  const adj = cond[data.condition] || 1;
+  const value = Math.round(total * (1 - dep) * adj);
+  return { method: 'Cost Approach (Replacement)', value, weight: .15, confidence: data.constructionCost > 0 ? 'medium' : 'low', details: `Land: ${land.toLocaleString()} + Build: ${build.toLocaleString()} AED. Depreciation: ${(dep*100).toFixed(1)}%.`, perSqm: Math.round(value/data.area) };
 }
-
 function dcfApproach(data) {
-  const incomeTypes = ['apartment', 'villa', 'townhouse', 'office', 'retail'];
-  if (!incomeTypes.includes(data.propType)) return null;
-  if (!data.annualRent || data.annualRent <= 0) return null;
-  const currentValue = data.avgPriceSqm ? data.avgPriceSqm * data.area : data.annualRent / 0.07;
-  if (currentValue <= 0) return null;
-  const rentGrowth = 0.02, valueGrowth = 0.03, discountRate = 0.10, exitCost = 0.05;
-  let totalNPV = -currentValue;
-  let runningValue = currentValue;
-  let runningRent = data.annualRent;
+  const types = ['apartment','villa','townhouse','office','retail'];
+  if (!types.includes(data.propType) || !data.annualRent || data.annualRent <= 0) return null;
+  const cur = data.avgPriceSqm ? data.avgPriceSqm*data.area : data.annualRent/.07;
+  if (cur <= 0) return null;
+  let npv = -cur, runVal = cur, runRent = data.annualRent;
   for (let y = 1; y <= 10; y++) {
-    runningRent *= (1 + rentGrowth);
-    runningValue *= (1 + valueGrowth);
-    totalNPV += (runningRent * 0.75) / Math.pow(1 + discountRate, y);
-    if (y === 10) totalNPV += (runningValue * (1 - exitCost)) / Math.pow(1 + discountRate, 10);
+    runRent *= 1.02; runVal *= 1.03;
+    npv += (runRent * .75) / Math.pow(1.1, y);
+    if (y === 10) npv += (runVal * .95) / Math.pow(1.1, 10);
   }
-  const dcfValue = totalNPV > 0 ? Math.round(totalNPV) : Math.round(currentValue * 0.85);
-  return { method: 'DCF Analysis (10-Year)', value: dcfValue, weight: 0.10, confidence: 'medium', details: '10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr.', perSqm: Math.round(dcfValue / data.area) };
+  const value = npv > 0 ? Math.round(npv) : Math.round(cur * .85);
+  return { method: 'DCF Analysis (10-Year)', value, weight: .1, confidence: 'medium', details: '10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr.', perSqm: Math.round(value/data.area) };
 }
-
 function calculateWeightedValue(valuations, propData) {
-  if (valuations.length === 0) {
-    const fallback = (propData.avgPriceSqm || 4000) * propData.area;
-    return { finalValue: Math.round(fallback), confidence: 'low', confidencePct: 25, valuations: [], range: { low: Math.round(fallback * 0.8), high: Math.round(fallback * 1.2) } };
+  if (!valuations.length) {
+    const fb = (propData.avgPriceSqm||4000) * propData.area;
+    return { finalValue: Math.round(fb), confidence: 'low', confidencePct: 25, valuations: [], range: { low: Math.round(fb*.8), high: Math.round(fb*1.2) } };
   }
-  let weightedSum = 0, totalWeight = 0;
-  valuations.forEach(v => {
-    weightedSum += v.value * v.weight;
-    totalWeight += v.weight;
-  });
-  const finalValue = Math.round(weightedSum / totalWeight);
-  let confidencePct = 60;
-  if (valuations.some(v => v.confidence === 'high')) confidencePct += 20;
-  if (valuations.length >= 3) confidencePct += 10;
-  if (valuations.length >= 4) confidencePct += 5;
-  confidencePct = Math.min(95, Math.max(20, confidencePct));
-  const allValues = valuations.map(v => v.value);
-  return {
-    finalValue,
-    confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low',
-    confidencePct,
-    valuations,
-    range: {
-      low: Math.round(Math.min(...allValues) * 0.92),
-      high: Math.round(Math.max(...allValues) * 1.08)
-    }
-  };
+  let ws = 0, tw = 0;
+  valuations.forEach(v => { ws += v.value * v.weight; tw += v.weight; });
+  const final = Math.round(ws/tw);
+  let confPct = 60;
+  if (valuations.some(v => v.confidence === 'high')) confPct += 20;
+  if (valuations.length >= 3) confPct += 10;
+  if (valuations.length >= 4) confPct += 5;
+  confPct = Math.min(95, Math.max(20, confPct));
+  const vals = valuations.map(v => v.value);
+  return { finalValue: final, confidence: confPct >= 75 ? 'high' : confPct >= 50 ? 'medium' : 'low', confidencePct: confPct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) } };
 }
-
 function buildDecisionEngineLink(result, propData) {
-  const params = new URLSearchParams();
-  params.set('price', result.finalValue);
-  params.set('area', propData.area);
-  params.set('type', propData.propType);
-  params.set('city', propData.city);
-  params.set('district', propData.district);
-  params.set('valuation', result.finalValue);
-  params.set('valLow', result.range.low);
-  params.set('valHigh', result.range.high);
-  params.set('confidence', result.confidencePct);
-  params.set('methods', result.valuations.length);
-  if (propData.avgPriceSqm > 0) params.set('pricePerSqm', propData.avgPriceSqm);
-  if (scrapedDistrictData?.capRate) params.set('capRate', scrapedDistrictData.capRate);
-  if (scrapedDistrictData?.vacancyRate) params.set('vacancy', scrapedDistrictData.vacancyRate);
-  if (propData.annualRent > 0) params.set('rent', propData.annualRent);
-  params.set('source', 'valuation_engine');
-  params.set('referrer', 'aqar_valuation');
-  return `https://aqar-decision-engine.netlify.app/?${params.toString()}`;
+  const p = new URLSearchParams();
+  p.set('price', result.finalValue); p.set('area', propData.area); p.set('type', propData.propType);
+  p.set('city', propData.city); p.set('district', propData.district);
+  p.set('valuation', result.finalValue); p.set('valLow', result.range.low); p.set('valHigh', result.range.high);
+  p.set('confidence', result.confidencePct); p.set('methods', result.valuations.length);
+  if (propData.avgPriceSqm > 0) p.set('pricePerSqm', propData.avgPriceSqm);
+  if (scrapedDistrictData?.capRate) p.set('capRate', scrapedDistrictData.capRate);
+  if (scrapedDistrictData?.vacancyRate) p.set('vacancy', scrapedDistrictData.vacancyRate);
+  if (propData.annualRent > 0) p.set('rent', propData.annualRent);
+  p.set('source', 'valuation_engine'); p.set('referrer', 'aqar_valuation');
+  return `https://aqar-decision-engine.netlify.app/?${p.toString()}`;
 }
-
 function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
-  const confidenceLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
-  const explainHTML = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count || 'multiple'}</b> comparable sales in ${propData.district}<br>• Data confidence: <b>${confidenceLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Total DLD database: <b>30,475</b> verified transactions<br>• Valuation range reflects natural market variation</div>`;
-  
+  const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count||'multiple'}</b> comparable sales in ${propData.district}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend||'stable'}</b><br>• Total DLD database: <b>30,475</b> verified transactions<br>• Valuation range reflects natural market variation</div>`;
   let vHTML = '';
   valuations.forEach(v => {
-    const confColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
-    vHTML += `<div class="method-card">
-      <div class="m-header">
-        <span class="m-name">${v.method}</span>
-        <span style="font-size:10px;color:${confColor}">● ${v.confidence} confidence</span>
-      </div>
-      <div class="m-value">${v.value.toLocaleString()} AED</div>
-      <div class="m-meta">
-        <span>Weight: ${Math.round(v.weight*100)}%</span>
-        ${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}
-        ${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}
-      </div>
-      <div class="m-detail">${v.details}</div>
-    </div>`;
+    const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
+    vHTML += `<div class="method-card"><div class="m-header"><span class="m-name">${v.method}</span><span style="font-size:10px;color:${cColor}">● ${v.confidence} confidence</span></div><div class="m-value">${v.value.toLocaleString()} AED</div><div class="m-meta"><span>Weight: ${Math.round(v.weight*100)}%</span>${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}</div><div class="m-detail">${v.details}</div></div>`;
   });
-  
   const deUrl = buildDecisionEngineLink(result, propData);
-  
-  section.innerHTML = `
-    <div class="result-card">
-      <div style="text-align:center">
-        <div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div>
-        <div class="final-value">AED ${result.finalValue.toLocaleString()}</div>
-        <div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district || 'N/A'} • ${propData.area} sqm</div>
-        <div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>
-        <div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div>
-        <div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div>
-      </div>
-      ${explainHTML}
-      <div style="margin-top:20px">
-        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Valuation Methods Detail</div>
-        ${vHTML}
-      </div>
-      <a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a>
-      <div class="text-center text-muted mt-2">Opens Decision Engine with full valuation data pre-filled</div>
-      <button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button>
-    </div>
-  `;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div><div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Valuation Methods Detail</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><div class="text-center text-muted mt-2">Opens Decision Engine with full valuation data pre-filled</div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
-
 function runValuation() {
   const area = parseFloat(document.getElementById('area').value);
-  if (!area || area < 10) {
-    document.getElementById('area').classList.add('error');
-    document.getElementById('area').focus();
-    showToast('Area must be at least 10 sqm');
-    setTimeout(() => document.getElementById('area').classList.remove('error'), 3000);
-    return;
-  }
+  if (!area || area < 10) { document.getElementById('area').classList.add('error'); document.getElementById('area').focus(); showToast('Area must be at least 10 sqm'); setTimeout(() => document.getElementById('area').classList.remove('error'), 3000); return; }
   document.getElementById('btnValuate').disabled = true;
   document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
-  
   setTimeout(() => {
     const propData = collectPropertyData();
     const valuations = [];
-    
     const salesComp = salesComparisonApproach(propData);
     if (salesComp) valuations.push(salesComp);
-    
     const incomeVal = incomeCapitalizationApproach(propData);
     if (incomeVal) valuations.push(incomeVal);
-    
     const costVal = costApproach(propData);
     if (costVal) valuations.push(costVal);
-    
     const dcfVal = dcfApproach(propData);
     if (dcfVal) valuations.push(dcfVal);
-    
-    if (valuations.length === 0) {
-      showToast('Insufficient data. Run "Scrape" first.');
-      document.getElementById('btnValuate').disabled = false;
-      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation';
-      return;
-    }
-    
+    if (!valuations.length) { showToast('Insufficient data. Run "Scrape" first.'); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
     const finalResult = calculateWeightedValue(valuations, propData);
     displayResult(finalResult, valuations, propData);
     document.getElementById('btnValuate').disabled = false;
@@ -1372,7 +991,6 @@ function runValuation() {
     saveToHistory(finalResult, propData);
   }, 800);
 }
-
 function resetAll() {
   document.getElementById('city').value = 'dubai';
   document.getElementById('districtInput').value = '';
@@ -1391,134 +1009,91 @@ function resetAll() {
   document.getElementById('landValue').value = '';
   document.getElementById('constructionCost').value = '';
   document.getElementById('finishQuality').value = '';
-  
-  document.querySelectorAll('#viewTypeGroup input[type="checkbox"]').forEach(cb => {
-    cb.checked = false;
-    cb.closest('.checkbox-item').classList.remove('checked');
-  });
-  
+  document.querySelectorAll('#viewTypeGroup input[type="checkbox"]').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
   document.getElementById('floorLevel').value = '';
   document.getElementById('streetPosition').value = '';
   document.getElementById('buildingCondition').value = '';
   document.getElementById('furnishedStatus').value = '';
-  
   document.getElementById('gisLat').value = '';
   document.getElementById('gisLng').value = '';
   document.getElementById('gisCoordsRow').style.display = 'none';
   document.getElementById('gisResult').style.display = 'none';
-  
   if (mapInitialized && gisMapInstance) {
-    const defaultLat = 25.2048;
-    const defaultLng = 55.2708;
-    gisMapInstance.setView([defaultLat, defaultLng], 11);
-    if (gisMarker) gisMarker.setLatLng([defaultLat, defaultLng]);
-    if (gisCircleLayer) gisCircleLayer.setLatLng([defaultLat, defaultLng]);
-    document.getElementById('gisLat').value = defaultLat.toFixed(6);
-    document.getElementById('gisLng').value = defaultLng.toFixed(6);
+    const dLat = 25.2048, dLng = 55.2708;
+    gisMapInstance.setView([dLat, dLng], 11);
+    if (gisMarker) gisMarker.setLatLng([dLat, dLng]);
+    if (gisCircleLayer) gisCircleLayer.setLatLng([dLat, dLng]);
+    document.getElementById('gisLat').value = dLat.toFixed(6);
+    document.getElementById('gisLng').value = dLng.toFixed(6);
     document.getElementById('gisCoordsRow').style.display = 'flex';
-    poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
-    poiMarkers = [];
+    poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
   }
-  
   document.getElementById('scrapeStatus').innerHTML = '';
   document.getElementById('scrapedComps').innerHTML = '';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
-  
-  document.querySelectorAll('#featuresGroup input:checked').forEach(cb => {
-    cb.checked = false;
-    cb.closest('.checkbox-item').classList.remove('checked');
-  });
-  
-  scrapedDistrictData = null;
-  gisData = null;
+  document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
+  scrapedDistrictData = null; gisData = null;
   onPropertyTypeChange();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   showToast('All fields cleared');
 }
-
 function saveToHistory(result, propData) {
   try {
-    const history = JSON.parse(localStorage.getItem('aqar_history') || '[]');
-    history.unshift({
-      date: new Date().toISOString(),
-      value: result.finalValue,
-      district: propData.district,
-      type: propData.propType,
-      area: propData.area
-    });
-    localStorage.setItem('aqar_history', JSON.stringify(history.slice(0, 5)));
+    const h = JSON.parse(localStorage.getItem('aqar_history')||'[]');
+    h.unshift({ date: new Date().toISOString(), value: result.finalValue, district: propData.district, type: propData.propType, area: propData.area });
+    localStorage.setItem('aqar_history', JSON.stringify(h.slice(0,5)));
   } catch(e) {}
 }
-
-function showToast(msg, d=3000) {
+function showToast(msg, dur=3000) {
   const existing = document.querySelector('.toast');
   if (existing) existing.remove();
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = msg;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), d);
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), dur);
 }
-
 function onPropertyTypeChange() {
   const type = document.getElementById('propType').value;
-  const isLand = type === 'land', isWarehouse = type === 'warehouse';
-  const isApartment = type === 'apartment', isVilla = type === 'villa', isTownhouse = type === 'townhouse', isOffice = type === 'office', isRetail = type === 'retail';
-  document.getElementById('rowBedrooms').style.display = (isApartment||isVilla||isTownhouse) ? 'flex' : 'none';
-  document.getElementById('rowFeatures').style.display = (!isLand && !isWarehouse) ? 'block' : 'none';
+  const isLand = type === 'land', isWare = type === 'warehouse';
+  const isApt = type === 'apartment', isVilla = type === 'villa', isTown = type === 'townhouse', isOff = type === 'office', isRet = type === 'retail';
+  document.getElementById('rowBedrooms').style.display = (isApt||isVilla||isTown) ? 'flex' : 'none';
+  document.getElementById('rowFeatures').style.display = (!isLand && !isWare) ? 'block' : 'none';
   document.getElementById('rowYearCondition').style.display = isLand ? 'none' : 'flex';
   document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
-  document.getElementById('costSection').style.display = (isLand || isApartment) ? 'none' : 'block';
+  document.getElementById('costSection').style.display = (isLand||isApt) ? 'none' : 'block';
   document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
-    const types = item.dataset.types || '';
+    const types = item.dataset.types||'';
     item.style.display = types.includes(type) ? 'flex' : 'none';
-    if (!types.includes(type)) {
-      const cb = item.querySelector('input');
-      if (cb && cb.checked) {
-        cb.checked = false;
-        item.classList.remove('checked');
-      }
-    }
+    if (!types.includes(type)) { const cb = item.querySelector('input'); if (cb?.checked) { cb.checked = false; item.classList.remove('checked'); } }
   });
-  document.getElementById('fgFinishQuality').style.display = (!isLand && !isWarehouse) ? '' : 'none';
-  document.getElementById('fgViewType').style.display = (isApartment||isVilla||isTownhouse||isOffice) ? '' : 'none';
-  document.getElementById('fgFloorLevel').style.display = (isApartment||isOffice) ? '' : 'none';
-  document.getElementById('fgStreetPosition').style.display = (isVilla||isTownhouse||isOffice||isRetail) ? '' : 'none';
-  document.getElementById('fgBuildingCondition').style.display = (!isLand) ? '' : 'none';
-  document.getElementById('fgFurnishedStatus').style.display = (isApartment||isVilla||isTownhouse||isOffice) ? '' : 'none';
+  document.getElementById('fgFinishQuality').style.display = (!isLand&&!isWare)?'':'none';
+  document.getElementById('fgViewType').style.display = (isApt||isVilla||isTown||isOff)?'':'none';
+  document.getElementById('fgFloorLevel').style.display = (isApt||isOff)?'':'none';
+  document.getElementById('fgStreetPosition').style.display = (isVilla||isTown||isOff||isRet)?'':'none';
+  document.getElementById('fgBuildingCondition').style.display = (!isLand)?'':'none';
+  document.getElementById('fgFurnishedStatus').style.display = (isApt||isVilla||isTown||isOff)?'':'none';
 }
-
-// ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
-  
   document.getElementById('city').value = 'dubai';
   document.getElementById('gisRadius').value = '1000';
-  
   document.querySelectorAll('.checkbox-item').forEach(item => {
     item.addEventListener('click', function(e) {
       e.preventDefault();
       const cb = this.querySelector('input');
       cb.checked = !cb.checked;
       this.classList.toggle('checked', cb.checked);
-      if (this.closest('#viewTypeGroup')) {
-        handleViewTypeChange(cb);
-      }
+      if (this.closest('#viewTypeGroup')) handleViewTypeChange(cb);
     });
   });
-  
   onPropertyTypeChange();
-  document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  
+  document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
   document.addEventListener('click', function(e) {
     const container = document.getElementById('districtAutocomplete');
     const input = document.getElementById('districtInput');
-    if (e.target !== input && !container.contains(e.target)) {
-      container.style.display = 'none';
-    }
+    if (e.target !== input && !container.contains(e.target)) container.style.display = 'none';
   });
-  
   setTimeout(initGISMap, 100);
 });
 </script>
