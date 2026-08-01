@@ -1,5 +1,6 @@
 ﻿const fs = require('fs');
 const path = require('path');
+const LOOKUP_PATH = path.join(process.cwd(), 'data', 'dld-price-lookup.json');
 
 // ===== SIZE CATEGORIES =====
 function getSizeCategory(area, propertyType) {
@@ -24,7 +25,6 @@ exports.handler = async (event) => {
   try {
     const { district, propertyType, area, project } = event.queryStringParameters || {};
 
-    // تحقق من المعاملات المطلوبة
     if (!district || !propertyType || !area) {
       return {
         statusCode: 400,
@@ -33,12 +33,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // تحديد المسار الصحيح للملف
-    const LOOKUP_PATH = path.join(process.cwd(), 'data', 'dld-price-lookup.json');
-
-    // تحقق من وجود الملف
     if (!fs.existsSync(LOOKUP_PATH)) {
-      console.error('❌ File not found:', LOOKUP_PATH);
       return {
         statusCode: 200,
         headers,
@@ -46,7 +41,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // قراءة الملف
     const raw = fs.readFileSync(LOOKUP_PATH, 'utf8');
     const lookup = JSON.parse(raw);
     const tables = lookup.tables;
@@ -55,44 +49,91 @@ exports.handler = async (event) => {
     let match = null;
     let level = null;
 
-    // 1. محاولة المشروع + النوع + الحجم
+    // ===== 1. البحث بالمشروع (إذا وجد) =====
     if (project && project.length > 2) {
+      // project + type + size
       const projSizeKey = `${project}__${propertyType}__${sizeCat}`;
       if (tables.projectSize && tables.projectSize[projSizeKey] && tables.projectSize[projSizeKey].count >= 3) {
         match = tables.projectSize[projSizeKey];
         level = 'project_size';
       }
-    }
-
-    // 2. محاولة المشروع + النوع
-    if (!match && project && project.length > 2) {
-      const projKey = `${project}__${propertyType}`;
-      const minCount = propertyType === 'retail' ? 2 : 5;
-      if (tables.project && tables.project[projKey] && tables.project[projKey].count >= minCount) {
-        match = tables.project[projKey];
-        level = 'project';
+      // project + type
+      if (!match) {
+        const projKey = `${project}__${propertyType}`;
+        const minCount = propertyType === 'retail' ? 2 : 5;
+        if (tables.project && tables.project[projKey] && tables.project[projKey].count >= minCount) {
+          match = tables.project[projKey];
+          level = 'project';
+        }
       }
     }
 
-    // 3. محاولة المنطقة + النوع + الحجم
+    // ===== 2. البحث بالمنطقة (district) =====
     if (!match) {
-      const distSizeKey = `${district}__${propertyType}__${sizeCat}`;
-      if (tables.districtSize && tables.districtSize[distSizeKey] && tables.districtSize[distSizeKey].count >= 5) {
-        match = tables.districtSize[distSizeKey];
-        level = 'district_size';
+      const districtLower = district.toLowerCase().trim();
+      
+      // 2a. البحث في districtSize
+      if (tables.districtSize) {
+        for (const [key, value] of Object.entries(tables.districtSize)) {
+          // المفتاح في الجدول يكون: "المنطقة__نوع__حجم"
+          const parts = key.split('__');
+          if (parts.length >= 3) {
+            const keyDistrict = parts[0].toLowerCase();
+            const keyType = parts[1];
+            const keySize = parts[2];
+            
+            // التحقق: المنطقة تحتوي على النص المطلوب، النوع متطابق، الحجم متطابق
+            if (keyDistrict.includes(districtLower) && 
+                keyType === propertyType && 
+                keySize === sizeCat && 
+                value.count >= 5) {
+              match = value;
+              level = 'district_size';
+              console.log('✅ Found match:', key);
+              break;
+            }
+          }
+        }
       }
     }
 
-    // 4. محاولة المنطقة + النوع
-    if (!match) {
-      const distKey = `${district}__${propertyType}`;
-      if (tables.district && tables.district[distKey] && tables.district[distKey].count >= 5) {
-        match = tables.district[distKey];
-        level = 'district';
+    // 2b. البحث في district (بدون حجم)
+    if (!match && tables.district) {
+      const districtLower = district.toLowerCase().trim();
+      for (const [key, value] of Object.entries(tables.district)) {
+        const parts = key.split('__');
+        if (parts.length >= 2) {
+          const keyDistrict = parts[0].toLowerCase();
+          const keyType = parts[1];
+          
+          if (keyDistrict.includes(districtLower) && 
+              keyType === propertyType && 
+              value.count >= 5) {
+            match = value;
+            level = 'district';
+            console.log('✅ Found match (district):', key);
+            break;
+          }
+        }
       }
     }
 
-    // إذا لم يتم العثور على بيانات
+    // ===== 3. البحث في projectSize (كحل أخير) =====
+    if (!match && tables.projectSize) {
+      const districtLower = district.toLowerCase().trim();
+      for (const [key, value] of Object.entries(tables.projectSize)) {
+        if (key.toLowerCase().includes(districtLower) && 
+            key.includes(propertyType) && 
+            key.includes(sizeCat) && 
+            value.count >= 3) {
+          match = value;
+          level = 'project_size';
+          console.log('✅ Found match (projectSize fallback):', key);
+          break;
+        }
+      }
+    }
+
     if (!match) {
       return {
         statusCode: 200,
@@ -107,7 +148,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // إرجاع النتيجة
     return {
       statusCode: 200,
       headers,
