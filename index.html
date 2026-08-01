@@ -575,7 +575,7 @@
 const UAE_DISTRICTS = {
   dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"]
 };
-const DISTRICT_COORDS = {
+const FALLBACK_COORDS = {
   'dubai marina': { lat: 25.0802, lng: 55.1416 },
   'palm jumeirah': { lat: 25.1181, lng: 55.1425 },
   'downtown dubai': { lat: 25.1972, lng: 55.2741 },
@@ -615,8 +615,48 @@ const DISTRICT_COORDS = {
   'tilal al ghaf': { lat: 25.0800, lng: 55.3500 },
   'al warqa': { lat: 25.2600, lng: 55.4200 }
 };
+let districtCoordsMap = {};
 let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
 let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
+
+// ===== LOAD DISTRICT COORDINATES =====
+async function loadDistrictCoords() {
+  try {
+    const response = await fetch('/data/district-coordinates.json');
+    if (response.ok) {
+      const data = await response.json();
+      districtCoordsMap = data;
+      console.log(`✅ Loaded ${Object.keys(districtCoordsMap).length} district coordinates`);
+      return;
+    }
+  } catch (e) {
+    console.warn('⚠️ Could not load district coordinates:', e.message);
+  }
+  districtCoordsMap = FALLBACK_COORDS;
+  console.log(`📋 Using ${Object.keys(districtCoordsMap).length} fallback coordinates`);
+}
+
+function getDistrictCoords(district) {
+  if (!district) return null;
+  // Try exact match
+  if (districtCoordsMap[district]) {
+    return districtCoordsMap[district];
+  }
+  // Try case-insensitive
+  const lower = district.toLowerCase();
+  for (const [key, value] of Object.entries(districtCoordsMap)) {
+    if (key.toLowerCase() === lower) {
+      return value;
+    }
+  }
+  // Try partial match
+  for (const [key, value] of Object.entries(districtCoordsMap)) {
+    if (key.toLowerCase().includes(lower) || lower.includes(key.toLowerCase())) {
+      return value;
+    }
+  }
+  return null;
+}
 
 // ===== LOAD DISTRICTS FROM DLD DATA =====
 async function loadDistrictsFromDLD() {
@@ -641,7 +681,6 @@ async function loadDistrictsFromDLD() {
   } catch (e) {
     console.warn('⚠️ Could not load districts from DLD:', e.message);
   }
-  // Fallback
   dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
   countEl.textContent = `📋 Using ${dubaiDistrictsList.length} districts (fallback)`;
 }
@@ -660,12 +699,6 @@ function selectDistrict(d) {
   document.getElementById('districtAutocomplete').style.display = 'none';
   const c = getDistrictCoords(d);
   if (c) { updateMapMarker(c.lat, c.lng); if (gisMapInstance) gisMapInstance.setView([c.lat, c.lng], 14); debouncedFetchGISData(); }
-}
-function getDistrictCoords(d) {
-  const k = d.toLowerCase();
-  if (DISTRICT_COORDS[k]) return DISTRICT_COORDS[k];
-  for (const [a,b] of Object.entries(DISTRICT_COORDS)) if (k.includes(a) || a.includes(k)) return b;
-  return null;
 }
 function handleViewTypeChange(cb) {
   const g = document.getElementById('viewTypeGroup'), all = g.querySelectorAll('input[type="checkbox"]'), excl = ['unknown','internal'], norm = ['sea','partial-sea','city','garden','park','street'];
@@ -1105,6 +1138,7 @@ function onPropertyTypeChange() {
   document.getElementById('fgFurnishedStatus').style.display = (isApt||isVilla||isTown||isOff)?'':'none';
 }
 document.addEventListener('DOMContentLoaded', function() {
+  loadDistrictCoords();
   loadDistrictsFromDLD();
   document.getElementById('city').value = 'dubai';
   document.getElementById('gisRadius').value = '1000';
