@@ -238,14 +238,19 @@ function getTimeAdjustedPrice(saleDate, pricePerSqm, monthlyGrowthRate, monthsDi
 // ===== ADAPTIVE SEARCH =====
 function adaptiveSearch(district, propertyType, sizeCat, transactions, targetDate) {
   const windows = [30, 60, 90, 180, 365, 730, Infinity];
-  const districtUpper = district.toUpperCase();
+  const districtLower = district.toLowerCase().trim();
   
-  // Pre-filter by district and type
-  const relevant = transactions.filter(t => 
-    t.district.toUpperCase() === districtUpper &&
-    t.propertyType === propertyType &&
-    getSizeCategory(t.area, t.propertyType) === sizeCat
-  );
+  // Pre-filter by district (partial match) and type
+  const relevant = transactions.filter(t => {
+    const tDistrict = (t.district || '').toLowerCase();
+    // Partial match: district name contains the search term OR vice versa
+    const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
+    const typeMatch = t.propertyType === propertyType;
+    const sizeMatch = getSizeCategory(t.area, t.propertyType) === sizeCat;
+    return districtMatch && typeMatch && sizeMatch;
+  });
+  
+  console.log(`🔍 Found ${relevant.length} relevant transactions for ${district}`);
   
   if (relevant.length === 0) return null;
   
