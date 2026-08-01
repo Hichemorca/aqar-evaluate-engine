@@ -1,4 +1,7 @@
 ﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration (with enriched data)
+// ✅ Updated with Calibration Results (2026-08-01)
+// Best parameters: mean, areaSmall=1.04, areaLarge=0.96, conditionExcellent=1.08, conditionFair=0.82, ageDepreciation=0.004
+
 const fs = require('fs');
 const path = require('path');
 
@@ -10,6 +13,30 @@ const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
 const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
+
+// ===== CALIBRATION PARAMETERS (from calibration-lab) =====
+const CALIBRATION = {
+  priceMethod: 'mean',           // mean / median / weightedMedian
+  areaSmall: 1.04,               // <80 sqm
+  areaLarge: 0.96,               // >200 sqm
+  conditionExcellent: 1.08,      // +8%
+  conditionFair: 0.82,           // -18%
+  ageDepreciation: 0.004,        // 0.4% per year
+  weights: {
+    salesComparison: 0.40,
+    income: 0.35,
+    cost: 0.15,
+    dcf: 0.10
+  }
+};
+
+console.log(`📊 Using Calibration Parameters:`);
+console.log(`   Price Method: ${CALIBRATION.priceMethod}`);
+console.log(`   Area Small (<80): ${CALIBRATION.areaSmall}`);
+console.log(`   Area Large (>200): ${CALIBRATION.areaLarge}`);
+console.log(`   Condition Excellent: ${CALIBRATION.conditionExcellent}`);
+console.log(`   Condition Fair: ${CALIBRATION.conditionFair}`);
+console.log(`   Age Depreciation: ${CALIBRATION.ageDepreciation}\n`);
 
 // ===== LOAD EXTERNAL DATA LAYERS =====
 let consultancyData = {};
@@ -516,12 +543,13 @@ async function main() {
   
   const marketOutput = { 
     metadata: { 
-      version: '22.0.0', 
+      version: '22.1.0', 
       lastUpdated: new Date().toISOString(), 
       totalRecords: allResults.length, 
-      methodology: 'v22 Multi-layer weighting + GIS Integration + View Type Multiplier', 
+      methodology: 'v22.1 Calibrated with Mean + optimized multipliers', 
       dataSource: 'DLD + Consultancy + Government + GIS',
-      dataType: usingEnriched ? 'enriched' : 'basic'
+      dataType: usingEnriched ? 'enriched' : 'basic',
+      calibration: CALIBRATION
     }, 
     metrics: marketMetrics, 
     records: allResults 
@@ -608,12 +636,13 @@ async function main() {
   
   const evalOutput = { 
     metadata: { 
-      version: '22.0.0', 
+      version: '22.1.0', 
       lastUpdated: new Date().toISOString(), 
       totalRecords: evalResults.length, 
-      methodology: 'v22 Multi-layer weighting + GIS Integration + View Type Multiplier', 
+      methodology: 'v22.1 Calibrated with Mean + optimized multipliers', 
       dataSource: 'DLD + Consultancy + Government + GIS',
-      dataType: usingEnriched ? 'enriched' : 'basic'
+      dataType: usingEnriched ? 'enriched' : 'basic',
+      calibration: CALIBRATION
     }, 
     metrics: evalMetrics, 
     records: evalResults 
