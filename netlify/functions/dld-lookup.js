@@ -231,7 +231,6 @@ function computeMonthlyGrowthRate(transactions) {
 
 // ===== TIME-ADJUSTED PRICE =====
 function getTimeAdjustedPrice(saleDate, pricePerSqm, monthlyGrowthRate, monthsDiff) {
-  // Adjusted price = price * (1 + growthRate)^months
   return pricePerSqm * Math.pow(1 + monthlyGrowthRate, monthsDiff);
 }
 
@@ -239,18 +238,43 @@ function getTimeAdjustedPrice(saleDate, pricePerSqm, monthlyGrowthRate, monthsDi
 function adaptiveSearch(district, propertyType, sizeCat, transactions, targetDate) {
   const windows = [30, 60, 90, 180, 365, 730, Infinity];
   const districtLower = district.toLowerCase().trim();
+  const sizeCatLower = sizeCat.toLowerCase().trim();
   
-  // Pre-filter by district (partial match) and type
-  const relevant = transactions.filter(t => {
+  // ===== LEVEL 1: District + Type + Size =====
+  let relevant = transactions.filter(t => {
     const tDistrict = (t.district || '').toLowerCase();
-    // Partial match: district name contains the search term OR vice versa
     const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
     const typeMatch = t.propertyType === propertyType;
     const sizeMatch = getSizeCategory(t.area, t.propertyType) === sizeCat;
     return districtMatch && typeMatch && sizeMatch;
   });
   
-  console.log(`🔍 Found ${relevant.length} relevant transactions for ${district}`);
+  let level = 'district_size';
+  
+  // ===== LEVEL 2: District + Type only (no size) =====
+  if (relevant.length < 5) {
+    console.log(`⚠️ Not enough data with size filter (${relevant.length}), trying without size...`);
+    relevant = transactions.filter(t => {
+      const tDistrict = (t.district || '').toLowerCase();
+      const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
+      const typeMatch = t.propertyType === propertyType;
+      return districtMatch && typeMatch;
+    });
+    level = 'district_type';
+  }
+  
+  // ===== LEVEL 3: District only (any type) =====
+  if (relevant.length < 5) {
+    console.log(`⚠️ Not enough data with type filter (${relevant.length}), trying district only...`);
+    relevant = transactions.filter(t => {
+      const tDistrict = (t.district || '').toLowerCase();
+      const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
+      return districtMatch;
+    });
+    level = 'district_only';
+  }
+  
+  console.log(`🔍 Found ${relevant.length} relevant transactions for ${district} (level: ${level})`);
   
   if (relevant.length === 0) return null;
   
@@ -297,7 +321,7 @@ function adaptiveSearch(district, propertyType, sizeCat, transactions, targetDat
         confidence: confidence,
         monthlyGrowthRate: monthlyGrowthRate,
         source: 'dld',
-        level: windowDays <= 90 ? 'district_size' : 'district_size_adjusted'
+        level: level
       };
     }
   }
