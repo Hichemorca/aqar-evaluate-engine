@@ -2,7 +2,6 @@
 const path = require('path');
 const LOOKUP_PATH = path.join(process.cwd(), 'data', 'dld-price-lookup.json');
 
-// ===== SIZE CATEGORIES =====
 function getSizeCategory(area, propertyType) {
   if (propertyType === 'land') {
     if (area <= 200) return 'land_tiny';
@@ -48,87 +47,72 @@ exports.handler = async (event) => {
     const sizeCat = getSizeCategory(parseFloat(area), propertyType);
     let match = null;
     let level = null;
+    let matchedKey = null;
 
-    // ===== 1. البحث بالمشروع (إذا وجد) =====
-    if (project && project.length > 2) {
-      // project + type + size
-      const projSizeKey = `${project}__${propertyType}__${sizeCat}`;
-      if (tables.projectSize && tables.projectSize[projSizeKey] && tables.projectSize[projSizeKey].count >= 3) {
-        match = tables.projectSize[projSizeKey];
-        level = 'project_size';
-      }
-      // project + type
-      if (!match) {
-        const projKey = `${project}__${propertyType}`;
-        const minCount = propertyType === 'retail' ? 2 : 5;
-        if (tables.project && tables.project[projKey] && tables.project[projKey].count >= minCount) {
-          match = tables.project[projKey];
-          level = 'project';
+    const districtLower = district.toLowerCase().trim();
+
+    // ===== 1. البحث في districtSize (الأولوية) =====
+    if (tables.districtSize) {
+      const keys = Object.keys(tables.districtSize);
+      for (const key of keys) {
+        const keyLower = key.toLowerCase();
+        // التحقق: المفتاح يحتوي على اسم المنطقة، النوع، والحجم
+        if (keyLower.includes(districtLower) && 
+            key.includes(propertyType) && 
+            key.includes(sizeCat) && 
+            tables.districtSize[key].count >= 5) {
+          match = tables.districtSize[key];
+          level = 'district_size';
+          matchedKey = key;
+          break;
         }
       }
     }
 
-    // ===== 2. البحث بالمنطقة (district) =====
-    if (!match) {
-      const districtLower = district.toLowerCase().trim();
-      
-      // 2a. البحث في districtSize
-      if (tables.districtSize) {
-        for (const [key, value] of Object.entries(tables.districtSize)) {
-          // المفتاح في الجدول يكون: "المنطقة__نوع__حجم"
-          const parts = key.split('__');
-          if (parts.length >= 3) {
-            const keyDistrict = parts[0].toLowerCase();
-            const keyType = parts[1];
-            const keySize = parts[2];
-            
-            // التحقق: المنطقة تحتوي على النص المطلوب، النوع متطابق، الحجم متطابق
-            if (keyDistrict.includes(districtLower) && 
-                keyType === propertyType && 
-                keySize === sizeCat && 
-                value.count >= 5) {
-              match = value;
-              level = 'district_size';
-              console.log('✅ Found match:', key);
-              break;
-            }
-          }
-        }
-      }
-    }
-
-    // 2b. البحث في district (بدون حجم)
+    // ===== 2. البحث في district (بدون حجم) =====
     if (!match && tables.district) {
-      const districtLower = district.toLowerCase().trim();
-      for (const [key, value] of Object.entries(tables.district)) {
-        const parts = key.split('__');
-        if (parts.length >= 2) {
-          const keyDistrict = parts[0].toLowerCase();
-          const keyType = parts[1];
-          
-          if (keyDistrict.includes(districtLower) && 
-              keyType === propertyType && 
-              value.count >= 5) {
-            match = value;
-            level = 'district';
-            console.log('✅ Found match (district):', key);
-            break;
-          }
+      const keys = Object.keys(tables.district);
+      for (const key of keys) {
+        const keyLower = key.toLowerCase();
+        if (keyLower.includes(districtLower) && 
+            key.includes(propertyType) && 
+            tables.district[key].count >= 5) {
+          match = tables.district[key];
+          level = 'district';
+          matchedKey = key;
+          break;
         }
       }
     }
 
     // ===== 3. البحث في projectSize (كحل أخير) =====
     if (!match && tables.projectSize) {
-      const districtLower = district.toLowerCase().trim();
-      for (const [key, value] of Object.entries(tables.projectSize)) {
-        if (key.toLowerCase().includes(districtLower) && 
+      const keys = Object.keys(tables.projectSize);
+      for (const key of keys) {
+        const keyLower = key.toLowerCase();
+        if (keyLower.includes(districtLower) && 
             key.includes(propertyType) && 
             key.includes(sizeCat) && 
-            value.count >= 3) {
-          match = value;
+            tables.projectSize[key].count >= 3) {
+          match = tables.projectSize[key];
           level = 'project_size';
-          console.log('✅ Found match (projectSize fallback):', key);
+          matchedKey = key;
+          break;
+        }
+      }
+    }
+
+    // ===== 4. البحث في project (كحل أخير) =====
+    if (!match && tables.project) {
+      const keys = Object.keys(tables.project);
+      for (const key of keys) {
+        const keyLower = key.toLowerCase();
+        if (keyLower.includes(districtLower) && 
+            key.includes(propertyType) && 
+            tables.project[key].count >= 3) {
+          match = tables.project[key];
+          level = 'project';
+          matchedKey = key;
           break;
         }
       }
@@ -158,6 +142,7 @@ exports.handler = async (event) => {
         level: level,
         source: 'dld',
         weight: 1.0,
+        matchedKey: matchedKey,
         generatedAt: lookup.generatedAt
       })
     };
