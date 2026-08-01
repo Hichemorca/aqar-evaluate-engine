@@ -969,58 +969,91 @@ function getFacilityIcon(key) {
 
 // ===== SCRAPING =====
 async function scrapeRealData() {
-  const city = 'dubai';
-  const district = document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value;
-  const propType = document.getElementById('propType').value;
+  const city = document.getElementById('city').value, district = document.getElementById('districtInput').value.trim(), propType = document.getElementById('propType').value;
+  const area = parseFloat(document.getElementById('area').value) || 0;
+  const project = document.getElementById('project')?.value || '';
   const btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
-  if (!district) { status.innerHTML = '<span class="status-badge error">⚠️ Please select a district</span>'; showToast('Please select a district from the list'); return; }
-  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...';
-  status.innerHTML = '<span style="color:var(--muted)">Fetching comparable sales from DLD + live listings...</span>';
+  
+  if (!city || !district) { 
+    status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; 
+    showToast('Please select a city and enter a district name'); 
+    return; 
+  }
+  
+  if (area < 10) {
+    status.innerHTML = '<span class="status-badge error">⚠️ Please enter a valid area</span>';
+    showToast('Please enter a valid area');
+    return;
+  }
+  
+  btn.disabled = true; 
+  btn.innerHTML = '<span class="loading"></span> Analyzing market...';
+  status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data first...</span>';
   
   const lat = document.getElementById('gisLat').value.trim();
   const lng = document.getElementById('gisLng').value.trim();
   
+  // ===== STEP 1: Try DLD Lookup first =====
   try {
-    const body = { city, district, propertyType: propType || 'apartment' };
-    if (lat && lng) {
-      body.lat = parseFloat(lat);
-      body.lng = parseFloat(lng);
-      body.radius = 1000;
-    }
-    
-    const response = await fetch('/.netlify/functions/scrape', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+    const lookupParams = new URLSearchParams({
+      district: district,
+      propertyType: propType || 'apartment',
+      area: area
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    scrapedDistrictData = data;
-    document.getElementById('avgPriceSqm').value = data.avgPricePerSqm || 0;
-    document.getElementById('recentSalesCount').value = data.count || 0;
-    document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    
-    let compsHTML = '';
-    if (data.sales && data.sales.length > 0) {
-      compsHTML = '<table><thead><tr><th>Price</th><th>Area</th><th>AED/sqm</th><th>Date</th></tr></thead><tbody>';
-      data.sales.forEach(s => {
-        compsHTML += `<tr><td>${Number(s.price).toLocaleString()} AED</td><td>${s.sqm} sqm</td><td>${s.pricePerSqm.toLocaleString()}</td><td>${s.date}</td></tr>`;
-      });
-      compsHTML += '</tbody></table>';
+    if (project && project.length > 2) {
+      lookupParams.append('project', project);
     }
-    document.getElementById('scrapedComps').innerHTML = compsHTML;
+    if (lat && lng) {
+      lookupParams.append('lat', lat);
+      lookupParams.append('lng', lng);
+    }
     
-    const srcLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
-    status.innerHTML = `<span class="status-badge success">✅ ${data.count} comparable sales • ${srcLabel}</span>`;
-    showToast(`Found ${data.count} comparable sales in ${district}`);
-  } catch (err) {
-    status.innerHTML = '<span class="status-badge warning">⚠️ Live data unavailable — using DLD market estimates</span>';
-    const fb = getFallbackPrice(city, district);
-    document.getElementById('avgPriceSqm').value = fb;
-    document.getElementById('recentSalesCount').value = 5;
-    showToast('Using estimated market data for this area');
+    const lookupResponse = await fetch(`/.netlify/functions/dld-lookup?${lookupParams.toString()}`);
+    const lookupData = await lookupResponse.json();
+    
+    if (lookupData.found === true) {
+      // ✅ DLD data found - use it directly
+      document.getElementById('avgPriceSqm').value = lookupData.avgPricePerSqm;
+      document.getElementById('recentSalesCount').value = lookupData.count;
+      document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      
+      // Store DLD data for valuation
+      scrapedDistrictData = {
+        avgPricePerSqm: lookupData.avgPricePerSqm,
+        count: lookupData.count,
+        dataSource: 'dld',
+        level: lookupData.level,
+        source: 'dld'
+      };
+      
+      const levelNames = {
+        'project_size': 'المشروع + النوع + الحجم',
+        'project': 'المشروع + النوع',
+        'district_size': 'المنطقة + النوع + الحجم',
+        'district': 'المنطقة + النوع'
+      };
+      
+      status.innerHTML = `<span class="status-badge success">✅ بيانات DLD حقيقية (${lookupData.count} صفقة مقارنة، مستوى: ${levelNames[lookupData.level] || lookupData.level})</span>`;
+      showToast(`✅ Found ${lookupData.count} DLD comparable sales in ${district}`);
+      
+      btn.disabled = false;
+      btn.innerHTML = '🔄 Re-Scrape';
+      return;
+    }
+  } catch (lookupErr) {
+    console.log('⚠️ DLD Lookup error:', lookupErr.message);
+    status.innerHTML = '<span style="color:var(--muted)">⚠️ DLD lookup failed, trying live scrape...</span>';
   }
-  btn.disabled = false; btn.innerHTML = '🔄 Re-Scrape';
+  
+  // ===== STEP 2: No DLD data - Show clear message and stop =====
+  status.innerHTML = `<span class="status-badge warning">⚠️ لا توجد بيانات DLD كافية لهذا العقار حاليًا — لا يمكن حساب تقييم موثوق</span><br>
+                     <span style="font-size:10px;color:var(--muted);">⚠️ No sufficient DLD data for this property — reliable valuation not possible</span>`;
+  document.getElementById('avgPriceSqm').value = '';
+  document.getElementById('recentSalesCount').value = '';
+  scrapedDistrictData = null;
+  
+  btn.disabled = false;
+  btn.innerHTML = '🔍 Scrape Live Market Data';
 }
 
 function getFallbackPrice(city, district) {
@@ -1063,25 +1096,6 @@ function calculateViewMultiplier(viewTypes) {
   return Math.max(0.8, Math.min(1.25, multiplier));
 }
 
-// ===== COST APPROACH =====
-function costApproach(data) {
-  // 🚫 Cost Approach is NOT available for Apartment or Land
-  if (data.propType === 'apartment' || data.propType === 'land') {
-    return null;
-  }
-  
-  const buildCostPerSqm = data.constructionCost || 3000;
-  const buildCost = buildCostPerSqm * data.area;
-  let landValue = data.landValue || (data.avgPriceSqm ? Math.round(data.avgPriceSqm * data.area * 0.30) : Math.round(buildCost * 0.35));
-  const totalCost = landValue + buildCost;
-  const age = Math.min(50, Math.max(0, 2026 - data.yearBuilt));
-  const depreciation = Math.min(0.60, age * 0.015);
-  const conditionFactors = { excellent: 0.95, good: 1.00, fair: 1.10, 'needs-renovation': 1.25 };
-  const conditionAdjustment = conditionFactors[data.condition] || 1.00;
-  const depreciatedValue = Math.round(totalCost * (1 - depreciation) * conditionAdjustment);
-  return { method: 'Cost Approach (Replacement)', value: depreciatedValue, weight: 0.15, confidence: data.constructionCost > 0 ? 'medium' : 'low', details: `Land: ${landValue.toLocaleString()} + Build: ${buildCost.toLocaleString()} AED. Depreciation: ${(depreciation*100).toFixed(1)}%.`, perSqm: Math.round(depreciatedValue / data.area) };
-}
-
 // ===== VALUATION =====
 function collectPropertyData() {
   const features = [];
@@ -1089,7 +1103,7 @@ function collectPropertyData() {
   const isLand = document.getElementById('propType').value === 'land';
   
   return {
-    city: 'dubai',
+    city: document.getElementById('city').value,
     district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
     propType: document.getElementById('propType').value,
     area: Math.max(10, parseFloat(document.getElementById('area').value) || 0),
@@ -1115,8 +1129,13 @@ function collectPropertyData() {
 }
 
 function salesComparisonApproach(data) {
-  if (!data.avgPriceSqm && !data.scrapedData) return null;
-  let avgPrice = data.avgPriceSqm || (data.scrapedData?.avgPricePerSqm) || getFallbackPrice('dubai', data.district);
+  // Only use real DLD data - no fallback
+  if (!data.avgPriceSqm && !data.scrapedData?.avgPricePerSqm) {
+    return null;
+  }
+  let avgPrice = data.avgPriceSqm || data.scrapedData?.avgPricePerSqm;
+  if (!avgPrice || avgPrice <= 0) return null;
+  
   const maxPricePerSqm = 25000;
   if (avgPrice > maxPricePerSqm) avgPrice = maxPricePerSqm;
   let value = avgPrice * data.area;
@@ -1125,10 +1144,10 @@ function salesComparisonApproach(data) {
     value *= 0.80;
   }
   
-  const conditionFactors = { excellent: 1.10, good: 1.00, fair: 0.90, 'needs-renovation': 0.75 };
+  const conditionFactors = { excellent: 1.08, good: 1.00, fair: 0.82, 'needs-renovation': 0.75 };
   value *= conditionFactors[data.condition] || 1.00;
   const age = 2026 - data.yearBuilt;
-  value *= Math.max(0.80, 1 - (age * 0.005));
+  value *= Math.max(0.80, 1 - (age * 0.004));
   value += data.features.length * (data.area * 50);
   const finishFactors = { luxury: 1.15, good: 1.05, normal: 1.00, basic: 0.92, poor: 0.80 };
   if (data.finishQuality) value *= finishFactors[data.finishQuality] || 1.00;
@@ -1161,7 +1180,7 @@ function salesComparisonApproach(data) {
   details += ` Condition: ${data.condition}, Age: ${age}y.`;
   if (gisImpactPercent > 0) details += ` GIS location premium: +${gisImpactPercent}% (${data.gisData?.count || 0} nearby facilities).`;
   
-  return { method: 'Sales Comparison Approach', value, weight: 0.50, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
+  return { method: 'Sales Comparison Approach', value, weight: 0.40, confidence: comparableCount > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
 }
 
 function incomeCapitalizationApproach(data) {
@@ -1174,6 +1193,21 @@ function incomeCapitalizationApproach(data) {
   const capRate = data.scrapedData?.capRate ? data.scrapedData.capRate / 100 : 0.07;
   const value = Math.round(noi / capRate);
   return { method: 'Income Capitalization Approach', value, weight: 0.35, confidence: 'high', details: `NOI: ${Math.round(noi).toLocaleString()} AED / Cap Rate: ${(capRate*100).toFixed(1)}%.`, perSqm: Math.round(value / data.area), rentalYield: Math.round((data.annualRent / value) * 1000) / 10 };
+}
+
+function costApproach(data) {
+  if (data.propType === 'apartment' || data.propType === 'land') return null;
+  
+  const buildCostPerSqm = data.constructionCost || 3000;
+  const buildCost = buildCostPerSqm * data.area;
+  let landValue = data.landValue || (data.avgPriceSqm ? Math.round(data.avgPriceSqm * data.area * 0.30) : Math.round(buildCost * 0.35));
+  const totalCost = landValue + buildCost;
+  const age = Math.min(50, Math.max(0, 2026 - data.yearBuilt));
+  const depreciation = Math.min(0.60, age * 0.015);
+  const conditionFactors = { excellent: 0.95, good: 1.00, fair: 1.10, 'needs-renovation': 1.25 };
+  const conditionAdjustment = conditionFactors[data.condition] || 1.00;
+  const depreciatedValue = Math.round(totalCost * (1 - depreciation) * conditionAdjustment);
+  return { method: 'Cost Approach (Replacement)', value: depreciatedValue, weight: 0.15, confidence: data.constructionCost > 0 ? 'medium' : 'low', details: `Land: ${landValue.toLocaleString()} + Build: ${buildCost.toLocaleString()} AED. Depreciation: ${(depreciation*100).toFixed(1)}%.`, perSqm: Math.round(depreciatedValue / data.area) };
 }
 
 function dcfApproach(data) {
@@ -1193,7 +1227,7 @@ function dcfApproach(data) {
     if (y === 10) totalNPV += (runningValue * (1 - exitCost)) / Math.pow(1 + discountRate, 10);
   }
   const dcfValue = totalNPV > 0 ? Math.round(totalNPV) : Math.round(currentValue * 0.85);
-  return { method: 'DCF Analysis (10-Year)', value: dcfValue, weight: 0.15, confidence: 'medium', details: '10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr.', perSqm: Math.round(dcfValue / data.area) };
+  return { method: 'DCF Analysis (10-Year)', value: dcfValue, weight: 0.10, confidence: 'medium', details: '10-year projection. Rent growth: 2%/yr. Value growth: 3%/yr.', perSqm: Math.round(dcfValue / data.area) };
 }
 
 function calculateWeightedValue(valuations, propData) {
@@ -1318,7 +1352,6 @@ function runValuation() {
     const incomeVal = incomeCapitalizationApproach(propData);
     if (incomeVal) valuations.push(incomeVal);
     
-    // Cost Approach: ONLY for non-apartment, non-land properties
     const costVal = costApproach(propData);
     if (costVal) valuations.push(costVal);
     

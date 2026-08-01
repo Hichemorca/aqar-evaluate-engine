@@ -1,7 +1,4 @@
 ﻿// AQAR Auto-Evaluate — v22: Multi-Layer Weighting + GIS Integration (with enriched data)
-// ✅ Updated with Calibration Results (2026-08-01)
-// Best parameters: mean, areaSmall=1.04, areaLarge=0.96, conditionExcellent=1.08, conditionFair=0.82, ageDepreciation=0.004
-
 const fs = require('fs');
 const path = require('path');
 
@@ -368,6 +365,55 @@ function computeMedians(transactions, groupFn) {
   return medians;
 }
 
+// ===== BUILD LIVE LOOKUP TABLE =====
+function buildLiveLookupTable(transactions) {
+  function simpleMedian(items) {
+    const now = new Date();
+    const withWeights = items.map(t => {
+      const saleDate = new Date(t.saleDate);
+      const ageDays = isNaN(saleDate.getTime()) ? 90 : (now - saleDate) / 86400000;
+      return { price: t.pricePerSqm, weight: Math.max(0.15, 1 - ageDays / 180) };
+    }).sort((a, b) => a.price - b.price);
+    const totalWeight = withWeights.reduce((s, w) => s + w.weight, 0);
+    const targetWeight = totalWeight / 2;
+    let cumWeight = 0;
+    for (const w of withWeights) {
+      cumWeight += w.weight;
+      if (cumWeight >= targetWeight) return w.price;
+    }
+    return withWeights[withWeights.length - 1].price;
+  }
+
+  function groupAndMedian(groupFn) {
+    const groups = {};
+    transactions.forEach(t => {
+      const key = groupFn(t);
+      if (!key) return;
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(t);
+    });
+    const result = {};
+    Object.keys(groups).forEach(key => {
+      if (groups[key].length < 2) return;
+      result[key] = { medianPricePerSqm: Math.round(simpleMedian(groups[key])), count: groups[key].length };
+    });
+    return result;
+  }
+
+  return {
+    projectSize: groupAndMedian(t => {
+      if (!t.project || t.project.length < 2) return null;
+      return `${t.project}__${t.propertyType}__${getSizeCategory(t.area, t.propertyType)}`;
+    }),
+    project: groupAndMedian(t => {
+      if (!t.project || t.project.length < 2) return null;
+      return `${t.project}__${t.propertyType}`;
+    }),
+    districtSize: groupAndMedian(t => `${t.district}__${t.propertyType}__${getSizeCategory(t.area, t.propertyType)}`),
+    district: groupAndMedian(t => `${t.district}__${t.propertyType}`)
+  };
+}
+
 // ===== EVALUATE =====
 async function evaluateProperty(property, projectSizeStats, projectStats, districtSizeStats, districtStats) {
   const sizeCat = getSizeCategory(property.area, property.propertyType);
@@ -478,6 +524,17 @@ async function main() {
   const districtStats = computeMedians(cleaned, t => `${t.district}__${t.propertyType}`);
 
   console.log(`📊 Groups: ${Object.keys(projectSizeStats).length} proj+size, ${Object.keys(projectStats).length} project, ${Object.keys(districtSizeStats).length} dist+size, ${Object.keys(districtStats).length} district`);
+
+  // ===== BUILD LIVE LOOKUP TABLE =====
+  const liveLookup = buildLiveLookupTable(cleaned);
+  const lookupOutput = {
+    generatedAt: new Date().toISOString(),
+    source: 'dld-transactions.csv',
+    totalTransactionsUsed: cleaned.length,
+    tables: liveLookup
+  };
+  fs.writeFileSync(path.join(DATA_DIR, 'dld-price-lookup.json'), JSON.stringify(lookupOutput, null, 2));
+  console.log(`✅ Saved live lookup table: ${Object.keys(liveLookup.projectSize).length} project+size, ${Object.keys(liveLookup.district).length} district groups`);
 
   // ===== FULL MARKET ANALYSIS =====
   console.log('\n🔍 Market Analysis (ALL data)...');
