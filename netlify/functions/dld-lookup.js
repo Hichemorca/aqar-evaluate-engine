@@ -32,11 +32,36 @@ exports.handler = async (event) => {
       };
     }
 
-    // ===== LOOKUP FILE IN SAME DIRECTORY =====
-    const LOOKUP_PATH = path.join(__dirname, 'dld-price-lookup.json');
-    
-    if (!fs.existsSync(LOOKUP_PATH)) {
-      console.error('❌ Lookup file not found at:', LOOKUP_PATH);
+    // ===== TRY MULTIPLE PATHS =====
+    let lookupContent = null;
+    const possiblePaths = [
+      // Netlify paths
+      path.join('/var/task', 'data', 'dld-price-lookup.json'),
+      path.join('/var/task', 'netlify', 'functions', 'dld-price-lookup.json'),
+      path.join(process.cwd(), 'data', 'dld-price-lookup.json'),
+      path.join(process.cwd(), 'netlify', 'functions', 'dld-price-lookup.json'),
+      path.join(__dirname, 'dld-price-lookup.json'),
+      path.join(__dirname, '..', '..', 'data', 'dld-price-lookup.json'),
+      // Relative paths
+      'data/dld-price-lookup.json',
+      'netlify/functions/dld-price-lookup.json'
+    ];
+
+    console.log('🔍 Looking for lookup file...');
+    for (const p of possiblePaths) {
+      try {
+        if (fs.existsSync(p)) {
+          lookupContent = fs.readFileSync(p, 'utf8');
+          console.log('✅ Found lookup file at:', p);
+          break;
+        }
+      } catch (e) {
+        // Continue to next path
+      }
+    }
+
+    if (!lookupContent) {
+      console.error('❌ Lookup file not found. Tried paths:', possiblePaths);
       return {
         statusCode: 200,
         headers,
@@ -44,8 +69,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const raw = fs.readFileSync(LOOKUP_PATH, 'utf8');
-    const lookup = JSON.parse(raw);
+    const lookup = JSON.parse(lookupContent);
     const tables = lookup.tables;
 
     const sizeCat = getSizeCategory(parseFloat(area), propertyType);
