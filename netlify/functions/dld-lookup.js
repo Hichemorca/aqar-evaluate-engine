@@ -32,28 +32,11 @@ exports.handler = async (event) => {
       };
     }
 
-    // ===== TRY MULTIPLE PATHS =====
-    let lookupContent = null;
-    const possiblePaths = [
-      path.join(process.cwd(), 'data', 'dld-price-lookup.json'),
-      path.join(__dirname, '..', '..', 'data', 'dld-price-lookup.json'),
-      path.join('/var/task', 'data', 'dld-price-lookup.json'),  // Netlify path
-      path.join(__dirname, 'data', 'dld-price-lookup.json'),
-      'data/dld-price-lookup.json'
-    ];
-
-    for (const p of possiblePaths) {
-      try {
-        if (fs.existsSync(p)) {
-          lookupContent = fs.readFileSync(p, 'utf8');
-          console.log('✅ Found lookup file at:', p);
-          break;
-        }
-      } catch (e) {}
-    }
-
-    if (!lookupContent) {
-      console.error('❌ Lookup file not found. Tried paths:', possiblePaths);
+    // ===== LOOKUP FILE IN SAME DIRECTORY =====
+    const LOOKUP_PATH = path.join(__dirname, 'dld-price-lookup.json');
+    
+    if (!fs.existsSync(LOOKUP_PATH)) {
+      console.error('❌ Lookup file not found at:', LOOKUP_PATH);
       return {
         statusCode: 200,
         headers,
@@ -61,7 +44,8 @@ exports.handler = async (event) => {
       };
     }
 
-    const lookup = JSON.parse(lookupContent);
+    const raw = fs.readFileSync(LOOKUP_PATH, 'utf8');
+    const lookup = JSON.parse(raw);
     const tables = lookup.tables;
 
     const sizeCat = getSizeCategory(parseFloat(area), propertyType);
@@ -104,39 +88,6 @@ exports.handler = async (event) => {
       }
     }
 
-    // ===== 3. Search in projectSize =====
-    if (!match && tables.projectSize) {
-      const keys = Object.keys(tables.projectSize);
-      for (const key of keys) {
-        const keyLower = key.toLowerCase();
-        if (keyLower.includes(districtLower) && 
-            key.includes(propertyType) && 
-            key.includes(sizeCat) && 
-            tables.projectSize[key].count >= 3) {
-          match = tables.projectSize[key];
-          level = 'project_size';
-          matchedKey = key;
-          break;
-        }
-      }
-    }
-
-    // ===== 4. Search in project =====
-    if (!match && tables.project) {
-      const keys = Object.keys(tables.project);
-      for (const key of keys) {
-        const keyLower = key.toLowerCase();
-        if (keyLower.includes(districtLower) && 
-            key.includes(propertyType) && 
-            tables.project[key].count >= 3) {
-          match = tables.project[key];
-          level = 'project';
-          matchedKey = key;
-          break;
-        }
-      }
-    }
-
     if (!match) {
       return {
         statusCode: 200,
@@ -173,8 +124,7 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({
         found: false,
-        error: error.message,
-        stack: error.stack
+        error: error.message
       })
     };
   }
