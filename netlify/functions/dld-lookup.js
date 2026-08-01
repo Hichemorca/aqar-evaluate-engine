@@ -1,5 +1,5 @@
-﻿const fs = require('fs');
-const path = require('path');
+﻿const https = require('https');
+const url = require('url');
 
 // ===== SIZE CATEGORIES =====
 function getSizeCategory(area, propertyType) {
@@ -15,26 +15,50 @@ function getSizeCategory(area, propertyType) {
   return 'medium';
 }
 
-// ===== LOAD DLD DATA =====
-function loadDLDData() {
-  // المسار الصحيح في Netlify
-  const filePath = '/var/task/data/dld-transactions.json';
-  
-  console.log('🔍 Looking for file at:', filePath);
-  
-  if (!fs.existsSync(filePath)) {
-    console.error('❌ File not found at:', filePath);
-    return [];
-  }
-  
-  try {
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    console.log(`✅ Loaded ${data.length} transactions`);
-    return data;
-  } catch (e) {
-    console.error('❌ Error reading file:', e.message);
-    return [];
-  }
+// ===== FETCH DLD DATA VIA HTTP =====
+function fetchDLDData() {
+  return new Promise((resolve, reject) => {
+    // Use the public URL of the file
+    const baseUrl = process.env.URL || 'https://aqar-evaluate-engine.netlify.app';
+    const fileUrl = `${baseUrl}/data/dld-transactions.json`;
+    
+    console.log('🔍 Fetching DLD data from:', fileUrl);
+    
+    const parsedUrl = url.parse(fileUrl);
+    const options = {
+      hostname: parsedUrl.hostname,
+      port: 443,
+      path: parsedUrl.path,
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    };
+    
+    const req = https.request(options, (res) => {
+      let data = '';
+      
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(data);
+          console.log(`✅ Loaded ${json.length} transactions via HTTP`);
+          resolve(json);
+        } catch (e) {
+          reject(new Error('Failed to parse JSON: ' + e.message));
+        }
+      });
+    });
+    
+    req.on('error', (e) => {
+      reject(new Error('HTTP request failed: ' + e.message));
+    });
+    
+    req.end();
+  });
 }
 
 // ===== COMPUTE MEDIAN =====
@@ -122,8 +146,20 @@ exports.handler = async (event) => {
       };
     }
 
-    const transactions = loadDLDData();
-    if (transactions.length === 0) {
+    // Fetch DLD data via HTTP
+    let transactions;
+    try {
+      transactions = await fetchDLDData();
+    } catch (e) {
+      console.error('❌ Failed to fetch DLD data:', e.message);
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ found: false, error: 'Failed to load DLD data: ' + e.message })
+      };
+    }
+    
+    if (!transactions || transactions.length === 0) {
       return {
         statusCode: 200,
         headers,
