@@ -1,335 +1,140 @@
 ﻿const https = require('https');
 const url = require('url');
 
-// ===== SIZE CATEGORIES =====
-function getSizeCategory(area, propertyType) {
-  if (propertyType === 'land') {
-    if (area <= 200) return 'land_tiny';
-    if (area <= 500) return 'land_small';
-    if (area <= 1000) return 'land_medium';
-    if (area <= 3000) return 'land_large';
-    return 'land_xlarge';
-  }
-  if (area < 80) return 'small';
-  if (area > 200) return 'large';
-  return 'medium';
-}
+// ============================================================
+// IMPORT SHARED CLEANING
+// ============================================================
+const { getSizeCategory, applyAllFilters } = require('../../scripts/cleaning-pipeline');
 
-// ===== 10-STAGE CLEANING =====
-function filterNonSaleTransactions(transactions) {
-  const nonMarketProcedures = ['development registration', 'sell development', 'lease to own registration'];
-  const excludedKeywords = ['gift', 'hiba', 'inheritance', 'irt', 'wasiya', 'correction', 'rectification', 'mortgage', 'رهن', 'auction', 'مزاد'];
-  return transactions.filter(t => {
-    const procedure = (t.procedure || '').toLowerCase();
-    const group = (t.group || '').toLowerCase();
-    if (nonMarketProcedures.some(p => procedure.includes(p))) return false;
-    const combined = group + ' ' + procedure;
-    for (const kw of excludedKeywords) { if (combined.includes(kw)) return false; }
-    return true;
-  });
-}
+// ============================================================
+// HELPERS
+// ============================================================
 
-function filterMissingData(transactions) {
-  return transactions.filter(t => 
-    t.district && t.district !== 'Unknown' && 
-    t.propertyType && t.propertyType !== 'Unknown' && 
-    t.area > 0 && t.actualSalePrice > 0
-  );
-}
-
-function filterAreaMismatch(transactions) {
-  return transactions.filter(t => {
-    if (t.procedureArea && t.procedureArea > 0) {
-      const ratio = t.area / t.procedureArea;
-      if (ratio < 0.5 || ratio > 2.0) return false;
-    }
-    return true;
-  });
-}
-
-function filterInvalidAreas(transactions) {
-  const limits = { 
-    apartment: { min: 30, max: 1000 }, 
-    villa: { min: 100, max: 5000 }, 
-    townhouse: { min: 80, max: 2000 }, 
-    office: { min: 30, max: 10000 }, 
-    retail: { min: 20, max: 5000 }, 
-    warehouse: { min: 100, max: 50000 }, 
-    land: { min: 100, max: 100000 } 
-  };
-  return transactions.filter(t => { 
-    const l = limits[t.propertyType] || { min: 30, max: 5000 }; 
-    return t.area >= l.min && t.area <= l.max; 
-  });
-}
-
-function filterInvalidPrices(transactions) {
-  transactions.forEach(t => { t.pricePerSqm = t.actualSalePrice / Math.max(1, t.area); });
-  return transactions.filter(t => t.pricePerSqm > 0);
-}
-
-function filterOutliers(transactions) {
-  const groups = {};
-  transactions.forEach(t => { 
-    const k = `${t.district}__${t.propertyType}`; 
-    if (!groups[k]) groups[k] = []; 
-    groups[k].push(t); 
-  });
-  const filtered = [];
-  Object.values(groups).forEach(group => {
-    if (group.length < 5) { filtered.push(...group); return; }
-    const logPrices = group.map(t => Math.log(t.pricePerSqm)).sort((a, b) => a - b);
-    const n = logPrices.length, q1 = logPrices[Math.floor(n * 0.25)], q3 = logPrices[Math.floor(n * 0.75)], iqr = q3 - q1;
-    const lo = Math.exp(q1 - 1.5 * iqr), hi = Math.exp(q3 + 1.5 * iqr);
-    group.forEach(t => { if (t.pricePerSqm >= lo && t.pricePerSqm <= hi) filtered.push(t); });
-  });
-  return filtered;
-}
-
-function filterReadyOnly(transactions) {
-  return transactions.filter(t => {
-    if (t.isOffPlan === true) return false;
-    const status = (t.status || t.projectStatus || '').toLowerCase();
-    if (status.includes('off-plan') || status.includes('offplan') || status.includes('under construction') || status.includes('launched')) return false;
-    return true;
-  });
-}
-
-function filterDuplicates(transactions) {
-  const seen = new Set();
-  return transactions.filter(t => {
-    if (t.propertyRef && seen.has(t.propertyRef)) return false;
-    if (t.propertyRef) seen.add(t.propertyRef);
-    const key = `${t.district}__${t.area}__${Math.round(t.actualSalePrice / 1000)}__${t.saleDate}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-}
-
-function filterUltraLuxury(transactions) {
-  return transactions.filter(t => {
-    const pricePerSqm = t.actualSalePrice / Math.max(1, t.area);
-    if (pricePerSqm > 50000) return false;
-    if (t.actualSalePrice > 50000000) return false;
-    return true;
-  });
-}
-
-function validateGroupCounts(transactions) {
-  const groups = {};
-  transactions.forEach(t => { 
-    const k = `${t.district}__${t.propertyType}`; 
-    if (!groups[k]) groups[k] = []; 
-    groups[k].push(t); 
-  });
-  const filtered = [];
-  Object.entries(groups).forEach(([k, g]) => { if (g.length >= 3) filtered.push(...g); });
-  return filtered;
-}
-
-function applyAllFilters(transactions) {
-  console.log(`🧹 Cleaning: ${transactions.length} input`);
-  let data = transactions;
-  data = filterNonSaleTransactions(data);
-  data = filterMissingData(data);
-  data = filterAreaMismatch(data);
-  data = filterInvalidAreas(data);
-  data.forEach(t => { t.pricePerSqm = t.actualSalePrice / Math.max(1, t.area); });
-  data = filterInvalidPrices(data);
-  data = filterOutliers(data);
-  data = filterReadyOnly(data);
-  data = filterDuplicates(data);
-  data = filterUltraLuxury(data);
-  data = validateGroupCounts(data);
-  console.log(`✅ Cleaned: ${data.length} transactions`);
-  return data;
-}
-
-// ===== FETCH DLD DATA =====
 function fetchDLDData() {
   return new Promise((resolve, reject) => {
     const baseUrl = process.env.URL || 'https://aqar-evaluate-engine.netlify.app';
     const fileUrl = `${baseUrl}/data/dld-transactions.json`;
-    
-    console.log('🔍 Fetching DLD data from:', fileUrl);
-    
-    const parsedUrl = url.parse(fileUrl);
-    const options = {
-      hostname: parsedUrl.hostname,
-      port: 443,
-      path: parsedUrl.path,
-      method: 'GET',
-      headers: { 'Accept': 'application/json' }
-    };
-    
-    const req = https.request(options, (res) => {
+
+    console.log('🔍 Fetching:', fileUrl);
+
+    const req = https.get(fileUrl, (res) => {
       let data = '';
-      res.on('data', (chunk) => { data += chunk; });
+      res.on('data', chunk => data += chunk);
       res.on('end', () => {
         try {
-          const json = JSON.parse(data);
-          console.log(`✅ Loaded ${json.length} transactions via HTTP`);
-          resolve(json);
+          resolve(JSON.parse(data));
         } catch (e) {
-          reject(new Error('Failed to parse JSON: ' + e.message));
+          reject(new Error('Invalid JSON: ' + e.message));
         }
       });
     });
-    
-    req.on('error', (e) => { reject(new Error('HTTP request failed: ' + e.message)); });
+
+    req.on('error', reject);
     req.end();
   });
 }
 
-// ===== COMPUTE MEDIAN =====
-function computeMedian(transactions) {
-  if (!transactions || transactions.length === 0) return null;
-  const prices = transactions.map(t => t.actualSalePrice / t.area);
-  const sorted = [...prices].sort((a, b) => a - b);
+function median(values) {
+  if (!values || values.length === 0) return null;
+  const sorted = [...values].sort((a, b) => a - b);
   const mid = Math.floor(sorted.length / 2);
-  if (sorted.length % 2 === 0) return (sorted[mid - 1] + sorted[mid]) / 2;
-  return sorted[mid];
+  return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
-// ===== COMPUTE MONTHLY GROWTH RATE =====
-function computeMonthlyGrowthRate(transactions) {
-  if (!transactions || transactions.length < 10) return 0.005; // Default 0.5%
-  
-  // Group by month
-  const monthly = {};
+function monthlyGrowthRate(transactions) {
+  if (!transactions || transactions.length < 10) return 0.005;
+
+  const byMonth = {};
   for (const t of transactions) {
-    const date = new Date(t.saleDate);
-    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-    if (!monthly[monthKey]) monthly[monthKey] = [];
-    monthly[monthKey].push(t.actualSalePrice / t.area);
+    const d = new Date(t.saleDate);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    if (!byMonth[key]) byMonth[key] = [];
+    byMonth[key].push(t.actualSalePrice / t.area);
   }
-  
-  const months = Object.keys(monthly).sort();
+
+  const months = Object.keys(byMonth).sort();
   if (months.length < 3) return 0.005;
-  
-  // Calculate monthly medians
-  const medians = months.map(m => {
-    const prices = monthly[m];
-    const sorted = [...prices].sort((a, b) => a - b);
-    const mid = Math.floor(sorted.length / 2);
-    return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
-  });
-  
-  // Calculate average monthly growth
-  let totalGrowth = 0;
-  let count = 0;
+
+  const medians = months.map(m => median(byMonth[m])).filter(Boolean);
+  let total = 0, count = 0;
   for (let i = 1; i < medians.length; i++) {
-    if (medians[i-1] > 0) {
-      totalGrowth += (medians[i] - medians[i-1]) / medians[i-1];
+    if (medians[i - 1] > 0) {
+      total += (medians[i] - medians[i - 1]) / medians[i - 1];
       count++;
     }
   }
-  
-  return count > 0 ? totalGrowth / count : 0.005;
+  return count > 0 ? total / count : 0.005;
 }
 
-// ===== TIME-ADJUSTED PRICE =====
-function getTimeAdjustedPrice(saleDate, pricePerSqm, monthlyGrowthRate, monthsDiff) {
-  return pricePerSqm * Math.pow(1 + monthlyGrowthRate, monthsDiff);
+function adjustPrice(saleDate, pricePerSqm, growth, months) {
+  return pricePerSqm * Math.pow(1 + growth, months);
 }
 
-// ===== ADAPTIVE SEARCH =====
-function adaptiveSearch(district, propertyType, sizeCat, transactions, targetDate) {
+function findComparables(transactions, district, type, size, targetDate) {
+  const lower = district.toLowerCase().trim();
   const windows = [30, 60, 90, 180, 365, 730, Infinity];
-  const districtLower = district.toLowerCase().trim();
-  const sizeCatLower = sizeCat.toLowerCase().trim();
-  
-  // ===== LEVEL 1: District + Type + Size =====
-  let relevant = transactions.filter(t => {
-    const tDistrict = (t.district || '').toLowerCase();
-    const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
-    const typeMatch = t.propertyType === propertyType;
-    const sizeMatch = getSizeCategory(t.area, t.propertyType) === sizeCat;
-    return districtMatch && typeMatch && sizeMatch;
+
+  // Try: district + type + size
+  let filtered = transactions.filter(t => {
+    const d = (t.district || '').toLowerCase();
+    return (d.includes(lower) || lower.includes(d)) &&
+           t.propertyType === type &&
+           getSizeCategory(t.area, t.propertyType) === size;
   });
-  
   let level = 'district_size';
-  
-  // ===== LEVEL 2: District + Type only (no size) =====
-  if (relevant.length < 5) {
-    console.log(`⚠️ Not enough data with size filter (${relevant.length}), trying without size...`);
-    relevant = transactions.filter(t => {
-      const tDistrict = (t.district || '').toLowerCase();
-      const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
-      const typeMatch = t.propertyType === propertyType;
-      return districtMatch && typeMatch;
+
+  // Fallback: district + type
+  if (filtered.length < 5) {
+    filtered = transactions.filter(t => {
+      const d = (t.district || '').toLowerCase();
+      return (d.includes(lower) || lower.includes(d)) && t.propertyType === type;
     });
     level = 'district_type';
   }
-  
-  // ===== LEVEL 3: District only (any type) =====
-  if (relevant.length < 5) {
-    console.log(`⚠️ Not enough data with type filter (${relevant.length}), trying district only...`);
-    relevant = transactions.filter(t => {
-      const tDistrict = (t.district || '').toLowerCase();
-      const districtMatch = tDistrict.includes(districtLower) || districtLower.includes(tDistrict);
-      return districtMatch;
+
+  // Fallback: district only
+  if (filtered.length < 5) {
+    filtered = transactions.filter(t => {
+      const d = (t.district || '').toLowerCase();
+      return d.includes(lower) || lower.includes(d);
     });
     level = 'district_only';
   }
-  
-  console.log(`🔍 Found ${relevant.length} relevant transactions for ${district} (level: ${level})`);
-  
-  if (relevant.length === 0) return null;
-  
-  // Compute monthly growth rate for this district/type
-  const monthlyGrowthRate = computeMonthlyGrowthRate(relevant);
-  console.log(`📈 Monthly growth rate for ${district}: ${(monthlyGrowthRate * 100).toFixed(1)}%`);
-  
-  for (const windowDays of windows) {
-    const cutoffDate = new Date(targetDate);
-    cutoffDate.setDate(cutoffDate.getDate() - windowDays);
-    
-    const filtered = relevant.filter(t => {
-      const saleDate = new Date(t.saleDate);
-      return saleDate >= cutoffDate;
-    });
-    
-    if (filtered.length >= 5) {
-      // Calculate time-adjusted prices
-      const adjustedPrices = filtered.map(t => {
-        const saleDate = new Date(t.saleDate);
-        const monthsDiff = (targetDate - saleDate) / (30.44 * 86400000);
-        const currentPricePerSqm = getTimeAdjustedPrice(
-          saleDate, 
-          t.actualSalePrice / t.area, 
-          monthlyGrowthRate, 
-          monthsDiff
-        );
-        return currentPricePerSqm;
+
+  if (filtered.length === 0) return null;
+
+  const growth = monthlyGrowthRate(filtered);
+  console.log(`📈 Growth: ${(growth * 100).toFixed(1)}% | Level: ${level} | Found: ${filtered.length}`);
+
+  for (const days of windows) {
+    const cutoff = new Date(targetDate);
+    cutoff.setDate(cutoff.getDate() - days);
+
+    const matches = filtered.filter(t => new Date(t.saleDate) >= cutoff);
+    if (matches.length >= 5) {
+      const adjusted = matches.map(t => {
+        const months = (targetDate - new Date(t.saleDate)) / (30.44 * 86400000);
+        return adjustPrice(new Date(t.saleDate), t.actualSalePrice / t.area, growth, months);
       });
-      
-      const sorted = [...adjustedPrices].sort((a, b) => a - b);
-      const mid = Math.floor(sorted.length / 2);
-      const median = sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
-      
-      const confidence = windowDays <= 30 ? 'high' : 
-                        windowDays <= 90 ? 'medium' : 
-                        windowDays <= 180 ? 'low' : 'very-low';
-      
+
       return {
-        avgPricePerSqm: Math.round(median),
-        count: filtered.length,
-        timeWindow: windowDays,
-        adjusted: true,
-        confidence: confidence,
-        monthlyGrowthRate: monthlyGrowthRate,
-        source: 'dld',
-        level: level
+        avgPricePerSqm: Math.round(median(adjusted)),
+        count: matches.length,
+        days,
+        confidence: days <= 90 ? 'high' : days <= 180 ? 'medium' : 'low',
+        growth,
+        level
       };
     }
   }
-  
+
   return null;
 }
 
-// ===== HANDLER =====
+// ============================================================
+// HANDLER
+// ============================================================
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -337,7 +142,7 @@ exports.handler = async (event) => {
   };
 
   try {
-    const { district, propertyType, area, project } = event.queryStringParameters || {};
+    const { district, propertyType, area } = event.queryStringParameters || {};
 
     if (!district || !propertyType || !area) {
       return {
@@ -347,43 +152,26 @@ exports.handler = async (event) => {
       };
     }
 
-    // Fetch DLD data
-    let transactions;
-    try {
-      transactions = await fetchDLDData();
-    } catch (e) {
-      console.error('❌ Failed to fetch DLD data:', e.message);
+    const raw = await fetchDLDData();
+    if (!raw || raw.length === 0) {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ found: false, error: 'Failed to load DLD data: ' + e.message })
-      };
-    }
-    
-    if (!transactions || transactions.length === 0) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ found: false, error: 'No DLD data available' })
+        body: JSON.stringify({ found: false, error: 'No DLD data' })
       };
     }
 
-    // Apply 10-stage cleaning
-    const cleaned = applyAllFilters(transactions);
-    
+    const cleaned = applyAllFilters(raw);
     if (cleaned.length === 0) {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ found: false, error: 'No clean data available' })
+        body: JSON.stringify({ found: false, error: 'No clean data' })
       };
     }
 
-    const sizeCat = getSizeCategory(parseFloat(area), propertyType);
-    const targetDate = new Date();
-    
-    // ===== ADAPTIVE SEARCH =====
-    const result = adaptiveSearch(district, propertyType, sizeCat, cleaned, targetDate);
+    const size = getSizeCategory(parseFloat(area), propertyType);
+    const result = findComparables(cleaned, district, propertyType, size, new Date());
 
     if (!result) {
       return {
@@ -391,10 +179,10 @@ exports.handler = async (event) => {
         headers,
         body: JSON.stringify({
           found: false,
-          reason: 'no-sufficient-dld-comparables',
-          district: district,
-          propertyType: propertyType,
-          sizeCat: sizeCat
+          reason: 'no-sufficient-data',
+          district,
+          propertyType,
+          size
         })
       };
     }
@@ -406,12 +194,10 @@ exports.handler = async (event) => {
         found: true,
         avgPricePerSqm: result.avgPricePerSqm,
         count: result.count,
-        timeWindow: result.timeWindow,
+        timeWindow: result.days,
         confidence: result.confidence,
-        monthlyGrowthRate: result.monthlyGrowthRate,
-        adjusted: result.adjusted,
+        monthlyGrowthRate: result.growth,
         level: result.level,
-        matchedKey: `${district}__${propertyType}__${sizeCat}`,
         source: 'dld',
         weight: 1.0,
         generatedAt: new Date().toISOString()
@@ -419,7 +205,7 @@ exports.handler = async (event) => {
     };
 
   } catch (error) {
-    console.error('❌ DLD Lookup Error:', error);
+    console.error('❌ Error:', error);
     return {
       statusCode: 200,
       headers,
