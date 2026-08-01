@@ -914,10 +914,9 @@ function salesComparisonApproach(data) {
   let value = avgPrice * data.area;
   if (data.bedrooms === 0 && data.propType === 'apartment') value *= .8;
   
-  // ✅ FIXED: Condition factors applied correctly
+  // ✅ Condition factors applied correctly
   const condFactors = { excellent: 1.08, good: 1.00, fair: 0.82, 'needs-renovation': 0.75 };
   const factor = condFactors[data.condition] || 1.00;
-  console.log(`📊 Condition: ${data.condition} → factor ${factor}`);
   value *= factor;
   
   const age = 2026 - data.yearBuilt;
@@ -935,10 +934,9 @@ function salesComparisonApproach(data) {
   const furnishFactors = { furnished:1.04, 'semi-furnished':1.02, unfurnished:.98 };
   if (data.furnishedStatus) value *= furnishFactors[data.furnishedStatus] || 1;
   
-  // ✅ FIXED: GIS impact with debug
+  // ✅ GIS impact
   const gisImpact = window.gisImpactPercent || 0;
   const gisMultiplier = 1 + (gisImpact / 100);
-  console.log(`📊 GIS: ${gisImpact}% → multiplier ${gisMultiplier}`);
   if (gisMultiplier > 1) {
     value = Math.round(value * gisMultiplier);
   }
@@ -991,19 +989,39 @@ function dcfApproach(data) {
 }
 function calculateWeightedValue(valuations, propData) {
   if (!valuations.length) {
-    const fb = (propData.avgPriceSqm||4000) * propData.area;
-    return { finalValue: Math.round(fb), confidence: 'low', confidencePct: 25, valuations: [], range: { low: Math.round(fb*.8), high: Math.round(fb*1.2) } };
+    const fb = (propData.avgPriceSqm || 4000) * propData.area;
+    return { finalValue: Math.round(fb), confidence: 'low', confidencePct: 25, valuations: [], range: { low: Math.round(fb * .8), high: Math.round(fb * 1.2) } };
   }
+
+  // ===== REBALANCE WEIGHTS FOR APARTMENT & LAND =====
+  const hasCost = valuations.some(v => v.method === 'Cost Approach (Replacement)');
+  
+  if (!hasCost) {
+    valuations.forEach(v => {
+      if (v.method === 'Sales Comparison Approach') {
+        v.weight = 0.55;  // 55%
+      } else if (v.method === 'Income Capitalization Approach') {
+        v.weight = 0.35;  // 35%
+      } else if (v.method === 'DCF Analysis (10-Year)') {
+        v.weight = 0.10;  // 10%
+      }
+    });
+  }
+
   let ws = 0, tw = 0;
-  valuations.forEach(v => { ws += v.value * v.weight; tw += v.weight; });
-  const final = Math.round(ws/tw);
-  let confPct = 60;
-  if (valuations.some(v => v.confidence === 'high')) confPct += 20;
-  if (valuations.length >= 3) confPct += 10;
-  if (valuations.length >= 4) confPct += 5;
-  confPct = Math.min(95, Math.max(20, confPct));
+  valuations.forEach(v => {
+    ws += v.value * v.weight;
+    tw += v.weight;
+  });
+  const final = Math.round(ws / tw);
+  
+  let confidencePct = 60;
+  if (valuations.some(v => v.confidence === 'high')) confidencePct += 20;
+  if (valuations.length >= 3) confidencePct += 10;
+  if (valuations.length >= 4) confidencePct += 5;
+  confidencePct = Math.min(95, Math.max(20, confidencePct));
   const vals = valuations.map(v => v.value);
-  return { finalValue: final, confidence: confPct >= 75 ? 'high' : confPct >= 50 ? 'medium' : 'low', confidencePct: confPct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) } };
+  return { finalValue: final, confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low', confidencePct: confidencePct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) } };
 }
 function buildDecisionEngineLink(result, propData) {
   const p = new URLSearchParams();
