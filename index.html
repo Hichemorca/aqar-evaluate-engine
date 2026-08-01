@@ -325,6 +325,7 @@
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
     .selected-display span { color: var(--text); font-weight: 600; }
+    .district-count { font-size: 10px; color: var(--muted); margin-top: 4px; }
     @media (max-width: 500px) {
       .row { flex-direction: column; gap: 0; }
       #app-container { padding: 20px 10px 40px; }
@@ -507,7 +508,7 @@
       Select a district from the list below, then drag the marker on the map to pinpoint the exact location.
     </div>
     <div class="fg">
-      <label>📍 District / Area</label>
+      <label>📍 District / Area <span class="note" style="font-weight:400;text-transform:none;color:var(--muted)">(Choose from DLD data)</span></label>
       <div class="autocomplete-container">
         <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" oninput="filterDistricts(this.value)" onfocus="this.select()">
         <div class="autocomplete-list" id="districtAutocomplete"></div>
@@ -516,6 +517,7 @@
         Selected: <span id="selectedDistrictDisplay">None</span>
       </div>
       <input type="hidden" id="selectedDistrict" value="">
+      <div class="district-count" id="districtCount">Loading districts from DLD data...</div>
     </div>
     <div class="row" id="gisCoordsRow" style="display:none">
       <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly style="background:rgba(255,255,255,0.05)"></div>
@@ -615,6 +617,34 @@ const DISTRICT_COORDS = {
 };
 let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
 let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
+
+// ===== LOAD DISTRICTS FROM DLD DATA =====
+async function loadDistrictsFromDLD() {
+  const countEl = document.getElementById('districtCount');
+  countEl.textContent = 'Loading districts from DLD data...';
+  try {
+    const response = await fetch('/data/dld-transactions.json');
+    if (!response.ok) throw new Error('Failed to fetch DLD data');
+    const data = await response.json();
+    const districts = new Set();
+    data.forEach(t => {
+      if (t.district && t.district !== 'Unknown' && t.district !== '') {
+        districts.add(t.district);
+      }
+    });
+    if (districts.size > 10) {
+      dubaiDistrictsList = Array.from(districts).sort();
+      countEl.textContent = `✅ Loaded ${dubaiDistrictsList.length} districts from DLD data`;
+      console.log(`✅ Loaded ${dubaiDistrictsList.length} districts from DLD data`);
+      return;
+    }
+  } catch (e) {
+    console.warn('⚠️ Could not load districts from DLD:', e.message);
+  }
+  // Fallback
+  dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
+  countEl.textContent = `📋 Using ${dubaiDistrictsList.length} districts (fallback)`;
+}
 
 function filterDistricts(q) {
   const c = document.getElementById('districtAutocomplete');
@@ -1075,7 +1105,7 @@ function onPropertyTypeChange() {
   document.getElementById('fgFurnishedStatus').style.display = (isApt||isVilla||isTown||isOff)?'':'none';
 }
 document.addEventListener('DOMContentLoaded', function() {
-  dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
+  loadDistrictsFromDLD();
   document.getElementById('city').value = 'dubai';
   document.getElementById('gisRadius').value = '1000';
   document.querySelectorAll('.checkbox-item').forEach(item => {
