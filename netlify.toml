@@ -10,8 +10,8 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+# Add this to ensure data files are included
 [[redirects]]
-  from = "/data-api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/data/*"
+  to = "/data/:splat"
   status = 200
-  force = true
