@@ -1,11 +1,6 @@
 ﻿const fs = require('fs');
 const path = require('path');
 
-// ===== PATHS =====
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
-const DLD_FILE = path.join(DATA_DIR, 'dld-transactions.json');
-const DLD_ENRICHED_FILE = path.join(DATA_DIR, 'dld-transactions-enriched.json');
-
 // ===== SIZE CATEGORIES =====
 function getSizeCategory(area, propertyType) {
   if (propertyType === 'land') {
@@ -20,33 +15,25 @@ function getSizeCategory(area, propertyType) {
   return 'medium';
 }
 
-// ===== LOAD DLD DATA =====
+// ===== LOAD DLD DATA FROM FUNCTIONS FOLDER =====
 function loadDLDData() {
-  let data = [];
+  const filePath = path.join(__dirname, 'dld-transactions.json');
   
-  // Try enriched first
-  if (fs.existsSync(DLD_ENRICHED_FILE)) {
-    try {
-      data = JSON.parse(fs.readFileSync(DLD_ENRICHED_FILE, 'utf8'));
-      console.log(`✅ Loaded ${data.length} transactions from enriched DLD data`);
-      return data;
-    } catch(e) {
-      console.log('⚠️ Failed to load enriched data:', e.message);
-    }
+  console.log('🔍 Looking for file at:', filePath);
+  
+  if (!fs.existsSync(filePath)) {
+    console.error('❌ File not found at:', filePath);
+    return [];
   }
   
-  // Fallback to basic
-  if (fs.existsSync(DLD_FILE)) {
-    try {
-      data = JSON.parse(fs.readFileSync(DLD_FILE, 'utf8'));
-      console.log(`✅ Loaded ${data.length} transactions from basic DLD data`);
-      return data;
-    } catch(e) {
-      console.log('⚠️ Failed to load basic data:', e.message);
-    }
+  try {
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    console.log(`✅ Loaded ${data.length} transactions from: ${filePath}`);
+    return data;
+  } catch (e) {
+    console.error('❌ Error reading file:', e.message);
+    return [];
   }
-  
-  return [];
 }
 
 // ===== COMPUTE MEDIAN =====
@@ -63,52 +50,36 @@ function computeMedian(transactions) {
   return sorted[mid];
 }
 
-// ===== BUILD LOOKUP ON THE FLY =====
+// ===== BUILD LOOKUP =====
 function buildLookup(transactions) {
   const districtSizeGroups = {};
   const districtGroups = {};
-  const projectSizeGroups = {};
-  const projectGroups = {};
   
-  for (const t of transactions) {
-    if (!t.district || !t.propertyType || !t.area || !t.actualSalePrice) continue;
-    if (t.isOffPlan === true) continue;
-    if (t.actualSalePrice <= 0 || t.area <= 0) continue;
-    
+  const valid = transactions.filter(t => {
+    if (!t.district || !t.propertyType) return false;
+    if (!t.area || t.area <= 0) return false;
+    if (!t.actualSalePrice || t.actualSalePrice <= 0) return false;
+    if (t.isOffPlan === true) return false;
+    return true;
+  });
+  
+  console.log(`📊 Building lookup from ${valid.length} valid transactions...`);
+  
+  for (const t of valid) {
     const sizeCat = getSizeCategory(t.area, t.propertyType);
     const district = t.district.toUpperCase();
     const propertyType = t.propertyType;
-    const project = t.project || '';
     
-    // District + Type + Size
     const distSizeKey = `${district}__${propertyType}__${sizeCat}`;
     if (!districtSizeGroups[distSizeKey]) districtSizeGroups[distSizeKey] = [];
     districtSizeGroups[distSizeKey].push(t);
     
-    // District + Type
     const distKey = `${district}__${propertyType}`;
     if (!districtGroups[distKey]) districtGroups[distKey] = [];
     districtGroups[distKey].push(t);
-    
-    // Project + Type + Size
-    if (project && project.length > 2) {
-      const projSizeKey = `${project}__${propertyType}__${sizeCat}`;
-      if (!projectSizeGroups[projSizeKey]) projectSizeGroups[projSizeKey] = [];
-      projectSizeGroups[projSizeKey].push(t);
-      
-      const projKey = `${project}__${propertyType}`;
-      if (!projectGroups[projKey]) projectGroups[projKey] = [];
-      projectGroups[projKey].push(t);
-    }
   }
   
-  // Compute medians and filter
-  const result = {
-    districtSize: {},
-    district: {},
-    projectSize: {},
-    project: {}
-  };
+  const result = { districtSize: {}, district: {} };
   
   for (const [key, items] of Object.entries(districtSizeGroups)) {
     if (items.length >= 5) {
@@ -124,25 +95,6 @@ function buildLookup(transactions) {
       const median = computeMedian(items);
       if (median) {
         result.district[key] = { medianPricePerSqm: Math.round(median), count: items.length };
-      }
-    }
-  }
-  
-  for (const [key, items] of Object.entries(projectSizeGroups)) {
-    if (items.length >= 3) {
-      const median = computeMedian(items);
-      if (median) {
-        result.projectSize[key] = { medianPricePerSqm: Math.round(median), count: items.length };
-      }
-    }
-  }
-  
-  for (const [key, items] of Object.entries(projectGroups)) {
-    const minCount = key.includes('retail') ? 2 : 5;
-    if (items.length >= minCount) {
-      const median = computeMedian(items);
-      if (median) {
-        result.project[key] = { medianPricePerSqm: Math.round(median), count: items.length };
       }
     }
   }
@@ -168,7 +120,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // ===== LOAD DLD DATA =====
     const transactions = loadDLDData();
     if (transactions.length === 0) {
       return {
@@ -178,7 +129,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // ===== BUILD LOOKUP =====
     const tables = buildLookup(transactions);
 
     const sizeCat = getSizeCategory(parseFloat(area), propertyType);
@@ -188,7 +138,6 @@ exports.handler = async (event) => {
 
     const districtUpper = district.toUpperCase().trim();
 
-    // ===== 1. Search in districtSize =====
     const distSizeKey = `${districtUpper}__${propertyType}__${sizeCat}`;
     if (tables.districtSize[distSizeKey] && tables.districtSize[distSizeKey].count >= 5) {
       match = tables.districtSize[distSizeKey];
@@ -196,34 +145,12 @@ exports.handler = async (event) => {
       matchedKey = distSizeKey;
     }
 
-    // ===== 2. Search in district =====
     if (!match) {
       const distKey = `${districtUpper}__${propertyType}`;
       if (tables.district[distKey] && tables.district[distKey].count >= 5) {
         match = tables.district[distKey];
         level = 'district';
         matchedKey = distKey;
-      }
-    }
-
-    // ===== 3. Search in projectSize =====
-    if (!match && project && project.length > 2) {
-      const projSizeKey = `${project}__${propertyType}__${sizeCat}`;
-      if (tables.projectSize[projSizeKey] && tables.projectSize[projSizeKey].count >= 3) {
-        match = tables.projectSize[projSizeKey];
-        level = 'project_size';
-        matchedKey = projSizeKey;
-      }
-    }
-
-    // ===== 4. Search in project =====
-    if (!match && project && project.length > 2) {
-      const projKey = `${project}__${propertyType}`;
-      const minCount = propertyType === 'retail' ? 2 : 5;
-      if (tables.project[projKey] && tables.project[projKey].count >= minCount) {
-        match = tables.project[projKey];
-        level = 'project';
-        matchedKey = projKey;
       }
     }
 
