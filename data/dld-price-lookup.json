@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-02T08:06:08.916Z",
+  "generatedAt": "2026-08-03T09:23:50.645Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -1717,7 +1717,7 @@
         "count": 19
       },
       "LIV MARINA__apartment__small": {
-        "medianPricePerSqm": 37681,
+        "medianPricePerSqm": 39855,
         "count": 5
       },
       "PARK ISLANDS__apartment__medium": {
@@ -2213,7 +2213,7 @@
         "count": 12
       },
       "SIRAJ TOWER__apartment__small": {
-        "medianPricePerSqm": 13846,
+        "medianPricePerSqm": 14359,
         "count": 10
       },
       "Adhara Star__apartment__small": {
@@ -2389,7 +2389,7 @@
         "count": 4
       },
       "Oxford Gardens__apartment__medium": {
-        "medianPricePerSqm": 18636,
+        "medianPricePerSqm": 15455,
         "count": 2
       },
       "LEGACY BY SUNRISE__apartment__small": {
@@ -3033,7 +3033,7 @@
         "count": 5
       },
       "EXECUTIVE BAY B__office__medium": {
-        "medianPricePerSqm": 15870,
+        "medianPricePerSqm": 17419,
         "count": 3
       },
       "THE MERTOPOLIS__office__small": {
@@ -3225,7 +3225,7 @@
         "count": 11
       },
       "THE DIPLOMAT RESIDENCES__apartment__small": {
-        "medianPricePerSqm": 15086,
+        "medianPricePerSqm": 15000,
         "count": 7
       },
       "RAWDA APARTMENTS__apartment__medium": {
@@ -3389,7 +3389,7 @@
         "count": 5
       },
       "Creek Beach - Rosewater__apartment__small": {
-        "medianPricePerSqm": 24851,
+        "medianPricePerSqm": 25386,
         "count": 7
       },
       "Island Park I__apartment__medium": {
@@ -3485,7 +3485,7 @@
         "count": 10
       },
       "Creek Beach - Rosewater__apartment__large": {
-        "medianPricePerSqm": 20137,
+        "medianPricePerSqm": 22727,
         "count": 3
       },
       "Creek Beach - Orchid__apartment__small": {
@@ -3805,7 +3805,7 @@
         "count": 4
       },
       "DESERT SUN TOWER__apartment__small": {
-        "medianPricePerSqm": 8953,
+        "medianPricePerSqm": 8919,
         "count": 13
       },
       "DURAR1__apartment__medium": {
@@ -4261,7 +4261,7 @@
         "count": 7
       },
       "NOBLES__apartment__small": {
-        "medianPricePerSqm": 18442,
+        "medianPricePerSqm": 18182,
         "count": 11
       },
       "DAMAC TOWERS BY PARAMOUNT__apartment__small": {
@@ -4489,7 +4489,7 @@
         "count": 3
       },
       "VERA TOWER__apartment__medium": {
-        "medianPricePerSqm": 22619,
+        "medianPricePerSqm": 19524,
         "count": 5
       },
       "SCALA TOWER__apartment__medium": {
@@ -4789,7 +4789,7 @@
         "count": 2
       },
       "HDS BUSINESS CENTRE__office__medium": {
-        "medianPricePerSqm": 16123,
+        "medianPricePerSqm": 16238,
         "count": 13
       },
       "LIWA HEIGHTS__office__medium": {
@@ -7413,7 +7413,7 @@
         "count": 3
       },
       "FIRST CENTRAL__apartment__small": {
-        "medianPricePerSqm": 24959,
+        "medianPricePerSqm": 24270,
         "count": 15
       },
       "METRO CENTRAL__apartment__small": {
@@ -8009,7 +8009,7 @@
         "count": 2
       },
       "Palm Jebel Ali - The Beach and Coral Collection__land__land_medium": {
-        "medianPricePerSqm": 38408,
+        "medianPricePerSqm": 37891,
         "count": 16
       },
       "Palm Jebel Ali - Frond L__land__land_medium": {
@@ -8273,7 +8273,7 @@
         "count": 151
       },
       "Mareva The Oasis__land__land_large": {
-        "medianPricePerSqm": 19876,
+        "medianPricePerSqm": 19821,
         "count": 72
       },
       "Mareva 2 The Oasis__land__land_large": {
@@ -11619,7 +11619,7 @@
         "count": 4
       },
       "HDS BUSINESS CENTRE__office": {
-        "medianPricePerSqm": 16123,
+        "medianPricePerSqm": 16238,
         "count": 13
       },
       "LIWA HEIGHTS__office": {
@@ -13395,7 +13395,7 @@
         "count": 4
       },
       "FIRST CENTRAL__apartment": {
-        "medianPricePerSqm": 24959,
+        "medianPricePerSqm": 24270,
         "count": 15
       },
       "METRO CENTRAL__apartment": {
@@ -13851,7 +13851,7 @@
         "count": 2
       },
       "Palm Jebel Ali - The Beach and Coral Collection__land": {
-        "medianPricePerSqm": 37891,
+        "medianPricePerSqm": 37815,
         "count": 18
       },
       "Palm Jebel Ali - Frond L__land": {
@@ -14225,7 +14225,7 @@
         "count": 4
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__small": {
-        "medianPricePerSqm": 14561,
+        "medianPricePerSqm": 14545,
         "count": 1262
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__medium": {
@@ -14461,7 +14461,7 @@
         "count": 297
       },
       "DUBAI PRODUCTION CITY__apartment__medium": {
-        "medianPricePerSqm": 11564,
+        "medianPricePerSqm": 11413,
         "count": 95
       },
       "DUBAI LAND RESIDENCE COMPLEX__apartment__small": {
@@ -16321,7 +16321,7 @@
         "count": 30
       },
       "Me'Aisem Second__land__land_medium": {
-        "medianPricePerSqm": 19357,
+        "medianPricePerSqm": 19339,
         "count": 356
       },
       "Me'Aisem Second__land__land_large": {
@@ -16519,7 +16519,7 @@
         "count": 507
       },
       "LIWAN__apartment": {
-        "medianPricePerSqm": 10533,
+        "medianPricePerSqm": 10527,
         "count": 281
       },
       "BUSINESS BAY__apartment": {
@@ -16711,7 +16711,7 @@
         "count": 27
       },
       "Nad Al Shiba First__land": {
-        "medianPricePerSqm": 23692,
+        "medianPricePerSqm": 23678,
         "count": 130
       },
       "Al Hebiah Sixth__villa": {
@@ -16995,7 +16995,7 @@
         "count": 8
       },
       "SUFOUH GARDENS__apartment": {
-        "medianPricePerSqm": 17949,
+        "medianPricePerSqm": 18260,
         "count": 21
       },
       "Hor Al Anz__land": {
@@ -17123,7 +17123,7 @@
         "count": 12
       },
       "Hadaeq Sheikh Mohammed Bin Rashid__land": {
-        "medianPricePerSqm": 29507,
+        "medianPricePerSqm": 29335,
         "count": 146
       },
       "Ghadeer Al tair__land": {
@@ -17343,7 +17343,7 @@
         "count": 3
       },
       "Palm Jabal Ali__land": {
-        "medianPricePerSqm": 38606,
+        "medianPricePerSqm": 38502,
         "count": 167
       },
       "Al Hamriya__land": {
@@ -17499,7 +17499,7 @@
         "count": 71
       },
       "Me'Aisem Second__land": {
-        "medianPricePerSqm": 19384,
+        "medianPricePerSqm": 19357,
         "count": 506
       },
       "Al Yelayiss 1__land": {
