@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T09:23:50.645Z",
+  "generatedAt": "2026-08-04T08:21:32.362Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -2965,7 +2965,7 @@
         "count": 10
       },
       "BAYSWATER__office__small": {
-        "medianPricePerSqm": 19231,
+        "medianPricePerSqm": 18016,
         "count": 4
       },
       "TAMANI ARTS OFFICES__office__small": {
@@ -3033,7 +3033,7 @@
         "count": 5
       },
       "EXECUTIVE BAY B__office__medium": {
-        "medianPricePerSqm": 17419,
+        "medianPricePerSqm": 15870,
         "count": 3
       },
       "THE MERTOPOLIS__office__small": {
@@ -3049,7 +3049,7 @@
         "count": 6
       },
       "BURLINGTON TOWER__office__medium": {
-        "medianPricePerSqm": 24242,
+        "medianPricePerSqm": 24615,
         "count": 9
       },
       "CITADEL TOWER__office__medium": {
@@ -4017,7 +4017,7 @@
         "count": 5
       },
       "DAMAC HILLS (2) - VERONA__land__land_tiny": {
-        "medianPricePerSqm": 16814,
+        "medianPricePerSqm": 16752,
         "count": 9
       },
       "DAMAC HILLS (2) - PARK GREENS 2__land__land_small": {
@@ -4329,7 +4329,7 @@
         "count": 11
       },
       "THE RESIDENCE AT BUSINESS CENTRAL__apartment__medium": {
-        "medianPricePerSqm": 19758,
+        "medianPricePerSqm": 22059,
         "count": 4
       },
       "MERANO TOWER__apartment__medium": {
@@ -6161,7 +6161,7 @@
         "count": 15
       },
       "Sobha Hartland - The Crest__apartment__small": {
-        "medianPricePerSqm": 24375,
+        "medianPricePerSqm": 24364,
         "count": 63
       },
       "Sobha Hartland Waves__apartment__small": {
@@ -6237,11 +6237,11 @@
         "count": 5
       },
       "Parkside__villa__medium": {
-        "medianPricePerSqm": 15646,
+        "medianPricePerSqm": 16538,
         "count": 22
       },
       "Parkside 3__villa__large": {
-        "medianPricePerSqm": 10506,
+        "medianPricePerSqm": 10590,
         "count": 8
       },
       "Greenview__villa__large": {
@@ -6253,7 +6253,7 @@
         "count": 4
       },
       "Parkside 3__villa__medium": {
-        "medianPricePerSqm": 15409,
+        "medianPricePerSqm": 14787,
         "count": 12
       },
       "Parkside 2__villa__large": {
@@ -6581,7 +6581,7 @@
         "count": 4
       },
       "OLIVE POINT__land__land_medium": {
-        "medianPricePerSqm": 29412,
+        "medianPricePerSqm": 37427,
         "count": 5
       },
       "Jumeirah Golf Estates - Hillside__land__land_large": {
@@ -7813,7 +7813,7 @@
         "count": 3
       },
       "ATHLON BY AL DAR 1__land__land_small": {
-        "medianPricePerSqm": 13705,
+        "medianPricePerSqm": 13787,
         "count": 11
       },
       "Haven By Aldar 2__land__land_medium": {
@@ -9767,7 +9767,7 @@
         "count": 16
       },
       "LAKESIDE RESIDENCE__apartment": {
-        "medianPricePerSqm": 17424,
+        "medianPricePerSqm": 15000,
         "count": 7
       },
       "LAKE VIEW__apartment": {
@@ -10223,7 +10223,7 @@
         "count": 7
       },
       "Vista by Prestige One__apartment": {
-        "medianPricePerSqm": 13953,
+        "medianPricePerSqm": 13404,
         "count": 22
       },
       "Golf Vista Heights__apartment": {
@@ -10259,7 +10259,7 @@
         "count": 9
       },
       "EQUITI RESIDENCE__apartment": {
-        "medianPricePerSqm": 11875,
+        "medianPricePerSqm": 12121,
         "count": 5
       },
       "GEMZ by Danube__apartment": {
@@ -10595,7 +10595,7 @@
         "count": 26
       },
       "RAWDA APARTMENTS__apartment": {
-        "medianPricePerSqm": 13263,
+        "medianPricePerSqm": 13708,
         "count": 29
       },
       "UNA__apartment": {
@@ -11111,7 +11111,7 @@
         "count": 7
       },
       "DAMAC HILLS (2) - VERONA__land": {
-        "medianPricePerSqm": 16814,
+        "medianPricePerSqm": 16752,
         "count": 9
       },
       "DAMAC HILLS (2) - PARK GREENS 2__land": {
@@ -11355,7 +11355,7 @@
         "count": 16
       },
       "THE RESIDENCE AT BUSINESS CENTRAL__apartment": {
-        "medianPricePerSqm": 19758,
+        "medianPricePerSqm": 22059,
         "count": 4
       },
       "TERRACES MARASI DRIVE__apartment": {
@@ -12123,7 +12123,7 @@
         "count": 11
       },
       "Madinat Jumeriah Living - Phase 2__apartment": {
-        "medianPricePerSqm": 28523,
+        "medianPricePerSqm": 28667,
         "count": 10
       },
       "Madinat Jumeirah Living__apartment": {
@@ -12823,7 +12823,7 @@
         "count": 4
       },
       "OLIVE POINT__land": {
-        "medianPricePerSqm": 29412,
+        "medianPricePerSqm": 37427,
         "count": 5
       },
       "Jumeirah Golf Estates - Hillside__land": {
@@ -14449,7 +14449,7 @@
         "count": 248
       },
       "SOBHA HEARTLAND__retail__small": {
-        "medianPricePerSqm": 50000,
+        "medianPricePerSqm": 21512,
         "count": 2
       },
       "SOBHA HEARTLAND__land__land_medium": {
@@ -14713,7 +14713,7 @@
         "count": 253
       },
       "DUBAI SOUTH__apartment__medium": {
-        "medianPricePerSqm": 11378,
+        "medianPricePerSqm": 11404,
         "count": 121
       },
       "Marsa Dubai__apartment__large": {
@@ -15405,7 +15405,7 @@
         "count": 4
       },
       "ARABIAN RANCHES II__villa__large": {
-        "medianPricePerSqm": 16534,
+        "medianPricePerSqm": 16423,
         "count": 7
       },
       "ARABIAN RANCHES II__villa__medium": {
@@ -15541,7 +15541,7 @@
         "count": 11
       },
       "EMAAR SOUTH__apartment__medium": {
-        "medianPricePerSqm": 12810,
+        "medianPricePerSqm": 11987,
         "count": 24
       },
       "EMAAR SOUTH__apartment__large": {
@@ -16427,7 +16427,7 @@
         "count": 916
       },
       "ARABIAN RANCHES I__land": {
-        "medianPricePerSqm": 14523,
+        "medianPricePerSqm": 14478,
         "count": 73
       },
       "Al Khawaneej First__land": {
