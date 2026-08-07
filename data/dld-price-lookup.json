@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-06T08:16:00.688Z",
+  "generatedAt": "2026-08-07T07:00:58.572Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -1485,7 +1485,7 @@
         "count": 5
       },
       "SERENIA RESIDENCES THE PALM__apartment__large": {
-        "medianPricePerSqm": 22914,
+        "medianPricePerSqm": 32188,
         "count": 3
       },
       "PALM VIEWS - WEST__apartment__small": {
@@ -2937,7 +2937,7 @@
         "count": 15
       },
       "AVENUE RESIDENCE 5__apartment__small": {
-        "medianPricePerSqm": 17838,
+        "medianPricePerSqm": 16256,
         "count": 3
       },
       "EQUITI HOME__apartment__medium": {
@@ -4309,7 +4309,7 @@
         "count": 13
       },
       "AG TOWER__apartment__medium": {
-        "medianPricePerSqm": 13475,
+        "medianPricePerSqm": 14007,
         "count": 6
       },
       "CHURCHILL TOWER__apartment__medium": {
@@ -5241,11 +5241,11 @@
         "count": 2
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment__small": {
-        "medianPricePerSqm": 19752,
+        "medianPricePerSqm": 19753,
         "count": 6
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment__medium": {
-        "medianPricePerSqm": 19663,
+        "medianPricePerSqm": 19667,
         "count": 6
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13__apartment__medium": {
@@ -5725,7 +5725,7 @@
         "count": 6
       },
       "AZIZI RIVIERA 69__apartment__small": {
-        "medianPricePerSqm": 23025,
+        "medianPricePerSqm": 23112,
         "count": 27
       },
       "Azizi Riviera 44__apartment__small": {
@@ -6165,7 +6165,7 @@
         "count": 63
       },
       "Sobha Hartland Waves__apartment__small": {
-        "medianPricePerSqm": 24709,
+        "medianPricePerSqm": 24167,
         "count": 11
       },
       "Sobha Creek Vistas Grande__apartment__small": {
@@ -6781,7 +6781,7 @@
         "count": 2
       },
       "THE ANWA BY OMNIYAT__apartment__medium": {
-        "medianPricePerSqm": 21591,
+        "medianPricePerSqm": 18676,
         "count": 5
       },
       "THE ANWA BY OMNIYAT__apartment__small": {
@@ -6921,7 +6921,7 @@
         "count": 6
       },
       "DAMAC HILLS-PARK RESIDENCES 1__land__land_small": {
-        "medianPricePerSqm": 19286,
+        "medianPricePerSqm": 20098,
         "count": 5
       },
       "DAMAC HILLS - WHITEFIELD__land__land_medium": {
@@ -7129,7 +7129,7 @@
         "count": 5
       },
       "DAMAC HILLS - SILVER SPRINGS 3__land__land_tiny": {
-        "medianPricePerSqm": 23899,
+        "medianPricePerSqm": 22948,
         "count": 13
       },
       "DAMAC HILLS - CAVALLI ESTATES__land__land_medium": {
@@ -8045,7 +8045,7 @@
         "count": 2
       },
       "Palm Jebel Ali - Frond N__land__land_medium": {
-        "medianPricePerSqm": 31095,
+        "medianPricePerSqm": 31898,
         "count": 5
       },
       "Palm Jebel Ali - The Beach and Coral Collection - Frond C__land__land_large": {
@@ -8855,7 +8855,7 @@
         "count": 9
       },
       "MASAAR RESIDENCES__apartment": {
-        "medianPricePerSqm": 10870,
+        "medianPricePerSqm": 10889,
         "count": 4
       },
       "PULSE SMART RESIDENCE__apartment": {
@@ -8983,7 +8983,7 @@
         "count": 32
       },
       "DIAMOND VIEWS 1__apartment": {
-        "medianPricePerSqm": 9444,
+        "medianPricePerSqm": 9430,
         "count": 13
       },
       "Nicholas Residence__apartment": {
@@ -10715,7 +10715,7 @@
         "count": 33
       },
       "CREEK RISE__apartment": {
-        "medianPricePerSqm": 23301,
+        "medianPricePerSqm": 23377,
         "count": 30
       },
       "Harbour Gate__apartment": {
@@ -11275,7 +11275,7 @@
         "count": 21
       },
       "AYKON CITY 2__apartment": {
-        "medianPricePerSqm": 19048,
+        "medianPricePerSqm": 19000,
         "count": 29
       },
       "Bayz Tower__apartment": {
@@ -11899,7 +11899,7 @@
         "count": 2
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment": {
-        "medianPricePerSqm": 19706,
+        "medianPricePerSqm": 19667,
         "count": 12
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13__apartment": {
@@ -13975,7 +13975,7 @@
         "count": 334
       },
       "Salva The Heights__land": {
-        "medianPricePerSqm": 16309,
+        "medianPricePerSqm": 16294,
         "count": 337
       },
       "Serro The Heights__land": {
@@ -14209,7 +14209,7 @@
         "count": 582
       },
       "BURJ KHALIFA__apartment__small": {
-        "medianPricePerSqm": 26795,
+        "medianPricePerSqm": 26667,
         "count": 181
       },
       "BURJ KHALIFA__apartment__large": {
@@ -14529,7 +14529,7 @@
         "count": 21
       },
       "THE GREENS__apartment__small": {
-        "medianPricePerSqm": 19500,
+        "medianPricePerSqm": 19539,
         "count": 95
       },
       "THE GREENS__apartment__medium": {
@@ -16419,7 +16419,7 @@
         "count": 348
       },
       "REMRAAM__apartment": {
-        "medianPricePerSqm": 10161,
+        "medianPricePerSqm": 10143,
         "count": 122
       },
       "DUBAI MARINA__apartment": {
@@ -16519,7 +16519,7 @@
         "count": 507
       },
       "LIWAN__apartment": {
-        "medianPricePerSqm": 10527,
+        "medianPricePerSqm": 10519,
         "count": 281
       },
       "BUSINESS BAY__apartment": {
@@ -17499,7 +17499,7 @@
         "count": 71
       },
       "Me'Aisem Second__land": {
-        "medianPricePerSqm": 19357,
+        "medianPricePerSqm": 19339,
         "count": 506
       },
       "Al Yelayiss 1__land": {
