@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T07:00:58.572Z",
+  "generatedAt": "2026-08-08T06:35:42.782Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -573,7 +573,7 @@
         "count": 10
       },
       "SEASONS COMMUNITY- SUMMER__apartment__medium": {
-        "medianPricePerSqm": 8800,
+        "medianPricePerSqm": 9009,
         "count": 8
       },
       "LOCI Residences__apartment__medium": {
@@ -717,7 +717,7 @@
         "count": 25
       },
       "CITY APARTMENTS__apartment__medium": {
-        "medianPricePerSqm": 10055,
+        "medianPricePerSqm": 9121,
         "count": 3
       },
       "Rigel__apartment__medium": {
@@ -3373,7 +3373,7 @@
         "count": 29
       },
       "CREEK RISE__apartment__medium": {
-        "medianPricePerSqm": 22816,
+        "medianPricePerSqm": 23226,
         "count": 22
       },
       "Harbour Gate__apartment__medium": {
@@ -6685,7 +6685,7 @@
         "count": 8
       },
       "Celadon__apartment__small": {
-        "medianPricePerSqm": 22917,
+        "medianPricePerSqm": 30986,
         "count": 3
       },
       "No.17, No.18a,No.18b and No.19 Citywalk Residential__apartment__medium": {
@@ -8197,7 +8197,7 @@
         "count": 128
       },
       "Salva The Heights__land__land_small": {
-        "medianPricePerSqm": 16609,
+        "medianPricePerSqm": 16578,
         "count": 209
       },
       "Serro 2 The Heights__land__land_medium": {
@@ -8679,7 +8679,7 @@
         "count": 15
       },
       "Burj Crown__apartment": {
-        "medianPricePerSqm": 29365,
+        "medianPricePerSqm": 29600,
         "count": 31
       },
       "DD BOULEVARD CENTRAL__apartment": {
@@ -8839,7 +8839,7 @@
         "count": 9
       },
       "Bloom Towers__apartment": {
-        "medianPricePerSqm": 14615,
+        "medianPricePerSqm": 14493,
         "count": 34
       },
       "Binghatti Lavender__apartment": {
@@ -9003,7 +9003,7 @@
         "count": 34
       },
       "CITY APARTMENTS__apartment": {
-        "medianPricePerSqm": 10055,
+        "medianPricePerSqm": 9121,
         "count": 3
       },
       "Rigel__apartment": {
@@ -9859,7 +9859,7 @@
         "count": 10
       },
       "ALFURJAN PACKAGE 6__land": {
-        "medianPricePerSqm": 11833,
+        "medianPricePerSqm": 12000,
         "count": 8
       },
       "TORINO BY ORO24__apartment": {
@@ -10203,7 +10203,7 @@
         "count": 5
       },
       "THE DIAMOND__apartment": {
-        "medianPricePerSqm": 7018,
+        "medianPricePerSqm": 7576,
         "count": 4
       },
       "OLYMPIC PARK 1__apartment": {
@@ -11291,7 +11291,7 @@
         "count": 11
       },
       "AYKON CITY__apartment": {
-        "medianPricePerSqm": 16667,
+        "medianPricePerSqm": 16489,
         "count": 54
       },
       "THE PAD__apartment": {
@@ -12043,7 +12043,7 @@
         "count": 14
       },
       "TENORA__apartment": {
-        "medianPricePerSqm": 10104,
+        "medianPricePerSqm": 9756,
         "count": 9
       },
       "CELESTIA__apartment": {
@@ -13875,7 +13875,7 @@
         "count": 2
       },
       "Palm Jebel Ali - Frond M__land": {
-        "medianPricePerSqm": 30123,
+        "medianPricePerSqm": 29119,
         "count": 9
       },
       "Palm Jebel Ali - The Beach and Coral Collection - Frond D__land": {
@@ -13979,7 +13979,7 @@
         "count": 337
       },
       "Serro The Heights__land": {
-        "medianPricePerSqm": 14628,
+        "medianPricePerSqm": 14621,
         "count": 202
       },
       "Bay Villas - Dubai Islands__land": {
@@ -14229,7 +14229,7 @@
         "count": 1262
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__medium": {
-        "medianPricePerSqm": 12748,
+        "medianPricePerSqm": 12750,
         "count": 747
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__large": {
@@ -14433,7 +14433,7 @@
         "count": 134
       },
       "INTERNATIONAL CITY PH 2 & 3__apartment__medium": {
-        "medianPricePerSqm": 8471,
+        "medianPricePerSqm": 8429,
         "count": 23
       },
       "INTERNATIONAL CITY PH 2 & 3__apartment__large": {
@@ -14517,7 +14517,7 @@
         "count": 5
       },
       "JUMEIRAH LAKES TOWERS__office__medium": {
-        "medianPricePerSqm": 18247,
+        "medianPricePerSqm": 18220,
         "count": 245
       },
       "JUMEIRAH LAKES TOWERS__office__small": {
@@ -15353,7 +15353,7 @@
         "count": 9
       },
       "Al Hebiah Fifth__land__land_tiny": {
-        "medianPricePerSqm": 17882,
+        "medianPricePerSqm": 17847,
         "count": 362
       },
       "Al Hebiah Fifth__land__land_small": {
@@ -16093,7 +16093,7 @@
         "count": 3
       },
       "Palm Jabal Ali__land__land_medium": {
-        "medianPricePerSqm": 41456,
+        "medianPricePerSqm": 41386,
         "count": 124
       },
       "Palm Jabal Ali__land__land_large": {
@@ -16321,7 +16321,7 @@
         "count": 30
       },
       "Me'Aisem Second__land__land_medium": {
-        "medianPricePerSqm": 19339,
+        "medianPricePerSqm": 19321,
         "count": 356
       },
       "Me'Aisem Second__land__land_large": {
@@ -16333,7 +16333,7 @@
         "count": 150
       },
       "Al Yelayiss 1__land__land_small": {
-        "medianPricePerSqm": 17599,
+        "medianPricePerSqm": 17566,
         "count": 67
       },
       "Al Yelayiss 1__land__land_medium": {
@@ -17087,7 +17087,7 @@
         "count": 29
       },
       "ARJAN__retail": {
-        "medianPricePerSqm": 18341,
+        "medianPricePerSqm": 18312,
         "count": 20
       },
       "JUMEIRAH ISLANDS__land": {
