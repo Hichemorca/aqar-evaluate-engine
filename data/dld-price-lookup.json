@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T06:38:54.365Z",
+  "generatedAt": "2026-08-10T07:11:33.150Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -2429,7 +2429,7 @@
         "count": 3
       },
       "HAMZA TOWER__apartment__small": {
-        "medianPricePerSqm": 6667,
+        "medianPricePerSqm": 8544,
         "count": 3
       },
       "GOLF VIEW RESIDENCE__apartment__small": {
@@ -3529,7 +3529,7 @@
         "count": 4
       },
       "Palace Residences - Dubai Creek Harbour__apartment__small": {
-        "medianPricePerSqm": 33846,
+        "medianPricePerSqm": 33077,
         "count": 11
       },
       "Creek Beach - Breeze__apartment__small": {
@@ -5241,11 +5241,11 @@
         "count": 2
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment__small": {
-        "medianPricePerSqm": 19753,
+        "medianPricePerSqm": 19752,
         "count": 6
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment__medium": {
-        "medianPricePerSqm": 19667,
+        "medianPricePerSqm": 19663,
         "count": 6
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13__apartment__medium": {
@@ -7185,7 +7185,7 @@
         "count": 19
       },
       "DAMAC LAGOONS - COSTA BRAVA (1)__land__land_small": {
-        "medianPricePerSqm": 16477,
+        "medianPricePerSqm": 17143,
         "count": 14
       },
       "DAMAC LAGOONS - COSTA BRAVA (1)__land__land_tiny": {
@@ -8017,7 +8017,7 @@
         "count": 5
       },
       "Palm Jebel Ali - The Beach and Coral Collection - Frond B__land__land_medium": {
-        "medianPricePerSqm": 39572,
+        "medianPricePerSqm": 39499,
         "count": 14
       },
       "Palm Jebel Ali - Frond N__land__land_large": {
@@ -8157,7 +8157,7 @@
         "count": 2
       },
       "DIAMOND BUSINESS CENTER__office__small": {
-        "medianPricePerSqm": 13431,
+        "medianPricePerSqm": 12727,
         "count": 20
       },
       "DIAMOND BUSINESS CENTER__office__medium": {
@@ -8927,7 +8927,7 @@
         "count": 9
       },
       "CONCEPT 7 RESIDENCES__apartment": {
-        "medianPricePerSqm": 17750,
+        "medianPricePerSqm": 17188,
         "count": 9
       },
       "DIAMOND VIEWS 3__apartment": {
@@ -8971,7 +8971,7 @@
         "count": 5
       },
       "LE GRAND CHATEAU__apartment": {
-        "medianPricePerSqm": 9938,
+        "medianPricePerSqm": 10000,
         "count": 9
       },
       "SOBHA DAFFODIL__apartment": {
@@ -11979,7 +11979,7 @@
         "count": 13
       },
       "PORT DE LA MER - LE SOLEIL__apartment": {
-        "medianPricePerSqm": 38356,
+        "medianPricePerSqm": 36567,
         "count": 22
       },
       "THE HAVEN__apartment": {
@@ -12211,7 +12211,7 @@
         "count": 6
       },
       "AZIZI RIVIERA 69__apartment": {
-        "medianPricePerSqm": 23025,
+        "medianPricePerSqm": 22880,
         "count": 35
       },
       "Azizi Riviera 44__apartment": {
@@ -13859,7 +13859,7 @@
         "count": 5
       },
       "Palm Jebel Ali - The Beach and Coral Collection - Frond B__land": {
-        "medianPricePerSqm": 37960,
+        "medianPricePerSqm": 37689,
         "count": 20
       },
       "Palm Jebel Ali - Frond N__land": {
@@ -14277,7 +14277,7 @@
         "count": 315
       },
       "DUBAI MARINA__apartment__medium": {
-        "medianPricePerSqm": 19091,
+        "medianPricePerSqm": 19101,
         "count": 521
       },
       "DUBAI MARINA__apartment__large": {
@@ -14337,7 +14337,7 @@
         "count": 15
       },
       "ARJAN__apartment__small": {
-        "medianPricePerSqm": 15282,
+        "medianPricePerSqm": 15278,
         "count": 494
       },
       "ARJAN__apartment__medium": {
@@ -14489,7 +14489,7 @@
         "count": 56
       },
       "LIWAN__apartment__small": {
-        "medianPricePerSqm": 10740,
+        "medianPricePerSqm": 10688,
         "count": 153
       },
       "LIWAN__apartment__medium": {
@@ -14701,7 +14701,7 @@
         "count": 136
       },
       "MAJAN__apartment__medium": {
-        "medianPricePerSqm": 11628,
+        "medianPricePerSqm": 11585,
         "count": 143
       },
       "Al Mizhar Second__land__land_large": {
@@ -15465,7 +15465,7 @@
         "count": 6
       },
       "Al Barsha Second__land__land_large": {
-        "medianPricePerSqm": 6098,
+        "medianPricePerSqm": 6416,
         "count": 8
       },
       "Nad Al Hamar__apartment__medium": {
@@ -16443,7 +16443,7 @@
         "count": 61
       },
       "AL FURJAN__land": {
-        "medianPricePerSqm": 14592,
+        "medianPricePerSqm": 14833,
         "count": 60
       },
       "SILICON OASIS__land": {
@@ -16531,7 +16531,7 @@
         "count": 33
       },
       "JUMEIRAH LAKES TOWERS__office": {
-        "medianPricePerSqm": 18289,
+        "medianPricePerSqm": 18286,
         "count": 315
       },
       "THE GREENS__apartment": {
@@ -16583,7 +16583,7 @@
         "count": 6
       },
       "BUSINESS BAY__retail": {
-        "medianPricePerSqm": 25641,
+        "medianPricePerSqm": 25222,
         "count": 46
       },
       "MBR DISTRICT 1__apartment": {
@@ -16599,7 +16599,7 @@
         "count": 139
       },
       "Jumeirah First__apartment": {
-        "medianPricePerSqm": 38356,
+        "medianPricePerSqm": 36567,
         "count": 22
       },
       "MAJAN__apartment": {
@@ -16967,7 +16967,7 @@
         "count": 33
       },
       "Al Barsha Second__land": {
-        "medianPricePerSqm": 6098,
+        "medianPricePerSqm": 6416,
         "count": 8
       },
       "Nad Al Hamar__apartment": {
@@ -17127,7 +17127,7 @@
         "count": 146
       },
       "Ghadeer Al tair__land": {
-        "medianPricePerSqm": 21508,
+        "medianPricePerSqm": 21667,
         "count": 30
       },
       "Muhaisanah First__apartment": {
