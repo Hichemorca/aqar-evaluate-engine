@@ -1,7 +1,7 @@
 {
-  "modelAccuracy": 67.4,
-  "mape": 32.6,
-  "r2": 0.707,
+  "modelAccuracy": 67.7,
+  "mape": 32.3,
+  "r2": 0.726,
   "trainingSamples": 27635,
   "features": [
     "area",
@@ -14,7 +14,7 @@
     "hasMall",
     "daysSinceStart"
   ],
-  "previousAccuracy": 86,
-  "trainedAt": "2026-08-16T06:23:03.011299",
+  "previousAccuracy": 86.1,
+  "trainedAt": "2026-08-17T06:35:02.051921",
   "modelVersion": "2.0.0"
 }
