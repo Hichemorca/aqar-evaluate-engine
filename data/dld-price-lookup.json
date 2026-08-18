@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T06:34:58.706Z",
+  "generatedAt": "2026-08-18T06:26:33.510Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -2789,7 +2789,7 @@
         "count": 7
       },
       "AZIZI. DAISY__apartment__medium": {
-        "medianPricePerSqm": 11625,
+        "medianPricePerSqm": 11220,
         "count": 4
       },
       "PEARLZ by Danube__apartment__medium": {
@@ -3973,7 +3973,7 @@
         "count": 33
       },
       "DAMAC HILLS (2) - PACIFICA__land__land_small": {
-        "medianPricePerSqm": 11180,
+        "medianPricePerSqm": 9390,
         "count": 4
       },
       "DAMAC HILLS (2) - JUNIPER__land__land_small": {
@@ -4053,7 +4053,7 @@
         "count": 3
       },
       "QPOINT LIWAN-PLOT R051__apartment__medium": {
-        "medianPricePerSqm": 8642,
+        "medianPricePerSqm": 6780,
         "count": 2
       },
       "QPOINT LIWAN-PLOT R070__apartment__small": {
@@ -4121,7 +4121,7 @@
         "count": 2
       },
       "QPOINT LIWAN-R019__apartment__medium": {
-        "medianPricePerSqm": 7080,
+        "medianPricePerSqm": 7168,
         "count": 3
       },
       "QPOINT LIWAN-PLOT R046__apartment__small": {
@@ -4269,7 +4269,7 @@
         "count": 8
       },
       "AL HABTOOR CITY__apartment__medium": {
-        "medianPricePerSqm": 19286,
+        "medianPricePerSqm": 19107,
         "count": 37
       },
       "PARK CENTRAL__apartment__small": {
@@ -4681,7 +4681,7 @@
         "count": 28
       },
       "The Nook__apartment__medium": {
-        "medianPricePerSqm": 17204,
+        "medianPricePerSqm": 16842,
         "count": 5
       },
       "JUMEIRAH BUSINESS CENTRE1__office__medium": {
@@ -5293,7 +5293,7 @@
         "count": 3
       },
       "ARABIAN GATE__apartment__medium": {
-        "medianPricePerSqm": 11200,
+        "medianPricePerSqm": 11074,
         "count": 2
       },
       "AURA ELEGANCE__apartment__small": {
@@ -5305,7 +5305,7 @@
         "count": 2
       },
       "ARABIAN GATE__apartment__small": {
-        "medianPricePerSqm": 11395,
+        "medianPricePerSqm": 11842,
         "count": 10
       },
       "SILICON GATE 1__apartment__small": {
@@ -7237,7 +7237,7 @@
         "count": 7
       },
       "DAMAC LAGOONS - VENICE (1)__land__land_small": {
-        "medianPricePerSqm": 13174,
+        "medianPricePerSqm": 13871,
         "count": 12
       },
       "DAMAC LAGOONS - MOROCCO 1__land__land_tiny": {
@@ -7409,7 +7409,7 @@
         "count": 3
       },
       "FAHAD 2__apartment__medium": {
-        "medianPricePerSqm": 9184,
+        "medianPricePerSqm": 10000,
         "count": 3
       },
       "FIRST CENTRAL__apartment__small": {
@@ -8599,7 +8599,7 @@
         "count": 10
       },
       "Boulevard Point__apartment": {
-        "medianPricePerSqm": 31298,
+        "medianPricePerSqm": 31720,
         "count": 21
       },
       "BURJ KHALIFA TOWERS__apartment": {
@@ -8871,7 +8871,7 @@
         "count": 36
       },
       "Binghatti Heights__apartment": {
-        "medianPricePerSqm": 14746,
+        "medianPricePerSqm": 14915,
         "count": 15
       },
       "Binghatti Aurora__apartment": {
@@ -9115,7 +9115,7 @@
         "count": 9
       },
       "Pearl House I by Imtiaz__apartment": {
-        "medianPricePerSqm": 17941,
+        "medianPricePerSqm": 17632,
         "count": 10
       },
       "Hadley Heights__apartment": {
@@ -11147,7 +11147,7 @@
         "count": 2
       },
       "QPOINT LIWAN-PLOT R051__apartment": {
-        "medianPricePerSqm": 8642,
+        "medianPricePerSqm": 8500,
         "count": 4
       },
       "QPOINT LIWAN-PLOT R070__apartment": {
@@ -11199,7 +11199,7 @@
         "count": 5
       },
       "QPOINT LIWAN-PLOT R005__apartment": {
-        "medianPricePerSqm": 5980,
+        "medianPricePerSqm": 5904,
         "count": 15
       },
       "QPOINT LIWAN-PLOT R095__apartment": {
@@ -11899,7 +11899,7 @@
         "count": 2
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment": {
-        "medianPricePerSqm": 19706,
+        "medianPricePerSqm": 19667,
         "count": 12
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13__apartment": {
@@ -11939,7 +11939,7 @@
         "count": 3
       },
       "ARABIAN GATE__apartment": {
-        "medianPricePerSqm": 11200,
+        "medianPricePerSqm": 11395,
         "count": 12
       },
       "AURA ELEGANCE__apartment": {
@@ -12035,7 +12035,7 @@
         "count": 12
       },
       "The Pulse Residence Icon__apartment": {
-        "medianPricePerSqm": 10942,
+        "medianPricePerSqm": 8621,
         "count": 2
       },
       "MAJESTIQUE RESIDENCE 2__apartment": {
@@ -14385,7 +14385,7 @@
         "count": 69
       },
       "BUSINESS BAY__office__large": {
-        "medianPricePerSqm": 27157,
+        "medianPricePerSqm": 28462,
         "count": 41
       },
       "DUBAI STUDIO CITY__apartment__small": {
@@ -14513,7 +14513,7 @@
         "count": 28
       },
       "Jabal Ali First__apartment__medium": {
-        "medianPricePerSqm": 17204,
+        "medianPricePerSqm": 16842,
         "count": 5
       },
       "JUMEIRAH LAKES TOWERS__office__medium": {
@@ -14533,7 +14533,7 @@
         "count": 95
       },
       "THE GREENS__apartment__medium": {
-        "medianPricePerSqm": 19130,
+        "medianPricePerSqm": 19171,
         "count": 113
       },
       "THE GREENS__apartment__large": {
@@ -14565,7 +14565,7 @@
         "count": 185
       },
       "DUBAI HILLS__apartment__small": {
-        "medianPricePerSqm": 24562,
+        "medianPricePerSqm": 24500,
         "count": 194
       },
       "DUBAI HILLS__apartment__large": {
@@ -14697,7 +14697,7 @@
         "count": 6
       },
       "MAJAN__apartment__small": {
-        "medianPricePerSqm": 14114,
+        "medianPricePerSqm": 14110,
         "count": 136
       },
       "MAJAN__apartment__medium": {
@@ -16333,7 +16333,7 @@
         "count": 150
       },
       "Al Yelayiss 1__land__land_small": {
-        "medianPricePerSqm": 17566,
+        "medianPricePerSqm": 17524,
         "count": 67
       },
       "Al Yelayiss 1__land__land_medium": {
@@ -16407,7 +16407,7 @@
         "count": 44
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment": {
-        "medianPricePerSqm": 13793,
+        "medianPricePerSqm": 13797,
         "count": 2036
       },
       "INTERNATIONAL CITY PH 1__apartment": {
@@ -17443,7 +17443,7 @@
         "count": 10
       },
       "Al Yelayiss 5__land": {
-        "medianPricePerSqm": 15861,
+        "medianPricePerSqm": 15870,
         "count": 873
       },
       "Jumeirah Second__land": {
