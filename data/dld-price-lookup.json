@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T06:26:33.510Z",
+  "generatedAt": "2026-08-19T06:27:18.151Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -2173,7 +2173,7 @@
         "count": 10
       },
       "Divine Living__apartment__small": {
-        "medianPricePerSqm": 13377,
+        "medianPricePerSqm": 14130,
         "count": 3
       },
       "BEVERLY BOULEVARD__apartment__small": {
@@ -2837,7 +2837,7 @@
         "count": 4
       },
       "Zazen Gardens__apartment__medium": {
-        "medianPricePerSqm": 16535,
+        "medianPricePerSqm": 16087,
         "count": 3
       },
       "Azizi Samia Residence__apartment__medium": {
@@ -5457,7 +5457,7 @@
         "count": 33
       },
       "CELESTIA__apartment__medium": {
-        "medianPricePerSqm": 10723,
+        "medianPricePerSqm": 11058,
         "count": 8
       },
       "TENORA__apartment__small": {
@@ -5665,7 +5665,7 @@
         "count": 8
       },
       "Serena - Casa Viva__villa__medium": {
-        "medianPricePerSqm": 14451,
+        "medianPricePerSqm": 14017,
         "count": 7
       },
       "Serena Casa Dora__villa__large": {
@@ -5741,7 +5741,7 @@
         "count": 8
       },
       "Azizi Riviera 4__apartment__small": {
-        "medianPricePerSqm": 18857,
+        "medianPricePerSqm": 19643,
         "count": 5
       },
       "Azizi Riviera 18__apartment__small": {
@@ -5853,7 +5853,7 @@
         "count": 3
       },
       "AZIZI RIVIERA 65__apartment__small": {
-        "medianPricePerSqm": 27687,
+        "medianPricePerSqm": 27463,
         "count": 16
       },
       "Azizi Riviera 31__apartment__small": {
@@ -7441,7 +7441,7 @@
         "count": 6
       },
       "Petalz By Danube__apartment__small": {
-        "medianPricePerSqm": 13583,
+        "medianPricePerSqm": 13833,
         "count": 14
       },
       "The Hamilton__apartment__medium": {
@@ -7837,7 +7837,7 @@
         "count": 2
       },
       "ATHLON BY AL DAR 1__land__land_medium": {
-        "medianPricePerSqm": 15268,
+        "medianPricePerSqm": 15344,
         "count": 12
       },
       "ATHLON BY AL DAR 2__land__land_medium": {
@@ -10343,7 +10343,7 @@
         "count": 6
       },
       "Zazen Gardens__apartment": {
-        "medianPricePerSqm": 16535,
+        "medianPricePerSqm": 16087,
         "count": 3
       },
       "VICTORIA RESIDENCY__apartment": {
@@ -10571,7 +10571,7 @@
         "count": 6
       },
       "AZIZI VISTA__apartment": {
-        "medianPricePerSqm": 14286,
+        "medianPricePerSqm": 14167,
         "count": 18
       },
       "SAMANA GOLF AVENUE__apartment": {
@@ -12119,7 +12119,7 @@
         "count": 2
       },
       "Asayel at Madinat Jumeirah Living__apartment": {
-        "medianPricePerSqm": 21645,
+        "medianPricePerSqm": 23691,
         "count": 11
       },
       "Madinat Jumeriah Living - Phase 2__apartment": {
@@ -12227,7 +12227,7 @@
         "count": 8
       },
       "Azizi Riviera 4__apartment": {
-        "medianPricePerSqm": 18857,
+        "medianPricePerSqm": 19643,
         "count": 5
       },
       "Azizi Riviera 18__apartment": {
@@ -12335,7 +12335,7 @@
         "count": 4
       },
       "AZIZI RIVIERA 65__apartment": {
-        "medianPricePerSqm": 27687,
+        "medianPricePerSqm": 27463,
         "count": 16
       },
       "Azizi Riviera 31__apartment": {
@@ -14225,7 +14225,7 @@
         "count": 4
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__small": {
-        "medianPricePerSqm": 14561,
+        "medianPricePerSqm": 14583,
         "count": 1262
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__medium": {
@@ -14301,7 +14301,7 @@
         "count": 3
       },
       "JUMEIRAH LAKES TOWERS__apartment__medium": {
-        "medianPricePerSqm": 14454,
+        "medianPricePerSqm": 14607,
         "count": 231
       },
       "JUMEIRAH LAKES TOWERS__apartment__small": {
@@ -14469,7 +14469,7 @@
         "count": 165
       },
       "DUBAI LAND RESIDENCE COMPLEX__apartment__medium": {
-        "medianPricePerSqm": 8000,
+        "medianPricePerSqm": 8039,
         "count": 115
       },
       "DUBAI LAND RESIDENCE COMPLEX__apartment__large": {
@@ -14561,7 +14561,7 @@
         "count": 6
       },
       "DUBAI HILLS__apartment__medium": {
-        "medianPricePerSqm": 25564,
+        "medianPricePerSqm": 25591,
         "count": 185
       },
       "DUBAI HILLS__apartment__small": {
@@ -15065,7 +15065,7 @@
         "count": 13
       },
       "JUMEIRAH VILLAGE CIRCLE__office__small": {
-        "medianPricePerSqm": 20006,
+        "medianPricePerSqm": 20528,
         "count": 10
       },
       "Al Warqa Third__land__land_large": {
@@ -15109,7 +15109,7 @@
         "count": 37
       },
       "MEYDAN ONE__land__land_xlarge": {
-        "medianPricePerSqm": 5384,
+        "medianPricePerSqm": 5385,
         "count": 12
       },
       "MEYDAN ONE__land__land_large": {
@@ -15445,7 +15445,7 @@
         "count": 45
       },
       "BARSHA HEIGHTS__apartment__medium": {
-        "medianPricePerSqm": 12397,
+        "medianPricePerSqm": 12810,
         "count": 13
       },
       "DUBAI LAND RESIDENCE COMPLEX__land__land_large": {
@@ -15749,7 +15749,7 @@
         "count": 2
       },
       "Hadaeq Sheikh Mohammed Bin Rashid__land__land_medium": {
-        "medianPricePerSqm": 29222,
+        "medianPricePerSqm": 29183,
         "count": 130
       },
       "Hadaeq Sheikh Mohammed Bin Rashid__land__land_large": {
@@ -16097,7 +16097,7 @@
         "count": 124
       },
       "Palm Jabal Ali__land__land_large": {
-        "medianPricePerSqm": 25998,
+        "medianPricePerSqm": 25952,
         "count": 43
       },
       "MOTOR CITY__office__large": {
@@ -16523,7 +16523,7 @@
         "count": 281
       },
       "BUSINESS BAY__apartment": {
-        "medianPricePerSqm": 19492,
+        "medianPricePerSqm": 19512,
         "count": 1260
       },
       "Jabal Ali First__apartment": {
@@ -16603,7 +16603,7 @@
         "count": 22
       },
       "MAJAN__apartment": {
-        "medianPricePerSqm": 12494,
+        "medianPricePerSqm": 12424,
         "count": 280
       },
       "Al Mizhar Second__land": {
@@ -16975,7 +16975,7 @@
         "count": 14
       },
       "Al Yelayiss 2__apartment": {
-        "medianPricePerSqm": 14674,
+        "medianPricePerSqm": 14667,
         "count": 132
       },
       "Al Warsan Second__land": {
@@ -17007,7 +17007,7 @@
         "count": 18
       },
       "Zaabeel Second__apartment": {
-        "medianPricePerSqm": 27027,
+        "medianPricePerSqm": 27612,
         "count": 58
       },
       "EMAAR SOUTH__apartment": {
@@ -17499,7 +17499,7 @@
         "count": 71
       },
       "Me'Aisem Second__land": {
-        "medianPricePerSqm": 19321,
+        "medianPricePerSqm": 19314,
         "count": 506
       },
       "Al Yelayiss 1__land": {
