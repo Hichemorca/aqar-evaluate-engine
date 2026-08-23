@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T06:22:56.969Z",
+  "generatedAt": "2026-08-23T06:24:36.204Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -453,7 +453,7 @@
         "count": 6
       },
       "Binghatti Royale__apartment__small": {
-        "medianPricePerSqm": 20000,
+        "medianPricePerSqm": 20410,
         "count": 32
       },
       "Binghatti Amber__apartment__medium": {
@@ -1641,7 +1641,7 @@
         "count": 2
       },
       "CAYAN TOWER__apartment__medium": {
-        "medianPricePerSqm": 21875,
+        "medianPricePerSqm": 22222,
         "count": 16
       },
       "ELITE RESIDENCE__apartment__medium": {
@@ -2009,7 +2009,7 @@
         "count": 2
       },
       "ARMADA TOWERS__apartment__small": {
-        "medianPricePerSqm": 14733,
+        "medianPricePerSqm": 15065,
         "count": 5
       },
       "MBL Royal__apartment__large": {
@@ -2097,7 +2097,7 @@
         "count": 14
       },
       "THE POLO RESIDENCE__apartment__medium": {
-        "medianPricePerSqm": 17902,
+        "medianPricePerSqm": 17904,
         "count": 21
       },
       "Azizi Gardens__apartment__small": {
@@ -2685,7 +2685,7 @@
         "count": 3
       },
       "ELITE 8 SPORTS RESIDENCE__apartment__small": {
-        "medianPricePerSqm": 9733,
+        "medianPricePerSqm": 11136,
         "count": 10
       },
       "Golf Vista Heights__apartment__small": {
@@ -3025,7 +3025,7 @@
         "count": 4
       },
       "OPAL TOWER__office__medium": {
-        "medianPricePerSqm": 20982,
+        "medianPricePerSqm": 18527,
         "count": 10
       },
       "SOL BAY__office__medium": {
@@ -3873,7 +3873,7 @@
         "count": 5
       },
       "DAMAC HILLS (2) - CENTAURY__land__land_tiny": {
-        "medianPricePerSqm": 11429,
+        "medianPricePerSqm": 11382,
         "count": 21
       },
       "DAMAC HILLS (2) - MIMOSA__land__land_tiny": {
@@ -4241,7 +4241,7 @@
         "count": 4
       },
       "AYKON CITY__apartment__small": {
-        "medianPricePerSqm": 16318,
+        "medianPricePerSqm": 16305,
         "count": 42
       },
       "THE PAD__apartment__small": {
@@ -9207,7 +9207,7 @@
         "count": 2
       },
       "Binghatti Crest__apartment": {
-        "medianPricePerSqm": 14348,
+        "medianPricePerSqm": 14561,
         "count": 12
       },
       "PLAZZO HEIGHTS__apartment": {
@@ -10703,7 +10703,7 @@
         "count": 28
       },
       "The Cove__apartment": {
-        "medianPricePerSqm": 24597,
+        "medianPricePerSqm": 24510,
         "count": 19
       },
       "Creek Beach - Lotus__apartment": {
@@ -10755,7 +10755,7 @@
         "count": 24
       },
       "The Grand__apartment": {
-        "medianPricePerSqm": 30409,
+        "medianPricePerSqm": 31081,
         "count": 42
       },
       "Creek Beach - Bayshore__apartment": {
@@ -11315,7 +11315,7 @@
         "count": 12
       },
       "NOBLES__apartment": {
-        "medianPricePerSqm": 17587,
+        "medianPricePerSqm": 17627,
         "count": 25
       },
       "DAMAC TOWERS BY PARAMOUNT__apartment": {
@@ -11419,7 +11419,7 @@
         "count": 13
       },
       "WATER'S EDGE__apartment": {
-        "medianPricePerSqm": 16316,
+        "medianPricePerSqm": 16949,
         "count": 12
       },
       "Binghatti Canal__apartment": {
@@ -12167,7 +12167,7 @@
         "count": 15
       },
       "SERENA BELLA CASA__villa": {
-        "medianPricePerSqm": 13868,
+        "medianPricePerSqm": 13825,
         "count": 14
       },
       "Serena - Casa Viva__villa": {
@@ -13759,7 +13759,7 @@
         "count": 13
       },
       "Opalz By Danube__apartment": {
-        "medianPricePerSqm": 15482,
+        "medianPricePerSqm": 15486,
         "count": 28
       },
       "One Za'abeel__apartment": {
@@ -13943,7 +13943,7 @@
         "count": 3
       },
       "DIAMOND BUSINESS CENTER__office": {
-        "medianPricePerSqm": 13431,
+        "medianPricePerSqm": 12727,
         "count": 25
       },
       "THE LIGHT__office": {
@@ -13975,7 +13975,7 @@
         "count": 334
       },
       "Salva The Heights__land": {
-        "medianPricePerSqm": 16309,
+        "medianPricePerSqm": 16318,
         "count": 337
       },
       "Serro The Heights__land": {
@@ -14493,7 +14493,7 @@
         "count": 153
       },
       "LIWAN__apartment__medium": {
-        "medianPricePerSqm": 9381,
+        "medianPricePerSqm": 9639,
         "count": 128
       },
       "BUSINESS BAY__apartment__small": {
@@ -14505,7 +14505,7 @@
         "count": 563
       },
       "BUSINESS BAY__apartment__large": {
-        "medianPricePerSqm": 18382,
+        "medianPricePerSqm": 18224,
         "count": 51
       },
       "Jabal Ali First__apartment__small": {
@@ -14573,7 +14573,7 @@
         "count": 11
       },
       "JABEL ALI HILLS__land__land_medium": {
-        "medianPricePerSqm": 3498,
+        "medianPricePerSqm": 3613,
         "count": 50
       },
       "JABEL ALI HILLS__land__land_large": {
@@ -14633,7 +14633,7 @@
         "count": 3
       },
       "Al Suq Al Kabeer__land__land_small": {
-        "medianPricePerSqm": 26846,
+        "medianPricePerSqm": 27304,
         "count": 7
       },
       "Al Suq Al Kabeer__land__land_medium": {
@@ -16345,7 +16345,7 @@
         "count": 146
       },
       "Al Yufrah 1__land__land_small": {
-        "medianPricePerSqm": 14090,
+        "medianPricePerSqm": 14650,
         "count": 7
       },
       "Wadi Al Safa 2__land__land_small": {
@@ -16491,7 +16491,7 @@
         "count": 161
       },
       "DISCOVERY GARDENS__apartment": {
-        "medianPricePerSqm": 10150,
+        "medianPricePerSqm": 10162,
         "count": 554
       },
       "SOBHA HEARTLAND__retail": {
@@ -16515,7 +16515,7 @@
         "count": 3
       },
       "Madinat Hind 4__land": {
-        "medianPricePerSqm": 11475,
+        "medianPricePerSqm": 11473,
         "count": 507
       },
       "LIWAN__apartment": {
@@ -16647,7 +16647,7 @@
         "count": 30
       },
       "MOTOR CITY__apartment": {
-        "medianPricePerSqm": 10830,
+        "medianPricePerSqm": 10839,
         "count": 325
       },
       "Abu Hail__land": {
