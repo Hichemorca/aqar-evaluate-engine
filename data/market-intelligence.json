@@ -1,21 +1,26 @@
 {
-  "generatedAt": "2026-08-25T10:01:36.848Z",
+  "generatedAt": "2026-08-25T10:39:55.660Z",
   "dataWindow": {
     "firstTransactionDate": "2026-01",
     "lastTransactionDate": "2026-07",
     "note": "All growth, volatility, and risk metrics use the complete available transaction history for each district, not a fixed lookback window. This window will grow automatically as more data accumulates."
   },
-  "totalTransactions": 27669,
-  "qualifyingDistricts": 77,
+  "totalTransactions": 24440,
+  "qualifyingDistricts": 75,
   "excludedDistricts": [
     {
-      "district": "Al Barsha First (Apartment)",
+      "district": "AL BARSHA FIRST (Apartment)",
       "transactionCount": 11,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Jumeirah First (Apartment)",
+      "district": "JUMEIRAH FIRST (Apartment)",
       "transactionCount": 22,
+      "reason": "below minimum transaction count"
+    },
+    {
+      "district": "MARSA DUBAI (Apartment)",
+      "transactionCount": 28,
       "reason": "below minimum transaction count"
     },
     {
@@ -25,7 +30,7 @@
     },
     {
       "district": "JUMEIRAH LIVING (Apartment)",
-      "transactionCount": 28,
+      "transactionCount": 27,
       "reason": "below minimum transaction count"
     },
     {
@@ -44,11 +49,6 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Wadi Al Safa 3 (Villa)",
-      "transactionCount": 18,
-      "reason": "below minimum transaction count"
-    },
-    {
       "district": "DUBAI MARITIME CITY (Apartment)",
       "transactionCount": 15,
       "reason": "below minimum transaction count"
@@ -59,7 +59,7 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Hadaeq Sheikh Mohammed Bin Rashid (Villa)",
+      "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID (Villa)",
       "transactionCount": 3,
       "reason": "below minimum transaction count"
     },
@@ -99,22 +99,22 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Warsan First (Apartment)",
+      "district": "WARSAN FIRST (Apartment)",
       "transactionCount": 33,
       "reason": "fewer than minimum months of data for a reliable trend fit"
     },
     {
-      "district": "Al Wasl (Apartment)",
+      "district": "AL WASL (Apartment)",
       "transactionCount": 25,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Nad Al Hamar (Apartment)",
+      "district": "NAD AL HAMAR (Apartment)",
       "transactionCount": 14,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Nad Al Shiba First (Villa)",
+      "district": "NAD AL SHIBA FIRST (Villa)",
       "transactionCount": 3,
       "reason": "below minimum transaction count"
     },
@@ -125,7 +125,7 @@
     },
     {
       "district": "AL BARARI (Apartment)",
-      "transactionCount": 94,
+      "transactionCount": 84,
       "reason": "fewer than minimum months of data for a reliable trend fit"
     },
     {
@@ -139,22 +139,12 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Hadaeq Sheikh Mohammed Bin Rashid (Apartment)",
+      "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID (Apartment)",
       "transactionCount": 40,
       "reason": "fewer than minimum months of data for a reliable trend fit"
     },
     {
-      "district": "Island 2 (Villa)",
-      "transactionCount": 4,
-      "reason": "below minimum transaction count"
-    },
-    {
-      "district": "Business Bay (Apartment)",
-      "transactionCount": 14,
-      "reason": "below minimum transaction count"
-    },
-    {
-      "district": "Wadi Al Safa 3 (Apartment)",
+      "district": "WADI AL SAFA 3 (Apartment)",
       "transactionCount": 29,
       "reason": "below minimum transaction count"
     },
@@ -164,7 +154,7 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Al Kheeran (Apartment)",
+      "district": "AL KHEERAN (Apartment)",
       "transactionCount": 18,
       "reason": "below minimum transaction count"
     },
@@ -179,12 +169,17 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Muhaisanah First (Apartment)",
+      "district": "BLUEWATERS (Apartment)",
+      "transactionCount": 10,
+      "reason": "below minimum transaction count"
+    },
+    {
+      "district": "MUHAISANAH FIRST (Apartment)",
       "transactionCount": 22,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Al Barshaa South Third (Apartment)",
+      "district": "AL BARSHAA SOUTH THIRD (Apartment)",
       "transactionCount": 4,
       "reason": "below minimum transaction count"
     },
@@ -194,8 +189,8 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Zaabeel First (Apartment)",
-      "transactionCount": 17,
+      "district": "ZAABEEL FIRST (Apartment)",
+      "transactionCount": 7,
       "reason": "below minimum transaction count"
     },
     {
@@ -204,13 +199,13 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Al Kheeran (Villa)",
+      "district": "AL KHEERAN (Villa)",
       "transactionCount": 1,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Me'Aisem First (Villa)",
-      "transactionCount": 9,
+      "district": "ME'AISEM FIRST (Villa)",
+      "transactionCount": 8,
       "reason": "below minimum transaction count"
     },
     {
@@ -239,13 +234,8 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Al Thanyah Third (Villa)",
+      "district": "AL THANYAH THIRD (Villa)",
       "transactionCount": 1,
-      "reason": "below minimum transaction count"
-    },
-    {
-      "district": "Trade Center First (Apartment)",
-      "transactionCount": 3,
       "reason": "below minimum transaction count"
     },
     {
@@ -254,13 +244,8 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "PALM JUMEIRAH (Villa)",
-      "transactionCount": 2,
-      "reason": "below minimum transaction count"
-    },
-    {
-      "district": "JUMEIRA BAY (Apartment)",
-      "transactionCount": 2,
+      "district": "WADI AL SAFA 3 (Villa)",
+      "transactionCount": 14,
       "reason": "below minimum transaction count"
     },
     {
@@ -269,7 +254,7 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Al Qusais Industrial Fourth (Apartment)",
+      "district": "AL QUSAIS INDUSTRIAL FOURTH (Apartment)",
       "transactionCount": 4,
       "reason": "below minimum transaction count"
     },
@@ -285,11 +270,11 @@
     },
     {
       "district": "LA MER (Villa)",
-      "transactionCount": 3,
+      "transactionCount": 2,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Saih Shuaib 2 (Apartment)",
+      "district": "SAIH SHUAIB 2 (Apartment)",
       "transactionCount": 1,
       "reason": "below minimum transaction count"
     },
@@ -299,12 +284,12 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Rega Al Buteen (Apartment)",
+      "district": "REGA AL BUTEEN (Apartment)",
       "transactionCount": 1,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Wadi Al Safa 4 (Villa)",
+      "district": "WADI AL SAFA 4 (Villa)",
       "transactionCount": 3,
       "reason": "below minimum transaction count"
     },
@@ -314,8 +299,13 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "PEARL JUMEIRA (Apartment)",
+      "district": "ISLAND 2 (Villa)",
       "transactionCount": 2,
+      "reason": "below minimum transaction count"
+    },
+    {
+      "district": "PEARL JUMEIRA (Apartment)",
+      "transactionCount": 1,
       "reason": "below minimum transaction count"
     },
     {
@@ -329,18 +319,23 @@
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Madinat Dubai Almelaheyah (Apartment)",
+      "district": "MADINAT DUBAI ALMELAHEYAH (Apartment)",
       "transactionCount": 2,
       "reason": "below minimum transaction count"
     },
     {
-      "district": "Al Merkadh (Apartment)",
+      "district": "AL MERKADH (Apartment)",
       "transactionCount": 2,
+      "reason": "below minimum transaction count"
+    },
+    {
+      "district": "TRADE CENTER FIRST (Apartment)",
+      "transactionCount": 1,
       "reason": "below minimum transaction count"
     },
     {
       "district": "DUBAI INVESTMENT PARK SECOND (Apartment)",
-      "transactionCount": 45,
+      "transactionCount": 49,
       "reason": "fewer than minimum months of data for a reliable trend fit"
     }
   ],
@@ -353,18 +348,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 14714,
+      "medianPricePerSqm": 14732,
       "growth": {
-        "observedPeriodGrowthPct": 6.8,
-        "annualizedPct": 14,
+        "observedPeriodGrowthPct": 7.8,
+        "annualizedPct": 15.6,
         "method": "ols_trend_full_history",
-        "r2": 0.28,
+        "r2": 0.33,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 16.2,
+      "temporalVolatilityPct": 15.1,
       "valuationDispersionCV": 20,
-      "priceAccelerationPct": -77,
+      "priceAccelerationPct": -76.6,
       "volumeTrendPctPerMonth": -10.2,
       "avgMonthlyTransactions": 95.9,
       "smallSampleWarning": false,
@@ -373,193 +368,139 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 6.8,
-          "annualizedPct": 14,
+          "observedPeriodGrowthPct": 7.8,
+          "annualizedPct": 15.6,
           "monthsUsed": 7,
-          "r2": 0.28,
+          "r2": 0.33,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 1.7,
-          "annualizedPct": 2.2,
+          "observedPeriodGrowthPct": 2.7,
+          "annualizedPct": 3.8,
           "monthsUsed": 6,
-          "r2": 0.01,
+          "r2": 0.04,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": -5.7,
-          "annualizedPct": -29.9,
+          "observedPeriodGrowthPct": -4.8,
+          "annualizedPct": -25.4,
           "monthsUsed": 3,
-          "r2": 0.98,
+          "r2": 0.97,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 31.7,
-      "investmentScore": 82.5,
+      "bubbleRiskScore": 31.4,
+      "investmentScore": 83.5,
       "liquidityPercentile": 95
     },
     {
       "district": "AL FURJAN",
-      "transactionCount": 460,
+      "transactionCount": 459,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 31,
-      "medianPricePerSqm": 13969,
+      "medianPricePerSqm": 14033,
       "growth": {
-        "observedPeriodGrowthPct": -2.1,
-        "annualizedPct": -3.4,
+        "observedPeriodGrowthPct": -2,
+        "annualizedPct": -4.3,
         "method": "ols_trend_full_history",
-        "r2": 0.1,
+        "r2": 0.16,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 9.2,
-      "valuationDispersionCV": 15.8,
-      "priceAccelerationPct": -29.9,
-      "volumeTrendPctPerMonth": -13.2,
-      "avgMonthlyTransactions": 65.7,
+      "temporalVolatilityPct": 9.8,
+      "valuationDispersionCV": 15.6,
+      "priceAccelerationPct": -25.8,
+      "volumeTrendPctPerMonth": -13.1,
+      "avgMonthlyTransactions": 65.6,
       "smallSampleWarning": false,
       "anomalousMonths": null,
       "label": "AL FURJAN (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": -2.1,
-          "annualizedPct": -3.4,
+          "observedPeriodGrowthPct": -2,
+          "annualizedPct": -4.3,
           "monthsUsed": 7,
-          "r2": 0.1,
+          "r2": 0.16,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -4.7,
-          "annualizedPct": -7.2,
+          "observedPeriodGrowthPct": -4.8,
+          "annualizedPct": -8,
           "monthsUsed": 6,
-          "r2": 0.32,
+          "r2": 0.37,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": -4.2,
-          "annualizedPct": -22.7,
+          "observedPeriodGrowthPct": -3.7,
+          "annualizedPct": -20.2,
           "monthsUsed": 3,
-          "r2": 0.99,
+          "r2": 0.98,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 21.9,
-      "investmentScore": 78.4,
-      "liquidityPercentile": 87
+      "bubbleRiskScore": 22.1,
+      "investmentScore": 77.9,
+      "liquidityPercentile": 86
     },
     {
-      "district": "DUBAI STUDIO CITY",
-      "transactionCount": 221,
-      "monthsOfData": 7,
-      "monthCoverageRatio": 0.88,
-      "firstMonth": "2026-01",
-      "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 15071,
-      "growth": {
-        "observedPeriodGrowthPct": 1.9,
-        "annualizedPct": -2.5,
-        "method": "ols_trend_full_history",
-        "r2": 0.01,
-        "monthsUsed": 7,
-        "periodLabel": "2026-01 to 2026-07"
-      },
-      "temporalVolatilityPct": 14.7,
-      "valuationDispersionCV": 14.1,
-      "priceAccelerationPct": -46.4,
-      "volumeTrendPctPerMonth": -11.1,
-      "avgMonthlyTransactions": 31.6,
-      "smallSampleWarning": false,
-      "anomalousMonths": null,
-      "label": "DUBAI STUDIO CITY (Apartment)",
-      "propertyType": "apartment",
-      "windowedGrowth": {
-        "full": {
-          "observedPeriodGrowthPct": 1.9,
-          "annualizedPct": -2.5,
-          "monthsUsed": 7,
-          "r2": 0.01,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": -1.8,
-          "annualizedPct": -13,
-          "monthsUsed": 6,
-          "r2": 0.35,
-          "periodLabel": "2026-02 to 2026-07"
-        },
-        "last3m": {
-          "observedPeriodGrowthPct": -0.8,
-          "annualizedPct": -4.9,
-          "monthsUsed": 3,
-          "r2": 0.99,
-          "periodLabel": "2026-05 to 2026-07"
-        }
-      },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 27.5,
-      "investmentScore": 77.8,
-      "liquidityPercentile": 67
-    },
-    {
-      "district": "DUBAI CREEK HARBOUR",
-      "transactionCount": 653,
+      "district": "DUBAI SPORTS CITY",
+      "transactionCount": 518,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 31,
-      "medianPricePerSqm": 25269,
+      "medianPricePerSqm": 10591,
       "growth": {
-        "observedPeriodGrowthPct": -6.7,
-        "annualizedPct": -13.6,
+        "observedPeriodGrowthPct": 3.9,
+        "annualizedPct": 12.9,
         "method": "ols_trend_full_history",
-        "r2": 0.89,
+        "r2": 0.2,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 5.1,
-      "valuationDispersionCV": 14.6,
-      "priceAccelerationPct": -7.6,
-      "volumeTrendPctPerMonth": -9,
-      "avgMonthlyTransactions": 93.3,
+      "temporalVolatilityPct": 20.1,
+      "valuationDispersionCV": 22.7,
+      "priceAccelerationPct": 38,
+      "volumeTrendPctPerMonth": -10.1,
+      "avgMonthlyTransactions": 74,
       "smallSampleWarning": false,
       "anomalousMonths": null,
-      "label": "DUBAI CREEK HARBOUR (Apartment)",
+      "label": "DUBAI SPORTS CITY (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": -6.7,
-          "annualizedPct": -13.6,
+          "observedPeriodGrowthPct": 3.9,
+          "annualizedPct": 12.9,
           "monthsUsed": 7,
-          "r2": 0.89,
+          "r2": 0.2,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -6.3,
-          "annualizedPct": -15,
+          "observedPeriodGrowthPct": 7.4,
+          "annualizedPct": 26.2,
           "monthsUsed": 6,
-          "r2": 0.88,
+          "r2": 0.47,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": -2.3,
-          "annualizedPct": -13,
+          "observedPeriodGrowthPct": 1,
+          "annualizedPct": 6.2,
           "monthsUsed": 3,
-          "r2": 1,
+          "r2": 0.11,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 12.8,
-      "investmentScore": 77.1,
-      "liquidityPercentile": 93
+      "bubbleRiskScore": 60.9,
+      "investmentScore": 76.6,
+      "liquidityPercentile": 88
     },
     {
       "district": "INTERNATIONAL CITY PH 1",
@@ -571,16 +512,16 @@
       "daysSinceLastTransaction": 31,
       "medianPricePerSqm": 6940,
       "growth": {
-        "observedPeriodGrowthPct": -5.7,
-        "annualizedPct": -14.3,
+        "observedPeriodGrowthPct": -5.6,
+        "annualizedPct": -14.8,
         "method": "ols_trend_full_history",
-        "r2": 0.77,
+        "r2": 0.74,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 7.1,
-      "valuationDispersionCV": 15.1,
-      "priceAccelerationPct": -7.6,
+      "temporalVolatilityPct": 8.3,
+      "valuationDispersionCV": 15.2,
+      "priceAccelerationPct": -5,
       "volumeTrendPctPerMonth": -13,
       "avgMonthlyTransactions": 78.7,
       "smallSampleWarning": false,
@@ -589,85 +530,139 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": -5.7,
-          "annualizedPct": -14.3,
+          "observedPeriodGrowthPct": -5.6,
+          "annualizedPct": -14.8,
           "monthsUsed": 7,
-          "r2": 0.77,
+          "r2": 0.74,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -8.5,
-          "annualizedPct": -19.2,
+          "observedPeriodGrowthPct": -9,
+          "annualizedPct": -20,
           "monthsUsed": 6,
-          "r2": 0.96,
+          "r2": 0.92,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
           "observedPeriodGrowthPct": -2.9,
           "annualizedPct": -16,
           "monthsUsed": 3,
-          "r2": 0.96,
+          "r2": 1,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 18.3,
+      "bubbleRiskScore": 19.2,
       "investmentScore": 76.2,
       "liquidityPercentile": 89
     },
     {
-      "district": "DUBAI SPORTS CITY",
-      "transactionCount": 531,
+      "district": "DUBAI STUDIO CITY",
+      "transactionCount": 220,
+      "monthsOfData": 7,
+      "monthCoverageRatio": 0.88,
+      "firstMonth": "2026-01",
+      "lastMonth": "2026-07",
+      "daysSinceLastTransaction": 32,
+      "medianPricePerSqm": 15037,
+      "growth": {
+        "observedPeriodGrowthPct": 2.2,
+        "annualizedPct": -3.2,
+        "method": "ols_trend_full_history",
+        "r2": 0.02,
+        "monthsUsed": 7,
+        "periodLabel": "2026-01 to 2026-07"
+      },
+      "temporalVolatilityPct": 16,
+      "valuationDispersionCV": 13.8,
+      "priceAccelerationPct": -39.5,
+      "volumeTrendPctPerMonth": -10.8,
+      "avgMonthlyTransactions": 31.4,
+      "smallSampleWarning": false,
+      "anomalousMonths": null,
+      "label": "DUBAI STUDIO CITY (Apartment)",
+      "propertyType": "apartment",
+      "windowedGrowth": {
+        "full": {
+          "observedPeriodGrowthPct": 2.2,
+          "annualizedPct": -3.2,
+          "monthsUsed": 7,
+          "r2": 0.02,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": -2.4,
+          "annualizedPct": -14.5,
+          "monthsUsed": 6,
+          "r2": 0.38,
+          "periodLabel": "2026-02 to 2026-07"
+        },
+        "last3m": {
+          "observedPeriodGrowthPct": 0.3,
+          "annualizedPct": 2.1,
+          "monthsUsed": 3,
+          "r2": 0.24,
+          "periodLabel": "2026-05 to 2026-07"
+        }
+      },
+      "confidenceScore": 90,
+      "bubbleRiskScore": 28.3,
+      "investmentScore": 76.2,
+      "liquidityPercentile": 66
+    },
+    {
+      "district": "DUBAI CREEK HARBOUR",
+      "transactionCount": 653,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 31,
-      "medianPricePerSqm": 10606,
+      "medianPricePerSqm": 25284,
       "growth": {
-        "observedPeriodGrowthPct": 3,
-        "annualizedPct": 12,
+        "observedPeriodGrowthPct": -7.1,
+        "annualizedPct": -14.1,
         "method": "ols_trend_full_history",
-        "r2": 0.17,
+        "r2": 0.85,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 20.7,
-      "valuationDispersionCV": 22.4,
-      "priceAccelerationPct": 32.7,
-      "volumeTrendPctPerMonth": -10.1,
-      "avgMonthlyTransactions": 75.9,
+      "temporalVolatilityPct": 5.8,
+      "valuationDispersionCV": 14.6,
+      "priceAccelerationPct": -12.2,
+      "volumeTrendPctPerMonth": -9,
+      "avgMonthlyTransactions": 93.3,
       "smallSampleWarning": false,
       "anomalousMonths": null,
-      "label": "DUBAI SPORTS CITY (Apartment)",
+      "label": "DUBAI CREEK HARBOUR (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 3,
-          "annualizedPct": 12,
+          "observedPeriodGrowthPct": -7.1,
+          "annualizedPct": -14.1,
           "monthsUsed": 7,
-          "r2": 0.17,
+          "r2": 0.85,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 6.7,
-          "annualizedPct": 25.4,
+          "observedPeriodGrowthPct": -7,
+          "annualizedPct": -16.3,
           "monthsUsed": 6,
-          "r2": 0.44,
+          "r2": 0.87,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 0,
-          "annualizedPct": 0,
+          "observedPeriodGrowthPct": -2.7,
+          "annualizedPct": -15.2,
           "monthsUsed": 3,
-          "r2": 0,
+          "r2": 0.91,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 60.9,
-      "investmentScore": 76.1,
-      "liquidityPercentile": 88
+      "bubbleRiskScore": 13.4,
+      "investmentScore": 76,
+      "liquidityPercentile": 93
     },
     {
       "district": "MEYDAN ONE",
@@ -677,18 +672,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 21591,
+      "medianPricePerSqm": 21563,
       "growth": {
-        "observedPeriodGrowthPct": -1.1,
-        "annualizedPct": -8.9,
+        "observedPeriodGrowthPct": -2.1,
+        "annualizedPct": -10.8,
         "method": "ols_trend_full_history",
-        "r2": 0.31,
+        "r2": 0.4,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 14.5,
+      "temporalVolatilityPct": 15,
       "valuationDispersionCV": 15.5,
-      "priceAccelerationPct": -4.1,
+      "priceAccelerationPct": -6.4,
       "volumeTrendPctPerMonth": -11.6,
       "avgMonthlyTransactions": 64,
       "smallSampleWarning": false,
@@ -697,108 +692,108 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": -1.1,
-          "annualizedPct": -8.9,
+          "observedPeriodGrowthPct": -2.1,
+          "annualizedPct": -10.8,
           "monthsUsed": 7,
-          "r2": 0.31,
+          "r2": 0.4,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -6.5,
-          "annualizedPct": -14.8,
+          "observedPeriodGrowthPct": -6.8,
+          "annualizedPct": -16,
           "monthsUsed": 6,
-          "r2": 0.57,
+          "r2": 0.59,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": -2.7,
-          "annualizedPct": -15,
+          "observedPeriodGrowthPct": -3.3,
+          "annualizedPct": -18.2,
           "monthsUsed": 3,
-          "r2": 0.29,
+          "r2": 0.26,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 25.6,
-      "investmentScore": 76,
+      "bubbleRiskScore": 24.9,
+      "investmentScore": 75.2,
       "liquidityPercentile": 84
     },
     {
       "district": "DUBAI MARINA",
-      "transactionCount": 938,
+      "transactionCount": 921,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 20213,
+      "medianPricePerSqm": 19999,
       "growth": {
-        "observedPeriodGrowthPct": 7.1,
-        "annualizedPct": 1.1,
+        "observedPeriodGrowthPct": 7,
+        "annualizedPct": 0.6,
         "method": "ols_trend_full_history",
         "r2": 0,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 26.1,
-      "valuationDispersionCV": 43.3,
-      "priceAccelerationPct": 139.2,
+      "temporalVolatilityPct": 24.2,
+      "valuationDispersionCV": 37.4,
+      "priceAccelerationPct": 161.1,
       "volumeTrendPctPerMonth": -4.2,
-      "avgMonthlyTransactions": 134,
+      "avgMonthlyTransactions": 131.6,
       "smallSampleWarning": false,
       "anomalousMonths": null,
       "label": "DUBAI MARINA (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 7.1,
-          "annualizedPct": 1.1,
+          "observedPeriodGrowthPct": 7,
+          "annualizedPct": 0.6,
           "monthsUsed": 7,
           "r2": 0,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 9.4,
-          "annualizedPct": 4,
+          "observedPeriodGrowthPct": 9.5,
+          "annualizedPct": 4.6,
           "monthsUsed": 6,
           "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 17,
-          "annualizedPct": 156.2,
+          "observedPeriodGrowthPct": 17.7,
+          "annualizedPct": 166.2,
           "monthsUsed": 3,
-          "r2": 0.86,
+          "r2": 0.88,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 62.9,
-      "investmentScore": 74.8,
+      "bubbleRiskScore": 61.1,
+      "investmentScore": 74.7,
       "liquidityPercentile": 97
     },
     {
       "district": "JUMEIRAH LAKES TOWERS",
-      "transactionCount": 440,
+      "transactionCount": 441,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 15563,
+      "medianPricePerSqm": 15551,
       "growth": {
         "observedPeriodGrowthPct": -3,
-        "annualizedPct": -9.4,
+        "annualizedPct": -9.1,
         "method": "ols_trend_full_history",
-        "r2": 0.34,
+        "r2": 0.33,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 9.6,
-      "valuationDispersionCV": 22.9,
-      "priceAccelerationPct": 53.3,
-      "volumeTrendPctPerMonth": -14.3,
-      "avgMonthlyTransactions": 62.9,
+      "temporalVolatilityPct": 9,
+      "valuationDispersionCV": 23.1,
+      "priceAccelerationPct": 55.9,
+      "volumeTrendPctPerMonth": -14.4,
+      "avgMonthlyTransactions": 63,
       "smallSampleWarning": false,
       "anomalousMonths": null,
       "label": "JUMEIRAH LAKES TOWERS (Apartment)",
@@ -806,30 +801,30 @@
       "windowedGrowth": {
         "full": {
           "observedPeriodGrowthPct": -3,
-          "annualizedPct": -9.4,
+          "annualizedPct": -9.1,
           "monthsUsed": 7,
-          "r2": 0.34,
+          "r2": 0.33,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -2.6,
-          "annualizedPct": -5.6,
+          "observedPeriodGrowthPct": -2,
+          "annualizedPct": -4.8,
           "monthsUsed": 6,
-          "r2": 0.12,
+          "r2": 0.09,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 4.3,
-          "annualizedPct": 28.6,
+          "observedPeriodGrowthPct": 4.7,
+          "annualizedPct": 31.7,
           "monthsUsed": 3,
-          "r2": 0.83,
+          "r2": 0.89,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 51.1,
-      "investmentScore": 74.1,
-      "liquidityPercentile": 83
+      "bubbleRiskScore": 50.4,
+      "investmentScore": 73.1,
+      "liquidityPercentile": 82
     },
     {
       "district": "TOWN SQUARE",
@@ -839,18 +834,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 14248,
+      "medianPricePerSqm": 14192,
       "growth": {
-        "observedPeriodGrowthPct": -0.4,
+        "observedPeriodGrowthPct": -0.3,
         "annualizedPct": -9.1,
         "method": "ols_trend_full_history",
         "r2": 0.24,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 15.7,
-      "valuationDispersionCV": 17,
-      "priceAccelerationPct": 17,
+      "temporalVolatilityPct": 15.6,
+      "valuationDispersionCV": 17.1,
+      "priceAccelerationPct": 9.7,
       "volumeTrendPctPerMonth": -9.5,
       "avgMonthlyTransactions": 36.6,
       "smallSampleWarning": false,
@@ -859,31 +854,31 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": -0.4,
+          "observedPeriodGrowthPct": -0.3,
           "annualizedPct": -9.1,
           "monthsUsed": 7,
           "r2": 0.24,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -1.8,
-          "annualizedPct": -12.1,
+          "observedPeriodGrowthPct": -2.2,
+          "annualizedPct": -13,
           "monthsUsed": 6,
-          "r2": 0.28,
+          "r2": 0.32,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 4.2,
-          "annualizedPct": 28,
+          "observedPeriodGrowthPct": 3.6,
+          "annualizedPct": 23.6,
           "monthsUsed": 3,
-          "r2": 0.4,
+          "r2": 0.33,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 41.3,
-      "investmentScore": 72.9,
-      "liquidityPercentile": 70
+      "bubbleRiskScore": 34,
+      "investmentScore": 72,
+      "liquidityPercentile": 69
     }
   ],
   "fastestGrowing": [
@@ -895,17 +890,17 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 24300,
+      "medianPricePerSqm": 24384,
       "growth": {
-        "observedPeriodGrowthPct": 35.1,
-        "annualizedPct": 81.7,
+        "observedPeriodGrowthPct": 34.1,
+        "annualizedPct": 79.3,
         "method": "ols_trend_full_history",
-        "r2": 0.51,
+        "r2": 0.5,
         "monthsUsed": 6,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 54.9,
-      "valuationDispersionCV": 23.9,
+      "temporalVolatilityPct": 55.1,
+      "valuationDispersionCV": 23.7,
       "priceAccelerationPct": null,
       "volumeTrendPctPerMonth": -0.7,
       "avgMonthlyTransactions": 8,
@@ -915,76 +910,76 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 35.1,
-          "annualizedPct": 81.7,
+          "observedPeriodGrowthPct": 34.1,
+          "annualizedPct": 79.3,
           "monthsUsed": 6,
-          "r2": 0.51,
+          "r2": 0.5,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 35.1,
-          "annualizedPct": 81.7,
+          "observedPeriodGrowthPct": 34.1,
+          "annualizedPct": 79.3,
           "monthsUsed": 6,
-          "r2": 0.51,
+          "r2": 0.5,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 5.2,
-          "annualizedPct": 35.6,
+          "observedPeriodGrowthPct": 4.4,
+          "annualizedPct": 29.5,
           "monthsUsed": 3,
-          "r2": 0.36,
+          "r2": 0.27,
           "periodLabel": "2026-04 to 2026-07"
         }
       },
       "confidenceScore": 67,
       "bubbleRiskScore": null,
-      "investmentScore": 48.2,
+      "investmentScore": 47.2,
       "liquidityPercentile": 14
     },
     {
-      "district": "Madinat Hind 4",
+      "district": "MADINAT HIND 4",
       "transactionCount": 73,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 33,
-      "medianPricePerSqm": 11695,
+      "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
-        "annualizedPct": 4.9,
+        "annualizedPct": 4,
         "method": "ols_trend_full_history",
-        "r2": 0.01,
+        "r2": 0,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 54.3,
-      "valuationDispersionCV": 18.2,
-      "priceAccelerationPct": 944.5,
+      "temporalVolatilityPct": 53.5,
+      "valuationDispersionCV": 18.3,
+      "priceAccelerationPct": 920.8,
       "volumeTrendPctPerMonth": -14,
       "avgMonthlyTransactions": 10.4,
       "smallSampleWarning": false,
       "anomalousMonths": null,
-      "label": "Madinat Hind 4 (Apartment)",
+      "label": "MADINAT HIND 4 (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
           "observedPeriodGrowthPct": 16.2,
-          "annualizedPct": 4.9,
+          "annualizedPct": 4,
           "monthsUsed": 7,
-          "r2": 0.01,
+          "r2": 0,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 14.9,
-          "annualizedPct": 11.6,
+          "observedPeriodGrowthPct": 14.5,
+          "annualizedPct": 10,
           "monthsUsed": 6,
-          "r2": 0.02,
+          "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 48,
-          "annualizedPct": 952.8,
+          "observedPeriodGrowthPct": 47.5,
+          "annualizedPct": 928.8,
           "monthsUsed": 3,
           "r2": 1,
           "periodLabel": "2026-05 to 2026-07"
@@ -992,8 +987,8 @@
       },
       "confidenceScore": 78,
       "bubbleRiskScore": 85,
-      "investmentScore": 56.2,
-      "liquidityPercentile": 33
+      "investmentScore": 54.6,
+      "liquidityPercentile": 31
     },
     {
       "district": "DUBAI HILLS",
@@ -1003,7 +998,7 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 34,
-      "medianPricePerSqm": 22036,
+      "medianPricePerSqm": 22011,
       "growth": {
         "observedPeriodGrowthPct": 14.4,
         "annualizedPct": -1.1,
@@ -1012,7 +1007,7 @@
         "monthsUsed": 6,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 49.3,
+      "temporalVolatilityPct": 49.6,
       "valuationDispersionCV": 15,
       "priceAccelerationPct": null,
       "volumeTrendPctPerMonth": -12.3,
@@ -1037,17 +1032,17 @@
           "periodLabel": "2026-01 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 17.6,
-          "annualizedPct": 165.2,
+          "observedPeriodGrowthPct": 17.8,
+          "annualizedPct": 167.4,
           "monthsUsed": 3,
-          "r2": 0.4,
+          "r2": 0.41,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 70,
       "bubbleRiskScore": null,
-      "investmentScore": 57.7,
-      "liquidityPercentile": 37
+      "investmentScore": 56.5,
+      "liquidityPercentile": 35
     },
     {
       "district": "THE FIELD",
@@ -1057,18 +1052,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 33,
-      "medianPricePerSqm": 17380,
+      "medianPricePerSqm": 17363,
       "growth": {
-        "observedPeriodGrowthPct": 12.8,
-        "annualizedPct": 1.6,
+        "observedPeriodGrowthPct": 13.1,
+        "annualizedPct": 1.9,
         "method": "ols_trend_full_history",
         "r2": 0,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
       "temporalVolatilityPct": 57.8,
-      "valuationDispersionCV": 14.7,
-      "priceAccelerationPct": 80.1,
+      "valuationDispersionCV": 14.6,
+      "priceAccelerationPct": 86.7,
       "volumeTrendPctPerMonth": -13.3,
       "avgMonthlyTransactions": 9.4,
       "smallSampleWarning": true,
@@ -1077,31 +1072,31 @@
       "propertyType": "villa",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 12.8,
-          "annualizedPct": 1.6,
+          "observedPeriodGrowthPct": 13.1,
+          "annualizedPct": 1.9,
           "monthsUsed": 7,
           "r2": 0,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -6.9,
-          "annualizedPct": -19.9,
+          "observedPeriodGrowthPct": -6.6,
+          "annualizedPct": -19.5,
           "monthsUsed": 6,
           "r2": 0.12,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 19.5,
-          "annualizedPct": 190.5,
+          "observedPeriodGrowthPct": 19.9,
+          "annualizedPct": 196.9,
           "monthsUsed": 3,
-          "r2": 0.76,
+          "r2": 0.77,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 79,
-      "bubbleRiskScore": 82.4,
-      "investmentScore": 55.4,
-      "liquidityPercentile": 25
+      "bubbleRiskScore": 82.6,
+      "investmentScore": 54.7,
+      "liquidityPercentile": 24
     },
     {
       "district": "INTERNATIONAL CITY PH 2 & 3",
@@ -1111,18 +1106,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 8571,
+      "medianPricePerSqm": 8579,
       "growth": {
-        "observedPeriodGrowthPct": 11,
-        "annualizedPct": -21.7,
+        "observedPeriodGrowthPct": 12.5,
+        "annualizedPct": -19.2,
         "method": "ols_trend_full_history",
-        "r2": 0.02,
+        "r2": 0.01,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 173.7,
-      "valuationDispersionCV": 43.8,
-      "priceAccelerationPct": 21182,
+      "temporalVolatilityPct": 174.4,
+      "valuationDispersionCV": 43.7,
+      "priceAccelerationPct": 21303.9,
       "volumeTrendPctPerMonth": 3.5,
       "avgMonthlyTransactions": 35,
       "smallSampleWarning": false,
@@ -1133,85 +1128,31 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 11,
-          "annualizedPct": -21.7,
+          "observedPeriodGrowthPct": 12.5,
+          "annualizedPct": -19.2,
           "monthsUsed": 7,
-          "r2": 0.02,
+          "r2": 0.01,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 5.5,
-          "annualizedPct": -24.3,
+          "observedPeriodGrowthPct": 6.7,
+          "annualizedPct": -22.3,
           "monthsUsed": 6,
           "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 144.4,
-          "annualizedPct": 21222.8,
+          "observedPeriodGrowthPct": 144.7,
+          "annualizedPct": 21355.2,
           "monthsUsed": 3,
-          "r2": 0.77,
+          "r2": 0.76,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 76.8,
-      "investmentScore": 58.5,
+      "bubbleRiskScore": 77.9,
+      "investmentScore": 59,
       "liquidityPercentile": 68
-    },
-    {
-      "district": "SILICON OASIS",
-      "transactionCount": 142,
-      "monthsOfData": 7,
-      "monthCoverageRatio": 0.88,
-      "firstMonth": "2026-01",
-      "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 12914,
-      "growth": {
-        "observedPeriodGrowthPct": 11,
-        "annualizedPct": 12.2,
-        "method": "ols_trend_full_history",
-        "r2": 0.08,
-        "monthsUsed": 7,
-        "periodLabel": "2026-01 to 2026-07"
-      },
-      "temporalVolatilityPct": 37.4,
-      "valuationDispersionCV": 17.5,
-      "priceAccelerationPct": 24.7,
-      "volumeTrendPctPerMonth": 4.2,
-      "avgMonthlyTransactions": 20.3,
-      "smallSampleWarning": false,
-      "anomalousMonths": null,
-      "label": "SILICON OASIS (Apartment)",
-      "propertyType": "apartment",
-      "windowedGrowth": {
-        "full": {
-          "observedPeriodGrowthPct": 11,
-          "annualizedPct": 12.2,
-          "monthsUsed": 7,
-          "r2": 0.08,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": -2.9,
-          "annualizedPct": 2.3,
-          "monthsUsed": 6,
-          "r2": 0,
-          "periodLabel": "2026-02 to 2026-07"
-        },
-        "last3m": {
-          "observedPeriodGrowthPct": 0,
-          "annualizedPct": 0,
-          "monthsUsed": 3,
-          "r2": 0,
-          "periodLabel": "2026-05 to 2026-07"
-        }
-      },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 70.2,
-      "investmentScore": 66.3,
-      "liquidityPercentile": 59
     },
     {
       "district": "LIWAN",
@@ -1221,18 +1162,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 10513,
+      "medianPricePerSqm": 10549,
       "growth": {
-        "observedPeriodGrowthPct": 10.9,
-        "annualizedPct": 15,
+        "observedPeriodGrowthPct": 12,
+        "annualizedPct": 17.2,
         "method": "ols_trend_full_history",
-        "r2": 0.08,
+        "r2": 0.1,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 44.8,
+      "temporalVolatilityPct": 46.4,
       "valuationDispersionCV": 23.9,
-      "priceAccelerationPct": 107,
+      "priceAccelerationPct": 121.1,
       "volumeTrendPctPerMonth": -14.3,
       "avgMonthlyTransactions": 40.6,
       "smallSampleWarning": false,
@@ -1241,139 +1182,139 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 10.9,
-          "annualizedPct": 15,
+          "observedPeriodGrowthPct": 12,
+          "annualizedPct": 17.2,
           "monthsUsed": 7,
-          "r2": 0.08,
+          "r2": 0.1,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 5.3,
-          "annualizedPct": 9.4,
+          "observedPeriodGrowthPct": 6.5,
+          "annualizedPct": 12,
           "monthsUsed": 6,
-          "r2": 0.02,
+          "r2": 0.03,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 11.9,
-          "annualizedPct": 95.8,
+          "observedPeriodGrowthPct": 13.3,
+          "annualizedPct": 111.4,
           "monthsUsed": 3,
-          "r2": 0.49,
+          "r2": 0.51,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 87,
-      "investmentScore": 66,
-      "liquidityPercentile": 74
+      "bubbleRiskScore": 87.8,
+      "investmentScore": 64.8,
+      "liquidityPercentile": 73
     },
     {
-      "district": "DUBAI LAND RESIDENCE COMPLEX",
-      "transactionCount": 298,
+      "district": "SILICON OASIS",
+      "transactionCount": 142,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 8867,
+      "medianPricePerSqm": 12917,
       "growth": {
-        "observedPeriodGrowthPct": 7.8,
-        "annualizedPct": -0.6,
+        "observedPeriodGrowthPct": 11.2,
+        "annualizedPct": 12.9,
         "method": "ols_trend_full_history",
-        "r2": 0,
+        "r2": 0.1,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 32.5,
-      "valuationDispersionCV": 25,
-      "priceAccelerationPct": 118.9,
-      "volumeTrendPctPerMonth": -11,
-      "avgMonthlyTransactions": 42.6,
+      "temporalVolatilityPct": 36.3,
+      "valuationDispersionCV": 17.5,
+      "priceAccelerationPct": 22.4,
+      "volumeTrendPctPerMonth": 4.2,
+      "avgMonthlyTransactions": 20.3,
+      "smallSampleWarning": false,
+      "anomalousMonths": null,
+      "label": "SILICON OASIS (Apartment)",
+      "propertyType": "apartment",
+      "windowedGrowth": {
+        "full": {
+          "observedPeriodGrowthPct": 11.2,
+          "annualizedPct": 12.9,
+          "monthsUsed": 7,
+          "r2": 0.1,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": -2.5,
+          "annualizedPct": 2.8,
+          "monthsUsed": 6,
+          "r2": 0,
+          "periodLabel": "2026-02 to 2026-07"
+        },
+        "last3m": {
+          "observedPeriodGrowthPct": 0,
+          "annualizedPct": 0,
+          "monthsUsed": 3,
+          "r2": 0.75,
+          "periodLabel": "2026-05 to 2026-07"
+        }
+      },
+      "confidenceScore": 90,
+      "bubbleRiskScore": 67.2,
+      "investmentScore": 65.1,
+      "liquidityPercentile": 58
+    },
+    {
+      "district": "DUBAI LAND RESIDENCE COMPLEX",
+      "transactionCount": 299,
+      "monthsOfData": 7,
+      "monthCoverageRatio": 0.88,
+      "firstMonth": "2026-01",
+      "lastMonth": "2026-07",
+      "daysSinceLastTransaction": 32,
+      "medianPricePerSqm": 8824,
+      "growth": {
+        "observedPeriodGrowthPct": 10,
+        "annualizedPct": 2.7,
+        "method": "ols_trend_full_history",
+        "r2": 0.01,
+        "monthsUsed": 7,
+        "periodLabel": "2026-01 to 2026-07"
+      },
+      "temporalVolatilityPct": 31.4,
+      "valuationDispersionCV": 25.4,
+      "priceAccelerationPct": 95.3,
+      "volumeTrendPctPerMonth": -11.2,
+      "avgMonthlyTransactions": 42.7,
       "smallSampleWarning": false,
       "anomalousMonths": null,
       "label": "DUBAI LAND RESIDENCE COMPLEX (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 7.8,
-          "annualizedPct": -0.6,
+          "observedPeriodGrowthPct": 10,
+          "annualizedPct": 2.7,
           "monthsUsed": 7,
-          "r2": 0,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": 10.8,
-          "annualizedPct": 0.9,
-          "monthsUsed": 6,
-          "r2": 0,
-          "periodLabel": "2026-02 to 2026-07"
-        },
-        "last3m": {
-          "observedPeriodGrowthPct": 13.6,
-          "annualizedPct": 114.4,
-          "monthsUsed": 3,
-          "r2": 0.59,
-          "periodLabel": "2026-05 to 2026-07"
-        }
-      },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 75.2,
-      "investmentScore": 68.6,
-      "liquidityPercentile": 75
-    },
-    {
-      "district": "DUBAI MARINA",
-      "transactionCount": 938,
-      "monthsOfData": 7,
-      "monthCoverageRatio": 0.88,
-      "firstMonth": "2026-01",
-      "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 20213,
-      "growth": {
-        "observedPeriodGrowthPct": 7.1,
-        "annualizedPct": 1.1,
-        "method": "ols_trend_full_history",
-        "r2": 0,
-        "monthsUsed": 7,
-        "periodLabel": "2026-01 to 2026-07"
-      },
-      "temporalVolatilityPct": 26.1,
-      "valuationDispersionCV": 43.3,
-      "priceAccelerationPct": 139.2,
-      "volumeTrendPctPerMonth": -4.2,
-      "avgMonthlyTransactions": 134,
-      "smallSampleWarning": false,
-      "anomalousMonths": null,
-      "label": "DUBAI MARINA (Apartment)",
-      "propertyType": "apartment",
-      "windowedGrowth": {
-        "full": {
-          "observedPeriodGrowthPct": 7.1,
-          "annualizedPct": 1.1,
-          "monthsUsed": 7,
-          "r2": 0,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": 9.4,
-          "annualizedPct": 4,
-          "monthsUsed": 6,
           "r2": 0.01,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": 10.7,
+          "annualizedPct": 1.7,
+          "monthsUsed": 6,
+          "r2": 0,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 17,
-          "annualizedPct": 156.2,
+          "observedPeriodGrowthPct": 12.1,
+          "annualizedPct": 98.1,
           "monthsUsed": 3,
-          "r2": 0.86,
+          "r2": 0.49,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 62.9,
-      "investmentScore": 74.8,
-      "liquidityPercentile": 97
+      "bubbleRiskScore": 76.1,
+      "investmentScore": 68.5,
+      "liquidityPercentile": 74
     },
     {
       "district": "ARJAN",
@@ -1383,18 +1324,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 14714,
+      "medianPricePerSqm": 14732,
       "growth": {
-        "observedPeriodGrowthPct": 6.8,
-        "annualizedPct": 14,
+        "observedPeriodGrowthPct": 7.8,
+        "annualizedPct": 15.6,
         "method": "ols_trend_full_history",
-        "r2": 0.28,
+        "r2": 0.33,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 16.2,
+      "temporalVolatilityPct": 15.1,
       "valuationDispersionCV": 20,
-      "priceAccelerationPct": -77,
+      "priceAccelerationPct": -76.6,
       "volumeTrendPctPerMonth": -10.2,
       "avgMonthlyTransactions": 95.9,
       "smallSampleWarning": false,
@@ -1403,31 +1344,85 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 6.8,
-          "annualizedPct": 14,
+          "observedPeriodGrowthPct": 7.8,
+          "annualizedPct": 15.6,
           "monthsUsed": 7,
-          "r2": 0.28,
+          "r2": 0.33,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 1.7,
-          "annualizedPct": 2.2,
+          "observedPeriodGrowthPct": 2.7,
+          "annualizedPct": 3.8,
+          "monthsUsed": 6,
+          "r2": 0.04,
+          "periodLabel": "2026-02 to 2026-07"
+        },
+        "last3m": {
+          "observedPeriodGrowthPct": -4.8,
+          "annualizedPct": -25.4,
+          "monthsUsed": 3,
+          "r2": 0.97,
+          "periodLabel": "2026-05 to 2026-07"
+        }
+      },
+      "confidenceScore": 90,
+      "bubbleRiskScore": 31.4,
+      "investmentScore": 83.5,
+      "liquidityPercentile": 95
+    },
+    {
+      "district": "DUBAI MARINA",
+      "transactionCount": 921,
+      "monthsOfData": 7,
+      "monthCoverageRatio": 0.88,
+      "firstMonth": "2026-01",
+      "lastMonth": "2026-07",
+      "daysSinceLastTransaction": 32,
+      "medianPricePerSqm": 19999,
+      "growth": {
+        "observedPeriodGrowthPct": 7,
+        "annualizedPct": 0.6,
+        "method": "ols_trend_full_history",
+        "r2": 0,
+        "monthsUsed": 7,
+        "periodLabel": "2026-01 to 2026-07"
+      },
+      "temporalVolatilityPct": 24.2,
+      "valuationDispersionCV": 37.4,
+      "priceAccelerationPct": 161.1,
+      "volumeTrendPctPerMonth": -4.2,
+      "avgMonthlyTransactions": 131.6,
+      "smallSampleWarning": false,
+      "anomalousMonths": null,
+      "label": "DUBAI MARINA (Apartment)",
+      "propertyType": "apartment",
+      "windowedGrowth": {
+        "full": {
+          "observedPeriodGrowthPct": 7,
+          "annualizedPct": 0.6,
+          "monthsUsed": 7,
+          "r2": 0,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": 9.5,
+          "annualizedPct": 4.6,
           "monthsUsed": 6,
           "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": -5.7,
-          "annualizedPct": -29.9,
+          "observedPeriodGrowthPct": 17.7,
+          "annualizedPct": 166.2,
           "monthsUsed": 3,
-          "r2": 0.98,
+          "r2": 0.88,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 31.7,
-      "investmentScore": 82.5,
-      "liquidityPercentile": 95
+      "bubbleRiskScore": 61.1,
+      "investmentScore": 74.7,
+      "liquidityPercentile": 97
     }
   ],
   "highRiskAreas": [
@@ -1439,18 +1434,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 10513,
+      "medianPricePerSqm": 10549,
       "growth": {
-        "observedPeriodGrowthPct": 10.9,
-        "annualizedPct": 15,
+        "observedPeriodGrowthPct": 12,
+        "annualizedPct": 17.2,
         "method": "ols_trend_full_history",
-        "r2": 0.08,
+        "r2": 0.1,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 44.8,
+      "temporalVolatilityPct": 46.4,
       "valuationDispersionCV": 23.9,
-      "priceAccelerationPct": 107,
+      "priceAccelerationPct": 121.1,
       "volumeTrendPctPerMonth": -14.3,
       "avgMonthlyTransactions": 40.6,
       "smallSampleWarning": false,
@@ -1459,76 +1454,76 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 10.9,
-          "annualizedPct": 15,
+          "observedPeriodGrowthPct": 12,
+          "annualizedPct": 17.2,
           "monthsUsed": 7,
-          "r2": 0.08,
+          "r2": 0.1,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 5.3,
-          "annualizedPct": 9.4,
+          "observedPeriodGrowthPct": 6.5,
+          "annualizedPct": 12,
           "monthsUsed": 6,
-          "r2": 0.02,
+          "r2": 0.03,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 11.9,
-          "annualizedPct": 95.8,
+          "observedPeriodGrowthPct": 13.3,
+          "annualizedPct": 111.4,
           "monthsUsed": 3,
-          "r2": 0.49,
+          "r2": 0.51,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 87,
-      "investmentScore": 66,
-      "liquidityPercentile": 74
+      "bubbleRiskScore": 87.8,
+      "investmentScore": 64.8,
+      "liquidityPercentile": 73
     },
     {
-      "district": "Madinat Hind 4",
+      "district": "MADINAT HIND 4",
       "transactionCount": 73,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 33,
-      "medianPricePerSqm": 11695,
+      "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
-        "annualizedPct": 4.9,
+        "annualizedPct": 4,
         "method": "ols_trend_full_history",
-        "r2": 0.01,
+        "r2": 0,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 54.3,
-      "valuationDispersionCV": 18.2,
-      "priceAccelerationPct": 944.5,
+      "temporalVolatilityPct": 53.5,
+      "valuationDispersionCV": 18.3,
+      "priceAccelerationPct": 920.8,
       "volumeTrendPctPerMonth": -14,
       "avgMonthlyTransactions": 10.4,
       "smallSampleWarning": false,
       "anomalousMonths": null,
-      "label": "Madinat Hind 4 (Apartment)",
+      "label": "MADINAT HIND 4 (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
           "observedPeriodGrowthPct": 16.2,
-          "annualizedPct": 4.9,
+          "annualizedPct": 4,
           "monthsUsed": 7,
-          "r2": 0.01,
+          "r2": 0,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 14.9,
-          "annualizedPct": 11.6,
+          "observedPeriodGrowthPct": 14.5,
+          "annualizedPct": 10,
           "monthsUsed": 6,
-          "r2": 0.02,
+          "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 48,
-          "annualizedPct": 952.8,
+          "observedPeriodGrowthPct": 47.5,
+          "annualizedPct": 928.8,
           "monthsUsed": 3,
           "r2": 1,
           "periodLabel": "2026-05 to 2026-07"
@@ -1536,8 +1531,8 @@
       },
       "confidenceScore": 78,
       "bubbleRiskScore": 85,
-      "investmentScore": 56.2,
-      "liquidityPercentile": 33
+      "investmentScore": 54.6,
+      "liquidityPercentile": 31
     },
     {
       "district": "THE FIELD",
@@ -1547,18 +1542,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 33,
-      "medianPricePerSqm": 17380,
+      "medianPricePerSqm": 17363,
       "growth": {
-        "observedPeriodGrowthPct": 12.8,
-        "annualizedPct": 1.6,
+        "observedPeriodGrowthPct": 13.1,
+        "annualizedPct": 1.9,
         "method": "ols_trend_full_history",
         "r2": 0,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
       "temporalVolatilityPct": 57.8,
-      "valuationDispersionCV": 14.7,
-      "priceAccelerationPct": 80.1,
+      "valuationDispersionCV": 14.6,
+      "priceAccelerationPct": 86.7,
       "volumeTrendPctPerMonth": -13.3,
       "avgMonthlyTransactions": 9.4,
       "smallSampleWarning": true,
@@ -1567,84 +1562,84 @@
       "propertyType": "villa",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 12.8,
-          "annualizedPct": 1.6,
+          "observedPeriodGrowthPct": 13.1,
+          "annualizedPct": 1.9,
           "monthsUsed": 7,
           "r2": 0,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -6.9,
-          "annualizedPct": -19.9,
+          "observedPeriodGrowthPct": -6.6,
+          "annualizedPct": -19.5,
           "monthsUsed": 6,
           "r2": 0.12,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 19.5,
-          "annualizedPct": 190.5,
+          "observedPeriodGrowthPct": 19.9,
+          "annualizedPct": 196.9,
           "monthsUsed": 3,
-          "r2": 0.76,
+          "r2": 0.77,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 79,
-      "bubbleRiskScore": 82.4,
-      "investmentScore": 55.4,
-      "liquidityPercentile": 25
+      "bubbleRiskScore": 82.6,
+      "investmentScore": 54.7,
+      "liquidityPercentile": 24
     },
     {
-      "district": "Al Yelayiss 2",
+      "district": "AL YELAYISS 2",
       "transactionCount": 80,
       "monthsOfData": 7,
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 36,
-      "medianPricePerSqm": 15473,
+      "medianPricePerSqm": 15501,
       "growth": {
-        "observedPeriodGrowthPct": 2.7,
-        "annualizedPct": 7.7,
+        "observedPeriodGrowthPct": 3,
+        "annualizedPct": 8.3,
         "method": "ols_trend_full_history",
         "r2": 0.03,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 49.4,
-      "valuationDispersionCV": 11.4,
-      "priceAccelerationPct": 83.5,
+      "temporalVolatilityPct": 49.1,
+      "valuationDispersionCV": 11.3,
+      "priceAccelerationPct": 85.2,
       "volumeTrendPctPerMonth": -20.6,
       "avgMonthlyTransactions": 11.4,
       "smallSampleWarning": false,
       "anomalousMonths": null,
-      "label": "Al Yelayiss 2 (Villa)",
+      "label": "AL YELAYISS 2 (Villa)",
       "propertyType": "villa",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 2.7,
-          "annualizedPct": 7.7,
+          "observedPeriodGrowthPct": 3,
+          "annualizedPct": 8.3,
           "monthsUsed": 7,
           "r2": 0.03,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 2.8,
-          "annualizedPct": 4.9,
+          "observedPeriodGrowthPct": 3.1,
+          "annualizedPct": 5.6,
           "monthsUsed": 6,
           "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 15.2,
-          "annualizedPct": 133.3,
+          "observedPeriodGrowthPct": 15.3,
+          "annualizedPct": 135.5,
           "monthsUsed": 3,
-          "r2": 0.31,
+          "r2": 0.32,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 85,
-      "bubbleRiskScore": 79.2,
-      "investmentScore": 57.9,
+      "bubbleRiskScore": 79.3,
+      "investmentScore": 58.1,
       "liquidityPercentile": 39
     },
     {
@@ -1655,18 +1650,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 8571,
+      "medianPricePerSqm": 8579,
       "growth": {
-        "observedPeriodGrowthPct": 11,
-        "annualizedPct": -21.7,
+        "observedPeriodGrowthPct": 12.5,
+        "annualizedPct": -19.2,
         "method": "ols_trend_full_history",
-        "r2": 0.02,
+        "r2": 0.01,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 173.7,
-      "valuationDispersionCV": 43.8,
-      "priceAccelerationPct": 21182,
+      "temporalVolatilityPct": 174.4,
+      "valuationDispersionCV": 43.7,
+      "priceAccelerationPct": 21303.9,
       "volumeTrendPctPerMonth": 3.5,
       "avgMonthlyTransactions": 35,
       "smallSampleWarning": false,
@@ -1677,139 +1672,193 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 11,
-          "annualizedPct": -21.7,
+          "observedPeriodGrowthPct": 12.5,
+          "annualizedPct": -19.2,
           "monthsUsed": 7,
-          "r2": 0.02,
+          "r2": 0.01,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 5.5,
-          "annualizedPct": -24.3,
+          "observedPeriodGrowthPct": 6.7,
+          "annualizedPct": -22.3,
           "monthsUsed": 6,
           "r2": 0.01,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 144.4,
-          "annualizedPct": 21222.8,
+          "observedPeriodGrowthPct": 144.7,
+          "annualizedPct": 21355.2,
           "monthsUsed": 3,
-          "r2": 0.77,
+          "r2": 0.76,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 76.8,
-      "investmentScore": 58.5,
+      "bubbleRiskScore": 77.9,
+      "investmentScore": 59,
       "liquidityPercentile": 68
     },
     {
       "district": "DUBAI LAND RESIDENCE COMPLEX",
-      "transactionCount": 298,
+      "transactionCount": 299,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 8867,
+      "medianPricePerSqm": 8824,
       "growth": {
-        "observedPeriodGrowthPct": 7.8,
-        "annualizedPct": -0.6,
+        "observedPeriodGrowthPct": 10,
+        "annualizedPct": 2.7,
         "method": "ols_trend_full_history",
-        "r2": 0,
+        "r2": 0.01,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 32.5,
-      "valuationDispersionCV": 25,
-      "priceAccelerationPct": 118.9,
-      "volumeTrendPctPerMonth": -11,
-      "avgMonthlyTransactions": 42.6,
+      "temporalVolatilityPct": 31.4,
+      "valuationDispersionCV": 25.4,
+      "priceAccelerationPct": 95.3,
+      "volumeTrendPctPerMonth": -11.2,
+      "avgMonthlyTransactions": 42.7,
       "smallSampleWarning": false,
       "anomalousMonths": null,
       "label": "DUBAI LAND RESIDENCE COMPLEX (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 7.8,
-          "annualizedPct": -0.6,
+          "observedPeriodGrowthPct": 10,
+          "annualizedPct": 2.7,
           "monthsUsed": 7,
-          "r2": 0,
+          "r2": 0.01,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 10.8,
-          "annualizedPct": 0.9,
+          "observedPeriodGrowthPct": 10.7,
+          "annualizedPct": 1.7,
           "monthsUsed": 6,
           "r2": 0,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 13.6,
-          "annualizedPct": 114.4,
+          "observedPeriodGrowthPct": 12.1,
+          "annualizedPct": 98.1,
           "monthsUsed": 3,
-          "r2": 0.59,
+          "r2": 0.49,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 75.2,
-      "investmentScore": 68.6,
-      "liquidityPercentile": 75
+      "bubbleRiskScore": 76.1,
+      "investmentScore": 68.5,
+      "liquidityPercentile": 74
     },
     {
       "district": "JUMEIRAH BEACH RESIDENCE",
-      "transactionCount": 186,
+      "transactionCount": 182,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 16890,
+      "medianPricePerSqm": 16820,
       "growth": {
-        "observedPeriodGrowthPct": 5.7,
-        "annualizedPct": -11.8,
+        "observedPeriodGrowthPct": 2.4,
+        "annualizedPct": -14.8,
         "method": "ols_trend_full_history",
-        "r2": 0.07,
+        "r2": 0.12,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 39,
-      "valuationDispersionCV": 30.5,
-      "priceAccelerationPct": 64.7,
+      "temporalVolatilityPct": 38.7,
+      "valuationDispersionCV": 25.9,
+      "priceAccelerationPct": 37.6,
       "volumeTrendPctPerMonth": -6.7,
-      "avgMonthlyTransactions": 26.6,
+      "avgMonthlyTransactions": 26,
       "smallSampleWarning": false,
       "anomalousMonths": null,
       "label": "JUMEIRAH BEACH RESIDENCE (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 5.7,
-          "annualizedPct": -11.8,
+          "observedPeriodGrowthPct": 2.4,
+          "annualizedPct": -14.8,
           "monthsUsed": 7,
-          "r2": 0.07,
+          "r2": 0.12,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -3.6,
-          "annualizedPct": -25.7,
+          "observedPeriodGrowthPct": -5.8,
+          "annualizedPct": -28.5,
           "monthsUsed": 6,
-          "r2": 0.26,
+          "r2": 0.32,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 9.4,
-          "annualizedPct": 71.1,
+          "observedPeriodGrowthPct": 6.2,
+          "annualizedPct": 43.1,
           "monthsUsed": 3,
-          "r2": 0.87,
+          "r2": 0.93,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 74.9,
-      "investmentScore": 60.8,
-      "liquidityPercentile": 62
+      "bubbleRiskScore": 72,
+      "investmentScore": 58,
+      "liquidityPercentile": 61
+    },
+    {
+      "district": "PALM JUMEIRAH",
+      "transactionCount": 353,
+      "monthsOfData": 7,
+      "monthCoverageRatio": 0.88,
+      "firstMonth": "2026-01",
+      "lastMonth": "2026-07",
+      "daysSinceLastTransaction": 32,
+      "medianPricePerSqm": 27958,
+      "growth": {
+        "observedPeriodGrowthPct": -7.1,
+        "annualizedPct": -28.5,
+        "method": "ols_trend_full_history",
+        "r2": 0.45,
+        "monthsUsed": 7,
+        "periodLabel": "2026-01 to 2026-07"
+      },
+      "temporalVolatilityPct": 37.8,
+      "valuationDispersionCV": 32.5,
+      "priceAccelerationPct": 50.8,
+      "volumeTrendPctPerMonth": -11.7,
+      "avgMonthlyTransactions": 50.4,
+      "smallSampleWarning": false,
+      "anomalousMonths": null,
+      "label": "PALM JUMEIRAH (Apartment)",
+      "propertyType": "apartment",
+      "windowedGrowth": {
+        "full": {
+          "observedPeriodGrowthPct": -7.1,
+          "annualizedPct": -28.5,
+          "monthsUsed": 7,
+          "r2": 0.45,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": -17.1,
+          "annualizedPct": -33,
+          "monthsUsed": 6,
+          "r2": 0.43,
+          "periodLabel": "2026-02 to 2026-07"
+        },
+        "last3m": {
+          "observedPeriodGrowthPct": 1.2,
+          "annualizedPct": 7.1,
+          "monthsUsed": 3,
+          "r2": 0.01,
+          "periodLabel": "2026-05 to 2026-07"
+        }
+      },
+      "confidenceScore": 90,
+      "bubbleRiskScore": 71,
+      "investmentScore": 51.1,
+      "liquidityPercentile": 77
     },
     {
       "district": "SILICON OASIS",
@@ -1819,18 +1868,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 12914,
+      "medianPricePerSqm": 12917,
       "growth": {
-        "observedPeriodGrowthPct": 11,
-        "annualizedPct": 12.2,
+        "observedPeriodGrowthPct": 11.2,
+        "annualizedPct": 12.9,
         "method": "ols_trend_full_history",
-        "r2": 0.08,
+        "r2": 0.1,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 37.4,
+      "temporalVolatilityPct": 36.3,
       "valuationDispersionCV": 17.5,
-      "priceAccelerationPct": 24.7,
+      "priceAccelerationPct": 22.4,
       "volumeTrendPctPerMonth": 4.2,
       "avgMonthlyTransactions": 20.3,
       "smallSampleWarning": false,
@@ -1839,15 +1888,15 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 11,
-          "annualizedPct": 12.2,
+          "observedPeriodGrowthPct": 11.2,
+          "annualizedPct": 12.9,
           "monthsUsed": 7,
-          "r2": 0.08,
+          "r2": 0.1,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": -2.9,
-          "annualizedPct": 2.3,
+          "observedPeriodGrowthPct": -2.5,
+          "annualizedPct": 2.8,
           "monthsUsed": 6,
           "r2": 0,
           "periodLabel": "2026-02 to 2026-07"
@@ -1856,14 +1905,14 @@
           "observedPeriodGrowthPct": 0,
           "annualizedPct": 0,
           "monthsUsed": 3,
-          "r2": 0,
+          "r2": 0.75,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 70.2,
-      "investmentScore": 66.3,
-      "liquidityPercentile": 59
+      "bubbleRiskScore": 67.2,
+      "investmentScore": 65.1,
+      "liquidityPercentile": 58
     },
     {
       "district": "MOTOR CITY",
@@ -1873,18 +1922,18 @@
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 32,
-      "medianPricePerSqm": 11111,
+      "medianPricePerSqm": 11096,
       "growth": {
-        "observedPeriodGrowthPct": 0.5,
-        "annualizedPct": -8.1,
+        "observedPeriodGrowthPct": 0.7,
+        "annualizedPct": -7.7,
         "method": "ols_trend_full_history",
-        "r2": 0.09,
+        "r2": 0.08,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 22.9,
+      "temporalVolatilityPct": 23.1,
       "valuationDispersionCV": 16.1,
-      "priceAccelerationPct": 131.7,
+      "priceAccelerationPct": 134.6,
       "volumeTrendPctPerMonth": -14.9,
       "avgMonthlyTransactions": 47.3,
       "smallSampleWarning": false,
@@ -1893,110 +1942,56 @@
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 0.5,
-          "annualizedPct": -8.1,
+          "observedPeriodGrowthPct": 0.7,
+          "annualizedPct": -7.7,
           "monthsUsed": 7,
-          "r2": 0.09,
+          "r2": 0.08,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 2,
-          "annualizedPct": -5.6,
+          "observedPeriodGrowthPct": 2.2,
+          "annualizedPct": -5.1,
           "monthsUsed": 6,
-          "r2": 0.03,
+          "r2": 0.02,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 14.9,
-          "annualizedPct": 129.8,
+          "observedPeriodGrowthPct": 15.1,
+          "annualizedPct": 132.4,
           "monthsUsed": 3,
           "r2": 1,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 65.4,
-      "investmentScore": 70.2,
+      "bubbleRiskScore": 65.5,
+      "investmentScore": 69.9,
       "liquidityPercentile": 76
-    },
-    {
-      "district": "JUMEIRAH VILLAGE TRIANGLE",
-      "transactionCount": 270,
-      "monthsOfData": 7,
-      "monthCoverageRatio": 0.88,
-      "firstMonth": "2026-01",
-      "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 31,
-      "medianPricePerSqm": 14797,
-      "growth": {
-        "observedPeriodGrowthPct": -9.5,
-        "annualizedPct": -29,
-        "method": "ols_trend_full_history",
-        "r2": 0.42,
-        "monthsUsed": 7,
-        "periodLabel": "2026-01 to 2026-07"
-      },
-      "temporalVolatilityPct": 26.6,
-      "valuationDispersionCV": 29.5,
-      "priceAccelerationPct": 212.6,
-      "volumeTrendPctPerMonth": -18.4,
-      "avgMonthlyTransactions": 38.6,
-      "smallSampleWarning": false,
-      "anomalousMonths": null,
-      "label": "JUMEIRAH VILLAGE TRIANGLE (Apartment)",
-      "propertyType": "apartment",
-      "windowedGrowth": {
-        "full": {
-          "observedPeriodGrowthPct": -9.5,
-          "annualizedPct": -29,
-          "monthsUsed": 7,
-          "r2": 0.42,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": -9.4,
-          "annualizedPct": -23.2,
-          "monthsUsed": 6,
-          "r2": 0.22,
-          "periodLabel": "2026-02 to 2026-07"
-        },
-        "last3m": {
-          "observedPeriodGrowthPct": 17.3,
-          "annualizedPct": 159.8,
-          "monthsUsed": 3,
-          "r2": 1,
-          "periodLabel": "2026-05 to 2026-07"
-        }
-      },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 64.9,
-      "investmentScore": 50,
-      "liquidityPercentile": 72
     }
   ],
   "liquidityIndex": [
     {
       "district": "JUMEIRAH VILLAGE CIRCLE",
-      "transactionCount": 2115,
-      "avgMonthlyTransactions": 302.1,
+      "transactionCount": 2121,
+      "avgMonthlyTransactions": 303,
       "liquidityPercentile": 100
     },
     {
       "district": "BUSINESS BAY",
-      "transactionCount": 1329,
-      "avgMonthlyTransactions": 189.9,
+      "transactionCount": 1317,
+      "avgMonthlyTransactions": 188.1,
       "liquidityPercentile": 99
     },
     {
       "district": "DUBAI MARINA",
-      "transactionCount": 938,
-      "avgMonthlyTransactions": 134,
+      "transactionCount": 921,
+      "avgMonthlyTransactions": 131.6,
       "liquidityPercentile": 97
     },
     {
       "district": "BURJ KHALIFA",
-      "transactionCount": 883,
-      "avgMonthlyTransactions": 126.1,
+      "transactionCount": 814,
+      "avgMonthlyTransactions": 116.3,
       "liquidityPercentile": 96
     },
     {
@@ -2031,21 +2026,21 @@
     },
     {
       "district": "DUBAI SPORTS CITY",
-      "transactionCount": 531,
-      "avgMonthlyTransactions": 75.9,
+      "transactionCount": 518,
+      "avgMonthlyTransactions": 74,
       "liquidityPercentile": 88
     },
     {
       "district": "AL FURJAN",
-      "transactionCount": 460,
-      "avgMonthlyTransactions": 65.7,
-      "liquidityPercentile": 87
+      "transactionCount": 459,
+      "avgMonthlyTransactions": 65.6,
+      "liquidityPercentile": 86
     },
     {
       "district": "SOBHA HEARTLAND",
       "transactionCount": 452,
       "avgMonthlyTransactions": 64.6,
-      "liquidityPercentile": 86
+      "liquidityPercentile": 85
     },
     {
       "district": "MEYDAN ONE",
@@ -2055,23 +2050,23 @@
     },
     {
       "district": "JUMEIRAH LAKES TOWERS",
-      "transactionCount": 440,
-      "avgMonthlyTransactions": 62.9,
-      "liquidityPercentile": 83
+      "transactionCount": 441,
+      "avgMonthlyTransactions": 63,
+      "liquidityPercentile": 82
     },
     {
       "district": "DUBAI SOUTH",
-      "transactionCount": 418,
-      "avgMonthlyTransactions": 59.7,
-      "liquidityPercentile": 82
+      "transactionCount": 419,
+      "avgMonthlyTransactions": 59.9,
+      "liquidityPercentile": 81
     }
   ],
   "marketIndicators": {
-    "averageObservedPeriodGrowthPct": -4.4,
-    "averageAnnualizedTrendPct": -14.6,
+    "averageObservedPeriodGrowthPct": -3.9,
+    "averageAnnualizedTrendPct": -13.4,
     "marketConditionBasis": "Classification below uses the annualized trend rate (a rate concept), not the raw observed-period growth (a cumulative concept whose magnitude grows mechanically as more history accumulates). The annualized figure is a trend extrapolation from ~7 months of data — see methodology.growth.limitations.",
-    "totalActiveDistricts": 77,
-    "totalTransactions": 27669,
+    "totalActiveDistricts": 75,
+    "totalTransactions": 24440,
     "marketCondition": "Moderate Buyer Market",
     "topPerformer": "TECOM SITE A",
     "mostLiquid": "JUMEIRAH VILLAGE CIRCLE",
