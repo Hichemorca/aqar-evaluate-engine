@@ -55,10 +55,13 @@ jobs:
       - name: Layer 6 — Market Intelligence Analysis
         run: node scripts/market-intelligence.js
         
-      - name: Layer 7 — Evaluate all properties
+      - name: Layer 7 — Load active calibration
+        run: node scripts/fetch-calibration-config.js
+
+      - name: Layer 8 — Evaluate all properties
         run: node scripts/evaluate-and-save.js
         
-      - name: Layer 8 — Train ML model
+      - name: Layer 9 — Train ML model
         run: python scripts/train-model.py
         continue-on-error: true
         
