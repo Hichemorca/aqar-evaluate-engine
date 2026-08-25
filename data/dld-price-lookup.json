@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T07:02:05.613Z",
+  "generatedAt": "2026-08-25T10:01:52.537Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -2429,7 +2429,7 @@
         "count": 3
       },
       "HAMZA TOWER__apartment__small": {
-        "medianPricePerSqm": 8544,
+        "medianPricePerSqm": 6667,
         "count": 3
       },
       "GOLF VIEW RESIDENCE__apartment__small": {
@@ -5241,11 +5241,11 @@
         "count": 2
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment__small": {
-        "medianPricePerSqm": 19752,
+        "medianPricePerSqm": 19753,
         "count": 6
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment__medium": {
-        "medianPricePerSqm": 19663,
+        "medianPricePerSqm": 19667,
         "count": 6
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13__apartment__medium": {
@@ -12679,7 +12679,7 @@
         "count": 3
       },
       "Mudon Al Ranim 3__villa": {
-        "medianPricePerSqm": 18443,
+        "medianPricePerSqm": 18609,
         "count": 43
       },
       "Mudon Al Ranim 1__villa": {
@@ -15109,7 +15109,7 @@
         "count": 37
       },
       "MEYDAN ONE__land__land_xlarge": {
-        "medianPricePerSqm": 5384,
+        "medianPricePerSqm": 5385,
         "count": 12
       },
       "MEYDAN ONE__land__land_large": {
