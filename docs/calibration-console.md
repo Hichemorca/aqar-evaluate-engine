@@ -24,7 +24,7 @@ Save is intentionally immediate as requested by the owner. The API validates fin
 
 ## Version behavior
 
-The active configuration is loaded by the public valuation engine before a new valuation is enabled. Each new browser-side valuation stores the active `configId` with its local history entry and shows the same ID in the explainability section. Existing local history entries are not rewritten. The configuration is not used to silently recalculate historical results.
+The active configuration is loaded by the public valuation engine before a new valuation is enabled. The daily offline/Accuracy workflow fetches the active configuration with cache-busting before evaluation. Each new browser-side or offline valuation stores the active `configId` with its result and trace. Existing local history entries and previously generated valuation results are not rewritten. The configuration is not used to silently recalculate historical results.
 
 ## Configuration boundaries
 
@@ -32,8 +32,8 @@ The console controls existing AQAR weights and coefficients only. It does not ch
 
 ## Current defaults
 
-The default configuration is held in `shared/aqar-calibration-defaults.js`. It mirrors the current interactive AQAR values, including Sales, Income, Cost, DCF, View, GIS, vacancy, cap rate, depreciation, rent growth, value growth, discount, and terminal-value parameters. If the configuration store is empty or temporarily unavailable, the public engine uses these defaults and logs a warning rather than blocking the public page.
+The default configuration is held in `shared/aqar-calibration-defaults.js`. It mirrors the current interactive AQAR values, including Sales, Income, Cost, DCF, View, GIS, vacancy, cap rate, depreciation, rent growth, value growth, discount, and terminal-value parameters. The shared calculation layer applies the existing methods and weights in both browser and offline paths; when a method lacks required data, it is recorded as `NOT_APPLICABLE` rather than represented by zero or fabricated data. Fallback values such as expenses, vacancy, cap rate, construction cost, and land share are recorded as assumptions. If the configuration store is empty or temporarily unavailable, the public engine uses these defaults and logs a warning rather than blocking the public page.
 
 ## Operational acceptance checks
 
-A release is accepted when `npm test` passes, the calibration API module passes syntax validation, the public valuation page loads the shared defaults or active configuration, a valid administrator save creates a new version, an invalid weight receives HTTP 400, and a request without the administrator token cannot write or read history.
+A release is accepted when `npm test` passes, the calibration API module and shared calculation layer pass syntax validation, the public valuation page loads the shared defaults or active configuration without stale cache, the offline workflow records the active `configId`, a valid administrator save creates a new version, an invalid weight receives HTTP 400, and a request without the administrator token cannot write or read history.

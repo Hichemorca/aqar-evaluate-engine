@@ -572,6 +572,7 @@
 </div>
 <script src="/shared/aqar-policy.js"></script>
 <script src="/shared/aqar-calibration-defaults.js"></script>
+<script src="/shared/calibration-engine.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 let AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig();
@@ -582,7 +583,7 @@ function getCalibrationCoefficient(propertyType, group, key, fallback) {
 }
 async function loadCalibrationConfig() {
   try {
-    const response = await fetch('/api/calibration-config');
+    const response = await fetch(`/api/calibration-config?_calibration_fetch=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Calibration HTTP ${response.status}`);
     const payload = await response.json();
     if (payload.config) AQAR_ACTIVE_CALIBRATION = payload.config;
@@ -1048,15 +1049,27 @@ function calculateWeightedValue(valuations, propData) {
     return { finalValue: Math.round(fb), confidence: 'low', confidencePct: 25, valuations: [], range: { low: Math.round(fb * .8), high: Math.round(fb * 1.2) } };
   }
 
-  // Weights are supplied by the active, versioned calibration configuration.
-  // The denominator below preserves normalization when the configured weights do not sum to 1.
-
-  let ws = 0, tw = 0;
-  valuations.forEach(v => {
-    ws += v.value * v.weight;
-    tw += v.weight;
-  });
-  const final = Math.round(ws / tw);
+  // The shared calibration engine owns the weighted combination contract for browser and batch paths.
+  const methodNames = {
+    'Sales Comparison Approach': 'sales-comparison',
+    'Income Capitalization Approach': 'income',
+    'Cost Approach (Replacement)': 'cost',
+    'DCF Analysis (10-Year)': 'dcf'
+  };
+  const propertyConfig = getCalibrationForProperty(propData.propType);
+  const methodResults = valuations.map(v => ({
+    method: methodNames[v.method] || (v.method.startsWith('DCF Analysis') ? 'dcf' : v.method),
+    status: 'APPLIED',
+    value: v.value,
+    weight: v.weight,
+    assumptions: []
+  }));
+  const combined = AQAR_CALIBRATION_ENGINE.combineMethodResults(
+    methodResults,
+    propertyConfig,
+    AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'
+  );
+  const final = combined.value;
   
   let confidencePct = 60;
   if (valuations.some(v => v.confidence === 'high')) confidencePct += 20;

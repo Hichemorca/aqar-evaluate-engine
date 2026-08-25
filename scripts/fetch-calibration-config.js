@@ -5,7 +5,9 @@ const publicUrl = process.env.AQAR_PUBLIC_URL || 'https://aqar-valuation-engine.
 const outputFile = path.join(__dirname, '..', 'data', 'active-calibration.json');
 
 async function main() {
-  const response = await fetch(`${publicUrl}/api/calibration-config`);
+  const endpoint = new URL('/api/calibration-config', publicUrl);
+  endpoint.searchParams.set('_calibration_fetch', Date.now().toString());
+  const response = await fetch(endpoint, { headers: { 'cache-control': 'no-cache' } });
   if (!response.ok) throw new Error(`Calibration API returned HTTP ${response.status}`);
   const payload = await response.json();
   const config = payload.config;

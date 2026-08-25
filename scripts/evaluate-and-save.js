@@ -14,6 +14,7 @@ const { getApplicableMethods } = require('../shared/aqar-policy');
 const { getSizeCategory, applyAllFilters } = require('../scripts/cleaning-pipeline');
 const { findUnverifiedRecords } = require('../shared/dld-provenance');
 const calibrationDefaults = require('../shared/aqar-calibration-defaults');
+const calibrationEngine = require('../shared/calibration-engine');
 const ACTIVE_CALIBRATION_FILE = path.join(DATA_DIR, 'active-calibration.json');
 let ACTIVE_CALIBRATION = calibrationDefaults.createDefaultCalibrationConfig();
 try {
@@ -25,30 +26,7 @@ function getBatchCalibration(propertyType) {
   return calibrationDefaults.getPropertyConfig(ACTIVE_CALIBRATION, propertyType);
 }
 
-// ===== CALIBRATION PARAMETERS (from calibration-lab) =====
-const CALIBRATION = {
-  priceMethod: 'mean',           // mean / median / weightedMedian
-  areaSmall: 1.04,               // <80 sqm
-  areaLarge: 0.96,               // >200 sqm
-  conditionExcellent: 1.08,      // +8%
-  conditionFair: 0.82,           // -18%
-  ageDepreciation: 0.004,        // 0.4% per year
-  weights: {
-    salesComparison: 0.40,
-    income: 0.35,
-    cost: 0.15,
-    dcf: 0.10
-  }
-};
-
-console.log(`📊 Using Calibration Parameters:`);
-console.log(`   Price Method: ${CALIBRATION.priceMethod}`);
-console.log(`   Area Small (<80): ${CALIBRATION.areaSmall}`);
-console.log(`   Area Large (>200): ${CALIBRATION.areaLarge}`);
-console.log(`   Condition Excellent: ${CALIBRATION.conditionExcellent}`);
-console.log(`   Condition Fair: ${CALIBRATION.conditionFair}`);
-console.log(`   Age Depreciation: ${CALIBRATION.ageDepreciation}`);
-console.log(`   Active Config: ${ACTIVE_CALIBRATION.configId || 'base-22.1'}\n`);
+console.log(`📊 Active calibration config: ${ACTIVE_CALIBRATION.configId || 'base-22.1'}`);
 
 // ===== LOAD EXTERNAL DATA LAYERS =====
 let consultancyData = {};
@@ -319,7 +297,29 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
     result.gisScore = gisScore;
     result.gisMultiplier = gisMultiplier;
   }
-  
+
+  const propertyConfig = getBatchCalibration(property.propertyType);
+  const methodResults = calibrationEngine.buildMethodResults({
+    salesValue: result.valuation,
+    marketValue: result.valuation,
+    annualRent: property.annualRent,
+    annualExpenses: property.annualExpenses,
+    vacancyRatePercent: property.vacancyRatePercent,
+    capRatePercent: property.capRatePercent,
+    area: property.area,
+    landValue: property.landValue,
+    constructionCost: property.constructionCost,
+    yearBuilt: property.yearBuilt,
+    currentYear: 2026,
+    condition: property.condition || 'good'
+  }, propertyConfig);
+  const combined = calibrationEngine.combineMethodResults(methodResults, propertyConfig, ACTIVE_CALIBRATION.configId || 'base-22.1');
+  if (combined.status !== 'APPLIED') return null;
+  result.valuation = combined.value;
+  result.methodResults = combined.methods;
+  result.assumptions = combined.assumptions;
+  result.calibrationId = combined.calibrationId;
+
   return result;
 }
 
@@ -402,7 +402,10 @@ async function main() {
       gisScore: evalResult.gisScore ?? null,
       gisMultiplier: evalResult.gisMultiplier || 1,
       viewMultiplier: evalResult.viewMultiplier || 1,
-      viewTypes: evalResult.viewTypes || []
+      viewTypes: evalResult.viewTypes || [],
+      calibrationConfigId: evalResult.calibrationId,
+      valuationMethods: evalResult.methodResults,
+      calibrationAssumptions: evalResult.assumptions
     });
   }
 
@@ -437,7 +440,7 @@ async function main() {
       comparison: 'AQAR vs actual sale price',
       calibrationConfigId: ACTIVE_CALIBRATION.configId || 'base-22.1',
       dataType: usingEnriched ? 'enriched' : 'basic',
-      calibration: CALIBRATION
+      calibration: ACTIVE_CALIBRATION
     }, 
     metrics: marketMetrics, 
     records: allResults 
@@ -486,7 +489,10 @@ async function main() {
       gisScore: evalResult.gisScore ?? null,
       gisMultiplier: evalResult.gisMultiplier || 1,
       viewMultiplier: evalResult.viewMultiplier || 1,
-      viewTypes: evalResult.viewTypes || []
+      viewTypes: evalResult.viewTypes || [],
+      calibrationConfigId: evalResult.calibrationId,
+      valuationMethods: evalResult.methodResults,
+      calibrationAssumptions: evalResult.assumptions
     });
   }
 
@@ -531,7 +537,7 @@ async function main() {
       comparison: 'AQAR vs actual sale price',
       calibrationConfigId: ACTIVE_CALIBRATION.configId || 'base-22.1',
       dataType: usingEnriched ? 'enriched' : 'basic',
-      calibration: CALIBRATION
+      calibration: ACTIVE_CALIBRATION
     }, 
     metrics: evalMetrics, 
     records: evalResults 
