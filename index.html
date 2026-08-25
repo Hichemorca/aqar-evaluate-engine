@@ -925,7 +925,7 @@ function collectPropertyData() {
     city: document.getElementById('city').value,
     district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
     propType,
-    area: Math.max(10, parseFloat(document.getElementById('area').value) || 0),
+    area: parseFloat(document.getElementById('area').value) || 0,
     bedrooms: isRelevant('bedrooms') ? (parseInt(document.getElementById('bedrooms').value) || 0) : 0,
     yearBuilt: isRelevant('yearBuilt') ? Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value) || 2020)) : 2026,
     condition: isRelevant('condition') ? document.getElementById('condition').value : 'good',
@@ -1125,13 +1125,14 @@ function runValuation() {
   document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
   setTimeout(() => {
     const propData = collectPropertyData();
-    const applicableMethods = new Set(AQAR_POLICY.getApplicableMethods(propData.propType, 'interactive'));
-    if (!applicableMethods.size) {
-      showToast('Unsupported property type');
+    const validation = AQAR_POLICY.validatePropertyInput(propData);
+    if (!validation.valid) {
+      showToast(validation.errors.map(error => error.code).join(', '));
       document.getElementById('btnValuate').disabled = false;
       document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation';
       return;
     }
+    const applicableMethods = new Set(AQAR_POLICY.getApplicableMethods(propData.propType, 'interactive'));
     const valuations = [];
     if (applicableMethods.has('sales-comparison')) {
       const salesComp = salesComparisonApproach(propData);

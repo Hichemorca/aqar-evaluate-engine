@@ -100,6 +100,17 @@
       : 'NOT_APPLICABLE';
   }
 
+  function validatePropertyInput(property) {
+    const errors = [];
+    if (!property || !isSupportedPropertyType(property.propType)) {
+      errors.push({ field: 'propType', code: 'UNSUPPORTED_PROPERTY_TYPE' });
+    }
+    if (!Number.isFinite(Number(property?.area)) || Number(property.area) < 10) {
+      errors.push({ field: 'area', code: 'AREA_MUST_BE_AT_LEAST_10_SQM' });
+    }
+    return { valid: errors.length === 0, errors };
+  }
+
   return Object.freeze({
     PROPERTY_TYPES,
     METHOD_KEYS,
@@ -108,6 +119,7 @@
     isSupportedPropertyType,
     getPropertyPolicy,
     getApplicableMethods,
-    getMethodStatus
+    getMethodStatus,
+    validatePropertyInput
   });
 });

@@ -35,6 +35,15 @@ test('interactive applicability preserves the current AQAR method surface', () =
   assert.equal(policy.getMethodStatus('villa', 'dcf', 'interactive'), 'APPLICABLE');
 });
 
+test('shared input validation rejects invalid primary fields', () => {
+  assert.equal(policy.validatePropertyInput({ propType: 'apartment', area: 120 }).valid, true);
+  assert.equal(policy.validatePropertyInput({ propType: 'apartment', area: 9 }).valid, false);
+  assert.equal(policy.validatePropertyInput({ propType: 'not-supported', area: 120 }).valid, false);
+  assert.deepEqual(policy.validatePropertyInput({ propType: 'apartment', area: 9 }).errors, [
+    { field: 'area', code: 'AREA_MUST_BE_AT_LEAST_10_SQM' }
+  ]);
+});
+
 test('batch applicability preserves the current offline policy', () => {
   assert.deepEqual(policy.getApplicableMethods('apartment', 'batch'), ['sales-comparison', 'income']);
   assert.deepEqual(policy.getApplicableMethods('villa', 'batch'), ['sales-comparison', 'income', 'cost']);
