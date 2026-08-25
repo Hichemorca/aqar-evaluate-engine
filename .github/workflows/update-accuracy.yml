@@ -52,6 +52,10 @@ jobs:
         run: timeout --signal=TERM --kill-after=20s 5m node scripts/fetch-osm.js
         continue-on-error: true
         
+      - name: Enrich eligible DLD records with current GIS cache
+        run: rm -f data/dld-transactions-enriched.json && node scripts/enrich-with-coordinates.js
+        continue-on-error: true
+
       - name: Layer 6 — Market Intelligence Analysis
         run: node scripts/market-intelligence.js
         

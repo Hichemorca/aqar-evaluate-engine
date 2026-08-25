@@ -21,6 +21,10 @@ function getSizeCategory(area, propertyType) {
 }
 
 // ===== 10-STAGE CLEANING =====
+function filterEvidenceEligible(transactions) {
+  return transactions.filter(t => !t.evidenceStatus || t.evidenceStatus === 'eligible');
+}
+
 function filterNonSaleTransactions(transactions) {
   const nonMarketProcedures = ['development registration', 'sell development', 'lease to own registration'];
   const excludedKeywords = ['gift', 'hiba', 'inheritance', 'irt', 'wasiya', 'correction', 'rectification', 'mortgage', 'رهن', 'auction', 'مزاد'];
@@ -136,6 +140,7 @@ function validateGroupCounts(transactions) {
 function applyAllFilters(transactions) {
   console.log(`🧹 Cleaning: ${transactions.length} input`);
   let data = transactions;
+  data = filterEvidenceEligible(data);
   data = filterNonSaleTransactions(data);
   data = filterMissingData(data);
   data = filterAreaMismatch(data);

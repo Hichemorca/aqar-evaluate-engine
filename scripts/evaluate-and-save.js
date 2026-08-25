@@ -13,14 +13,22 @@ const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
 const { getApplicableMethods } = require('../shared/aqar-policy');
 const { getSizeCategory, applyAllFilters } = require('../scripts/cleaning-pipeline');
 const { findUnverifiedRecords } = require('../shared/dld-provenance');
+const { cleanDldRecords } = require('../shared/dld-evidence-cleaning');
 const calibrationDefaults = require('../shared/aqar-calibration-defaults');
 const calibrationEngine = require('../shared/calibration-engine');
 const ACTIVE_CALIBRATION_FILE = path.join(DATA_DIR, 'active-calibration.json');
+const DLD_CLEANING_REPORT_FILE = path.join(DATA_DIR, 'dld-cleaning-report.json');
 let ACTIVE_CALIBRATION = calibrationDefaults.createDefaultCalibrationConfig();
+let DLD_CLEANING_REPORT = null;
 try {
   if (fs.existsSync(ACTIVE_CALIBRATION_FILE)) ACTIVE_CALIBRATION = JSON.parse(fs.readFileSync(ACTIVE_CALIBRATION_FILE, 'utf8'));
 } catch (error) {
   console.log(`⚠️ Could not load active calibration, using defaults: ${error.message}`);
+}
+try {
+  if (fs.existsSync(DLD_CLEANING_REPORT_FILE)) DLD_CLEANING_REPORT = JSON.parse(fs.readFileSync(DLD_CLEANING_REPORT_FILE, 'utf8'));
+} catch (error) {
+  console.log(`⚠️ Could not load DLD cleaning report: ${error.message}`);
 }
 function getBatchCalibration(propertyType) {
   return calibrationDefaults.getPropertyConfig(ACTIVE_CALIBRATION, propertyType);
@@ -330,6 +338,9 @@ async function main() {
   console.log(`📋 Using ${usingEnriched ? 'enriched' : 'basic'} DLD data`);
 
   console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
+  const dldCleaning = cleanDldRecords(dldData);
+  console.log(`🧼 DLD Evidence Cleaning: ${dldCleaning.eligibleRecords.length.toLocaleString()} eligible | ${dldCleaning.rejectedRecords.length.toLocaleString()} rejected | ${dldCleaning.summary.skipped.toLocaleString()} skipped | ${dldCleaning.summary.duplicateTransactionIds.toLocaleString()} duplicates`);
+  dldData = dldCleaning.eligibleRecords;
   const unverifiedRecords = findUnverifiedRecords(dldData);
   if (unverifiedRecords.length > 0) {
     console.error(`❌ Refusing official accuracy generation: ${unverifiedRecords.length} unverified DLD records`);
@@ -440,7 +451,17 @@ async function main() {
       comparison: 'AQAR vs actual sale price',
       calibrationConfigId: ACTIVE_CALIBRATION.configId || 'base-22.1',
       dataType: usingEnriched ? 'enriched' : 'basic',
-      calibration: ACTIVE_CALIBRATION
+      calibration: ACTIVE_CALIBRATION,
+      dldCleaning: DLD_CLEANING_REPORT
+        ? {
+            sourceChecksum: DLD_CLEANING_REPORT.sourceChecksum,
+            recordsRead: DLD_CLEANING_REPORT.recordsRead,
+            eligible: DLD_CLEANING_REPORT.eligible,
+            rejected: DLD_CLEANING_REPORT.rejected,
+            skipped: DLD_CLEANING_REPORT.skipped,
+            duplicateTransactionIds: DLD_CLEANING_REPORT.duplicateTransactionIds
+          }
+        : null
     }, 
     metrics: marketMetrics, 
     records: allResults 
@@ -537,7 +558,17 @@ async function main() {
       comparison: 'AQAR vs actual sale price',
       calibrationConfigId: ACTIVE_CALIBRATION.configId || 'base-22.1',
       dataType: usingEnriched ? 'enriched' : 'basic',
-      calibration: ACTIVE_CALIBRATION
+      calibration: ACTIVE_CALIBRATION,
+      dldCleaning: DLD_CLEANING_REPORT
+        ? {
+            sourceChecksum: DLD_CLEANING_REPORT.sourceChecksum,
+            recordsRead: DLD_CLEANING_REPORT.recordsRead,
+            eligible: DLD_CLEANING_REPORT.eligible,
+            rejected: DLD_CLEANING_REPORT.rejected,
+            skipped: DLD_CLEANING_REPORT.skipped,
+            duplicateTransactionIds: DLD_CLEANING_REPORT.duplicateTransactionIds
+          }
+        : null
     }, 
     metrics: evalMetrics, 
     records: evalResults 

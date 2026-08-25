@@ -1,0 +1,25 @@
+{
+  "source": "Dubai Land Department",
+  "sourceFile": "data/dld-transactions.csv",
+  "sourceChecksum": "5d863484f69278615cd6b116ade988d50b77ef0406b20b22495f18c0e0a3d019",
+  "generatedAt": "2026-08-25T10:33:18.195Z",
+  "recordsRead": 30475,
+  "normalized": 30328,
+  "uniqueTransactionIds": 30456,
+  "duplicateTransactionIds": 19,
+  "eligible": 26766,
+  "rejected": 3562,
+  "skipped": 128,
+  "issueCounts": {
+    "duplicates": 19,
+    "rejected": 3562,
+    "invalid": 128
+  },
+  "issueLedgerFile": "data/dld-transactions-rejected.json",
+  "issueCountsByReason": {
+    "commercial_land": 2944,
+    "ultra_luxury": 618,
+    "duplicate_transaction_id": 19,
+    "invalid_area_sqm": 128
+  }
+}
