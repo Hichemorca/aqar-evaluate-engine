@@ -65,6 +65,7 @@
     .loading { text-align: center; padding: 40px; color: var(--muted); }
     .back-link { display: inline-block; margin-top: 20px; color: var(--muted); font-size: 12px; text-decoration: none; }
     .back-link:hover { color: var(--gold); }
+    .back-link.admin-link { color: var(--gold); font-weight: 700; }
 
     .methodology { font-size: 11px; line-height: 1.6; color: #c3cfe0; }
     .methodology h4 { color: var(--gold); font-size: 11px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -140,6 +141,8 @@
   </div>
 
   <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+    <a href="/admin-calibration" class="back-link admin-link">Admin Login</a>
+    <span style="color:var(--muted)">•</span>
     <a href="/" class="back-link">← Valuation Engine</a>
     <span style="color:var(--muted)">•</span>
     <a href="/accuracy-dashboard" class="back-link">📊 Accuracy Dashboard</a>

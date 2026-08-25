@@ -10,6 +10,7 @@
     .btn-json { background: #3c8cdc; color: #fff; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
     .stats { margin: 20px 0; font-size: 14px; color: #8a9ab0; }
+    .admin-link { color: #d4920e; font-size: 12px; font-weight: 700; margin-right: 16px; }
   </style>
 </head>
 <body>
@@ -18,7 +19,8 @@
   <button class="btn btn-csv" onclick="exportCSV()">?? Download CSV (Excel)</button>
   <button class="btn btn-json" onclick="exportJSON()">?? Download JSON</button>
   <br><br>
-  <a href="/accuracy-dashboard" style="color:#8a9ab0;font-size:12px">? Back to Dashboard</a>
+  <a href="/admin-calibration" class="admin-link">Admin Login</a>
+  <a href="/accuracy-dashboard" style="color:#8a9ab0;font-size:12px">Back to Dashboard</a>
 
   <script>
     let data = null;

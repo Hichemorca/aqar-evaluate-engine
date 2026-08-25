@@ -79,6 +79,7 @@
 
     .back-link { display: inline-block; margin-top: 20px; color: var(--muted); font-size: 12px; text-decoration: none; }
     .back-link:hover { color: var(--gold); }
+    .back-link.admin-link { color: var(--gold); font-weight: 700; }
 
     .refresh-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
     .refresh-bar .last-updated { font-size: 10px; color: var(--muted); }
@@ -152,6 +153,8 @@
   </div>
 
   <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+    <a href="/admin-calibration" class="back-link admin-link">Admin Login</a>
+    <span style="color:var(--muted)">•</span>
     <a href="/" class="back-link">← Valuation Engine</a>
     <span style="color:var(--muted)">•</span>
     <a href="/market-intelligence" class="back-link">📊 Market Intelligence →</a>

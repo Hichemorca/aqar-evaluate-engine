@@ -335,6 +335,7 @@
     }
     .footer-links a { color: var(--muted); text-decoration: underline; margin: 0 8px; }
     .footer-links a:hover { color: var(--gold); }
+    .footer-links .admin-link { color: var(--gold); font-weight: 700; }
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
@@ -351,25 +352,13 @@
   <div class="brand">
     <div class="tag">AQAR Valuation Intelligence <span class="beta-badge">BETA</span></div>
     <div class="title">Real Estate Valuation Engine</div>
-    <div class="sub">Stop guessing — let the numbers decide.</div>
   </div>
   <div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:12px">
     📅 Data refreshed: <span id="lastDataRefresh">Loading...</span> •
     📊 Based on <span id="accuracyRecordCount">—</span> evaluated records • <span id="accuracyRate">—</span>% accuracy
   </div>
-  <div style="background:rgba(212,146,14,0.12);border:1px solid rgba(212,146,14,0.3);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:center;backdrop-filter:blur(4px);">
-    <span style="font-size:12px;font-weight:600;color:var(--gold);">
-      🧪 نسخة تجريبية — البيانات متاحة لإمارة دبي فقط &nbsp;|&nbsp; Demo Version — Dubai Data Only
-    </span>
-  </div>
-  <div class="section" style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);">
-    <div class="section-title">🧠 How AQAR Works</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;font-size:10px;color:var(--muted);line-height:1.6">
-      <div><b style="color:var(--gold)">1. Data</b><br>Pulls real transaction data from Dubai Land Department + live listings</div>
-      <div><b style="color:var(--gold)">2. Compare</b><br>Finds comparable sales in same project, district, and size category</div>
-      <div><b style="color:var(--gold)">3. Analyze</b><br>Time-weighted median with Leave-One-Out validation</div>
-      <div><b style="color:var(--gold)">4. Decide</b><br>Clear valuation with confidence level and market context</div>
-    </div>
+  <div style="background:rgba(212,146,14,0.12);border:1px solid rgba(212,146,14,0.3);border-radius:12px;padding:10px 16px;margin-bottom:16px;text-align:center;backdrop-filter:blur(4px);">
+    <span style="font-size:12px;font-weight:600;color:var(--gold);">BETA • Dubai data only</span>
   </div>
   <div class="section">
     <div class="section-title">🏠 Property Information</div>
@@ -442,8 +431,8 @@
     </div>
   </div>
   <div class="section" id="expertSection">
-    <div class="section-title">👁️ Expert Assessment (Optional)</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Fields vary by property type. Leave empty if unknown.</div>
+    <div class="section-title">👁️ Property Details</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional inputs • leave blank if unknown.</div>
     <div class="row">
       <div class="fg" id="fgFinishQuality">
         <label>⭐ Finish Quality</label>
@@ -517,10 +506,8 @@
     </div>
   </div>
   <div class="section" id="gisSection">
-    <div class="section-title">📍 Location & Nearby Facilities (GIS)</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">
-      Select a district from the list below, then drag the marker on the map to pinpoint the exact location.
-    </div>
+    <div class="section-title">📍 Location & Facilities</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a DLD district and adjust the map marker if needed.</div>
     <div class="fg">
       <label>📍 District / Area <span class="note" style="font-weight:400;text-transform:none;color:var(--muted)">(Choose from DLD data)</span></label>
       <div class="autocomplete-container">
@@ -545,43 +532,42 @@
     <div id="gisMap" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     <input type="hidden" id="gisRadius" value="1000">
     <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">
-      📌 Drag the gold marker on the map to pinpoint the exact property location
     </div>
   </div>
   <div class="section">
-    <div class="section-title">🔍 Market Data <span style="font-size:10px;color:var(--muted);font-weight:400">(Run first!)</span></div>
+    <div class="section-title">🔍 DLD Market Evidence</div>
     <div class="row">
-      <div class="fg"><label>📊 Avg Price/sqm (Auto)</label><input type="number" id="avgPriceSqm" placeholder="Click 'Scrape'" readonly></div>
-      <div class="fg"><label>📋 Listings Found</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
+      <div class="fg"><label>📊 DLD Price/sqm</label><input type="number" id="avgPriceSqm" placeholder="Load DLD evidence" readonly></div>
+      <div class="fg"><label>📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
     </div>
-    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Scrape Live Market Data</button>
+    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load DLD Evidence</button>
     <div id="scrapeStatus" style="font-size:11px;margin-top:8px;text-align:center"></div>
     <div class="scrape-comps" id="scrapedComps"></div>
   </div>
   <div class="section" id="incomeSection">
-    <div class="section-title">💰 Income Capitalization (Optional)</div>
-    <div class="row">
-      <div class="fg"><label>📊 Annual Gross Rent (AED)</label><input type="number" id="annualRent" placeholder="e.g. 80000"></div>
+    <div class="section-title">💰 Income Approach</div>
+      <div class="row">
+        <div class="fg"><label>📊 Annual Rent (AED)</label><input type="number" id="annualRent" placeholder="e.g. 80000"></div>
       <div class="fg"><label>🛠️ Annual Expenses (AED)</label><input type="number" id="annualExpenses" placeholder="~20% of rent"></div>
     </div>
   </div>
   <div class="section" id="costSection">
-    <div class="section-title">🔨 Cost Approach (Optional)</div>
+    <div class="section-title">🔨 Cost Approach</div>
     <div class="row">
       <div class="fg"><label>🏗️ Land Value (AED)</label><input type="number" id="landValue" placeholder="Auto: ~30% of market value"></div>
       <div class="fg"><label>🔨 Build Cost/sqm (AED)</label><input type="number" id="constructionCost" placeholder="e.g. 3000"></div>
     </div>
   </div>
   <div style="display:flex;gap:10px">
-    <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">🧮 Calculate Full Valuation</button>
-    <button class="btn btn-reset" onclick="resetAll()" style="flex:1">🔄 Reset</button>
+    <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">🧮 Calculate Valuation</button>
+    <button class="btn btn-reset" onclick="resetAll()" style="flex:1">Reset</button>
   </div>
   <div id="resultSection" class="hidden"></div>
   <div class="footer-links">
+    <a href="/admin-calibration" class="admin-link">Admin Login</a>
     <a href="/accuracy-dashboard">📊 Accuracy (<span id="footerAccuracyRate">—</span>%)</a>
     <a href="/market-intelligence">📈 Market Intelligence</a>
     <a href="https://aqar-decision-engine.netlify.app" target="_blank">🧠 Decision Engine</a>
-    <a href="https://github.com/Hichemorca/aqar-evaluate-engine" target="_blank">📂 GitHub</a>
   </div>
 </div>
 <script src="/shared/aqar-policy.js"></script>
@@ -1183,7 +1169,7 @@ function displayResult(result, valuations, propData) {
     vHTML += `<div class="method-card"><div class="m-header"><span class="m-name">${v.method}</span><span style="font-size:10px;color:${cColor}">● ${v.confidence} confidence</span></div><div class="m-value">${v.value.toLocaleString()} AED</div><div class="m-meta"><span>Weight: ${Math.round(v.weight*100)}%</span>${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}</div><div class="m-detail">${v.details}</div></div>`;
   });
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div><div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Valuation Methods Detail</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><div class="text-center text-muted mt-2">Opens Decision Engine with full valuation data pre-filled</div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div><div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Methods</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1200,7 +1186,7 @@ function runValuation() {
     if (!validation.valid) {
       showToast(validation.errors.map(error => error.code).join(', '));
       document.getElementById('btnValuate').disabled = false;
-      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation';
+      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Valuation';
       return;
     }
     const applicableMethods = new Set(AQAR_POLICY.getApplicableMethods(propData.propType, 'interactive'));
@@ -1221,7 +1207,7 @@ function runValuation() {
       const dcfVal = dcfApproach(propData);
       if (dcfVal) valuations.push(dcfVal);
     }
-    if (!valuations.length) { displayEvidenceOnlyState(propData); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
+    if (!valuations.length) { displayEvidenceOnlyState(propData); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Valuation'; return; }
     const finalResult = calculateWeightedValue(valuations, propData);
     displayResult(finalResult, valuations, propData);
     document.getElementById('btnValuate').disabled = false;
