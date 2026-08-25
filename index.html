@@ -570,6 +570,7 @@
     <a href="https://github.com/Hichemorca/aqar-evaluate-engine" target="_blank">📂 GitHub</a>
   </div>
 </div>
+<script src="/shared/aqar-policy.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const UAE_DISTRICTS = {
@@ -911,30 +912,36 @@ function calculateViewMultiplier(viewTypes) {
   return Math.max(0.8, Math.min(1.25, mult));
 }
 function collectPropertyData() {
+  const propType = document.getElementById('propType').value;
+  const policy = AQAR_POLICY.getPropertyPolicy(propType);
+  const isRelevant = field => policy ? !policy.irrelevantFields.includes(field) : false;
   const features = [];
-  document.querySelectorAll('#featuresGroup input:checked').forEach(cb => features.push(cb.value));
-  const isLand = document.getElementById('propType').value === 'land';
+  if (isRelevant('features')) {
+    document.querySelectorAll('#featuresGroup input:checked').forEach(cb => features.push(cb.value));
+  }
+  const readNumber = field => isRelevant(field) ? (parseFloat(document.getElementById(field).value) || 0) : 0;
+  const readValue = field => isRelevant(field) ? document.getElementById(field).value : '';
   return {
     city: document.getElementById('city').value,
     district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
-    propType: document.getElementById('propType').value,
-    area: Math.max(10, parseFloat(document.getElementById('area').value)||0),
-    bedrooms: parseInt(document.getElementById('bedrooms').value)||0,
-    yearBuilt: isLand ? 2026 : Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value)||2020)),
-    condition: isLand ? 'good' : document.getElementById('condition').value,
+    propType,
+    area: parseFloat(document.getElementById('area').value) || 0,
+    bedrooms: isRelevant('bedrooms') ? (parseInt(document.getElementById('bedrooms').value) || 0) : 0,
+    yearBuilt: isRelevant('yearBuilt') ? Math.max(1970, Math.min(2026, parseInt(document.getElementById('yearBuilt').value) || 2020)) : 2026,
+    condition: isRelevant('condition') ? document.getElementById('condition').value : 'good',
     features,
-    avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value)||0,
-    annualRent: parseFloat(document.getElementById('annualRent').value)||0,
-    annualExpenses: parseFloat(document.getElementById('annualExpenses').value)||0,
-    landValue: parseFloat(document.getElementById('landValue').value)||0,
-    constructionCost: parseFloat(document.getElementById('constructionCost').value)||0,
+    avgPriceSqm: parseFloat(document.getElementById('avgPriceSqm').value) || 0,
+    annualRent: readNumber('annualRent'),
+    annualExpenses: readNumber('annualExpenses'),
+    landValue: readNumber('landValue'),
+    constructionCost: readNumber('constructionCost'),
     scrapedData: scrapedDistrictData,
-    finishQuality: document.getElementById('finishQuality').value,
-    viewTypes: getSelectedViewTypes(),
-    floorLevel: document.getElementById('floorLevel').value,
-    streetPosition: document.getElementById('streetPosition').value,
-    buildingCondition: document.getElementById('buildingCondition').value,
-    furnishedStatus: document.getElementById('furnishedStatus').value,
+    finishQuality: readValue('finishQuality'),
+    viewTypes: isRelevant('viewTypes') ? getSelectedViewTypes() : [],
+    floorLevel: readValue('floorLevel'),
+    streetPosition: readValue('streetPosition'),
+    buildingCondition: readValue('buildingCondition'),
+    furnishedStatus: readValue('furnishedStatus'),
     gisData: gisData,
     gisRadius: 1000
   };
@@ -1073,7 +1080,34 @@ function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
   const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count||'multiple'}</b> comparable sales in ${propData.district}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend||'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString() || 'available'}</b><br>• Valuation range reflects natural market variation</div>`;
+  const methodLabels = {
+    'sales-comparison': 'Sales Comparison Approach',
+    income: 'Income Capitalization Approach',
+    cost: 'Cost Approach (Replacement)',
+    dcf: 'DCF Analysis (10-Year)'
+  };
+  const applicableMethods = new Set(AQAR_POLICY.getApplicableMethods(propData.propType, 'interactive'));
+  const methodStatusHTML = AQAR_POLICY.METHOD_KEYS.map(method => {
+    const label = methodLabels[method];
+    const isApplicable = applicableMethods.has(method);
+    const wasUsed = valuations.some(v => v.method === label);
+    const status = !isApplicable ? 'NOT_APPLICABLE' : wasUsed ? 'USED' : 'NOT_USED — insufficient evidence or inputs';
+    const color = status === 'USED' ? 'var(--green)' : status === 'NOT_APPLICABLE' ? 'var(--muted)' : 'var(--gold)';
+    return `<div style="display:flex;justify-content:space-between;gap:12px;padding:3px 0"><span>${label}</span><b style="color:${color};font-size:10px">${status}</b></div>`;
+  }).join('');
+  const evidenceHTML = `<div style="margin-top:10px"><b>Evidence classification</b><br><span style="color:var(--muted)">SOURCE FACT:</span> ${scrapedDistrictData?.count || 0} DLD comparable sales${scrapedDistrictData?.avgPricePerSqm ? `; ${Number(scrapedDistrictData.avgPricePerSqm).toLocaleString()} AED/sqm` : ''}.<br><span style="color:var(--muted)">DERIVED VALUE:</span> weighted reconciliation of the methods shown below.<br><span style="color:var(--muted)">ASSUMPTION:</span> optional rent/expense and consultancy defaults remain those of the current AQAR behavior.<br><span style="color:var(--muted)">MODEL OUTPUT:</span> final value and range shown above.</div>`;
+  const adjustmentFacts = [
+    propData.condition ? `Condition: ${propData.condition}` : '',
+    propData.finishQuality ? `Finish: ${propData.finishQuality}` : '',
+    propData.viewTypes?.length ? `Views: ${propData.viewTypes.join(', ')}` : '',
+    propData.floorLevel ? `Floor: ${propData.floorLevel}` : '',
+    propData.streetPosition ? `Street position: ${propData.streetPosition}` : '',
+    propData.buildingCondition ? `Building condition: ${propData.buildingCondition}` : '',
+    propData.furnishedStatus ? `Furnished status: ${propData.furnishedStatus}` : '',
+    window.gisImpactPercent ? `GIS impact: +${window.gisImpactPercent}%` : ''
+  ].filter(Boolean);
+  const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Current adjustments / inputs</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count || 'multiple'}</b> comparable sales in ${propData.district || 'the selected area'}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
   let vHTML = '';
   valuations.forEach(v => {
     const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
@@ -1091,15 +1125,31 @@ function runValuation() {
   document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
   setTimeout(() => {
     const propData = collectPropertyData();
+    const validation = AQAR_POLICY.validatePropertyInput(propData);
+    if (!validation.valid) {
+      showToast(validation.errors.map(error => error.code).join(', '));
+      document.getElementById('btnValuate').disabled = false;
+      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation';
+      return;
+    }
+    const applicableMethods = new Set(AQAR_POLICY.getApplicableMethods(propData.propType, 'interactive'));
     const valuations = [];
-    const salesComp = salesComparisonApproach(propData);
-    if (salesComp) valuations.push(salesComp);
-    const incomeVal = incomeCapitalizationApproach(propData);
-    if (incomeVal) valuations.push(incomeVal);
-    const costVal = costApproach(propData);
-    if (costVal) valuations.push(costVal);
-    const dcfVal = dcfApproach(propData);
-    if (dcfVal) valuations.push(dcfVal);
+    if (applicableMethods.has('sales-comparison')) {
+      const salesComp = salesComparisonApproach(propData);
+      if (salesComp) valuations.push(salesComp);
+    }
+    if (applicableMethods.has('income')) {
+      const incomeVal = incomeCapitalizationApproach(propData);
+      if (incomeVal) valuations.push(incomeVal);
+    }
+    if (applicableMethods.has('cost')) {
+      const costVal = costApproach(propData);
+      if (costVal) valuations.push(costVal);
+    }
+    if (applicableMethods.has('dcf')) {
+      const dcfVal = dcfApproach(propData);
+      if (dcfVal) valuations.push(dcfVal);
+    }
     if (!valuations.length) { showToast('Insufficient data. Run "Scrape" first.'); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
     const finalResult = calculateWeightedValue(valuations, propData);
     displayResult(finalResult, valuations, propData);
@@ -1201,24 +1251,49 @@ function showToast(msg, dur=3000) {
 }
 function onPropertyTypeChange() {
   const type = document.getElementById('propType').value;
-  const isLand = type === 'land', isWare = type === 'warehouse';
-  const isApt = type === 'apartment', isVilla = type === 'villa', isTown = type === 'townhouse', isOff = type === 'office', isRet = type === 'retail';
-  document.getElementById('rowBedrooms').style.display = (isApt||isVilla||isTown) ? 'flex' : 'none';
-  document.getElementById('rowFeatures').style.display = (!isLand && !isWare) ? 'block' : 'none';
-  document.getElementById('rowYearCondition').style.display = isLand ? 'none' : 'flex';
-  document.getElementById('incomeSection').style.display = isLand ? 'none' : 'block';
-  document.getElementById('costSection').style.display = (isLand||isApt) ? 'none' : 'block';
+  const policy = AQAR_POLICY.getPropertyPolicy(type);
+  const isRelevant = field => policy ? !policy.irrelevantFields.includes(field) : false;
+  document.getElementById('rowBedrooms').style.display = isRelevant('bedrooms') ? 'flex' : 'none';
+  document.getElementById('rowFeatures').style.display = isRelevant('features') ? 'block' : 'none';
+  document.getElementById('rowYearCondition').style.display = (isRelevant('yearBuilt') || isRelevant('condition')) ? 'flex' : 'none';
+  document.getElementById('incomeSection').style.display = isRelevant('annualRent') ? 'block' : 'none';
+  document.getElementById('costSection').style.display = (isRelevant('landValue') || isRelevant('constructionCost')) ? 'block' : 'none';
   document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
     const types = item.dataset.types||'';
-    item.style.display = types.includes(type) ? 'flex' : 'none';
+    item.style.display = isRelevant('features') && types.includes(type) ? 'flex' : 'none';
     if (!types.includes(type)) { const cb = item.querySelector('input'); if (cb?.checked) { cb.checked = false; item.classList.remove('checked'); } }
   });
-  document.getElementById('fgFinishQuality').style.display = (!isLand&&!isWare)?'':'none';
-  document.getElementById('fgViewType').style.display = (isApt||isVilla||isTown||isOff)?'':'none';
-  document.getElementById('fgFloorLevel').style.display = (isApt||isOff)?'':'none';
-  document.getElementById('fgStreetPosition').style.display = (isVilla||isTown||isOff||isRet)?'':'none';
-  document.getElementById('fgBuildingCondition').style.display = (!isLand)?'':'none';
-  document.getElementById('fgFurnishedStatus').style.display = (isApt||isVilla||isTown||isOff)?'':'none';
+  document.getElementById('fgFinishQuality').style.display = isRelevant('finishQuality') ? '' : 'none';
+  document.getElementById('fgViewType').style.display = isRelevant('viewTypes') ? '' : 'none';
+  document.getElementById('fgFloorLevel').style.display = isRelevant('floorLevel') ? '' : 'none';
+  document.getElementById('fgStreetPosition').style.display = isRelevant('streetPosition') ? '' : 'none';
+  document.getElementById('fgBuildingCondition').style.display = isRelevant('buildingCondition') ? '' : 'none';
+  document.getElementById('fgFurnishedStatus').style.display = isRelevant('furnishedStatus') ? '' : 'none';
+  if (policy) {
+    const fieldElements = {
+      bedrooms: document.getElementById('bedrooms'),
+      yearBuilt: document.getElementById('yearBuilt'),
+      condition: document.getElementById('condition'),
+      finishQuality: document.getElementById('finishQuality'),
+      floorLevel: document.getElementById('floorLevel'),
+      streetPosition: document.getElementById('streetPosition'),
+      buildingCondition: document.getElementById('buildingCondition'),
+      furnishedStatus: document.getElementById('furnishedStatus'),
+      annualRent: document.getElementById('annualRent'),
+      annualExpenses: document.getElementById('annualExpenses'),
+      landValue: document.getElementById('landValue'),
+      constructionCost: document.getElementById('constructionCost')
+    };
+    policy.irrelevantFields.forEach(field => {
+      if (field === 'features') {
+        document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item')?.classList.remove('checked'); });
+      } else if (field === 'viewTypes') {
+        document.querySelectorAll('#viewTypeGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item')?.classList.remove('checked'); });
+      } else if (fieldElements[field]) {
+        fieldElements[field].value = '';
+      }
+    });
+  }
 }
 document.addEventListener('DOMContentLoaded', function() {
   loadDistrictCoords();
