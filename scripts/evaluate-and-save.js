@@ -10,6 +10,7 @@ const GOVERNMENT_FILE = path.join(DATA_DIR, 'government-data.json');
 const OSM_CACHE_FILE = path.join(DATA_DIR, 'osm-cache.json');
 const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
+const { getApplicableMethods } = require('../shared/aqar-policy');
 
 // ===== CALIBRATION PARAMETERS (from calibration-lab) =====
 const CALIBRATION = {
@@ -303,12 +304,7 @@ function calculateViewMultiplier(viewTypes) {
 
 // ===== AVAILABLE APPROACHES BY PROPERTY TYPE =====
 function getAvailableApproaches(propertyType) {
-  // Apartment و Land: فقط Sales Comparison و Income
-  if (propertyType === 'apartment' || propertyType === 'land') {
-    return ['sales-comparison', 'income'];
-  }
-  // الباقي: جميع المناهج
-  return ['sales-comparison', 'income', 'cost'];
+  return getApplicableMethods(propertyType, 'batch');
 }
 
 // ===== AMENITIES FILTER (remove view-related items) =====

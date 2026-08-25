@@ -5,6 +5,7 @@ const url = require('url');
 // IMPORT SHARED CLEANING
 // ============================================================
 const { getSizeCategory, applyAllFilters } = require('../../scripts/cleaning-pipeline');
+const { isSupportedPropertyType } = require('../../shared/aqar-policy');
 
 // ============================================================
 // HELPERS
@@ -157,6 +158,15 @@ exports.handler = async (event) => {
       };
     }
 
+    const numericArea = Number(area);
+    if (!isSupportedPropertyType(propertyType) || !Number.isFinite(numericArea) || numericArea <= 0) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ found: false, error: 'Unsupported property type or invalid area' })
+      };
+    }
+
     const raw = await fetchDLDData();
     if (!raw || raw.length === 0) {
       return {
@@ -175,7 +185,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const size = getSizeCategory(parseFloat(area), propertyType);
+    const size = getSizeCategory(numericArea, propertyType);
     const result = adaptiveSearch(district, propertyType, size, cleaned, new Date());
 
     if (!result) {

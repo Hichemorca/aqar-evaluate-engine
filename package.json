@@ -5,9 +5,10 @@
   "main": "index.html",
   "scripts": {
     "build": "echo 'No build step required'",
+    "test": "node --test tests/*.test.js",
     "fetch": "node scripts/fetch-transactions.js",
     "evaluate": "node scripts/evaluate-and-save.js",
-    "fetch-osm": "node scripts/fetch-osm-data.js"
+    "fetch-osm": "node scripts/fetch-osm.js"
   },
   "dependencies": {
     "axios": "^1.7.0",

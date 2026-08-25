@@ -1,2 +1,3 @@
-"models/*.pkl" 
-"models/*.pkl" 
+models/*.pkl
+node_modules/
+.netlify/
