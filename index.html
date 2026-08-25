@@ -1144,6 +1144,8 @@ function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
   const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
+  const dldCount = Number(scrapedDistrictData?.count || 0);
+  const evidenceConfidence = dldCount > 0 ? confLevel : '⚪ Not available';
   const methodLabels = {
     'sales-comparison': 'Sales Comparison Approach',
     income: 'Income Capitalization Approach',
@@ -1174,7 +1176,7 @@ function displayResult(result, valuations, propData) {
     window.gisImpactPercent ? `GIS impact: +${window.gisImpactPercent}%` : ''
   ].filter(Boolean);
   const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Current adjustments / inputs</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>${evidenceStateHTML}• Based on <b>${scrapedDistrictData?.count || 'multiple'}</b> comparable sales in ${propData.district || 'the selected area'}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Calibration config: <b>${AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>${evidenceStateHTML}• DLD comparable sales: <b>${dldCount > 0 ? `${dldCount} in ${propData.district || 'the selected area'}` : 'None available'}</b><br>• DLD evidence confidence: <b>${evidenceConfidence}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Calibration config: <b>${AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
   let vHTML = '';
   valuations.forEach(v => {
     const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
