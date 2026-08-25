@@ -13,6 +13,17 @@ const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
 const { getApplicableMethods } = require('../shared/aqar-policy');
 const { getSizeCategory, applyAllFilters } = require('../scripts/cleaning-pipeline');
 const { findUnverifiedRecords } = require('../shared/dld-provenance');
+const calibrationDefaults = require('../shared/aqar-calibration-defaults');
+const ACTIVE_CALIBRATION_FILE = path.join(DATA_DIR, 'active-calibration.json');
+let ACTIVE_CALIBRATION = calibrationDefaults.createDefaultCalibrationConfig();
+try {
+  if (fs.existsSync(ACTIVE_CALIBRATION_FILE)) ACTIVE_CALIBRATION = JSON.parse(fs.readFileSync(ACTIVE_CALIBRATION_FILE, 'utf8'));
+} catch (error) {
+  console.log(`⚠️ Could not load active calibration, using defaults: ${error.message}`);
+}
+function getBatchCalibration(propertyType) {
+  return calibrationDefaults.getPropertyConfig(ACTIVE_CALIBRATION, propertyType);
+}
 
 // ===== CALIBRATION PARAMETERS (from calibration-lab) =====
 const CALIBRATION = {
@@ -36,7 +47,8 @@ console.log(`   Area Small (<80): ${CALIBRATION.areaSmall}`);
 console.log(`   Area Large (>200): ${CALIBRATION.areaLarge}`);
 console.log(`   Condition Excellent: ${CALIBRATION.conditionExcellent}`);
 console.log(`   Condition Fair: ${CALIBRATION.conditionFair}`);
-console.log(`   Age Depreciation: ${CALIBRATION.ageDepreciation}\n`);
+console.log(`   Age Depreciation: ${CALIBRATION.ageDepreciation}`);
+console.log(`   Active Config: ${ACTIVE_CALIBRATION.configId || 'base-22.1'}\n`);
 
 // ===== LOAD EXTERNAL DATA LAYERS =====
 let consultancyData = {};
@@ -97,62 +109,25 @@ function getGISScoreFromTransaction(transaction) {
 // ===== CALCULATE PROXIMITY MULTIPLIER (Re-calibrated based on actual data) =====
 function getProximityMultiplier(gisScore) {
   if (gisScore === null || gisScore === undefined) return 1;
-  
-  // المعامل المُشتق من البيانات الفعلية (تحليل كلود):
-  // b = +1.56% (القريبة تبالغ أكثر من البعيدة)
-  // لذا نطبق تخفيضاً طفيفاً للتعويض
-  // gisScore = 0.4 (قريب) → تخفيض ~0.62%
-  // gisScore = 0 (بعيد) → لا تغيير
-  
-  // المعامل المحايد هو 1.0
-  // نطبق تخفيضاً متناسباً مع gisScore
-  const calibrationFactor = -0.0156; // -1.56% كحد أقصى
-  
-  // gisScore يتراوح بين 0 و 1 (في بياناتنا 0 أو 0.4)
+  const gis = ACTIVE_CALIBRATION.gis || {};
+  const calibrationFactor = Number(gis.proximityFactorPerScore ?? -0.0156);
   const adjustment = gisScore * calibrationFactor;
   const multiplier = 1 + adjustment;
-  
-  // حدود آمنة (تخفيض بين 0% و -1.56%)
-  return Math.min(1.01, Math.max(0.98, multiplier));
+  return Math.min(Number(gis.proximityMaximumMultiplier ?? 1.01), Math.max(Number(gis.proximityMinimumMultiplier ?? 0.98), multiplier));
 }
 
 // ===== VIEW TYPE MULTIPLIER (Multiple Selection Support) =====
-function calculateViewMultiplier(viewTypes) {
+function calculateViewMultiplier(viewTypes, propertyType) {
   if (!viewTypes || viewTypes.length === 0) return 1;
-  
-  // تحقق من وجود Unknown أو Internal
-  if (viewTypes.includes('unknown') || viewTypes.includes('internal')) {
-    return 0.95; // تخفيض 5% للإطلالة الداخلية أو غير المعروفة
-  }
-  
-  // تأثيرات كل نوع إطلالة (محدثة مع فصل garden و park)
-  const viewImpacts = {
-    'sea': 1.12,        // +12%
-    'golf': 1.10,       // +10%
-    'marina': 1.10,     // +10%
-    'lagoon': 1.08,     // +8%
-    'garden': 1.06,     // +6% (خاصة)
-    'park': 1.04,       // +4% (عامة)
-    'landmark': 1.03,   // +3%
-    'main-road': 1.01   // +1%
-  };
-  
-  // ترتيب التأثيرات تنازلياً
-  const sortedImpacts = viewTypes
-    .map(v => viewImpacts[v] || 1)
-    .sort((a, b) => b - a);
-  
-  // أعلى قيمة × 100% + الباقي × 50%
+  if (viewTypes.includes('unknown') || viewTypes.includes('internal')) return 1;
+  const sales = getBatchCalibration(propertyType || 'apartment').coefficients.sales;
+  const factors = sales.viewFactors || {};
+  const impacts = viewTypes.map(view => Number(factors[view] || 1)).sort((a, b) => b - a);
   let totalMultiplier = 1;
-  sortedImpacts.forEach((impact, index) => {
-    if (index === 0) {
-      totalMultiplier = impact;
-    } else {
-      totalMultiplier += (impact - 1) * 0.5;
-    }
+  impacts.forEach((impact, index) => {
+    totalMultiplier = index === 0 ? impact : totalMultiplier + (impact - 1) * Number(sales.viewSecondaryFactor ?? 0.5);
   });
-  
-  return Math.min(totalMultiplier, 1.20); // الحد الأقصى +20%
+  return Math.max(Number(sales.viewMinimumMultiplier ?? 0.8), Math.min(Number(sales.viewMaximumMultiplier ?? 1.25), totalMultiplier));
 }
 
 // ===== AVAILABLE APPROACHES BY PROPERTY TYPE =====
@@ -330,7 +305,7 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   
   // ===== APPLY VIEW TYPE MULTIPLIER (Multiple Selection) =====
   if (property.viewTypes && property.viewTypes.length > 0) {
-    const viewMultiplier = calculateViewMultiplier(property.viewTypes);
+    const viewMultiplier = calculateViewMultiplier(property.viewTypes, property.propertyType);
     result.valuation = Math.round(result.valuation * viewMultiplier);
     result.viewMultiplier = viewMultiplier;
     result.viewTypes = property.viewTypes;
@@ -460,6 +435,7 @@ async function main() {
       dataSource: 'DLD + Consultancy + Government + GIS',
       accuracyScope: 'verified-dld-only',
       comparison: 'AQAR vs actual sale price',
+      calibrationConfigId: ACTIVE_CALIBRATION.configId || 'base-22.1',
       dataType: usingEnriched ? 'enriched' : 'basic',
       calibration: CALIBRATION
     }, 
@@ -553,6 +529,7 @@ async function main() {
       dataSource: 'DLD + Consultancy + Government + GIS',
       accuracyScope: 'verified-dld-only',
       comparison: 'AQAR vs actual sale price',
+      calibrationConfigId: ACTIVE_CALIBRATION.configId || 'base-22.1',
       dataType: usingEnriched ? 'enriched' : 'basic',
       calibration: CALIBRATION
     }, 

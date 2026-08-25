@@ -3,11 +3,16 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["axios"]
+  external_node_modules = ["axios", "@netlify/blobs"]
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/admin-calibration"
+  to = "/calibration.html"
   status = 200
 
 # Add this to ensure data files are included
