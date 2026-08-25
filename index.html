@@ -193,6 +193,20 @@
     .status-badge.success { background: rgba(0,184,110,0.15); color: var(--green); }
     .status-badge.warning { background: rgba(212,146,14,0.15); color: var(--gold); }
     .status-badge.error { background: rgba(255,60,90,0.15); color: var(--red); }
+    .evidence-state {
+      margin-top: 10px;
+      padding: 11px 13px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .evidence-state.success { background: rgba(0,184,110,0.10); border-color: rgba(0,184,110,0.28); color: #b8f2d7; }
+    .evidence-state.warning { background: rgba(212,146,14,0.10); border-color: rgba(212,146,14,0.28); color: #f1d28e; }
+    .evidence-state.error { background: rgba(255,60,90,0.10); border-color: rgba(255,60,90,0.28); color: #ffc0ca; }
+    .evidence-state strong { display: block; margin-bottom: 2px; color: inherit; }
+    .evidence-state small { display: block; color: var(--muted); font-size: 10px; }
     .toast {
       position: fixed;
       bottom: 24px;
@@ -573,7 +587,8 @@
 <script src="/shared/aqar-policy.js"></script>
 <script src="/shared/aqar-calibration-defaults.js"></script>
 <script src="/shared/calibration-engine.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/shared/evidence-state.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 let AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig();
 function getCalibrationForProperty(propertyType) { return AQAR_CALIBRATION_DEFAULTS.getPropertyConfig(AQAR_ACTIVE_CALIBRATION, propertyType); }
@@ -638,7 +653,28 @@ const FALLBACK_COORDS = {
 };
 let districtCoordsMap = {};
 let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
+let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
 let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
+
+function setEvidenceState(input = {}) {
+  currentEvidenceState = AQAR_EVIDENCE_STATE.classifyEvidenceState(input);
+  window.aqarEvidenceState = currentEvidenceState;
+  return currentEvidenceState;
+}
+function renderEvidenceState(state, container, detail = '') {
+  if (!container) return;
+  const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(state);
+  const detailHTML = detail ? `<small>${detail}</small>` : '';
+  container.innerHTML = `<div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}${detailHTML}</div>`;
+}
+function getCurrentEvidenceState(data = {}) {
+  return setEvidenceState({
+    found: Boolean(data.found),
+    count: data.count || data.scrapedData?.count || 0,
+    reason: data.reason || '',
+    error: Boolean(data.error)
+  });
+}
 
 // ===== LOAD DISTRICT COORDINATES =====
 async function loadDistrictCoords() {
@@ -908,16 +944,18 @@ async function scrapeRealData() {
       document.getElementById('avgPriceSqm').value = data.avgPricePerSqm;
       document.getElementById('recentSalesCount').value = data.count;
       document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
-      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A' };
-      const levelNames = { 'project_size':'المشروع + النوع + الحجم', 'project':'المشروع + النوع', 'district_size':'المنطقة + النوع + الحجم', 'district':'المنطقة + النوع', 'district_type':'المنطقة + النوع', 'district_only':'المنطقة فقط' };
-      const confColor = data.confidence === 'high' ? 'success' : data.confidence === 'medium' ? 'warning' : 'error';
-      status.innerHTML = `<span class="status-badge ${confColor}">✅ بيانات DLD حقيقية (${data.count} صفقة مقارنة، مستوى: ${levelNames[data.level]||data.level})</span><span style="font-size:9px;color:var(--muted);margin-left:8px;">⏱️ ${data.timeWindow} يوم • ${data.confidence||'متوسطة'} الثقة</span>`;
-      showToast(`✅ Found ${data.count} DLD comparable sales in ${district}`);
+      const evidenceState = getCurrentEvidenceState(data);
+      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', evidenceState };
+      const levelNames = { 'project_size':'Project + type + size', 'project':'Project + type', 'district_size':'District + type + size', 'district':'District + type', 'district_type':'District + type', 'district_only':'District only' };
+      const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
+      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span><span style="font-size:9px;color:var(--muted);margin-left:8px;">Level: ${levelNames[data.level]||data.level} • ${data.timeWindow} days • ${data.confidence||'medium'} confidence</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
+      showToast(`${data.count} verified DLD comparable sales found in ${district}`);
     } else {
-      status.innerHTML = `<span class="status-badge warning">⚠️ لا توجد بيانات DLD كافية لهذا العقار حاليًا — لا يمكن حساب تقييم موثوق</span><br><span style="font-size:10px;color:var(--muted);">⚠️ No sufficient DLD data for this property — reliable valuation not possible</span>`;
-      document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; scrapedDistrictData = null;
+      const evidenceState = getCurrentEvidenceState(data);
+      status.innerHTML = `<span class="status-badge warning">Insufficient DLD evidence — no reliable Sales Comparison value</span><br><span style="font-size:10px;color:var(--muted);">No fallback price will be invented. You may provide inputs for other applicable methods.</span>`;
+      document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: data.reason || 'no-sufficient-data' };
     }
-  } catch(e) { console.error('Scrape error:', e); status.innerHTML = '<span class="status-badge error">⚠️ Error fetching data. Please try again.</span>'; }
+  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">DLD evidence unavailable</span><br><span style="font-size:10px;color:var(--muted);">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
   btn.disabled = false; btn.innerHTML = '🔄 Re-Scrape';
 }
 function getFallbackPrice(city, district) {
@@ -963,6 +1001,7 @@ function collectPropertyData() {
     landValue: readNumber('landValue'),
     constructionCost: readNumber('constructionCost'),
     scrapedData: scrapedDistrictData,
+    evidenceState: currentEvidenceState || scrapedDistrictData?.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT,
     finishQuality: readValue('finishQuality'),
     viewTypes: isRelevant('viewTypes') ? getSelectedViewTypes() : [],
     floorLevel: readValue('floorLevel'),
@@ -1092,6 +1131,13 @@ function buildDecisionEngineLink(result, propData) {
   p.set('source', 'valuation_engine'); p.set('referrer', 'aqar_valuation');
   return `https://aqar-decision-engine.netlify.app/?${p.toString()}`;
 }
+function displayEvidenceOnlyState(propData) {
+  const section = document.getElementById('resultSection');
+  const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT);
+  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide a valid DLD comparable sample or complete another applicable method, such as rental information where supported. The system will not display an invented market value.</small></div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 Review Inputs</button></div>`;
+  section.classList.remove('hidden');
+  section.scrollIntoView({ behavior: 'smooth' });
+}
 function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
@@ -1111,6 +1157,9 @@ function displayResult(result, valuations, propData) {
     const color = status === 'USED' ? 'var(--green)' : status === 'NOT_APPLICABLE' ? 'var(--muted)' : 'var(--gold)';
     return `<div style="display:flex;justify-content:space-between;gap:12px;padding:3px 0"><span>${label}</span><b style="color:${color};font-size:10px">${status}</b></div>`;
   }).join('');
+  const evidenceState = propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
+  const evidencePresentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
+  const evidenceStateHTML = `<div class="evidence-state ${evidencePresentation.tone}"><strong>${evidencePresentation.title}</strong>${evidencePresentation.message}${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<small>Review the comparable sample before relying on this result.</small>' : ''}</div>`;
   const evidenceHTML = `<div style="margin-top:10px"><b>Evidence classification</b><br><span style="color:var(--muted)">SOURCE FACT:</span> ${scrapedDistrictData?.count || 0} DLD comparable sales${scrapedDistrictData?.avgPricePerSqm ? `; ${Number(scrapedDistrictData.avgPricePerSqm).toLocaleString()} AED/sqm` : ''}.<br><span style="color:var(--muted)">DERIVED VALUE:</span> weighted reconciliation of the methods shown below.<br><span style="color:var(--muted)">ASSUMPTION:</span> optional rent/expense and consultancy defaults remain those of the current AQAR behavior.<br><span style="color:var(--muted)">MODEL OUTPUT:</span> final value and range shown above.</div>`;
   const adjustmentFacts = [
     propData.condition ? `Condition: ${propData.condition}` : '',
@@ -1123,7 +1172,7 @@ function displayResult(result, valuations, propData) {
     window.gisImpactPercent ? `GIS impact: +${window.gisImpactPercent}%` : ''
   ].filter(Boolean);
   const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Current adjustments / inputs</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count || 'multiple'}</b> comparable sales in ${propData.district || 'the selected area'}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Calibration config: <b>${AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>${evidenceStateHTML}• Based on <b>${scrapedDistrictData?.count || 'multiple'}</b> comparable sales in ${propData.district || 'the selected area'}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Calibration config: <b>${AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
   let vHTML = '';
   valuations.forEach(v => {
     const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
@@ -1166,7 +1215,7 @@ function runValuation() {
       const dcfVal = dcfApproach(propData);
       if (dcfVal) valuations.push(dcfVal);
     }
-    if (!valuations.length) { showToast('Insufficient data. Run "Scrape" first.'); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
+    if (!valuations.length) { displayEvidenceOnlyState(propData); document.getElementById('btnValuate').disabled = false; document.getElementById('btnValuate').innerHTML = '🧮 Calculate Full Valuation'; return; }
     const finalResult = calculateWeightedValue(valuations, propData);
     displayResult(finalResult, valuations, propData);
     document.getElementById('btnValuate').disabled = false;
@@ -1217,6 +1266,8 @@ function resetAll() {
   document.getElementById('resultSection').innerHTML = '';
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
   scrapedDistrictData = null;
+  currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
+  window.aqarEvidenceState = currentEvidenceState;
   gisData = null;
   window.gisImpactMultiplier = 1;
   window.gisImpactPercent = 0;
