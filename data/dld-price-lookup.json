@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T10:40:10.419Z",
+  "generatedAt": "2026-08-25T11:16:19.587Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 23160,
   "tables": {
@@ -11727,7 +11727,7 @@
         "count": 9
       },
       "CELESTIA__apartment": {
-        "medianPricePerSqm": 11967,
+        "medianPricePerSqm": 12011,
         "count": 41
       },
       "The Pulse Residence Park__apartment": {
@@ -15655,7 +15655,7 @@
         "count": 73
       },
       "JUMEIRAH LAKES TOWERS__apartment": {
-        "medianPricePerSqm": 15342,
+        "medianPricePerSqm": 15355,
         "count": 428
       },
       "MEYDAN AVENUE__apartment": {
