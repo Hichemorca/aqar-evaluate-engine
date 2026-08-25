@@ -23,3 +23,19 @@ test('calibration merge ignores unknown keys', () => {
   assert.equal(merged.unknown, undefined);
   assert.equal(merged.gis.scoreCap, 2);
 });
+
+test('calibration validation rejects approved-method totals other than 100 percent', () => {
+  const config = calibrationDefaults.createDefaultCalibrationConfig();
+  config.propertyTypes.land.weights.income = 0.35;
+  const result = validateConfig(config);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some(error => error.includes('land approved method weights must total 1.0')));
+});
+
+test('calibration validation rejects non-applicable method weights', () => {
+  const config = calibrationDefaults.createDefaultCalibrationConfig();
+  config.propertyTypes.apartment.weights.cost = 0.1;
+  const result = validateConfig(config);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some(error => error.includes('apartment.weights.cost must be 0')));
+});

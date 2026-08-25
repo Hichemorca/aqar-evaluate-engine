@@ -51,15 +51,22 @@ function validateConfig(config) {
       }
     }
 
-    const totalWeight = calibrationDefaults.METHOD_KEYS.reduce(
-      (sum, method) => sum + Number(property.weights?.[method] || 0),
-      0,
-    );
-    if (totalWeight <= 0) errors.push(`${propertyType} must have at least one positive method weight`);
-
     const applicable = new Set(property.applicableMethods || []);
     if ([...applicable].some((method) => !calibrationDefaults.METHOD_KEYS.includes(method))) {
       errors.push(`${propertyType}.applicableMethods contains an unknown method`);
+    }
+
+    const applicableWeightTotal = [...applicable].reduce(
+      (sum, method) => sum + Number(property.weights?.[method] || 0),
+      0,
+    );
+    if (Math.abs(applicableWeightTotal - 1) > 0.000001) {
+      errors.push(`${propertyType} approved method weights must total 1.0 (received ${applicableWeightTotal})`);
+    }
+    for (const method of calibrationDefaults.METHOD_KEYS) {
+      if (!applicable.has(method) && Number(property.weights?.[method] || 0) !== 0) {
+        errors.push(`${propertyType}.weights.${method} must be 0 because the method is not applicable`);
+      }
     }
   }
 

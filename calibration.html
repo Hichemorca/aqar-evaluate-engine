@@ -40,6 +40,12 @@
     .actions { display:grid; gap:10px; margin-top:16px; }
     .history-item { border-left:2px solid var(--gold); padding:9px 0 9px 11px; margin:8px 0; font-size:11px; } .history-item strong { color:#dcecff; } .history-item span { display:block; color:var(--muted); margin-top:3px; }
     .small { color:var(--muted); font-size:11px; line-height:1.55; }
+    .weight-summary { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:10px 0 12px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; color:#edf4fb; background:rgba(255,255,255,.035); font-size:12px; }
+    .weight-summary strong { font-size:16px; color:#edf4fb; }
+    .weight-summary.invalid { border-color:rgba(255,107,122,.55); background:rgba(255,107,122,.12); color:var(--red); }
+    .weight-summary.invalid strong { color:var(--red); }
+    .weight-summary small { display:block; color:var(--muted); font-size:10px; margin-top:3px; }
+    .weight-summary.invalid small { color:#ffc0c8; }
     @media (max-width:900px) { .grid { grid-template-columns:1fr; } .sidebar { position:static; } }
     @media (max-width:640px) { .field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .topbar { display:block; } .status { text-align:left; margin-top:10px; } }
   </style>
@@ -95,6 +101,8 @@
     const token = () => $('adminToken').value.trim();
     const label = path => path[path.length - 1].replace(/([A-Z])/g, ' $1').replace(/[-_]/g, ' ').replace(/^./, c => c.toUpperCase());
     const formatDate = value => { const d = new Date(value); return Number.isNaN(d.getTime()) ? value : d.toLocaleString(); };
+    const methodGroups = { 'sales-comparison': 'sales', income: 'income', cost: 'cost', dcf: 'dcf' };
+    const methodLabels = { 'sales-comparison': 'Sales Comparison', income: 'Income', cost: 'Cost', dcf: 'DCF' };
 
     function showNotice(message, type='info') { const box = $('notice'); box.textContent = message; box.className = `notice show ${type}`; }
     function setStatus(message) { $('status').textContent = message; }
@@ -112,19 +120,67 @@
       return output;
     }
 
-    function renderNumericSection(title, object, prefix) {
-      const leaves = collectNumericLeaves(object, prefix);
+    function renderNumericSection(title, object, prefix, allowedKeys=null) {
+      const isWeights = prefix[prefix.length - 1] === 'weights';
+      const leaves = collectNumericLeaves(object, prefix).filter(({ path }) => !allowedKeys || allowedKeys.includes(path[prefix.length]));
       if (!leaves.length) return '';
-      const fields = leaves.map(({ path, value }) => `<div class="field"><label for="${path.join('__')}">${label(path.slice(-2))}</label><input id="${path.join('__')}" data-path="${path.join('.')}" type="number" step="any" value="${value}"></div>`).join('');
+      const fields = leaves.map(({ path, value }) => {
+        const displayValue = isWeights ? Number(value) * 100 : value;
+        const step = isWeights ? '0.1' : 'any';
+        const suffix = isWeights ? '<span class="panel-note">%</span>' : '';
+        return `<div class="field"><label for="${path.join('__')}">${label(path.slice(-2))}</label><div style="display:flex;align-items:center;gap:5px"><input id="${path.join('__')}" data-path="${path.join('.')}" data-percent="${isWeights}" type="number" step="${step}" value="${displayValue}">${suffix}</div></div>`;
+      }).join('');
       return `<div class="section"><div class="section-title"><span>${title}</span><span class="panel-note">${leaves.length} controls</span></div><div class="field-grid">${fields}</div></div>`;
+    }
+
+    function getApplicableWeightTotal(config) {
+      const applicable = config?.applicableMethods || [];
+      return applicable.reduce((sum, method) => sum + Number(config?.weights?.[method] || 0), 0);
+    }
+
+    function isValidWeightTotal(config) {
+      return Math.abs(getApplicableWeightTotal(config) - 1) <= 0.000001;
+    }
+
+    function renderWeightSummary(propertyType, propertyConfig) {
+      const total = getApplicableWeightTotal(propertyConfig);
+      const valid = Math.abs(total - 1) <= 0.000001;
+      const methods = (propertyConfig.applicableMethods || []).map(method => methodLabels[method] || method).join(' + ');
+      return `<div id="weightSummary-${propertyType}" class="weight-summary${valid ? '' : ' invalid'}"><div><strong>${(total * 100).toFixed(1)}%</strong><small>Approved methods: ${methods}</small></div><span>${valid ? 'Valid total' : 'Save blocked: total must equal 100%'}</span></div>`;
+    }
+
+    function updateWeightSummaries() {
+      if (!activeConfig) return true;
+      let allValid = true;
+      for (const [propertyType, propertyConfig] of Object.entries(activeConfig.propertyTypes || {})) {
+        const inputs = [...$('editor').querySelectorAll(`input[data-path^="propertyTypes.${propertyType}.weights."]`)];
+        const total = (propertyConfig.applicableMethods || []).reduce((sum, method) => {
+          const input = inputs.find(item => item.dataset.path.endsWith(`.${method}`));
+          return sum + (input ? Number(input.value || 0) / 100 : 0);
+        }, 0);
+        const valid = Math.abs(total - 1) <= 0.000001;
+        allValid = allValid && valid;
+        const box = $(`weightSummary-${propertyType}`);
+        if (box) {
+          box.classList.toggle('invalid', !valid);
+          box.querySelector('strong').textContent = `${(total * 100).toFixed(1)}%`;
+          box.querySelector('span').textContent = valid ? 'Valid total' : 'Save blocked: total must equal 100%';
+        }
+      }
+      return allValid;
     }
 
     function renderEditor(config) {
       let html = '';
       for (const [propertyType, propertyConfig] of Object.entries(config.propertyTypes || {})) {
-        html += `<div class="type-card"><div class="type-title"><span>${propertyType}</span><span class="panel-note">${(propertyConfig.applicableMethods || []).join(' · ')}</span></div>`;
-        html += renderNumericSection('Method weights', propertyConfig.weights, ['propertyTypes', propertyType, 'weights']);
-        html += renderNumericSection('Method coefficients', propertyConfig.coefficients, ['propertyTypes', propertyType, 'coefficients']);
+        const applicableMethods = propertyConfig.applicableMethods || [];
+        html += `<div class="type-card"><div class="type-title"><span>${propertyType}</span><span class="panel-note">${applicableMethods.map(method => methodLabels[method] || method).join(' · ')}</span></div>`;
+        html += renderWeightSummary(propertyType, propertyConfig);
+        html += renderNumericSection('Method weights', propertyConfig.weights, ['propertyTypes', propertyType, 'weights'], applicableMethods);
+        for (const method of applicableMethods) {
+          const group = methodGroups[method];
+          html += renderNumericSection(`${methodLabels[method] || method} coefficients`, propertyConfig.coefficients?.[group], ['propertyTypes', propertyType, 'coefficients', group]);
+        }
         html += '</div>';
       }
       html += renderNumericSection('GIS coefficients', config.gis, ['gis']);
@@ -136,16 +192,24 @@
       updateChangeSummary();
     }
 
+    function inputConfigValue(input) {
+      const value = Number(input.value);
+      return input.dataset.percent === 'true' ? value / 100 : value;
+    }
+
     function updateChangeSummary() {
       if (!activeConfig || !originalConfig) return;
-      const changed = [...$('editor').querySelectorAll('input[data-path]')].filter(input => Number(input.value) !== Number(getAt(originalConfig, input.dataset.path.split('.'))));
+      const changed = [...$('editor').querySelectorAll('input[data-path]')].filter(input => inputConfigValue(input) !== Number(getAt(originalConfig, input.dataset.path.split('.'))));
       const total = $('editor').querySelectorAll('input[data-path]').length;
-      $('changeSummary').textContent = changed.length ? `${changed.length} of ${total} numeric values changed. Save will activate a new version immediately.` : `No changes. ${total} numeric controls are loaded.`;
+      const totalsValid = updateWeightSummaries();
+      $('changeSummary').textContent = !totalsValid ? `${changed.length} of ${total} values changed. Save is blocked until every approved-method total equals 100%.` : changed.length ? `${changed.length} of ${total} numeric values changed. Save will activate a new version immediately.` : `No changes. ${total} numeric controls are loaded.`;
+      $('changeSummary').className = `notice show ${totalsValid ? 'info' : 'error'}`;
+      $('saveButton').disabled = !totalsValid;
     }
 
     function readEditedConfig() {
       const next = deepClone(activeConfig);
-      $('editor').querySelectorAll('input[data-path]').forEach(input => setAt(next, input.dataset.path.split('.'), Number(input.value)));
+      $('editor').querySelectorAll('input[data-path]').forEach(input => setAt(next, input.dataset.path.split('.'), inputConfigValue(input)));
       return next;
     }
 
@@ -176,6 +240,10 @@
     async function saveConfig() {
       if (!activeConfig) return;
       const config = readEditedConfig();
+      if (!Object.values(config.propertyTypes || {}).every(isValidWeightTotal)) {
+        updateChangeSummary();
+        return;
+      }
       $('saveButton').disabled = true; setStatus('Saving…');
       try {
         const payload = await request('POST', { config });

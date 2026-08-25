@@ -95,8 +95,10 @@
     propertyTypes.apartment.weights.cost = 0;
     propertyTypes.apartment.weights.dcf = 0.1;
     propertyTypes.land.weights['sales-comparison'] = 0.55;
+    propertyTypes.land.weights.income = 0.45;
     propertyTypes.land.weights.cost = 0;
     propertyTypes.land.weights.dcf = 0;
+    propertyTypes.warehouse.weights.income = 0.45;
     propertyTypes.warehouse.weights.dcf = 0;
     return {
       schemaVersion: 1,
