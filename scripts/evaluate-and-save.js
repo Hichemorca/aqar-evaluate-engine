@@ -16,10 +16,12 @@ const { findUnverifiedRecords } = require('../shared/dld-provenance');
 const { cleanDldRecords } = require('../shared/dld-evidence-cleaning');
 const calibrationDefaults = require('../shared/aqar-calibration-defaults');
 const calibrationEngine = require('../shared/calibration-engine');
+const { buildComparableGroups, createComparableDiagnostics, DIAGNOSTIC_THRESHOLDS } = require('../shared/comparable-diagnostics');
 const ACTIVE_CALIBRATION_FILE = path.join(DATA_DIR, 'active-calibration.json');
 const DLD_CLEANING_REPORT_FILE = path.join(DATA_DIR, 'dld-cleaning-report.json');
 let ACTIVE_CALIBRATION = calibrationDefaults.createDefaultCalibrationConfig();
 let DLD_CLEANING_REPORT = null;
+let COMPARABLE_GROUPS = null;
 try {
   if (fs.existsSync(ACTIVE_CALIBRATION_FILE)) ACTIVE_CALIBRATION = JSON.parse(fs.readFileSync(ACTIVE_CALIBRATION_FILE, 'utf8'));
 } catch (error) {
@@ -327,6 +329,9 @@ async function evaluateProperty(property, projectSizeStats, projectStats, distri
   result.methodResults = combined.methods;
   result.assumptions = combined.assumptions;
   result.calibrationId = combined.calibrationId;
+  result.comparableDiagnostics = COMPARABLE_GROUPS
+    ? createComparableDiagnostics(property, COMPARABLE_GROUPS)
+    : null;
 
   return result;
 }
@@ -352,6 +357,8 @@ async function main() {
   cleaned.forEach(t => { t.dataSource = 'dld-real-cleaned'; t.city = t.city || 'dubai'; });
 
   if (cleaned.length === 0) { console.log('❌ No transactions'); return; }
+
+  COMPARABLE_GROUPS = buildComparableGroups(cleaned);
 
   const projectSizeStats = computeMedians(cleaned, t => {
     if (!t.project || t.project.length < 2) return null;
@@ -416,7 +423,8 @@ async function main() {
       viewTypes: evalResult.viewTypes || [],
       calibrationConfigId: evalResult.calibrationId,
       valuationMethods: evalResult.methodResults,
-      calibrationAssumptions: evalResult.assumptions
+      calibrationAssumptions: evalResult.assumptions,
+      comparableDiagnostics: evalResult.comparableDiagnostics
     });
   }
 
@@ -513,7 +521,8 @@ async function main() {
       viewTypes: evalResult.viewTypes || [],
       calibrationConfigId: evalResult.calibrationId,
       valuationMethods: evalResult.methodResults,
-      calibrationAssumptions: evalResult.assumptions
+      calibrationAssumptions: evalResult.assumptions,
+      comparableDiagnostics: evalResult.comparableDiagnostics
     });
   }
 
