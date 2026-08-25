@@ -49,7 +49,7 @@ jobs:
         run: node scripts/validate-dld-data.js
         
       - name: Layer 5 — Fetch OSM GIS Data (NEW)
-        run: node scripts/fetch-osm.js
+        run: timeout --signal=TERM --kill-after=20s 5m node scripts/fetch-osm.js
         continue-on-error: true
         
       - name: Layer 6 — Market Intelligence Analysis
