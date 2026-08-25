@@ -1,0 +1,2350 @@
+{
+  "generatedAt": "2026-08-25T11:02:22.632Z",
+  "source": {
+    "accuracyScope": "verified-dld-only",
+    "calibrationConfigId": "cal-1787651025399",
+    "dldCleaning": {
+      "sourceChecksum": "5d863484f69278615cd6b116ade988d50b77ef0406b20b22495f18c0e0a3d019",
+      "recordsRead": 30475,
+      "eligible": 26766,
+      "rejected": 3562,
+      "skipped": 128,
+      "duplicateTransactionIds": 19
+    },
+    "accuracyAsOf": "2026-08-25T10:40:10.901Z",
+    "windowStart": "2026-04-27"
+  },
+  "counts": {
+    "eligibleDld": 26766,
+    "afterGeneralCleaning": 23160,
+    "recentInWindow": 8287,
+    "scored": 8221,
+    "unscored": 66
+  },
+  "thresholds": {
+    "projectSizeComparableCount": 3,
+    "projectComparableCountDefault": 5,
+    "projectComparableCountRetail": 2,
+    "districtSizeComparableCount": 5,
+    "districtComparableCount": 5
+  },
+  "unscored": {
+    "reasonCounts": {
+      "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold": 21,
+      "no_project_for_project_levels;district_size_below_threshold;district_below_threshold": 45
+    },
+    "propertyTypeCounts": {
+      "retail": 5,
+      "office": 2,
+      "villa": 4,
+      "apartment": 12,
+      "land": 43
+    },
+    "records": [
+      {
+        "propertyRef": "DLD-41-6931-2026",
+        "propertyType": "retail",
+        "district": "SOBHA HEARTLAND",
+        "project": "Sobha Creek Vistas Grande",
+        "area": 842.49,
+        "saleDate": "2026-05-07",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-41-9752-2026",
+        "propertyType": "office",
+        "district": "DUBAI SPORTS CITY",
+        "project": "THE BRIDGE",
+        "area": 34.77,
+        "saleDate": "2026-07-21",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19106-2026",
+        "propertyType": "retail",
+        "district": "MOTOR CITY",
+        "project": "",
+        "area": 150.84,
+        "saleDate": "2026-06-29",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-13699-2026",
+        "propertyType": "villa",
+        "district": "DUBAI MARINA",
+        "project": "",
+        "area": 437.94,
+        "saleDate": "2026-04-28",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16540-2026",
+        "propertyType": "villa",
+        "district": "NAD AL SHIBA FIRST",
+        "project": "Nad Al Sheba Gardens Phase 2",
+        "area": 341.39,
+        "saleDate": "2026-05-18",
+        "counts": {
+          "projectSize": 2,
+          "project": 2,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-22088-2026",
+        "propertyType": "villa",
+        "district": "NAD AL SHIBA FIRST",
+        "project": "Nad Al Sheba Gardens Phase 2",
+        "area": 347.37,
+        "saleDate": "2026-07-17",
+        "counts": {
+          "projectSize": 2,
+          "project": 2,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-15109-2026",
+        "propertyType": "apartment",
+        "district": "AL BARSHAA SOUTH THIRD",
+        "project": "ORION BUILDING",
+        "area": 81.69,
+        "saleDate": "2026-05-01",
+        "counts": {
+          "projectSize": 0,
+          "project": 3,
+          "districtSize": 0,
+          "district": 3
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21420-2026",
+        "propertyType": "apartment",
+        "district": "AL BARSHAA SOUTH THIRD",
+        "project": "ORION BUILDING",
+        "area": 61.98,
+        "saleDate": "2026-07-10",
+        "counts": {
+          "projectSize": 2,
+          "project": 3,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19750-2026",
+        "propertyType": "land",
+        "district": "NAD AL SHIBA SECOND",
+        "project": "",
+        "area": 2532.35,
+        "saleDate": "2026-06-25",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-22638-2026",
+        "propertyType": "land",
+        "district": "NAD SHAMMA",
+        "project": "",
+        "area": 891.87,
+        "saleDate": "2026-07-24",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-18874-2026",
+        "propertyType": "land",
+        "district": "AL WARQA FOURTH",
+        "project": "",
+        "area": 961.64,
+        "saleDate": "2026-06-19",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20411-2026",
+        "propertyType": "land",
+        "district": "AL WARQA FOURTH",
+        "project": "",
+        "area": 1087.71,
+        "saleDate": "2026-07-01",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21160-2026",
+        "propertyType": "land",
+        "district": "AL WARQA FOURTH",
+        "project": "",
+        "area": 1163.98,
+        "saleDate": "2026-07-08",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20959-2026",
+        "propertyType": "land",
+        "district": "AL KHABEESI",
+        "project": "",
+        "area": 929.03,
+        "saleDate": "2026-07-07",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21287-2026",
+        "propertyType": "land",
+        "district": "ARABIAN RANCHES POLO CLUB",
+        "project": "POLO HOMES",
+        "area": 2196.41,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 2,
+          "project": 2,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-41-9357-2026",
+        "propertyType": "land",
+        "district": "ARABIAN RANCHES POLO CLUB",
+        "project": "POLO HOMES",
+        "area": 2166.31,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 2,
+          "project": 2,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21253-2026",
+        "propertyType": "land",
+        "district": "AL BARSHAA SOUTH FIRST",
+        "project": "",
+        "area": 927.8,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-15281-2026",
+        "propertyType": "land",
+        "district": "VILLANOVA",
+        "project": "La Quinta",
+        "area": 450,
+        "saleDate": "2026-05-05",
+        "counts": {
+          "projectSize": 2,
+          "project": 2,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16754-2026",
+        "propertyType": "land",
+        "district": "VILLANOVA",
+        "project": "Villanova Amaranta",
+        "area": 327.91,
+        "saleDate": "2026-05-20",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16442-2026",
+        "propertyType": "apartment",
+        "district": "CITY OF ARABIA",
+        "project": "WADI TOWER",
+        "area": 134.1,
+        "saleDate": "2026-05-16",
+        "counts": {
+          "projectSize": 1,
+          "project": 4,
+          "districtSize": 1,
+          "district": 4
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17351-2026",
+        "propertyType": "apartment",
+        "district": "CITY OF ARABIA",
+        "project": "WADI TOWER",
+        "area": 75.38,
+        "saleDate": "2026-06-03",
+        "counts": {
+          "projectSize": 2,
+          "project": 4,
+          "districtSize": 2,
+          "district": 4
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-18774-2026",
+        "propertyType": "apartment",
+        "district": "CITY OF ARABIA",
+        "project": "WADI TOWER",
+        "area": 75.38,
+        "saleDate": "2026-06-16",
+        "counts": {
+          "projectSize": 2,
+          "project": 4,
+          "districtSize": 2,
+          "district": 4
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-18683-2026",
+        "propertyType": "land",
+        "district": "DUBAI SOUTH",
+        "project": "",
+        "area": 2818.43,
+        "saleDate": "2026-06-16",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20216-2026",
+        "propertyType": "land",
+        "district": "DUBAI SOUTH",
+        "project": "",
+        "area": 4502.74,
+        "saleDate": "2026-06-30",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20220-2026",
+        "propertyType": "land",
+        "district": "DUBAI SOUTH",
+        "project": "",
+        "area": 5048.61,
+        "saleDate": "2026-06-30",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 4
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-15329-2026",
+        "propertyType": "land",
+        "district": "AL KHAWANEEJ SECOND",
+        "project": "",
+        "area": 929.76,
+        "saleDate": "2026-05-12",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17297-2026",
+        "propertyType": "land",
+        "district": "AL KHAWANEEJ SECOND",
+        "project": "",
+        "area": 951.31,
+        "saleDate": "2026-06-03",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-18179-2026",
+        "propertyType": "land",
+        "district": "AL KHAWANEEJ SECOND",
+        "project": "",
+        "area": 4030.15,
+        "saleDate": "2026-06-11",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-22027-2026",
+        "propertyType": "land",
+        "district": "AL KHAWANEEJ SECOND",
+        "project": "",
+        "area": 1115,
+        "saleDate": "2026-07-16",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-15570-2026",
+        "propertyType": "land",
+        "district": "MILLENNIUM",
+        "project": "MILLENNIUM ESTATES",
+        "area": 961.01,
+        "saleDate": "2026-05-07",
+        "counts": {
+          "projectSize": 1,
+          "project": 2,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17195-2026",
+        "propertyType": "land",
+        "district": "MILLENNIUM",
+        "project": "MILLENNIUM ESTATES",
+        "area": 1393.31,
+        "saleDate": "2026-05-23",
+        "counts": {
+          "projectSize": 0,
+          "project": 2,
+          "districtSize": 0,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-15834-2026",
+        "propertyType": "apartment",
+        "district": "AL WAHA",
+        "project": "",
+        "area": 160.45,
+        "saleDate": "2026-05-11",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17611-2026",
+        "propertyType": "apartment",
+        "district": "AL WAHA",
+        "project": "",
+        "area": 160.45,
+        "saleDate": "2026-06-04",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19746-2026",
+        "propertyType": "apartment",
+        "district": "AL WAHA",
+        "project": "",
+        "area": 160.68,
+        "saleDate": "2026-06-25",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16096-2026",
+        "propertyType": "land",
+        "district": "JUMEIRAH THIRD",
+        "project": "",
+        "area": 929.03,
+        "saleDate": "2026-05-14",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19090-2026",
+        "propertyType": "land",
+        "district": "JUMEIRAH THIRD",
+        "project": "",
+        "area": 594.58,
+        "saleDate": "2026-06-19",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16147-2026",
+        "propertyType": "land",
+        "district": "LIWAN 2",
+        "project": "",
+        "area": 930.55,
+        "saleDate": "2026-05-18",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-18985-2026",
+        "propertyType": "land",
+        "district": "LIWAN 2",
+        "project": "",
+        "area": 750,
+        "saleDate": "2026-06-18",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20529-2026",
+        "propertyType": "land",
+        "district": "LIWAN 2",
+        "project": "",
+        "area": 750.02,
+        "saleDate": "2026-07-02",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16233-2026",
+        "propertyType": "land",
+        "district": "AL TWAR FIFTH",
+        "project": "",
+        "area": 1114.84,
+        "saleDate": "2026-05-18",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17270-2026",
+        "propertyType": "land",
+        "district": "AL TWAR FIFTH",
+        "project": "",
+        "area": 1365.67,
+        "saleDate": "2026-06-01",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20501-2026",
+        "propertyType": "land",
+        "district": "AL TWAR FIFTH",
+        "project": "",
+        "area": 1598.5,
+        "saleDate": "2026-07-02",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-16616-2026",
+        "propertyType": "land",
+        "district": "NAD AL SHIBA FOURTH",
+        "project": "",
+        "area": 1384.81,
+        "saleDate": "2026-05-19",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17600-2026",
+        "propertyType": "apartment",
+        "district": "DUBAI HEALTHCARE CITY - PHASE 1",
+        "project": "",
+        "area": 47.18,
+        "saleDate": "2026-06-04",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19246-2026",
+        "propertyType": "apartment",
+        "district": "DUBAI HEALTHCARE CITY - PHASE 1",
+        "project": "",
+        "area": 103.42,
+        "saleDate": "2026-06-22",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21005-2026",
+        "propertyType": "apartment",
+        "district": "DUBAI HEALTHCARE CITY - PHASE 1",
+        "project": "",
+        "area": 155.78,
+        "saleDate": "2026-07-07",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-17894-2026",
+        "propertyType": "retail",
+        "district": "MEYDAN AVENUE",
+        "project": "Azizi Park Avenue",
+        "area": 33.13,
+        "saleDate": "2026-06-08",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 4
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-22947-2026",
+        "propertyType": "retail",
+        "district": "MEYDAN AVENUE",
+        "project": "The Galleries",
+        "area": 114.13,
+        "saleDate": "2026-07-25",
+        "counts": {
+          "projectSize": 1,
+          "project": 1,
+          "districtSize": 1,
+          "district": 4
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-22948-2026",
+        "propertyType": "retail",
+        "district": "MEYDAN AVENUE",
+        "project": "The Galleries",
+        "area": 94.54,
+        "saleDate": "2026-07-25",
+        "counts": {
+          "projectSize": 1,
+          "project": 1,
+          "districtSize": 1,
+          "district": 4
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-18221-2026",
+        "propertyType": "land",
+        "district": "AL TWAR FIRST",
+        "project": "",
+        "area": 724.64,
+        "saleDate": "2026-06-14",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19319-2026",
+        "propertyType": "land",
+        "district": "AL TWAR FIRST",
+        "project": "",
+        "area": 858.8,
+        "saleDate": "2026-06-22",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20877-2026",
+        "propertyType": "land",
+        "district": "AL TWAR FIRST",
+        "project": "",
+        "area": 1189.16,
+        "saleDate": "2026-07-08",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19459-2026",
+        "propertyType": "land",
+        "district": "JUMEIRAH SECOND",
+        "project": "",
+        "area": 929.79,
+        "saleDate": "2026-06-23",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-19505-2026",
+        "propertyType": "land",
+        "district": "JUMEIRAH SECOND",
+        "project": "",
+        "area": 1008,
+        "saleDate": "2026-06-24",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-20467-2026",
+        "propertyType": "land",
+        "district": "UM SUQAIM THIRD",
+        "project": "",
+        "area": 1374.96,
+        "saleDate": "2026-07-01",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 1,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-4-4-2026",
+        "propertyType": "land",
+        "district": "UM SUQAIM THIRD",
+        "project": "",
+        "area": 6442.06,
+        "saleDate": "2026-06-25",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21051-2026",
+        "propertyType": "land",
+        "district": "AL MANARA",
+        "project": "",
+        "area": 2768.29,
+        "saleDate": "2026-07-07",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-22678-2026",
+        "propertyType": "land",
+        "district": "AL MANARA",
+        "project": "",
+        "area": 1427.39,
+        "saleDate": "2026-07-23",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21196-2026",
+        "propertyType": "land",
+        "district": "AL NAHDA FIRST",
+        "project": "",
+        "area": 2702.65,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21202-2026",
+        "propertyType": "land",
+        "district": "AL NAHDA FIRST",
+        "project": "",
+        "area": 2702.62,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21207-2026",
+        "propertyType": "land",
+        "district": "AL NAHDA FIRST",
+        "project": "",
+        "area": 2702.64,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21210-2026",
+        "propertyType": "land",
+        "district": "AL NAHDA FIRST",
+        "project": "",
+        "area": 2702.66,
+        "saleDate": "2026-07-09",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 3,
+          "district": 3
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-11-21956-2026",
+        "propertyType": "office",
+        "district": "BURJ KHALIFA",
+        "project": "",
+        "area": 353.23,
+        "saleDate": "2026-07-16",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "no_project_for_project_levels;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-41-9127-2026",
+        "propertyType": "villa",
+        "district": "WADI AL SAFA 4",
+        "project": "California Village",
+        "area": 281.62,
+        "saleDate": "2026-07-03",
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-41-9496-2026",
+        "propertyType": "land",
+        "district": "BUKADRA",
+        "project": "Sobha Estates",
+        "area": 786.8,
+        "saleDate": "2026-07-14",
+        "counts": {
+          "projectSize": 2,
+          "project": 2,
+          "districtSize": 2,
+          "district": 2
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      },
+      {
+        "propertyRef": "DLD-41-8345-2026",
+        "propertyType": "apartment",
+        "district": "NAD AL SHEBA GARDENS",
+        "project": "The Roof Residence",
+        "area": 79.78,
+        "saleDate": "2026-06-18",
+        "counts": {
+          "projectSize": 0,
+          "project": 3,
+          "districtSize": 0,
+          "district": 3
+        },
+        "reason": "project_size_below_threshold;project_below_threshold;district_size_below_threshold;district_below_threshold"
+      }
+    ]
+  },
+  "selectedLevelStats": {
+    "project_size": {
+      "count": 5684,
+      "avgAbsError": 11.87,
+      "medianAbsError": 8.5,
+      "p90AbsError": 25.5,
+      "bias": 1.15
+    },
+    "project": {
+      "count": 347,
+      "avgAbsError": 18.09,
+      "medianAbsError": 14,
+      "p90AbsError": 35,
+      "bias": 5.28
+    },
+    "district_size": {
+      "count": 2107,
+      "avgAbsError": 21.99,
+      "medianAbsError": 13.6,
+      "p90AbsError": 42.6,
+      "bias": 6.96
+    },
+    "district": {
+      "count": 83,
+      "avgAbsError": 23.69,
+      "medianAbsError": 14.6,
+      "p90AbsError": 45.2,
+      "bias": 8.21
+    }
+  },
+  "outliers": {
+    "count": 67,
+    "propertyTypeCounts": {
+      "land": 10,
+      "villa": 1,
+      "apartment": 55,
+      "retail": 1
+    },
+    "records": [
+      {
+        "propertyRef": "DLD-41-8610-2026",
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR",
+        "project": "",
+        "area": 15760.16,
+        "saleDate": "2026-06-23",
+        "evalLevel": "district_size",
+        "evalCount": 6,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 6,
+          "district": 143
+        },
+        "aqarValuation": 139241014,
+        "actualSalePrice": 3229200,
+        "aqarVsActual": 4211.9
+      },
+      {
+        "propertyRef": "DLD-11-15929-2026",
+        "propertyType": "villa",
+        "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+        "project": "MAG EYE Phase 1",
+        "area": 131.04,
+        "saleDate": "2026-05-12",
+        "evalLevel": "project_size",
+        "evalCount": 16,
+        "counts": {
+          "projectSize": 16,
+          "project": 17,
+          "districtSize": 2,
+          "district": 2
+        },
+        "aqarValuation": 2944397,
+        "actualSalePrice": 664651.09,
+        "aqarVsActual": 343
+      },
+      {
+        "propertyRef": "DLD-11-21757-2026",
+        "propertyType": "apartment",
+        "district": "DUBAI MARINA",
+        "project": "5242",
+        "area": 93.97,
+        "saleDate": "2026-07-15",
+        "evalLevel": "project_size",
+        "evalCount": 8,
+        "counts": {
+          "projectSize": 8,
+          "project": 9,
+          "districtSize": 518,
+          "district": 918
+        },
+        "aqarValuation": 3081840,
+        "actualSalePrice": 1000000,
+        "aqarVsActual": 208.2
+      },
+      {
+        "propertyRef": "DLD-11-14852-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.06,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 837365,
+        "actualSalePrice": 280000,
+        "aqarVsActual": 199.1
+      },
+      {
+        "propertyRef": "DLD-11-14843-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.06,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 837365,
+        "actualSalePrice": 287500,
+        "aqarVsActual": 191.3
+      },
+      {
+        "propertyRef": "DLD-11-14847-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.06,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 837365,
+        "actualSalePrice": 290000,
+        "aqarVsActual": 188.7
+      },
+      {
+        "propertyRef": "DLD-11-20033-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "OXFORD RESIDENCE 2",
+        "area": 155.46,
+        "saleDate": "2026-06-29",
+        "evalLevel": "project",
+        "evalCount": 5,
+        "counts": {
+          "projectSize": 1,
+          "project": 5,
+          "districtSize": 749,
+          "district": 2063
+        },
+        "aqarValuation": 2631938,
+        "actualSalePrice": 930000,
+        "aqarVsActual": 183
+      },
+      {
+        "propertyRef": "DLD-11-14841-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.28,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 842774,
+        "actualSalePrice": 309649,
+        "aqarVsActual": 172.2
+      },
+      {
+        "propertyRef": "DLD-11-20178-2026",
+        "propertyType": "land",
+        "district": "JABAL ALI INDUSTRIAL FIRST",
+        "project": "",
+        "area": 1950.03,
+        "saleDate": "2026-06-30",
+        "evalLevel": "district_size",
+        "evalCount": 9,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 9,
+          "district": 11
+        },
+        "aqarValuation": 29385002,
+        "actualSalePrice": 11000000,
+        "aqarVsActual": 167.1
+      },
+      {
+        "propertyRef": "DLD-11-14846-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.06,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 837365,
+        "actualSalePrice": 313789,
+        "aqarVsActual": 166.9
+      },
+      {
+        "propertyRef": "DLD-11-14855-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.06,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 837365,
+        "actualSalePrice": 316513,
+        "aqarVsActual": 164.6
+      },
+      {
+        "propertyRef": "DLD-11-14853-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.06,
+        "saleDate": "2026-04-30",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 837365,
+        "actualSalePrice": 317208,
+        "aqarVsActual": 164
+      },
+      {
+        "propertyRef": "DLD-11-14840-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "area": 34.52,
+        "saleDate": "2026-04-29",
+        "evalLevel": "project_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 38,
+          "project": 38,
+          "districtSize": 191,
+          "district": 249
+        },
+        "aqarValuation": 848674,
+        "actualSalePrice": 328932,
+        "aqarVsActual": 158
+      },
+      {
+        "propertyRef": "DLD-11-16093-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 75.51,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 754194,
+        "actualSalePrice": 294560,
+        "aqarVsActual": 156
+      },
+      {
+        "propertyRef": "DLD-11-18676-2026",
+        "propertyType": "land",
+        "district": "HOR AL ANZ",
+        "project": "",
+        "area": 238.76,
+        "saleDate": "2026-06-14",
+        "evalLevel": "district_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 38,
+          "district": 41
+        },
+        "aqarValuation": 3671413,
+        "actualSalePrice": 1455000,
+        "aqarVsActual": 152.3
+      },
+      {
+        "propertyRef": "DLD-11-16117-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 69.29,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 692069,
+        "actualSalePrice": 275364,
+        "aqarVsActual": 151.3
+      },
+      {
+        "propertyRef": "DLD-11-21700-2026",
+        "propertyType": "land",
+        "district": "AL BADA",
+        "project": "",
+        "area": 2799.17,
+        "saleDate": "2026-07-14",
+        "evalLevel": "district",
+        "evalCount": 18,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 18
+        },
+        "aqarValuation": 48198571,
+        "actualSalePrice": 19400000,
+        "aqarVsActual": 148.4
+      },
+      {
+        "propertyRef": "DLD-11-16083-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 71.18,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 710946,
+        "actualSalePrice": 286608,
+        "aqarVsActual": 148.1
+      },
+      {
+        "propertyRef": "DLD-11-16091-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 71.16,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 710746,
+        "actualSalePrice": 286528,
+        "aqarVsActual": 148.1
+      },
+      {
+        "propertyRef": "DLD-11-16158-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 72.45,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 723631,
+        "actualSalePrice": 291638,
+        "aqarVsActual": 148.1
+      },
+      {
+        "propertyRef": "DLD-11-16193-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 71.18,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 710946,
+        "actualSalePrice": 287842,
+        "aqarVsActual": 147
+      },
+      {
+        "propertyRef": "DLD-11-16218-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 71.16,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 710746,
+        "actualSalePrice": 287761,
+        "aqarVsActual": 147
+      },
+      {
+        "propertyRef": "DLD-41-7078-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "Elysee III by Pantheon",
+        "area": 73.88,
+        "saleDate": "2026-05-11",
+        "evalLevel": "project_size",
+        "evalCount": 9,
+        "counts": {
+          "projectSize": 9,
+          "project": 10,
+          "districtSize": 1286,
+          "district": 2063
+        },
+        "aqarValuation": 1113445,
+        "actualSalePrice": 459278,
+        "aqarVsActual": 142.4
+      },
+      {
+        "propertyRef": "DLD-11-14758-2026",
+        "propertyType": "apartment",
+        "district": "PALM JUMEIRAH",
+        "project": "Seven Hotel and Apartments The Palm",
+        "area": 61.46,
+        "saleDate": "2026-04-28",
+        "evalLevel": "project_size",
+        "evalCount": 30,
+        "counts": {
+          "projectSize": 30,
+          "project": 32,
+          "districtSize": 64,
+          "district": 345
+        },
+        "aqarValuation": 2375368,
+        "actualSalePrice": 1000000,
+        "aqarVsActual": 137.5
+      },
+      {
+        "propertyRef": "DLD-11-16105-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 166.47,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 24,
+          "district": 181
+        },
+        "aqarValuation": 1400179,
+        "actualSalePrice": 592294,
+        "aqarVsActual": 136.4
+      },
+      {
+        "propertyRef": "DLD-11-16155-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 65.71,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 656311,
+        "actualSalePrice": 282922,
+        "aqarVsActual": 132
+      },
+      {
+        "propertyRef": "DLD-11-19474-2026",
+        "propertyType": "retail",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "Binghatti Phantom",
+        "area": 159.58,
+        "saleDate": "2026-06-23",
+        "evalLevel": "district_size",
+        "evalCount": 17,
+        "counts": {
+          "projectSize": 0,
+          "project": 1,
+          "districtSize": 17,
+          "district": 27
+        },
+        "aqarValuation": 3917500,
+        "actualSalePrice": 1717700,
+        "aqarVsActual": 128.1
+      },
+      {
+        "propertyRef": "DLD-11-16109-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 48.84,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 487814,
+        "actualSalePrice": 214161,
+        "aqarVsActual": 127.8
+      },
+      {
+        "propertyRef": "DLD-11-16114-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 48.64,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 485816,
+        "actualSalePrice": 213243,
+        "aqarVsActual": 127.8
+      },
+      {
+        "propertyRef": "DLD-11-16101-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 48.47,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 484118,
+        "actualSalePrice": 213523,
+        "aqarVsActual": 126.7
+      },
+      {
+        "propertyRef": "DLD-11-16166-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 135.2,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 24,
+          "district": 181
+        },
+        "aqarValuation": 1137167,
+        "actualSalePrice": 507667,
+        "aqarVsActual": 124
+      },
+      {
+        "propertyRef": "DLD-11-16174-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 133.95,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 24,
+          "district": 181
+        },
+        "aqarValuation": 1126653,
+        "actualSalePrice": 502858,
+        "aqarVsActual": 124
+      },
+      {
+        "propertyRef": "DLD-11-16079-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 46.89,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 468337,
+        "actualSalePrice": 209188,
+        "aqarVsActual": 123.9
+      },
+      {
+        "propertyRef": "DLD-11-16113-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 46.89,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 468337,
+        "actualSalePrice": 209825,
+        "aqarVsActual": 123.2
+      },
+      {
+        "propertyRef": "DLD-11-16112-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 94.84,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 24,
+          "district": 181
+        },
+        "aqarValuation": 797699,
+        "actualSalePrice": 357654,
+        "aqarVsActual": 123
+      },
+      {
+        "propertyRef": "DLD-11-16094-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 45.01,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 449560,
+        "actualSalePrice": 201742,
+        "aqarVsActual": 122.8
+      },
+      {
+        "propertyRef": "DLD-11-16095-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 46.25,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 461945,
+        "actualSalePrice": 209591,
+        "aqarVsActual": 120.4
+      },
+      {
+        "propertyRef": "DLD-11-21625-2026",
+        "propertyType": "land",
+        "district": "AL RASHIDIYA",
+        "project": "",
+        "area": 3716.12,
+        "saleDate": "2026-07-14",
+        "evalLevel": "district",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 0,
+          "district": 24
+        },
+        "aqarValuation": 16455702,
+        "actualSalePrice": 7500000,
+        "aqarVsActual": 119.4
+      },
+      {
+        "propertyRef": "DLD-11-16110-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 43.96,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 439072,
+        "actualSalePrice": 201010,
+        "aqarVsActual": 118.4
+      },
+      {
+        "propertyRef": "DLD-11-16078-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 43.59,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 435377,
+        "actualSalePrice": 199767,
+        "aqarVsActual": 117.9
+      },
+      {
+        "propertyRef": "DLD-11-16134-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 43.56,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 435077,
+        "actualSalePrice": 199708,
+        "aqarVsActual": 117.9
+      },
+      {
+        "propertyRef": "DLD-11-16127-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 43.2,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 431482,
+        "actualSalePrice": 199319,
+        "aqarVsActual": 116.5
+      },
+      {
+        "propertyRef": "DLD-11-16132-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 43.22,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 431681,
+        "actualSalePrice": 199425,
+        "aqarVsActual": 116.5
+      },
+      {
+        "propertyRef": "DLD-11-21048-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "THE VYBE",
+        "area": 79.02,
+        "saleDate": "2026-07-07",
+        "evalLevel": "project_size",
+        "evalCount": 11,
+        "counts": {
+          "projectSize": 11,
+          "project": 12,
+          "districtSize": 1286,
+          "district": 2063
+        },
+        "aqarValuation": 1186248,
+        "actualSalePrice": 550000,
+        "aqarVsActual": 115.7
+      },
+      {
+        "propertyRef": "DLD-11-16088-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 87.59,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 24,
+          "district": 181
+        },
+        "aqarValuation": 736719,
+        "actualSalePrice": 344467,
+        "aqarVsActual": 113.9
+      },
+      {
+        "propertyRef": "DLD-11-16128-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 87.59,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 24,
+          "district": 181
+        },
+        "aqarValuation": 736719,
+        "actualSalePrice": 345908,
+        "aqarVsActual": 113
+      },
+      {
+        "propertyRef": "DLD-11-20077-2026",
+        "propertyType": "land",
+        "district": "JUMEIRAH GOLF",
+        "project": "ORANGE LAKE",
+        "area": 934.3,
+        "saleDate": "2026-06-29",
+        "evalLevel": "district_size",
+        "evalCount": 11,
+        "counts": {
+          "projectSize": 1,
+          "project": 1,
+          "districtSize": 11,
+          "district": 18
+        },
+        "aqarValuation": 27618842,
+        "actualSalePrice": 13000000,
+        "aqarVsActual": 112.5
+      },
+      {
+        "propertyRef": "DLD-11-16081-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.23,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 411805,
+        "actualSalePrice": 194380,
+        "aqarVsActual": 111.9
+      },
+      {
+        "propertyRef": "DLD-11-16097-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 42.69,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 426388,
+        "actualSalePrice": 201209,
+        "aqarVsActual": 111.9
+      },
+      {
+        "propertyRef": "DLD-11-17893-2026",
+        "propertyType": "land",
+        "district": "AL KHAWANEEJ FIRST",
+        "project": "",
+        "area": 1816.25,
+        "saleDate": "2026-06-09",
+        "evalLevel": "district_size",
+        "evalCount": 6,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 6,
+          "district": 10
+        },
+        "aqarValuation": 17484227,
+        "actualSalePrice": 8250000,
+        "aqarVsActual": 111.9
+      },
+      {
+        "propertyRef": "DLD-11-16100-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.06,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 410107,
+        "actualSalePrice": 193701,
+        "aqarVsActual": 111.7
+      },
+      {
+        "propertyRef": "DLD-11-16107-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.27,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 412205,
+        "actualSalePrice": 195015,
+        "aqarVsActual": 111.4
+      },
+      {
+        "propertyRef": "DLD-11-16115-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.23,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 411805,
+        "actualSalePrice": 194851,
+        "aqarVsActual": 111.3
+      },
+      {
+        "propertyRef": "DLD-11-16086-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.07,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 410207,
+        "actualSalePrice": 194192,
+        "aqarVsActual": 111.2
+      },
+      {
+        "propertyRef": "DLD-11-16092-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.1,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 410507,
+        "actualSalePrice": 194334,
+        "aqarVsActual": 111.2
+      },
+      {
+        "propertyRef": "DLD-41-7512-2026",
+        "propertyType": "land",
+        "district": "MADINAT HIND 4",
+        "project": "DAMAC HILLS (2) - VERONA",
+        "area": 112.86,
+        "saleDate": "2026-05-21",
+        "evalLevel": "project_size",
+        "evalCount": 10,
+        "counts": {
+          "projectSize": 10,
+          "project": 10,
+          "districtSize": 450,
+          "district": 508
+        },
+        "aqarValuation": 1899998,
+        "actualSalePrice": 900000,
+        "aqarVsActual": 111.1
+      },
+      {
+        "propertyRef": "DLD-11-16165-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.1,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 410507,
+        "actualSalePrice": 194533,
+        "aqarVsActual": 111
+      },
+      {
+        "propertyRef": "DLD-11-16229-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.06,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 410107,
+        "actualSalePrice": 194584,
+        "aqarVsActual": 110.8
+      },
+      {
+        "propertyRef": "DLD-11-16120-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.07,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 410207,
+        "actualSalePrice": 194661,
+        "aqarVsActual": 110.7
+      },
+      {
+        "propertyRef": "DLD-11-16099-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 40.95,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 409009,
+        "actualSalePrice": 194266,
+        "aqarVsActual": 110.5
+      },
+      {
+        "propertyRef": "DLD-11-18224-2026",
+        "propertyType": "land",
+        "district": "AL SATWA",
+        "project": "",
+        "area": 1096.26,
+        "saleDate": "2026-06-12",
+        "evalLevel": "district",
+        "evalCount": 12,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 2,
+          "district": 12
+        },
+        "aqarValuation": 23457377,
+        "actualSalePrice": 11149250,
+        "aqarVsActual": 110.4
+      },
+      {
+        "propertyRef": "DLD-11-16122-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 41.69,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 416400,
+        "actualSalePrice": 198178,
+        "aqarVsActual": 110.1
+      },
+      {
+        "propertyRef": "DLD-11-16206-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 40.95,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 409009,
+        "actualSalePrice": 194734,
+        "aqarVsActual": 110
+      },
+      {
+        "propertyRef": "DLD-11-16152-2026",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": "",
+        "area": 40.23,
+        "saleDate": "2026-05-20",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 152,
+          "district": 181
+        },
+        "aqarValuation": 401817,
+        "actualSalePrice": 192021,
+        "aqarVsActual": 109.3
+      },
+      {
+        "propertyRef": "DLD-11-15311-2026",
+        "propertyType": "land",
+        "district": "HOR AL ANZ",
+        "project": "",
+        "area": 232.25,
+        "saleDate": "2026-05-05",
+        "evalLevel": "district_size",
+        "evalCount": 38,
+        "counts": {
+          "projectSize": 0,
+          "project": 0,
+          "districtSize": 38,
+          "district": 41
+        },
+        "aqarValuation": 3299808,
+        "actualSalePrice": 1602000,
+        "aqarVsActual": 106
+      },
+      {
+        "propertyRef": "DLD-11-18818-2026",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "BOTANICA",
+        "area": 53.51,
+        "saleDate": "2026-06-17",
+        "evalLevel": "project_size",
+        "evalCount": 19,
+        "counts": {
+          "projectSize": 19,
+          "project": 23,
+          "districtSize": 1286,
+          "district": 2063
+        },
+        "aqarValuation": 1103002,
+        "actualSalePrice": 540000,
+        "aqarVsActual": 104.3
+      },
+      {
+        "propertyRef": "DLD-41-8232-2026",
+        "propertyType": "apartment",
+        "district": "PALM JUMEIRAH",
+        "project": "Seven Hotel and Apartments The Palm",
+        "area": 66.44,
+        "saleDate": "2026-06-17",
+        "evalLevel": "project_size",
+        "evalCount": 30,
+        "counts": {
+          "projectSize": 30,
+          "project": 32,
+          "districtSize": 64,
+          "district": 345
+        },
+        "aqarValuation": 2567840,
+        "actualSalePrice": 1282238,
+        "aqarVsActual": 100.3
+      }
+    ]
+  }
+}
