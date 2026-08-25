@@ -3,7 +3,10 @@ const { connectLambda, getStore } = require('@netlify/blobs');
 const calibrationDefaults = require('../../shared/aqar-calibration-defaults');
 const { deepMergeKnown, validateConfig } = require('../../shared/calibration-validation');
 
-const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' };
+const JSON_HEADERS = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Cache-Control': 'no-store, max-age=0'
+};
 const STORE_NAME = 'aqar-calibration';
 const ACTIVE_KEY = 'active';
 const HISTORY_KEY = 'history/index';
