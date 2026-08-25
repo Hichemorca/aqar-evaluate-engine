@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const { connectLambda, getStore } = require('@netlify/blobs');
 const calibrationDefaults = require('../../shared/aqar-calibration-defaults');
+const { deepMergeKnown, validateConfig } = require('../../shared/calibration-validation');
 
 const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8' };
 const STORE_NAME = 'aqar-calibration';
@@ -8,7 +9,13 @@ const ACTIVE_KEY = 'active';
 const HISTORY_KEY = 'history/index';
 
 function getEnv(name) {
-  return typeof Netlify !== 'undefined' && Netlify?.env?.get ? Netlify.env.get(name) : undefined;
+  try {
+    const netlifyValue = globalThis.Netlify?.env?.get?.(name);
+    if (netlifyValue) return netlifyValue;
+  } catch {
+    // Fall through to the Lambda-compatible environment accessor.
+  }
+  return typeof process !== 'undefined' && process.env ? process.env[name] : undefined;
 }
 
 function response(statusCode, payload) {
@@ -29,55 +36,6 @@ function isAuthorized(event) {
   return configuredToken ? safeEqual(suppliedToken, configuredToken) : false;
 }
 
-function deepMergeKnown(base, input) {
-  if (!input || typeof input !== 'object' || Array.isArray(input)) return base;
-  const output = { ...base };
-  for (const [key, value] of Object.entries(input)) {
-    if (!Object.prototype.hasOwnProperty.call(base, key)) continue;
-    if (value && typeof value === 'object' && !Array.isArray(value) && base[key] && typeof base[key] === 'object' && !Array.isArray(base[key])) {
-      output[key] = deepMergeKnown(base[key], value);
-    } else {
-      output[key] = value;
-    }
-  }
-  return output;
-}
-
-function validateNumericLeaves(value, path, errors) {
-  if (typeof value === 'number') {
-    if (!Number.isFinite(value)) errors.push(`${path} must be finite`);
-    return;
-  }
-  if (!value || typeof value !== 'object') return;
-  for (const [key, child] of Object.entries(value)) validateNumericLeaves(child, `${path}.${key}`, errors);
-}
-
-function validateConfig(config) {
-  const errors = [];
-  if (!config || typeof config !== 'object') errors.push('configuration must be an object');
-  if (config?.schemaVersion !== 1) errors.push('schemaVersion must be 1');
-  for (const propertyType of calibrationDefaults.PROPERTY_TYPES) {
-    const property = config?.propertyTypes?.[propertyType];
-    if (!property) {
-      errors.push(`missing property type: ${propertyType}`);
-      continue;
-    }
-    for (const method of calibrationDefaults.METHOD_KEYS) {
-      const weight = property.weights?.[method];
-      if (!Number.isFinite(Number(weight)) || Number(weight) < 0 || Number(weight) > 1) {
-        errors.push(`${propertyType}.weights.${method} must be between 0 and 1`);
-      }
-    }
-    const totalWeight = calibrationDefaults.METHOD_KEYS.reduce((sum, method) => sum + Number(property.weights?.[method] || 0), 0);
-    if (totalWeight <= 0) errors.push(`${propertyType} must have at least one positive method weight`);
-    const applicable = new Set(property.applicableMethods || []);
-    if (![...applicable].every(method => calibrationDefaults.METHOD_KEYS.includes(method))) errors.push(`${propertyType}.applicableMethods contains an unknown method`);
-  }
-  validateNumericLeaves(config?.gis, 'gis', errors);
-  for (const propertyType of calibrationDefaults.PROPERTY_TYPES) validateNumericLeaves(config?.propertyTypes?.[propertyType]?.coefficients, `${propertyType}.coefficients`, errors);
-  return { valid: errors.length === 0, errors };
-}
-
 function createStore(event) {
   connectLambda(event);
   return getStore(STORE_NAME);
@@ -94,7 +52,11 @@ async function readHistory(store) {
 async function handler(event) {
   if (!['GET', 'POST'].includes(event.httpMethod)) return response(405, { success: false, error: 'Use GET or POST' });
   const includeHistory = event.queryStringParameters?.history === 'true';
-  if (event.httpMethod === 'POST' && !getEnv('AQAR_ADMIN_TOKEN')) return response(503, { success: false, error: 'AQAR_ADMIN_TOKEN is not configured' });
+  const configuredToken = getEnv('AQAR_ADMIN_TOKEN');
+
+  if (event.httpMethod === 'POST' && !configuredToken) {
+    return response(503, { success: false, error: 'AQAR_ADMIN_TOKEN is not configured' });
+  }
   if (event.httpMethod === 'POST' || includeHistory) {
     if (!isAuthorized(event)) return response(401, { success: false, error: 'Unauthorized' });
   }
@@ -133,4 +95,4 @@ async function handler(event) {
   }
 }
 
-module.exports = { handler, validateConfig, deepMergeKnown };
+module.exports = { handler, validateConfig, deepMergeKnown, getEnv, isAuthorized };
