@@ -34,3 +34,4 @@ The coordinate candidates were gathered from OpenStreetMap Nominatim search and 
 [1]: https://nominatim.openstreetmap.org/ "Nominatim OpenStreetMap Search"
 
 [2]: https://hub.arcgis.com/search?collection=dataset&tags=dubai "ArcGIS Hub Dubai dataset search"
+Live deployment verification completed after manual Netlify deploy `6a8e0b30a2e40ce2079c8c3e`: the public coordinate artifact returned 202 entries, the page loaded 204 DLD districts, and a browser loop tested all 204 names with 0 failures. The marker and facility circle moved to valid coordinates for every district and the configured circle radius was 1,000 m.
