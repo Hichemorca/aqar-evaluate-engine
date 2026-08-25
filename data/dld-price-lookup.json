@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T06:37:04.780Z",
+  "generatedAt": "2026-08-25T06:58:07.878Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -10335,7 +10335,7 @@
         "count": 4
       },
       "Azizi Pearl__apartment": {
-        "medianPricePerSqm": 16084,
+        "medianPricePerSqm": 15909,
         "count": 8
       },
       "Maria Tower__apartment": {
@@ -11899,7 +11899,7 @@
         "count": 2
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26__apartment": {
-        "medianPricePerSqm": 19667,
+        "medianPricePerSqm": 19706,
         "count": 12
       },
       "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13__apartment": {
@@ -15109,7 +15109,7 @@
         "count": 37
       },
       "MEYDAN ONE__land__land_xlarge": {
-        "medianPricePerSqm": 5384,
+        "medianPricePerSqm": 5385,
         "count": 12
       },
       "MEYDAN ONE__land__land_large": {

@@ -39,9 +39,9 @@
 
     function exportCSV() {
       if (!data || !data.records) return alert('No data');
-      let csv = 'Ref,Type,District,Area (sqm),Actual Price (AED),AQAR Valuation (AED),AQAR vs Actual (%),Appraiser Valuation (AED),Date\n';
+      let csv = 'Ref,Type,District,Area (sqm),Actual Price (AED),AQAR Valuation (AED),AQAR vs Actual (%),Date\n';
       data.records.forEach(r => {
-        csv += `"${r.propertyRef}","${r.propertyType}","${r.district}",${r.area},${r.actualSalePrice},${r.aqarValuation},${r.aqarVsActual},${r.appraiserValuation},"${r.saleDate}"\n`;
+        csv += `"${r.propertyRef}","${r.propertyType}","${r.district}",${r.area},${r.actualSalePrice},${r.aqarValuation},${r.aqarVsActual},"${r.saleDate}"\n`;
       });
       downloadFile(csv, 'aqar-accuracy-data.csv', 'text/csv');
     }

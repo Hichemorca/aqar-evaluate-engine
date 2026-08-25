@@ -396,7 +396,6 @@ async function main() {
     if (!evalResult) continue;
     
     const aqarValuation = evalResult.valuation;
-    const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
     const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
     
     // Track GIS availability
@@ -416,7 +415,6 @@ async function main() {
       ...t, 
       aqarValuation, 
       aqarVsActual: Math.round(aqarDiff * 10) / 10, 
-      appraiserValuation, 
       evalLevel: evalResult.level, 
       evalCount: evalResult.count,
       gisScore: evalResult.gisScore ?? null,
@@ -453,6 +451,8 @@ async function main() {
       totalRecords: allResults.length, 
       methodology: 'v22.1 Calibrated with Mean + optimized multipliers', 
       dataSource: 'DLD + Consultancy + Government + GIS',
+      accuracyScope: 'verified-dld-only',
+      comparison: 'AQAR vs actual sale price',
       dataType: usingEnriched ? 'enriched' : 'basic',
       calibration: CALIBRATION
     }, 
@@ -480,7 +480,6 @@ async function main() {
     if (!evalResult) continue;
     
     const aqarValuation = evalResult.valuation;
-    const appraiserValuation = Math.round(t.actualSalePrice * (0.92 + Math.random() * 0.16));
     const aqarDiff = ((aqarValuation - t.actualSalePrice) / t.actualSalePrice) * 100;
     
     if (t.hasGis && t.gisScore !== null && t.gisScore !== undefined) {
@@ -499,7 +498,6 @@ async function main() {
       ...t, 
       aqarValuation, 
       aqarVsActual: Math.round(aqarDiff * 10) / 10, 
-      appraiserValuation, 
       evalLevel: evalResult.level, 
       evalCount: evalResult.count,
       gisScore: evalResult.gisScore ?? null,
@@ -546,6 +544,8 @@ async function main() {
       totalRecords: evalResults.length, 
       methodology: 'v22.1 Calibrated with Mean + optimized multipliers', 
       dataSource: 'DLD + Consultancy + Government + GIS',
+      accuracyScope: 'verified-dld-only',
+      comparison: 'AQAR vs actual sale price',
       dataType: usingEnriched ? 'enriched' : 'basic',
       calibration: CALIBRATION
     }, 

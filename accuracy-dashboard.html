@@ -135,12 +135,12 @@
   <div class="section">
     <div class="refresh-bar">
       <div style="display:flex;align-items:center;gap:12px">
-        <div class="section-title" style="margin-bottom:0">📋 Recent Transactions — AQAR vs Actual vs Appraiser</div>
+        <div class="section-title" style="margin-bottom:0">📋 Recent Transactions — AQAR vs Actual</div>
         <span id="dataSourceBadge"></span>
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn-s" onclick="loadFromLocal()">📁 Load Saved Data</button>
-        <button class="btn btn-p" onclick="loadFromLive()" style="width:auto;margin:0;padding:8px 16px;font-size:12px">🔄 Fetch Live Data</button>
+        <span style="font-size:10px;color:var(--muted)">Verified DLD snapshot only</span>
       </div>
     </div>
     <div class="table-container" id="tableContainer">
@@ -164,10 +164,7 @@
 let currentDataSource = 'unknown';
 
 async function loadDashboard() {
-  const localLoaded = await loadFromLocal();
-  if (!localLoaded) {
-    await loadFromLive();
-  }
+  await loadFromLocal();
 }
 
 async function loadFromLocal() {
@@ -175,18 +172,27 @@ async function loadFromLocal() {
   try {
     const response = await fetch('/data/accuracy-data.json');
     if (!response.ok) {
-      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Could not load saved data. Click "Fetch Live Data" to load from source.</div>';
+      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Could not load the verified DLD snapshot. Official accuracy is unavailable until a verified snapshot is restored.</div>';
       return false;
     }
     const data = await response.json();
     if (!data.records || data.records.length === 0) {
-      document.getElementById('tableContainer').innerHTML = '<div class="loading">No saved data found. Click "Fetch Live Data".</div>';
+      document.getElementById('tableContainer').innerHTML = '<div class="loading">No verified DLD accuracy snapshot is available.</div>';
+      return false;
+    }
+    const unverified = data.records.filter(record =>
+      record.dataSource !== 'dld-real-cleaned' ||
+      record.scrapedFrom !== 'Dubai Land Department' ||
+      record.verifiedBy !== 'Government Record'
+    );
+    if (unverified.length > 0) {
+      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Accuracy snapshot rejected: it contains records without verified DLD provenance.</div>';
       return false;
     }
     updateStats(data.metrics);
     updateTable(data.records);
     updateLastUpdated(data.metadata?.lastUpdated);
-    updateSourceBadge('cached', '📁 Saved Data');
+    updateSourceBadge('cached', '✅ Verified DLD Snapshot');
     currentDataSource = 'cached';
     return true;
   } catch (err) {
@@ -195,28 +201,7 @@ async function loadFromLocal() {
   }
 }
 
-async function loadFromLive() {
-  document.getElementById('tableContainer').innerHTML = '<div class="loading"><div class="spinner"></div><div>Fetching live transaction data...</div></div>';
-  try {
-    const response = await fetch('/.netlify/functions/scrape-sold', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ city: 'dubai', days: 60 })
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    updateStats(data.metrics);
-    updateTable(data.properties);
-    updateLastUpdated(data.scrapedAt);
-    const sourceLabel = data.dataSource === 'live' ? '🟢 Live Data' : '🟡 Estimated';
-    updateSourceBadge(data.dataSource === 'live' ? 'live' : 'generated', sourceLabel);
-    currentDataSource = data.dataSource || 'unknown';
-    return true;
-  } catch (err) {
-    document.getElementById('tableContainer').innerHTML = '<div class="loading"><div style="color:var(--red);margin-bottom:10px">⚠️ Could not load live data.</div><button class="btn btn-s" onclick="loadFromLocal()">📁 Try Saved Data</button></div>';
-    return false;
-  }
-}
+// Live accuracy loading remains disabled until an approved verified source adapter is available.
 
 function updateStats(metrics) {
   if (!metrics) return;

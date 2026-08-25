@@ -146,7 +146,6 @@ function generateTransactionsForEmirate(cityKey, count) {
       actualSalePrice: actualPrice,
       aqarValuation: aqarPrice,
       aqarVsActual: Math.round(diff * 10) / 10,
-      appraiserValuation: Math.round(actualPrice * (0.90 + Math.random() * 0.18)),
       saleDate: new Date(Date.now() - daysAgo * 86400000).toISOString().split('T')[0],
       scrapedFrom: 'Market Data (Estimated)'
     });

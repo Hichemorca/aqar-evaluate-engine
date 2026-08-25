@@ -134,7 +134,8 @@ async function main() {
   console.log('🚀 AQAR DLD CSV Importer — FIXED v2 (Land + PROP_SB_TYPE_EN)\n');
 
   if (!fs.existsSync(INPUT_FILE)) {
-    console.log(`❌ File not found: ${INPUT_FILE}`);
+    console.error(`❌ File not found: ${INPUT_FILE}`);
+    process.exitCode = 1;
     return;
   }
 
@@ -142,7 +143,8 @@ async function main() {
   const transactions = parseDLDCSV(csvText);
 
   if (transactions.length === 0) {
-    console.log('⚠️ No valid transactions found');
+    console.error('❌ No valid transactions found');
+    process.exitCode = 1;
     return;
   }
 
