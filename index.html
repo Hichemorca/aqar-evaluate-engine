@@ -340,8 +340,8 @@
     <div class="sub">Stop guessing — let the numbers decide.</div>
   </div>
   <div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:12px">
-    📅 Data refreshed: <span id="lastDataRefresh">Today</span> •
-    📊 Based on 30,475 DLD transactions • 86.3% accuracy
+    📅 Data refreshed: <span id="lastDataRefresh">Loading...</span> •
+    📊 Based on <span id="accuracyRecordCount">—</span> evaluated records • <span id="accuracyRate">—</span>% accuracy
   </div>
   <div style="background:rgba(212,146,14,0.12);border:1px solid rgba(212,146,14,0.3);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:center;backdrop-filter:blur(4px);">
     <span style="font-size:12px;font-weight:600;color:var(--gold);">
@@ -564,7 +564,7 @@
   </div>
   <div id="resultSection" class="hidden"></div>
   <div class="footer-links">
-    <a href="/accuracy-dashboard">📊 Accuracy (86.3%)</a>
+    <a href="/accuracy-dashboard">📊 Accuracy (<span id="footerAccuracyRate">—</span>%)</a>
     <a href="/market-intelligence">📈 Market Intelligence</a>
     <a href="https://aqar-decision-engine.netlify.app" target="_blank">🧠 Decision Engine</a>
     <a href="https://github.com/Hichemorca/aqar-evaluate-engine" target="_blank">📂 GitHub</a>
@@ -1073,7 +1073,7 @@ function displayResult(result, valuations, propData) {
   const section = document.getElementById('resultSection');
   const cc = result.confidence === 'high' ? 'high' : result.confidence === 'medium' ? 'medium' : 'low';
   const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count||'multiple'}</b> comparable sales in ${propData.district}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend||'stable'}</b><br>• Total DLD database: <b>30,475</b> verified transactions<br>• Valuation range reflects natural market variation</div>`;
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>• Based on <b>${scrapedDistrictData?.count||'multiple'}</b> comparable sales in ${propData.district}<br>• Data confidence: <b>${confLevel}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend||'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString() || 'available'}</b><br>• Valuation range reflects natural market variation</div>`;
   let vHTML = '';
   valuations.forEach(v => {
     const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
@@ -1165,6 +1165,32 @@ function saveToHistory(result, propData) {
     localStorage.setItem('aqar_history', JSON.stringify(h.slice(0,5)));
   } catch(e) {}
 }
+async function loadAccuracyMeta() {
+  try {
+    const response = await fetch('/data/accuracy-data.json');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    const metrics = data.metrics || {};
+    const metadata = data.metadata || {};
+    const records = Number(metadata.totalRecords || metrics.totalRecords || 0);
+    const accuracy = Number(metrics.avgAccuracy || 0);
+    if (records > 0) document.getElementById('accuracyRecordCount').textContent = records.toLocaleString();
+    if (accuracy > 0) {
+      const formattedAccuracy = accuracy.toFixed(1);
+      document.getElementById('accuracyRate').textContent = formattedAccuracy;
+      document.getElementById('footerAccuracyRate').textContent = formattedAccuracy;
+    }
+    if (metadata.lastUpdated) {
+      const updated = new Date(metadata.lastUpdated);
+      if (!Number.isNaN(updated.getTime())) {
+        document.getElementById('lastDataRefresh').textContent = updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+    }
+    window.aqarAccuracyMetrics = metrics;
+  } catch (error) {
+    console.warn('Could not load accuracy metadata:', error.message);
+  }
+}
 function showToast(msg, dur=3000) {
   const existing = document.querySelector('.toast');
   if (existing) existing.remove();
@@ -1209,7 +1235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   onPropertyTypeChange();
-  document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+  loadAccuracyMeta();
   document.addEventListener('click', function(e) {
     const container = document.getElementById('districtAutocomplete');
     const input = document.getElementById('districtInput');

@@ -105,7 +105,7 @@
 <div class="container">
   <div class="header">
     <h1>📊 AQAR Accuracy Dashboard</h1>
-    <p>Real-time comparison: AQAR Valuation vs Actual Sale Prices • 30,475 DLD Transactions</p>
+    <p>Real-time comparison: AQAR Valuation vs Actual Sale Prices • <span id="datasetRecordCount">—</span> validation records</p>
     <div class="last-update" id="lastUpdated">Loading...</div>
   </div>
 
@@ -128,7 +128,7 @@
     <div class="stat-card">
       <div class="stat-value" id="totalRecords">—</div>
       <div class="stat-label">Tracked Transactions</div>
-      <div class="stat-detail">30,475 DLD Records</div>
+      <div class="stat-detail" id="trackedRecordsDetail">Validation records</div>
     </div>
   </div>
 
@@ -225,7 +225,10 @@ function updateStats(metrics) {
   avgAcc.className = 'stat-value ' + (metrics.avgAccuracy >= 90 ? 'green' : metrics.avgAccuracy >= 75 ? 'gold' : 'red');
   document.getElementById('avgDeviation').textContent = metrics.avgDeviation ? '±' + metrics.avgDeviation + '%' : '—';
   document.getElementById('priceBand15').textContent = metrics.priceBand15 ? metrics.priceBand15 + '%' : '—';
-  document.getElementById('totalRecords').textContent = metrics.totalRecords || '0';
+  const totalRecords = Number(metrics.totalRecords || 0);
+  document.getElementById('totalRecords').textContent = totalRecords ? totalRecords.toLocaleString() : '0';
+  document.getElementById('datasetRecordCount').textContent = totalRecords ? totalRecords.toLocaleString() : '0';
+  document.getElementById('trackedRecordsDetail').textContent = totalRecords ? `${totalRecords.toLocaleString()} validation records` : 'Validation records';
 }
 
 function updateTable(properties) {
