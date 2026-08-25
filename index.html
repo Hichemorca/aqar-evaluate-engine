@@ -507,7 +507,7 @@
   </div>
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Facilities</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a DLD district and adjust the map marker if needed.</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a DLD district to center the map on its representative location; adjust the marker if needed.</div>
     <div class="fg">
       <label>📍 District / Area <span class="note" style="font-weight:400;text-transform:none;color:var(--muted)">(Choose from DLD data)</span></label>
       <div class="autocomplete-container">
@@ -670,7 +670,7 @@ function getCurrentEvidenceState(data = {}) {
 // ===== LOAD DISTRICT COORDINATES =====
 async function loadDistrictCoords() {
   try {
-    const response = await fetch('/data/district-coordinates.json');
+    const response = await fetch(`/data/district-coordinates.json?_district_coords=${Date.now()}`, { cache: 'no-store' });
     if (response.ok) {
       const data = await response.json();
       districtCoordsMap = data;

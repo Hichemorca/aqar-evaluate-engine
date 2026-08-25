@@ -1,82 +1,810 @@
 {
-  "Al Barsha": { "lat": 25.1166, "lng": 55.1953 },
-  "Al Barsha South": { "lat": 25.1000, "lng": 55.2100 },
-  "Al Barsha Heights": { "lat": 25.1050, "lng": 55.1800 },
-  "Al Furjan": { "lat": 25.0322, "lng": 55.1511 },
-  "Al Jaddaf": { "lat": 25.1950, "lng": 55.3100 },
-  "Al Karama": { "lat": 25.2300, "lng": 55.3000 },
-  "Al Khawaneej": { "lat": 25.2300, "lng": 55.4700 },
-  "Al Mamzar": { "lat": 25.3000, "lng": 55.3300 },
-  "Al Mankhool": { "lat": 25.2400, "lng": 55.3100 },
-  "Al Nahda": { "lat": 25.2800, "lng": 55.3700 },
-  "Al Qusais": { "lat": 25.2700, "lng": 55.3900 },
-  "Al Quoz": { "lat": 25.1200, "lng": 55.2300 },
-  "Al Rashidiya": { "lat": 25.2400, "lng": 55.4000 },
-  "Al Safa": { "lat": 25.1900, "lng": 55.2500 },
-  "Al Satwa": { "lat": 25.2100, "lng": 55.2600 },
-  "Al Sufouh": { "lat": 25.1000, "lng": 55.1500 },
-  "Al Twar": { "lat": 25.2900, "lng": 55.3900 },
-  "Al Warqa": { "lat": 25.2600, "lng": 55.4200 },
-  "Arabian Ranches": { "lat": 25.0556, "lng": 55.2531 },
-  "Arabian Ranches 2": { "lat": 25.0450, "lng": 55.2600 },
-  "Arabian Ranches 3": { "lat": 25.0350, "lng": 55.2700 },
-  "Arjan": { "lat": 25.0800, "lng": 55.3100 },
-  "Barsha Heights": { "lat": 25.1050, "lng": 55.1800 },
-  "Bluewaters Island": { "lat": 25.0800, "lng": 55.1200 },
-  "Bur Dubai": { "lat": 25.2500, "lng": 55.3100 },
-  "Business Bay": { "lat": 25.1855, "lng": 55.2604 },
-  "Damac Hills": { "lat": 25.0200, "lng": 55.2700 },
-  "Damac Hills 2": { "lat": 25.0100, "lng": 55.2800 },
-  "Deira": { "lat": 25.2700, "lng": 55.3100 },
-  "Discovery Gardens": { "lat": 25.0500, "lng": 55.1600 },
-  "Downtown Dubai": { "lat": 25.1972, "lng": 55.2741 },
-  "Dubai Creek Harbour": { "lat": 25.2078, "lng": 55.3350 },
-  "Dubai Healthcare City": { "lat": 25.2100, "lng": 55.3200 },
-  "Dubai Hills Estate": { "lat": 25.0900, "lng": 55.2300 },
-  "Dubai Investment Park": { "lat": 25.0100, "lng": 55.1400 },
-  "Dubai Land": { "lat": 25.0470, "lng": 55.3100 },
-  "Dubai Marina": { "lat": 25.0802, "lng": 55.1416 },
-  "Dubai Silicon Oasis": { "lat": 25.1296, "lng": 55.3750 },
-  "Dubai South": { "lat": 24.9500, "lng": 55.1500 },
-  "Dubai Sports City": { "lat": 25.0300, "lng": 55.2900 },
-  "Dubai Studio City": { "lat": 25.0370, "lng": 55.2800 },
-  "Emirates Hills": { "lat": 25.0677, "lng": 55.1691 },
-  "Emirates Living": { "lat": 25.0600, "lng": 55.2200 },
-  "Festival City": { "lat": 25.2300, "lng": 55.3400 },
-  "Garhoud": { "lat": 25.2300, "lng": 55.3500 },
-  "Greens": { "lat": 25.1100, "lng": 55.2100 },
-  "International City": { "lat": 25.2100, "lng": 55.4300 },
-  "Jebel Ali": { "lat": 24.9800, "lng": 55.0300 },
-  "Jebel Ali Village": { "lat": 25.0100, "lng": 55.1200 },
-  "Jumeirah": { "lat": 25.2070, "lng": 55.2300 },
-  "Jumeirah Beach Residence": { "lat": 25.0780, "lng": 55.1340 },
-  "Jumeirah Golf Estates": { "lat": 25.0200, "lng": 55.2000 },
-  "Jumeirah Islands": { "lat": 25.1400, "lng": 55.1600 },
-  "Jumeirah Lake Towers": { "lat": 25.0700, "lng": 55.1400 },
-  "Jumeirah Park": { "lat": 25.0600, "lng": 55.1900 },
-  "Jumeirah Village Circle": { "lat": 25.0551, "lng": 55.2057 },
-  "Jumeirah Village Triangle": { "lat": 25.0500, "lng": 55.2000 },
-  "Liwan": { "lat": 25.1700, "lng": 55.4300 },
-  "MBR City": { "lat": 25.1150, "lng": 55.3650 },
-  "MBR District 7": { "lat": 25.1150, "lng": 55.3650 },
-  "Meadows": { "lat": 25.0600, "lng": 55.2200 },
-  "Mirdif": { "lat": 25.2370, "lng": 55.4100 },
-  "Mohamed Bin Rashed City": { "lat": 25.1150, "lng": 55.3650 },
-  "Mohammed Bin Rashid City": { "lat": 25.1150, "lng": 55.3650 },
-  "Motor City": { "lat": 25.0350, "lng": 55.3000 },
-  "Mudon": { "lat": 25.0400, "lng": 55.2900 },
-  "Nad Al Sheba": { "lat": 25.1800, "lng": 55.3400 },
-  "Palm Jumeirah": { "lat": 25.1181, "lng": 55.1425 },
-  "Remraam": { "lat": 25.0500, "lng": 55.2500 },
-  "Serena": { "lat": 25.0500, "lng": 55.3200 },
-  "The Greens": { "lat": 25.1100, "lng": 55.2100 },
-  "The Villa": { "lat": 25.0700, "lng": 55.3800 },
-  "Tilal Al Ghaf": { "lat": 25.0800, "lng": 55.3500 },
-  "Town Square": { "lat": 25.0300, "lng": 55.2600 },
-  "Umm Al Sheif": { "lat": 25.1700, "lng": 55.2300 },
-  "Umm Suqeim": { "lat": 25.1540, "lng": 55.2200 },
-  "Victory Heights": { "lat": 25.0400, "lng": 55.2800 },
-  "Warsan": { "lat": 25.2200, "lng": 55.4500 },
-  "Zabeel": { "lat": 25.2100, "lng": 55.2800 },
-  "Zabeel Park": { "lat": 25.2300, "lng": 55.3000 }
+  "ABU HAIL": {
+    "lat": 25.286029,
+    "lng": 55.328865
+  },
+  "AL AWEER FIRST": {
+    "lat": 25.176036,
+    "lng": 55.540827
+  },
+  "AL AWEER SECOND": {
+    "lat": 25.176036,
+    "lng": 55.540827
+  },
+  "AL BADA": {
+    "lat": 25.224626,
+    "lng": 55.268483
+  },
+  "AL BARAHA": {
+    "lat": 25.280988,
+    "lng": 55.319525
+  },
+  "AL BARARI": {
+    "lat": 25.108277,
+    "lng": 55.31877
+  },
+  "Al Barsha": {
+    "lat": 25.1166,
+    "lng": 55.1953
+  },
+  "Al Barsha Heights": {
+    "lat": 25.105,
+    "lng": 55.18
+  },
+  "Al Barsha South": {
+    "lat": 25.1,
+    "lng": 55.21
+  },
+  "Al Furjan": {
+    "lat": 25.0322,
+    "lng": 55.1511
+  },
+  "AL GOZE FIRST": {
+    "lat": 25.173737,
+    "lng": 55.244658
+  },
+  "AL GOZE FOURTH": {
+    "lat": 25.173737,
+    "lng": 55.244658
+  },
+  "AL GOZE INDUSTRIAL FIRST": {
+    "lat": 25.173737,
+    "lng": 55.244658
+  },
+  "AL GOZE INDUSTRIAL SECOND": {
+    "lat": 25.173737,
+    "lng": 55.244658
+  },
+  "AL GOZE THIRD": {
+    "lat": 25.173737,
+    "lng": 55.244658
+  },
+  "AL HEBIAH FIFTH": {
+    "lat": 25.017172,
+    "lng": 55.255397
+  },
+  "AL HEBIAH FOURTH": {
+    "lat": 25.017172,
+    "lng": 55.255397
+  },
+  "AL HEBIAH SIXTH": {
+    "lat": 25.017172,
+    "lng": 55.255397
+  },
+  "AL HEBIAH THIRD": {
+    "lat": 25.017172,
+    "lng": 55.255397
+  },
+  "Al Jaddaf": {
+    "lat": 25.195,
+    "lng": 55.31
+  },
+  "AL JAFLIYA": {
+    "lat": 25.237631,
+    "lng": 55.286937
+  },
+  "Al Karama": {
+    "lat": 25.23,
+    "lng": 55.3
+  },
+  "AL KHABEESI": {
+    "lat": 25.266108,
+    "lng": 55.327715
+  },
+  "AL KHAIL HEIGHTS": {
+    "lat": 25.15586,
+    "lng": 55.253687
+  },
+  "Al Khawaneej": {
+    "lat": 25.23,
+    "lng": 55.47
+  },
+  "AL KHEERAN": {
+    "lat": 25.21524,
+    "lng": 55.36392
+  },
+  "AL KIFAF": {
+    "lat": 25.234627,
+    "lng": 55.298597
+  },
+  "AL MAHA": {
+    "lat": 24.898695,
+    "lng": 55.661437
+  },
+  "Al Mamzar": {
+    "lat": 25.3,
+    "lng": 55.33
+  },
+  "AL MAMZER": {
+    "lat": 25.300533,
+    "lng": 55.359633
+  },
+  "AL MANARA": {
+    "lat": 25.144818,
+    "lng": 55.214453
+  },
+  "Al Mankhool": {
+    "lat": 25.24,
+    "lng": 55.31
+  },
+  "AL MARARR": {
+    "lat": 25.276562,
+    "lng": 55.308875
+  },
+  "AL MERKADH": {
+    "lat": 25.145728,
+    "lng": 55.292649
+  },
+  "AL MIZHAR FIRST": {
+    "lat": 25.242702,
+    "lng": 55.46108
+  },
+  "AL MIZHAR FOURTH": {
+    "lat": 25.242702,
+    "lng": 55.46108
+  },
+  "AL MIZHAR SECOND": {
+    "lat": 25.242702,
+    "lng": 55.46108
+  },
+  "AL MIZHAR THIRD": {
+    "lat": 25.242702,
+    "lng": 55.46108
+  },
+  "AL MUTEENA": {
+    "lat": 25.274155,
+    "lng": 55.322556
+  },
+  "Al Nahda": {
+    "lat": 25.28,
+    "lng": 55.37
+  },
+  "Al Quoz": {
+    "lat": 25.12,
+    "lng": 55.23
+  },
+  "Al Qusais": {
+    "lat": 25.27,
+    "lng": 55.39
+  },
+  "Al Rashidiya": {
+    "lat": 25.24,
+    "lng": 55.4
+  },
+  "Al Safa": {
+    "lat": 25.19,
+    "lng": 55.25
+  },
+  "AL SAFFA SECOND": {
+    "lat": 25.167737,
+    "lng": 55.231018
+  },
+  "Al Satwa": {
+    "lat": 25.21,
+    "lng": 55.26
+  },
+  "Al Sufouh": {
+    "lat": 25.1,
+    "lng": 55.15
+  },
+  "AL THANYAH THIRD": {
+    "lat": 25.072636,
+    "lng": 55.124389
+  },
+  "AL TTAY": {
+    "lat": 25.232156,
+    "lng": 55.556317
+  },
+  "Al Twar": {
+    "lat": 25.29,
+    "lng": 55.39
+  },
+  "AL WAHA": {
+    "lat": 25.029016,
+    "lng": 55.28587
+  },
+  "AL WAHEDA": {
+    "lat": 25.291539,
+    "lng": 55.337362
+  },
+  "Al Warqa": {
+    "lat": 25.26,
+    "lng": 55.42
+  },
+  "AL WASL": {
+    "lat": 25.195933,
+    "lng": 55.255737
+  },
+  "AL YELAYISS 1": {
+    "lat": 25.009036,
+    "lng": 55.299857
+  },
+  "AL YELAYISS 2": {
+    "lat": 25.009036,
+    "lng": 55.299857
+  },
+  "AL YELAYISS 5": {
+    "lat": 25.009036,
+    "lng": 55.299857
+  },
+  "AL YUFRAH 1": {
+    "lat": 25.002413,
+    "lng": 55.432676
+  },
+  "Arabian Ranches": {
+    "lat": 25.0556,
+    "lng": 55.2531
+  },
+  "Arabian Ranches 2": {
+    "lat": 25.045,
+    "lng": 55.26
+  },
+  "Arabian Ranches 3": {
+    "lat": 25.035,
+    "lng": 55.27
+  },
+  "Arjan": {
+    "lat": 25.08,
+    "lng": 55.31
+  },
+  "Barsha Heights": {
+    "lat": 25.105,
+    "lng": 55.18
+  },
+  "Bluewaters Island": {
+    "lat": 25.08,
+    "lng": 55.12
+  },
+  "BUKADRA": {
+    "lat": 25.17686,
+    "lng": 55.3262
+  },
+  "Bur Dubai": {
+    "lat": 25.25,
+    "lng": 55.31
+  },
+  "BURJ KHALIFA": {
+    "lat": 25.191821,
+    "lng": 55.272338
+  },
+  "Business Bay": {
+    "lat": 25.1855,
+    "lng": 55.2604
+  },
+  "CHERRYWOODS": {
+    "lat": 25.016006,
+    "lng": 55.290943
+  },
+  "CITY OF ARABIA": {
+    "lat": 25.088969,
+    "lng": 55.337371
+  },
+  "CITY WALK": {
+    "lat": 25.208159,
+    "lng": 55.261874
+  },
+  "Damac Hills": {
+    "lat": 25.02,
+    "lng": 55.27
+  },
+  "Damac Hills 2": {
+    "lat": 25.01,
+    "lng": 55.28
+  },
+  "Deira": {
+    "lat": 25.27,
+    "lng": 55.31
+  },
+  "Discovery Gardens": {
+    "lat": 25.05,
+    "lng": 55.16
+  },
+  "DMCC-EZ2": {
+    "lat": 25.070837,
+    "lng": 55.138656
+  },
+  "DOWN TOWN JABAL ALI": {
+    "lat": 24.954518,
+    "lng": 55.07783
+  },
+  "Downtown Dubai": {
+    "lat": 25.1972,
+    "lng": 55.2741
+  },
+  "Dubai Creek Harbour": {
+    "lat": 25.2078,
+    "lng": 55.335
+  },
+  "DUBAI GOLF CITY": {
+    "lat": 25.011316,
+    "lng": 55.234267
+  },
+  "DUBAI HARBOUR": {
+    "lat": 25.095619,
+    "lng": 55.138001
+  },
+  "Dubai Healthcare City": {
+    "lat": 25.21,
+    "lng": 55.32
+  },
+  "Dubai Hills Estate": {
+    "lat": 25.09,
+    "lng": 55.23
+  },
+  "DUBAI INDUSTRIAL CITY": {
+    "lat": 24.839901,
+    "lng": 55.066293
+  },
+  "Dubai Investment Park": {
+    "lat": 25.01,
+    "lng": 55.14
+  },
+  "Dubai Land": {
+    "lat": 25.047,
+    "lng": 55.31
+  },
+  "Dubai Marina": {
+    "lat": 25.0802,
+    "lng": 55.1416
+  },
+  "DUBAI MARITIME CITY": {
+    "lat": 25.249626,
+    "lng": 55.276165
+  },
+  "DUBAI PRODUCTION CITY": {
+    "lat": 25.032128,
+    "lng": 55.191273
+  },
+  "DUBAI SCIENCE PARK": {
+    "lat": 25.075895,
+    "lng": 55.248814
+  },
+  "Dubai Silicon Oasis": {
+    "lat": 25.1296,
+    "lng": 55.375
+  },
+  "Dubai South": {
+    "lat": 24.95,
+    "lng": 55.15
+  },
+  "Dubai Sports City": {
+    "lat": 25.03,
+    "lng": 55.29
+  },
+  "Dubai Studio City": {
+    "lat": 25.037,
+    "lng": 55.28
+  },
+  "DUBAI WATER CANAL": {
+    "lat": 25.197793,
+    "lng": 55.233791
+  },
+  "DUBAI WATER FRONT": {
+    "lat": 24.944817,
+    "lng": 54.998449
+  },
+  "EMAAR SOUTH": {
+    "lat": 24.85472,
+    "lng": 55.147066
+  },
+  "EMIRATE LIVING": {
+    "lat": 25.097897,
+    "lng": 55.156315
+  },
+  "Emirates Hills": {
+    "lat": 25.0677,
+    "lng": 55.1691
+  },
+  "Emirates Living": {
+    "lat": 25.06,
+    "lng": 55.22
+  },
+  "FALCON CITY OF WONDERS": {
+    "lat": 25.095528,
+    "lng": 55.339338
+  },
+  "Festival City": {
+    "lat": 25.23,
+    "lng": 55.34
+  },
+  "Garhoud": {
+    "lat": 25.23,
+    "lng": 55.35
+  },
+  "GHADEER AL TAIR": {
+    "lat": 25.150914,
+    "lng": 55.272006
+  },
+  "GRAND VIEWS": {
+    "lat": 25.145686,
+    "lng": 55.300144
+  },
+  "Greens": {
+    "lat": 25.11,
+    "lng": 55.21
+  },
+  "HADAEQ SHEIKH MOHAMMED BIN RASHID": {
+    "lat": 25.099773,
+    "lng": 55.269182
+  },
+  "HOR AL ANZ": {
+    "lat": 25.278299,
+    "lng": 55.3395
+  },
+  "HOR AL ANZ EAST": {
+    "lat": 25.282255,
+    "lng": 55.348484
+  },
+  "International City": {
+    "lat": 25.21,
+    "lng": 55.43
+  },
+  "ISLAND 2": {
+    "lat": 25.197624,
+    "lng": 55.225824
+  },
+  "JABAL ALI FIRST": {
+    "lat": 25.033817,
+    "lng": 55.136604
+  },
+  "JABAL ALI INDUSTRIAL FIRST": {
+    "lat": 25.033817,
+    "lng": 55.136604
+  },
+  "JABEL ALI HILLS": {
+    "lat": 24.90019,
+    "lng": 54.971222
+  },
+  "JADDAF WATERFRONT": {
+    "lat": 25.228581,
+    "lng": 55.343191
+  },
+  "Jebel Ali": {
+    "lat": 24.98,
+    "lng": 55.03
+  },
+  "Jebel Ali Village": {
+    "lat": 25.01,
+    "lng": 55.12
+  },
+  "Jumeirah": {
+    "lat": 25.207,
+    "lng": 55.23
+  },
+  "Jumeirah Beach Residence": {
+    "lat": 25.078,
+    "lng": 55.134
+  },
+  "Jumeirah Golf Estates": {
+    "lat": 25.02,
+    "lng": 55.2
+  },
+  "Jumeirah Islands": {
+    "lat": 25.14,
+    "lng": 55.16
+  },
+  "Jumeirah Lake Towers": {
+    "lat": 25.07,
+    "lng": 55.14
+  },
+  "Jumeirah Park": {
+    "lat": 25.06,
+    "lng": 55.19
+  },
+  "Jumeirah Village Circle": {
+    "lat": 25.0551,
+    "lng": 55.2057
+  },
+  "Jumeirah Village Triangle": {
+    "lat": 25.05,
+    "lng": 55.2
+  },
+  "LA MER": {
+    "lat": 25.227093,
+    "lng": 55.256325
+  },
+  "LIVING LEGENDS": {
+    "lat": 25.085079,
+    "lng": 55.298122
+  },
+  "Liwan": {
+    "lat": 25.17,
+    "lng": 55.43
+  },
+  "MADINAT AL MATAAR": {
+    "lat": 24.90462,
+    "lng": 55.150985
+  },
+  "MADINAT DUBAI ALMELAHEYAH": {
+    "lat": 25.249626,
+    "lng": 55.276165
+  },
+  "MADINAT HIND 4": {
+    "lat": 25.007772,
+    "lng": 55.368145
+  },
+  "MAJAN": {
+    "lat": 25.092939,
+    "lng": 55.318483
+  },
+  "MARSA DUBAI": {
+    "lat": 25.23116,
+    "lng": 55.346463
+  },
+  "MBR City": {
+    "lat": 25.115,
+    "lng": 55.365
+  },
+  "MBR DISTRICT 1": {
+    "lat": 25.169213,
+    "lng": 55.292473
+  },
+  "MBR District 7": {
+    "lat": 25.115,
+    "lng": 55.365
+  },
+  "ME'AISEM FIRST": {
+    "lat": 24.996973,
+    "lng": 55.21674
+  },
+  "ME'AISEM SECOND": {
+    "lat": 24.996973,
+    "lng": 55.21674
+  },
+  "Meadows": {
+    "lat": 25.06,
+    "lng": 55.22
+  },
+  "MEYDAN AVENUE": {
+    "lat": 25.159142,
+    "lng": 55.296136
+  },
+  "MEYDAN ONE": {
+    "lat": 25.172559,
+    "lng": 55.287132
+  },
+  "MILLENNIUM": {
+    "lat": 25.180103,
+    "lng": 55.263813
+  },
+  "MINA RASHID": {
+    "lat": 25.260006,
+    "lng": 55.275607
+  },
+  "Mirdif": {
+    "lat": 25.237,
+    "lng": 55.41
+  },
+  "Mohamed Bin Rashed City": {
+    "lat": 25.115,
+    "lng": 55.365
+  },
+  "Mohammed Bin Rashid City": {
+    "lat": 25.115,
+    "lng": 55.365
+  },
+  "Motor City": {
+    "lat": 25.035,
+    "lng": 55.3
+  },
+  "Mudon": {
+    "lat": 25.04,
+    "lng": 55.29
+  },
+  "MUHAISANAH FIRST": {
+    "lat": 25.244504,
+    "lng": 55.418105
+  },
+  "MUHAISANAH FOURTH": {
+    "lat": 25.244504,
+    "lng": 55.418105
+  },
+  "MUHAISANAH SECOND": {
+    "lat": 25.244504,
+    "lng": 55.418105
+  },
+  "MUHAISANAH THIRD": {
+    "lat": 25.244504,
+    "lng": 55.418105
+  },
+  "NAD AL HAMAR": {
+    "lat": 25.197294,
+    "lng": 55.374906
+  },
+  "Nad Al Sheba": {
+    "lat": 25.18,
+    "lng": 55.34
+  },
+  "NAD AL SHIBA FIRST": {
+    "lat": 25.14563,
+    "lng": 55.364275
+  },
+  "NAD AL SHIBA FOURTH": {
+    "lat": 25.14563,
+    "lng": 55.364275
+  },
+  "NAD AL SHIBA SECOND": {
+    "lat": 25.14563,
+    "lng": 55.364275
+  },
+  "NAD AL SHIBA THIRD": {
+    "lat": 25.14563,
+    "lng": 55.364275
+  },
+  "NAD SHAMMA": {
+    "lat": 25.217776,
+    "lng": 55.383843
+  },
+  "NADD HESSA": {
+    "lat": 25.121931,
+    "lng": 55.385051
+  },
+  "NAIF": {
+    "lat": 25.271763,
+    "lng": 55.310317
+  },
+  "Palm Jumeirah": {
+    "lat": 25.1181,
+    "lng": 55.1425
+  },
+  "PEARL JUMEIRA": {
+    "lat": 25.244474,
+    "lng": 55.25896
+  },
+  "PORT SAEED": {
+    "lat": 25.253308,
+    "lng": 55.331892
+  },
+  "RAS AL KHOR INDUSTRIAL FIRST": {
+    "lat": 25.193963,
+    "lng": 55.339245
+  },
+  "RAS AL KHOR INDUSTRIAL THIRD": {
+    "lat": 25.193963,
+    "lng": 55.339245
+  },
+  "REGA AL BUTEEN": {
+    "lat": 25.261407,
+    "lng": 55.324903
+  },
+  "Remraam": {
+    "lat": 25.05,
+    "lng": 55.25
+  },
+  "RUKAN": {
+    "lat": 25.042348,
+    "lng": 55.288093
+  },
+  "SAIH SHUAIB 2": {
+    "lat": 24.857857,
+    "lng": 55.060872
+  },
+  "SAIH SHUAIB 3": {
+    "lat": 24.846117,
+    "lng": 55.07793
+  },
+  "SAIH SHUAIB 4": {
+    "lat": 24.823707,
+    "lng": 55.096106
+  },
+  "Serena": {
+    "lat": 25.05,
+    "lng": 55.32
+  },
+  "SOBHA HEARTLAND": {
+    "lat": 25.177431,
+    "lng": 55.307955
+  },
+  "SUFOUH GARDENS": {
+    "lat": 25.110138,
+    "lng": 55.178538
+  },
+  "SUSTAINABLE CITY": {
+    "lat": 25.02962,
+    "lng": 55.27886
+  },
+  "TECOM SITE A": {
+    "lat": 25.098284,
+    "lng": 55.175782
+  },
+  "THE FIELD": {
+    "lat": 25.02643,
+    "lng": 55.261392
+  },
+  "The Greens": {
+    "lat": 25.11,
+    "lng": 55.21
+  },
+  "THE LAKES": {
+    "lat": 25.080863,
+    "lng": 55.169241
+  },
+  "THE VALLEY": {
+    "lat": 24.999898,
+    "lng": 55.43059
+  },
+  "The Villa": {
+    "lat": 25.07,
+    "lng": 55.38
+  },
+  "THE WORLD": {
+    "lat": 25.237268,
+    "lng": 55.195494
+  },
+  "Tilal Al Ghaf": {
+    "lat": 25.08,
+    "lng": 55.35
+  },
+  "Town Square": {
+    "lat": 25.03,
+    "lng": 55.26
+  },
+  "TRADE CENTER FIRST": {
+    "lat": 25.229982,
+    "lng": 55.286587
+  },
+  "TRADE CENTER SECOND": {
+    "lat": 25.218909,
+    "lng": 55.283985
+  },
+  "UM AL SHEIF": {
+    "lat": 25.131998,
+    "lng": 55.204668
+  },
+  "UM RAMOOL": {
+    "lat": 25.231164,
+    "lng": 55.368567
+  },
+  "UM SUQAIM FIRST": {
+    "lat": 25.153909,
+    "lng": 55.2075
+  },
+  "UM SUQAIM SECOND": {
+    "lat": 25.153909,
+    "lng": 55.2075
+  },
+  "UM SUQAIM THIRD": {
+    "lat": 25.153909,
+    "lng": 55.2075
+  },
+  "Umm Al Sheif": {
+    "lat": 25.17,
+    "lng": 55.23
+  },
+  "Umm Suqeim": {
+    "lat": 25.154,
+    "lng": 55.22
+  },
+  "Victory Heights": {
+    "lat": 25.04,
+    "lng": 55.28
+  },
+  "VILLANOVA": {
+    "lat": 25.075004,
+    "lng": 55.359539
+  },
+  "WADI AL AMARDI": {
+    "lat": 25.20929,
+    "lng": 55.487909
+  },
+  "Warsan": {
+    "lat": 25.22,
+    "lng": 55.45
+  },
+  "ZAABEEL FIRST": {
+    "lat": 25.212105,
+    "lng": 55.283609
+  },
+  "ZAABEEL SECOND": {
+    "lat": 25.212105,
+    "lng": 55.283609
+  },
+  "Zabeel": {
+    "lat": 25.21,
+    "lng": 55.28
+  },
+  "Zabeel Park": {
+    "lat": 25.23,
+    "lng": 55.3
+  }
 }
