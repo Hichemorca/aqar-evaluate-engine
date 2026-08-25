@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T06:58:07.878Z",
+  "generatedAt": "2026-08-25T07:02:05.613Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 25199,
   "tables": {
@@ -2429,7 +2429,7 @@
         "count": 3
       },
       "HAMZA TOWER__apartment__small": {
-        "medianPricePerSqm": 6667,
+        "medianPricePerSqm": 8544,
         "count": 3
       },
       "GOLF VIEW RESIDENCE__apartment__small": {
@@ -15109,7 +15109,7 @@
         "count": 37
       },
       "MEYDAN ONE__land__land_xlarge": {
-        "medianPricePerSqm": 5385,
+        "medianPricePerSqm": 5384,
         "count": 12
       },
       "MEYDAN ONE__land__land_large": {

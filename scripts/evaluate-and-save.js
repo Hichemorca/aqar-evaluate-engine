@@ -12,6 +12,7 @@ const OUTPUT_FILE = path.join(DATA_DIR, 'accuracy-data.json');
 const MARKET_OUTPUT_FILE = path.join(DATA_DIR, 'market-data.json');
 const { getApplicableMethods } = require('../shared/aqar-policy');
 const { getSizeCategory, applyAllFilters } = require('../scripts/cleaning-pipeline');
+const { findUnverifiedRecords } = require('../shared/dld-provenance');
 
 // ===== CALIBRATION PARAMETERS (from calibration-lab) =====
 const CALIBRATION = {
@@ -354,6 +355,12 @@ async function main() {
   console.log(`📋 Using ${usingEnriched ? 'enriched' : 'basic'} DLD data`);
 
   console.log(`📋 DLD Raw: ${dldData.length.toLocaleString()}`);
+  const unverifiedRecords = findUnverifiedRecords(dldData);
+  if (unverifiedRecords.length > 0) {
+    console.error(`❌ Refusing official accuracy generation: ${unverifiedRecords.length} unverified DLD records`);
+    process.exitCode = 1;
+    return;
+  }
   
   const cleaned = applyAllFilters(dldData);
   cleaned.forEach(t => { t.dataSource = 'dld-real-cleaned'; t.city = t.city || 'dubai'; });
