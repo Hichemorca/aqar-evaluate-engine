@@ -50,7 +50,7 @@ jobs:
         run: node scripts/fetch-transactions.js
         
       - name: Layer 6 — Fetch OSM GIS Data (NEW)
-        run: node scripts/fetch-osm-data.js
+        run: node scripts/fetch-osm.js
         continue-on-error: true
         
       - name: Layer 7 — Market Intelligence Analysis

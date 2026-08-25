@@ -680,7 +680,25 @@ function filterDistricts(q) {
   const c = document.getElementById('districtAutocomplete');
   if (!q || q.length < 1) { c.style.display = 'none'; return; }
   const r = dubaiDistrictsList.filter(d => d.toLowerCase().includes(q.toLowerCase().trim()));
-  c.innerHTML = r.length ? r.slice(0,15).map(d => `<div class="item" onclick="selectDistrict('${d}')">${d}</div>`).join('') : '<div class="item" style="color:var(--muted);cursor:default;">No districts found</div>';
+  c.replaceChildren();
+  if (r.length) {
+    r.slice(0, 15).forEach(d => {
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.textContent = d;
+      item.addEventListener('mousedown', event => {
+        event.preventDefault();
+        selectDistrict(d);
+      });
+      c.appendChild(item);
+    });
+  } else {
+    const empty = document.createElement('div');
+    empty.className = 'item';
+    empty.style.cssText = 'color:var(--muted);cursor:default;';
+    empty.textContent = 'No districts found';
+    c.appendChild(empty);
+  }
   c.style.display = 'block';
 }
 function selectDistrict(d) {
@@ -807,8 +825,23 @@ async function fetchGISData() {
       gisData = { facilities: result.facilities, count: result.count, totalScore: result.totalScore, lat: a, lng: b, pois: result.pois };
       displayGISResult(gisData);
       addPOIsToMap(result.pois);
-    } else { document.getElementById('gisResult').style.display = 'none'; poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = []; }
-  } catch(e) { console.error('GIS Error:', e); } finally { gisLoading = false; }
+    } else {
+      gisData = null;
+      window.gisImpactMultiplier = 1;
+      window.gisImpactPercent = 0;
+      document.getElementById('gisResult').style.display = 'none';
+      poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
+      poiMarkers = [];
+    }
+  } catch(e) {
+    console.error('GIS Error:', e);
+    gisData = null;
+    window.gisImpactMultiplier = 1;
+    window.gisImpactPercent = 0;
+    document.getElementById('gisResult').style.display = 'none';
+    poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
+    poiMarkers = [];
+  } finally { gisLoading = false; }
 }
 function displayGISResult(gisData) {
   const container = document.getElementById('gisResult'), list = document.getElementById('gisFacilitiesList'), scoreDisplay = document.getElementById('gisScoreDisplay');
@@ -1117,7 +1150,10 @@ function resetAll() {
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
-  scrapedDistrictData = null; gisData = null;
+  scrapedDistrictData = null;
+  gisData = null;
+  window.gisImpactMultiplier = 1;
+  window.gisImpactPercent = 0;
   onPropertyTypeChange();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   showToast('All fields cleared');
