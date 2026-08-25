@@ -31,7 +31,15 @@
     .section { margin-top:18px; }
     .section-title { display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--gold); font-size:13px; font-weight:800; letter-spacing:.4px; text-transform:uppercase; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:11px; }
     .type-card { background:rgba(17,36,58,.72); border:1px solid var(--line); border-radius:14px; padding:14px; margin:10px 0; }
-    .type-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-weight:800; color:#dcecff; }
+    .type-card > summary { list-style:none; cursor:pointer; }
+    .type-card > summary::-webkit-details-marker { display:none; }
+    .type-card > summary::after { content:'+'; color:var(--gold); font-size:20px; line-height:1; }
+    .type-card[open] > summary::after { content:'−'; }
+    .type-title { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:0; font-weight:800; color:#dcecff; }
+    .type-summary-meta { display:flex; align-items:center; gap:12px; margin-left:auto; }
+    .type-total { color:#edf4fb; font-size:13px; white-space:nowrap; }
+    .type-total.invalid { color:var(--red); }
+    .type-content { padding-top:2px; }
     .field-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .field label { display:block; color:var(--muted); font-size:10px; margin-bottom:5px; word-break:break-word; }
     .field input { padding:8px 9px; font-size:12px; }
@@ -165,6 +173,12 @@
           box.classList.toggle('invalid', !valid);
           box.querySelector('strong').textContent = `${(total * 100).toFixed(1)}%`;
           box.querySelector('span').textContent = valid ? 'Valid total' : 'Save blocked: total must equal 100%';
+          const panel = $(`weightSummary-${propertyType}`).closest('details');
+          const headerTotal = panel?.querySelector('.type-total');
+          if (headerTotal) {
+            headerTotal.textContent = `${(total * 100).toFixed(1)}%`;
+            headerTotal.classList.toggle('invalid', !valid);
+          }
         }
       }
       return allValid;
@@ -174,17 +188,24 @@
       let html = '';
       for (const [propertyType, propertyConfig] of Object.entries(config.propertyTypes || {})) {
         const applicableMethods = propertyConfig.applicableMethods || [];
-        html += `<div class="type-card"><div class="type-title"><span>${propertyType}</span><span class="panel-note">${applicableMethods.map(method => methodLabels[method] || method).join(' · ')}</span></div>`;
+        const total = getApplicableWeightTotal(propertyConfig);
+        const totalClass = Math.abs(total - 1) <= 0.000001 ? '' : ' invalid';
+        html += `<details class="type-card" data-property-type="${propertyType}"><summary class="type-title"><span>${propertyType}</span><span class="type-summary-meta"><span class="panel-note">${applicableMethods.map(method => methodLabels[method] || method).join(' · ')}</span><strong class="type-total${totalClass}">${(total * 100).toFixed(1)}%</strong></span></summary><div class="type-content">`;
         html += renderWeightSummary(propertyType, propertyConfig);
         html += renderNumericSection('Method weights', propertyConfig.weights, ['propertyTypes', propertyType, 'weights'], applicableMethods);
         for (const method of applicableMethods) {
           const group = methodGroups[method];
           html += renderNumericSection(`${methodLabels[method] || method} coefficients`, propertyConfig.coefficients?.[group], ['propertyTypes', propertyType, 'coefficients', group]);
         }
-        html += '</div>';
+        html += '</div></details>';
       }
       html += renderNumericSection('GIS coefficients', config.gis, ['gis']);
       $('editor').innerHTML = html;
+      const typePanels = [...$('editor').querySelectorAll('details[data-property-type]')];
+      typePanels.forEach(panel => panel.addEventListener('toggle', () => {
+        if (panel.open) typePanels.filter(other => other !== panel).forEach(other => { other.open = false; });
+      }));
+      if (typePanels[0]) typePanels[0].open = true;
       $('editor').querySelectorAll('input[data-path]').forEach(input => input.addEventListener('input', updateChangeSummary));
       $('saveButton').disabled = false;
       $('reloadButton').disabled = false;
