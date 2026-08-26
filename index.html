@@ -647,6 +647,7 @@
     <a href="https://aqar-decision-engine.netlify.app" target="_blank">🧠 Decision Engine</a>
   </div>
 </div>
+<script src="/shared/html-escape.js"></script>
 <script src="/shared/aqar-policy.js"></script>
 <script src="/shared/property-extra-fields.js"></script>
 <script src="/shared/v21-shadow-multiplier-engine.js"></script>
@@ -743,7 +744,7 @@ function setEvidenceState(input = {}) {
 function renderEvidenceState(state, container, detail = '') {
   if (!container) return;
   const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(state);
-  const detailHTML = detail ? `<small>${detail}</small>` : '';
+  const detailHTML = detail ? `<small>${escapeMapHtml(detail)}</small>` : '';
   container.innerHTML = `<div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}${detailHTML}</div>`;
 }
 function getCurrentEvidenceState(data = {}) {
@@ -1640,7 +1641,7 @@ function displayResult(result, valuations, propData) {
   const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
   const dldCount = Number(scrapedDistrictData?.count || 0);
   const evidenceConfidence = dldCount > 0 ? confLevel : '⚪ Not available';
-  const shadowHTML = result.shadowEnabled ? `<div class="evidence-state warning"><strong>Experimental shadow multiplier</strong>Shadow value: <b>AED ${result.shadowValue.toLocaleString()}</b> (${result.shadowMultiplier.toFixed(4)}× baseline). This is analysis-only and does not replace the official valuation.<small>${(result.shadowTrace.applied || []).map(item => `${item.field}: ${Number(item.multiplier).toFixed(4)}×`).join(' • ') || 'No applicable v2.1 multiplier was applied.'}</small></div>` : '';
+  const shadowHTML = result.shadowEnabled ? `<div class="evidence-state warning"><strong>Experimental shadow multiplier</strong>Shadow value: <b>AED ${result.shadowValue.toLocaleString()}</b> (${result.shadowMultiplier.toFixed(4)}× baseline). This is analysis-only and does not replace the official valuation.<small>${(result.shadowTrace.applied || []).map(item => `${escapeMapHtml(item.field)}: ${Number(item.multiplier).toFixed(4)}×`).join(' • ') || 'No applicable v2.1 multiplier was applied.'}</small></div>` : '';
   const methodLabels = {
     'sales-comparison': 'Sales Comparison Approach',
     income: 'Income Capitalization Approach',
@@ -1662,31 +1663,31 @@ function displayResult(result, valuations, propData) {
       const evidenceHTML = '';
 
   const adjustmentFacts = [
-    propData.projectBuilding ? `Project / Building: ${propData.projectBuilding} (${propData.projectBuildingSource === 'dld-suggestion' ? 'Verified project suggestion' : 'user-entered'})` : '',
-    propData.bua ? `BUA: ${propData.bua} sqm` : '',
-    propData.plotArea ? `Plot area: ${propData.plotArea} sqm` : '',
-    propData.lastRenovationYear ? `Last renovation: ${propData.lastRenovationYear}` : '',
-    propData.condition ? `Condition: ${propData.condition}` : '',
-    propData.finishQuality ? `Finish: ${propData.finishQuality}` : '',
-    propData.viewTypes?.length ? `Views: ${propData.viewTypes.join(', ')}` : '',
-    propData.floorLevel ? `Floor: ${propData.floorLevel}` : '',
-    propData.streetPosition ? `Street position: ${propData.streetPosition}` : '',
-    propData.buildingCondition ? `Building condition: ${propData.buildingCondition}` : '',
-    propData.furnishedStatus ? `Furnished status: ${propData.furnishedStatus}` : '',
+    propData.projectBuilding ? `Project / Building: ${escapeMapHtml(propData.projectBuilding)} (${propData.projectBuildingSource === 'dld-suggestion' ? 'Verified project suggestion' : 'user-entered'})` : '',
+    propData.bua ? `BUA: ${escapeMapHtml(propData.bua)} sqm` : '',
+    propData.plotArea ? `Plot area: ${escapeMapHtml(propData.plotArea)} sqm` : '',
+    propData.lastRenovationYear ? `Last renovation: ${escapeMapHtml(propData.lastRenovationYear)}` : '',
+    propData.condition ? `Condition: ${escapeMapHtml(propData.condition)}` : '',
+    propData.finishQuality ? `Finish: ${escapeMapHtml(propData.finishQuality)}` : '',
+    propData.viewTypes?.length ? `Views: ${escapeMapHtml(propData.viewTypes.join(', '))}` : '',
+    propData.floorLevel ? `Floor: ${escapeMapHtml(propData.floorLevel)}` : '',
+    propData.streetPosition ? `Street position: ${escapeMapHtml(propData.streetPosition)}` : '',
+    propData.buildingCondition ? `Building condition: ${escapeMapHtml(propData.buildingCondition)}` : '',
+    propData.furnishedStatus ? `Furnished status: ${escapeMapHtml(propData.furnishedStatus)}` : '',
   ].filter(Boolean);
   const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
   const marketContextHTML = buildMarketContextHTML(result, propData);
   const comparableBracket = getComparableBracket(result.finalValue, scrapedDistrictData?.comparablePrices);
   const comparableRangeHTML = '';
   const explanationFacts = [
-    dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${propData.district || 'the selected area'}</b>` : '',
+    dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${escapeMapHtml(propData.district || 'the selected area')}</b>` : '',
     dldCount > 0 ? `Evidence strength: <b>${evidenceConfidence}</b>` : '',
     adjustmentsHTML
   ].filter(Boolean).join('<br>');
   const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
   const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }

@@ -107,6 +107,7 @@
     </div>
   </main>
 
+  <script src="/shared/html-escape.js"></script>
   <script src="/shared/v21-shadow-multiplier-engine.js"></script>
   <script>
     let activeConfig = null;
@@ -134,7 +135,7 @@
       return output;
     }
 
-    function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character])); }
+    function escapeHtml(value) { return AQAR_HTML_ESCAPE.escapeHtml(value); }
     function pathForV21(propertyType, group, key, field) { return ['v21ShadowMultipliers', 'propertyTypes', propertyType, group, key, field].filter(segment => segment !== '').map(encodeURIComponent).join('.'); }
     function pathForV21Band(propertyType, group, index, field) { return ['v21ShadowMultipliers', 'propertyTypes', propertyType, group, 'bands', index, field].map(encodeURIComponent).join('.'); }
     function renderShadowSection(propertyType, propertyConfig) {
@@ -144,9 +145,9 @@
       const projectRows = Object.entries(projectMap).map(([key, value]) => `<div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end;margin-bottom:8px"><div class="field"><label>Project key (type | district | project)</label><input data-project-key-label="true" type="text" value="${escapeHtml(key)}" readonly></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'projectMultipliers', key)}" data-project-multiplier="true" data-project-key="${escapeHtml(key)}" type="number" min="0.01" step="0.001" value="${Number(value)}"></div><div class="field"><button type="button" class="secondary" onclick="removeProjectMultiplierRow(this)">Remove</button></div></div>`).join('');
       const ratioBands = v21.buaPlotArea?.bands || [];
       const renovationBands = v21.lastRenovation?.bands || [];
-      const renderBands = (group, bands, metricKey, labelText) => bands.map((band, index) => `<div class="field-grid" style="grid-template-columns:1fr 1fr;align-items:end;margin-bottom:8px"><div class="field"><label>${labelText} ${index + 1} max (${band[metricKey] === null ? 'open' : metricKey === 'maxRatio' ? 'ratio' : 'years'})</label><input data-path="${pathForV21Band(propertyType, group, index, metricKey)}" data-band-field="${metricKey}" data-null-if-empty="true" type="number" min="0" step="0.01" value="${band[metricKey] === null ? '' : Number(band[metricKey])}"></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21Band(propertyType, group, index, 'multiplier')}" data-band-field="multiplier" type="number" min="0.01" step="0.001" value="${Number(band.multiplier)}"></div></div>`).join('');
+      const renderBands = (group, bands, metricKey, labelText) => bands.map((band, index) => `<div class="field-grid" style="grid-template-columns:1fr 1fr;align-items:end;margin-bottom:8px"><div class="field"><label>${escapeHtml(labelText)} ${index + 1} max (${band[metricKey] === null ? 'open' : metricKey === 'maxRatio' ? 'ratio' : 'years'})</label><input data-path="${pathForV21Band(propertyType, group, index, metricKey)}" data-band-field="${metricKey}" data-null-if-empty="true" type="number" min="0" step="0.01" value="${band[metricKey] === null ? '' : Number(band[metricKey])}"></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21Band(propertyType, group, index, 'multiplier')}" data-band-field="multiplier" type="number" min="0.01" step="0.001" value="${Number(band.multiplier)}"></div></div>`).join('');
       const globalControls = propertyType === 'apartment' ? `<div class="field-grid"><div class="field"><label>Shadow enabled (0/1)</label><input data-path="v21ShadowMultipliers.enabled" type="number" min="0" max="1" step="1" value="${shadow.enabled ? 1 : 0}"></div><div class="field"><label>Minimum project evidence</label><input data-path="v21ShadowMultipliers.minProjectEvidence" type="number" min="1" step="1" value="${Number(shadow.minProjectEvidence || 5)}"></div><div class="field"><label>Combined minimum ×</label><input data-path="v21ShadowMultipliers.combinedMinimumMultiplier" type="number" min="0.01" step="0.001" value="${Number(shadow.combinedMinimumMultiplier || 0.85)}"></div><div class="field"><label>Combined maximum ×</label><input data-path="v21ShadowMultipliers.combinedMaximumMultiplier" type="number" min="0.01" step="0.001" value="${Number(shadow.combinedMaximumMultiplier || 1.15)}"></div></div>` : '';
-      return `<div class="section"><div class="section-title"><span>v2.1 shadow multipliers</span><span class="panel-note">disabled by default · neutral = 1.00×</span></div><div class="small" style="margin-bottom:10px">These controls affect only the experimental shadow preview until separately approved for production.</div>${globalControls}<div class="section"><div class="section-title"><span>${propertyType} · Project multipliers</span><span class="panel-note">exact DLD key</span></div><div class="field-grid"><div class="field"><label>Default project multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'defaultMultiplier', '')}" type="number" min="0.01" step="0.001" value="${Number(v21.projectBuilding?.defaultMultiplier || 1)}"></div></div><div id="projectRows-${propertyType}">${projectRows || '<div class="small">No project-specific multipliers configured. Add one only after reviewing DLD evidence.</div>'}</div><div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end"><div class="field"><label>New project key: type | district | project</label><input id="newProjectKey-${propertyType}" type="text" placeholder="apartment | district | project"></div><div class="field"><label>Multiplier</label><input id="newProjectValue-${propertyType}" type="number" min="0.01" step="0.001" value="1"></div><div class="field"><button type="button" onclick="addProjectMultiplierRow('${propertyType}')">Add project</button></div></div></div><div class="section"><div class="section-title"><span>${propertyType} · BUA / Plot Area ratio</span><span class="panel-note">BUA ÷ Plot Area</span></div>${renderBands('buaPlotArea', ratioBands, 'maxRatio', 'Ratio band')}</div><div class="section"><div class="section-title"><span>${propertyType} · Renovation age</span><span class="panel-note">current year − renovation year</span></div>${renderBands('lastRenovation', renovationBands, 'maxAgeYears', 'Age band')}</div></div>`;
+      return `<div class="section"><div class="section-title"><span>v2.1 shadow multipliers</span><span class="panel-note">disabled by default · neutral = 1.00×</span></div><div class="small" style="margin-bottom:10px">These controls affect only the experimental shadow preview until separately approved for production.</div>${globalControls}<div class="section"><div class="section-title"><span>${escapeHtml(propertyType)} · Project multipliers</span><span class="panel-note">exact DLD key</span></div><div class="field-grid"><div class="field"><label>Default project multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'defaultMultiplier', '')}" type="number" min="0.01" step="0.001" value="${Number(v21.projectBuilding?.defaultMultiplier || 1)}"></div></div><div id="projectRows-${escapeHtml(propertyType)}">${projectRows || '<div class="small">No project-specific multipliers configured. Add one only after reviewing DLD evidence.</div>'}</div><div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end"><div class="field"><label>New project key: type | district | project</label><input id="newProjectKey-${escapeHtml(propertyType)}" type="text" placeholder="apartment | district | project"></div><div class="field"><label>Multiplier</label><input id="newProjectValue-${escapeHtml(propertyType)}" type="number" min="0.01" step="0.001" value="1"></div><div class="field"><button type="button" onclick="addProjectMultiplierRow(${escapeHtml(JSON.stringify(propertyType))})">Add project</button></div></div></div><div class="section"><div class="section-title"><span>${escapeHtml(propertyType)} · BUA / Plot Area ratio</span><span class="panel-note">BUA ÷ Plot Area</span></div>${renderBands('buaPlotArea', ratioBands, 'maxRatio', 'Ratio band')}</div><div class="section"><div class="section-title"><span>${escapeHtml(propertyType)} · Renovation age</span><span class="panel-note">current year − renovation year</span></div>${renderBands('lastRenovation', renovationBands, 'maxAgeYears', 'Age band')}</div></div>`;
     }
 
     function renderNumericSection(title, object, prefix, allowedKeys=null) {
@@ -157,7 +158,7 @@
         const displayValue = isWeights ? Number(value) * 100 : value;
         const step = isWeights ? '0.1' : 'any';
         const suffix = isWeights ? '<span class="panel-note">%</span>' : '';
-        return `<div class="field"><label for="${path.join('__')}">${label(path.slice(-2))}</label><div style="display:flex;align-items:center;gap:5px"><input id="${path.join('__')}" data-path="${path.join('.')}" data-percent="${isWeights}" type="number" step="${step}" value="${displayValue}">${suffix}</div></div>`;
+        return `<div class="field"><label for="${escapeHtml(path.join('__'))}">${escapeHtml(label(path.slice(-2)))}</label><div style="display:flex;align-items:center;gap:5px"><input id="${escapeHtml(path.join('__'))}" data-path="${escapeHtml(path.join('.'))}" data-percent="${isWeights}" type="number" step="${step}" value="${displayValue}">${suffix}</div></div>`;
       }).join('');
       return `<div class="section"><div class="section-title"><span>${title}</span><span class="panel-note">${leaves.length} controls</span></div><div class="field-grid">${fields}</div></div>`;
     }
@@ -175,7 +176,7 @@
       const total = getApplicableWeightTotal(propertyConfig);
       const valid = Math.abs(total - 1) <= 0.000001;
       const methods = (propertyConfig.applicableMethods || []).map(method => methodLabels[method] || method).join(' + ');
-      return `<div id="weightSummary-${propertyType}" class="weight-summary${valid ? '' : ' invalid'}"><div><strong>${(total * 100).toFixed(1)}%</strong><small>Approved methods: ${methods}</small></div><span>${valid ? 'Valid total' : 'Save blocked: total must equal 100%'}</span></div>`;
+      return `<div id="weightSummary-${escapeHtml(propertyType)}" class="weight-summary${valid ? '' : ' invalid'}"><div><strong>${(total * 100).toFixed(1)}%</strong><small>Approved methods: ${escapeHtml(methods)}</small></div><span>${valid ? 'Valid total' : 'Save blocked: total must equal 100%'}</span></div>`;
     }
 
     function updateWeightSummaries() {
@@ -211,12 +212,12 @@
         const applicableMethods = propertyConfig.applicableMethods || [];
         const total = getApplicableWeightTotal(propertyConfig);
         const totalClass = Math.abs(total - 1) <= 0.000001 ? '' : ' invalid';
-        html += `<details class="type-card" data-property-type="${propertyType}"><summary class="type-title"><span>${propertyType}</span><span class="type-summary-meta"><span class="panel-note">${applicableMethods.map(method => methodLabels[method] || method).join(' · ')}</span><strong class="type-total${totalClass}">${(total * 100).toFixed(1)}%</strong></span></summary><div class="type-content">`;
+        html += `<details class="type-card" data-property-type="${escapeHtml(propertyType)}"><summary class="type-title"><span>${escapeHtml(propertyType)}</span><span class="type-summary-meta"><span class="panel-note">${escapeHtml(applicableMethods.map(method => methodLabels[method] || method).join(' · '))}</span><strong class="type-total${totalClass}">${(total * 100).toFixed(1)}%</strong></span></summary><div class="type-content">`;
         html += renderWeightSummary(propertyType, propertyConfig);
         html += renderNumericSection('Method weights', propertyConfig.weights, ['propertyTypes', propertyType, 'weights'], applicableMethods);
         for (const method of applicableMethods) {
           const group = methodGroups[method];
-          html += renderNumericSection(`${methodLabels[method] || method} coefficients`, propertyConfig.coefficients?.[group], ['propertyTypes', propertyType, 'coefficients', group]);
+          html += renderNumericSection(`${escapeHtml(methodLabels[method] || method)} coefficients`, propertyConfig.coefficients?.[group], ['propertyTypes', propertyType, 'coefficients', group]);
         }
         if (['apartment', 'villa', 'townhouse'].includes(propertyType)) html += renderShadowSection(propertyType, propertyConfig);
         html += '</div></details>';
@@ -290,7 +291,7 @@
     function removeProjectMultiplierRow(button) { button.closest('.field-grid').remove(); updateChangeSummary(); }
 
     function renderHistory(history) {
-      $('history').innerHTML = history?.length ? history.slice(0, 12).map(item => `<div class="history-item"><strong>${item.configId}</strong><span>${formatDate(item.updatedAt)} · ${item.updatedBy || 'admin'}</span></div>`).join('') : '<div class="small">No saved versions yet.</div>';
+      $('history').innerHTML = history?.length ? history.slice(0, 12).map(item => `<div class="history-item"><strong>${escapeHtml(item.configId)}</strong><span>${escapeHtml(formatDate(item.updatedAt))} · ${escapeHtml(item.updatedBy || 'admin')}</span></div>`).join('') : '<div class="small">No saved versions yet.</div>';
     }
 
     async function request(method='GET', body) {

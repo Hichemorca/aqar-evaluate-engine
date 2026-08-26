@@ -154,7 +154,9 @@
   </div>
 </div>
 
+<script src="/shared/html-escape.js"></script>
 <script>
+const escapeHtml = value => AQAR_HTML_ESCAPE.escapeHtml(value);
 let marketData = null;
 
 function fmtPct(v) {
@@ -167,7 +169,7 @@ function warnBadge(d) {
   if (d.smallSampleWarning) flags.push('⚠ small sample (&lt;10 txns/mo avg) — treat with caution');
   if (d.anomalousMonths && d.anomalousMonths.length) flags.push('⚠ possible bulk-sale anomaly in ' + d.anomalousMonths.join(', '));
   if (!flags.length) return '';
-  return `<span class="warn-flag" title="${flags.join(' | ')}">⚠</span>`;
+  return `<span class="warn-flag" title="${escapeHtml(flags.join(' | '))}">⚠</span>`;
 }
 
 function renderInvestmentTable() {
@@ -175,7 +177,7 @@ function renderInvestmentTable() {
   (marketData.bestInvestmentDistricts || []).forEach((d, i) => {
     html += `<tr>
       <td>${i + 1}</td>
-      <td>${d.label}${warnBadge(d)}</td>
+      <td>${escapeHtml(d.label)}${warnBadge(d)}</td>
       <td>${d.investmentScore}</td>
       <td><span class="badge ${d.growth.observedPeriodGrowthPct > 0 ? 'green' : 'red'}">${fmtPct(d.growth.observedPeriodGrowthPct)}</span></td>
       <td>${d.temporalVolatilityPct === null ? '—' : d.temporalVolatilityPct + '%'}</td>
@@ -201,10 +203,10 @@ function renderGrowingTable(period) {
     const w = d._w;
     html += `<tr>
       <td>${i + 1}</td>
-      <td>${d.label}${warnBadge(d)}</td>
+      <td>${escapeHtml(d.label)}${warnBadge(d)}</td>
       <td><span class="badge green">${fmtPct(w.observedPeriodGrowthPct)}</span></td>
       <td class="conf">${fmtPct(w.annualizedPct)} (R²=${w.r2})</td>
-      <td class="conf">${w.periodLabel}</td>
+      <td class="conf">${escapeHtml(w.periodLabel)}</td>
       <td class="conf">${d.confidenceScore}/100</td>
       <td>${d.transactionCount}</td>
     </tr>`;
@@ -218,7 +220,7 @@ function renderRiskTable() {
   (marketData.highRiskAreas || []).forEach((d, i) => {
     html += `<tr>
       <td>${i + 1}</td>
-      <td>${d.label}${warnBadge(d)}</td>
+      <td>${escapeHtml(d.label)}${warnBadge(d)}</td>
       <td><span class="badge red">${d.bubbleRiskScore}</span></td>
       <td>${d.temporalVolatilityPct}%</td>
       <td>${fmtPct(d.priceAccelerationPct)}</td>
@@ -235,12 +237,12 @@ function renderMethodologyPanel() {
   let html = '';
   Object.entries(m).forEach(([key, def]) => {
     html += `<div class="m-block">
-      <h4>${key}</h4>
-      <div><span class="m-label">Definition:</span> ${def.definition}</div>
-      <div><span class="m-label">Calculation:</span> ${def.calculation}</div>
-      ${def.variables && def.variables.length ? `<div><span class="m-label">Variables:</span> ${def.variables.join(', ')}</div>` : ''}
-      ${def.assumptions && def.assumptions.length ? `<div><span class="m-label">Assumptions:</span> ${def.assumptions.join(' ')}</div>` : ''}
-      ${def.limitations && def.limitations.length ? `<div class="m-limit"><span class="m-label">Limitations:</span> ${def.limitations.join(' ')}</div>` : ''}
+      <h4>${escapeHtml(key)}</h4>
+      <div><span class="m-label">Definition:</span> ${escapeHtml(def.definition)}</div>
+      <div><span class="m-label">Calculation:</span> ${escapeHtml(def.calculation)}</div>
+      ${def.variables && def.variables.length ? `<div><span class="m-label">Variables:</span> ${escapeHtml(def.variables.join(', '))}</div>` : ''}
+      ${def.assumptions && def.assumptions.length ? `<div><span class="m-label">Assumptions:</span> ${escapeHtml(def.assumptions.join(' '))}</div>` : ''}
+      ${def.limitations && def.limitations.length ? `<div class="m-limit"><span class="m-label">Limitations:</span> ${escapeHtml(def.limitations.join(' '))}</div>` : ''}
     </div>`;
   });
   document.getElementById('methodologyPanel').innerHTML = html || 'No methodology metadata available.';
