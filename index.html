@@ -24,7 +24,29 @@
       overflow-x: hidden;
     }
     #app-container { max-width: 720px; margin: 0 auto; padding: 30px 16px 60px; }
-    .brand { text-align: center; margin-bottom: 8px; }
+    /* The brand is a full-bleed masthead, not a content card. */
+    .brand {
+      width: 100vw;
+      margin: -30px 0 18px calc(50% - 50vw);
+      text-align: center;
+      line-height: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .brand .miayaar-brand-lockup {
+      display: flex;
+      width: 100%;
+      max-width: none;
+      justify-content: center;
+    }
+    .brand .miayaar-logo-horizontal {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      height: auto;
+    }
     .brand .tag {
       font-size: 10px;
       letter-spacing: 5px;
@@ -350,6 +372,7 @@
     @media (max-width: 500px) {
       .row { flex-direction: column; gap: 0; }
       #app-container { padding: 20px 10px 40px; }
+      .brand { margin-top: -20px; margin-bottom: 16px; }
     }
   </style>
 </head>
