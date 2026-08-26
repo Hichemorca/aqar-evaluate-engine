@@ -96,7 +96,7 @@
     }
     .fg input:read-only { opacity: .7; cursor: not-allowed; }
     .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
-    .autocomplete-container { position: relative; }
+    .autocomplete-container { position: relative; z-index: 3000; }
     .autocomplete-list {
       position: absolute;
       top: 100%;
@@ -107,9 +107,11 @@
       background: #0a1628;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 0 0 9px 9px;
-      z-index: 1000;
+      z-index: 3001;
       display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
+    .autocomplete-container:focus-within { z-index: 3000; }
     .autocomplete-list .item {
       padding: 8px 12px;
       cursor: pointer;
@@ -119,6 +121,8 @@
       transition: background .15s;
     }
     .autocomplete-list .item:hover { background: rgba(212,146,14,0.08); }
+    #gisSection { position: relative; z-index: 0; }
+    #gisMap { position: relative; z-index: 0; }
     .btn {
       display: block;
       width: 100%;
@@ -997,7 +1001,7 @@ function addPOIsToMap(pois) {
   const colors = { school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71', metro: '#3498db', park: '#27ae60', gym: '#9b59b6', cafe: '#f1c40f', restaurant: '#e67e22' };
   pois.slice(0,30).forEach(p => {
     const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div style="background:${colors[p.type]||'#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
-    const marker = L.marker([p.lat, p.lng], { icon }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
+    const marker = L.marker([p.lat, p.lng], { icon, zIndexOffset: 700 }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
     poiMarkers.push(marker);
   });
 }
@@ -1063,10 +1067,29 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
     `way["amenity"="restaurant"](around:${radius},${lat},${lng});`
   ];
   const query = `[out:json][timeout:25];(${qs.join('')});out center;`;
+  const endpoints = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.private.coffee/api/interpreter'
+  ];
+  let data = null;
+  for (const endpoint of endpoints) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 18000);
+    try {
+      const resp = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}`, signal: controller.signal });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      data = await resp.json();
+      if (data && Array.isArray(data.elements)) break;
+      throw new Error('Invalid Overpass response');
+    } catch (error) {
+      console.warn(`⚠️ Overpass endpoint failed (${endpoint}):`, error.name === 'AbortError' ? 'timeout' : error.message);
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  if (!data || !Array.isArray(data.elements)) return null;
   try {
-    const resp = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}` });
-    if (!resp.ok) { if (resp.status === 429) { console.warn('⚠️ Overpass API rate limit'); return null; } throw new Error(`HTTP ${resp.status}`); }
-    const data = await resp.json();
     const pois = [], facilities = { school: { count: 0, distance: null, score: 0 }, hospital: { count: 0, distance: null, score: 0 }, supermarket: { count: 0, distance: null, score: 0 }, metro: { count: 0, distance: null, score: 0 }, park: { count: 0, distance: null, score: 0 }, gym: { count: 0, distance: null, score: 0 }, cafe: { count: 0, distance: null, score: 0 }, restaurant: { count: 0, distance: null, score: 0 } };
     const weights = AQAR_ACTIVE_CALIBRATION.gis?.facilityWeights || { school: 15, hospital: 20, supermarket: 12, metro: 25, park: 10, gym: 8, cafe: 5, restaurant: 5 };
     const typeMap = { 'school':'school','hospital':'hospital','supermarket':'supermarket','station':'metro','park':'park','fitness_centre':'gym','cafe':'cafe','restaurant':'restaurant' };
@@ -1122,7 +1145,8 @@ async function fetchGISData() {
       document.getElementById('gisResult').style.display = 'none';
       poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
       poiMarkers = [];
-      updateGISRadiusContext(radius, 0);
+      updateGISRadiusContext(radius, result ? 0 : null);
+      if (!result) document.getElementById('gisRadiusContext').textContent = `Facility data is temporarily unavailable. Please try again; the map does not invent facilities.`;
     }
   } catch(e) {
     console.error('GIS Error:', e);
