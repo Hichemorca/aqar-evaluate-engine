@@ -508,16 +508,6 @@
   <div class="section" id="propertyExtraSection">
     <div class="section-title">🏠 Additional Property Details</div>
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional details used for project matching and later evidence analysis.</div>
-    <div class="row" id="rowProjectBuilding" style="display:none">
-      <div class="fg">
-        <label>🏢 Project / Building Name</label>
-        <div class="autocomplete-container">
-          <input type="text" id="projectBuildingInput" placeholder="Choose from DLD projects..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
-          <div class="autocomplete-list" id="projectBuildingAutocomplete"></div>
-          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a DLD suggestion or leave as Unknown.</div>
-        </div>
-      </div>
-    </div>
     <div class="row" id="rowPropertyAreas" style="display:none">
       <div class="fg" id="fgBua" style="display:none">
         <label>📐 BUA (Built-up Area, sqm)</label>
@@ -549,9 +539,19 @@
       <input type="hidden" id="selectedDistrict" value="">
       <div class="district-count" id="districtCount">Loading districts from DLD data...</div>
     </div>
-    <div class="row" id="gisCoordsRow" style="display:none">
-      <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly style="background:rgba(255,255,255,0.05)"></div>
-      <div class="fg"><label>🌐 Longitude</label><input type="text" id="gisLng" readonly style="background:rgba(255,255,255,0.05)"></div>
+    <div class="row" id="rowProjectBuilding" style="display:none">
+      <div class="fg">
+        <label>🏢 Project / Building Name</label>
+        <div class="autocomplete-container">
+          <input type="text" id="projectBuildingInput" placeholder="Choose from DLD projects..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
+          <div class="autocomplete-list" id="projectBuildingAutocomplete"></div>
+          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a DLD suggestion or leave as Unknown.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="gisCoordsRow" style="display:none" aria-hidden="true">
+      <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
+      <div class="fg"><label>🌐 Longitude</label><input type="text" id="gisLng" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
     </div>
     <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
       <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
@@ -987,7 +987,7 @@ function updateMapMarker(lat, lng) {
   if (projectMapLabelMarker) projectMapLabelMarker.setLatLng([a, b]);
   document.getElementById('gisLat').value = a.toFixed(6);
   document.getElementById('gisLng').value = b.toFixed(6);
-  document.getElementById('gisCoordsRow').style.display = 'flex';
+  document.getElementById('gisCoordsRow').style.display = 'none';
   updateProjectMapLabel();
 }
 function addPOIsToMap(pois) {
@@ -1025,7 +1025,7 @@ function initGISMap() {
     gisCircleLayer = L.circle([dLat, dLng], { radius: gisRadiusMeters, color: '#d4920e', fillColor: '#d4920e', fillOpacity: 0.1, weight: 2 }).addTo(gisMapInstance);
     document.getElementById('gisLat').value = dLat.toFixed(6);
     document.getElementById('gisLng').value = dLng.toFixed(6);
-    document.getElementById('gisCoordsRow').style.display = 'flex';
+    document.getElementById('gisCoordsRow').style.display = 'none';
     gisMapInstance.on('click', e => {
       updateMapMarker(e.latlng.lat, e.latlng.lng);
       updateDistrictFromMapPoint(e.latlng.lat, e.latlng.lng);
@@ -1580,7 +1580,7 @@ function resetAll() {
     if (gisCircleLayer) gisCircleLayer.setLatLng([dLat, dLng]);
     document.getElementById('gisLat').value = dLat.toFixed(6);
     document.getElementById('gisLng').value = dLng.toFixed(6);
-    document.getElementById('gisCoordsRow').style.display = 'flex';
+    document.getElementById('gisCoordsRow').style.display = 'none';
     poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
   }
   document.getElementById('scrapeStatus').innerHTML = '';
