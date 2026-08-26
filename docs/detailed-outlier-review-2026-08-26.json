@@ -1,0 +1,4045 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-26T22:15:17.949Z",
+  "generatedBy": "scripts/analyze-detailed-outliers.js",
+  "readOnly": true,
+  "scope": [
+    "priorityRef",
+    "INTERNATIONAL CITY PH 2 & 3"
+  ],
+  "thresholds": {
+    "severeAbsoluteErrorPct": 100,
+    "nearBoundaryAreaRatio": 1.95,
+    "cleaningMaximumAreaRatio": 2
+  },
+  "source": {
+    "accuracyPath": "data/accuracy-data.json",
+    "dldPath": "data/dld-transactions.json",
+    "csvPath": "data/dld-transactions.csv",
+    "accuracySha256": "50b8473caab5fba30f097a55c57b16b2829d5f54c0bb9d1546e3973e712e74e8",
+    "dldSha256": "fc897736e4fe3c8cdf7acc0dfda8e36b5fc3f40468a444abfbd3a3ede67f4ce9",
+    "csvSha256": "5d863484f69278615cd6b116ade988d50b77ef0406b20b22495f18c0e0a3d019",
+    "accuracyScope": "verified-dld-only"
+  },
+  "pipelineReconstruction": {
+    "rawDldRecords": 26766,
+    "cleanedRecords": 26766,
+    "eligibleRecords": 26766,
+    "filteredComparableRecords": 23160,
+    "cleaningSummary": {
+      "recordsRead": 26766,
+      "normalized": 26766,
+      "uniqueTransactionIds": 26766,
+      "duplicateTransactionIds": 0,
+      "eligible": 26766,
+      "rejected": 0,
+      "skipped": 0,
+      "issueCounts": {
+        "duplicates": 0,
+        "rejected": 0,
+        "invalid": 0
+      }
+    }
+  },
+  "overallCoreFieldMismatches": [],
+  "priorityRecord": {
+    "accuracy": {
+      "propertyRef": "DLD-41-8610-2026",
+      "transactionNumber": "41-8610-2026",
+      "date": "2026-06-23",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "evalCount": 6,
+      "district": "MADINAT AL MATAAR",
+      "project": null,
+      "area": 15760.16,
+      "procedureArea": 15760.16,
+      "areaRatio": 1,
+      "actualSalePrice": 3229200,
+      "aqarValuation": 139241014,
+      "actualPpsm": 204.9,
+      "predictedPpsm": 8835,
+      "absErrorPct": 4211.935,
+      "signedErrorPct": 4211.935,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8610-2026"
+      },
+      "dldMatch": {
+        "propertyRef": "DLD-41-8610-2026",
+        "transactionNumber": "41-8610-2026",
+        "actualSalePrice": 3229200,
+        "area": 15760.16,
+        "procedureArea": 15760.16,
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible"
+      },
+      "rawCsv": {
+        "transactionNumber": "41-8610-2026",
+        "instanceDate": "2026-06-23 15:10:04",
+        "group": "Sales",
+        "procedure": "Delayed Sell",
+        "status": "Ready",
+        "usage": "Residential",
+        "district": "Madinat Al Mataar",
+        "propType": "Land",
+        "propSubType": "Airport",
+        "transactionValue": 3229200,
+        "procedureArea": 15760.16,
+        "actualArea": 15760.16,
+        "rooms": "",
+        "project": ""
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_xlarge",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 6,
+          "district": 143
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 6,
+        "selectedPeerPricePerSqm": {
+          "count": 6,
+          "min": 7194.01,
+          "q1": 7500.14,
+          "median": 7653.2,
+          "q3": 8591.67,
+          "max": 14640.9,
+          "iqrRatio": 0.1426,
+          "maxMinRatio": 2.0352
+        },
+        "selectedDispersion": "low",
+        "flags": [
+          "land_xlarge"
+        ]
+      },
+      "reconstructedPeerCounts": {
+        "project_size": 0,
+        "project": 0,
+        "district_size": 6,
+        "district": 143
+      }
+    },
+    "reconstructedPeers": [
+      {
+        "propertyRef": "DLD-41-1351-2026",
+        "date": "2026-01-23",
+        "actualSalePrice": 39567082,
+        "area": 5500,
+        "pricePerSqm": 7194.01,
+        "project": null,
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      },
+      {
+        "propertyRef": "DLD-41-1266-2026",
+        "date": "2026-01-22",
+        "actualSalePrice": 34250045,
+        "area": 4566.59,
+        "pricePerSqm": 7500.14,
+        "project": null,
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      },
+      {
+        "propertyRef": "DLD-41-1224-2026",
+        "date": "2026-01-22",
+        "actualSalePrice": 29608560,
+        "area": 3868.78,
+        "pricePerSqm": 7653.2,
+        "project": null,
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      },
+      {
+        "propertyRef": "DLD-41-4357-2026",
+        "date": "2026-03-11",
+        "actualSalePrice": 35527765,
+        "area": 4135.14,
+        "pricePerSqm": 8591.67,
+        "project": "Discovery Dunes",
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      },
+      {
+        "propertyRef": "DLD-41-9461-2026",
+        "date": "2026-07-13",
+        "actualSalePrice": 40128712,
+        "area": 4542.21,
+        "pricePerSqm": 8834.62,
+        "project": null,
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      },
+      {
+        "propertyRef": "DLD-41-7677-2026",
+        "date": "2026-06-01",
+        "actualSalePrice": 45906250,
+        "area": 3135.48,
+        "pricePerSqm": 14640.9,
+        "project": "Discovery Dunes",
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      }
+    ]
+  },
+  "internationalCity": {
+    "dldRecords": 275,
+    "dldByType": {
+      "apartment": {
+        "records": 249,
+        "medianPpsm": 8622.74,
+        "p25Ppsm": 4722.36,
+        "p75Ppsm": 11279.36,
+        "minPpsm": 1496.15,
+        "maxPpsm": 18298.64
+      },
+      "land": {
+        "records": 26,
+        "medianPpsm": 6724.19,
+        "p25Ppsm": 5990.64,
+        "p75Ppsm": 9015.22,
+        "minPpsm": 2099.8,
+        "maxPpsm": 18164.72
+      }
+    },
+    "accuracySummary": {
+      "records": 99,
+      "minDate": "2026-04-29",
+      "maxDate": "2026-07-24",
+      "maePct": 60.984,
+      "medianAbsErrorPct": 30.216,
+      "p90AbsErrorPct": 127.788,
+      "maxAbsErrorPct": 156.041,
+      "biasPct": 47.176,
+      "within15Pct": 29.293,
+      "severeOver100": 40,
+      "actualPpsm": {
+        "p25": 4614.02,
+        "median": 8424.01,
+        "p75": 11324.05,
+        "max": 18298.64
+      },
+      "predictedPpsm": {
+        "p25": 9905.99,
+        "median": 9987.99,
+        "p75": 9988.01,
+        "max": 12145
+      }
+    },
+    "accuracyByType": {
+      "apartment": {
+        "all": {
+          "records": 96,
+          "minDate": "2026-04-29",
+          "maxDate": "2026-07-24",
+          "maePct": 62.343,
+          "medianAbsErrorPct": 30.635,
+          "p90AbsErrorPct": 127.801,
+          "maxAbsErrorPct": 156.041,
+          "biasPct": 48.982,
+          "within15Pct": 28.125,
+          "severeOver100": 40,
+          "actualPpsm": {
+            "p25": 4606.57,
+            "median": 8631.33,
+            "p75": 11369.59,
+            "max": 18298.64
+          },
+          "predictedPpsm": {
+            "p25": 9925.99,
+            "median": 9987.99,
+            "p75": 9988.01,
+            "max": 12145
+          }
+        },
+        "severeCount": 40
+      },
+      "land": {
+        "all": {
+          "records": 3,
+          "minDate": "2026-06-22",
+          "maxDate": "2026-07-23",
+          "maePct": 17.49,
+          "medianAbsErrorPct": 10.306,
+          "p90AbsErrorPct": 28.173,
+          "maxAbsErrorPct": 32.639,
+          "biasPct": -10.619,
+          "within15Pct": 66.667,
+          "severeOver100": 0,
+          "actualPpsm": {
+            "p25": 6553.6,
+            "median": 6999.64,
+            "p75": 8500.52,
+            "max": 10001.4
+          },
+          "predictedPpsm": {
+            "p25": 6535,
+            "median": 6737,
+            "p75": 6737,
+            "max": 6737
+          }
+        },
+        "severeCount": 0
+      }
+    },
+    "accuracyByEvalLevel": {
+      "district_size": {
+        "all": {
+          "records": 65,
+          "minDate": "2026-04-29",
+          "maxDate": "2026-07-24",
+          "maePct": 84.108,
+          "medianAbsErrorPct": 111.238,
+          "p90AbsErrorPct": 142.755,
+          "maxAbsErrorPct": 156.041,
+          "biasPct": 68.704,
+          "within15Pct": 13.846,
+          "severeOver100": 40,
+          "actualPpsm": {
+            "p25": 4405.26,
+            "median": 4728.32,
+            "p75": 9887.94,
+            "max": 18298.64
+          },
+          "predictedPpsm": {
+            "p25": 9926,
+            "median": 9987.99,
+            "p75": 9988,
+            "max": 10041.01
+          }
+        },
+        "severeCount": 40
+      },
+      "project_size": {
+        "all": {
+          "records": 27,
+          "minDate": "2026-04-29",
+          "maxDate": "2026-07-23",
+          "maePct": 15.348,
+          "medianAbsErrorPct": 9.312,
+          "p90AbsErrorPct": 30.351,
+          "maxAbsErrorPct": 91.542,
+          "biasPct": 7.457,
+          "within15Pct": 66.667,
+          "severeOver100": 0,
+          "actualPpsm": {
+            "p25": 9130.1,
+            "median": 9905.89,
+            "p75": 11368.61,
+            "max": 13593.88
+          },
+          "predictedPpsm": {
+            "p25": 9436,
+            "median": 9926,
+            "p75": 11661.01,
+            "max": 12145
+          }
+        },
+        "severeCount": 0
+      },
+      "project": {
+        "all": {
+          "records": 4,
+          "minDate": "2026-05-09",
+          "maxDate": "2026-07-16",
+          "maePct": 11.768,
+          "medianAbsErrorPct": 10.088,
+          "p90AbsErrorPct": 23.318,
+          "maxAbsErrorPct": 26.103,
+          "biasPct": -10.089,
+          "within15Pct": 50,
+          "severeOver100": 0,
+          "actualPpsm": {
+            "p25": 11060.91,
+            "median": 11385.93,
+            "p75": 11488.33,
+            "max": 11754.18
+          },
+          "predictedPpsm": {
+            "p25": 8424.01,
+            "median": 10042.51,
+            "p75": 11684.25,
+            "max": 11754
+          }
+        },
+        "severeCount": 0
+      },
+      "district": {
+        "all": {
+          "records": 3,
+          "minDate": "2026-05-19",
+          "maxDate": "2026-07-23",
+          "maePct": 36.315,
+          "medianAbsErrorPct": 32.639,
+          "p90AbsErrorPct": 42.326,
+          "maxAbsErrorPct": 44.747,
+          "biasPct": 14.555,
+          "within15Pct": 0,
+          "severeOver100": 0,
+          "actualPpsm": {
+            "p25": 7060.46,
+            "median": 7397.48,
+            "p75": 8699.44,
+            "max": 10001.4
+          },
+          "predictedPpsm": {
+            "p25": 8234.5,
+            "median": 9732,
+            "p75": 9732,
+            "max": 9732
+          }
+        },
+        "severeCount": 0
+      }
+    },
+    "areaBoundaryBuckets": [
+      {
+        "label": "ratio-near-cleaning-boundary",
+        "records": 41,
+        "minDate": "2026-05-13",
+        "maxDate": "2026-05-20",
+        "maePct": 122.352,
+        "medianAbsErrorPct": 117.942,
+        "p90AbsErrorPct": 148.055,
+        "maxAbsErrorPct": 156.041,
+        "biasPct": 122.352,
+        "within15Pct": 0,
+        "severeOver100": 40,
+        "actualPpsm": {
+          "p25": 4026.53,
+          "median": 4531.7,
+          "p75": 4725.95,
+          "max": 4797.91
+        },
+        "predictedPpsm": {
+          "p25": 9987.99,
+          "median": 9988,
+          "p75": 9988,
+          "max": 9988.01
+        },
+        "areaRatios": {
+          "min": 1.9992,
+          "p25": 1.9995,
+          "median": 1.9997,
+          "p75": 2,
+          "max": 2
+        }
+      },
+      {
+        "label": "ratio-below-boundary",
+        "records": 58,
+        "minDate": "2026-04-29",
+        "maxDate": "2026-07-24",
+        "maePct": 17.603,
+        "medianAbsErrorPct": 15.079,
+        "p90AbsErrorPct": 31.883,
+        "maxAbsErrorPct": 45.755,
+        "biasPct": -5.966,
+        "within15Pct": 50,
+        "severeOver100": 0,
+        "actualPpsm": {
+          "p25": 9204.91,
+          "median": 10350.66,
+          "p75": 12866.05,
+          "max": 18298.64
+        },
+        "predictedPpsm": {
+          "p25": 9625.5,
+          "median": 9926,
+          "p75": 10080.76,
+          "max": 12145
+        },
+        "areaRatios": {
+          "min": 1,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "max": 1
+        }
+      }
+    ],
+    "severeRecords": [
+      {
+        "propertyRef": "DLD-11-16093-2026",
+        "transactionNumber": "11-16093-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 75.51,
+        "procedureArea": 37.76,
+        "areaRatio": 1.9997,
+        "actualSalePrice": 294560,
+        "aqarValuation": 754194,
+        "actualPpsm": 3900.94,
+        "predictedPpsm": 9988,
+        "absErrorPct": 156.041,
+        "signedErrorPct": 156.041,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16093-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16093-2026",
+          "transactionNumber": "11-16093-2026",
+          "actualSalePrice": 294560,
+          "area": 75.51,
+          "procedureArea": 37.76,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16093-2026",
+          "instanceDate": "2026-05-20 11:44:28",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 294560,
+          "procedureArea": 37.76,
+          "actualArea": 75.51,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3974.08,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6045
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16117-2026",
+        "transactionNumber": "11-16117-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 69.29,
+        "procedureArea": 34.65,
+        "areaRatio": 1.9997,
+        "actualSalePrice": 275364,
+        "aqarValuation": 692069,
+        "actualPpsm": 3974.08,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 151.329,
+        "signedErrorPct": 151.329,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16117-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16117-2026",
+          "transactionNumber": "11-16117-2026",
+          "actualSalePrice": 275364,
+          "area": 69.29,
+          "procedureArea": 34.65,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16117-2026",
+          "instanceDate": "2026-05-20 11:45:25",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 275364,
+          "procedureArea": 34.65,
+          "actualArea": 69.29,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16158-2026",
+        "transactionNumber": "11-16158-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 72.45,
+        "procedureArea": 36.23,
+        "areaRatio": 1.9997,
+        "actualSalePrice": 291638,
+        "aqarValuation": 723631,
+        "actualPpsm": 4025.37,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 148.126,
+        "signedErrorPct": 148.126,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16158-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16158-2026",
+          "transactionNumber": "11-16158-2026",
+          "actualSalePrice": 291638,
+          "area": 72.45,
+          "procedureArea": 36.23,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16158-2026",
+          "instanceDate": "2026-05-20 11:48:54",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 291638,
+          "procedureArea": 36.23,
+          "actualArea": 72.45,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16083-2026",
+        "transactionNumber": "11-16083-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "areaRatio": 2,
+        "actualSalePrice": 286608,
+        "aqarValuation": 710946,
+        "actualPpsm": 4026.52,
+        "predictedPpsm": 9988,
+        "absErrorPct": 148.055,
+        "signedErrorPct": 148.055,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16083-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16083-2026",
+          "transactionNumber": "11-16083-2026",
+          "actualSalePrice": 286608,
+          "area": 71.18,
+          "procedureArea": 35.59,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16083-2026",
+          "instanceDate": "2026-05-20 10:13:42",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 286608,
+          "procedureArea": 35.59,
+          "actualArea": 71.18,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16091-2026",
+        "transactionNumber": "11-16091-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "areaRatio": 2,
+        "actualSalePrice": 286528,
+        "aqarValuation": 710746,
+        "actualPpsm": 4026.53,
+        "predictedPpsm": 9988,
+        "absErrorPct": 148.055,
+        "signedErrorPct": 148.055,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16091-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16091-2026",
+          "transactionNumber": "11-16091-2026",
+          "actualSalePrice": 286528,
+          "area": 71.16,
+          "procedureArea": 35.58,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16091-2026",
+          "instanceDate": "2026-05-20 10:51:04",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 286528,
+          "procedureArea": 35.58,
+          "actualArea": 71.16,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16218-2026",
+        "transactionNumber": "11-16218-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "areaRatio": 2,
+        "actualSalePrice": 287761,
+        "aqarValuation": 710746,
+        "actualPpsm": 4043.86,
+        "predictedPpsm": 9988,
+        "absErrorPct": 146.992,
+        "signedErrorPct": 146.992,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16218-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16218-2026",
+          "transactionNumber": "11-16218-2026",
+          "actualSalePrice": 287761,
+          "area": 71.16,
+          "procedureArea": 35.58,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16218-2026",
+          "instanceDate": "2026-05-20 13:59:53",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 287761,
+          "procedureArea": 35.58,
+          "actualArea": 71.16,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16193-2026",
+        "transactionNumber": "11-16193-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "areaRatio": 2,
+        "actualSalePrice": 287842,
+        "aqarValuation": 710946,
+        "actualPpsm": 4043.86,
+        "predictedPpsm": 9988,
+        "absErrorPct": 146.992,
+        "signedErrorPct": 146.992,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16193-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16193-2026",
+          "transactionNumber": "11-16193-2026",
+          "actualSalePrice": 287842,
+          "area": 71.18,
+          "procedureArea": 35.59,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16193-2026",
+          "instanceDate": "2026-05-20 10:57:29",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 287842,
+          "procedureArea": 35.59,
+          "actualArea": 71.18,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16105-2026",
+        "transactionNumber": "11-16105-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 166.47,
+        "procedureArea": 83.24,
+        "areaRatio": 1.9999,
+        "actualSalePrice": 592294,
+        "aqarValuation": 1400179,
+        "actualPpsm": 3557.96,
+        "predictedPpsm": 8411,
+        "absErrorPct": 136.399,
+        "signedErrorPct": 136.399,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16105-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16105-2026",
+          "transactionNumber": "11-16105-2026",
+          "actualSalePrice": 592294,
+          "area": 166.47,
+          "procedureArea": 83.24,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16105-2026",
+          "instanceDate": "2026-05-20 10:13:12",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 592294,
+          "procedureArea": 83.24,
+          "actualArea": 166.47,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "medium",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 24,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 24,
+          "selectedPeerPricePerSqm": {
+            "count": 24,
+            "min": 3754.07,
+            "q1": 6427.84,
+            "median": 8424.01,
+            "q3": 9728.57,
+            "max": 13993.07,
+            "iqrRatio": 0.3918,
+            "maxMinRatio": 3.7274
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16155-2026",
+        "transactionNumber": "11-16155-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 65.71,
+        "procedureArea": 32.86,
+        "areaRatio": 1.9997,
+        "actualSalePrice": 282922,
+        "aqarValuation": 656311,
+        "actualPpsm": 4305.62,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 131.976,
+        "signedErrorPct": 131.976,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16155-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16155-2026",
+          "transactionNumber": "11-16155-2026",
+          "actualSalePrice": 282922,
+          "area": 65.71,
+          "procedureArea": 32.86,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16155-2026",
+          "instanceDate": "2026-05-20 11:48:28",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 282922,
+          "procedureArea": 32.86,
+          "actualArea": 65.71,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16114-2026",
+        "transactionNumber": "11-16114-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 48.64,
+        "procedureArea": 24.32,
+        "areaRatio": 2,
+        "actualSalePrice": 213243,
+        "aqarValuation": 485816,
+        "actualPpsm": 4384.11,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 127.823,
+        "signedErrorPct": 127.823,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16114-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16114-2026",
+          "transactionNumber": "11-16114-2026",
+          "actualSalePrice": 213243,
+          "area": 48.64,
+          "procedureArea": 24.32,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16114-2026",
+          "instanceDate": "2026-05-20 11:57:20",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 213243,
+          "procedureArea": 24.32,
+          "actualArea": 48.64,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16109-2026",
+        "transactionNumber": "11-16109-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 48.84,
+        "procedureArea": 24.43,
+        "areaRatio": 1.9992,
+        "actualSalePrice": 214161,
+        "aqarValuation": 487814,
+        "actualPpsm": 4384.95,
+        "predictedPpsm": 9988,
+        "absErrorPct": 127.779,
+        "signedErrorPct": 127.779,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16109-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16109-2026",
+          "transactionNumber": "11-16109-2026",
+          "actualSalePrice": 214161,
+          "area": 48.84,
+          "procedureArea": 24.43,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16109-2026",
+          "instanceDate": "2026-05-20 12:03:47",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 214161,
+          "procedureArea": 24.43,
+          "actualArea": 48.84,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16101-2026",
+        "transactionNumber": "11-16101-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 48.47,
+        "procedureArea": 24.24,
+        "areaRatio": 1.9996,
+        "actualSalePrice": 213523,
+        "aqarValuation": 484118,
+        "actualPpsm": 4405.26,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 126.729,
+        "signedErrorPct": 126.729,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16101-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16101-2026",
+          "transactionNumber": "11-16101-2026",
+          "actualSalePrice": 213523,
+          "area": 48.47,
+          "procedureArea": 24.24,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16101-2026",
+          "instanceDate": "2026-05-20 11:38:59",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 213523,
+          "procedureArea": 24.24,
+          "actualArea": 48.47,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16174-2026",
+        "transactionNumber": "11-16174-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 133.95,
+        "procedureArea": 66.98,
+        "areaRatio": 1.9999,
+        "actualSalePrice": 502858,
+        "aqarValuation": 1126653,
+        "actualPpsm": 3754.07,
+        "predictedPpsm": 8411,
+        "absErrorPct": 124.05,
+        "signedErrorPct": 124.05,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16174-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16174-2026",
+          "transactionNumber": "11-16174-2026",
+          "actualSalePrice": 502858,
+          "area": 133.95,
+          "procedureArea": 66.98,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16174-2026",
+          "instanceDate": "2026-05-20 10:18:12",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 502858,
+          "procedureArea": 66.98,
+          "actualArea": 133.95,
+          "rooms": "2 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "medium",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 24,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 24,
+          "selectedPeerPricePerSqm": {
+            "count": 24,
+            "min": 3557.96,
+            "q1": 6427.84,
+            "median": 8424.01,
+            "q3": 9728.57,
+            "max": 13993.07,
+            "iqrRatio": 0.3918,
+            "maxMinRatio": 3.9329
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16166-2026",
+        "transactionNumber": "11-16166-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 135.2,
+        "procedureArea": 67.6,
+        "areaRatio": 2,
+        "actualSalePrice": 507667,
+        "aqarValuation": 1137167,
+        "actualPpsm": 3754.93,
+        "predictedPpsm": 8411,
+        "absErrorPct": 123.999,
+        "signedErrorPct": 123.999,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16166-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16166-2026",
+          "transactionNumber": "11-16166-2026",
+          "actualSalePrice": 507667,
+          "area": 135.2,
+          "procedureArea": 67.6,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16166-2026",
+          "instanceDate": "2026-05-20 10:26:40",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 507667,
+          "procedureArea": 67.6,
+          "actualArea": 135.2,
+          "rooms": "2 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "medium",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 24,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 24,
+          "selectedPeerPricePerSqm": {
+            "count": 24,
+            "min": 3557.96,
+            "q1": 6427.84,
+            "median": 8424.01,
+            "q3": 9728.57,
+            "max": 13993.07,
+            "iqrRatio": 0.3918,
+            "maxMinRatio": 3.9329
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16079-2026",
+        "transactionNumber": "11-16079-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "areaRatio": 1.9996,
+        "actualSalePrice": 209188,
+        "aqarValuation": 468337,
+        "actualPpsm": 4461.25,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 123.883,
+        "signedErrorPct": 123.883,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16079-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16079-2026",
+          "transactionNumber": "11-16079-2026",
+          "actualSalePrice": 209188,
+          "area": 46.89,
+          "procedureArea": 23.45,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16079-2026",
+          "instanceDate": "2026-05-20 10:06:39",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 209188,
+          "procedureArea": 23.45,
+          "actualArea": 46.89,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16113-2026",
+        "transactionNumber": "11-16113-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "areaRatio": 1.9996,
+        "actualSalePrice": 209825,
+        "aqarValuation": 468337,
+        "actualPpsm": 4474.83,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 123.204,
+        "signedErrorPct": 123.204,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16113-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16113-2026",
+          "transactionNumber": "11-16113-2026",
+          "actualSalePrice": 209825,
+          "area": 46.89,
+          "procedureArea": 23.45,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16113-2026",
+          "instanceDate": "2026-05-20 11:05:51",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 209825,
+          "procedureArea": 23.45,
+          "actualArea": 46.89,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16112-2026",
+        "transactionNumber": "11-16112-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 94.84,
+        "procedureArea": 47.42,
+        "areaRatio": 2,
+        "actualSalePrice": 357654,
+        "aqarValuation": 797699,
+        "actualPpsm": 3771.13,
+        "predictedPpsm": 8411,
+        "absErrorPct": 123.037,
+        "signedErrorPct": 123.037,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16112-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16112-2026",
+          "transactionNumber": "11-16112-2026",
+          "actualSalePrice": 357654,
+          "area": 94.84,
+          "procedureArea": 47.42,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16112-2026",
+          "instanceDate": "2026-05-20 12:01:54",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 357654,
+          "procedureArea": 47.42,
+          "actualArea": 94.84,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "medium",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 24,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 24,
+          "selectedPeerPricePerSqm": {
+            "count": 24,
+            "min": 3557.96,
+            "q1": 6427.84,
+            "median": 8424.01,
+            "q3": 9728.57,
+            "max": 13993.07,
+            "iqrRatio": 0.3918,
+            "maxMinRatio": 3.9329
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16094-2026",
+        "transactionNumber": "11-16094-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 45.01,
+        "procedureArea": 22.51,
+        "areaRatio": 1.9996,
+        "actualSalePrice": 201742,
+        "aqarValuation": 449560,
+        "actualPpsm": 4482.16,
+        "predictedPpsm": 9988,
+        "absErrorPct": 122.839,
+        "signedErrorPct": 122.839,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16094-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16094-2026",
+          "transactionNumber": "11-16094-2026",
+          "actualSalePrice": 201742,
+          "area": 45.01,
+          "procedureArea": 22.51,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16094-2026",
+          "instanceDate": "2026-05-20 10:35:57",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 201742,
+          "procedureArea": 22.51,
+          "actualArea": 45.01,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16095-2026",
+        "transactionNumber": "11-16095-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 46.25,
+        "procedureArea": 23.13,
+        "areaRatio": 1.9996,
+        "actualSalePrice": 209591,
+        "aqarValuation": 461945,
+        "actualPpsm": 4531.7,
+        "predictedPpsm": 9988,
+        "absErrorPct": 120.403,
+        "signedErrorPct": 120.403,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16095-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16095-2026",
+          "transactionNumber": "11-16095-2026",
+          "actualSalePrice": 209591,
+          "area": 46.25,
+          "procedureArea": 23.13,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16095-2026",
+          "instanceDate": "2026-05-20 10:38:38",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 209591,
+          "procedureArea": 23.13,
+          "actualArea": 46.25,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16110-2026",
+        "transactionNumber": "11-16110-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 43.96,
+        "procedureArea": 21.98,
+        "areaRatio": 2,
+        "actualSalePrice": 201010,
+        "aqarValuation": 439072,
+        "actualPpsm": 4572.57,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 118.433,
+        "signedErrorPct": 118.433,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16110-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16110-2026",
+          "transactionNumber": "11-16110-2026",
+          "actualSalePrice": 201010,
+          "area": 43.96,
+          "procedureArea": 21.98,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16110-2026",
+          "instanceDate": "2026-05-20 10:00:05",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 201010,
+          "procedureArea": 21.98,
+          "actualArea": 43.96,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16078-2026",
+        "transactionNumber": "11-16078-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 43.59,
+        "procedureArea": 21.8,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 199767,
+        "aqarValuation": 435377,
+        "actualPpsm": 4582.86,
+        "predictedPpsm": 9988,
+        "absErrorPct": 117.942,
+        "signedErrorPct": 117.942,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16078-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16078-2026",
+          "transactionNumber": "11-16078-2026",
+          "actualSalePrice": 199767,
+          "area": 43.59,
+          "procedureArea": 21.8,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16078-2026",
+          "instanceDate": "2026-05-20 09:59:14",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 199767,
+          "procedureArea": 21.8,
+          "actualArea": 43.59,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16134-2026",
+        "transactionNumber": "11-16134-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 43.56,
+        "procedureArea": 21.78,
+        "areaRatio": 2,
+        "actualSalePrice": 199708,
+        "aqarValuation": 435077,
+        "actualPpsm": 4584.66,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 117.857,
+        "signedErrorPct": 117.857,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16134-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16134-2026",
+          "transactionNumber": "11-16134-2026",
+          "actualSalePrice": 199708,
+          "area": 43.56,
+          "procedureArea": 21.78,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16134-2026",
+          "instanceDate": "2026-05-20 11:46:59",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 199708,
+          "procedureArea": 21.78,
+          "actualArea": 43.56,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16127-2026",
+        "transactionNumber": "11-16127-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 43.2,
+        "procedureArea": 21.6,
+        "areaRatio": 2,
+        "actualSalePrice": 199319,
+        "aqarValuation": 431482,
+        "actualPpsm": 4613.87,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 116.478,
+        "signedErrorPct": 116.478,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16127-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16127-2026",
+          "transactionNumber": "11-16127-2026",
+          "actualSalePrice": 199319,
+          "area": 43.2,
+          "procedureArea": 21.6,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16127-2026",
+          "instanceDate": "2026-05-20 11:53:24",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 199319,
+          "procedureArea": 21.6,
+          "actualArea": 43.2,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16132-2026",
+        "transactionNumber": "11-16132-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 43.22,
+        "procedureArea": 21.61,
+        "areaRatio": 2,
+        "actualSalePrice": 199425,
+        "aqarValuation": 431681,
+        "actualPpsm": 4614.18,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 116.463,
+        "signedErrorPct": 116.463,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16132-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16132-2026",
+          "transactionNumber": "11-16132-2026",
+          "actualSalePrice": 199425,
+          "area": 43.22,
+          "procedureArea": 21.61,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16132-2026",
+          "instanceDate": "2026-05-20 12:00:41",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 199425,
+          "procedureArea": 21.61,
+          "actualArea": 43.22,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16088-2026",
+        "transactionNumber": "11-16088-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "areaRatio": 1.9998,
+        "actualSalePrice": 344467,
+        "aqarValuation": 736719,
+        "actualPpsm": 3932.72,
+        "predictedPpsm": 8410.99,
+        "absErrorPct": 113.872,
+        "signedErrorPct": 113.872,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16088-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16088-2026",
+          "transactionNumber": "11-16088-2026",
+          "actualSalePrice": 344467,
+          "area": 87.59,
+          "procedureArea": 43.8,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16088-2026",
+          "instanceDate": "2026-05-20 10:23:36",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 344467,
+          "procedureArea": 43.8,
+          "actualArea": 87.59,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "medium",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 24,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 24,
+          "selectedPeerPricePerSqm": {
+            "count": 24,
+            "min": 3557.96,
+            "q1": 6427.84,
+            "median": 8424.01,
+            "q3": 9728.57,
+            "max": 13993.07,
+            "iqrRatio": 0.3918,
+            "maxMinRatio": 3.9329
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16128-2026",
+        "transactionNumber": "11-16128-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 24,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "areaRatio": 1.9998,
+        "actualSalePrice": 345908,
+        "aqarValuation": 736719,
+        "actualPpsm": 3949.17,
+        "predictedPpsm": 8410.99,
+        "absErrorPct": 112.981,
+        "signedErrorPct": 112.981,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16128-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16128-2026",
+          "transactionNumber": "11-16128-2026",
+          "actualSalePrice": 345908,
+          "area": 87.59,
+          "procedureArea": 43.8,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16128-2026",
+          "instanceDate": "2026-05-20 11:15:53",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 345908,
+          "procedureArea": 43.8,
+          "actualArea": 87.59,
+          "rooms": "1 B/R",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "medium",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 24,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 24,
+          "selectedPeerPricePerSqm": {
+            "count": 24,
+            "min": 3557.96,
+            "q1": 6427.84,
+            "median": 8424.01,
+            "q3": 9728.57,
+            "max": 13993.07,
+            "iqrRatio": 0.3918,
+            "maxMinRatio": 3.9329
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16097-2026",
+        "transactionNumber": "11-16097-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 42.69,
+        "procedureArea": 21.35,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 201209,
+        "aqarValuation": 426388,
+        "actualPpsm": 4713.26,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 111.913,
+        "signedErrorPct": 111.913,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16097-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16097-2026",
+          "transactionNumber": "11-16097-2026",
+          "actualSalePrice": 201209,
+          "area": 42.69,
+          "procedureArea": 21.35,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16097-2026",
+          "instanceDate": "2026-05-20 10:33:04",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 201209,
+          "procedureArea": 21.35,
+          "actualArea": 42.69,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16081-2026",
+        "transactionNumber": "11-16081-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.23,
+        "procedureArea": 20.62,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 194380,
+        "aqarValuation": 411805,
+        "actualPpsm": 4714.53,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 111.856,
+        "signedErrorPct": 111.856,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16081-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16081-2026",
+          "transactionNumber": "11-16081-2026",
+          "actualSalePrice": 194380,
+          "area": 41.23,
+          "procedureArea": 20.62,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16081-2026",
+          "instanceDate": "2026-05-20 10:03:11",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194380,
+          "procedureArea": 20.62,
+          "actualArea": 41.23,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16100-2026",
+        "transactionNumber": "11-16100-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.06,
+        "procedureArea": 20.53,
+        "areaRatio": 2,
+        "actualSalePrice": 193701,
+        "aqarValuation": 410107,
+        "actualPpsm": 4717.51,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 111.722,
+        "signedErrorPct": 111.722,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16100-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16100-2026",
+          "transactionNumber": "11-16100-2026",
+          "actualSalePrice": 193701,
+          "area": 41.06,
+          "procedureArea": 20.53,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16100-2026",
+          "instanceDate": "2026-05-20 10:23:02",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 193701,
+          "procedureArea": 20.53,
+          "actualArea": 41.06,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16107-2026",
+        "transactionNumber": "11-16107-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.27,
+        "procedureArea": 20.64,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 195015,
+        "aqarValuation": 412205,
+        "actualPpsm": 4725.35,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 111.371,
+        "signedErrorPct": 111.371,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16107-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16107-2026",
+          "transactionNumber": "11-16107-2026",
+          "actualSalePrice": 195015,
+          "area": 41.27,
+          "procedureArea": 20.64,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16107-2026",
+          "instanceDate": "2026-05-20 10:45:21",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 195015,
+          "procedureArea": 20.64,
+          "actualArea": 41.27,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16115-2026",
+        "transactionNumber": "11-16115-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.23,
+        "procedureArea": 20.62,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 194851,
+        "aqarValuation": 411805,
+        "actualPpsm": 4725.95,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 111.344,
+        "signedErrorPct": 111.344,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16115-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16115-2026",
+          "transactionNumber": "11-16115-2026",
+          "actualSalePrice": 194851,
+          "area": 41.23,
+          "procedureArea": 20.62,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16115-2026",
+          "instanceDate": "2026-05-20 11:04:45",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194851,
+          "procedureArea": 20.62,
+          "actualArea": 41.23,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16092-2026",
+        "transactionNumber": "11-16092-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.1,
+        "procedureArea": 20.55,
+        "areaRatio": 2,
+        "actualSalePrice": 194334,
+        "aqarValuation": 410507,
+        "actualPpsm": 4728.32,
+        "predictedPpsm": 9988,
+        "absErrorPct": 111.238,
+        "signedErrorPct": 111.238,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16092-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16092-2026",
+          "transactionNumber": "11-16092-2026",
+          "actualSalePrice": 194334,
+          "area": 41.1,
+          "procedureArea": 20.55,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16092-2026",
+          "instanceDate": "2026-05-20 10:53:08",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194334,
+          "procedureArea": 20.55,
+          "actualArea": 41.1,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16086-2026",
+        "transactionNumber": "11-16086-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.07,
+        "procedureArea": 20.54,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 194192,
+        "aqarValuation": 410207,
+        "actualPpsm": 4728.32,
+        "predictedPpsm": 9988,
+        "absErrorPct": 111.238,
+        "signedErrorPct": 111.238,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16086-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16086-2026",
+          "transactionNumber": "11-16086-2026",
+          "actualSalePrice": 194192,
+          "area": 41.07,
+          "procedureArea": 20.54,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16086-2026",
+          "instanceDate": "2026-05-20 10:19:01",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194192,
+          "procedureArea": 20.54,
+          "actualArea": 41.07,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16165-2026",
+        "transactionNumber": "11-16165-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.1,
+        "procedureArea": 20.55,
+        "areaRatio": 2,
+        "actualSalePrice": 194533,
+        "aqarValuation": 410507,
+        "actualPpsm": 4733.16,
+        "predictedPpsm": 9988,
+        "absErrorPct": 111.022,
+        "signedErrorPct": 111.022,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16165-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16165-2026",
+          "transactionNumber": "11-16165-2026",
+          "actualSalePrice": 194533,
+          "area": 41.1,
+          "procedureArea": 20.55,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16165-2026",
+          "instanceDate": "2026-05-20 11:47:10",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194533,
+          "procedureArea": 20.55,
+          "actualArea": 41.1,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16229-2026",
+        "transactionNumber": "11-16229-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.06,
+        "procedureArea": 20.53,
+        "areaRatio": 2,
+        "actualSalePrice": 194584,
+        "aqarValuation": 410107,
+        "actualPpsm": 4739.02,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 110.761,
+        "signedErrorPct": 110.761,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16229-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16229-2026",
+          "transactionNumber": "11-16229-2026",
+          "actualSalePrice": 194584,
+          "area": 41.06,
+          "procedureArea": 20.53,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16229-2026",
+          "instanceDate": "2026-05-20 10:17:30",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194584,
+          "procedureArea": 20.53,
+          "actualArea": 41.06,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16120-2026",
+        "transactionNumber": "11-16120-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.07,
+        "procedureArea": 20.54,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 194661,
+        "aqarValuation": 410207,
+        "actualPpsm": 4739.74,
+        "predictedPpsm": 9988,
+        "absErrorPct": 110.729,
+        "signedErrorPct": 110.729,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16120-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16120-2026",
+          "transactionNumber": "11-16120-2026",
+          "actualSalePrice": 194661,
+          "area": 41.07,
+          "procedureArea": 20.54,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16120-2026",
+          "instanceDate": "2026-05-20 11:13:15",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194661,
+          "procedureArea": 20.54,
+          "actualArea": 41.07,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16099-2026",
+        "transactionNumber": "11-16099-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 40.95,
+        "procedureArea": 20.48,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 194266,
+        "aqarValuation": 409009,
+        "actualPpsm": 4743.98,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 110.541,
+        "signedErrorPct": 110.541,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16099-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16099-2026",
+          "transactionNumber": "11-16099-2026",
+          "actualSalePrice": 194266,
+          "area": 40.95,
+          "procedureArea": 20.48,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16099-2026",
+          "instanceDate": "2026-05-20 10:31:15",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194266,
+          "procedureArea": 20.48,
+          "actualArea": 40.95,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16122-2026",
+        "transactionNumber": "11-16122-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 41.69,
+        "procedureArea": 20.85,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 198178,
+        "aqarValuation": 416400,
+        "actualPpsm": 4753.61,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 110.114,
+        "signedErrorPct": 110.114,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16122-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16122-2026",
+          "transactionNumber": "11-16122-2026",
+          "actualSalePrice": 198178,
+          "area": 41.69,
+          "procedureArea": 20.85,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16122-2026",
+          "instanceDate": "2026-05-20 11:53:50",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 198178,
+          "procedureArea": 20.85,
+          "actualArea": 41.69,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16206-2026",
+        "transactionNumber": "11-16206-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 40.95,
+        "procedureArea": 20.48,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 194734,
+        "aqarValuation": 409009,
+        "actualPpsm": 4755.41,
+        "predictedPpsm": 9988.01,
+        "absErrorPct": 110.035,
+        "signedErrorPct": 110.035,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16206-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16206-2026",
+          "transactionNumber": "11-16206-2026",
+          "actualSalePrice": 194734,
+          "area": 40.95,
+          "procedureArea": 20.48,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16206-2026",
+          "instanceDate": "2026-05-20 10:32:01",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 194734,
+          "procedureArea": 20.48,
+          "actualArea": 40.95,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      },
+      {
+        "propertyRef": "DLD-11-16152-2026",
+        "transactionNumber": "11-16152-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evalLevel": "district_size",
+        "evalCount": 152,
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "area": 40.23,
+        "procedureArea": 20.12,
+        "areaRatio": 1.9995,
+        "actualSalePrice": 192021,
+        "aqarValuation": 401817,
+        "actualPpsm": 4773.08,
+        "predictedPpsm": 9987.99,
+        "absErrorPct": 109.257,
+        "signedErrorPct": 109.257,
+        "accuracySource": {
+          "dataSource": "dld-real-cleaned",
+          "evidenceStatus": "eligible",
+          "verifiedBy": "Government Record",
+          "sourceTransactionId": "dld:11-16152-2026"
+        },
+        "dldMatch": {
+          "propertyRef": "DLD-11-16152-2026",
+          "transactionNumber": "11-16152-2026",
+          "actualSalePrice": 192021,
+          "area": 40.23,
+          "procedureArea": 20.12,
+          "dataSource": "dld-real",
+          "evidenceStatus": "eligible"
+        },
+        "rawCsv": {
+          "transactionNumber": "11-16152-2026",
+          "instanceDate": "2026-05-20 11:55:52",
+          "group": "Sales",
+          "procedure": "Sale",
+          "status": "Ready",
+          "usage": "Residential",
+          "district": "INTERNATIONAL CITY PH 2 & 3",
+          "propType": "Unit",
+          "propSubType": "Flat",
+          "transactionValue": 192021,
+          "procedureArea": 20.12,
+          "actualArea": 40.23,
+          "rooms": "Studio",
+          "project": ""
+        },
+        "comparableDiagnostics": {
+          "schemaVersion": 1,
+          "diagnosticsOnly": true,
+          "sizeCategory": "small",
+          "comparableCounts": {
+            "project_size": 0,
+            "project": 0,
+            "district_size": 152,
+            "district": 181
+          },
+          "qualifies": {
+            "project_size": false,
+            "project": false,
+            "district_size": true,
+            "district": true
+          },
+          "selectedLevel": "district_size",
+          "selectedComparableCount": 152,
+          "selectedPeerPricePerSqm": {
+            "count": 152,
+            "min": 3900.94,
+            "q1": 7898.02,
+            "median": 10361.98,
+            "q3": 12291.83,
+            "max": 18298.64,
+            "iqrRatio": 0.424,
+            "maxMinRatio": 4.6908
+          },
+          "selectedDispersion": "moderate",
+          "flags": [
+            "moderate_peer_dispersion"
+          ]
+        },
+        "reconstructedPeerCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        }
+      }
+    ]
+  },
+  "safeguards": {
+    "officialAccuracyChanged": false,
+    "officialDldChanged": false,
+    "evaluatorChanged": false,
+    "calibrationChanged": false,
+    "recordsExcludedOrCapped": false,
+    "recommendationsAreNonOperational": true
+  }
+}
