@@ -1,0 +1,4291 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-26T11:22:22.484Z",
+  "generatedBy": "scripts/analyze-accuracy-stability.js",
+  "readOnly": true,
+  "scope": "official-accuracy-artifact-only",
+  "source": {
+    "accuracyPath": "data/accuracy-data.json",
+    "dldPath": "data/dld-transactions.json",
+    "accuracySha256": "50b8473caab5fba30f097a55c57b16b2829d5f54c0bb9d1546e3973e712e74e8",
+    "dldSha256": "fc897736e4fe3c8cdf7acc0dfda8e36b5fc3f40468a444abfbd3a3ede67f4ce9",
+    "accuracyMetadata": {
+      "version": "22.1.0",
+      "lastUpdated": "2026-08-26T06:36:34.831Z",
+      "totalRecords": 8108,
+      "methodology": "v22.1 Calibrated with Mean + optimized multipliers",
+      "dataSource": "DLD + Consultancy + Government + GIS",
+      "accuracyScope": "verified-dld-only",
+      "comparison": "AQAR vs actual sale price",
+      "calibrationConfigId": "cal-1787651025399",
+      "dataType": "enriched",
+      "calibration": {
+        "schemaVersion": 1,
+        "engineVersion": "22.1.0",
+        "configId": "cal-1787651025399",
+        "status": "active",
+        "createdAt": "2026-08-25T00:00:00.000Z",
+        "updatedAt": "2026-08-25T09:43:45.399Z",
+        "updatedBy": "admin",
+        "propertyTypes": {
+          "apartment": {
+            "weights": {
+              "sales-comparison": 0.55,
+              "income": 0.35,
+              "cost": 0,
+              "dcf": 0.1
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income",
+              "dcf"
+            ]
+          },
+          "villa": {
+            "weights": {
+              "sales-comparison": 0.4,
+              "income": 0.35,
+              "cost": 0.15,
+              "dcf": 0.1
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income",
+              "cost",
+              "dcf"
+            ]
+          },
+          "townhouse": {
+            "weights": {
+              "sales-comparison": 0.4,
+              "income": 0.35,
+              "cost": 0.15,
+              "dcf": 0.1
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income",
+              "cost",
+              "dcf"
+            ]
+          },
+          "office": {
+            "weights": {
+              "sales-comparison": 0.4,
+              "income": 0.35,
+              "cost": 0.15,
+              "dcf": 0.1
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income",
+              "cost",
+              "dcf"
+            ]
+          },
+          "retail": {
+            "weights": {
+              "sales-comparison": 0.4,
+              "income": 0.35,
+              "cost": 0.15,
+              "dcf": 0.1
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income",
+              "cost",
+              "dcf"
+            ]
+          },
+          "warehouse": {
+            "weights": {
+              "sales-comparison": 0.4,
+              "income": 0.45,
+              "cost": 0.15,
+              "dcf": 0
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income",
+              "cost"
+            ]
+          },
+          "land": {
+            "weights": {
+              "sales-comparison": 0.55,
+              "income": 0.45,
+              "cost": 0,
+              "dcf": 0
+            },
+            "coefficients": {
+              "sales": {
+                "maxPricePerSqm": 25000,
+                "noBedroomMultiplier": 0.8,
+                "featureBonusPerSqm": 50,
+                "ageDepreciation": 0.004,
+                "minimumAgeMultiplier": 0.8,
+                "conditionFactors": {
+                  "excellent": 1.08,
+                  "good": 1,
+                  "fair": 0.82,
+                  "needs-renovation": 0.75
+                },
+                "finishFactors": {
+                  "luxury": 1.15,
+                  "good": 1.05,
+                  "normal": 1,
+                  "basic": 0.92,
+                  "poor": 0.8
+                },
+                "viewFactors": {
+                  "sea": 1.15,
+                  "partial-sea": 1.08,
+                  "city": 1.05,
+                  "garden": 1.04,
+                  "park": 1.02,
+                  "street": 0.97
+                },
+                "viewSecondaryFactor": 0.5,
+                "viewMinimumMultiplier": 0.8,
+                "viewMaximumMultiplier": 1.25,
+                "floorFactors": {
+                  "penthouse": 1.12,
+                  "very-high": 1.06,
+                  "high": 1.03,
+                  "mid": 1,
+                  "low": 0.97,
+                  "ground": 0.92
+                },
+                "streetFactors": {
+                  "main": 1.08,
+                  "corner": 1.05,
+                  "secondary": 1,
+                  "quiet": 0.96
+                },
+                "buildingConditionFactors": {
+                  "excellent": 1.1,
+                  "good": 1.03,
+                  "fair": 0.95,
+                  "old": 0.82
+                },
+                "furnishedFactors": {
+                  "furnished": 1.04,
+                  "semi-furnished": 1.02,
+                  "unfurnished": 0.98
+                }
+              },
+              "income": {
+                "expenseRate": 0.2,
+                "vacancyRatePercent": 10,
+                "capRatePercent": 7
+              },
+              "cost": {
+                "constructionCostPerSqm": 3000,
+                "landValueFromMarketShare": 0.3,
+                "landValueFromBuildShare": 0.35,
+                "depreciationPerYear": 0.015,
+                "maximumDepreciation": 0.6,
+                "conditionFactors": {
+                  "excellent": 0.95,
+                  "good": 1,
+                  "fair": 1.1,
+                  "needs-renovation": 1.25
+                }
+              },
+              "dcf": {
+                "years": 10,
+                "rentGrowthRate": 0.02,
+                "valueGrowthRate": 0.03,
+                "netOperatingIncomeRate": 0.75,
+                "terminalValueRate": 0.95,
+                "discountRate": 0.1,
+                "negativeNpvFallback": 0.85,
+                "fallbackCapRate": 0.07
+              }
+            },
+            "applicableMethods": [
+              "sales-comparison",
+              "income"
+            ]
+          }
+        },
+        "gis": {
+          "facilityWeights": {
+            "metro": 10,
+            "supermarket": 8,
+            "school": 7,
+            "hospital": 6,
+            "park": 5,
+            "gym": 4,
+            "cafe": 3,
+            "restaurant": 3
+          },
+          "distanceRadiusMeters": 1000,
+          "scoreCap": 1.5,
+          "impactMaximumPercent": 12,
+          "facilityContributionCap": 2,
+          "distanceDecayBaseKm": 1,
+          "proximityFactorPerScore": -0.0156,
+          "proximityMinimumMultiplier": 0.98,
+          "proximityMaximumMultiplier": 1.01
+        },
+        "v21ShadowMultipliers": {
+          "schemaVersion": 1,
+          "enabled": false,
+          "minProjectEvidence": 5,
+          "combinedMinimumMultiplier": 0.85,
+          "combinedMaximumMultiplier": 1.15,
+          "propertyTypes": {
+            "apartment": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            },
+            "villa": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            },
+            "townhouse": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            },
+            "office": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            },
+            "retail": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            },
+            "warehouse": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            },
+            "land": {
+              "projectBuilding": {
+                "defaultMultiplier": 1,
+                "projectMultipliers": {}
+              },
+              "buaPlotArea": {
+                "bands": [
+                  {
+                    "maxRatio": 0.25,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 0.75,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": 1,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxRatio": null,
+                    "multiplier": 1
+                  }
+                ]
+              },
+              "lastRenovation": {
+                "bands": [
+                  {
+                    "maxAgeYears": 2,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 5,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": 10,
+                    "multiplier": 1
+                  },
+                  {
+                    "maxAgeYears": null,
+                    "multiplier": 1
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "dldCleaning": {
+        "sourceChecksum": "5d863484f69278615cd6b116ade988d50b77ef0406b20b22495f18c0e0a3d019",
+        "recordsRead": 30475,
+        "eligible": 26766,
+        "rejected": 3562,
+        "skipped": 128,
+        "duplicateTransactionIds": 19
+      }
+    },
+    "accuracyScope": "verified-dld-only"
+  },
+  "sourceCounts": {
+    "accuracy": {
+      "records": 8108,
+      "datedRecords": 8108,
+      "min": "2026-04-29",
+      "max": "2026-07-26"
+    },
+    "dld": {
+      "records": 26766,
+      "datedRecords": 26766,
+      "min": "2026-01-02",
+      "max": "2026-07-26"
+    }
+  },
+  "scored": {
+    "records": 8108,
+    "scoredRecords": 8108,
+    "over25": 1255,
+    "over50": 244,
+    "over100": 66
+  },
+  "thresholds": {
+    "moderateErrorAbsPct": 25,
+    "highErrorAbsPct": 50,
+    "severeErrorAbsPct": 100,
+    "minimumGroupRecordsForSectorSlices": 20
+  },
+  "outliers": {
+    "top50": [
+      {
+        "id": "DLD-41-8610-2026",
+        "date": "2026-06-23",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "MADINAT AL MATAAR",
+        "project": null,
+        "actualSalePrice": 3229200,
+        "aqarValuation": 139241014,
+        "absoluteErrorPct": 4211.935,
+        "signedErrorPct": 4211.935,
+        "area": 15760.16,
+        "procedureArea": 15760.16,
+        "pricePerSqm": 204.8963969908935,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8610-2026"
+      },
+      {
+        "id": "DLD-11-15929-2026",
+        "date": "2026-05-12",
+        "propertyType": "villa",
+        "evaluationLevel": "project_size",
+        "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+        "project": "MAG EYE Phase 1",
+        "actualSalePrice": 664651.09,
+        "aqarValuation": 2944397,
+        "absoluteErrorPct": 342.999,
+        "signedErrorPct": 342.999,
+        "area": 131.04,
+        "procedureArea": 65.52,
+        "pricePerSqm": 5072.123702686203,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-15929-2026"
+      },
+      {
+        "id": "DLD-11-21757-2026",
+        "date": "2026-07-15",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "DUBAI MARINA",
+        "project": "5242",
+        "actualSalePrice": 1000000,
+        "aqarValuation": 3081840,
+        "absoluteErrorPct": 208.184,
+        "signedErrorPct": 208.184,
+        "area": 93.97,
+        "procedureArea": 46.99,
+        "pricePerSqm": 10641.694157709908,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21757-2026"
+      },
+      {
+        "id": "DLD-11-20178-2026",
+        "date": "2026-06-30",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "JABAL ALI INDUSTRIAL FIRST",
+        "project": null,
+        "actualSalePrice": 11000000,
+        "aqarValuation": 33583417,
+        "absoluteErrorPct": 205.304,
+        "signedErrorPct": 205.304,
+        "area": 1950.03,
+        "procedureArea": 1950.03,
+        "pricePerSqm": 5640.938857350912,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20178-2026"
+      },
+      {
+        "id": "DLD-11-14852-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 280000,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 199.059,
+        "signedErrorPct": 199.059,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 8220.786846741044,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14852-2026"
+      },
+      {
+        "id": "DLD-11-14843-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 287500,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 191.257,
+        "signedErrorPct": 191.257,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 8440.986494421608,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14843-2026"
+      },
+      {
+        "id": "DLD-11-14847-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 290000,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 188.747,
+        "signedErrorPct": 188.747,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 8514.386376981796,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14847-2026"
+      },
+      {
+        "id": "DLD-11-20033-2026",
+        "date": "2026-06-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "OXFORD RESIDENCE 2",
+        "actualSalePrice": 930000,
+        "aqarValuation": 2631938,
+        "absoluteErrorPct": 183.004,
+        "signedErrorPct": 183.004,
+        "area": 155.46,
+        "procedureArea": 155.46,
+        "pricePerSqm": 5982.246236974141,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20033-2026"
+      },
+      {
+        "id": "DLD-11-14841-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 309649,
+        "aqarValuation": 842774,
+        "absoluteErrorPct": 172.171,
+        "signedErrorPct": 172.171,
+        "area": 34.28,
+        "procedureArea": 17.14,
+        "pricePerSqm": 9032.934655775962,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14841-2026"
+      },
+      {
+        "id": "DLD-11-14846-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 313789,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 166.856,
+        "signedErrorPct": 166.856,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 9212.83029947152,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14846-2026"
+      },
+      {
+        "id": "DLD-11-14855-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 316513,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 164.559,
+        "signedErrorPct": 164.559,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 9292.806811509101,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14855-2026"
+      },
+      {
+        "id": "DLD-11-14853-2026",
+        "date": "2026-04-30",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 317208,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 163.98,
+        "signedErrorPct": 163.98,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 9313.211978860832,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14853-2026"
+      },
+      {
+        "id": "DLD-11-14840-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 328932,
+        "aqarValuation": 848674,
+        "absoluteErrorPct": 158.009,
+        "signedErrorPct": 158.009,
+        "area": 34.52,
+        "procedureArea": 17.26,
+        "pricePerSqm": 9528.736964078795,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14840-2026"
+      },
+      {
+        "id": "DLD-11-16093-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 294560,
+        "aqarValuation": 754194,
+        "absoluteErrorPct": 156.041,
+        "signedErrorPct": 156.041,
+        "area": 75.51,
+        "procedureArea": 37.76,
+        "pricePerSqm": 3900.940272811548,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16093-2026"
+      },
+      {
+        "id": "DLD-11-18676-2026",
+        "date": "2026-06-14",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "HOR AL ANZ",
+        "project": null,
+        "actualSalePrice": 1455000,
+        "aqarValuation": 3671413,
+        "absoluteErrorPct": 152.331,
+        "signedErrorPct": 152.331,
+        "area": 238.76,
+        "procedureArea": 238.76,
+        "pricePerSqm": 6093.985592226504,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18676-2026"
+      },
+      {
+        "id": "DLD-11-16117-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 275364,
+        "aqarValuation": 692069,
+        "absoluteErrorPct": 151.329,
+        "signedErrorPct": 151.329,
+        "area": 69.29,
+        "procedureArea": 34.65,
+        "pricePerSqm": 3974.079953817289,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16117-2026"
+      },
+      {
+        "id": "DLD-11-21700-2026",
+        "date": "2026-07-14",
+        "propertyType": "land",
+        "evaluationLevel": "district",
+        "district": "AL BADA",
+        "project": null,
+        "actualSalePrice": 19400000,
+        "aqarValuation": 48198571,
+        "absoluteErrorPct": 148.446,
+        "signedErrorPct": 148.446,
+        "area": 2799.17,
+        "procedureArea": 2799.17,
+        "pricePerSqm": 6930.625864095428,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21700-2026"
+      },
+      {
+        "id": "DLD-11-16158-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 291638,
+        "aqarValuation": 723631,
+        "absoluteErrorPct": 148.126,
+        "signedErrorPct": 148.126,
+        "area": 72.45,
+        "procedureArea": 36.23,
+        "pricePerSqm": 4025.369220151829,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16158-2026"
+      },
+      {
+        "id": "DLD-11-16083-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 286608,
+        "aqarValuation": 710946,
+        "absoluteErrorPct": 148.055,
+        "signedErrorPct": 148.055,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "pricePerSqm": 4026.524304579938,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16083-2026"
+      },
+      {
+        "id": "DLD-11-16091-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 286528,
+        "aqarValuation": 710746,
+        "absoluteErrorPct": 148.055,
+        "signedErrorPct": 148.055,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "pricePerSqm": 4026.531759415402,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16091-2026"
+      },
+      {
+        "id": "DLD-11-16218-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 287761,
+        "aqarValuation": 710746,
+        "absoluteErrorPct": 146.992,
+        "signedErrorPct": 146.992,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "pricePerSqm": 4043.858909499719,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16218-2026"
+      },
+      {
+        "id": "DLD-11-16193-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 287842,
+        "aqarValuation": 710946,
+        "absoluteErrorPct": 146.992,
+        "signedErrorPct": 146.992,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "pricePerSqm": 4043.860635009834,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16193-2026"
+      },
+      {
+        "id": "DLD-41-7078-2026",
+        "date": "2026-05-11",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "Elysee III by Pantheon",
+        "actualSalePrice": 459278,
+        "aqarValuation": 1113445,
+        "absoluteErrorPct": 142.434,
+        "signedErrorPct": 142.434,
+        "area": 73.88,
+        "procedureArea": 36.94,
+        "pricePerSqm": 6216.54033567948,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-7078-2026"
+      },
+      {
+        "id": "DLD-11-16105-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 592294,
+        "aqarValuation": 1400179,
+        "absoluteErrorPct": 136.399,
+        "signedErrorPct": 136.399,
+        "area": 166.47,
+        "procedureArea": 83.24,
+        "pricePerSqm": 3557.9623956268397,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16105-2026"
+      },
+      {
+        "id": "DLD-11-16155-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 282922,
+        "aqarValuation": 656311,
+        "absoluteErrorPct": 131.976,
+        "signedErrorPct": 131.976,
+        "area": 65.71,
+        "procedureArea": 32.86,
+        "pricePerSqm": 4305.615583625019,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16155-2026"
+      },
+      {
+        "id": "DLD-11-19474-2026",
+        "date": "2026-06-23",
+        "propertyType": "retail",
+        "evaluationLevel": "district_size",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "Binghatti Phantom",
+        "actualSalePrice": 1717700,
+        "aqarValuation": 3917500,
+        "absoluteErrorPct": 128.067,
+        "signedErrorPct": 128.067,
+        "area": 159.58,
+        "procedureArea": 79.79,
+        "pricePerSqm": 10763.880185486902,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-19474-2026"
+      },
+      {
+        "id": "DLD-11-16114-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 213243,
+        "aqarValuation": 485816,
+        "absoluteErrorPct": 127.823,
+        "signedErrorPct": 127.823,
+        "area": 48.64,
+        "procedureArea": 24.32,
+        "pricePerSqm": 4384.1077302631575,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16114-2026"
+      },
+      {
+        "id": "DLD-11-16109-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 214161,
+        "aqarValuation": 487814,
+        "absoluteErrorPct": 127.779,
+        "signedErrorPct": 127.779,
+        "area": 48.84,
+        "procedureArea": 24.43,
+        "pricePerSqm": 4384.95085995086,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16109-2026"
+      },
+      {
+        "id": "DLD-11-16101-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 213523,
+        "aqarValuation": 484118,
+        "absoluteErrorPct": 126.729,
+        "signedErrorPct": 126.729,
+        "area": 48.47,
+        "procedureArea": 24.24,
+        "pricePerSqm": 4405.260986177017,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16101-2026"
+      },
+      {
+        "id": "DLD-11-16174-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 502858,
+        "aqarValuation": 1126653,
+        "absoluteErrorPct": 124.05,
+        "signedErrorPct": 124.05,
+        "area": 133.95,
+        "procedureArea": 66.98,
+        "pricePerSqm": 3754.0724150802544,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16174-2026"
+      },
+      {
+        "id": "DLD-11-16166-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 507667,
+        "aqarValuation": 1137167,
+        "absoluteErrorPct": 123.999,
+        "signedErrorPct": 123.999,
+        "area": 135.2,
+        "procedureArea": 67.6,
+        "pricePerSqm": 3754.933431952663,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16166-2026"
+      },
+      {
+        "id": "DLD-11-16079-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 209188,
+        "aqarValuation": 468337,
+        "absoluteErrorPct": 123.883,
+        "signedErrorPct": 123.883,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "pricePerSqm": 4461.249733418639,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16079-2026"
+      },
+      {
+        "id": "DLD-11-16113-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 209825,
+        "aqarValuation": 468337,
+        "absoluteErrorPct": 123.204,
+        "signedErrorPct": 123.204,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "pricePerSqm": 4474.834719556408,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16113-2026"
+      },
+      {
+        "id": "DLD-11-16112-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 357654,
+        "aqarValuation": 797699,
+        "absoluteErrorPct": 123.037,
+        "signedErrorPct": 123.037,
+        "area": 94.84,
+        "procedureArea": 47.42,
+        "pricePerSqm": 3771.130324757486,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16112-2026"
+      },
+      {
+        "id": "DLD-11-16094-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 201742,
+        "aqarValuation": 449560,
+        "absoluteErrorPct": 122.839,
+        "signedErrorPct": 122.839,
+        "area": 45.01,
+        "procedureArea": 22.51,
+        "pricePerSqm": 4482.159520106643,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16094-2026"
+      },
+      {
+        "id": "DLD-11-16095-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 209591,
+        "aqarValuation": 461945,
+        "absoluteErrorPct": 120.403,
+        "signedErrorPct": 120.403,
+        "area": 46.25,
+        "procedureArea": 23.13,
+        "pricePerSqm": 4531.697297297297,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16095-2026"
+      },
+      {
+        "id": "DLD-11-21625-2026",
+        "date": "2026-07-14",
+        "propertyType": "land",
+        "evaluationLevel": "district",
+        "district": "AL RASHIDIYA",
+        "project": null,
+        "actualSalePrice": 7500000,
+        "aqarValuation": 16455702,
+        "absoluteErrorPct": 119.409,
+        "signedErrorPct": 119.409,
+        "area": 3716.12,
+        "procedureArea": 3716.12,
+        "pricePerSqm": 2018.2340720967031,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21625-2026"
+      },
+      {
+        "id": "DLD-11-16110-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 201010,
+        "aqarValuation": 439072,
+        "absoluteErrorPct": 118.433,
+        "signedErrorPct": 118.433,
+        "area": 43.96,
+        "procedureArea": 21.98,
+        "pricePerSqm": 4572.5659690627845,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16110-2026"
+      },
+      {
+        "id": "DLD-11-16078-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199767,
+        "aqarValuation": 435377,
+        "absoluteErrorPct": 117.942,
+        "signedErrorPct": 117.942,
+        "area": 43.59,
+        "procedureArea": 21.8,
+        "pricePerSqm": 4582.863041982106,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16078-2026"
+      },
+      {
+        "id": "DLD-11-16134-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199708,
+        "aqarValuation": 435077,
+        "absoluteErrorPct": 117.857,
+        "signedErrorPct": 117.857,
+        "area": 43.56,
+        "procedureArea": 21.78,
+        "pricePerSqm": 4584.664830119375,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16134-2026"
+      },
+      {
+        "id": "DLD-11-16127-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199319,
+        "aqarValuation": 431482,
+        "absoluteErrorPct": 116.478,
+        "signedErrorPct": 116.478,
+        "area": 43.2,
+        "procedureArea": 21.6,
+        "pricePerSqm": 4613.865740740741,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16127-2026"
+      },
+      {
+        "id": "DLD-11-16132-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199425,
+        "aqarValuation": 431681,
+        "absoluteErrorPct": 116.463,
+        "signedErrorPct": 116.463,
+        "area": 43.22,
+        "procedureArea": 21.61,
+        "pricePerSqm": 4614.183248496067,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16132-2026"
+      },
+      {
+        "id": "DLD-11-21048-2026",
+        "date": "2026-07-07",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "THE VYBE",
+        "actualSalePrice": 550000,
+        "aqarValuation": 1186248,
+        "absoluteErrorPct": 115.681,
+        "signedErrorPct": 115.681,
+        "area": 79.02,
+        "procedureArea": 39.9,
+        "pricePerSqm": 6960.263224500127,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21048-2026"
+      },
+      {
+        "id": "DLD-11-16088-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 344467,
+        "aqarValuation": 736719,
+        "absoluteErrorPct": 113.872,
+        "signedErrorPct": 113.872,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "pricePerSqm": 3932.720630208928,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16088-2026"
+      },
+      {
+        "id": "DLD-11-16128-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 345908,
+        "aqarValuation": 736719,
+        "absoluteErrorPct": 112.981,
+        "signedErrorPct": 112.981,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "pricePerSqm": 3949.1722799406325,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16128-2026"
+      },
+      {
+        "id": "DLD-11-20077-2026",
+        "date": "2026-06-29",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "JUMEIRAH GOLF",
+        "project": "ORANGE LAKE",
+        "actualSalePrice": 13000000,
+        "aqarValuation": 27618842,
+        "absoluteErrorPct": 112.453,
+        "signedErrorPct": 112.453,
+        "area": 934.3,
+        "procedureArea": 934.3,
+        "pricePerSqm": 13914.160333939848,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20077-2026"
+      },
+      {
+        "id": "DLD-11-17893-2026",
+        "date": "2026-06-09",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "AL KHAWANEEJ FIRST",
+        "project": null,
+        "actualSalePrice": 8250000,
+        "aqarValuation": 17484227,
+        "absoluteErrorPct": 111.93,
+        "signedErrorPct": 111.93,
+        "area": 1816.25,
+        "procedureArea": 1816.25,
+        "pricePerSqm": 4542.326221610461,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-17893-2026"
+      },
+      {
+        "id": "DLD-11-16097-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 201209,
+        "aqarValuation": 426388,
+        "absoluteErrorPct": 111.913,
+        "signedErrorPct": 111.913,
+        "area": 42.69,
+        "procedureArea": 21.35,
+        "pricePerSqm": 4713.25837432654,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16097-2026"
+      },
+      {
+        "id": "DLD-11-16081-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 194380,
+        "aqarValuation": 411805,
+        "absoluteErrorPct": 111.856,
+        "signedErrorPct": 111.856,
+        "area": 41.23,
+        "procedureArea": 20.62,
+        "pricePerSqm": 4714.528256124182,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16081-2026"
+      },
+      {
+        "id": "DLD-11-16100-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 193701,
+        "aqarValuation": 410107,
+        "absoluteErrorPct": 111.722,
+        "signedErrorPct": 111.722,
+        "area": 41.06,
+        "procedureArea": 20.53,
+        "pricePerSqm": 4717.510959571358,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16100-2026"
+      }
+    ],
+    "integrityFlags": [
+      {
+        "id": "DLD-41-8610-2026",
+        "date": "2026-06-23",
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR",
+        "project": null,
+        "absoluteErrorPct": 4211.935,
+        "flags": [
+          "valuation-over-100m",
+          "area-over-10000sqm",
+          "valuation-to-actual-over-20x"
+        ]
+      },
+      {
+        "id": "DLD-41-9604-2026",
+        "date": "2026-07-16",
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR",
+        "project": "Expo City Valley",
+        "absoluteErrorPct": 97.255,
+        "flags": [
+          "actual-to-valuation-over-20x"
+        ]
+      },
+      {
+        "id": "DLD-11-20296-2026",
+        "date": "2026-07-06",
+        "propertyType": "land",
+        "district": "CITY OF ARABIA",
+        "project": null,
+        "absoluteErrorPct": 33.347,
+        "flags": [
+          "area-over-10000sqm"
+        ]
+      }
+    ],
+    "performanceFlags": [
+      {
+        "id": "DLD-41-8610-2026",
+        "date": "2026-06-23",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "MADINAT AL MATAAR",
+        "project": null,
+        "actualSalePrice": 3229200,
+        "aqarValuation": 139241014,
+        "absoluteErrorPct": 4211.935,
+        "signedErrorPct": 4211.935,
+        "area": 15760.16,
+        "procedureArea": 15760.16,
+        "pricePerSqm": 204.8963969908935,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8610-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-15929-2026",
+        "date": "2026-05-12",
+        "propertyType": "villa",
+        "evaluationLevel": "project_size",
+        "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+        "project": "MAG EYE Phase 1",
+        "actualSalePrice": 664651.09,
+        "aqarValuation": 2944397,
+        "absoluteErrorPct": 342.999,
+        "signedErrorPct": 342.999,
+        "area": 131.04,
+        "procedureArea": 65.52,
+        "pricePerSqm": 5072.123702686203,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-15929-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-21757-2026",
+        "date": "2026-07-15",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "DUBAI MARINA",
+        "project": "5242",
+        "actualSalePrice": 1000000,
+        "aqarValuation": 3081840,
+        "absoluteErrorPct": 208.184,
+        "signedErrorPct": 208.184,
+        "area": 93.97,
+        "procedureArea": 46.99,
+        "pricePerSqm": 10641.694157709908,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21757-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-20178-2026",
+        "date": "2026-06-30",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "JABAL ALI INDUSTRIAL FIRST",
+        "project": null,
+        "actualSalePrice": 11000000,
+        "aqarValuation": 33583417,
+        "absoluteErrorPct": 205.304,
+        "signedErrorPct": 205.304,
+        "area": 1950.03,
+        "procedureArea": 1950.03,
+        "pricePerSqm": 5640.938857350912,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20178-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14852-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 280000,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 199.059,
+        "signedErrorPct": 199.059,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 8220.786846741044,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14852-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14843-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 287500,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 191.257,
+        "signedErrorPct": 191.257,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 8440.986494421608,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14843-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14847-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 290000,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 188.747,
+        "signedErrorPct": 188.747,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 8514.386376981796,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14847-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-20033-2026",
+        "date": "2026-06-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "OXFORD RESIDENCE 2",
+        "actualSalePrice": 930000,
+        "aqarValuation": 2631938,
+        "absoluteErrorPct": 183.004,
+        "signedErrorPct": 183.004,
+        "area": 155.46,
+        "procedureArea": 155.46,
+        "pricePerSqm": 5982.246236974141,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20033-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14841-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 309649,
+        "aqarValuation": 842774,
+        "absoluteErrorPct": 172.171,
+        "signedErrorPct": 172.171,
+        "area": 34.28,
+        "procedureArea": 17.14,
+        "pricePerSqm": 9032.934655775962,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14841-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14846-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 313789,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 166.856,
+        "signedErrorPct": 166.856,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 9212.83029947152,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14846-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14855-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 316513,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 164.559,
+        "signedErrorPct": 164.559,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 9292.806811509101,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14855-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14853-2026",
+        "date": "2026-04-30",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 317208,
+        "aqarValuation": 837365,
+        "absoluteErrorPct": 163.98,
+        "signedErrorPct": 163.98,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "pricePerSqm": 9313.211978860832,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14853-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-14840-2026",
+        "date": "2026-04-29",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+        "actualSalePrice": 328932,
+        "aqarValuation": 848674,
+        "absoluteErrorPct": 158.009,
+        "signedErrorPct": 158.009,
+        "area": 34.52,
+        "procedureArea": 17.26,
+        "pricePerSqm": 9528.736964078795,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14840-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16093-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 294560,
+        "aqarValuation": 754194,
+        "absoluteErrorPct": 156.041,
+        "signedErrorPct": 156.041,
+        "area": 75.51,
+        "procedureArea": 37.76,
+        "pricePerSqm": 3900.940272811548,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16093-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-18676-2026",
+        "date": "2026-06-14",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "HOR AL ANZ",
+        "project": null,
+        "actualSalePrice": 1455000,
+        "aqarValuation": 3671413,
+        "absoluteErrorPct": 152.331,
+        "signedErrorPct": 152.331,
+        "area": 238.76,
+        "procedureArea": 238.76,
+        "pricePerSqm": 6093.985592226504,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18676-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16117-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 275364,
+        "aqarValuation": 692069,
+        "absoluteErrorPct": 151.329,
+        "signedErrorPct": 151.329,
+        "area": 69.29,
+        "procedureArea": 34.65,
+        "pricePerSqm": 3974.079953817289,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16117-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-21700-2026",
+        "date": "2026-07-14",
+        "propertyType": "land",
+        "evaluationLevel": "district",
+        "district": "AL BADA",
+        "project": null,
+        "actualSalePrice": 19400000,
+        "aqarValuation": 48198571,
+        "absoluteErrorPct": 148.446,
+        "signedErrorPct": 148.446,
+        "area": 2799.17,
+        "procedureArea": 2799.17,
+        "pricePerSqm": 6930.625864095428,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21700-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16158-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 291638,
+        "aqarValuation": 723631,
+        "absoluteErrorPct": 148.126,
+        "signedErrorPct": 148.126,
+        "area": 72.45,
+        "procedureArea": 36.23,
+        "pricePerSqm": 4025.369220151829,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16158-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16083-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 286608,
+        "aqarValuation": 710946,
+        "absoluteErrorPct": 148.055,
+        "signedErrorPct": 148.055,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "pricePerSqm": 4026.524304579938,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16083-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16091-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 286528,
+        "aqarValuation": 710746,
+        "absoluteErrorPct": 148.055,
+        "signedErrorPct": 148.055,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "pricePerSqm": 4026.531759415402,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16091-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16218-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 287761,
+        "aqarValuation": 710746,
+        "absoluteErrorPct": 146.992,
+        "signedErrorPct": 146.992,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "pricePerSqm": 4043.858909499719,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16218-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16193-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 287842,
+        "aqarValuation": 710946,
+        "absoluteErrorPct": 146.992,
+        "signedErrorPct": 146.992,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "pricePerSqm": 4043.860635009834,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16193-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-41-7078-2026",
+        "date": "2026-05-11",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "Elysee III by Pantheon",
+        "actualSalePrice": 459278,
+        "aqarValuation": 1113445,
+        "absoluteErrorPct": 142.434,
+        "signedErrorPct": 142.434,
+        "area": 73.88,
+        "procedureArea": 36.94,
+        "pricePerSqm": 6216.54033567948,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-7078-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16105-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 592294,
+        "aqarValuation": 1400179,
+        "absoluteErrorPct": 136.399,
+        "signedErrorPct": 136.399,
+        "area": 166.47,
+        "procedureArea": 83.24,
+        "pricePerSqm": 3557.9623956268397,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16105-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16155-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 282922,
+        "aqarValuation": 656311,
+        "absoluteErrorPct": 131.976,
+        "signedErrorPct": 131.976,
+        "area": 65.71,
+        "procedureArea": 32.86,
+        "pricePerSqm": 4305.615583625019,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16155-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-19474-2026",
+        "date": "2026-06-23",
+        "propertyType": "retail",
+        "evaluationLevel": "district_size",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "Binghatti Phantom",
+        "actualSalePrice": 1717700,
+        "aqarValuation": 3917500,
+        "absoluteErrorPct": 128.067,
+        "signedErrorPct": 128.067,
+        "area": 159.58,
+        "procedureArea": 79.79,
+        "pricePerSqm": 10763.880185486902,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-19474-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16114-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 213243,
+        "aqarValuation": 485816,
+        "absoluteErrorPct": 127.823,
+        "signedErrorPct": 127.823,
+        "area": 48.64,
+        "procedureArea": 24.32,
+        "pricePerSqm": 4384.1077302631575,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16114-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16109-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 214161,
+        "aqarValuation": 487814,
+        "absoluteErrorPct": 127.779,
+        "signedErrorPct": 127.779,
+        "area": 48.84,
+        "procedureArea": 24.43,
+        "pricePerSqm": 4384.95085995086,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16109-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16101-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 213523,
+        "aqarValuation": 484118,
+        "absoluteErrorPct": 126.729,
+        "signedErrorPct": 126.729,
+        "area": 48.47,
+        "procedureArea": 24.24,
+        "pricePerSqm": 4405.260986177017,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16101-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16174-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 502858,
+        "aqarValuation": 1126653,
+        "absoluteErrorPct": 124.05,
+        "signedErrorPct": 124.05,
+        "area": 133.95,
+        "procedureArea": 66.98,
+        "pricePerSqm": 3754.0724150802544,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16174-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16166-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 507667,
+        "aqarValuation": 1137167,
+        "absoluteErrorPct": 123.999,
+        "signedErrorPct": 123.999,
+        "area": 135.2,
+        "procedureArea": 67.6,
+        "pricePerSqm": 3754.933431952663,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16166-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16079-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 209188,
+        "aqarValuation": 468337,
+        "absoluteErrorPct": 123.883,
+        "signedErrorPct": 123.883,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "pricePerSqm": 4461.249733418639,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16079-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16113-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 209825,
+        "aqarValuation": 468337,
+        "absoluteErrorPct": 123.204,
+        "signedErrorPct": 123.204,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "pricePerSqm": 4474.834719556408,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16113-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16112-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 357654,
+        "aqarValuation": 797699,
+        "absoluteErrorPct": 123.037,
+        "signedErrorPct": 123.037,
+        "area": 94.84,
+        "procedureArea": 47.42,
+        "pricePerSqm": 3771.130324757486,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16112-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16094-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 201742,
+        "aqarValuation": 449560,
+        "absoluteErrorPct": 122.839,
+        "signedErrorPct": 122.839,
+        "area": 45.01,
+        "procedureArea": 22.51,
+        "pricePerSqm": 4482.159520106643,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16094-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16095-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 209591,
+        "aqarValuation": 461945,
+        "absoluteErrorPct": 120.403,
+        "signedErrorPct": 120.403,
+        "area": 46.25,
+        "procedureArea": 23.13,
+        "pricePerSqm": 4531.697297297297,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16095-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-21625-2026",
+        "date": "2026-07-14",
+        "propertyType": "land",
+        "evaluationLevel": "district",
+        "district": "AL RASHIDIYA",
+        "project": null,
+        "actualSalePrice": 7500000,
+        "aqarValuation": 16455702,
+        "absoluteErrorPct": 119.409,
+        "signedErrorPct": 119.409,
+        "area": 3716.12,
+        "procedureArea": 3716.12,
+        "pricePerSqm": 2018.2340720967031,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21625-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16110-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 201010,
+        "aqarValuation": 439072,
+        "absoluteErrorPct": 118.433,
+        "signedErrorPct": 118.433,
+        "area": 43.96,
+        "procedureArea": 21.98,
+        "pricePerSqm": 4572.5659690627845,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16110-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16078-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199767,
+        "aqarValuation": 435377,
+        "absoluteErrorPct": 117.942,
+        "signedErrorPct": 117.942,
+        "area": 43.59,
+        "procedureArea": 21.8,
+        "pricePerSqm": 4582.863041982106,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16078-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16134-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199708,
+        "aqarValuation": 435077,
+        "absoluteErrorPct": 117.857,
+        "signedErrorPct": 117.857,
+        "area": 43.56,
+        "procedureArea": 21.78,
+        "pricePerSqm": 4584.664830119375,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16134-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16127-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199319,
+        "aqarValuation": 431482,
+        "absoluteErrorPct": 116.478,
+        "signedErrorPct": 116.478,
+        "area": 43.2,
+        "procedureArea": 21.6,
+        "pricePerSqm": 4613.865740740741,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16127-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16132-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 199425,
+        "aqarValuation": 431681,
+        "absoluteErrorPct": 116.463,
+        "signedErrorPct": 116.463,
+        "area": 43.22,
+        "procedureArea": 21.61,
+        "pricePerSqm": 4614.183248496067,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16132-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-21048-2026",
+        "date": "2026-07-07",
+        "propertyType": "apartment",
+        "evaluationLevel": "project_size",
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "project": "THE VYBE",
+        "actualSalePrice": 550000,
+        "aqarValuation": 1186248,
+        "absoluteErrorPct": 115.681,
+        "signedErrorPct": 115.681,
+        "area": 79.02,
+        "procedureArea": 39.9,
+        "pricePerSqm": 6960.263224500127,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21048-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16088-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 344467,
+        "aqarValuation": 736719,
+        "absoluteErrorPct": 113.872,
+        "signedErrorPct": 113.872,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "pricePerSqm": 3932.720630208928,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16088-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16128-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 345908,
+        "aqarValuation": 736719,
+        "absoluteErrorPct": 112.981,
+        "signedErrorPct": 112.981,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "pricePerSqm": 3949.1722799406325,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16128-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-20077-2026",
+        "date": "2026-06-29",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "JUMEIRAH GOLF",
+        "project": "ORANGE LAKE",
+        "actualSalePrice": 13000000,
+        "aqarValuation": 27618842,
+        "absoluteErrorPct": 112.453,
+        "signedErrorPct": 112.453,
+        "area": 934.3,
+        "procedureArea": 934.3,
+        "pricePerSqm": 13914.160333939848,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20077-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-17893-2026",
+        "date": "2026-06-09",
+        "propertyType": "land",
+        "evaluationLevel": "district_size",
+        "district": "AL KHAWANEEJ FIRST",
+        "project": null,
+        "actualSalePrice": 8250000,
+        "aqarValuation": 17484227,
+        "absoluteErrorPct": 111.93,
+        "signedErrorPct": 111.93,
+        "area": 1816.25,
+        "procedureArea": 1816.25,
+        "pricePerSqm": 4542.326221610461,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-17893-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16097-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 201209,
+        "aqarValuation": 426388,
+        "absoluteErrorPct": 111.913,
+        "signedErrorPct": 111.913,
+        "area": 42.69,
+        "procedureArea": 21.35,
+        "pricePerSqm": 4713.25837432654,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16097-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16081-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 194380,
+        "aqarValuation": 411805,
+        "absoluteErrorPct": 111.856,
+        "signedErrorPct": 111.856,
+        "area": 41.23,
+        "procedureArea": 20.62,
+        "pricePerSqm": 4714.528256124182,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16081-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      },
+      {
+        "id": "DLD-11-16100-2026",
+        "date": "2026-05-20",
+        "propertyType": "apartment",
+        "evaluationLevel": "district_size",
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "project": null,
+        "actualSalePrice": 193701,
+        "aqarValuation": 410107,
+        "absoluteErrorPct": 111.722,
+        "signedErrorPct": 111.722,
+        "area": 41.06,
+        "procedureArea": 20.53,
+        "pricePerSqm": 4717.510959571358,
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16100-2026",
+        "flag": "model-performance-or-label-review-over-100pct"
+      }
+    ]
+  },
+  "slices": {
+    "byPropertyType": [
+      {
+        "propertyType": "apartment",
+        "records": 5888,
+        "scoredRecords": 5888,
+        "maePct": 13.953,
+        "medianAbsErrorPct": 9.174,
+        "p90AbsErrorPct": 29.615,
+        "maxAbsErrorPct": 208.184,
+        "biasPct": 4.451,
+        "within15Pct": 69.005,
+        "over100Pct": 0.917
+      },
+      {
+        "propertyType": "land",
+        "records": 1275,
+        "scoredRecords": 1275,
+        "maePct": 17.241,
+        "medianAbsErrorPct": 8.284,
+        "p90AbsErrorPct": 32.652,
+        "maxAbsErrorPct": 4211.935,
+        "biasPct": 6.693,
+        "within15Pct": 68.941,
+        "over100Pct": 0.784
+      },
+      {
+        "propertyType": "villa",
+        "records": 609,
+        "scoredRecords": 609,
+        "maePct": 15.937,
+        "medianAbsErrorPct": 14.217,
+        "p90AbsErrorPct": 27.693,
+        "maxAbsErrorPct": 342.999,
+        "biasPct": -10.993,
+        "within15Pct": 53.53,
+        "over100Pct": 0.164
+      },
+      {
+        "propertyType": "office",
+        "records": 260,
+        "scoredRecords": 260,
+        "maePct": 18.725,
+        "medianAbsErrorPct": 15.961,
+        "p90AbsErrorPct": 34.834,
+        "maxAbsErrorPct": 93.149,
+        "biasPct": -11.554,
+        "within15Pct": 44.231,
+        "over100Pct": 0
+      },
+      {
+        "propertyType": "retail",
+        "records": 76,
+        "scoredRecords": 76,
+        "maePct": 24.569,
+        "medianAbsErrorPct": 19.835,
+        "p90AbsErrorPct": 44.398,
+        "maxAbsErrorPct": 128.067,
+        "biasPct": -16.98,
+        "within15Pct": 35.526,
+        "over100Pct": 1.316
+      }
+    ],
+    "byEvaluationLevel": [
+      {
+        "evaluationLevel": "project_size",
+        "records": 5612,
+        "scoredRecords": 5612,
+        "maePct": 11.852,
+        "medianAbsErrorPct": 8.506,
+        "p90AbsErrorPct": 25.522,
+        "maxAbsErrorPct": 342.999,
+        "biasPct": 1.198,
+        "within15Pct": 72.79,
+        "over100Pct": 0.267
+      },
+      {
+        "evaluationLevel": "district_size",
+        "records": 2070,
+        "scoredRecords": 2070,
+        "maePct": 22.158,
+        "medianAbsErrorPct": 13.734,
+        "p90AbsErrorPct": 42.927,
+        "maxAbsErrorPct": 4211.935,
+        "biasPct": 7.027,
+        "within15Pct": 53.478,
+        "over100Pct": 2.271
+      },
+      {
+        "evaluationLevel": "project",
+        "records": 343,
+        "scoredRecords": 343,
+        "maePct": 18.17,
+        "medianAbsErrorPct": 14.08,
+        "p90AbsErrorPct": 35.394,
+        "maxAbsErrorPct": 183.004,
+        "biasPct": 5.251,
+        "within15Pct": 51.312,
+        "over100Pct": 0.292
+      },
+      {
+        "evaluationLevel": "district",
+        "records": 83,
+        "scoredRecords": 83,
+        "maePct": 23.69,
+        "medianAbsErrorPct": 14.645,
+        "p90AbsErrorPct": 45.853,
+        "maxAbsErrorPct": 148.446,
+        "biasPct": 8.211,
+        "within15Pct": 50.602,
+        "over100Pct": 3.614
+      }
+    ],
+    "bySaleMonth": [
+      {
+        "month": "2026-06",
+        "records": 2984,
+        "scoredRecords": 2984,
+        "maePct": 15.154,
+        "medianAbsErrorPct": 9.911,
+        "p90AbsErrorPct": 29.459,
+        "maxAbsErrorPct": 4211.935,
+        "biasPct": 3.131,
+        "within15Pct": 66.79,
+        "over100Pct": 0.335
+      },
+      {
+        "month": "2026-07",
+        "records": 2593,
+        "scoredRecords": 2593,
+        "maePct": 13.599,
+        "medianAbsErrorPct": 9.661,
+        "p90AbsErrorPct": 29.414,
+        "maxAbsErrorPct": 208.184,
+        "biasPct": 1.383,
+        "within15Pct": 66.911,
+        "over100Pct": 0.154
+      },
+      {
+        "month": "2026-05",
+        "records": 2260,
+        "scoredRecords": 2260,
+        "maePct": 15.605,
+        "medianAbsErrorPct": 9.669,
+        "p90AbsErrorPct": 32.708,
+        "maxAbsErrorPct": 342.999,
+        "biasPct": 4.371,
+        "within15Pct": 66.681,
+        "over100Pct": 1.947
+      },
+      {
+        "month": "2026-04",
+        "records": 271,
+        "scoredRecords": 271,
+        "maePct": 17.812,
+        "medianAbsErrorPct": 10.077,
+        "p90AbsErrorPct": 28.626,
+        "maxAbsErrorPct": 199.059,
+        "biasPct": 3.48,
+        "within15Pct": 64.576,
+        "over100Pct": 2.952
+      }
+    ],
+    "byPropertyTypeAndMonth": [
+      {
+        "propertyTypeMonth": "apartment|2026-06",
+        "records": 2158,
+        "scoredRecords": 2158,
+        "maePct": 12.837,
+        "medianAbsErrorPct": 9.357,
+        "p90AbsErrorPct": 27.771,
+        "maxAbsErrorPct": 183.004,
+        "biasPct": 3.243,
+        "within15Pct": 69.138,
+        "over100Pct": 0.139
+      },
+      {
+        "propertyTypeMonth": "apartment|2026-07",
+        "records": 1863,
+        "scoredRecords": 1863,
+        "maePct": 13.187,
+        "medianAbsErrorPct": 8.949,
+        "p90AbsErrorPct": 29.223,
+        "maxAbsErrorPct": 208.184,
+        "biasPct": 3.404,
+        "within15Pct": 69.512,
+        "over100Pct": 0.107
+      },
+      {
+        "propertyTypeMonth": "apartment|2026-05",
+        "records": 1679,
+        "scoredRecords": 1679,
+        "maePct": 15.683,
+        "medianAbsErrorPct": 9.309,
+        "p90AbsErrorPct": 33.674,
+        "maxAbsErrorPct": 156.041,
+        "biasPct": 6.771,
+        "within15Pct": 68.493,
+        "over100Pct": 2.442
+      },
+      {
+        "propertyTypeMonth": "land|2026-06",
+        "records": 476,
+        "scoredRecords": 476,
+        "maePct": 24.085,
+        "medianAbsErrorPct": 8.903,
+        "p90AbsErrorPct": 35.579,
+        "maxAbsErrorPct": 4211.935,
+        "biasPct": 13.885,
+        "within15Pct": 67.647,
+        "over100Pct": 1.261
+      },
+      {
+        "propertyTypeMonth": "land|2026-07",
+        "records": 392,
+        "scoredRecords": 392,
+        "maePct": 13.17,
+        "medianAbsErrorPct": 7.862,
+        "p90AbsErrorPct": 31.289,
+        "maxAbsErrorPct": 148.446,
+        "biasPct": 3.104,
+        "within15Pct": 69.643,
+        "over100Pct": 0.51
+      },
+      {
+        "propertyTypeMonth": "land|2026-05",
+        "records": 355,
+        "scoredRecords": 355,
+        "maePct": 13.443,
+        "medianAbsErrorPct": 7.98,
+        "p90AbsErrorPct": 30.078,
+        "maxAbsErrorPct": 111.111,
+        "biasPct": 2.259,
+        "within15Pct": 69.296,
+        "over100Pct": 0.563
+      },
+      {
+        "propertyTypeMonth": "villa|2026-06",
+        "records": 223,
+        "scoredRecords": 223,
+        "maePct": 15.627,
+        "medianAbsErrorPct": 14.232,
+        "p90AbsErrorPct": 27.257,
+        "maxAbsErrorPct": 49.323,
+        "biasPct": -11.488,
+        "within15Pct": 54.709,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "villa|2026-07",
+        "records": 212,
+        "scoredRecords": 212,
+        "maePct": 15.261,
+        "medianAbsErrorPct": 13.847,
+        "p90AbsErrorPct": 26.529,
+        "maxAbsErrorPct": 44.221,
+        "biasPct": -11.135,
+        "within15Pct": 53.302,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "apartment|2026-04",
+        "records": 188,
+        "scoredRecords": 188,
+        "maePct": 18.908,
+        "medianAbsErrorPct": 9.598,
+        "p90AbsErrorPct": 27.696,
+        "maxAbsErrorPct": 199.059,
+        "biasPct": 7.988,
+        "within15Pct": 67.021,
+        "over100Pct": 4.255
+      },
+      {
+        "propertyTypeMonth": "villa|2026-05",
+        "records": 154,
+        "scoredRecords": 154,
+        "maePct": 17.586,
+        "medianAbsErrorPct": 14.498,
+        "p90AbsErrorPct": 28.667,
+        "maxAbsErrorPct": 342.999,
+        "biasPct": -9.71,
+        "within15Pct": 52.597,
+        "over100Pct": 0.649
+      },
+      {
+        "propertyTypeMonth": "office|2026-07",
+        "records": 103,
+        "scoredRecords": 103,
+        "maePct": 17.707,
+        "medianAbsErrorPct": 15.557,
+        "p90AbsErrorPct": 32.184,
+        "maxAbsErrorPct": 65.491,
+        "biasPct": -12.744,
+        "within15Pct": 42.718,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "office|2026-06",
+        "records": 94,
+        "scoredRecords": 94,
+        "maePct": 17.329,
+        "medianAbsErrorPct": 15.403,
+        "p90AbsErrorPct": 34.711,
+        "maxAbsErrorPct": 53.674,
+        "biasPct": -11.298,
+        "within15Pct": 48.936,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "office|2026-05",
+        "records": 54,
+        "scoredRecords": 54,
+        "maePct": 19.837,
+        "medianAbsErrorPct": 15.987,
+        "p90AbsErrorPct": 36.319,
+        "maxAbsErrorPct": 93.149,
+        "biasPct": -8.444,
+        "within15Pct": 44.444,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "land|2026-04",
+        "records": 52,
+        "scoredRecords": 52,
+        "maePct": 11.212,
+        "medianAbsErrorPct": 9.003,
+        "p90AbsErrorPct": 20.555,
+        "maxAbsErrorPct": 46.649,
+        "biasPct": -1.82,
+        "within15Pct": 73.077,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "retail|2026-06",
+        "records": 33,
+        "scoredRecords": 33,
+        "maePct": 28.456,
+        "medianAbsErrorPct": 21.951,
+        "p90AbsErrorPct": 54.76,
+        "maxAbsErrorPct": 128.067,
+        "biasPct": -19.342,
+        "within15Pct": 33.333,
+        "over100Pct": 3.03
+      },
+      {
+        "propertyTypeMonth": "retail|2026-07",
+        "records": 23,
+        "scoredRecords": 23,
+        "maePct": 20.651,
+        "medianAbsErrorPct": 17.34,
+        "p90AbsErrorPct": 40.578,
+        "maxAbsErrorPct": 55.338,
+        "biasPct": -12.964,
+        "within15Pct": 43.478,
+        "over100Pct": 0
+      },
+      {
+        "propertyTypeMonth": "villa|2026-04",
+        "records": 20,
+        "scoredRecords": 20,
+        "maePct": 13.839,
+        "medianAbsErrorPct": 14.79,
+        "p90AbsErrorPct": 22.238,
+        "maxAbsErrorPct": 25.533,
+        "biasPct": -13.839,
+        "within15Pct": 50,
+        "over100Pct": 0
+      }
+    ],
+    "topDistrictsByMae": [
+      {
+        "district": "MADINAT AL MATAAR",
+        "records": 43,
+        "scoredRecords": 43,
+        "maePct": 123.124,
+        "medianAbsErrorPct": 24.064,
+        "p90AbsErrorPct": 64.054,
+        "maxAbsErrorPct": 4211.935,
+        "biasPct": 94.754,
+        "within15Pct": 37.209,
+        "over100Pct": 2.326
+      },
+      {
+        "district": "INTERNATIONAL CITY PH 2 & 3",
+        "records": 99,
+        "scoredRecords": 99,
+        "maePct": 60.984,
+        "medianAbsErrorPct": 30.216,
+        "p90AbsErrorPct": 127.788,
+        "maxAbsErrorPct": 156.041,
+        "biasPct": 47.176,
+        "within15Pct": 29.293,
+        "over100Pct": 40.404
+      },
+      {
+        "district": "HOR AL ANZ",
+        "records": 22,
+        "scoredRecords": 22,
+        "maePct": 52.676,
+        "medianAbsErrorPct": 47.49,
+        "p90AbsErrorPct": 96.547,
+        "maxAbsErrorPct": 152.331,
+        "biasPct": 15.067,
+        "within15Pct": 9.091,
+        "over100Pct": 9.091
+      },
+      {
+        "district": "JUMEIRAH VILLAGE TRIANGLE",
+        "records": 97,
+        "scoredRecords": 97,
+        "maePct": 27.129,
+        "medianAbsErrorPct": 14.264,
+        "p90AbsErrorPct": 37.22,
+        "maxAbsErrorPct": 199.059,
+        "biasPct": 15.141,
+        "within15Pct": 51.546,
+        "over100Pct": 8.247
+      },
+      {
+        "district": "DUBAI MARINA",
+        "records": 379,
+        "scoredRecords": 379,
+        "maePct": 23.466,
+        "medianAbsErrorPct": 18.566,
+        "p90AbsErrorPct": 48.194,
+        "maxAbsErrorPct": 208.184,
+        "biasPct": 5.478,
+        "within15Pct": 41.689,
+        "over100Pct": 0.264
+      },
+      {
+        "district": "JUMEIRAH GOLF",
+        "records": 26,
+        "scoredRecords": 26,
+        "maePct": 22.958,
+        "medianAbsErrorPct": 12.238,
+        "p90AbsErrorPct": 58.168,
+        "maxAbsErrorPct": 112.453,
+        "biasPct": 4.48,
+        "within15Pct": 53.846,
+        "over100Pct": 3.846
+      },
+      {
+        "district": "AL SATWA",
+        "records": 23,
+        "scoredRecords": 23,
+        "maePct": 22.287,
+        "medianAbsErrorPct": 14.161,
+        "p90AbsErrorPct": 42.005,
+        "maxAbsErrorPct": 110.394,
+        "biasPct": 12.834,
+        "within15Pct": 52.174,
+        "over100Pct": 4.348
+      },
+      {
+        "district": "EMIRATE LIVING",
+        "records": 78,
+        "scoredRecords": 78,
+        "maePct": 20.49,
+        "medianAbsErrorPct": 20.266,
+        "p90AbsErrorPct": 39.461,
+        "maxAbsErrorPct": 49.323,
+        "biasPct": -10.601,
+        "within15Pct": 38.462,
+        "over100Pct": 0
+      },
+      {
+        "district": "BARSHA HEIGHTS",
+        "records": 49,
+        "scoredRecords": 49,
+        "maePct": 18.592,
+        "medianAbsErrorPct": 17.35,
+        "p90AbsErrorPct": 26.789,
+        "maxAbsErrorPct": 86.708,
+        "biasPct": -1.057,
+        "within15Pct": 28.571,
+        "over100Pct": 0
+      },
+      {
+        "district": "PALM JUMEIRAH",
+        "records": 125,
+        "scoredRecords": 125,
+        "maePct": 18.136,
+        "medianAbsErrorPct": 13.026,
+        "p90AbsErrorPct": 37.457,
+        "maxAbsErrorPct": 100.262,
+        "biasPct": 2.95,
+        "within15Pct": 51.2,
+        "over100Pct": 0.8
+      },
+      {
+        "district": "BURJ KHALIFA",
+        "records": 297,
+        "scoredRecords": 297,
+        "maePct": 16.915,
+        "medianAbsErrorPct": 13.209,
+        "p90AbsErrorPct": 36.275,
+        "maxAbsErrorPct": 87.83,
+        "biasPct": 5.163,
+        "within15Pct": 55.556,
+        "over100Pct": 0
+      },
+      {
+        "district": "JUMEIRAH BEACH RESIDENCE",
+        "records": 64,
+        "scoredRecords": 64,
+        "maePct": 16.69,
+        "medianAbsErrorPct": 13.044,
+        "p90AbsErrorPct": 35.172,
+        "maxAbsErrorPct": 94.15,
+        "biasPct": 1.981,
+        "within15Pct": 56.25,
+        "over100Pct": 0
+      },
+      {
+        "district": "MAJAN",
+        "records": 52,
+        "scoredRecords": 52,
+        "maePct": 16.539,
+        "medianAbsErrorPct": 12.767,
+        "p90AbsErrorPct": 35.231,
+        "maxAbsErrorPct": 47.307,
+        "biasPct": -0.11,
+        "within15Pct": 59.615,
+        "over100Pct": 0
+      },
+      {
+        "district": "JUMEIRAH LAKES TOWERS",
+        "records": 241,
+        "scoredRecords": 241,
+        "maePct": 16.103,
+        "medianAbsErrorPct": 12.298,
+        "p90AbsErrorPct": 34.536,
+        "maxAbsErrorPct": 93.149,
+        "biasPct": -0.313,
+        "within15Pct": 60.996,
+        "over100Pct": 0
+      },
+      {
+        "district": "DOWN TOWN JABAL ALI",
+        "records": 20,
+        "scoredRecords": 20,
+        "maePct": 16.065,
+        "medianAbsErrorPct": 10.23,
+        "p90AbsErrorPct": 27.729,
+        "maxAbsErrorPct": 69.171,
+        "biasPct": 5.901,
+        "within15Pct": 70,
+        "over100Pct": 0
+      },
+      {
+        "district": "THE LAKES",
+        "records": 21,
+        "scoredRecords": 21,
+        "maePct": 15.85,
+        "medianAbsErrorPct": 13.041,
+        "p90AbsErrorPct": 27.106,
+        "maxAbsErrorPct": 34.66,
+        "biasPct": -2.184,
+        "within15Pct": 52.381,
+        "over100Pct": 0
+      },
+      {
+        "district": "JUMEIRAH VILLAGE CIRCLE",
+        "records": 900,
+        "scoredRecords": 900,
+        "maePct": 15.791,
+        "medianAbsErrorPct": 11.17,
+        "p90AbsErrorPct": 32.187,
+        "maxAbsErrorPct": 183.004,
+        "biasPct": 5.036,
+        "within15Pct": 63.444,
+        "over100Pct": 0.556
+      },
+      {
+        "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+        "records": 40,
+        "scoredRecords": 40,
+        "maePct": 15.644,
+        "medianAbsErrorPct": 4.938,
+        "p90AbsErrorPct": 16.62,
+        "maxAbsErrorPct": 342.999,
+        "biasPct": 7.953,
+        "within15Pct": 82.5,
+        "over100Pct": 2.5
+      },
+      {
+        "district": "ARABIAN RANCHES I",
+        "records": 41,
+        "scoredRecords": 41,
+        "maePct": 15.483,
+        "medianAbsErrorPct": 13.431,
+        "p90AbsErrorPct": 34.445,
+        "maxAbsErrorPct": 53.185,
+        "biasPct": -1.763,
+        "within15Pct": 53.659,
+        "over100Pct": 0
+      },
+      {
+        "district": "MOTOR CITY",
+        "records": 118,
+        "scoredRecords": 118,
+        "maePct": 14.886,
+        "medianAbsErrorPct": 10.873,
+        "p90AbsErrorPct": 37.994,
+        "maxAbsErrorPct": 64.068,
+        "biasPct": 5.044,
+        "within15Pct": 64.407,
+        "over100Pct": 0
+      }
+    ]
+  },
+  "rollingOrigin": {
+    "input": "docs/accuracy-stability-rolling-origin-2026-08-26.json",
+    "windows": [
+      {
+        "id": "origin-1",
+        "trainEndExclusive": "2026-04-01",
+        "testStart": "2026-04-28",
+        "testEndExclusive": "2026-06-01",
+        "trainDldRecords": 14354,
+        "testAccuracyRecords": 1592,
+        "candidateCohorts": 340,
+        "coveragePct": 51.759,
+        "baseline": {
+          "records": 1592,
+          "maePct": 13.721,
+          "biasPct": 2.776,
+          "p90AbsPct": 28.727,
+          "within15Pct": 69.158
+        },
+        "shadow": {
+          "records": 1592,
+          "maePct": 13.883,
+          "biasPct": 2.959,
+          "p90AbsPct": 28.585,
+          "within15Pct": 68.907
+        },
+        "byType": {
+          "apartment": {
+            "testRecords": 1432,
+            "matchedRecords": 755,
+            "coveragePct": 52.723,
+            "baseline": {
+              "records": 1432,
+              "maePct": 13.3,
+              "biasPct": 4.251,
+              "p90AbsPct": 28.826,
+              "within15Pct": 70.95
+            },
+            "shadow": {
+              "records": 1432,
+              "maePct": 13.462,
+              "biasPct": 4.473,
+              "p90AbsPct": 28.562,
+              "within15Pct": 70.601
+            }
+          },
+          "villa": {
+            "testRecords": 160,
+            "matchedRecords": 69,
+            "coveragePct": 43.125,
+            "baseline": {
+              "records": 160,
+              "maePct": 17.491,
+              "biasPct": -10.432,
+              "p90AbsPct": 28.544,
+              "within15Pct": 53.125
+            },
+            "shadow": {
+              "records": 160,
+              "maePct": 17.647,
+              "biasPct": -10.594,
+              "p90AbsPct": 28.808,
+              "within15Pct": 53.75
+            }
+          },
+          "townhouse": {
+            "testRecords": 0,
+            "matchedRecords": 0,
+            "coveragePct": 0,
+            "baseline": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            },
+            "shadow": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            }
+          }
+        }
+      },
+      {
+        "id": "origin-2",
+        "trainEndExclusive": "2026-05-01",
+        "testStart": "2026-05-01",
+        "testEndExclusive": "2026-06-01",
+        "trainDldRecords": 17717,
+        "testAccuracyRecords": 1429,
+        "candidateCohorts": 426,
+        "coveragePct": 59.902,
+        "baseline": {
+          "records": 1429,
+          "maePct": 13.028,
+          "biasPct": 2.304,
+          "p90AbsPct": 28.894,
+          "within15Pct": 69.769
+        },
+        "shadow": {
+          "records": 1429,
+          "maePct": 13.155,
+          "biasPct": 2.352,
+          "p90AbsPct": 28.938,
+          "within15Pct": 69.489
+        },
+        "byType": {
+          "apartment": {
+            "testRecords": 1289,
+            "matchedRecords": 779,
+            "coveragePct": 60.434,
+            "baseline": {
+              "records": 1289,
+              "maePct": 12.487,
+              "biasPct": 3.635,
+              "p90AbsPct": 28.862,
+              "within15Pct": 71.528
+            },
+            "shadow": {
+              "records": 1289,
+              "maePct": 12.603,
+              "biasPct": 3.712,
+              "p90AbsPct": 28.568,
+              "within15Pct": 71.218
+            }
+          },
+          "villa": {
+            "testRecords": 140,
+            "matchedRecords": 77,
+            "coveragePct": 55,
+            "baseline": {
+              "records": 140,
+              "maePct": 18.013,
+              "biasPct": -9.945,
+              "p90AbsPct": 29.478,
+              "within15Pct": 53.571
+            },
+            "shadow": {
+              "records": 140,
+              "maePct": 18.245,
+              "biasPct": -10.174,
+              "p90AbsPct": 30.195,
+              "within15Pct": 53.571
+            }
+          },
+          "townhouse": {
+            "testRecords": 0,
+            "matchedRecords": 0,
+            "coveragePct": 0,
+            "baseline": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            },
+            "shadow": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            }
+          }
+        }
+      },
+      {
+        "id": "origin-3",
+        "trainEndExclusive": "2026-06-01",
+        "testStart": "2026-06-01",
+        "testEndExclusive": "2026-07-01",
+        "trainDldRecords": 20335,
+        "testAccuracyRecords": 1891,
+        "candidateCohorts": 495,
+        "coveragePct": 65.68,
+        "baseline": {
+          "records": 1891,
+          "maePct": 12.472,
+          "biasPct": 1.001,
+          "p90AbsPct": 26.663,
+          "within15Pct": 70.069
+        },
+        "shadow": {
+          "records": 1891,
+          "maePct": 12.575,
+          "biasPct": 0.912,
+          "p90AbsPct": 26.798,
+          "within15Pct": 70.227
+        },
+        "byType": {
+          "apartment": {
+            "testRecords": 1687,
+            "matchedRecords": 1137,
+            "coveragePct": 67.398,
+            "baseline": {
+              "records": 1687,
+              "maePct": 12.083,
+              "biasPct": 2.575,
+              "p90AbsPct": 26.511,
+              "within15Pct": 71.903
+            },
+            "shadow": {
+              "records": 1687,
+              "maePct": 12.193,
+              "biasPct": 2.476,
+              "p90AbsPct": 26.754,
+              "within15Pct": 72.021
+            }
+          },
+          "villa": {
+            "testRecords": 204,
+            "matchedRecords": 105,
+            "coveragePct": 51.471,
+            "baseline": {
+              "records": 204,
+              "maePct": 15.693,
+              "biasPct": -12.011,
+              "p90AbsPct": 28.064,
+              "within15Pct": 54.902
+            },
+            "shadow": {
+              "records": 204,
+              "maePct": 15.734,
+              "biasPct": -12.027,
+              "p90AbsPct": 28.064,
+              "within15Pct": 55.392
+            }
+          },
+          "townhouse": {
+            "testRecords": 0,
+            "matchedRecords": 0,
+            "coveragePct": 0,
+            "baseline": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            },
+            "shadow": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            }
+          }
+        }
+      },
+      {
+        "id": "origin-4",
+        "trainEndExclusive": "2026-07-01",
+        "testStart": "2026-07-01",
+        "testEndExclusive": "2026-07-27",
+        "trainDldRecords": 23744,
+        "testAccuracyRecords": 1663,
+        "candidateCohorts": 573,
+        "coveragePct": 73.482,
+        "baseline": {
+          "records": 1663,
+          "maePct": 12.225,
+          "biasPct": 2.225,
+          "p90AbsPct": 25.675,
+          "within15Pct": 71.618
+        },
+        "shadow": {
+          "records": 1663,
+          "maePct": 12.44,
+          "biasPct": 2.298,
+          "p90AbsPct": 26.001,
+          "within15Pct": 70.716
+        },
+        "byType": {
+          "apartment": {
+            "testRecords": 1468,
+            "matchedRecords": 1099,
+            "coveragePct": 74.864,
+            "baseline": {
+              "records": 1468,
+              "maePct": 11.868,
+              "biasPct": 4.042,
+              "p90AbsPct": 25.619,
+              "within15Pct": 73.842
+            },
+            "shadow": {
+              "records": 1468,
+              "maePct": 12.094,
+              "biasPct": 4.137,
+              "p90AbsPct": 25.982,
+              "within15Pct": 72.752
+            }
+          },
+          "villa": {
+            "testRecords": 195,
+            "matchedRecords": 123,
+            "coveragePct": 63.077,
+            "baseline": {
+              "records": 195,
+              "maePct": 14.917,
+              "biasPct": -11.46,
+              "p90AbsPct": 26.136,
+              "within15Pct": 54.872
+            },
+            "shadow": {
+              "records": 195,
+              "maePct": 15.043,
+              "biasPct": -11.542,
+              "p90AbsPct": 26.003,
+              "within15Pct": 55.385
+            }
+          },
+          "townhouse": {
+            "testRecords": 0,
+            "matchedRecords": 0,
+            "coveragePct": 0,
+            "baseline": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            },
+            "shadow": {
+              "records": 0,
+              "maePct": null,
+              "biasPct": null,
+              "p90AbsPct": null,
+              "within15Pct": null
+            }
+          }
+        }
+      }
+    ],
+    "stability": {
+      "pairwise": [
+        {
+          "from": "origin-1",
+          "to": "origin-2",
+          "commonCohorts": 339,
+          "medianAbsMultiplierChange": 0,
+          "p90AbsMultiplierChange": 0.02,
+          "signStabilityPct": 82.301,
+          "sameMultiplierPct": 78.761
+        },
+        {
+          "from": "origin-2",
+          "to": "origin-3",
+          "commonCohorts": 421,
+          "medianAbsMultiplierChange": 0,
+          "p90AbsMultiplierChange": 0.02,
+          "signStabilityPct": 86.223,
+          "sameMultiplierPct": 83.61
+        },
+        {
+          "from": "origin-3",
+          "to": "origin-4",
+          "commonCohorts": 495,
+          "medianAbsMultiplierChange": 0,
+          "p90AbsMultiplierChange": 0.02,
+          "signStabilityPct": 85.859,
+          "sameMultiplierPct": 83.838
+        }
+      ],
+      "cohortsSeenAtLeast2": 499,
+      "stableWithin0_01Pct": 72.345,
+      "trajectoriesWithLargestRange": [
+        {
+          "key": "apartment||dubai marina||bay central west & central towers",
+          "windowsSeen": 4,
+          "median": 1.02,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||dubai sports city||hera tower",
+          "windowsSeen": 4,
+          "median": 1.01,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||dubai marina||damac heights",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||dubai marina||ocean heights",
+          "windowsSeen": 4,
+          "median": 0.99,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||business bay||aykon city 2",
+          "windowsSeen": 4,
+          "median": 0.99,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "villa||dubai hills||maple iii",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "villa||al hebiah sixth||mudon al ranim 3",
+          "windowsSeen": 4,
+          "median": 0.99,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||dubai studio city||azizi mirage 1",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "villa||emirate living||emirates living - springs 4",
+          "windowsSeen": 4,
+          "median": 1.0188,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "villa||emirate living||emirates living - springs 14",
+          "windowsSeen": 4,
+          "median": 0.9997,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "villa||emaar south||parkside 2",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||burj khalifa||dd stand point",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||jumeirah lakes towers||lake city tower",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||sobha heartland||wilton terraces",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||business bay||terraces marasi drive",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||sobha heartland||sobha hartland waves grande",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "villa||dubai hills||maple 2",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||sobha heartland||sobha creek vistas grande",
+          "windowsSeen": 4,
+          "median": 1.02,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||dubai harbour||marina vista",
+          "windowsSeen": 4,
+          "median": 1,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        },
+        {
+          "key": "apartment||damac hills||damac hills - loreto",
+          "windowsSeen": 4,
+          "median": 1.01,
+          "min": 0.98,
+          "max": 1.02,
+          "range": 0.04
+        }
+      ]
+    }
+  },
+  "safeguards": {
+    "officialAccuracyChanged": false,
+    "officialDldChanged": false,
+    "calibrationChanged": false,
+    "evaluatorChanged": false,
+    "recordsExcludedOrCapped": false,
+    "shadowOnly": true
+  }
+}
