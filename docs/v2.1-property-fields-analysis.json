@@ -1,0 +1,302 @@
+{
+  "generatedAt": "2026-08-26T00:39:04.948Z",
+  "scope": "isolated-v2.1-property-fields-analysis",
+  "dldEligibleRecords": 26766,
+  "accuracyRecords": 8221,
+  "dldFieldCoverage": {
+    "bua": 0,
+    "builtUpArea": 0,
+    "plotArea": 0,
+    "landArea": 0,
+    "lastRenovationYear": 0,
+    "renovationYear": 0
+  },
+  "accuracyFieldCoverage": {
+    "bua": 0,
+    "builtUpArea": 0,
+    "plotArea": 0,
+    "landArea": 0,
+    "lastRenovationYear": 0,
+    "renovationYear": 0
+  },
+  "projectCoverageByType": {
+    "apartment": {
+      "records": 18883,
+      "projectRecords": 14457,
+      "projectCoveragePct": 76.56,
+      "uniqueProjects": 1056,
+      "cohortsAtLeast5": 800,
+      "cohortsAtLeast3": 937,
+      "topProjects": [
+        {
+          "name": "Azizi Mirage 1",
+          "count": 140
+        },
+        {
+          "name": "Paradise View 1",
+          "count": 140
+        },
+        {
+          "name": "SKY COURTS",
+          "count": 139
+        },
+        {
+          "name": "RITAJ",
+          "count": 128
+        },
+        {
+          "name": "REMRAAM",
+          "count": 122
+        },
+        {
+          "name": "Luma Park Views",
+          "count": 113
+        },
+        {
+          "name": "Sobha Hartland - The Crest",
+          "count": 111
+        },
+        {
+          "name": "Peninsula Three",
+          "count": 110
+        },
+        {
+          "name": "Seventh Heaven - Ashjar",
+          "count": 103
+        },
+        {
+          "name": "Binghatti Apex",
+          "count": 98
+        }
+      ]
+    },
+    "villa": {
+      "records": 1961,
+      "projectRecords": 1751,
+      "projectCoveragePct": 89.29,
+      "uniqueProjects": 155,
+      "cohortsAtLeast5": 95,
+      "cohortsAtLeast3": 104,
+      "topProjects": [
+        {
+          "name": "Rukan 3",
+          "count": 81
+        },
+        {
+          "name": "THE FIELDS AT D11 - MBRMC",
+          "count": 72
+        },
+        {
+          "name": "The Valley - Orania",
+          "count": 68
+        },
+        {
+          "name": "Aura",
+          "count": 62
+        },
+        {
+          "name": "The Valley-Nara",
+          "count": 55
+        },
+        {
+          "name": "MAHA TOWNHOUSES",
+          "count": 50
+        },
+        {
+          "name": "Mudon Al Ranim 3",
+          "count": 46
+        },
+        {
+          "name": "The Valley - Talia",
+          "count": 37
+        },
+        {
+          "name": "The Pulse Beachfront 3",
+          "count": 35
+        },
+        {
+          "name": "Mudon Al Ranim 4",
+          "count": 34
+        }
+      ]
+    },
+    "townhouse": {
+      "records": 3,
+      "projectRecords": 3,
+      "projectCoveragePct": 100,
+      "uniqueProjects": 1,
+      "cohortsAtLeast5": 0,
+      "cohortsAtLeast3": 1,
+      "topProjects": [
+        {
+          "name": "THE PULSE TOWNHOUSES",
+          "count": 3
+        }
+      ]
+    },
+    "office": {
+      "records": 996,
+      "projectRecords": 821,
+      "projectCoveragePct": 82.43,
+      "uniqueProjects": 87,
+      "cohortsAtLeast5": 60,
+      "cohortsAtLeast3": 71,
+      "topProjects": [
+        {
+          "name": "BAY SQUARE",
+          "count": 49
+        },
+        {
+          "name": "TAMANI ARTS OFFICES",
+          "count": 32
+        },
+        {
+          "name": "THE ONE TOWER",
+          "count": 30
+        },
+        {
+          "name": "JUMEIRAH BUSINESS CENTRE1",
+          "count": 27
+        },
+        {
+          "name": "DIAMOND BUSINESS CENTER",
+          "count": 25
+        },
+        {
+          "name": "IRIS BAY",
+          "count": 23
+        },
+        {
+          "name": "JUMEIRAH BUSINESS CENTRE 5",
+          "count": 22
+        },
+        {
+          "name": "THE DOME TOWER",
+          "count": 22
+        },
+        {
+          "name": "CHURCHILL TOWER",
+          "count": 21
+        },
+        {
+          "name": "BUSINESS AVENUE AA1",
+          "count": 19
+        }
+      ]
+    },
+    "retail": {
+      "records": 330,
+      "projectRecords": 193,
+      "projectCoveragePct": 58.48,
+      "uniqueProjects": 104,
+      "cohortsAtLeast5": 5,
+      "cohortsAtLeast3": 17,
+      "topProjects": [
+        {
+          "name": "THE RESIDENCE AT BUSINESS CENTRAL",
+          "count": 11
+        },
+        {
+          "name": "OBEROI CENTRE",
+          "count": 10
+        },
+        {
+          "name": "SKY COURTS",
+          "count": 8
+        },
+        {
+          "name": "EQUITI HOME",
+          "count": 5
+        },
+        {
+          "name": "Farhad Azizi Residence",
+          "count": 5
+        },
+        {
+          "name": "Binghatti Royale",
+          "count": 4
+        },
+        {
+          "name": "THE VYBE",
+          "count": 4
+        },
+        {
+          "name": "Binghatti Phoenix",
+          "count": 4
+        },
+        {
+          "name": "J&G PLEXS",
+          "count": 4
+        },
+        {
+          "name": "MBL RESIDENCE",
+          "count": 4
+        }
+      ]
+    },
+    "warehouse": {
+      "records": 6,
+      "projectRecords": 0,
+      "projectCoveragePct": 0,
+      "uniqueProjects": 0,
+      "cohortsAtLeast5": 0,
+      "cohortsAtLeast3": 0,
+      "topProjects": []
+    },
+    "land": {
+      "records": 4587,
+      "projectRecords": 3166,
+      "projectCoveragePct": 69.02,
+      "uniqueProjects": 257,
+      "cohortsAtLeast5": 149,
+      "cohortsAtLeast3": 184,
+      "topProjects": [
+        {
+          "name": "Ashwood Estates",
+          "count": 150
+        },
+        {
+          "name": "Eden Hills",
+          "count": 112
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 11",
+          "count": 93
+        },
+        {
+          "name": "The Valley - Ovelle",
+          "count": 84
+        },
+        {
+          "name": "Pinewood Estate Homes",
+          "count": 70
+        },
+        {
+          "name": "DAMAC LAGOONS - PORTOFINO",
+          "count": 69
+        },
+        {
+          "name": "DAMAC LAGOONS - COSTA BRAVA (1)",
+          "count": 60
+        },
+        {
+          "name": "DAMAC ISLANDS - SEYCHELLES 2",
+          "count": 55
+        },
+        {
+          "name": "DAMAC LAGOONS - MALTA (1)",
+          "count": 53
+        },
+        {
+          "name": "DAMAC LAGOONS - SANTORINI (1)",
+          "count": 51
+        }
+      ]
+    }
+  },
+  "notes": [
+    "Project/Building is measurable from DLD masterProject/project fields.",
+    "The current eligible DLD schema exposes area/procedureArea, but no verified separate BUA, Plot Area, or Last Renovation Year fields.",
+    "No official Accuracy artifact, evaluator formula, calibration, weights, fallback policy, raw DLD file, or historical result is modified by this runner."
+  ]
+}

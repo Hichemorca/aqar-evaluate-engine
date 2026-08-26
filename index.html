@@ -760,6 +760,7 @@ async function loadDistrictsFromDLD() {
 function projectOptionsForCurrentContext() {
   const type = document.getElementById('propType').value;
   const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
+  if (!district) return [];
   const options = new Set();
   dldTransactionsCache.forEach(row => {
     if (row.propertyType !== type) return;
@@ -781,7 +782,7 @@ function refreshProjectSuggestions() {
 }
 function getProjectEvidence(name) {
   const normalized = String(name || '').trim().toLowerCase();
-  if (!normalized) return { count: 0, verified: false };
+  if (!normalized || !(document.getElementById('selectedDistrict').value || '').trim()) return { count: 0, verified: false };
   const rows = dldTransactionsCache.filter(row => {
     if (row.propertyType !== document.getElementById('propType').value) return false;
     const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
@@ -797,6 +798,7 @@ function updateProjectBuildingNotice() {
   if (!input || !notice) return;
   const value = input.value.trim();
   if (!value) { notice.textContent = 'Choose a DLD suggestion or leave as Unknown.'; notice.style.color = 'var(--muted)'; return; }
+  if (!(document.getElementById('selectedDistrict').value || '').trim()) { notice.textContent = 'Select a DLD district first to see verified project suggestions.'; notice.style.color = 'var(--gold)'; return; }
   if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { notice.textContent = 'No verified DLD project match. District evidence remains the fallback; no project price is invented.'; notice.style.color = 'var(--gold)'; return; }
   const evidence = getProjectEvidence(value);
   if (evidence.count < 5) { notice.textContent = `Limited DLD project evidence (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). District evidence remains the fallback.`; notice.style.color = 'var(--gold)'; }
