@@ -9,6 +9,7 @@
     "fetch": "node scripts/fetch-transactions.js",
     "evaluate": "node scripts/evaluate-and-save.js",
     "diagnostics": "node scripts/generate-accuracy-diagnostics.js",
+    "analyze-accuracy-stability": "node scripts/analyze-accuracy-stability.js",
     "validate-dld": "node scripts/validate-dld-data.js",
     "fetch-calibration": "node scripts/fetch-calibration-config.js",
     "fetch-osm": "node scripts/fetch-osm.js"
