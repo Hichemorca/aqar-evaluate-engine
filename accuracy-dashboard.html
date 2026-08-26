@@ -166,7 +166,9 @@
   </div>
 </div>
 
+<script src="/shared/html-escape.js"></script>
 <script>
+const escapeHtml = value => AQAR_HTML_ESCAPE.escapeHtml(value);
 let currentDataSource = 'unknown';
 
 async function loadDashboard() {
@@ -236,15 +238,15 @@ function updateTable(properties) {
     const aqarDiff = p.aqarVsActual || 0;
     const diffClass = Math.abs(aqarDiff) < 15 ? 'green' : Math.abs(aqarDiff) < 25 ? 'gold' : 'red';
     html += '<tr>';
-    html += `<td style="font-family:monospace;font-size:9px">${(p.propertyRef || '—').substring(0, 12)}</td>`;
-    html += `<td style="font-size:10px">${p.city || 'dubai'}</td>`;
-    html += `<td>${p.propertyType || '—'}</td>`;
-    html += `<td>${p.district || '—'}</td>`;
+    html += `<td style="font-family:monospace;font-size:9px">${escapeHtml((p.propertyRef || '—').substring(0, 12))}</td>`;
+    html += `<td style="font-size:10px">${escapeHtml(p.city || 'dubai')}</td>`;
+    html += `<td>${escapeHtml(p.propertyType || '—')}</td>`;
+    html += `<td>${escapeHtml(p.district || '—')}</td>`;
     html += `<td>${p.area ? p.area.toLocaleString() + ' sqm' : '—'}</td>`;
     html += `<td>${p.actualSalePrice ? Number(p.actualSalePrice).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td>${p.aqarValuation ? Number(p.aqarValuation).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td><span class="badge ${diffClass}">${aqarDiff > 0 ? '+' : ''}${aqarDiff}%</span></td>`;
-    html += `<td style="font-size:9px;color:var(--muted)">${p.saleDate || '—'}</td>`;
+    html += `<td style="font-size:9px;color:var(--muted)">${escapeHtml(p.saleDate || '—')}</td>`;
     html += '</tr>';
   });
   html += '</tbody></table>';
