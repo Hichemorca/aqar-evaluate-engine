@@ -222,6 +222,7 @@ checksum الحالي للملف الخام المنظف هو:
 | `npm run build` | فحص البناء؛ المشروع الثابت لا يحتاج build فعليًا ويطبع رسالة تأكيد. |
 | `npm run fetch` | تشغيل جلب المعاملات وفق script الحالي. |
 | `npm run evaluate` | تشغيل evaluator وتوليد artifacts التقييم. |
+| `npm run diagnostics` | توليد مؤشرات تشخيصية مشتقة فقط من `data/accuracy-data.json` إلى `data/accuracy-diagnostics.json`. |
 | `npm run validate-dld` | التحقق من بيانات DLD ومنع rejected leakage. |
 | `npm run fetch-calibration` | تحميل active calibration إلى artifact محلي. |
 | `npm run fetch-osm` | تحديث بيانات OSM/GIS وفق الإعداد الحالي. |
@@ -229,7 +230,13 @@ checksum الحالي للملف الخام المنظف هو:
 | `node /home/ubuntu/check-inline-script.cjs` | فحص JavaScript المضمن داخل الصفحات عند توفر الأداة في بيئة العمل. |
 | `git diff --check` | فحص أخطاء المسافات والتنسيق قبل الالتزام. |
 
-آخر حالة موثقة للاختبارات هي **46/46 ناجحة**، وتشمل اختبارات المعايرة، تنظيف DLD، Accuracy، تشخيص المقارنات، حالات الأدلة، وربط الخريطة بالمناطق.
+### Accuracy diagnostics
+
+ينتج `npm run diagnostics` ملف `data/accuracy-diagnostics.json` بصورة حتمية من artifact Accuracy الرسمي `data/accuracy-data.json` فقط. يعرض الملف توزيع الخطأ المطلق، median وP90 وP95، bias، شرائح نوع العقار ومستوى التقييم والمساحة والشهر، أسوأ الشرائح ذات العينة الكافية، أعلى الأخطاء، وفحوص provenance واتساق buckets. هذا الملف **تشخيصي فقط**؛ لا يغيّر Accuracy الرسمية أو calibration أو الأوزان أو معاملات التقييم أو بيانات DLD.
+
+يحتوي diagnostics على SHA-256 للـartifact المصدر حتى يمكن اكتشاف عدم التزامن بين المؤشرات والبيانات، ويجب إعادة توليده بعد كل تحديث رسمي للـAccuracy. لا يجوز استخدام outliers أو أي شريحة تشخيصية لتعديل المعاملات مباشرة؛ يلزم validation زمني/قطاعي مستقل وموافقة صريحة قبل أي تغيير منهجي.
+
+آخر baseline موثق للاختبارات هو **109/109 ناجحة**، وتشمل اختبارات المعايرة، تنظيف DLD، Accuracy، diagnostics، تشخيص المقارنات، حالات الأدلة، وربط الخريطة بالمناطق.
 
 ## 12. الاختبارات المطلوبة قبل النشر
 
