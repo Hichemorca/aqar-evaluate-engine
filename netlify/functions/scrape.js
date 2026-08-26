@@ -5,6 +5,7 @@ const fs = require('fs');
 
 const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_KEY || '';
 const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
+const SCRAPE_ENDPOINT_ENABLED = process.env.SCRAPE_ENDPOINT_ENABLED === 'true';
 
 // Cache: 24 hours
 const cache = new Map();
@@ -1254,10 +1255,18 @@ function generateSalesFallback(city, district, propertyType, count) {
 // ===== MAIN EXPORT =====
 exports.handler = async (event) => {
   const headers = {
-    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store'
   };
+
+  if (!SCRAPE_ENDPOINT_ENABLED) {
+    return {
+      statusCode: 410,
+      headers,
+      body: JSON.stringify({ error: 'This legacy scraping endpoint is disabled.' })
+    };
+  }
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
