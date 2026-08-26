@@ -12,6 +12,7 @@
     "analyze-accuracy-stability": "node scripts/analyze-accuracy-stability.js",
     "review-accuracy-outliers": "node scripts/review-accuracy-outliers.js",
     "analyze-detailed-outliers": "node scripts/analyze-detailed-outliers.js",
+    "mobile-smoke": "node tests/mobile-smoke.cjs",
     "validate-artifacts": "node scripts/validate-official-artifacts.js",
     "validate-dld": "node scripts/validate-dld-data.js",
     "fetch-calibration": "node scripts/fetch-calibration-config.js",
@@ -23,5 +24,8 @@
     "cheerio": "^1.0.0-rc.12"
   },
   "author": "AQAR Engine",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }
