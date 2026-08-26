@@ -558,10 +558,10 @@
       <div id="gisFacilitiesList" style="font-size:11px;color:var(--muted);line-height:1.8"></div>
       <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
     </div>
+    <div id="gisProjectLabel" style="display:none;margin-top:10px;padding:9px 11px;border-radius:10px;background:rgba(212,146,14,0.08);border:1px solid rgba(212,146,14,0.22);font-size:10px;color:var(--muted)" aria-live="polite"></div>
     <div id="gisMap" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     <input type="hidden" id="gisRadius" value="1000">
-    <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">
-    </div>
+    <div id="gisRadiusContext" style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">Vital facilities are shown inside the radius around the current map marker.</div>
   </div>
   <div class="section">
     <div class="section-title">🔍 DLD Market Evidence</div>
@@ -684,7 +684,7 @@ let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTime
 let dldTransactionsCache = [];
 let selectedProjectBuilding = '';
 let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
-let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
+let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, projectMapLabelMarker = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
 // Centroid matching is deliberately conservative: an unknown point must not inherit a distant DLD district.
 const MAP_DISTRICT_MATCH_MAX_KM = 1.5;
 
@@ -788,6 +788,7 @@ function refreshProjectSuggestions() {
   if (!visibility.projectBuilding) { selectedProjectBuilding = ''; input.value = ''; document.getElementById('projectBuildingAutocomplete').style.display = 'none'; }
   else if (selectedProjectBuilding && !projectOptionsForCurrentContext().includes(selectedProjectBuilding)) { selectedProjectBuilding = ''; input.value = ''; }
   updateProjectBuildingNotice();
+  updateProjectMapLabel();
 }
 function getProjectEvidence(name) {
   const normalized = String(name || '').trim().toLowerCase();
@@ -817,6 +818,7 @@ function onProjectBuildingInput(value) {
   if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== String(value || '').trim().toLowerCase()) selectedProjectBuilding = '';
   filterProjectBuildings(value);
   updateProjectBuildingNotice();
+  updateProjectMapLabel();
 }
 function filterProjectBuildings(q) {
   const list = document.getElementById('projectBuildingAutocomplete');
@@ -837,6 +839,33 @@ function selectProjectBuilding(name) {
   document.getElementById('projectBuildingInput').value = name;
   document.getElementById('projectBuildingAutocomplete').style.display = 'none';
   updateProjectBuildingNotice();
+  updateProjectMapLabel();
+  debouncedFetchGISData();
+}
+function escapeMapHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character])); }
+function updateProjectMapLabel() {
+  const label = document.getElementById('gisProjectLabel');
+  const input = document.getElementById('projectBuildingInput');
+  const value = input?.value.trim() || '';
+  const district = document.getElementById('selectedDistrict')?.value || document.getElementById('districtInput')?.value || '';
+  if (!label || !gisMapInstance || !value) {
+    if (projectMapLabelMarker && gisMapInstance) gisMapInstance.removeLayer(projectMapLabelMarker);
+    projectMapLabelMarker = null;
+    if (label) { label.style.display = 'none'; label.textContent = ''; }
+    return;
+  }
+  const verified = Boolean(selectedProjectBuilding && selectedProjectBuilding.toLowerCase() === value.toLowerCase() && getProjectEvidence(value).verified);
+  const sourceText = verified ? 'DLD project name; map point is the current selected marker.' : 'User-entered name; not verified and not used to invent a project location.';
+  const a = parseFloat(document.getElementById('gisLat')?.value), b = parseFloat(document.getElementById('gisLng')?.value);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return;
+  const html = `<div style="background:#d4920e;color:#06111d;border:2px solid #fff;border-radius:7px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap;box-shadow:0 2px 7px rgba(0,0,0,.35)">${escapeMapHtml(value)}</div>`;
+  const popup = `<strong>Project / Building</strong><br>${escapeMapHtml(value)}<br><span style="font-size:10px;color:#667">${escapeMapHtml(sourceText)}${district ? `<br>District: ${escapeMapHtml(district)}` : ''}</span>`;
+  const icon = L.divIcon({ className: 'project-map-label-icon', html, iconSize: [1, 1], iconAnchor: [-8, 18], popupAnchor: [8, -18] });
+  if (!projectMapLabelMarker) projectMapLabelMarker = L.marker([a, b], { icon, interactive: true, zIndexOffset: 500 }).addTo(gisMapInstance);
+  else projectMapLabelMarker.setLatLng([a, b]).setIcon(icon);
+  projectMapLabelMarker.bindPopup(popup);
+  label.innerHTML = `🏢 <b>${escapeMapHtml(value)}</b> <span style="color:var(--muted)">— ${escapeMapHtml(sourceText)}</span>`;
+  label.style.display = 'block';
 }
 function updateExtraFieldVisibility() {
   const type = document.getElementById('propType').value;
@@ -955,9 +984,11 @@ function updateMapMarker(lat, lng) {
   if (isNaN(a) || isNaN(b)) return;
   if (gisMarker) gisMarker.setLatLng([a, b]);
   if (gisCircleLayer) gisCircleLayer.setLatLng([a, b]);
+  if (projectMapLabelMarker) projectMapLabelMarker.setLatLng([a, b]);
   document.getElementById('gisLat').value = a.toFixed(6);
   document.getElementById('gisLng').value = b.toFixed(6);
   document.getElementById('gisCoordsRow').style.display = 'flex';
+  updateProjectMapLabel();
 }
 function addPOIsToMap(pois) {
   poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
@@ -972,6 +1003,14 @@ function addPOIsToMap(pois) {
 }
 function getGISRadiusMeters() {
   return Number(AQAR_ACTIVE_CALIBRATION.gis?.distanceRadiusMeters || 1000);
+}
+function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null) {
+  const context = document.getElementById('gisRadiusContext');
+  if (!context) return;
+  const roundedRadius = Math.round(Number(radius) || 0);
+  if (count === null) context.textContent = `Searching for vital facilities within ${roundedRadius}m of the current map marker…`;
+  else if (count > 0) context.textContent = `Showing ${count} vital facilities within ${roundedRadius}m of the current map marker.`;
+  else context.textContent = `No mapped vital facilities found within ${roundedRadius}m of the current map marker.`;
 }
 function initGISMap() {
   try {
@@ -999,6 +1038,7 @@ function initGISMap() {
       debouncedFetchGISData();
     });
     mapInitialized = true;
+    updateProjectMapLabel();
     setTimeout(() => debouncedFetchGISData(), 500);
   } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>'; }
 }
@@ -1068,9 +1108,11 @@ async function fetchGISData() {
     const a = parseFloat(lat), b = parseFloat(lng);
     if (isNaN(a) || isNaN(b)) { gisLoading = false; return; }
     const radius = getGISRadiusMeters();
+      updateGISRadiusContext(radius, null);
     const result = await fetchPOIsFromOSM(a, b, radius);
     if (result && result.count > 0) {
       gisData = { facilities: result.facilities, count: result.count, totalScore: result.totalScore, lat: a, lng: b, pois: result.pois };
+      updateGISRadiusContext(radius, result.count);
       displayGISResult(gisData);
       addPOIsToMap(result.pois);
     } else {
@@ -1080,6 +1122,7 @@ async function fetchGISData() {
       document.getElementById('gisResult').style.display = 'none';
       poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
       poiMarkers = [];
+      updateGISRadiusContext(radius, 0);
     }
   } catch(e) {
     console.error('GIS Error:', e);
@@ -1089,6 +1132,7 @@ async function fetchGISData() {
     document.getElementById('gisResult').style.display = 'none';
     poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
     poiMarkers = [];
+    updateGISRadiusContext(getGISRadiusMeters(), 0);
   } finally { gisLoading = false; }
 }
 function displayGISResult(gisData) {
