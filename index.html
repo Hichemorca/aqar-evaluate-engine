@@ -70,6 +70,9 @@
       margin-left: 8px;
     }
     .section {
+      position: relative;
+      z-index: 1;
+      overflow: visible;
       background: var(--card);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -121,6 +124,9 @@
     .fg input:read-only { opacity: .7; cursor: not-allowed; }
     .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
     .autocomplete-container { position: relative; z-index: 3000; }
+    .section:has(.autocomplete-container:focus-within) { z-index: 1000; }
+    #gisSection { z-index: 10; }
+    #gisSection:has(.autocomplete-container:focus-within) { z-index: 1100; }
     .autocomplete-list {
       position: absolute;
       top: 100%;
@@ -135,7 +141,7 @@
       display: none;
       box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
-    .autocomplete-container:focus-within { z-index: 3000; }
+    .autocomplete-container:focus-within { z-index: 1200; }
     .autocomplete-list .item {
       padding: 8px 12px;
       cursor: pointer;
@@ -145,7 +151,6 @@
       transition: background .15s;
     }
     .autocomplete-list .item:hover { background: rgba(212,146,14,0.08); }
-    #gisSection { position: relative; z-index: 0; }
     #gisMap { position: relative; z-index: 0; }
     .btn {
       display: block;
@@ -758,6 +763,18 @@ async function loadMarketIntelligence() {
   }
   return marketIntelligenceData;
 }
+function getComparableBracket(targetValue, prices) {
+  const target = Number(targetValue);
+  const values = Array.isArray(prices) ? prices.map(Number).filter(price => Number.isFinite(price) && price > 0).sort((a, b) => a - b) : [];
+  if (!Number.isFinite(target) || !values.length) return null;
+  const lower = [...values].reverse().find(price => price < target);
+  const upper = values.find(price => price > target);
+  if (!Number.isFinite(lower) || !Number.isFinite(upper)) return null;
+  return {
+    lower: Number.isFinite(lower) ? lower : values[0],
+    upper: Number.isFinite(upper) ? upper : values[values.length - 1]
+  };
+}
 function buildMarketContextHTML(result, propData) {
   const segment = findMarketSegment(propData.district, propData.propType);
   const avgPpsm = Number(scrapedDistrictData?.avgPricePerSqm || propData.avgPriceSqm || 0);
@@ -1351,7 +1368,7 @@ async function scrapeRealData() {
       document.getElementById('recentSalesCount').value = data.count;
       document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
       const evidenceState = getCurrentEvidenceState(data);
-      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, minComparablePrice: data.minComparablePrice, maxComparablePrice: data.maxComparablePrice, comparablePriceBasis: data.comparablePriceBasis || 'actual_sale_price', count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', monthlyGrowthRate: data.monthlyGrowthRate, evidenceState };
+      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, minComparablePrice: data.minComparablePrice, maxComparablePrice: data.maxComparablePrice, comparablePrices: data.comparablePrices || [], comparablePriceBasis: data.comparablePriceBasis || 'actual_sale_price', count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', monthlyGrowthRate: data.monthlyGrowthRate, evidenceState };
             const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
       status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
       showToast(`${data.count} comparable sales found in ${district}`);
@@ -1599,10 +1616,9 @@ function displayResult(result, valuations, propData) {
   ].filter(Boolean);
   const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
   const marketContextHTML = buildMarketContextHTML(result, propData);
-  const comparableMin = Number(scrapedDistrictData?.minComparablePrice);
-  const comparableMax = Number(scrapedDistrictData?.maxComparablePrice);
-  const comparableRangeHTML = Number.isFinite(comparableMin) && Number.isFinite(comparableMax)
-    ? `<div style="margin:10px 0;font-size:13px;color:var(--muted)">Comparable price range: <b style="color:#dce8f5">AED ${comparableMin.toLocaleString()}</b> — <b style="color:#dce8f5">AED ${comparableMax.toLocaleString()}</b></div>`
+  const comparableBracket = getComparableBracket(result.finalValue, scrapedDistrictData?.comparablePrices);
+  const comparableRangeHTML = comparableBracket
+    ? `<div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${comparableBracket.lower.toLocaleString()}</b> — <b style="color:#dce8f5">${comparableBracket.upper.toLocaleString()} AED</b></div>`
     : '';
   const explanationFacts = [
     dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${propData.district || 'the selected area'}</b>` : '',
