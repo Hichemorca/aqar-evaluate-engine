@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AQAR Calibration Console</title>
+  <title>MIAYAAR Calibration Console</title>
+  <link rel="icon" href="/assets/branding/favicon.png" type="image/png" />
   <style>
     :root { --bg:#07111f; --panel:#0d1b2d; --panel-2:#11243a; --line:rgba(255,255,255,.1); --text:#edf4fb; --muted:#93a7bd; --gold:#e3aa38; --green:#32d28b; --red:#ff6b7a; --blue:#5ba7ff; }
     * { box-sizing:border-box; }
@@ -57,14 +58,18 @@
     @media (max-width:900px) { .grid { grid-template-columns:1fr; } .sidebar { position:static; } }
     @media (max-width:640px) { .field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .topbar { display:block; } .status { text-align:left; margin-top:10px; } }
   </style>
+  <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
-      <div>
-        <div class="eyebrow">AQAR · Calibration Console</div>
-        <h1>Weights & coefficients control</h1>
-        <p class="subtitle">Edit the approved AQAR calibration parameters for each valuation method and property type. Saving is immediate and affects new valuations only; historical results retain their original configuration identity.</p>
+      <div class="miayaar-admin-brand">
+        <img class="miayaar-logo-icon" src="/assets/branding/miayaar-icon.png" alt="MIAYAAR" />
+        <div>
+          <div class="eyebrow">MIAYAAR · Calibration Console</div>
+          <h1>Weights & coefficients control</h1>
+          <p class="subtitle">Edit the approved MIAYAAR calibration parameters for each valuation method and property type. Saving is immediate and affects new valuations only; historical results retain their original configuration identity.</p>
+        </div>
       </div>
       <div class="status" id="status">Not connected</div>
     </header>
@@ -72,7 +77,7 @@
     <section class="panel">
       <div class="panel-head"><h2>Administrator access</h2><span class="panel-note">Single administrator</span></div>
       <div class="auth">
-        <input id="adminToken" type="password" autocomplete="current-password" placeholder="AQAR admin token" />
+        <input id="adminToken" type="password" autocomplete="current-password" placeholder="Administrator token" />
         <button class="secondary" id="loadButton">Load configuration</button>
       </div>
       <div id="notice" class="notice"></div>

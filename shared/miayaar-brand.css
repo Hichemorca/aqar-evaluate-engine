@@ -1,0 +1,110 @@
+:root {
+  --miayaar-navy: #07111f;
+  --miayaar-navy-deep: #061126;
+  --miayaar-blue: #173454;
+  --miayaar-green: #0aa66f;
+  --miayaar-green-bright: #23c98b;
+  --miayaar-green-soft: #75e0b5;
+  --miayaar-white: #f4f7fb;
+  --miayaar-muted: #93a7bd;
+}
+
+body {
+  background: radial-gradient(circle at 80% 0%, #173454 0, #07111f 45%), #07111f !important;
+}
+
+.miayaar-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  max-width: min(100%, 560px);
+  text-decoration: none;
+}
+
+.miayaar-logo-horizontal {
+  display: block;
+  width: min(100%, 460px);
+  height: auto;
+  max-height: 112px;
+  object-fit: contain;
+}
+
+.miayaar-logo-icon {
+  display: block;
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.miayaar-admin-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.miayaar-page-title {
+  margin-top: 12px;
+  color: var(--miayaar-green);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.miayaar-brand-name {
+  color: var(--miayaar-white);
+  letter-spacing: .18em;
+  font-weight: 800;
+}
+
+.miayaar-brand-subtitle {
+  color: var(--miayaar-green);
+}
+
+/* Brand accents are distinct from amber warning/medium-confidence states. */
+.section-title,
+.eyebrow,
+.brand .tag,
+.footer-links a:hover,
+.footer-links .admin-link,
+.back-link:hover,
+.back-link.admin-link,
+.stat-label.accent,
+.miayaar-accent {
+  color: var(--miayaar-green) !important;
+}
+
+.final-value {
+  color: var(--miayaar-green-bright) !important;
+}
+
+.integration-btn {
+  background: linear-gradient(135deg, rgba(10, 166, 111, .2), rgba(10, 166, 111, .08)) !important;
+  border-color: rgba(10, 166, 111, .45) !important;
+  color: var(--miayaar-green-bright) !important;
+}
+
+.btn-p,
+button.primary,
+button:not(.secondary):not(.danger):not(.btn-s):not(.btn-json):not(:disabled) {
+  background: linear-gradient(135deg, var(--miayaar-green-bright), var(--miayaar-green));
+}
+
+.btn-p:hover:not(:disabled),
+button.primary:hover:not(:disabled) {
+  box-shadow: 0 8px 28px rgba(10, 166, 111, .35);
+}
+
+::selection {
+  background: rgba(10, 166, 111, .35);
+  color: var(--miayaar-white);
+}
+
+@media (max-width: 640px) {
+  .miayaar-logo-horizontal {
+    width: min(100%, 340px);
+  }
+
+  .miayaar-admin-brand {
+    align-items: flex-start;
+  }
+}

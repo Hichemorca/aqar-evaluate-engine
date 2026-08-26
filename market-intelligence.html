@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AQAR Market Intelligence</title>
+  <title>MIAYAAR Market Intelligence</title>
+  <link rel="icon" href="/assets/branding/favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -74,12 +75,14 @@
     .methodology .m-limit { color: var(--gold); opacity: 0.85; }
     details.methodology-toggle summary { cursor: pointer; font-size: 12px; font-weight: 700; color: var(--gold); padding: 4px 0; }
   </style>
+  <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
 <body>
 
 <div class="container">
   <div class="header">
-    <h1>📊 AQAR Market Intelligence</h1>
+    <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine"><img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR — Valuation Intelligence Engine" /></a>
+    <div class="miayaar-page-title">Market Intelligence</div>
     <p id="headerSubtitle">Loading market data…</p>
   </div>
 
@@ -249,7 +252,7 @@ async function loadData() {
     marketData = await res.json();
 
     document.getElementById('headerSubtitle').textContent =
-      `Full market analysis based on ${marketData.totalTransactions.toLocaleString()} DLD transactions (${marketData.dataWindow.firstTransactionDate} to ${marketData.dataWindow.lastTransactionDate}) — ${marketData.qualifyingDistricts} qualifying district/type segments`;
+      `Full market analysis based on ${marketData.totalTransactions.toLocaleString()} transactions (${marketData.dataWindow.firstTransactionDate} to ${marketData.dataWindow.lastTransactionDate}) — ${marketData.qualifyingDistricts} qualifying district/type segments`;
 
     const mi = marketData.marketIndicators || {};
     document.getElementById('marketCondition').textContent = mi.marketCondition || '—';

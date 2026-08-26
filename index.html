@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AQAR Valuation Intelligence Engine</title>
+  <title>MIAYAAR Valuation Intelligence Engine</title>
+  <link rel="icon" href="/assets/branding/favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="/shared/miayaar-brand.css" />
   <style>
     :root {
       --gold: #d4920e; --green: #00b86e; --red: #ff3c5a;
@@ -354,8 +356,9 @@
 <body>
 <div id="app-container">
   <div class="brand">
-    <div class="tag">AQAR Valuation Intelligence </div>
-    <div class="title">Real Estate Valuation Engine</div>
+    <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine">
+      <img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR — Valuation Intelligence Engine" />
+    </a>
   </div>
   <div style="display:none" aria-hidden="true">
     📅 Data refreshed: <span id="lastDataRefresh">Loading...</span> •
@@ -596,7 +599,7 @@
     <button class="btn btn-reset" onclick="resetAll()" style="flex:1">Reset</button>
   </div>
   <div id="observationConsentRow" style="margin-top:12px;padding:10px 12px;border:1px solid rgba(91,167,255,0.18);border-radius:10px;background:rgba(91,167,255,0.05);font-size:10px;line-height:1.55;color:var(--muted)">
-    <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="observationConsent" style="margin-top:2px"><span>Help improve AQAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
+    <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="observationConsent" style="margin-top:2px"><span>Help improve MIAYAAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
     <div id="observationStatus" style="margin-top:5px;color:var(--muted)" aria-live="polite"></div>
   </div>
   <div id="resultSection" class="hidden"></div>
@@ -1536,7 +1539,7 @@ function displayResult(result, valuations, propData) {
   const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}</div>`;
   const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
