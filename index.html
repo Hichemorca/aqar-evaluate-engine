@@ -684,7 +684,7 @@ const FALLBACK_COORDS = {
 let districtCoordsMap = {};
 let resolvedDistrictCoords = {};
 let districtResolveRequestId = 0;
-let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
+let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null, gisRequestId = 0, gisAbortController = null;
 let dldTransactionsCache = [];
 let selectedProjectBuilding = '';
 let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
@@ -966,6 +966,14 @@ function updateDistrictFromMapPoint(lat, lng) {
     refreshProjectSuggestions();
     return match;
   }
+  const previousDistrict = hidden.value || input.value.trim();
+  if (previousDistrict) {
+    input.value = previousDistrict;
+    hidden.value = previousDistrict;
+    display.textContent = `${previousDistrict} (map point outside matched DLD radius)`;
+    refreshProjectSuggestions();
+    return null;
+  }
   input.value = '';
   hidden.value = '';
   display.textContent = 'No matching DLD district';
@@ -1047,7 +1055,7 @@ function initGISMap() {
   } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>'; }
 }
 function debouncedFetchGISData() { if (gisFetchTimeout) clearTimeout(gisFetchTimeout); gisFetchTimeout = setTimeout(() => fetchGISData(), 800); }
-async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
+async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null) {
   const buildResultFromServer = payload => {
     const keys = ['school', 'hospital', 'supermarket', 'metro', 'park', 'gym', 'cafe', 'restaurant'];
     const facilities = Object.fromEntries(keys.map(key => [key, { count: 0, distance: null, score: 0 }]));
@@ -1074,7 +1082,7 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
     return { pois, facilities, totalScore, count: pois.length };
   };
   try {
-    const serverResponse = await fetch(`/.netlify/functions/fetch-osm?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&radius=${encodeURIComponent(radius)}`, { cache: 'no-store' });
+    const serverResponse = await fetch(`/.netlify/functions/fetch-osm?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&radius=${encodeURIComponent(radius)}`, { cache: 'no-store', signal: requestSignal || undefined });
     if (serverResponse.ok) {
       const serverPayload = await serverResponse.json();
       if (Array.isArray(serverPayload.pois)) return buildResultFromServer(serverPayload);
@@ -1108,10 +1116,12 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
   ];
   let data = null;
   for (const endpoint of endpoints) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 18000);
-    try {
-      const resp = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}`, signal: controller.signal });
+          const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 18000);
+      const signal = requestSignal && typeof AbortSignal !== 'undefined' && AbortSignal.any ? AbortSignal.any([requestSignal, controller.signal]) : controller.signal;
+      try {
+        const resp = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}`, signal });
+
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       data = await resp.json();
       if (data && Array.isArray(data.elements)) break;
@@ -1157,16 +1167,20 @@ function haversineDistance(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 async function fetchGISData() {
-  if (gisLoading) return;
   const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
   if (!lat || !lng) return;
+  const requestId = ++gisRequestId;
+  if (gisAbortController) gisAbortController.abort();
+  gisAbortController = new AbortController();
+  const requestSignal = gisAbortController.signal;
   gisLoading = true;
   try {
     const a = parseFloat(lat), b = parseFloat(lng);
-    if (isNaN(a) || isNaN(b)) { gisLoading = false; return; }
+    if (isNaN(a) || isNaN(b)) return;
     const radius = getGISRadiusMeters();
-      updateGISRadiusContext(radius, null);
-    const result = await fetchPOIsFromOSM(a, b, radius);
+    updateGISRadiusContext(radius, null);
+    const result = await fetchPOIsFromOSM(a, b, radius, requestSignal);
+    if (requestId !== gisRequestId || requestSignal.aborted) return;
     if (result && result.count > 0) {
       gisData = { facilities: result.facilities, count: result.count, totalScore: result.totalScore, lat: a, lng: b, pois: result.pois };
       updateGISRadiusContext(radius, result.count);
@@ -1183,6 +1197,7 @@ async function fetchGISData() {
       if (!result) document.getElementById('gisRadiusContext').textContent = `Facility data is temporarily unavailable. Please try again; the map does not invent facilities.`;
     }
   } catch(e) {
+    if (requestId !== gisRequestId || requestSignal.aborted) return;
     console.error('GIS Error:', e);
     gisData = null;
     window.gisImpactMultiplier = 1;
@@ -1191,7 +1206,9 @@ async function fetchGISData() {
     poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
     poiMarkers = [];
     updateGISRadiusContext(getGISRadiusMeters(), 0);
-  } finally { gisLoading = false; }
+  } finally {
+    if (requestId === gisRequestId) { gisLoading = false; gisAbortController = null; }
+  }
 }
 function displayGISResult(gisData) {
   const container = document.getElementById('gisResult'), list = document.getElementById('gisFacilitiesList'), scoreDisplay = document.getElementById('gisScoreDisplay');
