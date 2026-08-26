@@ -207,11 +207,11 @@ checksum الحالي للملف الخام المنظف هو:
 
 تم تنفيذ الإصدار v2.1 على فرع `feature/v2.1-property-fields` كواجهة وpayload وشرح نتيجة وتحليل معزول فقط. الحقول الجديدة الاختيارية هي: `Project / Building Name` للـ Apartment وVilla وTownhouse، و`BUA` للـ Villa وTownhouse فقط، و`Plot Area` للـ Villa وTownhouse وLand، و`Last Renovation Year` للـ Apartment وVilla وTownhouse عندما يكون عمر العقار أكبر من خمس سنوات. بقيت حقول `Detailed Unit Type` و`Floor` و`Parking Count` كما هي دون حذف أو تغيير.
 
-يستخدم Project / Building اقتراحات من `masterProject` و`project` في معاملات DLD، وتُفلتر الاقتراحات حسب المنطقة والنوع. الاسم المدخل يدويًا لا يُعامل كبيان موثق، وإذا كانت أدلة المشروع محدودة يبقى District هو fallback المرئي. لا تستخدم الحقول الجديدة حاليًا في أي معادلة تقييم أو Accuracy رسمية.
+يستخدم Project / Building اقتراحات من `masterProject` و`project` في معاملات DLD، وتُفلتر الاقتراحات حسب المنطقة والنوع. الاسم المدخل يدويًا لا يُعامل كبيان موثق، وإذا كانت أدلة المشروع محدودة يبقى District هو fallback المرئي. أضيفت direct multipliers بقيمة محايدة `1.00`: معامل خاص للمشروع الموثق، ومعامل لنسبة `BUA ÷ Plot Area` للـ Villa/Townhouse، ومعامل لحداثة التجديد. حاصل ضرب هذه المعاملات يظهر في shadow preview فقط، ولا يستبدل القيمة الرسمية أو يدخل Accuracy قبل موافقة منفصلة.
 
 أثبت التحليل المعزول أن Project / Building قابل للقياس من بيانات DLD الحالية، مع تغطية 76.56% للشقق و89.29% للفلل، بينما لا تحتوي سجلات DLD أو Accuracy الحالية على حقول موثقة منفصلة لـ BUA أو Plot Area أو Last Renovation Year. لذلك لا يجوز إعادة تسمية `area` أو `procedureArea` تلقائيًا إلى BUA أو Plot Area، ولا يجوز توليد قيم اصطناعية لهذه الحقول. التفاصيل الكاملة في `docs/v2.1-property-fields-spec.md` و`docs/v2.1-property-fields-analysis.md`.
 
-أي ربط مستقبلي لهذه الحقول باختيار المقارنات أو طريقة التقييم أو Accuracy يتطلب مصدرًا موثقًا، تجربة shadow معزولة، مقارنة MAE وbias وP90 و±15% وcoverage وfallback transitions، ثم موافقة المالك الصريحة. لا يغيّر v2.1 الحالي أنواع العقارات أو طرق التقييم أو calibration أو الأوزان أو fallback أو artifacts التاريخية.
+تُدار direct multipliers من Calibration Console ضمن قسم مستقل عن أوزان المناهج. الإعداد الافتراضي shadow معطل، والشرائح المفتوحة تحفظ كـ `null`، ومفاتيح المشاريع تُحفظ بصيغة `property type | district | project`. أي تفعيل أو تغيير رسمي يتطلب مصدرًا موثقًا، تجربة shadow معزولة، مقارنة MAE وbias وP90 و±15% وcoverage وfallback transitions، ثم موافقة المالك الصريحة. لا يغيّر v2.1 الحالي أنواع العقارات أو طرق التقييم أو calibration الرسمي أو الأوزان أو fallback أو artifacts التاريخية.
 
 ## 15. القيود المعروفة
 
