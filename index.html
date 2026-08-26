@@ -142,6 +142,15 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
     .autocomplete-container:focus-within { z-index: 1200; }
+    .autocomplete-list.autocomplete-portal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: auto;
+      width: 280px;
+      max-width: calc(100vw - 20px);
+      z-index: 2147483000;
+    }
     .autocomplete-list .item {
       padding: 8px 12px;
       cursor: pointer;
@@ -876,7 +885,7 @@ function refreshProjectSuggestions() {
   if (!input || !row) return;
   const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(document.getElementById('propType').value, document.getElementById('yearBuilt').value);
   row.style.display = visibility.projectBuilding ? 'flex' : 'none';
-  if (!visibility.projectBuilding) { selectedProjectBuilding = ''; input.value = ''; document.getElementById('projectBuildingAutocomplete').style.display = 'none'; }
+  if (!visibility.projectBuilding) { selectedProjectBuilding = ''; input.value = ''; hideAutocompleteList(document.getElementById('projectBuildingAutocomplete')); }
   else if (selectedProjectBuilding && !projectOptionsForCurrentContext().includes(selectedProjectBuilding)) { selectedProjectBuilding = ''; input.value = ''; }
   updateProjectBuildingNotice();
   updateProjectMapLabel();
@@ -915,20 +924,24 @@ function filterProjectBuildings(q) {
   const list = document.getElementById('projectBuildingAutocomplete');
   const input = document.getElementById('projectBuildingInput');
   if (!list || !input) return;
+  promoteAutocompleteList(list);
+  closeOtherAutocompleteLists(list);
   const options = projectOptionsForCurrentContext().filter(name => !q || name.toLowerCase().includes(q.toLowerCase().trim()));
   list.replaceChildren();
   if (!options.length) {
     list.style.display = q ? 'block' : 'none';
+    if (q) positionAutocompleteList(list, input);
     if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); }
     return;
   }
   options.slice(0, 15).forEach(name => { const item = document.createElement('div'); item.className = 'item'; item.textContent = name; item.onclick = () => selectProjectBuilding(name); list.appendChild(item); });
   list.style.display = 'block';
+  positionAutocompleteList(list, input);
 }
 function selectProjectBuilding(name) {
   selectedProjectBuilding = name;
   document.getElementById('projectBuildingInput').value = name;
-  document.getElementById('projectBuildingAutocomplete').style.display = 'none';
+  hideAutocompleteList(document.getElementById('projectBuildingAutocomplete'));
   updateProjectBuildingNotice();
   updateProjectMapLabel();
   debouncedFetchGISData();
@@ -972,9 +985,50 @@ function updateExtraFieldVisibility() {
   if (!visibility.renovationYear) document.getElementById('lastRenovationYear').value = '';
   refreshProjectSuggestions();
 }
+function promoteAutocompleteList(list) {
+  if (!list || list.dataset.portalized === 'true') return;
+  document.body.appendChild(list);
+  list.classList.add('autocomplete-portal');
+  list.dataset.portalized = 'true';
+}
+function positionAutocompleteList(list, input) {
+  if (!list || !input || list.dataset.portalized !== 'true') return;
+  const rect = input.getBoundingClientRect();
+  const listHeight = Math.min(240, Math.max(100, list.scrollHeight || 200));
+  let top = rect.bottom;
+  if (top + listHeight > window.innerHeight - 8 && rect.top > listHeight + 8) top = rect.top - listHeight;
+  list.style.top = `${Math.max(8, Math.round(top))}px`;
+  list.style.left = `${Math.max(8, Math.round(rect.left))}px`;
+  list.style.width = `${Math.round(rect.width)}px`;
+  list.style.maxHeight = `${Math.max(100, Math.min(240, window.innerHeight - Math.max(8, Math.round(top)) - 8))}px`;
+}
+function hideAutocompleteList(list) {
+  if (list) list.style.display = 'none';
+}
+function closeOtherAutocompleteLists(keep) {
+  ['districtAutocomplete', 'projectBuildingAutocomplete'].forEach(id => {
+    const list = document.getElementById(id);
+    if (list && list !== keep) hideAutocompleteList(list);
+  });
+}
+function repositionVisibleAutocompleteLists() {
+  const pairs = [
+    ['districtAutocomplete', 'districtInput'],
+    ['projectBuildingAutocomplete', 'projectBuildingInput']
+  ];
+  pairs.forEach(([listId, inputId]) => {
+    const list = document.getElementById(listId);
+    if (list?.style.display === 'block') positionAutocompleteList(list, document.getElementById(inputId));
+  });
+}
+window.addEventListener('scroll', repositionVisibleAutocompleteLists, true);
+window.addEventListener('resize', repositionVisibleAutocompleteLists);
 function filterDistricts(q) {
   const c = document.getElementById('districtAutocomplete');
-  if (!q || q.length < 1) { c.style.display = 'none'; return; }
+  const input = document.getElementById('districtInput');
+  if (!q || q.length < 1) { hideAutocompleteList(c); return; }
+  promoteAutocompleteList(c);
+  closeOtherAutocompleteLists(c);
   const r = dubaiDistrictsList.filter(d => d.toLowerCase().includes(q.toLowerCase().trim()));
   c.replaceChildren();
   if (r.length) {
@@ -996,6 +1050,7 @@ function filterDistricts(q) {
     c.appendChild(empty);
   }
   c.style.display = 'block';
+  positionAutocompleteList(c, input);
 }
 async function resolveDistrictCoords(district) {
   const cached = resolvedDistrictCoords[AQAR_DISTRICT_MAP_LINKING.normalizeName(district)];
@@ -1023,7 +1078,7 @@ async function selectDistrict(d) {
   document.getElementById('districtInput').value = d;
   document.getElementById('selectedDistrict').value = d;
   document.getElementById('selectedDistrictDisplay').textContent = d;
-  document.getElementById('districtAutocomplete').style.display = 'none';
+  hideAutocompleteList(document.getElementById('districtAutocomplete'));
   refreshProjectSuggestions();
   const requestId = ++districtResolveRequestId;
   const c = await resolveDistrictCoords(d);
@@ -1903,9 +1958,14 @@ document.addEventListener('DOMContentLoaded', function() {
   loadAccuracyMeta();
   loadMarketIntelligence();
   document.addEventListener('click', function(e) {
-    const container = document.getElementById('districtAutocomplete');
-    const input = document.getElementById('districtInput');
-    if (e.target !== input && !container.contains(e.target)) container.style.display = 'none';
+    const districtList = document.getElementById('districtAutocomplete');
+    const projectList = document.getElementById('projectBuildingAutocomplete');
+    const districtInput = document.getElementById('districtInput');
+    const projectInput = document.getElementById('projectBuildingInput');
+    const insideDistrict = e.target === districtInput || districtList?.contains(e.target);
+    const insideProject = e.target === projectInput || projectList?.contains(e.target);
+    if (!insideDistrict) hideAutocompleteList(districtList);
+    if (!insideProject) hideAutocompleteList(projectList);
   });
 });
 </script>
