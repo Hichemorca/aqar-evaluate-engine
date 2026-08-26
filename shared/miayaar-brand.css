@@ -99,6 +99,27 @@ button.primary:hover:not(:disabled) {
   color: var(--miayaar-white);
 }
 
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 10000;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #07111f;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+  outline: 3px solid #00b86e;
+  outline-offset: 2px;
+}
+
 @media (max-width: 640px) {
   .miayaar-logo-horizontal {
     width: min(100%, 340px);

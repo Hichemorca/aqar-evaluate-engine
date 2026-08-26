@@ -16,9 +16,11 @@
   <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" tabindex="-1">
   <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine"><img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR &mdash; Valuation Intelligence Engine" /></a>
   <div class="miayaar-page-title">Data Export</div>
-  <div class="stats" id="stats">Loading...</div>
+  <div class="stats" id="stats" aria-live="polite">Loading...</div>
   <button class="btn btn-csv" onclick="exportCSV()">Download CSV (Excel)</button>
   <button class="btn btn-json" onclick="exportJSON()">Download JSON</button>
   <br><br>
@@ -66,5 +68,6 @@
 
     loadData();
   </script>
+  </main>
 </body>
 </html>
