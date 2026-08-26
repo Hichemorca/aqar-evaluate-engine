@@ -1670,7 +1670,7 @@ function displayResult(result, valuations, propData) {
       const evidenceHTML = '';
 
   const adjustmentFacts = [
-    propData.projectBuilding ? `Project / Building: ${propData.projectBuilding} (${propData.projectBuildingSource === 'dld-suggestion' ? 'DLD suggestion' : 'user-entered'})` : '',
+    propData.projectBuilding ? `Project / Building: ${propData.projectBuilding} (${propData.projectBuildingSource === 'dld-suggestion' ? 'Verified project suggestion' : 'user-entered'})` : '',
     propData.bua ? `BUA: ${propData.bua} sqm` : '',
     propData.plotArea ? `Plot area: ${propData.plotArea} sqm` : '',
     propData.lastRenovationYear ? `Last renovation: ${propData.lastRenovationYear}` : '',
@@ -1685,9 +1685,7 @@ function displayResult(result, valuations, propData) {
   const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
   const marketContextHTML = buildMarketContextHTML(result, propData);
   const comparableBracket = getComparableBracket(result.finalValue, scrapedDistrictData?.comparablePrices);
-  const comparableRangeHTML = comparableBracket
-    ? `<div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${comparableBracket.lower.toLocaleString()}</b> — <b style="color:#dce8f5">${comparableBracket.upper.toLocaleString()} AED</b></div>`
-    : '';
+  const comparableRangeHTML = '';
   const explanationFacts = [
     dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${propData.district || 'the selected area'}</b>` : '',
     dldCount > 0 ? `Evidence strength: <b>${evidenceConfidence}</b>` : '',
