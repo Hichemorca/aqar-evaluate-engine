@@ -187,7 +187,9 @@ checksum الحالي للملف الخام المنظف هو:
 
 `scripts/fetch-transactions.js` مولد تجريبي قديم ينشئ `data/fetched-transactions.json` باستخدام قيم تقديرية وعشوائية لأغراض العرض أو الاختبار فقط. لا يُستخدم في workflow الحالي، ولا يكتب `dld-transactions.json` أو `accuracy-data.json`، ولا يجوز استخدام مخرجاته في المقارنات أو Accuracy الرسمية. المسار الرسمي يعتمد على `scripts/fetch-dld.js` ثم `scripts/evaluate-and-save.js` باستخدام artifacts DLD المنظفة.
 
-`netlify/functions/scrape-sold.js` لا يختلق سجلات؛ adapter المصدر فيه غير مهيأ ويعيد عدم توفر المصدر عند عدم وجود مصدر DLD معتمد. أما `netlify/functions/scrape.js` فقد عُطّل افتراضيًا لأنه legacy وغير مستخدم من مسار المنتج الحالي.
+`netlify/functions/scrape-sold.js` لا يختلق سجلات، لكنه legacy وغير مستخدم من مسار المنتج الحالي؛ لذلك عُطّل افتراضيًا ويعيد `410 Gone` دون CORS عام. أما `netlify/functions/scrape.js` فقد عُطّل افتراضيًا للسبب نفسه. لا تُفعّل أيًا منهما قبل إضافة حماية وصول وrate limiting ومراجعة تشغيلية مستقلة.
+
+يُعرّف `.github/workflows/ci.yml` فحوص ما قبل الدمج عند كل `push` و`pull_request`، وتشمل `npm ci` و`npm test` والتحقق من summaries وJavaScript syntax.
 
 ## 11. تدفق تحديث البيانات اليومي
 
