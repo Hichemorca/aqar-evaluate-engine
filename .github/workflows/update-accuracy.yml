@@ -67,6 +67,9 @@ jobs:
       - name: Layer 8 — Evaluate all properties
         run: node scripts/evaluate-and-save.js
 
+      - name: Generate Accuracy diagnostics
+        run: node scripts/generate-accuracy-diagnostics.js
+
       - name: Generate lightweight client summaries
         run: node scripts/generate-client-summaries.js
         
