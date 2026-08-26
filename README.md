@@ -183,7 +183,13 @@ checksum الحالي للملف الخام المنظف هو:
 
 تضيف Accuracy: `lat`، `lng`، `gisScore`، `gisFacilities`، `gisMatchedBy`، `hasGis`، `aqarValuation`، `aqarVsActual`، `evalLevel`، `evalCount`، `gisMultiplier`، `viewMultiplier`، `viewTypes`، `calibrationConfigId`، `valuationMethods`، `calibrationAssumptions`، و`comparableDiagnostics`.
 
-## 10. تدفق تحديث البيانات اليومي
+## 10. فصل المسارات التجريبية عن Accuracy الرسمية
+
+`scripts/fetch-transactions.js` مولد تجريبي قديم ينشئ `data/fetched-transactions.json` باستخدام قيم تقديرية وعشوائية لأغراض العرض أو الاختبار فقط. لا يُستخدم في workflow الحالي، ولا يكتب `dld-transactions.json` أو `accuracy-data.json`، ولا يجوز استخدام مخرجاته في المقارنات أو Accuracy الرسمية. المسار الرسمي يعتمد على `scripts/fetch-dld.js` ثم `scripts/evaluate-and-save.js` باستخدام artifacts DLD المنظفة.
+
+`netlify/functions/scrape-sold.js` لا يختلق سجلات؛ adapter المصدر فيه غير مهيأ ويعيد عدم توفر المصدر عند عدم وجود مصدر DLD معتمد. أما `netlify/functions/scrape.js` فقد عُطّل افتراضيًا لأنه legacy وغير مستخدم من مسار المنتج الحالي.
+
+## 11. تدفق تحديث البيانات اليومي
 
 يُعرّف التدفق في `.github/workflows/update-accuracy.yml` ويُشغّل يوميًا عند الساعة 06:00 UTC أو يدويًا عبر `workflow_dispatch`. الترتيب الحالي هو:
 
