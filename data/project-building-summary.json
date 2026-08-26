@@ -1,0 +1,8031 @@
+{
+  "source": "dld-transactions.json",
+  "entries": [
+    {
+      "propertyType": "apartment",
+      "district": "AL BARARI",
+      "projects": [
+        {
+          "name": "SEVENTH HEAVEN",
+          "transactionCount": 9
+        },
+        {
+          "name": "Seventh Heaven - Ashjar",
+          "transactionCount": 103
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL BARSHAA SOUTH THIRD",
+      "projects": [
+        {
+          "name": "ORION BUILDING",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL FURJAN",
+      "projects": [
+        {
+          "name": "Al Fouad",
+          "transactionCount": 2
+        },
+        {
+          "name": "AMALIA RESIDENCES",
+          "transactionCount": 20
+        },
+        {
+          "name": "Avenue Residence 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "AVENUE RESIDENCE 4",
+          "transactionCount": 6
+        },
+        {
+          "name": "AVENUE RESIDENCE 5",
+          "transactionCount": 11
+        },
+        {
+          "name": "AVENUE RESIDENCE1",
+          "transactionCount": 4
+        },
+        {
+          "name": "AZIZI AMBER",
+          "transactionCount": 9
+        },
+        {
+          "name": "Azizi Berton",
+          "transactionCount": 10
+        },
+        {
+          "name": "Azizi Farishta Residence",
+          "transactionCount": 11
+        },
+        {
+          "name": "Azizi Pearl",
+          "transactionCount": 8
+        },
+        {
+          "name": "Azizi Plaza Hotel Apartments",
+          "transactionCount": 28
+        },
+        {
+          "name": "Azizi Samia Residence",
+          "transactionCount": 19
+        },
+        {
+          "name": "Azizi Shaista Residence",
+          "transactionCount": 8
+        },
+        {
+          "name": "Azizi Star Hotel Apartments",
+          "transactionCount": 29
+        },
+        {
+          "name": "AZIZI. DAISY",
+          "transactionCount": 5
+        },
+        {
+          "name": "AZIZI. FEIROUZ",
+          "transactionCount": 4
+        },
+        {
+          "name": "AZIZI. FREESIA",
+          "transactionCount": 5
+        },
+        {
+          "name": "Azizi. Iris",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi. Liatris",
+          "transactionCount": 2
+        },
+        {
+          "name": "AZIZI. ORCHID",
+          "transactionCount": 5
+        },
+        {
+          "name": "AZIZI. YASAMINE",
+          "transactionCount": 3
+        },
+        {
+          "name": "CANDACE ACACIA HOTEL APARTMENTS",
+          "transactionCount": 16
+        },
+        {
+          "name": "CANDACE ASTER HOTEL APARTMENTS",
+          "transactionCount": 8
+        },
+        {
+          "name": "EQUITI ARCADE",
+          "transactionCount": 6
+        },
+        {
+          "name": "EQUITI HOME",
+          "transactionCount": 21
+        },
+        {
+          "name": "EQUITI RESIDENCE",
+          "transactionCount": 7
+        },
+        {
+          "name": "GEMZ by Danube",
+          "transactionCount": 19
+        },
+        {
+          "name": "GLAMZ RESIDENCE",
+          "transactionCount": 15
+        },
+        {
+          "name": "Jebel Ali Village Townhouses- Phase 1",
+          "transactionCount": 9
+        },
+        {
+          "name": "Maria Tower",
+          "transactionCount": 6
+        },
+        {
+          "name": "Montrell Hotel Aprtments",
+          "transactionCount": 10
+        },
+        {
+          "name": "MURANO RESIDENCE 1",
+          "transactionCount": 1
+        },
+        {
+          "name": "Nadine Residences",
+          "transactionCount": 9
+        },
+        {
+          "name": "Nadine Residences 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "PEARLZ by Danube",
+          "transactionCount": 18
+        },
+        {
+          "name": "PG ONE AT AL FURJAN",
+          "transactionCount": 14
+        },
+        {
+          "name": "PG UPPERHOUSE",
+          "transactionCount": 8
+        },
+        {
+          "name": "Prime Residency 3",
+          "transactionCount": 11
+        },
+        {
+          "name": "Roy Mediterranean Hotel Apartments",
+          "transactionCount": 15
+        },
+        {
+          "name": "STARZ TOWER by DANUBE",
+          "transactionCount": 19
+        },
+        {
+          "name": "TALIA RESIDENCES",
+          "transactionCount": 1
+        },
+        {
+          "name": "VICTORIA RESIDENCY",
+          "transactionCount": 2
+        },
+        {
+          "name": "Westwood By Imtiaz",
+          "transactionCount": 7
+        },
+        {
+          "name": "Zazen Gardens",
+          "transactionCount": 3
+        },
+        {
+          "name": "ZaZEN Ivy",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL KHAIL HEIGHTS",
+      "projects": [
+        {
+          "name": "AL KHAIL HEIGHTS",
+          "transactionCount": 58
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL KIFAF",
+      "projects": [
+        {
+          "name": "1 Residences",
+          "transactionCount": 33
+        },
+        {
+          "name": "Park Gate Residences",
+          "transactionCount": 21
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL MERKADH",
+      "projects": [
+        {
+          "name": "Azizi Riviera 55",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL QUSAIS INDUSTRIAL FOURTH",
+      "projects": [
+        {
+          "name": "RASHA 2",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL SATWA",
+      "projects": [
+        {
+          "name": "Arista One",
+          "transactionCount": 2
+        },
+        {
+          "name": "Coral by Vision",
+          "transactionCount": 8
+        },
+        {
+          "name": "Hyde Walk Residence by Imtiaz",
+          "transactionCount": 3
+        },
+        {
+          "name": "KORO ONE",
+          "transactionCount": 1
+        },
+        {
+          "name": "WAHA LIVING by AL YAKKA",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL WASL",
+      "projects": [
+        {
+          "name": "Erin",
+          "transactionCount": 1
+        },
+        {
+          "name": "Myrtle",
+          "transactionCount": 19
+        },
+        {
+          "name": "Rove City Walk",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "AL YELAYISS 2",
+      "projects": [
+        {
+          "name": "HOLLAND GARDENS",
+          "transactionCount": 66
+        },
+        {
+          "name": "The Hamilton",
+          "transactionCount": 62
+        },
+        {
+          "name": "THE REGENT",
+          "transactionCount": 10
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "ARJAN",
+      "projects": [
+        {
+          "name": "2020 Marquis",
+          "transactionCount": 7
+        },
+        {
+          "name": "48 PARKSIDE",
+          "transactionCount": 18
+        },
+        {
+          "name": "Adhara Star",
+          "transactionCount": 20
+        },
+        {
+          "name": "ARBOR VIEW",
+          "transactionCount": 19
+        },
+        {
+          "name": "Avelon Boulevard",
+          "transactionCount": 14
+        },
+        {
+          "name": "BEVERLY BOULEVARD",
+          "transactionCount": 17
+        },
+        {
+          "name": "BURJ VIEW RESIDENCE",
+          "transactionCount": 8
+        },
+        {
+          "name": "Divine Living",
+          "transactionCount": 15
+        },
+        {
+          "name": "ELEVATE by Prescott",
+          "transactionCount": 22
+        },
+        {
+          "name": "ELZ Residence",
+          "transactionCount": 10
+        },
+        {
+          "name": "Floarea Residence",
+          "transactionCount": 8
+        },
+        {
+          "name": "Gardenia Livings",
+          "transactionCount": 11
+        },
+        {
+          "name": "GENESIS",
+          "transactionCount": 5
+        },
+        {
+          "name": "GREEN DIAMOND 1",
+          "transactionCount": 9
+        },
+        {
+          "name": "Jewelz Residence",
+          "transactionCount": 15
+        },
+        {
+          "name": "Joya Blanca Residences",
+          "transactionCount": 13
+        },
+        {
+          "name": "LA FONTANA DI TREVI",
+          "transactionCount": 5
+        },
+        {
+          "name": "LEGACY BY SUNRISE",
+          "transactionCount": 3
+        },
+        {
+          "name": "LINCOLN PARK",
+          "transactionCount": 26
+        },
+        {
+          "name": "LINCOLN PARK ( NORTH SIDE)",
+          "transactionCount": 13
+        },
+        {
+          "name": "LINCOLN PARK (SHEFFIELD)",
+          "transactionCount": 6
+        },
+        {
+          "name": "Marquis Galleria",
+          "transactionCount": 17
+        },
+        {
+          "name": "Marquis Signature",
+          "transactionCount": 1
+        },
+        {
+          "name": "MIRACLZ TOWER",
+          "transactionCount": 25
+        },
+        {
+          "name": "NAS3",
+          "transactionCount": 3
+        },
+        {
+          "name": "Oxford Gardens",
+          "transactionCount": 22
+        },
+        {
+          "name": "PLATINUM 1",
+          "transactionCount": 4
+        },
+        {
+          "name": "Prime Gardens",
+          "transactionCount": 8
+        },
+        {
+          "name": "Q Gardens Boutique Residences",
+          "transactionCount": 8
+        },
+        {
+          "name": "Remraam - Al Ramth",
+          "transactionCount": 5
+        },
+        {
+          "name": "Resortz Residence",
+          "transactionCount": 26
+        },
+        {
+          "name": "Samana Green",
+          "transactionCount": 6
+        },
+        {
+          "name": "SAMANA HILLS",
+          "transactionCount": 10
+        },
+        {
+          "name": "SAMANA PARK VIEWS",
+          "transactionCount": 9
+        },
+        {
+          "name": "SIRAJ TOWER",
+          "transactionCount": 27
+        },
+        {
+          "name": "SKYZ By Danube",
+          "transactionCount": 62
+        },
+        {
+          "name": "SUNRISE LEGEND",
+          "transactionCount": 8
+        },
+        {
+          "name": "SYANN PARK1",
+          "transactionCount": 3
+        },
+        {
+          "name": "THE WINGS",
+          "transactionCount": 13
+        },
+        {
+          "name": "TORINO BY ORO24",
+          "transactionCount": 71
+        },
+        {
+          "name": "UNIESTATE SUPREME RESIDENCE",
+          "transactionCount": 5
+        },
+        {
+          "name": "Vincitore Benessere",
+          "transactionCount": 19
+        },
+        {
+          "name": "Vincitore Boulevard",
+          "transactionCount": 12
+        },
+        {
+          "name": "VINCITORE PALACIO",
+          "transactionCount": 5
+        },
+        {
+          "name": "Welcome Residency",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "BARSHA HEIGHTS",
+      "projects": [
+        {
+          "name": "FAHAD 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "FIRST CENTRAL",
+          "transactionCount": 16
+        },
+        {
+          "name": "GRAND CENTRAL",
+          "transactionCount": 8
+        },
+        {
+          "name": "MADISON RESIDENCY",
+          "transactionCount": 5
+        },
+        {
+          "name": "METRO CENTRAL",
+          "transactionCount": 5
+        },
+        {
+          "name": "SKY CENTRAL",
+          "transactionCount": 20
+        },
+        {
+          "name": "TWO TOWERS",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "BLUEWATERS",
+      "projects": [
+        {
+          "name": "Bluewaters Residences",
+          "transactionCount": 12
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "BURJ KHALIFA",
+      "projects": [
+        {
+          "name": "29 BOULEVARD",
+          "transactionCount": 34
+        },
+        {
+          "name": "ACT ONE | ACT TWO",
+          "transactionCount": 33
+        },
+        {
+          "name": "BAHWAN TOWER",
+          "transactionCount": 6
+        },
+        {
+          "name": "BELLEVUE TOWERS",
+          "transactionCount": 15
+        },
+        {
+          "name": "BLVD CRESCENT",
+          "transactionCount": 9
+        },
+        {
+          "name": "BLVD HEIGHTS",
+          "transactionCount": 16
+        },
+        {
+          "name": "Boulevard Point",
+          "transactionCount": 21
+        },
+        {
+          "name": "BURJ AL NUJOOM",
+          "transactionCount": 11
+        },
+        {
+          "name": "Burj Crown",
+          "transactionCount": 33
+        },
+        {
+          "name": "BURJ KHALIFA TOWERS",
+          "transactionCount": 50
+        },
+        {
+          "name": "Burj Royale",
+          "transactionCount": 14
+        },
+        {
+          "name": "BURJ VIEWS",
+          "transactionCount": 26
+        },
+        {
+          "name": "BURJ VISTA",
+          "transactionCount": 17
+        },
+        {
+          "name": "CLAREN 1",
+          "transactionCount": 17
+        },
+        {
+          "name": "DD BOULEVARD CENTRAL",
+          "transactionCount": 17
+        },
+        {
+          "name": "DD STAND POINT",
+          "transactionCount": 19
+        },
+        {
+          "name": "DT 1",
+          "transactionCount": 11
+        },
+        {
+          "name": "ELITE DOWNTOWN RESIDENCE",
+          "transactionCount": 14
+        },
+        {
+          "name": "FORTE",
+          "transactionCount": 25
+        },
+        {
+          "name": "Grande",
+          "transactionCount": 22
+        },
+        {
+          "name": "Il PRIMO",
+          "transactionCount": 1
+        },
+        {
+          "name": "Imperial  Avenue",
+          "transactionCount": 33
+        },
+        {
+          "name": "MADA RESIDENCES TOWER",
+          "transactionCount": 9
+        },
+        {
+          "name": "MON REVE",
+          "transactionCount": 5
+        },
+        {
+          "name": "Opera Grand",
+          "transactionCount": 14
+        },
+        {
+          "name": "RP HEIGHTS",
+          "transactionCount": 6
+        },
+        {
+          "name": "THE 118",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE ADDRESS - THE BLVD",
+          "transactionCount": 21
+        },
+        {
+          "name": "THE ADDRESS DUBAI OPERA",
+          "transactionCount": 24
+        },
+        {
+          "name": "THE ADDRESS RESIDENCE - SKY VIEW",
+          "transactionCount": 24
+        },
+        {
+          "name": "THE ADDRESS RESIDENCE FOUNTAIN VIEWS II",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE ADDRESS RESIDENCE FOUNTAIN VIEWS III",
+          "transactionCount": 9
+        },
+        {
+          "name": "The Address Residence-Fountain Views",
+          "transactionCount": 8
+        },
+        {
+          "name": "THE DISTINCTION",
+          "transactionCount": 13
+        },
+        {
+          "name": "THE DUBAI MALL",
+          "transactionCount": 8
+        },
+        {
+          "name": "THE SIGNATURE",
+          "transactionCount": 18
+        },
+        {
+          "name": "UPPER CREST",
+          "transactionCount": 15
+        },
+        {
+          "name": "Vida Dubai Mall",
+          "transactionCount": 22
+        },
+        {
+          "name": "VIDA RESIDENCE DOWNTOWN DUBAI",
+          "transactionCount": 16
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "BUSINESS BAY",
+      "projects": [
+        {
+          "name": "15 Northside",
+          "transactionCount": 24
+        },
+        {
+          "name": "AG TOWER",
+          "transactionCount": 17
+        },
+        {
+          "name": "Ahad Residences",
+          "transactionCount": 13
+        },
+        {
+          "name": "AL HABTOOR CITY",
+          "transactionCount": 43
+        },
+        {
+          "name": "AVANTI TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "AYKON CITY",
+          "transactionCount": 66
+        },
+        {
+          "name": "AYKON CITY 2",
+          "transactionCount": 30
+        },
+        {
+          "name": "BAY SQUARE",
+          "transactionCount": 13
+        },
+        {
+          "name": "BAY'S EDGE",
+          "transactionCount": 7
+        },
+        {
+          "name": "Bayz Tower",
+          "transactionCount": 21
+        },
+        {
+          "name": "Binghatti Canal",
+          "transactionCount": 13
+        },
+        {
+          "name": "CAPITAL BAY  A",
+          "transactionCount": 5
+        },
+        {
+          "name": "CAPITAL BAY B",
+          "transactionCount": 19
+        },
+        {
+          "name": "Century",
+          "transactionCount": 3
+        },
+        {
+          "name": "CHURCHILL TOWER",
+          "transactionCount": 21
+        },
+        {
+          "name": "CLAYTON RESIDENCY",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC TOWERS BY PARAMOUNT",
+          "transactionCount": 74
+        },
+        {
+          "name": "Dolphin Tower",
+          "transactionCount": 6
+        },
+        {
+          "name": "ELITE BUSINESS BAY RESIDENCE",
+          "transactionCount": 15
+        },
+        {
+          "name": "EXECUTIVE BAY B",
+          "transactionCount": 5
+        },
+        {
+          "name": "FAIR VIEW RESIDENCY",
+          "transactionCount": 8
+        },
+        {
+          "name": "HAMILTON RESIDENCY",
+          "transactionCount": 6
+        },
+        {
+          "name": "J ONE",
+          "transactionCount": 10
+        },
+        {
+          "name": "Jumeirah Living Business Bay",
+          "transactionCount": 3
+        },
+        {
+          "name": "Luxury Family Residence II",
+          "transactionCount": 8
+        },
+        {
+          "name": "MAG 318",
+          "transactionCount": 16
+        },
+        {
+          "name": "MAJESTINE",
+          "transactionCount": 21
+        },
+        {
+          "name": "MARQUISE SQUARE TOWER",
+          "transactionCount": 17
+        },
+        {
+          "name": "MAYFAIR RESIDENCY",
+          "transactionCount": 11
+        },
+        {
+          "name": "MAYFAIR TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "MERANO TOWER",
+          "transactionCount": 15
+        },
+        {
+          "name": "Millennium Binghatti Residences Business Bay",
+          "transactionCount": 12
+        },
+        {
+          "name": "NOBLES",
+          "transactionCount": 27
+        },
+        {
+          "name": "ONTARIO TOWER",
+          "transactionCount": 12
+        },
+        {
+          "name": "PARAMOUNT TOWER HOTEL & RESIDENCES",
+          "transactionCount": 23
+        },
+        {
+          "name": "PARK CENTRAL",
+          "transactionCount": 12
+        },
+        {
+          "name": "PARK LANE TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "Peninsula Five",
+          "transactionCount": 30
+        },
+        {
+          "name": "Peninsula One",
+          "transactionCount": 23
+        },
+        {
+          "name": "Peninsula Three",
+          "transactionCount": 110
+        },
+        {
+          "name": "Peninsula Two",
+          "transactionCount": 16
+        },
+        {
+          "name": "PRIVE BY DAMAC",
+          "transactionCount": 49
+        },
+        {
+          "name": "REVA RESIDENCES",
+          "transactionCount": 13
+        },
+        {
+          "name": "Royal Regency",
+          "transactionCount": 17
+        },
+        {
+          "name": "SAFEER TOWER 1",
+          "transactionCount": 8
+        },
+        {
+          "name": "SAFEER TOWER 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "SCALA TOWER",
+          "transactionCount": 11
+        },
+        {
+          "name": "SKY BAY HOTEL",
+          "transactionCount": 13
+        },
+        {
+          "name": "SLS DUBAI",
+          "transactionCount": 26
+        },
+        {
+          "name": "SOL BAY",
+          "transactionCount": 20
+        },
+        {
+          "name": "TERRACES MARASI DRIVE",
+          "transactionCount": 14
+        },
+        {
+          "name": "THE ATRIA",
+          "transactionCount": 13
+        },
+        {
+          "name": "THE COSMOPOLITAN",
+          "transactionCount": 17
+        },
+        {
+          "name": "THE COURT",
+          "transactionCount": 5
+        },
+        {
+          "name": "THE ONE HOTEL",
+          "transactionCount": 9
+        },
+        {
+          "name": "THE OPUS BY OMNIYAT",
+          "transactionCount": 4
+        },
+        {
+          "name": "THE PAD",
+          "transactionCount": 12
+        },
+        {
+          "name": "The Paragon By IGO",
+          "transactionCount": 21
+        },
+        {
+          "name": "THE RESIDENCE AT BUSINESS CENTRAL",
+          "transactionCount": 5
+        },
+        {
+          "name": "THE STERLING EAST HOUSE",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE STERLING WEST HOUSE",
+          "transactionCount": 13
+        },
+        {
+          "name": "THE VOGUE",
+          "transactionCount": 7
+        },
+        {
+          "name": "Trillionaire Residences by Binghatti",
+          "transactionCount": 15
+        },
+        {
+          "name": "U-BORA TOWERS",
+          "transactionCount": 9
+        },
+        {
+          "name": "UPSIDE Living",
+          "transactionCount": 36
+        },
+        {
+          "name": "URBAN OASIS",
+          "transactionCount": 13
+        },
+        {
+          "name": "VERA TOWER",
+          "transactionCount": 13
+        },
+        {
+          "name": "VYB",
+          "transactionCount": 1
+        },
+        {
+          "name": "WATER'S EDGE",
+          "transactionCount": 12
+        },
+        {
+          "name": "WEST FIVE BUSINESS BAY RESIDENCES",
+          "transactionCount": 9
+        },
+        {
+          "name": "WEST WHAREF TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "WINDSOR MANOR",
+          "transactionCount": 5
+        },
+        {
+          "name": "ZADA TOWER",
+          "transactionCount": 29
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "CITY OF ARABIA",
+      "projects": [
+        {
+          "name": "WADI TOWER",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "CITY WALK",
+      "projects": [
+        {
+          "name": "Celadon",
+          "transactionCount": 12
+        },
+        {
+          "name": "Central Park at City Walk -Building 1",
+          "transactionCount": 5
+        },
+        {
+          "name": "NO. 4A, NO.4B, NO.5 CITYWALK RESIDENTIAL",
+          "transactionCount": 6
+        },
+        {
+          "name": "NO. 6A AND NO.6B CITYWALK RESIDENTIAL",
+          "transactionCount": 2
+        },
+        {
+          "name": "NO.1, NO.2A, NO.2B, NO.3A AND 3B CITYWALK RESIDENTIAL",
+          "transactionCount": 3
+        },
+        {
+          "name": "NO.15 & NO.16 CITYWALK RESIDENTIAL",
+          "transactionCount": 3
+        },
+        {
+          "name": "No.17, No.18a,No.18b and No.19 Citywalk Residential",
+          "transactionCount": 73
+        },
+        {
+          "name": "NO.20, NO.21A, NO.21B AND NO.22 CITYWALK RESIDENTIAL",
+          "transactionCount": 3
+        },
+        {
+          "name": "NO.9 & NO.10 CITYWALK RESIDENTIAL",
+          "transactionCount": 5
+        },
+        {
+          "name": "Viridian",
+          "transactionCount": 11
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DAMAC HILLS",
+      "projects": [
+        {
+          "name": "DAMAC HILLS - ARTESIA",
+          "transactionCount": 35
+        },
+        {
+          "name": "DAMAC HILLS - CARSON",
+          "transactionCount": 75
+        },
+        {
+          "name": "DAMAC HILLS - GOLF GATE",
+          "transactionCount": 22
+        },
+        {
+          "name": "DAMAC HILLS - GOLF HORIZON",
+          "transactionCount": 8
+        },
+        {
+          "name": "DAMAC HILLS - GOLF PANORAMA",
+          "transactionCount": 7
+        },
+        {
+          "name": "DAMAC HILLS - GOLF PROMENADE",
+          "transactionCount": 26
+        },
+        {
+          "name": "DAMAC HILLS - GOLF TERRACE",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC HILLS - GOLF VEDUTA",
+          "transactionCount": 4
+        },
+        {
+          "name": "DAMAC HILLS - GOLF VISTA",
+          "transactionCount": 9
+        },
+        {
+          "name": "DAMAC HILLS - GOLF VITA",
+          "transactionCount": 36
+        },
+        {
+          "name": "DAMAC HILLS - JASMINE",
+          "transactionCount": 8
+        },
+        {
+          "name": "DAMAC HILLS - LORETO",
+          "transactionCount": 22
+        },
+        {
+          "name": "DAMAC HILLS - ORCHID",
+          "transactionCount": 10
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DOWN TOWN JABAL ALI",
+      "projects": [
+        {
+          "name": "Alexis Tower",
+          "transactionCount": 19
+        },
+        {
+          "name": "Azizi Aura Residences",
+          "transactionCount": 26
+        },
+        {
+          "name": "EQUITI GATES",
+          "transactionCount": 6
+        },
+        {
+          "name": "SUBERBIA",
+          "transactionCount": 17
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI CREEK HARBOUR",
+      "projects": [
+        {
+          "name": "17 ICON BAY",
+          "transactionCount": 12
+        },
+        {
+          "name": "ADDRESS HARBOUR POINT",
+          "transactionCount": 29
+        },
+        {
+          "name": "Creek Beach - Bayshore",
+          "transactionCount": 14
+        },
+        {
+          "name": "Creek Beach - Breeze",
+          "transactionCount": 10
+        },
+        {
+          "name": "Creek Beach - Canopy - Moor",
+          "transactionCount": 55
+        },
+        {
+          "name": "Creek Beach - Grove",
+          "transactionCount": 16
+        },
+        {
+          "name": "Creek Beach - Lotus",
+          "transactionCount": 14
+        },
+        {
+          "name": "Creek Beach - Orchid",
+          "transactionCount": 15
+        },
+        {
+          "name": "Creek Beach - Rosewater",
+          "transactionCount": 28
+        },
+        {
+          "name": "Creek Beach - Savanna-Cedar-Mangrove",
+          "transactionCount": 42
+        },
+        {
+          "name": "Creek Beach - Summer",
+          "transactionCount": 5
+        },
+        {
+          "name": "Creek Beach - Sunset",
+          "transactionCount": 5
+        },
+        {
+          "name": "Creek Beach - Surf",
+          "transactionCount": 5
+        },
+        {
+          "name": "Creek Beach - VIDA Residences",
+          "transactionCount": 12
+        },
+        {
+          "name": "CREEK CRESCENT",
+          "transactionCount": 17
+        },
+        {
+          "name": "CREEK EDGE",
+          "transactionCount": 26
+        },
+        {
+          "name": "Creek Gate",
+          "transactionCount": 14
+        },
+        {
+          "name": "CREEK HORIZON",
+          "transactionCount": 24
+        },
+        {
+          "name": "Creek Palace",
+          "transactionCount": 29
+        },
+        {
+          "name": "CREEK RISE",
+          "transactionCount": 38
+        },
+        {
+          "name": "CREEKSIDE 18",
+          "transactionCount": 21
+        },
+        {
+          "name": "Harbour Gate",
+          "transactionCount": 26
+        },
+        {
+          "name": "HARBOUR VIEWS",
+          "transactionCount": 27
+        },
+        {
+          "name": "Island Park I",
+          "transactionCount": 16
+        },
+        {
+          "name": "Island Park II",
+          "transactionCount": 13
+        },
+        {
+          "name": "Palace Residences - Dubai Creek Harbour",
+          "transactionCount": 22
+        },
+        {
+          "name": "Palace Residences - North",
+          "transactionCount": 53
+        },
+        {
+          "name": "The Cove",
+          "transactionCount": 19
+        },
+        {
+          "name": "The Cove ll",
+          "transactionCount": 19
+        },
+        {
+          "name": "THE DUBAI CREEK RESIDENCES",
+          "transactionCount": 35
+        },
+        {
+          "name": "The Grand",
+          "transactionCount": 44
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI HARBOUR",
+      "projects": [
+        {
+          "name": "BEACH ISLE",
+          "transactionCount": 10
+        },
+        {
+          "name": "Beach Mansion",
+          "transactionCount": 37
+        },
+        {
+          "name": "BEACH VISTA",
+          "transactionCount": 13
+        },
+        {
+          "name": "Grand Bleu Tower interiors by Elie Saab",
+          "transactionCount": 34
+        },
+        {
+          "name": "MARINA VISTA",
+          "transactionCount": 19
+        },
+        {
+          "name": "Palace Beach Residence",
+          "transactionCount": 30
+        },
+        {
+          "name": "SUNRISE BAY",
+          "transactionCount": 16
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI HEALTHCARE CITY - PHASE 2",
+      "projects": [
+        {
+          "name": "AL WALEED GARDEN 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Aliyah Residences",
+          "transactionCount": 13
+        },
+        {
+          "name": "Binghatti Avenue",
+          "transactionCount": 29
+        },
+        {
+          "name": "Binghatti Creek",
+          "transactionCount": 11
+        },
+        {
+          "name": "Binghatti Gateway",
+          "transactionCount": 7
+        },
+        {
+          "name": "Farhad Azizi Residence",
+          "transactionCount": 30
+        },
+        {
+          "name": "Fawad Azizi Residence",
+          "transactionCount": 19
+        },
+        {
+          "name": "Kempinski Residences The Creek",
+          "transactionCount": 22
+        },
+        {
+          "name": "O10",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI HILLS",
+      "projects": [
+        {
+          "name": "ACACIA AT PARK HEIGHTS",
+          "transactionCount": 17
+        },
+        {
+          "name": "Collective",
+          "transactionCount": 27
+        },
+        {
+          "name": "Collective 2.0",
+          "transactionCount": 23
+        },
+        {
+          "name": "ELLINGTON HOUSE",
+          "transactionCount": 14
+        },
+        {
+          "name": "ELLINGTON HOUSE II",
+          "transactionCount": 19
+        },
+        {
+          "name": "Golf Grand",
+          "transactionCount": 22
+        },
+        {
+          "name": "Golf Suites - Dubai Hills",
+          "transactionCount": 7
+        },
+        {
+          "name": "Golf ville",
+          "transactionCount": 13
+        },
+        {
+          "name": "Lime Gardens",
+          "transactionCount": 30
+        },
+        {
+          "name": "MULBERRY at PARK HEIGHTS",
+          "transactionCount": 27
+        },
+        {
+          "name": "Park Field",
+          "transactionCount": 25
+        },
+        {
+          "name": "Park Heights I",
+          "transactionCount": 15
+        },
+        {
+          "name": "PARK HEIGHTS II",
+          "transactionCount": 35
+        },
+        {
+          "name": "Park Horizon",
+          "transactionCount": 38
+        },
+        {
+          "name": "Park Point",
+          "transactionCount": 12
+        },
+        {
+          "name": "PARK RIDGE",
+          "transactionCount": 37
+        },
+        {
+          "name": "Prive Residence",
+          "transactionCount": 18
+        },
+        {
+          "name": "Socio",
+          "transactionCount": 14
+        },
+        {
+          "name": "THE GROVE BY IMAN",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI INDUSTRIAL CITY",
+      "projects": [
+        {
+          "name": "Al Haseen Residence",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI INVESTMENT PARK SECOND",
+      "projects": [
+        {
+          "name": "CENTURION RESIDENCE",
+          "transactionCount": 12
+        },
+        {
+          "name": "DUNES VILLAGE",
+          "transactionCount": 13
+        },
+        {
+          "name": "RITAJ",
+          "transactionCount": 128
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI LAND RESIDENCE COMPLEX",
+      "projects": [
+        {
+          "name": "AARK RESIDENCES",
+          "transactionCount": 4
+        },
+        {
+          "name": "AJMAL SARAH",
+          "transactionCount": 2
+        },
+        {
+          "name": "BLISS HOMES",
+          "transactionCount": 3
+        },
+        {
+          "name": "BLUE WAVE",
+          "transactionCount": 21
+        },
+        {
+          "name": "DESERT SUN TOWER",
+          "transactionCount": 21
+        },
+        {
+          "name": "DURAR1",
+          "transactionCount": 18
+        },
+        {
+          "name": "Edison House",
+          "transactionCount": 4
+        },
+        {
+          "name": "INDIGO TOWER",
+          "transactionCount": 7
+        },
+        {
+          "name": "K1",
+          "transactionCount": 4
+        },
+        {
+          "name": "PHOENIX TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "Shorooq Land 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "SKY COURTS",
+          "transactionCount": 139
+        },
+        {
+          "name": "SOLITAIRE CASCADES",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE V TOWER",
+          "transactionCount": 15
+        },
+        {
+          "name": "Time 1",
+          "transactionCount": 17
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI MARINA",
+      "projects": [
+        {
+          "name": "23 MARINA",
+          "transactionCount": 5
+        },
+        {
+          "name": "5242",
+          "transactionCount": 10
+        },
+        {
+          "name": "ALSEEF I",
+          "transactionCount": 1
+        },
+        {
+          "name": "BAY CENTRAL WEST & CENTRAL TOWERS",
+          "transactionCount": 22
+        },
+        {
+          "name": "BAYSIDE RESIDENCE",
+          "transactionCount": 3
+        },
+        {
+          "name": "BOTANICA",
+          "transactionCount": 22
+        },
+        {
+          "name": "CAYAN TOWER",
+          "transactionCount": 23
+        },
+        {
+          "name": "Ciel",
+          "transactionCount": 6
+        },
+        {
+          "name": "Continental Tower",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC HEIGHTS",
+          "transactionCount": 23
+        },
+        {
+          "name": "DUBAI MARINA MALL",
+          "transactionCount": 18
+        },
+        {
+          "name": "ELITE RESIDENCE",
+          "transactionCount": 25
+        },
+        {
+          "name": "ESCAN MARINA TOWER",
+          "transactionCount": 15
+        },
+        {
+          "name": "HARBOUR RESIDENCES",
+          "transactionCount": 1
+        },
+        {
+          "name": "LIV MARINA",
+          "transactionCount": 15
+        },
+        {
+          "name": "LIV RESIDENCE",
+          "transactionCount": 5
+        },
+        {
+          "name": "MAG218",
+          "transactionCount": 18
+        },
+        {
+          "name": "MARINA 101",
+          "transactionCount": 3
+        },
+        {
+          "name": "MARINA ARCADE",
+          "transactionCount": 8
+        },
+        {
+          "name": "Marina Living",
+          "transactionCount": 11
+        },
+        {
+          "name": "MARINA PINNACLE",
+          "transactionCount": 9
+        },
+        {
+          "name": "MARINA QUAYS",
+          "transactionCount": 12
+        },
+        {
+          "name": "MARINA STAR",
+          "transactionCount": 19
+        },
+        {
+          "name": "MARINA WHARF I",
+          "transactionCount": 6
+        },
+        {
+          "name": "MARINA WHARF II",
+          "transactionCount": 5
+        },
+        {
+          "name": "MARINASCAPE",
+          "transactionCount": 8
+        },
+        {
+          "name": "NO 9",
+          "transactionCount": 4
+        },
+        {
+          "name": "OCEAN HEIGHTS",
+          "transactionCount": 18
+        },
+        {
+          "name": "ORRA MARINA",
+          "transactionCount": 7
+        },
+        {
+          "name": "PARK ISLANDS",
+          "transactionCount": 38
+        },
+        {
+          "name": "PRINCESS TOWER",
+          "transactionCount": 26
+        },
+        {
+          "name": "ROYAL OCEANIC TOWER",
+          "transactionCount": 9
+        },
+        {
+          "name": "SILVERENE",
+          "transactionCount": 23
+        },
+        {
+          "name": "SKY VIEW TOWER",
+          "transactionCount": 14
+        },
+        {
+          "name": "SPARKLE TOWERS",
+          "transactionCount": 14
+        },
+        {
+          "name": "STELLA MARIS",
+          "transactionCount": 12
+        },
+        {
+          "name": "Studio One",
+          "transactionCount": 23
+        },
+        {
+          "name": "SULAFA TOWER",
+          "transactionCount": 20
+        },
+        {
+          "name": "TFG MARINA",
+          "transactionCount": 10
+        },
+        {
+          "name": "TFG ONE HOTEL",
+          "transactionCount": 16
+        },
+        {
+          "name": "THE ATLANTIC",
+          "transactionCount": 1
+        },
+        {
+          "name": "THE BELVEDERE",
+          "transactionCount": 1
+        },
+        {
+          "name": "THE POINT",
+          "transactionCount": 11
+        },
+        {
+          "name": "THE RESIDENCES AT MARINA GATE 1",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE RESIDENCES AT MARINA GATE 2",
+          "transactionCount": 17
+        },
+        {
+          "name": "THE WATER FRONT",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE ZEN",
+          "transactionCount": 1
+        },
+        {
+          "name": "TORCH TOWER",
+          "transactionCount": 23
+        },
+        {
+          "name": "TRIDENT GRAND",
+          "transactionCount": 7
+        },
+        {
+          "name": "VIDA Residences Dubai Marina",
+          "transactionCount": 13
+        },
+        {
+          "name": "WEST AVENUE",
+          "transactionCount": 7
+        },
+        {
+          "name": "ZUMURUD DUBAI MARINA",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI MARITIME CITY",
+      "projects": [
+        {
+          "name": "Riva Residence",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE ANWA BY OMNIYAT",
+          "transactionCount": 9
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI PRODUCTION CITY",
+      "projects": [
+        {
+          "name": "CENTRIUM TOWER",
+          "transactionCount": 23
+        },
+        {
+          "name": "JANNAT",
+          "transactionCount": 10
+        },
+        {
+          "name": "LAGO VISTA",
+          "transactionCount": 36
+        },
+        {
+          "name": "LAKESIDE",
+          "transactionCount": 89
+        },
+        {
+          "name": "MIDTOWN - AFNAN",
+          "transactionCount": 33
+        },
+        {
+          "name": "MIDTOWN - DANIA",
+          "transactionCount": 17
+        },
+        {
+          "name": "MIDTOWN - MESK",
+          "transactionCount": 15
+        },
+        {
+          "name": "MIDTOWN - NOOR",
+          "transactionCount": 29
+        },
+        {
+          "name": "MYKA Residence",
+          "transactionCount": 7
+        },
+        {
+          "name": "OAKWOOD RESIDENCY",
+          "transactionCount": 9
+        },
+        {
+          "name": "QASR SABAH I , II ,III",
+          "transactionCount": 57
+        },
+        {
+          "name": "SUN POINT DUBAI",
+          "transactionCount": 8
+        },
+        {
+          "name": "THE CRESCENT",
+          "transactionCount": 40
+        },
+        {
+          "name": "Viera Residences",
+          "transactionCount": 15
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI SCIENCE PARK",
+      "projects": [
+        {
+          "name": "BELLA ROSE",
+          "transactionCount": 17
+        },
+        {
+          "name": "MONTROSE",
+          "transactionCount": 15
+        },
+        {
+          "name": "Opalz By Danube",
+          "transactionCount": 32
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI SOUTH",
+      "projects": [
+        {
+          "name": "CELESTIA",
+          "transactionCount": 43
+        },
+        {
+          "name": "Cresswell Residences",
+          "transactionCount": 14
+        },
+        {
+          "name": "Kappa Acca 3",
+          "transactionCount": 7
+        },
+        {
+          "name": "MAG 5 BOULEVARD",
+          "transactionCount": 51
+        },
+        {
+          "name": "MAJESTIQUE RESIDENCE 1",
+          "transactionCount": 12
+        },
+        {
+          "name": "MAJESTIQUE RESIDENCE 2",
+          "transactionCount": 14
+        },
+        {
+          "name": "Manam Prime",
+          "transactionCount": 2
+        },
+        {
+          "name": "TENORA",
+          "transactionCount": 9
+        },
+        {
+          "name": "The Pulse Boulevard Apartments",
+          "transactionCount": 5
+        },
+        {
+          "name": "The Pulse Boulevard Apartments - C3",
+          "transactionCount": 4
+        },
+        {
+          "name": "The Pulse Boulevard Apartments-C1",
+          "transactionCount": 2
+        },
+        {
+          "name": "The Pulse Residence",
+          "transactionCount": 13
+        },
+        {
+          "name": "The Pulse Residence Icon",
+          "transactionCount": 2
+        },
+        {
+          "name": "The Pulse Residence Park",
+          "transactionCount": 6
+        },
+        {
+          "name": "The Pulse Residence Plaza",
+          "transactionCount": 12
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI SPORTS CITY",
+      "projects": [
+        {
+          "name": "AMAL TOWER",
+          "transactionCount": 29
+        },
+        {
+          "name": "ARENA APARTMENTS",
+          "transactionCount": 6
+        },
+        {
+          "name": "BERMUDA VIEWS",
+          "transactionCount": 7
+        },
+        {
+          "name": "CANAL RESIDENCE WEST (PHASE 1)",
+          "transactionCount": 22
+        },
+        {
+          "name": "Canal Residence West 2",
+          "transactionCount": 13
+        },
+        {
+          "name": "CHAMPIONS TOWER1",
+          "transactionCount": 5
+        },
+        {
+          "name": "CONDOR GOLF LINKS 18",
+          "transactionCount": 44
+        },
+        {
+          "name": "CORAL INTERNATIONAL HOTEL APARTMENT",
+          "transactionCount": 1
+        },
+        {
+          "name": "CRICKET TOWER",
+          "transactionCount": 3
+        },
+        {
+          "name": "EAGLE HEIGHTS",
+          "transactionCount": 14
+        },
+        {
+          "name": "ELITE 10 SPORTS RESIDENCE",
+          "transactionCount": 27
+        },
+        {
+          "name": "ELITE 3 SPORTS RESIDENCE",
+          "transactionCount": 13
+        },
+        {
+          "name": "ELITE 4 SPORTS RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "ELITE 5 SPORTS RESIDENCE",
+          "transactionCount": 4
+        },
+        {
+          "name": "ELITE 6 SPORTS RESIDENCE",
+          "transactionCount": 14
+        },
+        {
+          "name": "ELITE 7 SPORTS RESIDENCE",
+          "transactionCount": 8
+        },
+        {
+          "name": "ELITE 8 SPORTS RESIDENCE",
+          "transactionCount": 11
+        },
+        {
+          "name": "ELITE 9 SPORTS RESIDENCE",
+          "transactionCount": 8
+        },
+        {
+          "name": "ELITE II SPORTS RESIDENCE",
+          "transactionCount": 13
+        },
+        {
+          "name": "ELITE SPORTS RESIDENCE",
+          "transactionCount": 9
+        },
+        {
+          "name": "FRANKFURT SPORTS TOWER I",
+          "transactionCount": 7
+        },
+        {
+          "name": "GIOVANNI BOUTIQUE",
+          "transactionCount": 23
+        },
+        {
+          "name": "GLOBAL GOLF RESIDENCE 2",
+          "transactionCount": 9
+        },
+        {
+          "name": "GOLF TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "GOLF VIEW RESIDENCE",
+          "transactionCount": 11
+        },
+        {
+          "name": "Golf Vista Heights",
+          "transactionCount": 11
+        },
+        {
+          "name": "GRAND HORIZON 1",
+          "transactionCount": 6
+        },
+        {
+          "name": "HAMZA TOWER",
+          "transactionCount": 9
+        },
+        {
+          "name": "Hera Tower",
+          "transactionCount": 39
+        },
+        {
+          "name": "HOCKEY TOWER",
+          "transactionCount": 3
+        },
+        {
+          "name": "HUB CANAL 1 TOWER",
+          "transactionCount": 8
+        },
+        {
+          "name": "HUB CANAL 2 TOWER",
+          "transactionCount": 2
+        },
+        {
+          "name": "LIME LIGHT TWIN TOWERS",
+          "transactionCount": 1
+        },
+        {
+          "name": "OASIS TOWER ONE",
+          "transactionCount": 7
+        },
+        {
+          "name": "OLYMPIC PARK 1",
+          "transactionCount": 4
+        },
+        {
+          "name": "OLYMPIC PARK 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "OLYMPIC PARK 3",
+          "transactionCount": 6
+        },
+        {
+          "name": "OLYMPIC PARK 4",
+          "transactionCount": 5
+        },
+        {
+          "name": "PROFILE RESIDENCE",
+          "transactionCount": 3
+        },
+        {
+          "name": "RED RESIDENCE",
+          "transactionCount": 13
+        },
+        {
+          "name": "ROYALE RESIDENCE1",
+          "transactionCount": 22
+        },
+        {
+          "name": "ROYALE RESIDENCE2",
+          "transactionCount": 8
+        },
+        {
+          "name": "STADIUM POINT",
+          "transactionCount": 14
+        },
+        {
+          "name": "THE BRIDGE",
+          "transactionCount": 11
+        },
+        {
+          "name": "THE DIAMOND",
+          "transactionCount": 4
+        },
+        {
+          "name": "THE MATRIX",
+          "transactionCount": 17
+        },
+        {
+          "name": "THE MEDALIST",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE SPIRIT",
+          "transactionCount": 13
+        },
+        {
+          "name": "UNIESTATE SPORTS TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "V2",
+          "transactionCount": 8
+        },
+        {
+          "name": "Vista by Prestige One",
+          "transactionCount": 22
+        },
+        {
+          "name": "ZENITH TOWER A1",
+          "transactionCount": 3
+        },
+        {
+          "name": "ZENITH TOWER A2",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI STUDIO CITY",
+      "projects": [
+        {
+          "name": "Azizi Mirage 1",
+          "transactionCount": 140
+        },
+        {
+          "name": "AZIZI VISTA",
+          "transactionCount": 18
+        },
+        {
+          "name": "CELIA RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "Divine Residencia",
+          "transactionCount": 1
+        },
+        {
+          "name": "GLITZ RESIDENCE 1",
+          "transactionCount": 7
+        },
+        {
+          "name": "GLITZ RESIDENCE 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "GLITZ RESIDENCE 3",
+          "transactionCount": 16
+        },
+        {
+          "name": "LAYA HEIGHTS",
+          "transactionCount": 38
+        },
+        {
+          "name": "SAMANA GOLF AVENUE",
+          "transactionCount": 7
+        },
+        {
+          "name": "Samana Santorini",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI WATER CANAL",
+      "projects": [
+        {
+          "name": "Canal Front Residences CF1 & CF2",
+          "transactionCount": 7
+        },
+        {
+          "name": "Canal Front Residences-CF3&CF4",
+          "transactionCount": 13
+        },
+        {
+          "name": "Canal Front Residences-CF5&CF6",
+          "transactionCount": 14
+        },
+        {
+          "name": "Canal Front Residences-CF7 & CF8 & CF9",
+          "transactionCount": 12
+        },
+        {
+          "name": "Eden House The Canal",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "DUBAI WATER FRONT",
+      "projects": [
+        {
+          "name": "BADRA PHASE 1",
+          "transactionCount": 9
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "EMAAR SOUTH",
+      "projects": [
+        {
+          "name": "Golf Views",
+          "transactionCount": 15
+        },
+        {
+          "name": "URBANA",
+          "transactionCount": 8
+        },
+        {
+          "name": "URBANA II",
+          "transactionCount": 4
+        },
+        {
+          "name": "URBANA III",
+          "transactionCount": 10
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+      "projects": [
+        {
+          "name": "Elvira",
+          "transactionCount": 2
+        },
+        {
+          "name": "Hills Park",
+          "transactionCount": 34
+        },
+        {
+          "name": "Parkside Views",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "INTERNATIONAL CITY PH 1",
+      "projects": [
+        {
+          "name": "Belvedere",
+          "transactionCount": 2
+        },
+        {
+          "name": "CLASSIC APARTMENTS",
+          "transactionCount": 22
+        },
+        {
+          "name": "DRAGON VIEW",
+          "transactionCount": 1
+        },
+        {
+          "name": "GLOBAL GREEN VIEW II",
+          "transactionCount": 3
+        },
+        {
+          "name": "HDS SUNSTAR 1",
+          "transactionCount": 8
+        },
+        {
+          "name": "INDIGO SPECTRUM 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "INDIGO SPECTRUM1",
+          "transactionCount": 6
+        },
+        {
+          "name": "INTERNATIONAL CITY EMARATI",
+          "transactionCount": 51
+        },
+        {
+          "name": "LADY RATAN MANOR",
+          "transactionCount": 6
+        },
+        {
+          "name": "Lawnz Residence by Danube",
+          "transactionCount": 32
+        },
+        {
+          "name": "PRIME RESIDENCY1",
+          "transactionCount": 2
+        },
+        {
+          "name": "PRIME RESIDENCY2",
+          "transactionCount": 2
+        },
+        {
+          "name": "RUFI GARDENS",
+          "transactionCount": 2
+        },
+        {
+          "name": "Tabeer 1",
+          "transactionCount": 4
+        },
+        {
+          "name": "TRAFALGAR CENTRAL",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "projects": [
+        {
+          "name": "AL HELAL AL ZAHABY  2",
+          "transactionCount": 4
+        },
+        {
+          "name": "AL HELAL AL ZAHABY 3",
+          "transactionCount": 5
+        },
+        {
+          "name": "AL HELAL AL ZAHABY BUILDING",
+          "transactionCount": 4
+        },
+        {
+          "name": "AL JAWZAA",
+          "transactionCount": 7
+        },
+        {
+          "name": "Easy18",
+          "transactionCount": 1
+        },
+        {
+          "name": "EATON",
+          "transactionCount": 4
+        },
+        {
+          "name": "EQUITI APARTMENTS",
+          "transactionCount": 10
+        },
+        {
+          "name": "Glorious Central Residences",
+          "transactionCount": 14
+        },
+        {
+          "name": "HZ RESIDENCES 4",
+          "transactionCount": 4
+        },
+        {
+          "name": "MODELUX TOWER 1",
+          "transactionCount": 7
+        },
+        {
+          "name": "Park ville 07",
+          "transactionCount": 3
+        },
+        {
+          "name": "RITZ RESIDENCE",
+          "transactionCount": 5
+        },
+        {
+          "name": "Silver Park Residency",
+          "transactionCount": 11
+        },
+        {
+          "name": "SUNCITY HOMES",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JABAL ALI FIRST",
+      "projects": [
+        {
+          "name": "The Nook",
+          "transactionCount": 38
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JADDAF WATERFRONT",
+      "projects": [
+        {
+          "name": "Boutique Xll",
+          "transactionCount": 7
+        },
+        {
+          "name": "D1",
+          "transactionCount": 21
+        },
+        {
+          "name": "DUBAI WHARF",
+          "transactionCount": 4
+        },
+        {
+          "name": "Dubai Wharf - Tower 2",
+          "transactionCount": 7
+        },
+        {
+          "name": "IRIS AMBER",
+          "transactionCount": 4
+        },
+        {
+          "name": "NILOOFAR",
+          "transactionCount": 2
+        },
+        {
+          "name": "PALAZZO VERSACE",
+          "transactionCount": 9
+        },
+        {
+          "name": "RIAH TOWERS",
+          "transactionCount": 3
+        },
+        {
+          "name": "Volna By Kasco",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH BEACH RESIDENCE",
+      "projects": [
+        {
+          "name": "Jumeirah Gate",
+          "transactionCount": 14
+        },
+        {
+          "name": "La Vie",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE ONE JBR",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH FIRST",
+      "projects": [
+        {
+          "name": "PORT DE LA MER - LE SOLEIL",
+          "transactionCount": 23
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH GOLF",
+      "projects": [
+        {
+          "name": "AL Andalus Phase 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "ALANDALUS",
+          "transactionCount": 10
+        },
+        {
+          "name": "ALandalus Building D",
+          "transactionCount": 9
+        },
+        {
+          "name": "ALANDALUS BUILDING E",
+          "transactionCount": 2
+        },
+        {
+          "name": "Alandalus Building G",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH HEIGHTS",
+      "projects": [
+        {
+          "name": "JUMEIRAH HEIGHTS CLUSTERS",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH LAKES TOWERS",
+      "projects": [
+        {
+          "name": "AL SEEF II",
+          "transactionCount": 6
+        },
+        {
+          "name": "ALSHERA TOWER",
+          "transactionCount": 2
+        },
+        {
+          "name": "ARMADA TOWERS",
+          "transactionCount": 16
+        },
+        {
+          "name": "BANYAN TREE RESIDENCES HILLSIDE DUBAI",
+          "transactionCount": 7
+        },
+        {
+          "name": "BONNINGTON TOWER HOTEL & RESIDENCE DUBAI",
+          "transactionCount": 11
+        },
+        {
+          "name": "CONCORDE TOWER",
+          "transactionCount": 20
+        },
+        {
+          "name": "DUBAI ARCH TOWER",
+          "transactionCount": 9
+        },
+        {
+          "name": "DUBAI STAR",
+          "transactionCount": 8
+        },
+        {
+          "name": "GLOBAL LAKE VIEW",
+          "transactionCount": 13
+        },
+        {
+          "name": "GOLD CREST EXECUTIVE",
+          "transactionCount": 13
+        },
+        {
+          "name": "GOLD CREST VIEWS2",
+          "transactionCount": 17
+        },
+        {
+          "name": "INDIGO TOWER",
+          "transactionCount": 14
+        },
+        {
+          "name": "LAGUNA TOWER",
+          "transactionCount": 18
+        },
+        {
+          "name": "LAKE CITY TOWER",
+          "transactionCount": 17
+        },
+        {
+          "name": "LAKE SHORE TOWER",
+          "transactionCount": 10
+        },
+        {
+          "name": "LAKE TERRACE",
+          "transactionCount": 17
+        },
+        {
+          "name": "LAKE VIEW",
+          "transactionCount": 16
+        },
+        {
+          "name": "LAKESIDE RESIDENCE",
+          "transactionCount": 7
+        },
+        {
+          "name": "MADINA TOWER",
+          "transactionCount": 4
+        },
+        {
+          "name": "MBL RESIDENCE",
+          "transactionCount": 11
+        },
+        {
+          "name": "MBL Royal",
+          "transactionCount": 12
+        },
+        {
+          "name": "ME DO RE",
+          "transactionCount": 9
+        },
+        {
+          "name": "NEW DUBAI GATE1",
+          "transactionCount": 7
+        },
+        {
+          "name": "NEW DUBAI GATE2",
+          "transactionCount": 15
+        },
+        {
+          "name": "Orra The Embankment",
+          "transactionCount": 15
+        },
+        {
+          "name": "PALLADIUM",
+          "transactionCount": 11
+        },
+        {
+          "name": "SABA TOWER 2",
+          "transactionCount": 17
+        },
+        {
+          "name": "SABA TOWER 3",
+          "transactionCount": 15
+        },
+        {
+          "name": "The Residences",
+          "transactionCount": 2
+        },
+        {
+          "name": "V3",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH LIVING",
+      "projects": [
+        {
+          "name": "Asayel at Madinat Jumeirah Living",
+          "transactionCount": 12
+        },
+        {
+          "name": "Madinat Jumeirah Living",
+          "transactionCount": 7
+        },
+        {
+          "name": "Madinat Jumeriah Living - Phase 2",
+          "transactionCount": 11
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "projects": [
+        {
+          "name": "AB CAVALIER",
+          "transactionCount": 16
+        },
+        {
+          "name": "ACES CHATEAU",
+          "transactionCount": 1
+        },
+        {
+          "name": "AL SERH RESIDENCES 11 BY ASAK REAL ESTATE DEVELOPMENT",
+          "transactionCount": 7
+        },
+        {
+          "name": "ALCOVE",
+          "transactionCount": 3
+        },
+        {
+          "name": "ALEF NOON RESIDENCE",
+          "transactionCount": 3
+        },
+        {
+          "name": "ARIA",
+          "transactionCount": 3
+        },
+        {
+          "name": "Ashton Park Residences",
+          "transactionCount": 9
+        },
+        {
+          "name": "ASTORIA RESIDNECE",
+          "transactionCount": 5
+        },
+        {
+          "name": "AURA by Grovy",
+          "transactionCount": 7
+        },
+        {
+          "name": "AVALON TOWER",
+          "transactionCount": 11
+        },
+        {
+          "name": "AVANOS",
+          "transactionCount": 4
+        },
+        {
+          "name": "BELGRAVIA",
+          "transactionCount": 5
+        },
+        {
+          "name": "Belgravia 2",
+          "transactionCount": 13
+        },
+        {
+          "name": "BELGRAVIA HEIGHTS I",
+          "transactionCount": 4
+        },
+        {
+          "name": "BELGRAVIA HEIGHTS II",
+          "transactionCount": 12
+        },
+        {
+          "name": "BELGRAVIA III",
+          "transactionCount": 18
+        },
+        {
+          "name": "BELGRAVIA SQUARE",
+          "transactionCount": 12
+        },
+        {
+          "name": "Beverly Residence",
+          "transactionCount": 10
+        },
+        {
+          "name": "Beverly Residence 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "Binghatti Amber",
+          "transactionCount": 37
+        },
+        {
+          "name": "Binghatti Apex",
+          "transactionCount": 98
+        },
+        {
+          "name": "Binghatti Aurora",
+          "transactionCount": 46
+        },
+        {
+          "name": "Binghatti Azure",
+          "transactionCount": 37
+        },
+        {
+          "name": "Binghatti Corner",
+          "transactionCount": 33
+        },
+        {
+          "name": "Binghatti Crescent",
+          "transactionCount": 4
+        },
+        {
+          "name": "Binghatti Crest",
+          "transactionCount": 12
+        },
+        {
+          "name": "Binghatti Emerald",
+          "transactionCount": 14
+        },
+        {
+          "name": "Binghatti Galaxy",
+          "transactionCount": 2
+        },
+        {
+          "name": "Binghatti Gardenia",
+          "transactionCount": 19
+        },
+        {
+          "name": "Binghatti Gate",
+          "transactionCount": 9
+        },
+        {
+          "name": "Binghatti Gems",
+          "transactionCount": 1
+        },
+        {
+          "name": "Binghatti Heights",
+          "transactionCount": 16
+        },
+        {
+          "name": "Binghatti House",
+          "transactionCount": 23
+        },
+        {
+          "name": "Binghatti Jasmine",
+          "transactionCount": 5
+        },
+        {
+          "name": "Binghatti Lavender",
+          "transactionCount": 5
+        },
+        {
+          "name": "Binghatti Luna",
+          "transactionCount": 1
+        },
+        {
+          "name": "Binghatti Mirage",
+          "transactionCount": 5
+        },
+        {
+          "name": "Binghatti Nova",
+          "transactionCount": 5
+        },
+        {
+          "name": "Binghatti Onyx",
+          "transactionCount": 36
+        },
+        {
+          "name": "Binghatti Orchid",
+          "transactionCount": 16
+        },
+        {
+          "name": "Binghatti Phantom",
+          "transactionCount": 32
+        },
+        {
+          "name": "Binghatti Phoenix",
+          "transactionCount": 64
+        },
+        {
+          "name": "Binghatti Rose",
+          "transactionCount": 3
+        },
+        {
+          "name": "Binghatti Royale",
+          "transactionCount": 60
+        },
+        {
+          "name": "Binghatti Tulip",
+          "transactionCount": 16
+        },
+        {
+          "name": "Binghatti Venus",
+          "transactionCount": 9
+        },
+        {
+          "name": "BLOOM HEIGHTS",
+          "transactionCount": 31
+        },
+        {
+          "name": "Bloom Towers",
+          "transactionCount": 47
+        },
+        {
+          "name": "BOTANICA",
+          "transactionCount": 11
+        },
+        {
+          "name": "CAPPADOCIA",
+          "transactionCount": 3
+        },
+        {
+          "name": "Catch Residences By IGO",
+          "transactionCount": 10
+        },
+        {
+          "name": "Chaimaa Avenue",
+          "transactionCount": 4
+        },
+        {
+          "name": "Chaimaa Avenue 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "CHAIMAA PREMIERE",
+          "transactionCount": 5
+        },
+        {
+          "name": "CITY APARTMENTS",
+          "transactionCount": 3
+        },
+        {
+          "name": "CONCEPT 7 RESIDENCES",
+          "transactionCount": 9
+        },
+        {
+          "name": "CRYSTAL RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "Cubix Residences",
+          "transactionCount": 2
+        },
+        {
+          "name": "DANA TOWER",
+          "transactionCount": 6
+        },
+        {
+          "name": "Dawn by Binghatti",
+          "transactionCount": 2
+        },
+        {
+          "name": "DEZIRE RESIDENCES",
+          "transactionCount": 6
+        },
+        {
+          "name": "DIAMOND VIEWS 1",
+          "transactionCount": 13
+        },
+        {
+          "name": "DIAMOND VIEWS 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "DIAMOND VIEWS 3",
+          "transactionCount": 11
+        },
+        {
+          "name": "DIAMOND VIEWS 4",
+          "transactionCount": 2
+        },
+        {
+          "name": "Dusk by Binghatti",
+          "transactionCount": 5
+        },
+        {
+          "name": "EATON PLACE",
+          "transactionCount": 8
+        },
+        {
+          "name": "Elegance by Chaimaa Holding",
+          "transactionCount": 5
+        },
+        {
+          "name": "ELYSEE II by PANTHEON",
+          "transactionCount": 12
+        },
+        {
+          "name": "Elysee III by Pantheon",
+          "transactionCount": 11
+        },
+        {
+          "name": "EMIRATES GARDEN 1 (LAVENDER - GARDENIA - ROSE)",
+          "transactionCount": 6
+        },
+        {
+          "name": "EMIRATES GARDEN 2 (MAPLE- MAGNOLA - MULBERRY)",
+          "transactionCount": 10
+        },
+        {
+          "name": "EMIRATES GARDEN I - GARDENIA",
+          "transactionCount": 11
+        },
+        {
+          "name": "EMIRATES GARDEN I - ROSE 1",
+          "transactionCount": 9
+        },
+        {
+          "name": "EMIRATES GARDEN II - MAGNOLIA",
+          "transactionCount": 13
+        },
+        {
+          "name": "EMIRATES GARDEN II - MAPLE",
+          "transactionCount": 7
+        },
+        {
+          "name": "Empire Residence",
+          "transactionCount": 8
+        },
+        {
+          "name": "Five at Jumeirah Village Circle Dubai",
+          "transactionCount": 25
+        },
+        {
+          "name": "FORTUNATO",
+          "transactionCount": 12
+        },
+        {
+          "name": "GHALIA",
+          "transactionCount": 30
+        },
+        {
+          "name": "H Three By Aurora",
+          "transactionCount": 6
+        },
+        {
+          "name": "Hadley Heights",
+          "transactionCount": 23
+        },
+        {
+          "name": "HAMENI",
+          "transactionCount": 25
+        },
+        {
+          "name": "HAMILTON HOUSE",
+          "transactionCount": 2
+        },
+        {
+          "name": "HANOVER SQUARE",
+          "transactionCount": 32
+        },
+        {
+          "name": "HARRINGTON HOUSE",
+          "transactionCount": 5
+        },
+        {
+          "name": "Hyati Avenue",
+          "transactionCount": 7
+        },
+        {
+          "name": "HYATI RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "joya verde residences dubai",
+          "transactionCount": 2
+        },
+        {
+          "name": "KNIGHT BRIDGE COURT & KENSNGTON MANOR",
+          "transactionCount": 21
+        },
+        {
+          "name": "LA RESIDENZA",
+          "transactionCount": 1
+        },
+        {
+          "name": "LA RIVIERA AZURE",
+          "transactionCount": 2
+        },
+        {
+          "name": "La-Riviera Apartments",
+          "transactionCount": 4
+        },
+        {
+          "name": "Laya Mansion",
+          "transactionCount": 13
+        },
+        {
+          "name": "Laya Residences",
+          "transactionCount": 8
+        },
+        {
+          "name": "LE GRAND CHATEAU",
+          "transactionCount": 9
+        },
+        {
+          "name": "Living Garden II",
+          "transactionCount": 2
+        },
+        {
+          "name": "LOCI Residences",
+          "transactionCount": 6
+        },
+        {
+          "name": "LOLENA",
+          "transactionCount": 4
+        },
+        {
+          "name": "LUCKY RESIDENCE",
+          "transactionCount": 5
+        },
+        {
+          "name": "Luma Park Views",
+          "transactionCount": 113
+        },
+        {
+          "name": "Luma21",
+          "transactionCount": 8
+        },
+        {
+          "name": "Luma22",
+          "transactionCount": 7
+        },
+        {
+          "name": "LUMINA VISTA RESIDENCES",
+          "transactionCount": 5
+        },
+        {
+          "name": "MANHATTAN",
+          "transactionCount": 8
+        },
+        {
+          "name": "Marwa Heights",
+          "transactionCount": 7
+        },
+        {
+          "name": "MASAAR RESIDENCES",
+          "transactionCount": 4
+        },
+        {
+          "name": "Mass Residence",
+          "transactionCount": 4
+        },
+        {
+          "name": "MAY RESIDENCE",
+          "transactionCount": 21
+        },
+        {
+          "name": "Mayas Geneva",
+          "transactionCount": 4
+        },
+        {
+          "name": "Milano Giovanni Boutique Suites",
+          "transactionCount": 4
+        },
+        {
+          "name": "NEVA RESIDENCES",
+          "transactionCount": 24
+        },
+        {
+          "name": "Nicholas Residence",
+          "transactionCount": 5
+        },
+        {
+          "name": "NOORA RESIDENCE 1",
+          "transactionCount": 3
+        },
+        {
+          "name": "O 2",
+          "transactionCount": 13
+        },
+        {
+          "name": "OAKLEY SQUARE RESIDENCES",
+          "transactionCount": 14
+        },
+        {
+          "name": "OLIVO PARK RESIDENCES BY EVERA",
+          "transactionCount": 6
+        },
+        {
+          "name": "Oxford 212",
+          "transactionCount": 10
+        },
+        {
+          "name": "OXFORD BOULEVARD",
+          "transactionCount": 4
+        },
+        {
+          "name": "Oxford Residence",
+          "transactionCount": 3
+        },
+        {
+          "name": "OXFORD RESIDENCE 2",
+          "transactionCount": 7
+        },
+        {
+          "name": "Oxford Terraces",
+          "transactionCount": 1
+        },
+        {
+          "name": "OXFORD TERRACES 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "PANTHEON ELYSEE",
+          "transactionCount": 6
+        },
+        {
+          "name": "PARK CORNER",
+          "transactionCount": 1
+        },
+        {
+          "name": "PARK LANE 2 BY HEILBRONN",
+          "transactionCount": 11
+        },
+        {
+          "name": "PARK LANE BY HEILBRONN",
+          "transactionCount": 1
+        },
+        {
+          "name": "PARK VIEW TOWER",
+          "transactionCount": 9
+        },
+        {
+          "name": "PARK VILLA'S 3",
+          "transactionCount": 2
+        },
+        {
+          "name": "Park Vista",
+          "transactionCount": 3
+        },
+        {
+          "name": "Pearl House I by Imtiaz",
+          "transactionCount": 11
+        },
+        {
+          "name": "Pearl House II By Imtiaz",
+          "transactionCount": 23
+        },
+        {
+          "name": "Pearl House III by Imtiaz",
+          "transactionCount": 3
+        },
+        {
+          "name": "PLATINUM RESIDENCE",
+          "transactionCount": 8
+        },
+        {
+          "name": "PLAZA RESIDENCES",
+          "transactionCount": 37
+        },
+        {
+          "name": "PLAZZO HEIGHTS",
+          "transactionCount": 9
+        },
+        {
+          "name": "PULSE SMART RESIDENCE",
+          "transactionCount": 8
+        },
+        {
+          "name": "RA1N Residence",
+          "transactionCount": 16
+        },
+        {
+          "name": "REEF RESIDENCE",
+          "transactionCount": 18
+        },
+        {
+          "name": "Regent Court",
+          "transactionCount": 21
+        },
+        {
+          "name": "REGINA",
+          "transactionCount": 7
+        },
+        {
+          "name": "Rigel",
+          "transactionCount": 9
+        },
+        {
+          "name": "Rise Residences",
+          "transactionCount": 28
+        },
+        {
+          "name": "ROXANA RESIDENCE",
+          "transactionCount": 3
+        },
+        {
+          "name": "SANDOVAL GARDENS",
+          "transactionCount": 7
+        },
+        {
+          "name": "SEASONS COMMUNITY- AUTUMN",
+          "transactionCount": 19
+        },
+        {
+          "name": "SEASONS COMMUNITY- SUMMER",
+          "transactionCount": 16
+        },
+        {
+          "name": "SERENITY LAKES 5",
+          "transactionCount": 2
+        },
+        {
+          "name": "SHAMAL RESIDENCES 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "SHAMAL WAVES",
+          "transactionCount": 8
+        },
+        {
+          "name": "SIGNATURE LIVINGS",
+          "transactionCount": 11
+        },
+        {
+          "name": "SIROYA GARDENS",
+          "transactionCount": 6
+        },
+        {
+          "name": "SOBHA DAFFODIL",
+          "transactionCount": 4
+        },
+        {
+          "name": "SPICA",
+          "transactionCount": 2
+        },
+        {
+          "name": "STONEHENGE RESIDENCES",
+          "transactionCount": 16
+        },
+        {
+          "name": "STONEHENGE RESIDENCES 2",
+          "transactionCount": 20
+        },
+        {
+          "name": "The Autograph",
+          "transactionCount": 17
+        },
+        {
+          "name": "THE EAST CREST BY METEORA",
+          "transactionCount": 8
+        },
+        {
+          "name": "THE HAVEN GARDEN",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE HAVEN RESIDENCES",
+          "transactionCount": 6
+        },
+        {
+          "name": "THE ONE",
+          "transactionCount": 18
+        },
+        {
+          "name": "The Residence By Prestige One",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE SQUARE",
+          "transactionCount": 19
+        },
+        {
+          "name": "THE VYBE",
+          "transactionCount": 13
+        },
+        {
+          "name": "TOWER 108",
+          "transactionCount": 20
+        },
+        {
+          "name": "TUSCAN RESIDENCE 1",
+          "transactionCount": 2
+        },
+        {
+          "name": "TUSCAN RESIDENCES1 - AREZZO",
+          "transactionCount": 8
+        },
+        {
+          "name": "TUSCAN RESIDENCES1 - SIENA",
+          "transactionCount": 1
+        },
+        {
+          "name": "Uniestate Prime Tower",
+          "transactionCount": 3
+        },
+        {
+          "name": "VILLA MYRA",
+          "transactionCount": 1
+        },
+        {
+          "name": "VILLA PERA",
+          "transactionCount": 7
+        },
+        {
+          "name": "Westwood Grande by Imtiaz",
+          "transactionCount": 6
+        },
+        {
+          "name": "Westwood Grande II By Imtiaz",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "projects": [
+        {
+          "name": "555 PARK VIEWS",
+          "transactionCount": 4
+        },
+        {
+          "name": "AL JAWHARA TOWER",
+          "transactionCount": 24
+        },
+        {
+          "name": "AL MANARAH TOWER",
+          "transactionCount": 11
+        },
+        {
+          "name": "Bali Residences",
+          "transactionCount": 8
+        },
+        {
+          "name": "CLOUD Tower",
+          "transactionCount": 39
+        },
+        {
+          "name": "EDMONTON ELM",
+          "transactionCount": 8
+        },
+        {
+          "name": "Emerald Vision Tower",
+          "transactionCount": 7
+        },
+        {
+          "name": "FH Residency",
+          "transactionCount": 3
+        },
+        {
+          "name": "GREEN PARK",
+          "transactionCount": 5
+        },
+        {
+          "name": "IMPERIAL RESIDENCE",
+          "transactionCount": 18
+        },
+        {
+          "name": "JANNAT",
+          "transactionCount": 7
+        },
+        {
+          "name": "Maya Residences 5",
+          "transactionCount": 6
+        },
+        {
+          "name": "Milestone Residences",
+          "transactionCount": 23
+        },
+        {
+          "name": "PARK ONE",
+          "transactionCount": 1
+        },
+        {
+          "name": "PLAZZO RESIDENCE",
+          "transactionCount": 7
+        },
+        {
+          "name": "Taraf 2 Residence",
+          "transactionCount": 7
+        },
+        {
+          "name": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+          "transactionCount": 40
+        },
+        {
+          "name": "The Community",
+          "transactionCount": 36
+        },
+        {
+          "name": "THE IVY",
+          "transactionCount": 10
+        },
+        {
+          "name": "The One at Jumeirah Village Triangle",
+          "transactionCount": 21
+        },
+        {
+          "name": "Tranquil Wellness Tower",
+          "transactionCount": 3
+        },
+        {
+          "name": "ZaZEN One",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "LA MER",
+      "projects": [
+        {
+          "name": "LA RIVE",
+          "transactionCount": 13
+        },
+        {
+          "name": "Port de La Mer - La Cote",
+          "transactionCount": 16
+        },
+        {
+          "name": "Port De La Mer - La Sirene",
+          "transactionCount": 3
+        },
+        {
+          "name": "Port De La Mer - La Sirene 2",
+          "transactionCount": 6
+        },
+        {
+          "name": "Port De La Mer - La Voile",
+          "transactionCount": 3
+        },
+        {
+          "name": "Port de La Mer - Le Pont",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "LIVING LEGENDS",
+      "projects": [
+        {
+          "name": "LIVING LEGENDS PHASE 5",
+          "transactionCount": 20
+        },
+        {
+          "name": "LIVING LEGENDS PHASE 6",
+          "transactionCount": 4
+        },
+        {
+          "name": "LIVING LEGENDS PHASE 7",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "LIWAN",
+      "projects": [
+        {
+          "name": "Celine By Vision",
+          "transactionCount": 30
+        },
+        {
+          "name": "Karma",
+          "transactionCount": 3
+        },
+        {
+          "name": "Qline (Qpoint phase II) R010",
+          "transactionCount": 3
+        },
+        {
+          "name": "QPOINT LIWAN - PLOT R002",
+          "transactionCount": 7
+        },
+        {
+          "name": "QPOINT LIWAN - PLOT R003",
+          "transactionCount": 5
+        },
+        {
+          "name": "QPOINT LIWAN- R093",
+          "transactionCount": 9
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R004",
+          "transactionCount": 8
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R005",
+          "transactionCount": 17
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R008 A&B",
+          "transactionCount": 11
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R009",
+          "transactionCount": 3
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R015",
+          "transactionCount": 1
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R016",
+          "transactionCount": 3
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R017",
+          "transactionCount": 1
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R020",
+          "transactionCount": 4
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R022",
+          "transactionCount": 1
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R046",
+          "transactionCount": 3
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R047",
+          "transactionCount": 2
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R048",
+          "transactionCount": 2
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R051",
+          "transactionCount": 4
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R052",
+          "transactionCount": 2
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R053",
+          "transactionCount": 1
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R055",
+          "transactionCount": 5
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R068",
+          "transactionCount": 5
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R069",
+          "transactionCount": 2
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R070",
+          "transactionCount": 4
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R071",
+          "transactionCount": 2
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R072",
+          "transactionCount": 6
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R092",
+          "transactionCount": 4
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R094",
+          "transactionCount": 3
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R095",
+          "transactionCount": 2
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R096",
+          "transactionCount": 1
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R097",
+          "transactionCount": 4
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R098",
+          "transactionCount": 5
+        },
+        {
+          "name": "QPOINT LIWAN-PLOT R099",
+          "transactionCount": 3
+        },
+        {
+          "name": "QPOINT LIWAN-PLOTR001",
+          "transactionCount": 5
+        },
+        {
+          "name": "QPOINT LIWAN-R019",
+          "transactionCount": 6
+        },
+        {
+          "name": "Symbolic Alpha",
+          "transactionCount": 8
+        },
+        {
+          "name": "Wavez Residence",
+          "transactionCount": 23
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MADINAT DUBAI ALMELAHEYAH",
+      "projects": [
+        {
+          "name": "Sunridge",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MADINAT HIND 4",
+      "projects": [
+        {
+          "name": "DAMAC HILLS (2) - AVENCIA",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC HILLS (2) - NAVITAS",
+          "transactionCount": 11
+        },
+        {
+          "name": "DAMAC HILLS (2) - NAVITAS (A & B)",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC HILLS (2) - VIRIDIS",
+          "transactionCount": 51
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MAJAN",
+      "projects": [
+        {
+          "name": "ARAS HEIGHTS",
+          "transactionCount": 8
+        },
+        {
+          "name": "barari views",
+          "transactionCount": 5
+        },
+        {
+          "name": "DEANSGATE by ADE",
+          "transactionCount": 4
+        },
+        {
+          "name": "FORUM RESIDENCES",
+          "transactionCount": 5
+        },
+        {
+          "name": "Paradise View 1",
+          "transactionCount": 140
+        },
+        {
+          "name": "SHERENA RESIDENCE",
+          "transactionCount": 15
+        },
+        {
+          "name": "The 50",
+          "transactionCount": 14
+        },
+        {
+          "name": "THE HAVEN",
+          "transactionCount": 32
+        },
+        {
+          "name": "TULIP OASIS 10",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MARSA DUBAI",
+      "projects": [
+        {
+          "name": "FIVE LUXE",
+          "transactionCount": 8
+        },
+        {
+          "name": "JUMEIRAH LIVING MARINA GATE",
+          "transactionCount": 16
+        },
+        {
+          "name": "Sensoria at Five Luxe",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MBR DISTRICT 1",
+      "projects": [
+        {
+          "name": "Lagoon Views at District One",
+          "transactionCount": 1
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 11",
+          "transactionCount": 3
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 13",
+          "transactionCount": 8
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 14",
+          "transactionCount": 4
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 15",
+          "transactionCount": 6
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 16",
+          "transactionCount": 2
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 18",
+          "transactionCount": 1
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 19",
+          "transactionCount": 1
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 22",
+          "transactionCount": 2
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 23",
+          "transactionCount": 2
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 25",
+          "transactionCount": 2
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 26",
+          "transactionCount": 31
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 28",
+          "transactionCount": 2
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 3",
+          "transactionCount": 1
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 5",
+          "transactionCount": 5
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 6",
+          "transactionCount": 3
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences 7",
+          "transactionCount": 3
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City , District One Phase III  , Residences12",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MBR DISTRICT 7",
+      "projects": [
+        {
+          "name": "MAG EYE Phase 1",
+          "transactionCount": 36
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MEYDAN AVENUE",
+      "projects": [
+        {
+          "name": "Azizi Gardens",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Greenfield",
+          "transactionCount": 2
+        },
+        {
+          "name": "Azizi Park Avenue",
+          "transactionCount": 2
+        },
+        {
+          "name": "Flamingo Lux Residence",
+          "transactionCount": 12
+        },
+        {
+          "name": "Prime Views",
+          "transactionCount": 3
+        },
+        {
+          "name": "THE DERBY RESIDENCE 2&3",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE POLO RESIDENCE",
+          "transactionCount": 85
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MEYDAN ONE",
+      "projects": [
+        {
+          "name": "Azizi  Riviera 34",
+          "transactionCount": 3
+        },
+        {
+          "name": "Azizi Riviera 1",
+          "transactionCount": 12
+        },
+        {
+          "name": "Azizi Riviera 10",
+          "transactionCount": 3
+        },
+        {
+          "name": "Azizi Riviera 11",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 12",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 13",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 14",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 15",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 16",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 17",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 18",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 19",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 20",
+          "transactionCount": 3
+        },
+        {
+          "name": "Azizi Riviera 21",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 22",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 23",
+          "transactionCount": 8
+        },
+        {
+          "name": "Azizi Riviera 24",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 25",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 26",
+          "transactionCount": 10
+        },
+        {
+          "name": "Azizi Riviera 27",
+          "transactionCount": 12
+        },
+        {
+          "name": "Azizi Riviera 28",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 29",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 3",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 30",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 31",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 32",
+          "transactionCount": 5
+        },
+        {
+          "name": "Azizi Riviera 33",
+          "transactionCount": 8
+        },
+        {
+          "name": "Azizi Riviera 35",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 36",
+          "transactionCount": 3
+        },
+        {
+          "name": "Azizi Riviera 37",
+          "transactionCount": 10
+        },
+        {
+          "name": "Azizi Riviera 38",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 39",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 4",
+          "transactionCount": 5
+        },
+        {
+          "name": "Azizi Riviera 40",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 41",
+          "transactionCount": 10
+        },
+        {
+          "name": "Azizi Riviera 42",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 43",
+          "transactionCount": 14
+        },
+        {
+          "name": "Azizi Riviera 44",
+          "transactionCount": 9
+        },
+        {
+          "name": "Azizi Riviera 45",
+          "transactionCount": 6
+        },
+        {
+          "name": "Azizi Riviera 46",
+          "transactionCount": 15
+        },
+        {
+          "name": "Azizi Riviera 47",
+          "transactionCount": 7
+        },
+        {
+          "name": "Azizi Riviera 48",
+          "transactionCount": 10
+        },
+        {
+          "name": "Azizi Riviera 5",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 59",
+          "transactionCount": 5
+        },
+        {
+          "name": "Azizi Riviera 6",
+          "transactionCount": 3
+        },
+        {
+          "name": "AZIZI RIVIERA 61",
+          "transactionCount": 12
+        },
+        {
+          "name": "AZIZI RIVIERA 63",
+          "transactionCount": 5
+        },
+        {
+          "name": "AZIZI RIVIERA 65",
+          "transactionCount": 16
+        },
+        {
+          "name": "AZIZI RIVIERA 67",
+          "transactionCount": 11
+        },
+        {
+          "name": "AZIZI RIVIERA 69",
+          "transactionCount": 35
+        },
+        {
+          "name": "Azizi Riviera 7",
+          "transactionCount": 4
+        },
+        {
+          "name": "Azizi Riviera 8",
+          "transactionCount": 16
+        },
+        {
+          "name": "Azizi Riviera 9",
+          "transactionCount": 8
+        },
+        {
+          "name": "AZIZI RIVIERA AZURE",
+          "transactionCount": 11
+        },
+        {
+          "name": "Azizi Riviera Beachfront",
+          "transactionCount": 59
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MINA RASHID",
+      "projects": [
+        {
+          "name": "Seagate",
+          "transactionCount": 12
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MIRDIF",
+      "projects": [
+        {
+          "name": "MIRDIF HILLS- AL MULTAQA AVENUE",
+          "transactionCount": 14
+        },
+        {
+          "name": "MIRDIF HILLS- JANAYEN AVENUE",
+          "transactionCount": 3
+        },
+        {
+          "name": "MIRDIF HILLS- NASAYEM AVENUE",
+          "transactionCount": 22
+        },
+        {
+          "name": "MIRDIF TULIP",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MOTOR CITY",
+      "projects": [
+        {
+          "name": "CASA FLORES AND EDEN APARTMENTS",
+          "transactionCount": 24
+        },
+        {
+          "name": "OIA Residence",
+          "transactionCount": 50
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "MUDON",
+      "projects": [
+        {
+          "name": "Mudon Views",
+          "transactionCount": 14
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "NAD AL SHEBA GARDENS",
+      "projects": [
+        {
+          "name": "The Roof Residence",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "PALM JUMEIRAH",
+      "projects": [
+        {
+          "name": "Azizi Mina",
+          "transactionCount": 10
+        },
+        {
+          "name": "AZURE RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "BALQIS RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "CLUB VISTA MARE",
+          "transactionCount": 1
+        },
+        {
+          "name": "ELLINGTON BEACH HOUSE",
+          "transactionCount": 5
+        },
+        {
+          "name": "EMERALD PALACE KEMPINSKI",
+          "transactionCount": 12
+        },
+        {
+          "name": "FAIRMONT PALM RESIDENCE",
+          "transactionCount": 12
+        },
+        {
+          "name": "GOLDEN MILE",
+          "transactionCount": 28
+        },
+        {
+          "name": "GRANDEUR RESIDENCES",
+          "transactionCount": 8
+        },
+        {
+          "name": "MARINA RESIDENCE",
+          "transactionCount": 33
+        },
+        {
+          "name": "MURABA RESIDENCES PALM JUMERIAH",
+          "transactionCount": 2
+        },
+        {
+          "name": "OCEANA HOTEL AND APARTMENTS",
+          "transactionCount": 1
+        },
+        {
+          "name": "PALM VIEWS - EAST",
+          "transactionCount": 12
+        },
+        {
+          "name": "PALM VIEWS - WEST",
+          "transactionCount": 8
+        },
+        {
+          "name": "ROYAL AMWAJ",
+          "transactionCount": 21
+        },
+        {
+          "name": "ROYAL BAY",
+          "transactionCount": 5
+        },
+        {
+          "name": "SERENIA LIVING",
+          "transactionCount": 9
+        },
+        {
+          "name": "SERENIA RESIDENCES THE PALM",
+          "transactionCount": 11
+        },
+        {
+          "name": "Seven Hotel and Apartments The Palm",
+          "transactionCount": 35
+        },
+        {
+          "name": "THE 8",
+          "transactionCount": 14
+        },
+        {
+          "name": "THE PALM TOWER",
+          "transactionCount": 18
+        },
+        {
+          "name": "TIARA RESIDENCE",
+          "transactionCount": 15
+        },
+        {
+          "name": "VICEROY HOTEL RESORTS RESIDENCES",
+          "transactionCount": 7
+        },
+        {
+          "name": "W Residences Dubai - The Palm",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "PEARL JUMEIRA",
+      "projects": [
+        {
+          "name": "NB RESIDENCES",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "REMRAAM",
+      "projects": [
+        {
+          "name": "REMRAAM",
+          "transactionCount": 122
+        },
+        {
+          "name": "Remraam - Al Ramth",
+          "transactionCount": 13
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "SILICON OASIS",
+      "projects": [
+        {
+          "name": "AL FALAK RESIDENCE",
+          "transactionCount": 3
+        },
+        {
+          "name": "ALTIA ONE",
+          "transactionCount": 15
+        },
+        {
+          "name": "ALTIA RESIDENCE",
+          "transactionCount": 2
+        },
+        {
+          "name": "ARABIAN GATE",
+          "transactionCount": 28
+        },
+        {
+          "name": "AURA ELEGANCE",
+          "transactionCount": 26
+        },
+        {
+          "name": "AXIS  RESIDENCES 1",
+          "transactionCount": 14
+        },
+        {
+          "name": "AXIS RESIDENCES 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "AXIS RESIDENCES 3",
+          "transactionCount": 4
+        },
+        {
+          "name": "AXIS RESIDENCES 4",
+          "transactionCount": 13
+        },
+        {
+          "name": "AXIS RESIDENCES 5",
+          "transactionCount": 5
+        },
+        {
+          "name": "AXIS RESIDENCES 6",
+          "transactionCount": 11
+        },
+        {
+          "name": "AXIS RESIDENCES 8",
+          "transactionCount": 5
+        },
+        {
+          "name": "AXIS SILVER",
+          "transactionCount": 8
+        },
+        {
+          "name": "BINGHATTI APARTMENTS",
+          "transactionCount": 9
+        },
+        {
+          "name": "Binghatti Point",
+          "transactionCount": 3
+        },
+        {
+          "name": "BINGHATTI STARS",
+          "transactionCount": 5
+        },
+        {
+          "name": "BINGHATTI VIEWS",
+          "transactionCount": 9
+        },
+        {
+          "name": "CORAL RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "CORDOBA PALACE",
+          "transactionCount": 1
+        },
+        {
+          "name": "IMPERIAL",
+          "transactionCount": 7
+        },
+        {
+          "name": "JADE RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "LA VISITA 01",
+          "transactionCount": 4
+        },
+        {
+          "name": "LA VISITA 02",
+          "transactionCount": 5
+        },
+        {
+          "name": "LA VISTA 03",
+          "transactionCount": 9
+        },
+        {
+          "name": "LE PRESIDIUM",
+          "transactionCount": 4
+        },
+        {
+          "name": "LYNX",
+          "transactionCount": 7
+        },
+        {
+          "name": "MAS TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "OASIS HIGH PARK",
+          "transactionCount": 2
+        },
+        {
+          "name": "OASIS STAR",
+          "transactionCount": 1
+        },
+        {
+          "name": "PALACE TOWER",
+          "transactionCount": 22
+        },
+        {
+          "name": "Pearls by Vision",
+          "transactionCount": 11
+        },
+        {
+          "name": "PLATINUM RESIDENCE 1",
+          "transactionCount": 5
+        },
+        {
+          "name": "PLATINUM RESIDENCE 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "RUBY RESIDENCE",
+          "transactionCount": 5
+        },
+        {
+          "name": "S.P OASIS",
+          "transactionCount": 2
+        },
+        {
+          "name": "SAPPHIRE RESIDENCE",
+          "transactionCount": 6
+        },
+        {
+          "name": "Selicon Star 2",
+          "transactionCount": 40
+        },
+        {
+          "name": "SEVANAM CROWN",
+          "transactionCount": 4
+        },
+        {
+          "name": "SILICON AVENUE",
+          "transactionCount": 1
+        },
+        {
+          "name": "SILICON BOULEVARD",
+          "transactionCount": 6
+        },
+        {
+          "name": "SILICON GATE 1",
+          "transactionCount": 37
+        },
+        {
+          "name": "SILICON GATE 3",
+          "transactionCount": 6
+        },
+        {
+          "name": "SILICON GATES 4",
+          "transactionCount": 12
+        },
+        {
+          "name": "SILICON HEIGHTS",
+          "transactionCount": 5
+        },
+        {
+          "name": "SILICON HEIGHTS2",
+          "transactionCount": 8
+        },
+        {
+          "name": "THE DUNES",
+          "transactionCount": 11
+        },
+        {
+          "name": "TOPAZ RESIDENCES 1",
+          "transactionCount": 4
+        },
+        {
+          "name": "TOPAZ RESIDENCES 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "TOPAZ RESIDENCES 3",
+          "transactionCount": 8
+        },
+        {
+          "name": "UNIESTATE MILLENNIUM TOWER",
+          "transactionCount": 15
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "SOBHA HEARTLAND",
+      "projects": [
+        {
+          "name": "BERKELEY PLACE",
+          "transactionCount": 6
+        },
+        {
+          "name": "GEMINI SPLENDOR",
+          "transactionCount": 14
+        },
+        {
+          "name": "KENSINGTON WATERS",
+          "transactionCount": 20
+        },
+        {
+          "name": "Sobha Creek Vistas",
+          "transactionCount": 76
+        },
+        {
+          "name": "Sobha Creek Vistas Grande",
+          "transactionCount": 21
+        },
+        {
+          "name": "Sobha Creek vistas Reserve",
+          "transactionCount": 35
+        },
+        {
+          "name": "Sobha Hartland - Crest Grande",
+          "transactionCount": 74
+        },
+        {
+          "name": "Sobha Hartland - The Crest",
+          "transactionCount": 111
+        },
+        {
+          "name": "Sobha Hartland Greens - Phase III",
+          "transactionCount": 28
+        },
+        {
+          "name": "SOBHA HARTLAND GREENS PHASE II",
+          "transactionCount": 13
+        },
+        {
+          "name": "SOBHA HARTLAND GREENS- PHASE I",
+          "transactionCount": 8
+        },
+        {
+          "name": "Sobha Hartland One Park Avenue",
+          "transactionCount": 13
+        },
+        {
+          "name": "Sobha Hartland Waves",
+          "transactionCount": 22
+        },
+        {
+          "name": "Sobha Hartland Waves Grande",
+          "transactionCount": 15
+        },
+        {
+          "name": "The Terraces",
+          "transactionCount": 13
+        },
+        {
+          "name": "WILTON PARK RESIDENCES",
+          "transactionCount": 16
+        },
+        {
+          "name": "WILTON TERRACES",
+          "transactionCount": 25
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "SUFOUH GARDENS",
+      "projects": [
+        {
+          "name": "HILIANA",
+          "transactionCount": 4
+        },
+        {
+          "name": "J5",
+          "transactionCount": 2
+        },
+        {
+          "name": "J8",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "TECOM SITE A",
+      "projects": [
+        {
+          "name": "THE S TOWER",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "THE GREENS",
+      "projects": [
+        {
+          "name": "MOSELA",
+          "transactionCount": 10
+        },
+        {
+          "name": "PANORAMA",
+          "transactionCount": 4
+        },
+        {
+          "name": "TANARO",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "THE LAKES",
+      "projects": [
+        {
+          "name": "Golf Heights",
+          "transactionCount": 3
+        },
+        {
+          "name": "The Hills",
+          "transactionCount": 20
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "THE WORLD",
+      "projects": [
+        {
+          "name": "THE HEART OF EUROPE 2",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "TOWN SQUARE",
+      "projects": [
+        {
+          "name": "ASCOT RESIDENCES",
+          "transactionCount": 12
+        },
+        {
+          "name": "HAYAT BOULEVARD",
+          "transactionCount": 32
+        },
+        {
+          "name": "LIVA",
+          "transactionCount": 33
+        },
+        {
+          "name": "RAWDA APARTMENTS",
+          "transactionCount": 34
+        },
+        {
+          "name": "THE DIPLOMAT RESIDENCES",
+          "transactionCount": 12
+        },
+        {
+          "name": "TOWN SQUARE JENNA AND WARDA",
+          "transactionCount": 29
+        },
+        {
+          "name": "TOWN SQUARE SAFI",
+          "transactionCount": 33
+        },
+        {
+          "name": "TOWN SQUARE ZAHRA",
+          "transactionCount": 61
+        },
+        {
+          "name": "UNA",
+          "transactionCount": 24
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "UM SUQAIM THIRD",
+      "projects": [
+        {
+          "name": "Al Jazi - Madinat Jumeriah Living",
+          "transactionCount": 35
+        },
+        {
+          "name": "Jadeel -Madinat Jumeirah Living",
+          "transactionCount": 12
+        },
+        {
+          "name": "Lamaa",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "WADI AL SAFA 3",
+      "projects": [
+        {
+          "name": "ARAS Residence",
+          "transactionCount": 5
+        },
+        {
+          "name": "Grenland Residence By arloid",
+          "transactionCount": 3
+        },
+        {
+          "name": "LIVING LEGENDS PHASE 7",
+          "transactionCount": 3
+        },
+        {
+          "name": "MADISON RESIDENCE",
+          "transactionCount": 4
+        },
+        {
+          "name": "The Spark by Esnaad",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "WADI AL SAFA 7",
+      "projects": [
+        {
+          "name": "RUKAN",
+          "transactionCount": 35
+        },
+        {
+          "name": "Rukan Residence",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "WARSAN FIRST",
+      "projects": [
+        {
+          "name": "Olivz Residence",
+          "transactionCount": 14
+        },
+        {
+          "name": "Petalz By Danube",
+          "transactionCount": 20
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "ZAABEEL FIRST",
+      "projects": [
+        {
+          "name": "One Za'abeel",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "apartment",
+      "district": "ZAABEEL SECOND",
+      "projects": [
+        {
+          "name": "DOWNTOWN VIEWS",
+          "transactionCount": 18
+        },
+        {
+          "name": "Downtown Views II",
+          "transactionCount": 43
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL FURJAN",
+      "projects": [
+        {
+          "name": "AL FURJAN",
+          "transactionCount": 19
+        },
+        {
+          "name": "ALFURJAN PACKAGE 4",
+          "transactionCount": 8
+        },
+        {
+          "name": "ALFURJAN PACKAGE 6",
+          "transactionCount": 11
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL HEBIAH FIFTH",
+      "projects": [
+        {
+          "name": "DAMAC LAGOONS - COSTA BRAVA (1)",
+          "transactionCount": 60
+        },
+        {
+          "name": "DAMAC LAGOONS - COSTA BRAVA (2)",
+          "transactionCount": 50
+        },
+        {
+          "name": "DAMAC LAGOONS - IBIZA",
+          "transactionCount": 32
+        },
+        {
+          "name": "DAMAC LAGOONS - MALTA (1)",
+          "transactionCount": 53
+        },
+        {
+          "name": "DAMAC LAGOONS - MALTA (2)",
+          "transactionCount": 33
+        },
+        {
+          "name": "DAMAC LAGOONS - MARBELLA",
+          "transactionCount": 22
+        },
+        {
+          "name": "DAMAC LAGOONS - MONTE CARLO",
+          "transactionCount": 28
+        },
+        {
+          "name": "DAMAC LAGOONS - MOROCCO 1",
+          "transactionCount": 11
+        },
+        {
+          "name": "DAMAC LAGOONS - MOROCCO 2",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC LAGOONS - MYKONOS",
+          "transactionCount": 20
+        },
+        {
+          "name": "DAMAC LAGOONS - NICE 1",
+          "transactionCount": 33
+        },
+        {
+          "name": "DAMAC LAGOONS - NICE 2",
+          "transactionCount": 19
+        },
+        {
+          "name": "DAMAC LAGOONS - PORTOFINO",
+          "transactionCount": 69
+        },
+        {
+          "name": "DAMAC LAGOONS - SANTORINI (1)",
+          "transactionCount": 51
+        },
+        {
+          "name": "DAMAC LAGOONS - SANTORINI (2)",
+          "transactionCount": 33
+        },
+        {
+          "name": "DAMAC LAGOONS - SANTORINI (3)",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC LAGOONS - VENICE (1)",
+          "transactionCount": 23
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL HEBIAH FOURTH",
+      "projects": [
+        {
+          "name": "Alaya",
+          "transactionCount": 10
+        },
+        {
+          "name": "Elysian Mansions",
+          "transactionCount": 2
+        },
+        {
+          "name": "Harmony",
+          "transactionCount": 28
+        },
+        {
+          "name": "Serenity Mansions",
+          "transactionCount": 2
+        },
+        {
+          "name": "Sevilla Village",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL HEBIAH THIRD",
+      "projects": [
+        {
+          "name": "DAMAC HILLS - AUTOGRAPH COLLECTION",
+          "transactionCount": 5
+        },
+        {
+          "name": "DAMAC HILLS - CAVALLI ESTATES",
+          "transactionCount": 4
+        },
+        {
+          "name": "DAMAC HILLS - GEMS ESTATES 1",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC HILLS - IVORY",
+          "transactionCount": 46
+        },
+        {
+          "name": "DAMAC HILLS - SILVER SPRINGS 3",
+          "transactionCount": 23
+        },
+        {
+          "name": "DAMAC HILLS-BEL AIR",
+          "transactionCount": 7
+        },
+        {
+          "name": "DAMAC HILLS-PARK RESIDENCES 1",
+          "transactionCount": 11
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL MERKADH",
+      "projects": [
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City  District One- C Villas",
+          "transactionCount": 6
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City District One  B Extension Villas",
+          "transactionCount": 4
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City District One, B Villas",
+          "transactionCount": 12
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL SATWA",
+      "projects": [
+        {
+          "name": "Prestige Gardens by Prestige One",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL WAHA",
+      "projects": [
+        {
+          "name": "Al Waha",
+          "transactionCount": 10
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL YELAYISS 1",
+      "projects": [
+        {
+          "name": "DAMAC ISLANDS - BALI 1",
+          "transactionCount": 9
+        },
+        {
+          "name": "DAMAC ISLANDS - BALI 2",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC ISLANDS - BALI 3",
+          "transactionCount": 27
+        },
+        {
+          "name": "DAMAC ISLANDS - BALI 4",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC ISLANDS - BORA BORA 1",
+          "transactionCount": 14
+        },
+        {
+          "name": "DAMAC ISLANDS - BORA BORA 2",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC ISLANDS - BORA BORA 3",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC ISLANDS - BORA BORA 4",
+          "transactionCount": 4
+        },
+        {
+          "name": "DAMAC ISLANDS - FIJI 1",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC ISLANDS - FIJI 2",
+          "transactionCount": 31
+        },
+        {
+          "name": "DAMAC ISLANDS - MALDIVES 1",
+          "transactionCount": 11
+        },
+        {
+          "name": "DAMAC ISLANDS - MALDIVES 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC ISLANDS - MALDIVES 3",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC ISLANDS - MALDIVES 4",
+          "transactionCount": 15
+        },
+        {
+          "name": "DAMAC ISLANDS - MALDIVES 5",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC ISLANDS - SEYCHELLES 1",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC ISLANDS - SEYCHELLES 2",
+          "transactionCount": 55
+        },
+        {
+          "name": "DAMAC ISLANDS 2 - BAHAMAS 1",
+          "transactionCount": 15
+        },
+        {
+          "name": "DAMAC ISLANDS 2 - BERMUDA",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC SUN CITY",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "AL YUFRAH 1",
+      "projects": [
+        {
+          "name": "Elwood Estates",
+          "transactionCount": 24
+        },
+        {
+          "name": "The Valley - Avelia",
+          "transactionCount": 23
+        },
+        {
+          "name": "The Valley - Farm Gardens",
+          "transactionCount": 9
+        },
+        {
+          "name": "The Valley - Farm Gardens 2",
+          "transactionCount": 16
+        },
+        {
+          "name": "The Valley - Farm Grove",
+          "transactionCount": 5
+        },
+        {
+          "name": "The Valley - Farm Grove 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "The Valley - Ovelle",
+          "transactionCount": 84
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "ARABIAN RANCHES I",
+      "projects": [
+        {
+          "name": "Arabian Ranches - Alvorada II",
+          "transactionCount": 2
+        },
+        {
+          "name": "Arabian Ranches - Alvorada III",
+          "transactionCount": 2
+        },
+        {
+          "name": "ASEEL",
+          "transactionCount": 4
+        },
+        {
+          "name": "LA AVENIDA-2",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "ARABIAN RANCHES II",
+      "projects": [
+        {
+          "name": "Arabian Ranches - Lila Community",
+          "transactionCount": 7
+        },
+        {
+          "name": "ARABIAN RANCHES - PALMA COMMUNITY",
+          "transactionCount": 6
+        },
+        {
+          "name": "ARABIAN RANCHES - RASHA COMMUNITY",
+          "transactionCount": 3
+        },
+        {
+          "name": "ARABIAN RANCHES - SAMARA COMMUNITY",
+          "transactionCount": 1
+        },
+        {
+          "name": "ARABIAN RANCHES - YASMIN COMMUNITY",
+          "transactionCount": 2
+        },
+        {
+          "name": "ARABIAN RANCHES- AZALEA COMMUNITY",
+          "transactionCount": 6
+        },
+        {
+          "name": "ARABIAN RANCHES- ROSA COMMUNITY",
+          "transactionCount": 1
+        },
+        {
+          "name": "Arabian Ranches-Casa Community",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "ARABIAN RANCHES POLO CLUB",
+      "projects": [
+        {
+          "name": "POLO HOMES",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "BUKADRA",
+      "projects": [
+        {
+          "name": "Sobha Estates",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DAMAC HILLS",
+      "projects": [
+        {
+          "name": "DAMAC HILLS -  TOPANGA",
+          "transactionCount": 4
+        },
+        {
+          "name": "DAMAC HILLS - AUTOGRAPH COLLECTION",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC HILLS - BROOKFIELD-1",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC HILLS - BROOKFIELD-2",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC HILLS - BROOKFIELD-3",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC HILLS - PHOENIX",
+          "transactionCount": 3
+        },
+        {
+          "name": "DAMAC HILLS - PICCADILLY GREEN",
+          "transactionCount": 9
+        },
+        {
+          "name": "DAMAC HILLS - QUEENS MEADOW",
+          "transactionCount": 3
+        },
+        {
+          "name": "DAMAC HILLS - ROCHESTER",
+          "transactionCount": 8
+        },
+        {
+          "name": "DAMAC HILLS - ROCKWOOD",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC HILLS - SILVER SPRINGS",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC HILLS - THE FIELD",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC HILLS - THE FLORA",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC HILLS - THE TURF",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC HILLS - TRINITY",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC HILLS - WHITEFIELD",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC HILLS- PELHAM",
+          "transactionCount": 9
+        },
+        {
+          "name": "DAMAC HILLS-BEL AIR",
+          "transactionCount": 8
+        },
+        {
+          "name": "DAMAC HILLS-PARK RESIDENCES 1",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC HILLS-PARK RESIDENCES 4",
+          "transactionCount": 7
+        },
+        {
+          "name": "DAMAC HILLS-VENETO",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI GOLF CITY",
+      "projects": [
+        {
+          "name": "Paradise Hills",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI HILLS",
+      "projects": [
+        {
+          "name": "FAIRWAY VISTAS",
+          "transactionCount": 4
+        },
+        {
+          "name": "Golf Place",
+          "transactionCount": 6
+        },
+        {
+          "name": "Golf Place ll",
+          "transactionCount": 6
+        },
+        {
+          "name": "Majestic Vistas",
+          "transactionCount": 3
+        },
+        {
+          "name": "Parkway Vistas",
+          "transactionCount": 3
+        },
+        {
+          "name": "SIDRA",
+          "transactionCount": 15
+        },
+        {
+          "name": "Sidra 2",
+          "transactionCount": 16
+        },
+        {
+          "name": "Sidra 3",
+          "transactionCount": 10
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI INDUSTRIAL CITY",
+      "projects": [
+        {
+          "name": "Samana South Haven 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "South Lofts 2 by Premier Choice",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI INVESTMENT PARK SECOND",
+      "projects": [
+        {
+          "name": "Grand Polo - Chevalia Estate",
+          "transactionCount": 2
+        },
+        {
+          "name": "Grand Polo - Chevalia Estate 2",
+          "transactionCount": 5
+        },
+        {
+          "name": "Grand Polo - Chevalia Fields",
+          "transactionCount": 1
+        },
+        {
+          "name": "Grand Polo - Equestra",
+          "transactionCount": 26
+        },
+        {
+          "name": "Grand Polo - Equiterra",
+          "transactionCount": 37
+        },
+        {
+          "name": "Grand Polo - Montura",
+          "transactionCount": 3
+        },
+        {
+          "name": "Grand Polo - Montura 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "Grand Polo - Montura 3",
+          "transactionCount": 2
+        },
+        {
+          "name": "Grand Polo - Selvara",
+          "transactionCount": 1
+        },
+        {
+          "name": "Grand Polo - Selvara 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "Grand Polo - Selvara 3",
+          "transactionCount": 5
+        },
+        {
+          "name": "Grand Polo - Selvara 4",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI SCIENCE PARK",
+      "projects": [
+        {
+          "name": "Villa Lantana 1",
+          "transactionCount": 5
+        },
+        {
+          "name": "Villa Lantana 2",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI SOUTH",
+      "projects": [
+        {
+          "name": "Divine Haven",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI SPORTS CITY",
+      "projects": [
+        {
+          "name": "BLOOMINGDALE",
+          "transactionCount": 3
+        },
+        {
+          "name": "GALLERY VILLAS",
+          "transactionCount": 2
+        },
+        {
+          "name": "Marbella Village",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "DUBAI WATER FRONT",
+      "projects": [
+        {
+          "name": "DUBAI WATER FRONT VENETO",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "EMAAR SOUTH",
+      "projects": [
+        {
+          "name": "GOLF LINKS",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "FALCON CITY OF WONDERS",
+      "projects": [
+        {
+          "name": "WESTERN RESIDENCE - NORTH",
+          "transactionCount": 6
+        },
+        {
+          "name": "WESTERN RESIDENCE - SOUTH",
+          "transactionCount": 9
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "GHADEER AL TAIR",
+      "projects": [
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City -District One West - Phase 2",
+          "transactionCount": 14
+        },
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City District One West - Phase 1",
+          "transactionCount": 30
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "GRAND VIEWS",
+      "projects": [
+        {
+          "name": "GRAND VIEWS",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+      "projects": [
+        {
+          "name": "Address Hillcrest",
+          "transactionCount": 4
+        },
+        {
+          "name": "Eden Hills",
+          "transactionCount": 112
+        },
+        {
+          "name": "Golf Place ll",
+          "transactionCount": 1
+        },
+        {
+          "name": "Palm Hills",
+          "transactionCount": 1
+        },
+        {
+          "name": "Park Gate",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "projects": [
+        {
+          "name": "LENJAWI DIAMOND",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "JABAL ALI FIRST",
+      "projects": [
+        {
+          "name": "GardeniaTownHomes @ wasl gate",
+          "transactionCount": 5
+        },
+        {
+          "name": "Jebel Ali Village",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "JUMEIRAH GOLF",
+      "projects": [
+        {
+          "name": "ALandalus Townhouse",
+          "transactionCount": 5
+        },
+        {
+          "name": "OLIVE POINT",
+          "transactionCount": 5
+        },
+        {
+          "name": "ORANGE LAKE",
+          "transactionCount": 2
+        },
+        {
+          "name": "RED WOOD PARK",
+          "transactionCount": 2
+        },
+        {
+          "name": "ROYAL GOLF VILLAS",
+          "transactionCount": 1
+        },
+        {
+          "name": "SIENNA  LAKES",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "LIVING LEGENDS",
+      "projects": [
+        {
+          "name": "LIVING LEGENDS PHASE 1",
+          "transactionCount": 9
+        },
+        {
+          "name": "LIVING LEGENDS PHASE 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "LIVING LEGENDS PHASE 3",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "MADINAT AL MATAAR",
+      "projects": [
+        {
+          "name": "Discovery Dunes",
+          "transactionCount": 49
+        },
+        {
+          "name": "Expo City Valley",
+          "transactionCount": 1
+        },
+        {
+          "name": "Fairway Villas",
+          "transactionCount": 10
+        },
+        {
+          "name": "Fairway Villas 2",
+          "transactionCount": 10
+        },
+        {
+          "name": "Fairway Villas 3",
+          "transactionCount": 1
+        },
+        {
+          "name": "Golf Lane",
+          "transactionCount": 2
+        },
+        {
+          "name": "South Bay 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Pulse Beachfront 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Pulse Beachfront 3",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Pulse- Beachfront",
+          "transactionCount": 2
+        },
+        {
+          "name": "Waada- Raiha",
+          "transactionCount": 14
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "MADINAT HIND 4",
+      "projects": [
+        {
+          "name": "DAMAC HILLS (2)  - SANCTNARY",
+          "transactionCount": 21
+        },
+        {
+          "name": "DAMAC HILLS (2) - ACUNA",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAMAC HILLS (2) - ALBIZIA",
+          "transactionCount": 23
+        },
+        {
+          "name": "DAMAC HILLS (2) - AMARGO",
+          "transactionCount": 16
+        },
+        {
+          "name": "DAMAC HILLS (2) - AMARGO 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "DAMAC HILLS (2) - AMAZONIA",
+          "transactionCount": 14
+        },
+        {
+          "name": "DAMAC HILLS (2) - AQUILEGIA",
+          "transactionCount": 21
+        },
+        {
+          "name": "DAMAC HILLS (2) - ASTER",
+          "transactionCount": 19
+        },
+        {
+          "name": "DAMAC HILLS (2) - AVENCIA-2",
+          "transactionCount": 17
+        },
+        {
+          "name": "DAMAC HILLS (2) - BASSWOOD",
+          "transactionCount": 14
+        },
+        {
+          "name": "DAMAC HILLS (2) - CAMELIA",
+          "transactionCount": 35
+        },
+        {
+          "name": "DAMAC HILLS (2) - CENTAURY",
+          "transactionCount": 24
+        },
+        {
+          "name": "DAMAC HILLS (2) - CLARET",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC HILLS (2) - COURSETIA",
+          "transactionCount": 9
+        },
+        {
+          "name": "DAMAC HILLS (2) - JANUSIA",
+          "transactionCount": 36
+        },
+        {
+          "name": "DAMAC HILLS (2) - JUNIPER",
+          "transactionCount": 13
+        },
+        {
+          "name": "DAMAC HILLS (2) - MIMOSA",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC HILLS (2) - MULBERRY",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC HILLS (2) - NATURA",
+          "transactionCount": 10
+        },
+        {
+          "name": "DAMAC HILLS (2) - ODORA",
+          "transactionCount": 6
+        },
+        {
+          "name": "DAMAC HILLS (2) - PACIFICA",
+          "transactionCount": 31
+        },
+        {
+          "name": "DAMAC HILLS (2) - PARK GREENS 1",
+          "transactionCount": 2
+        },
+        {
+          "name": "DAMAC HILLS (2) - PARK GREENS 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "DAMAC HILLS (2) - PARK GREENS 3",
+          "transactionCount": 7
+        },
+        {
+          "name": "DAMAC HILLS (2) - PRIMROSE",
+          "transactionCount": 19
+        },
+        {
+          "name": "DAMAC HILLS (2) - SYCAMORE",
+          "transactionCount": 14
+        },
+        {
+          "name": "DAMAC HILLS (2) - TRIXIS",
+          "transactionCount": 7
+        },
+        {
+          "name": "DAMAC HILLS (2) - VARDON",
+          "transactionCount": 37
+        },
+        {
+          "name": "DAMAC HILLS (2) - VERONA",
+          "transactionCount": 11
+        },
+        {
+          "name": "DAMAC HILLS (2) - VICTORIA",
+          "transactionCount": 24
+        },
+        {
+          "name": "DAMAC HILLS (2) - VICTORIA 2",
+          "transactionCount": 7
+        },
+        {
+          "name": "DAMAC HILLS (2) - VIOLET",
+          "transactionCount": 5
+        },
+        {
+          "name": "DAMAC HILLS (2) - VIOLET 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "DAMAC HILLS (2) - VIOLET 3",
+          "transactionCount": 8
+        },
+        {
+          "name": "DAMAC HILLS (2) - VIOLET 4",
+          "transactionCount": 12
+        },
+        {
+          "name": "DAMAC HILLS (2) - ZINNIA",
+          "transactionCount": 14
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "MBR DISTRICT 1",
+      "projects": [
+        {
+          "name": "MOHAMMED BIN RASHID AL MAKTOUM CITY- DISTRICT ONE, PHASE 1",
+          "transactionCount": 11
+        },
+        {
+          "name": "MOHAMMED BIN RASHID AL MAKTOUM CITY-DISTRICT ONE PHASE II VILLAS",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "ME'AISEM FIRST",
+      "projects": [
+        {
+          "name": "Ashwood Estates",
+          "transactionCount": 150
+        },
+        {
+          "name": "D Villas",
+          "transactionCount": 16
+        },
+        {
+          "name": "Pinewood Estate Homes",
+          "transactionCount": 70
+        },
+        {
+          "name": "Terra Golf Collection",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "ME'AISEM SECOND",
+      "projects": [
+        {
+          "name": "The Oasis - Palmiera",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "MEYDAN ONE",
+      "projects": [
+        {
+          "name": "Azizi Riviera 25",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 31",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 36",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 37",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 38",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 39",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 40",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 41",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 43",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 44",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 45",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 46",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 47",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 48",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 50",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "MILLENNIUM",
+      "projects": [
+        {
+          "name": "MILLENNIUM ESTATES",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "MUDON",
+      "projects": [
+        {
+          "name": "ARABELLA 2 - TOWNHOUSES AT MUDON",
+          "transactionCount": 15
+        },
+        {
+          "name": "Arabella 3",
+          "transactionCount": 17
+        },
+        {
+          "name": "MUDON",
+          "transactionCount": 10
+        },
+        {
+          "name": "MUDON PHASE 3 _  NEIGHBOURHOOD I- ARABELLA",
+          "transactionCount": 18
+        },
+        {
+          "name": "Mudon-Phase 2",
+          "transactionCount": 12
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "NAD AL SHIBA FIRST",
+      "projects": [
+        {
+          "name": "Nad Al Sheba Gardens Phase 10",
+          "transactionCount": 3
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 11",
+          "transactionCount": 93
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 2",
+          "transactionCount": 25
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 3",
+          "transactionCount": 6
+        },
+        {
+          "name": "Nad AL Sheba Gardens Phase 4",
+          "transactionCount": 4
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 5",
+          "transactionCount": 1
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 7",
+          "transactionCount": 3
+        },
+        {
+          "name": "Nad Al Sheba Gardens Phase 8 & 9",
+          "transactionCount": 15
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "SILICON OASIS",
+      "projects": [
+        {
+          "name": "ELYRA RESIDENCES BY ENAAM",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "SOBHA HEARTLAND",
+      "projects": [
+        {
+          "name": "Sobha Hartland Villas - Phase II",
+          "transactionCount": 1
+        },
+        {
+          "name": "Sobha Hartland Villas Phase III",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "THE LAKES",
+      "projects": [
+        {
+          "name": "The Lakes - Deema 1",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Lakes Deema 3",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Lakes Deema 4",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "THE VILLA",
+      "projects": [
+        {
+          "name": "THE VILLA",
+          "transactionCount": 18
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "VILLANOVA",
+      "projects": [
+        {
+          "name": "La Quinta",
+          "transactionCount": 3
+        },
+        {
+          "name": "Villanova Amaranta",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "WADI AL SAFA 2",
+      "projects": [
+        {
+          "name": "Sobha Reserve",
+          "transactionCount": 15
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "WADI AL SAFA 3",
+      "projects": [
+        {
+          "name": "Mohammed Bin Rashid Al Maktoum City, District 11- Opal Gardens",
+          "transactionCount": 25
+        },
+        {
+          "name": "The Wilds 1",
+          "transactionCount": 31
+        },
+        {
+          "name": "The Wilds 2",
+          "transactionCount": 25
+        },
+        {
+          "name": "The Wilds 3",
+          "transactionCount": 30
+        },
+        {
+          "name": "Wellington Grand Villas",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "WADI AL SAFA 5",
+      "projects": [
+        {
+          "name": "Arabian Ranches lll - Caya",
+          "transactionCount": 22
+        },
+        {
+          "name": "Arabian Ranches lll - Elie Saab",
+          "transactionCount": 7
+        },
+        {
+          "name": "Arabian Ranches lll - Elie Saab ll",
+          "transactionCount": 16
+        },
+        {
+          "name": "ATHLON BY AL DAR 1",
+          "transactionCount": 23
+        },
+        {
+          "name": "ATHLON BY AL DAR 2",
+          "transactionCount": 28
+        },
+        {
+          "name": "Haven By Aldar 1",
+          "transactionCount": 7
+        },
+        {
+          "name": "Haven By Aldar 2",
+          "transactionCount": 4
+        },
+        {
+          "name": "Haven By Aldar 3",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "land",
+      "district": "WADI AL SAFA 7",
+      "projects": [
+        {
+          "name": "The Acres",
+          "transactionCount": 29
+        },
+        {
+          "name": "The Acres 2 & Estates 2",
+          "transactionCount": 3
+        },
+        {
+          "name": "The Acres 3 & Estates",
+          "transactionCount": 9
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "ARJAN",
+      "projects": [
+        {
+          "name": "DIAMOND BUSINESS CENTER",
+          "transactionCount": 25
+        },
+        {
+          "name": "THE LIGHT",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "BARSHA HEIGHTS",
+      "projects": [
+        {
+          "name": "EXECUTIVE HEIGHT",
+          "transactionCount": 5
+        },
+        {
+          "name": "I - RISE TOWER",
+          "transactionCount": 15
+        },
+        {
+          "name": "SMART HEIGHTS",
+          "transactionCount": 14
+        },
+        {
+          "name": "THE ONE TOWER",
+          "transactionCount": 30
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "BURJ KHALIFA",
+      "projects": [
+        {
+          "name": "BD BOULEVARD PLAZA",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "BUSINESS BAY",
+      "projects": [
+        {
+          "name": "014 TOWER",
+          "transactionCount": 6
+        },
+        {
+          "name": "51@BUSINESS BAY",
+          "transactionCount": 7
+        },
+        {
+          "name": "AL MANARA",
+          "transactionCount": 2
+        },
+        {
+          "name": "B2B TOWER",
+          "transactionCount": 12
+        },
+        {
+          "name": "BAY SQUARE",
+          "transactionCount": 49
+        },
+        {
+          "name": "BAYSWATER",
+          "transactionCount": 12
+        },
+        {
+          "name": "BURLINGTON TOWER",
+          "transactionCount": 15
+        },
+        {
+          "name": "BUSINESS TOWER",
+          "transactionCount": 4
+        },
+        {
+          "name": "CHURCHILL TOWER",
+          "transactionCount": 21
+        },
+        {
+          "name": "CITADEL TOWER",
+          "transactionCount": 14
+        },
+        {
+          "name": "CLOVER BAY",
+          "transactionCount": 11
+        },
+        {
+          "name": "CRYSTAL TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "EMPIRE HEIGHTS",
+          "transactionCount": 9
+        },
+        {
+          "name": "EXECUTIVE BAY B",
+          "transactionCount": 3
+        },
+        {
+          "name": "IRIS BAY",
+          "transactionCount": 23
+        },
+        {
+          "name": "LAKE CENTRAL",
+          "transactionCount": 2
+        },
+        {
+          "name": "OBEROI CENTRE",
+          "transactionCount": 8
+        },
+        {
+          "name": "ONE BUSINESS BAY",
+          "transactionCount": 2
+        },
+        {
+          "name": "ONTARIO TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "OPAL TOWER",
+          "transactionCount": 11
+        },
+        {
+          "name": "PARK LANE TOWER",
+          "transactionCount": 13
+        },
+        {
+          "name": "PRIME TOWER",
+          "transactionCount": 7
+        },
+        {
+          "name": "REGAL TOWER",
+          "transactionCount": 19
+        },
+        {
+          "name": "SILVER TOWER",
+          "transactionCount": 18
+        },
+        {
+          "name": "SOBHA IVORY",
+          "transactionCount": 1
+        },
+        {
+          "name": "SOBHA IVORY - II",
+          "transactionCount": 3
+        },
+        {
+          "name": "SOL BAY",
+          "transactionCount": 6
+        },
+        {
+          "name": "TAMANI ARTS OFFICES",
+          "transactionCount": 32
+        },
+        {
+          "name": "THE BINARY BY OMNIYAT",
+          "transactionCount": 8
+        },
+        {
+          "name": "THE COURT",
+          "transactionCount": 7
+        },
+        {
+          "name": "THE EXCHANGE",
+          "transactionCount": 6
+        },
+        {
+          "name": "THE MERTOPOLIS",
+          "transactionCount": 9
+        },
+        {
+          "name": "THE OPUS BY OMNIYAT",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE PRISM",
+          "transactionCount": 11
+        },
+        {
+          "name": "WESTBURRY TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "XL TOWER",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "DUBAI INVESTMENT PARK FIRST",
+      "projects": [
+        {
+          "name": "SCHON BUSINESS PARK",
+          "transactionCount": 17
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "DUBAI INVESTMENT PARK SECOND",
+      "projects": [
+        {
+          "name": "RITAJ",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "DUBAI MARINA",
+      "projects": [
+        {
+          "name": "DM MARINA PLAZA",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "DUBAI SPORTS CITY",
+      "projects": [
+        {
+          "name": "STADIUM POINT",
+          "transactionCount": 2
+        },
+        {
+          "name": "THE BRIDGE",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "INTERNATIONAL CITY PH 1",
+      "projects": [
+        {
+          "name": "INDIGO OPTIMA 1",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "JUMEIRAH LAKES TOWERS",
+      "projects": [
+        {
+          "name": "AG TOWER",
+          "transactionCount": 7
+        },
+        {
+          "name": "AL MAS TOWER",
+          "transactionCount": 7
+        },
+        {
+          "name": "ARMADA TOWERS",
+          "transactionCount": 2
+        },
+        {
+          "name": "AU TOWER",
+          "transactionCount": 3
+        },
+        {
+          "name": "BUSINESS AVENUE AA1",
+          "transactionCount": 19
+        },
+        {
+          "name": "BUSINESS AVENUE BB1",
+          "transactionCount": 9
+        },
+        {
+          "name": "BUSINESS AVENUE BB2",
+          "transactionCount": 13
+        },
+        {
+          "name": "CONCORDE TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "DUBAI ARCH TOWER",
+          "transactionCount": 2
+        },
+        {
+          "name": "DUBAI STAR",
+          "transactionCount": 19
+        },
+        {
+          "name": "GOLD CREST EXECUTIVE",
+          "transactionCount": 9
+        },
+        {
+          "name": "HDS BUSINESS CENTRE",
+          "transactionCount": 13
+        },
+        {
+          "name": "INIGO ICON",
+          "transactionCount": 8
+        },
+        {
+          "name": "JUMEIRAH BUSINESS CENTRE 4",
+          "transactionCount": 13
+        },
+        {
+          "name": "JUMEIRAH BUSINESS CENTRE 5",
+          "transactionCount": 22
+        },
+        {
+          "name": "JUMEIRAH BUSINESS CENTRE1",
+          "transactionCount": 27
+        },
+        {
+          "name": "JUMEIRAH BUSINESS CENTRE2",
+          "transactionCount": 12
+        },
+        {
+          "name": "LIWA HEIGHTS",
+          "transactionCount": 5
+        },
+        {
+          "name": "PLATINUM TOWER",
+          "transactionCount": 13
+        },
+        {
+          "name": "REEF TOWER",
+          "transactionCount": 4
+        },
+        {
+          "name": "SABA TOWER 1",
+          "transactionCount": 5
+        },
+        {
+          "name": "SWISS TOWER",
+          "transactionCount": 3
+        },
+        {
+          "name": "THE DOME TOWER",
+          "transactionCount": 22
+        },
+        {
+          "name": "TIFFANY TOWERS",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "projects": [
+        {
+          "name": "Binghatti Apex",
+          "transactionCount": 1
+        },
+        {
+          "name": "Binghatti Azure",
+          "transactionCount": 9
+        },
+        {
+          "name": "Binghatti Emerald",
+          "transactionCount": 1
+        },
+        {
+          "name": "Binghatti House",
+          "transactionCount": 3
+        },
+        {
+          "name": "PRIME BUSINESS CENTER",
+          "transactionCount": 9
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "MOTOR CITY",
+      "projects": [
+        {
+          "name": "DETROIT HOUSE",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "SILICON OASIS",
+      "projects": [
+        {
+          "name": "IT PLAZA",
+          "transactionCount": 6
+        },
+        {
+          "name": "LYNX",
+          "transactionCount": 3
+        },
+        {
+          "name": "PALACE TOWER",
+          "transactionCount": 5
+        },
+        {
+          "name": "SILICON BOULEVARD",
+          "transactionCount": 6
+        },
+        {
+          "name": "SILICON INFORMATION TECHNOLOGY TOWER",
+          "transactionCount": 18
+        },
+        {
+          "name": "THE APRICOT",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "THE GREENS",
+      "projects": [
+        {
+          "name": "THE ONYX",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "office",
+      "district": "TRADE CENTER FIRST",
+      "projects": [
+        {
+          "name": "LATIFA TOWER",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "AL FURJAN",
+      "projects": [
+        {
+          "name": "Al Fouad",
+          "transactionCount": 2
+        },
+        {
+          "name": "Azizi Berton",
+          "transactionCount": 2
+        },
+        {
+          "name": "Azizi Farishta Residence",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Pearl",
+          "transactionCount": 3
+        },
+        {
+          "name": "Azizi Shaista Residence",
+          "transactionCount": 1
+        },
+        {
+          "name": "EQUITI HOME",
+          "transactionCount": 5
+        },
+        {
+          "name": "STARZ TOWER by DANUBE",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "ARJAN",
+      "projects": [
+        {
+          "name": "Adhara Star",
+          "transactionCount": 2
+        },
+        {
+          "name": "BEVERLY BOULEVARD",
+          "transactionCount": 2
+        },
+        {
+          "name": "DIAMOND BUSINESS CENTER",
+          "transactionCount": 4
+        },
+        {
+          "name": "ELZ Residence",
+          "transactionCount": 1
+        },
+        {
+          "name": "MIRACLZ TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "Oxford Gardens",
+          "transactionCount": 2
+        },
+        {
+          "name": "Resortz Residence",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "BARSHA HEIGHTS",
+      "projects": [
+        {
+          "name": "THE ONE TOWER",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "BURJ KHALIFA",
+      "projects": [
+        {
+          "name": "BURJ AL NUJOOM",
+          "transactionCount": 1
+        },
+        {
+          "name": "Imperial  Avenue",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "BUSINESS BAY",
+      "projects": [
+        {
+          "name": "AVANTI TOWER",
+          "transactionCount": 2
+        },
+        {
+          "name": "Bayz Tower",
+          "transactionCount": 2
+        },
+        {
+          "name": "Binghatti Canal",
+          "transactionCount": 1
+        },
+        {
+          "name": "BUSINESS TOWER",
+          "transactionCount": 3
+        },
+        {
+          "name": "CAPITAL BAY  A",
+          "transactionCount": 1
+        },
+        {
+          "name": "CAPITAL BAY B",
+          "transactionCount": 1
+        },
+        {
+          "name": "CLOVER BAY",
+          "transactionCount": 1
+        },
+        {
+          "name": "CRYSTAL TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "IRIS BAY",
+          "transactionCount": 1
+        },
+        {
+          "name": "MAG 318",
+          "transactionCount": 1
+        },
+        {
+          "name": "MARQUISE SQUARE TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "OBEROI CENTRE",
+          "transactionCount": 10
+        },
+        {
+          "name": "ONTARIO TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "SILVER TOWER",
+          "transactionCount": 2
+        },
+        {
+          "name": "TAMANI ARTS OFFICES",
+          "transactionCount": 1
+        },
+        {
+          "name": "THE RESIDENCE AT BUSINESS CENTRAL",
+          "transactionCount": 11
+        },
+        {
+          "name": "VYB",
+          "transactionCount": 2
+        },
+        {
+          "name": "WATER'S EDGE",
+          "transactionCount": 2
+        },
+        {
+          "name": "WESTBURRY TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "XL TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "ZADA TOWER",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DMCC-EZ2",
+      "projects": [
+        {
+          "name": "J&G PLEXS",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DOWN TOWN JABAL ALI",
+      "projects": [
+        {
+          "name": "SUBERBIA",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI HEALTHCARE CITY - PHASE 2",
+      "projects": [
+        {
+          "name": "Farhad Azizi Residence",
+          "transactionCount": 5
+        },
+        {
+          "name": "Fawad Azizi Residence",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI INVESTMENT PARK FIRST",
+      "projects": [
+        {
+          "name": "SCHON BUSINESS PARK",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI LAND RESIDENCE COMPLEX",
+      "projects": [
+        {
+          "name": "SKY COURTS",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI MARINA",
+      "projects": [
+        {
+          "name": "Continental Tower",
+          "transactionCount": 2
+        },
+        {
+          "name": "MARINA WHARF II",
+          "transactionCount": 2
+        },
+        {
+          "name": "SPARKLE TOWERS",
+          "transactionCount": 1
+        },
+        {
+          "name": "THE ZEN",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI PRODUCTION CITY",
+      "projects": [
+        {
+          "name": "LAGO VISTA",
+          "transactionCount": 1
+        },
+        {
+          "name": "THE CRESCENT",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI SOUTH",
+      "projects": [
+        {
+          "name": "CELESTIA",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "DUBAI WATER CANAL",
+      "projects": [
+        {
+          "name": "Canal Front Residences-CF7 & CF8 & CF9",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "INTERNATIONAL CITY PH 1",
+      "projects": [
+        {
+          "name": "Lawnz Residence by Danube",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "JADDAF WATERFRONT",
+      "projects": [
+        {
+          "name": "Boutique Xll",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "JUMEIRAH LAKES TOWERS",
+      "projects": [
+        {
+          "name": "BONNINGTON TOWER HOTEL & RESIDENCE DUBAI",
+          "transactionCount": 1
+        },
+        {
+          "name": "DUBAI ARCH TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "INDIGO TOWER",
+          "transactionCount": 1
+        },
+        {
+          "name": "LAKE VIEW",
+          "transactionCount": 1
+        },
+        {
+          "name": "MBL RESIDENCE",
+          "transactionCount": 4
+        },
+        {
+          "name": "MBL Royal",
+          "transactionCount": 1
+        },
+        {
+          "name": "NEW DUBAI GATE1",
+          "transactionCount": 1
+        },
+        {
+          "name": "Orra The Embankment",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "projects": [
+        {
+          "name": "Binghatti Apex",
+          "transactionCount": 1
+        },
+        {
+          "name": "Binghatti Onyx",
+          "transactionCount": 2
+        },
+        {
+          "name": "Binghatti Orchid",
+          "transactionCount": 2
+        },
+        {
+          "name": "Binghatti Phantom",
+          "transactionCount": 2
+        },
+        {
+          "name": "Binghatti Phoenix",
+          "transactionCount": 4
+        },
+        {
+          "name": "Binghatti Royale",
+          "transactionCount": 4
+        },
+        {
+          "name": "Binghatti Tulip",
+          "transactionCount": 1
+        },
+        {
+          "name": "BOTANICA",
+          "transactionCount": 1
+        },
+        {
+          "name": "DAR AL JAWHARA",
+          "transactionCount": 1
+        },
+        {
+          "name": "Pearl House II By Imtiaz",
+          "transactionCount": 1
+        },
+        {
+          "name": "PLATINUM RESIDENCE",
+          "transactionCount": 1
+        },
+        {
+          "name": "Regent Court",
+          "transactionCount": 3
+        },
+        {
+          "name": "THE EAST CREST BY METEORA",
+          "transactionCount": 1
+        },
+        {
+          "name": "THE VYBE",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "projects": [
+        {
+          "name": "555 PARK VIEWS",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "LIWAN",
+      "projects": [
+        {
+          "name": "Wavez Residence",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "MADINAT HIND 4",
+      "projects": [
+        {
+          "name": "DAMAC HILLS (2) - VIRIDIS",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "MEYDAN AVENUE",
+      "projects": [
+        {
+          "name": "Azizi Greenfield",
+          "transactionCount": 2
+        },
+        {
+          "name": "Azizi Park Avenue",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Galleries",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "MEYDAN ONE",
+      "projects": [
+        {
+          "name": "Azizi Riviera 11",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 15",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 16",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 20",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 25",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 3",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 32",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 37",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 40",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 46",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 5",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 7",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera 8",
+          "transactionCount": 1
+        },
+        {
+          "name": "Azizi Riviera Beachfront",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "MIRDIF",
+      "projects": [
+        {
+          "name": "MIRDIF HILLS- NASAYEM AVENUE",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "SILICON OASIS",
+      "projects": [
+        {
+          "name": "IT PLAZA",
+          "transactionCount": 2
+        },
+        {
+          "name": "Selicon Star 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "SILICON BOULEVARD",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "SOBHA HEARTLAND",
+      "projects": [
+        {
+          "name": "Sobha Creek Vistas Grande",
+          "transactionCount": 1
+        },
+        {
+          "name": "Sobha Hartland - The Crest",
+          "transactionCount": 1
+        },
+        {
+          "name": "Sobha Hartland Greens - Phase III",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "retail",
+      "district": "WARSAN FIRST",
+      "projects": [
+        {
+          "name": "Olivz Residence",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "townhouse",
+      "district": "DUBAI SOUTH",
+      "projects": [
+        {
+          "name": "THE PULSE TOWNHOUSES",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL FURJAN",
+      "projects": [
+        {
+          "name": "DREAMZ",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL HEBIAH FOURTH",
+      "projects": [
+        {
+          "name": "Aura",
+          "transactionCount": 62
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL HEBIAH SIXTH",
+      "projects": [
+        {
+          "name": "Mudon Al Ranim 1",
+          "transactionCount": 12
+        },
+        {
+          "name": "Mudon Al Ranim 2",
+          "transactionCount": 18
+        },
+        {
+          "name": "Mudon Al Ranim 3",
+          "transactionCount": 46
+        },
+        {
+          "name": "Mudon Al Ranim 4",
+          "transactionCount": 34
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL KHAIL HEIGHTS",
+      "projects": [
+        {
+          "name": "AL KHAIL HEIGHTS",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL THANYAH THIRD",
+      "projects": [
+        {
+          "name": "The Lakes Ghadeer",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL YELAYISS 2",
+      "projects": [
+        {
+          "name": "MAHA TOWNHOUSES",
+          "transactionCount": 50
+        },
+        {
+          "name": "NASEEM TOWNHOUSES",
+          "transactionCount": 4
+        },
+        {
+          "name": "REEM TOWNHOUSES",
+          "transactionCount": 12
+        },
+        {
+          "name": "SAMA TOWNHOUSES",
+          "transactionCount": 8
+        },
+        {
+          "name": "SHAMS TOWNHOUSES",
+          "transactionCount": 9
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "AL YUFRAH 1",
+      "projects": [
+        {
+          "name": "The Valley - Elora",
+          "transactionCount": 16
+        },
+        {
+          "name": "The Valley - Orania",
+          "transactionCount": 68
+        },
+        {
+          "name": "The Valley - Talia",
+          "transactionCount": 37
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "ARABIAN RANCHES I",
+      "projects": [
+        {
+          "name": "ALMA-2",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "ARABIAN RANCHES II",
+      "projects": [
+        {
+          "name": "AR II - Reem Community",
+          "transactionCount": 6
+        },
+        {
+          "name": "AR II Camelia",
+          "transactionCount": 4
+        },
+        {
+          "name": "AR II Camelia 2",
+          "transactionCount": 4
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "ARABIAN RANCHES III",
+      "projects": [
+        {
+          "name": "Arabain Ranches lll - Bliss",
+          "transactionCount": 20
+        },
+        {
+          "name": "Arabian Ranches III - JOY",
+          "transactionCount": 18
+        },
+        {
+          "name": "Arabian Ranches III - Spring",
+          "transactionCount": 4
+        },
+        {
+          "name": "Arabian Ranches III - SUN",
+          "transactionCount": 8
+        },
+        {
+          "name": "Arabian Ranches lll - Ruba",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "CHERRYWOODS",
+      "projects": [
+        {
+          "name": "Cherrywoods",
+          "transactionCount": 14
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "DUBAI HILLS",
+      "projects": [
+        {
+          "name": "Club Villas at Dubai Hills",
+          "transactionCount": 1
+        },
+        {
+          "name": "Golf Grove",
+          "transactionCount": 7
+        },
+        {
+          "name": "MAPLE",
+          "transactionCount": 23
+        },
+        {
+          "name": "MAPLE 2",
+          "transactionCount": 17
+        },
+        {
+          "name": "Maple III",
+          "transactionCount": 23
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "DUBAI INDUSTRIAL CITY",
+      "projects": [
+        {
+          "name": "DUBAI SPANISH TWIN VILLA",
+          "transactionCount": 1
+        },
+        {
+          "name": "SAHARA MEADOWS1",
+          "transactionCount": 8
+        },
+        {
+          "name": "SAHARA MEADOWS2",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "DUBAI SOUTH",
+      "projects": [
+        {
+          "name": "The Pulse Villas",
+          "transactionCount": 5
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "EMAAR SOUTH",
+      "projects": [
+        {
+          "name": "Greenview",
+          "transactionCount": 11
+        },
+        {
+          "name": "Greenview 2",
+          "transactionCount": 14
+        },
+        {
+          "name": "Parkside",
+          "transactionCount": 27
+        },
+        {
+          "name": "Parkside 2",
+          "transactionCount": 14
+        },
+        {
+          "name": "Parkside 3",
+          "transactionCount": 20
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "EMIRATE LIVING",
+      "projects": [
+        {
+          "name": "Emirates Living - Springs 1",
+          "transactionCount": 14
+        },
+        {
+          "name": "Emirates Living - Springs 10",
+          "transactionCount": 14
+        },
+        {
+          "name": "Emirates Living - Springs 11",
+          "transactionCount": 18
+        },
+        {
+          "name": "Emirates Living - Springs 12",
+          "transactionCount": 12
+        },
+        {
+          "name": "Emirates Living - Springs 14",
+          "transactionCount": 16
+        },
+        {
+          "name": "Emirates Living - Springs 15",
+          "transactionCount": 16
+        },
+        {
+          "name": "Emirates Living - Springs 2",
+          "transactionCount": 12
+        },
+        {
+          "name": "Emirates Living - Springs 3",
+          "transactionCount": 15
+        },
+        {
+          "name": "Emirates Living - Springs 4",
+          "transactionCount": 12
+        },
+        {
+          "name": "Emirates Living - Springs 5",
+          "transactionCount": 11
+        },
+        {
+          "name": "Emirates Living - Springs 6",
+          "transactionCount": 10
+        },
+        {
+          "name": "Emirates Living - Springs 7",
+          "transactionCount": 14
+        },
+        {
+          "name": "Emirates Living - Springs 8",
+          "transactionCount": 16
+        },
+        {
+          "name": "Emirates Living - Springs 9",
+          "transactionCount": 16
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "GRAND VIEWS",
+      "projects": [
+        {
+          "name": "GRAND VIEWS",
+          "transactionCount": 16
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+      "projects": [
+        {
+          "name": "MAG EYE Phase 1",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "ISLAND 2",
+      "projects": [
+        {
+          "name": "Villa Amalfi",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "JUMEIRAH GOLF",
+      "projects": [
+        {
+          "name": "JASMINE LANE",
+          "transactionCount": 20
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "JUMEIRAH PARK",
+      "projects": [
+        {
+          "name": "ROYAL PARK",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "projects": [
+        {
+          "name": "7 WEST VILLAS",
+          "transactionCount": 1
+        },
+        {
+          "name": "Celeste by Westar",
+          "transactionCount": 1
+        },
+        {
+          "name": "DIAMOND VIEW 1,2,3,4",
+          "transactionCount": 1
+        },
+        {
+          "name": "DIAMOND VIEWS 3 - VILLAS A",
+          "transactionCount": 1
+        },
+        {
+          "name": "ERANTIS",
+          "transactionCount": 1
+        },
+        {
+          "name": "Grand Glow",
+          "transactionCount": 1
+        },
+        {
+          "name": "Haven Villas 1",
+          "transactionCount": 2
+        },
+        {
+          "name": "HYATI RESIDENCE",
+          "transactionCount": 1
+        },
+        {
+          "name": "INDIGO VILLE 1",
+          "transactionCount": 2
+        },
+        {
+          "name": "LAS CASAS",
+          "transactionCount": 2
+        },
+        {
+          "name": "Le Parc Homes",
+          "transactionCount": 8
+        },
+        {
+          "name": "Le Parc Homes II",
+          "transactionCount": 2
+        },
+        {
+          "name": "LOTUS PARK",
+          "transactionCount": 1
+        },
+        {
+          "name": "MARWA HOMES",
+          "transactionCount": 1
+        },
+        {
+          "name": "MARWA HOMES 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "MIRABELLA",
+          "transactionCount": 2
+        },
+        {
+          "name": "MIRABELLA 4",
+          "transactionCount": 1
+        },
+        {
+          "name": "MIRABELLA 5",
+          "transactionCount": 1
+        },
+        {
+          "name": "MIRABELLA 6",
+          "transactionCount": 1
+        },
+        {
+          "name": "MULBERRY MANSIONS",
+          "transactionCount": 2
+        },
+        {
+          "name": "MULBERRY PARK",
+          "transactionCount": 1
+        },
+        {
+          "name": "PALACE ESTATES",
+          "transactionCount": 3
+        },
+        {
+          "name": "PARK VILLA'S",
+          "transactionCount": 1
+        },
+        {
+          "name": "PARK VILLA'S 2",
+          "transactionCount": 1
+        },
+        {
+          "name": "ROYAL PARK SOUTH 1",
+          "transactionCount": 4
+        },
+        {
+          "name": "SANDOVAL LANE",
+          "transactionCount": 1
+        },
+        {
+          "name": "SEASONS COMMUNITY- AUTUMN",
+          "transactionCount": 10
+        },
+        {
+          "name": "SEASONS COMMUNITY- SUMMER",
+          "transactionCount": 6
+        },
+        {
+          "name": "SHAMAL TERRACES 1",
+          "transactionCount": 1
+        },
+        {
+          "name": "SHAMAL TERRACES 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "SOMERSET MEWS",
+          "transactionCount": 1
+        },
+        {
+          "name": "SUNSET GARDENS",
+          "transactionCount": 1
+        },
+        {
+          "name": "The Veranda Collection 1",
+          "transactionCount": 4
+        },
+        {
+          "name": "VALENCIA",
+          "transactionCount": 2
+        },
+        {
+          "name": "Westar Azure",
+          "transactionCount": 1
+        },
+        {
+          "name": "WESTAR REFLECTION",
+          "transactionCount": 1
+        },
+        {
+          "name": "WESTAR TERRACE  GARDEN",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "projects": [
+        {
+          "name": "AL BUROOJ RESIDENCE 1",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "LA MER",
+      "projects": [
+        {
+          "name": "Sur La Mer",
+          "transactionCount": 1
+        },
+        {
+          "name": "Sur La Mer 2",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "LIVING LEGENDS",
+      "projects": [
+        {
+          "name": "MAYA Luxury Collection",
+          "transactionCount": 1
+        },
+        {
+          "name": "MAYA townhouses",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "LIWAN",
+      "projects": [
+        {
+          "name": "SUNRISE BOULEVARD 10",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "MADINAT AL MATAAR",
+      "projects": [
+        {
+          "name": "Greenview 3",
+          "transactionCount": 13
+        },
+        {
+          "name": "The Pulse Beachfront 2",
+          "transactionCount": 10
+        },
+        {
+          "name": "The Pulse Beachfront 3",
+          "transactionCount": 35
+        },
+        {
+          "name": "The Pulse Villas 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "The Pulse- Beachfront",
+          "transactionCount": 20
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "MBR DISTRICT 7",
+      "projects": [
+        {
+          "name": "MAG EYE Phase 1",
+          "transactionCount": 16
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "ME'AISEM FIRST",
+      "projects": [
+        {
+          "name": "Jumeirah Luxury",
+          "transactionCount": 8
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "MIRA",
+      "projects": [
+        {
+          "name": "REEM - MIRA OASIS COMMUNITY",
+          "transactionCount": 17
+        },
+        {
+          "name": "REEM - MIRA OASIS COMMUNITY PHASE 2",
+          "transactionCount": 22
+        },
+        {
+          "name": "REEM - MIRA OASIS COMMUNITY PHASE 3",
+          "transactionCount": 14
+        },
+        {
+          "name": "REEM-MIRA COMMUNITY PH 1",
+          "transactionCount": 8
+        },
+        {
+          "name": "REEM-MIRA COMMUNITY PH 2",
+          "transactionCount": 7
+        },
+        {
+          "name": "REEM-MIRA COMMUNITY PH 3",
+          "transactionCount": 20
+        },
+        {
+          "name": "REEM-MIRA COMMUNITY PH 4",
+          "transactionCount": 11
+        },
+        {
+          "name": "REEM-MIRA COMMUNITY PH5",
+          "transactionCount": 6
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "MOTOR CITY",
+      "projects": [
+        {
+          "name": "GREEN COMMUNITY MOTOR CITY, PHASE II - CASA FAMILIA",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "NAD AL SHEBA GARDENS",
+      "projects": [
+        {
+          "name": "MAG 22",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "NAD AL SHIBA FIRST",
+      "projects": [
+        {
+          "name": "Nad Al Sheba Gardens Phase 2",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "RUKAN",
+      "projects": [
+        {
+          "name": "Rukan 3",
+          "transactionCount": 16
+        },
+        {
+          "name": "Rukan2",
+          "transactionCount": 3
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "SERENA",
+      "projects": [
+        {
+          "name": "Serena - Casa Viva",
+          "transactionCount": 18
+        },
+        {
+          "name": "SERENA BELLA CASA",
+          "transactionCount": 15
+        },
+        {
+          "name": "Serena Casa Dora",
+          "transactionCount": 15
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "SOBHA HEARTLAND",
+      "projects": [
+        {
+          "name": "Sobha Hartland Estates - Townhouses",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "SUSTAINABLE CITY",
+      "projects": [
+        {
+          "name": "THE SUSTAINABLE CITY",
+          "transactionCount": 14
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "THE FIELD",
+      "projects": [
+        {
+          "name": "THE FIELDS AT D11 - MBRMC",
+          "transactionCount": 72
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "THE LAKES",
+      "projects": [
+        {
+          "name": "The Lakes Ghadeer",
+          "transactionCount": 5
+        },
+        {
+          "name": "The Lakes Zulal",
+          "transactionCount": 7
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "THE VALLEY",
+      "projects": [
+        {
+          "name": "The Valley - Eden",
+          "transactionCount": 8
+        },
+        {
+          "name": "The Valley-Nara",
+          "transactionCount": 55
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "TILAL AL GHAF",
+      "projects": [
+        {
+          "name": "Elan",
+          "transactionCount": 33
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "TOWN SQUARE",
+      "projects": [
+        {
+          "name": "NOOR TOWNHOUSES",
+          "transactionCount": 19
+        },
+        {
+          "name": "SAFI TOWNHOUSES",
+          "transactionCount": 8
+        },
+        {
+          "name": "TOWN SQUARE HAYAT",
+          "transactionCount": 16
+        },
+        {
+          "name": "TOWN SQUARE ZAHRA",
+          "transactionCount": 13
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "VILLANOVA",
+      "projects": [
+        {
+          "name": "AMARANTA 2",
+          "transactionCount": 8
+        },
+        {
+          "name": "La Rosa",
+          "transactionCount": 5
+        },
+        {
+          "name": "La Rosa 3",
+          "transactionCount": 6
+        },
+        {
+          "name": "La Rosa 5",
+          "transactionCount": 5
+        },
+        {
+          "name": "La Rosa 6",
+          "transactionCount": 7
+        },
+        {
+          "name": "La Rosa Phase 2",
+          "transactionCount": 6
+        },
+        {
+          "name": "La Violeta 1",
+          "transactionCount": 5
+        },
+        {
+          "name": "La Violeta 2",
+          "transactionCount": 28
+        },
+        {
+          "name": "Villanova Amaranta",
+          "transactionCount": 9
+        },
+        {
+          "name": "Villanova Amaranta 3",
+          "transactionCount": 12
+        },
+        {
+          "name": "Villanova Amaranta A",
+          "transactionCount": 6
+        },
+        {
+          "name": "Villanova Amaranta B",
+          "transactionCount": 11
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "WADI AL SAFA 3",
+      "projects": [
+        {
+          "name": "ALBARARI IXORA VILLAS",
+          "transactionCount": 12
+        },
+        {
+          "name": "CHORISIA 2 VILLAS",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "WADI AL SAFA 4",
+      "projects": [
+        {
+          "name": "California Village",
+          "transactionCount": 1
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "WADI AL SAFA 5",
+      "projects": [
+        {
+          "name": "Arabian Ranches lll - Bliss 2",
+          "transactionCount": 14
+        },
+        {
+          "name": "Arabian Ranches lll - June",
+          "transactionCount": 25
+        },
+        {
+          "name": "Arabian Ranches lll - June 2",
+          "transactionCount": 2
+        },
+        {
+          "name": "Arabian Ranches lll - Raya",
+          "transactionCount": 20
+        },
+        {
+          "name": "La Rosa 4",
+          "transactionCount": 2
+        }
+      ]
+    },
+    {
+      "propertyType": "villa",
+      "district": "WADI AL SAFA 7",
+      "projects": [
+        {
+          "name": "Rukan 3",
+          "transactionCount": 65
+        }
+      ]
+    }
+  ]
+}

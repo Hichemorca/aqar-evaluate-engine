@@ -1,6 +1,6 @@
-# AQAR Valuation Intelligence Engine
+# MIAYAAR Valuation Intelligence Engine
 
-**AQAR** منصة ويب لتقييم العقارات في دبي، تجمع بين بيانات معاملات دائرة الأراضي والأملاك في دبي (DLD)، المقارنات السعرية، طرق التقييم المعتمدة، بيانات GIS والمرافق، وطبقة معايرة إدارية قابلة للتتبع. المنصة مستقلة عن MIAYAAR؛ تمت مراجعة MIAYAAR سابقًا للاستفادة من نمط تنظيف الأدلة وسجل التدقيق فقط، ولم تُنقل منه أنواع عقارات أو طرق تقييم أو أوزان.
+**MIAYAAR** منصة ويب لتقييم العقارات في دبي، تجمع بين بيانات معاملات دائرة الأراضي والأملاك في دبي (DLD)، المقارنات السعرية، طرق التقييم المعتمدة، بيانات GIS والمرافق، وطبقة معايرة إدارية قابلة للتتبع. الاسم التجاري والهوية البصرية المعتمدان للمشروع هما MIAYAAR — Valuation Intelligence Engine.
 
 > **حالة المشروع:** المنصة جاهزة للاستخدام التجريبي والمحدود (Pilot/BETA). لا ينبغي اعتبار القيمة الناتجة تقرير تقييم رسميًا أو بديلًا عن مراجعة مثمّن مرخّص، خصوصًا في التمويل والضمانات والقرارات القانونية.
 
@@ -13,9 +13,13 @@
 | `/market-intelligence` | صفحة Market Intelligence. |
 | `/export` | صفحة التصدير العامة. |
 
+## الهوية البصرية
+
+الاسم الرسمي للمنصة هو **MIAYAAR — Valuation Intelligence Engine**. يستخدم الموقع الشعار الأفقي الداكن في الرؤوس العامة، والأيقونة المختصرة في الصفحات الإدارية وfavicon. لوحة الألوان الأساسية هي الكحلي الداكن `#07111f`، الأزرق `#173454`، والأخضر `#0aa66f` مع أخضر ساطع `#23c98b`. بقي اللون الذهبي للأحوال الدلالية مثل التحذيرات والثقة المتوسطة، وليس كلون العلامة الأساسي. الخط التشغيلي هو `Inter` لسهولة قراءة الأرقام والبيانات، بينما يحافظ الشعار على حروفه الهندسية الخاصة.
+
 ## 1. نطاق المنصة
 
-تعمل AQAR حاليًا على بيانات دبي فقط. أنواع العقارات الموجودة في النظام هي: **Apartment، Villa، Townhouse، Office، Retail، Warehouse، Land**. اللغة التشغيلية الحالية للواجهة هي الإنجليزية، مع تحسين الوضوح النصي دون إضافة تبديل لغة في هذه المرحلة.
+تعمل MIAYAAR حاليًا على بيانات دبي فقط. أنواع العقارات الموجودة في النظام هي: **Apartment، Villa، Townhouse، Office، Retail، Warehouse، Land**. اللغة التشغيلية الحالية للواجهة هي الإنجليزية، مع تحسين الوضوح النصي دون إضافة تبديل لغة في هذه المرحلة.
 
 تعتمد النتيجة على المدخلات التي يدخلها المستخدم، وبيانات DLD المتاحة، والمقارنات التي يستطيع النظام اختيارها، والمعاملات الحالية في Calibration Console. عندما لا توجد أدلة DLD كافية، تعرض الواجهة حالة الأدلة بوضوح ولا تنشئ سعرًا اصطناعيًا لمجرد إظهار رقم.
 
@@ -38,6 +42,8 @@
 | النماذج | `models/` | مخرجات النموذج الآلي إن وُجدت؛ لا تستبدل طريقة التقييم الحاكمة. |
 
 إعداد Netlify موجود في `netlify.toml`. مسارات `/api/*` تُحوّل إلى Netlify Functions، والمسار `/admin-calibration` يُحوّل إلى `calibration.html`. يجب عدم وضع أسرار أو tokens داخل الكود أو ملفات `data/` أو سجلات Git.
+
+وظيفة `netlify/functions/scrape.js` legacy وليست جزءًا من مسار التقييم الحالي؛ الواجهة تستخدم `dld-lookup` و`fetch-osm` بدلًا منها. لذلك تكون وظيفة ScrapingBee معطلة افتراضيًا وتعيد `410 Gone` ولا تسمح بـ CORS عام. لا تُفعّلها إلا بعد إضافة حماية وصول وrate limiting ومراجعة تشغيلية مستقلة عبر متغير البيئة `SCRAPE_ENDPOINT_ENABLED=true`.
 
 ## 3. صفحات المستخدم
 
@@ -94,7 +100,23 @@
 
 الإعداد النشط الموثق حاليًا هو `cal-1787651025399`، وإصدار المحرك `22.1.0`. لا تضع token الإداري في README أو commit أو command line أو logs. إذا احتاج السر إلى تغيير، يجب تدويره من إعدادات Netlify ثم اختبار المصادقة دون كشف قيمته.
 
-## 7. تنظيف بيانات DLD وسجل الأدلة
+## 7. User Input Observation Layer
+
+تحتفظ المنصة بحقول v2.1 الاختيارية وتتيح للمستخدم مشاركة مدخلات العقار ونتيجة التقييم للتحليل المجهول عبر موافقة اختيارية واضحة. عدم تحديد الموافقة لا يمنع التقييم ولا يغيّر القيمة الناتجة. عند الموافقة، يرسل المتصفح observation بعد اكتمال التقييم إلى `POST /api/valuation-observation`، ويكون فشل التسجيل غير حاجب للتقييم.
+
+تُحفظ observations في مساحة Netlify Blobs مستقلة باسم `aqar-input-observations`، ولا تُكتب في `data/accuracy-data.json` أو `data/dld-transactions.json` أو calibration history. كل سجل يحمل `schemaVersion` و`calibrationConfigId` و`baselineValue` و`shadowValue` و`shadowTrace` وحالة مصدر Project. القيم الفارغة وUnknown محايدة، والنص الحر للمشروع لا يُعامل كـDLD verified.
+
+| القاعدة | السلوك |
+|---|---|
+| Consent | opt-in صريح؛ لا يُسجل observation عند عدم الموافقة. |
+| Privacy | لا تُحفظ أسماء أو بريد أو هاتف أو authorization headers أو tokens أو أسرار. |
+| Validation | التحقق الخادمي يرفض النوع غير الصالح، الحقول غير المنطبقة، سنة التجديد غير الصحيحة، المشروع الموثق بلا مصدر DLD، والـpayload الكبير. |
+| Evidence | إدخال المستخدم ليس market truth؛ outcome لاحق لا يدخل أي تحليل Accuracy إلا بعد توثيقه. |
+| Production boundary | observations وshadow trace للتحليل فقط؛ لا تغيّر evaluator أو الأوزان أو fallback أو Accuracy الرسمية. |
+
+المواصفة الكاملة موجودة في `docs/v2.1-input-observation-spec.md`. مسار التسجيل في `netlify/functions/valuation-observation.js`، واختباراته في `tests/valuation-observation.test.js`. يجب مراجعة سياسة الاحتفاظ والخصوصية قبل فتح جمع البيانات على نطاق واسع.
+
+## 8. تنظيف بيانات DLD وسجل الأدلة
 
 الملف الخام `data/dld-transactions.csv` محفوظ كما هو ولا يُعدّل. ينتج `scripts/fetch-dld.js` طبقات منفصلة:
 
@@ -104,6 +126,16 @@
 | Eligible | `data/dld-transactions.json` | السجلات المسموح باستخدامها في Accuracy والمسارات التابعة. |
 | Rejected ledger | `data/dld-transactions-rejected.json` | السجلات المرفوضة وأسباب الرفض، ولا تدخل Accuracy. |
 | Cleaning report | `data/dld-cleaning-report.json` | checksum والأعداد وأسباب الاستبعاد. |
+
+تستخدم الصفحة الرئيسية ملفات client summaries خفيفة مشتقة تلقائيًا من artifacts الرسمية لتقليل التحميل الأولي:
+
+| الملف | المصدر | الاستخدام في الواجهة |
+|---|---|---|
+| `data/district-list.json` | `data/dld-transactions.json` | قائمة District / Area فقط. |
+| `data/project-building-summary.json` | `data/dld-transactions.json` | اقتراحات Project / Building Name وعدد المعاملات المرتبطة بها. |
+| `data/accuracy-summary.json` | `data/accuracy-data.json` | أرقام Accuracy وتاريخ التحديث فقط. |
+
+تُولّد هذه الملفات عبر `scripts/generate-client-summaries.js` بعد تحديث البيانات، وتبقى الملفات الكاملة هي المصدر الرسمي الوحيد للمقارنات وAccuracy والتدقيق. يمكن تشغيل `node scripts/generate-client-summaries.js --check` للتحقق من أن summaries ليست قديمة.
 
 آخر snapshot موثق:
 
@@ -151,7 +183,15 @@ checksum الحالي للملف الخام المنظف هو:
 
 تضيف Accuracy: `lat`، `lng`، `gisScore`، `gisFacilities`، `gisMatchedBy`، `hasGis`، `aqarValuation`، `aqarVsActual`، `evalLevel`، `evalCount`، `gisMultiplier`، `viewMultiplier`، `viewTypes`، `calibrationConfigId`، `valuationMethods`، `calibrationAssumptions`، و`comparableDiagnostics`.
 
-## 10. تدفق تحديث البيانات اليومي
+## 10. فصل المسارات التجريبية عن Accuracy الرسمية
+
+`scripts/fetch-transactions.js` مولد تجريبي قديم ينشئ `data/fetched-transactions.json` باستخدام قيم تقديرية وعشوائية لأغراض العرض أو الاختبار فقط. لا يُستخدم في workflow الحالي، ولا يكتب `dld-transactions.json` أو `accuracy-data.json`، ولا يجوز استخدام مخرجاته في المقارنات أو Accuracy الرسمية. المسار الرسمي يعتمد على `scripts/fetch-dld.js` ثم `scripts/evaluate-and-save.js` باستخدام artifacts DLD المنظفة.
+
+`netlify/functions/scrape-sold.js` لا يختلق سجلات، لكنه legacy وغير مستخدم من مسار المنتج الحالي؛ لذلك عُطّل افتراضيًا ويعيد `410 Gone` دون CORS عام. أما `netlify/functions/scrape.js` فقد عُطّل افتراضيًا للسبب نفسه. لا تُفعّل أيًا منهما قبل إضافة حماية وصول وrate limiting ومراجعة تشغيلية مستقلة.
+
+يُعرّف `.github/workflows/ci.yml` فحوص ما قبل الدمج عند كل `push` و`pull_request`، وتشمل `npm ci` و`npm test` والتحقق من summaries وJavaScript syntax.
+
+## 11. تدفق تحديث البيانات اليومي
 
 يُعرّف التدفق في `.github/workflows/update-accuracy.yml` ويُشغّل يوميًا عند الساعة 06:00 UTC أو يدويًا عبر `workflow_dispatch`. الترتيب الحالي هو:
 
@@ -203,11 +243,15 @@ checksum الحالي للملف الخام المنظف هو:
 
 كل نتيجة يجب أن تكون قابلة لتحديد نسخة المحرك ونسخة البيانات والمعايرة. يجب فصل `SOURCE_FACT` و`DERIVED_VALUE` و`ASSUMPTION` و`MODEL_OUTPUT` في trace، ويجب أن تبقى الطرق غير المنطبقة `NOT_APPLICABLE`.
 
-## 14. القرارات والحقول المؤجلة
+## 14. v2.1 حقول العقار الإضافية
 
-تم تأجيل إضافة حقول جديدة إلى واجهة الإدخال ونتيجة التقييم حتى تُراجع بنية المستودع وتُعتمد خطة عمل آمنة. الاقتراحات التي نوقشت، لكنها **ليست تنفيذًا معتمدًا بعد**، تشمل: اسم المشروع أو المبنى، نوع الوحدة التفصيلي، الفصل بين BUA وPlot Area، عدد الحمامات، الطابق الرقمي، سنة آخر تجديد، خصائص الوحدة الخاصة، عدد مواقف السيارات، وحقول Income المتقدمة.
+تم تنفيذ الإصدار v2.1 على فرع `feature/v2.1-property-fields` كواجهة وpayload وشرح نتيجة وتحليل معزول فقط. الحقول الجديدة الاختيارية هي: `Project / Building Name` للـ Apartment وVilla وTownhouse، و`BUA` للـ Villa وTownhouse فقط، و`Plot Area` للـ Villa وTownhouse وLand، و`Last Renovation Year` للـ Apartment وVilla وTownhouse عندما يكون عمر العقار أكبر من خمس سنوات. بقيت حقول `Detailed Unit Type` و`Floor` و`Parking Count` كما هي دون حذف أو تغيير.
 
-يجب ألا يبدأ تنفيذ هذه الحقول قبل تحديد: هل ستُستخدم في اختيار المقارنات أم في طريقة تقييم، مصدرها، القيم المسموحة، أثرها على الأنواع المختلفة، أثرها على Accuracy، وسلوكها عند تركها فارغة. كما يجب عدم إضافة أنواع عقارات أو طرق تقييم أو معاملات جديدة لمجرد توسيع النموذج.
+يستخدم Project / Building اقتراحات من `masterProject` و`project` في معاملات DLD، وتُفلتر الاقتراحات حسب المنطقة والنوع. الاسم المدخل يدويًا لا يُعامل كبيان موثق، وإذا كانت أدلة المشروع محدودة يبقى District هو fallback المرئي. أضيفت direct multipliers بقيمة محايدة `1.00`: معامل خاص للمشروع الموثق، ومعامل لنسبة `BUA ÷ Plot Area` للـ Villa/Townhouse، ومعامل لحداثة التجديد. حاصل ضرب هذه المعاملات يظهر في shadow preview فقط، ولا يستبدل القيمة الرسمية أو يدخل Accuracy قبل موافقة منفصلة.
+
+أثبت التحليل المعزول أن Project / Building قابل للقياس من بيانات DLD الحالية، مع تغطية 76.56% للشقق و89.29% للفلل، بينما لا تحتوي سجلات DLD أو Accuracy الحالية على حقول موثقة منفصلة لـ BUA أو Plot Area أو Last Renovation Year. لذلك لا يجوز إعادة تسمية `area` أو `procedureArea` تلقائيًا إلى BUA أو Plot Area، ولا يجوز توليد قيم اصطناعية لهذه الحقول. التفاصيل الكاملة في `docs/v2.1-property-fields-spec.md` و`docs/v2.1-property-fields-analysis.md`.
+
+تُدار direct multipliers من Calibration Console ضمن قسم مستقل عن أوزان المناهج. الإعداد الافتراضي shadow معطل، والشرائح المفتوحة تحفظ كـ `null`، ومفاتيح المشاريع تُحفظ بصيغة `property type | district | project`. أي تفعيل أو تغيير رسمي يتطلب مصدرًا موثقًا، تجربة shadow معزولة، مقارنة MAE وbias وP90 و±15% وcoverage وfallback transitions، ثم موافقة المالك الصريحة. لا يغيّر v2.1 الحالي أنواع العقارات أو طرق التقييم أو calibration الرسمي أو الأوزان أو fallback أو artifacts التاريخية.
 
 ## 15. القيود المعروفة
 

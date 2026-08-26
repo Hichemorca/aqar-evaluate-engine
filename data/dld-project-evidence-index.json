@@ -1,0 +1,5034 @@
+{
+  "schemaVersion": 1,
+  "source": "data/dld-transactions.json",
+  "sourceSha256": "fc897736e4fe3c8cdf7acc0dfda8e36b5fc3f40468a444abfbd3a3ede67f4ce9",
+  "generatedAt": "2026-08-26T02:24:59.806Z",
+  "projectKeyCount": 1675,
+  "projects": {
+    "apartment||al barari||seventh heaven": {
+      "count": 9
+    },
+    "apartment||al barari||seventh heaven - ashjar": {
+      "count": 103
+    },
+    "apartment||al barshaa south third||orion building": {
+      "count": 4
+    },
+    "apartment||al furjan||al fouad": {
+      "count": 2
+    },
+    "apartment||al furjan||amalia residences": {
+      "count": 20
+    },
+    "apartment||al furjan||avenue residence 2": {
+      "count": 4
+    },
+    "apartment||al furjan||avenue residence 4": {
+      "count": 6
+    },
+    "apartment||al furjan||avenue residence 5": {
+      "count": 11
+    },
+    "apartment||al furjan||avenue residence1": {
+      "count": 4
+    },
+    "apartment||al furjan||azizi amber": {
+      "count": 9
+    },
+    "apartment||al furjan||azizi berton": {
+      "count": 10
+    },
+    "apartment||al furjan||azizi farishta residence": {
+      "count": 11
+    },
+    "apartment||al furjan||azizi pearl": {
+      "count": 8
+    },
+    "apartment||al furjan||azizi plaza hotel apartments": {
+      "count": 28
+    },
+    "apartment||al furjan||azizi samia residence": {
+      "count": 19
+    },
+    "apartment||al furjan||azizi shaista residence": {
+      "count": 8
+    },
+    "apartment||al furjan||azizi star hotel apartments": {
+      "count": 29
+    },
+    "apartment||al furjan||azizi. daisy": {
+      "count": 5
+    },
+    "apartment||al furjan||azizi. feirouz": {
+      "count": 4
+    },
+    "apartment||al furjan||azizi. freesia": {
+      "count": 5
+    },
+    "apartment||al furjan||azizi. iris": {
+      "count": 7
+    },
+    "apartment||al furjan||azizi. liatris": {
+      "count": 2
+    },
+    "apartment||al furjan||azizi. orchid": {
+      "count": 5
+    },
+    "apartment||al furjan||azizi. yasamine": {
+      "count": 3
+    },
+    "apartment||al furjan||candace acacia hotel apartments": {
+      "count": 16
+    },
+    "apartment||al furjan||candace aster hotel apartments": {
+      "count": 8
+    },
+    "apartment||al furjan||equiti arcade": {
+      "count": 6
+    },
+    "apartment||al furjan||equiti home": {
+      "count": 21
+    },
+    "apartment||al furjan||equiti residence": {
+      "count": 7
+    },
+    "apartment||al furjan||gemz by danube": {
+      "count": 19
+    },
+    "apartment||al furjan||glamz residence": {
+      "count": 15
+    },
+    "apartment||al furjan||jebel ali village townhouses- phase 1": {
+      "count": 9
+    },
+    "apartment||al furjan||maria tower": {
+      "count": 6
+    },
+    "apartment||al furjan||montrell hotel aprtments": {
+      "count": 10
+    },
+    "apartment||al furjan||murano residence 1": {
+      "count": 1
+    },
+    "apartment||al furjan||nadine residences": {
+      "count": 9
+    },
+    "apartment||al furjan||nadine residences 2": {
+      "count": 5
+    },
+    "apartment||al furjan||pearlz by danube": {
+      "count": 18
+    },
+    "apartment||al furjan||pg one at al furjan": {
+      "count": 14
+    },
+    "apartment||al furjan||pg upperhouse": {
+      "count": 8
+    },
+    "apartment||al furjan||prime residency 3": {
+      "count": 11
+    },
+    "apartment||al furjan||roy mediterranean hotel apartments": {
+      "count": 15
+    },
+    "apartment||al furjan||starz tower by danube": {
+      "count": 19
+    },
+    "apartment||al furjan||talia residences": {
+      "count": 1
+    },
+    "apartment||al furjan||victoria residency": {
+      "count": 2
+    },
+    "apartment||al furjan||westwood by imtiaz": {
+      "count": 7
+    },
+    "apartment||al furjan||zazen gardens": {
+      "count": 3
+    },
+    "apartment||al furjan||zazen ivy": {
+      "count": 3
+    },
+    "apartment||al khail heights||al khail heights": {
+      "count": 58
+    },
+    "apartment||al kifaf||1 residences": {
+      "count": 33
+    },
+    "apartment||al kifaf||park gate residences": {
+      "count": 21
+    },
+    "apartment||al merkadh||azizi riviera 55": {
+      "count": 2
+    },
+    "apartment||al qusais industrial fourth||rasha 2": {
+      "count": 4
+    },
+    "apartment||al satwa||arista one": {
+      "count": 2
+    },
+    "apartment||al satwa||coral by vision": {
+      "count": 8
+    },
+    "apartment||al satwa||hyde walk residence by imtiaz": {
+      "count": 3
+    },
+    "apartment||al satwa||koro one": {
+      "count": 1
+    },
+    "apartment||al satwa||waha living by al yakka": {
+      "count": 7
+    },
+    "apartment||al wasl||erin": {
+      "count": 1
+    },
+    "apartment||al wasl||myrtle": {
+      "count": 19
+    },
+    "apartment||al wasl||rove city walk": {
+      "count": 5
+    },
+    "apartment||al yelayiss 2||holland gardens": {
+      "count": 66
+    },
+    "apartment||al yelayiss 2||the hamilton": {
+      "count": 62
+    },
+    "apartment||al yelayiss 2||the regent": {
+      "count": 10
+    },
+    "apartment||arjan||2020 marquis": {
+      "count": 7
+    },
+    "apartment||arjan||48 parkside": {
+      "count": 18
+    },
+    "apartment||arjan||adhara star": {
+      "count": 20
+    },
+    "apartment||arjan||arbor view": {
+      "count": 19
+    },
+    "apartment||arjan||avelon boulevard": {
+      "count": 14
+    },
+    "apartment||arjan||beverly boulevard": {
+      "count": 17
+    },
+    "apartment||arjan||burj view residence": {
+      "count": 8
+    },
+    "apartment||arjan||divine living": {
+      "count": 15
+    },
+    "apartment||arjan||elevate by prescott": {
+      "count": 22
+    },
+    "apartment||arjan||elz residence": {
+      "count": 10
+    },
+    "apartment||arjan||floarea residence": {
+      "count": 8
+    },
+    "apartment||arjan||gardenia livings": {
+      "count": 11
+    },
+    "apartment||arjan||genesis": {
+      "count": 5
+    },
+    "apartment||arjan||green diamond 1": {
+      "count": 9
+    },
+    "apartment||arjan||jewelz residence": {
+      "count": 15
+    },
+    "apartment||arjan||joya blanca residences": {
+      "count": 13
+    },
+    "apartment||arjan||la fontana di trevi": {
+      "count": 5
+    },
+    "apartment||arjan||legacy by sunrise": {
+      "count": 3
+    },
+    "apartment||arjan||lincoln park": {
+      "count": 26
+    },
+    "apartment||arjan||lincoln park ( north side)": {
+      "count": 13
+    },
+    "apartment||arjan||lincoln park (sheffield)": {
+      "count": 6
+    },
+    "apartment||arjan||marquis galleria": {
+      "count": 17
+    },
+    "apartment||arjan||marquis signature": {
+      "count": 1
+    },
+    "apartment||arjan||miraclz tower": {
+      "count": 25
+    },
+    "apartment||arjan||nas3": {
+      "count": 3
+    },
+    "apartment||arjan||oxford gardens": {
+      "count": 22
+    },
+    "apartment||arjan||platinum 1": {
+      "count": 4
+    },
+    "apartment||arjan||prime gardens": {
+      "count": 8
+    },
+    "apartment||arjan||q gardens boutique residences": {
+      "count": 8
+    },
+    "apartment||arjan||remraam - al ramth": {
+      "count": 5
+    },
+    "apartment||arjan||resortz residence": {
+      "count": 26
+    },
+    "apartment||arjan||samana green": {
+      "count": 6
+    },
+    "apartment||arjan||samana hills": {
+      "count": 10
+    },
+    "apartment||arjan||samana park views": {
+      "count": 9
+    },
+    "apartment||arjan||siraj tower": {
+      "count": 27
+    },
+    "apartment||arjan||skyz by danube": {
+      "count": 62
+    },
+    "apartment||arjan||sunrise legend": {
+      "count": 8
+    },
+    "apartment||arjan||syann park1": {
+      "count": 3
+    },
+    "apartment||arjan||the wings": {
+      "count": 13
+    },
+    "apartment||arjan||torino by oro24": {
+      "count": 71
+    },
+    "apartment||arjan||uniestate supreme residence": {
+      "count": 5
+    },
+    "apartment||arjan||vincitore benessere": {
+      "count": 19
+    },
+    "apartment||arjan||vincitore boulevard": {
+      "count": 12
+    },
+    "apartment||arjan||vincitore palacio": {
+      "count": 5
+    },
+    "apartment||arjan||welcome residency": {
+      "count": 8
+    },
+    "apartment||barsha heights||fahad 2": {
+      "count": 4
+    },
+    "apartment||barsha heights||first central": {
+      "count": 16
+    },
+    "apartment||barsha heights||grand central": {
+      "count": 8
+    },
+    "apartment||barsha heights||madison residency": {
+      "count": 5
+    },
+    "apartment||barsha heights||metro central": {
+      "count": 5
+    },
+    "apartment||barsha heights||sky central": {
+      "count": 20
+    },
+    "apartment||barsha heights||two towers": {
+      "count": 6
+    },
+    "apartment||bluewaters||bluewaters residences": {
+      "count": 12
+    },
+    "apartment||burj khalifa||29 boulevard": {
+      "count": 34
+    },
+    "apartment||burj khalifa||act one | act two": {
+      "count": 33
+    },
+    "apartment||burj khalifa||bahwan tower": {
+      "count": 6
+    },
+    "apartment||burj khalifa||bellevue towers": {
+      "count": 15
+    },
+    "apartment||burj khalifa||blvd crescent": {
+      "count": 9
+    },
+    "apartment||burj khalifa||blvd heights": {
+      "count": 16
+    },
+    "apartment||burj khalifa||boulevard point": {
+      "count": 21
+    },
+    "apartment||burj khalifa||burj al nujoom": {
+      "count": 11
+    },
+    "apartment||burj khalifa||burj crown": {
+      "count": 33
+    },
+    "apartment||burj khalifa||burj khalifa towers": {
+      "count": 50
+    },
+    "apartment||burj khalifa||burj royale": {
+      "count": 14
+    },
+    "apartment||burj khalifa||burj views": {
+      "count": 26
+    },
+    "apartment||burj khalifa||burj vista": {
+      "count": 17
+    },
+    "apartment||burj khalifa||claren 1": {
+      "count": 17
+    },
+    "apartment||burj khalifa||dd boulevard central": {
+      "count": 17
+    },
+    "apartment||burj khalifa||dd stand point": {
+      "count": 19
+    },
+    "apartment||burj khalifa||dt 1": {
+      "count": 11
+    },
+    "apartment||burj khalifa||elite downtown residence": {
+      "count": 14
+    },
+    "apartment||burj khalifa||forte": {
+      "count": 25
+    },
+    "apartment||burj khalifa||grande": {
+      "count": 22
+    },
+    "apartment||burj khalifa||il primo": {
+      "count": 1
+    },
+    "apartment||burj khalifa||imperial avenue": {
+      "count": 33
+    },
+    "apartment||burj khalifa||mada residences tower": {
+      "count": 9
+    },
+    "apartment||burj khalifa||mon reve": {
+      "count": 5
+    },
+    "apartment||burj khalifa||opera grand": {
+      "count": 14
+    },
+    "apartment||burj khalifa||rp heights": {
+      "count": 6
+    },
+    "apartment||burj khalifa||the 118": {
+      "count": 2
+    },
+    "apartment||burj khalifa||the address - the blvd": {
+      "count": 21
+    },
+    "apartment||burj khalifa||the address dubai opera": {
+      "count": 24
+    },
+    "apartment||burj khalifa||the address residence - sky view": {
+      "count": 24
+    },
+    "apartment||burj khalifa||the address residence fountain views ii": {
+      "count": 7
+    },
+    "apartment||burj khalifa||the address residence fountain views iii": {
+      "count": 9
+    },
+    "apartment||burj khalifa||the address residence-fountain views": {
+      "count": 8
+    },
+    "apartment||burj khalifa||the distinction": {
+      "count": 13
+    },
+    "apartment||burj khalifa||the dubai mall": {
+      "count": 8
+    },
+    "apartment||burj khalifa||the signature": {
+      "count": 18
+    },
+    "apartment||burj khalifa||upper crest": {
+      "count": 15
+    },
+    "apartment||burj khalifa||vida dubai mall": {
+      "count": 22
+    },
+    "apartment||burj khalifa||vida residence downtown dubai": {
+      "count": 16
+    },
+    "apartment||business bay||15 northside": {
+      "count": 24
+    },
+    "apartment||business bay||ag tower": {
+      "count": 17
+    },
+    "apartment||business bay||ahad residences": {
+      "count": 13
+    },
+    "apartment||business bay||al habtoor city": {
+      "count": 43
+    },
+    "apartment||business bay||avanti tower": {
+      "count": 5
+    },
+    "apartment||business bay||aykon city": {
+      "count": 66
+    },
+    "apartment||business bay||aykon city 2": {
+      "count": 30
+    },
+    "apartment||business bay||bay square": {
+      "count": 13
+    },
+    "apartment||business bay||bay's edge": {
+      "count": 7
+    },
+    "apartment||business bay||bayz tower": {
+      "count": 21
+    },
+    "apartment||business bay||binghatti canal": {
+      "count": 13
+    },
+    "apartment||business bay||capital bay a": {
+      "count": 5
+    },
+    "apartment||business bay||capital bay b": {
+      "count": 19
+    },
+    "apartment||business bay||century": {
+      "count": 3
+    },
+    "apartment||business bay||churchill tower": {
+      "count": 21
+    },
+    "apartment||business bay||clayton residency": {
+      "count": 6
+    },
+    "apartment||business bay||damac towers by paramount": {
+      "count": 74
+    },
+    "apartment||business bay||dolphin tower": {
+      "count": 6
+    },
+    "apartment||business bay||elite business bay residence": {
+      "count": 15
+    },
+    "apartment||business bay||executive bay b": {
+      "count": 5
+    },
+    "apartment||business bay||fair view residency": {
+      "count": 8
+    },
+    "apartment||business bay||hamilton residency": {
+      "count": 6
+    },
+    "apartment||business bay||j one": {
+      "count": 10
+    },
+    "apartment||business bay||jumeirah living business bay": {
+      "count": 3
+    },
+    "apartment||business bay||luxury family residence ii": {
+      "count": 8
+    },
+    "apartment||business bay||mag 318": {
+      "count": 16
+    },
+    "apartment||business bay||majestine": {
+      "count": 21
+    },
+    "apartment||business bay||marquise square tower": {
+      "count": 17
+    },
+    "apartment||business bay||mayfair residency": {
+      "count": 11
+    },
+    "apartment||business bay||mayfair tower": {
+      "count": 5
+    },
+    "apartment||business bay||merano tower": {
+      "count": 15
+    },
+    "apartment||business bay||millennium binghatti residences business bay": {
+      "count": 12
+    },
+    "apartment||business bay||nobles": {
+      "count": 27
+    },
+    "apartment||business bay||ontario tower": {
+      "count": 12
+    },
+    "apartment||business bay||paramount tower hotel & residences": {
+      "count": 23
+    },
+    "apartment||business bay||park central": {
+      "count": 12
+    },
+    "apartment||business bay||park lane tower": {
+      "count": 1
+    },
+    "apartment||business bay||peninsula five": {
+      "count": 30
+    },
+    "apartment||business bay||peninsula one": {
+      "count": 23
+    },
+    "apartment||business bay||peninsula three": {
+      "count": 110
+    },
+    "apartment||business bay||peninsula two": {
+      "count": 16
+    },
+    "apartment||business bay||prive by damac": {
+      "count": 49
+    },
+    "apartment||business bay||reva residences": {
+      "count": 13
+    },
+    "apartment||business bay||royal regency": {
+      "count": 17
+    },
+    "apartment||business bay||safeer tower 1": {
+      "count": 8
+    },
+    "apartment||business bay||safeer tower 2": {
+      "count": 5
+    },
+    "apartment||business bay||scala tower": {
+      "count": 11
+    },
+    "apartment||business bay||sky bay hotel": {
+      "count": 13
+    },
+    "apartment||business bay||sls dubai": {
+      "count": 26
+    },
+    "apartment||business bay||sol bay": {
+      "count": 20
+    },
+    "apartment||business bay||terraces marasi drive": {
+      "count": 14
+    },
+    "apartment||business bay||the atria": {
+      "count": 13
+    },
+    "apartment||business bay||the cosmopolitan": {
+      "count": 17
+    },
+    "apartment||business bay||the court": {
+      "count": 5
+    },
+    "apartment||business bay||the one hotel": {
+      "count": 9
+    },
+    "apartment||business bay||the opus by omniyat": {
+      "count": 4
+    },
+    "apartment||business bay||the pad": {
+      "count": 12
+    },
+    "apartment||business bay||the paragon by igo": {
+      "count": 21
+    },
+    "apartment||business bay||the residence at business central": {
+      "count": 5
+    },
+    "apartment||business bay||the sterling east house": {
+      "count": 7
+    },
+    "apartment||business bay||the sterling west house": {
+      "count": 13
+    },
+    "apartment||business bay||the vogue": {
+      "count": 7
+    },
+    "apartment||business bay||trillionaire residences by binghatti": {
+      "count": 15
+    },
+    "apartment||business bay||u-bora towers": {
+      "count": 9
+    },
+    "apartment||business bay||upside living": {
+      "count": 36
+    },
+    "apartment||business bay||urban oasis": {
+      "count": 13
+    },
+    "apartment||business bay||vera tower": {
+      "count": 13
+    },
+    "apartment||business bay||vyb": {
+      "count": 1
+    },
+    "apartment||business bay||water's edge": {
+      "count": 12
+    },
+    "apartment||business bay||west five business bay residences": {
+      "count": 9
+    },
+    "apartment||business bay||west wharef tower": {
+      "count": 5
+    },
+    "apartment||business bay||windsor manor": {
+      "count": 5
+    },
+    "apartment||business bay||zada tower": {
+      "count": 29
+    },
+    "apartment||city of arabia||wadi tower": {
+      "count": 6
+    },
+    "apartment||city walk||celadon": {
+      "count": 12
+    },
+    "apartment||city walk||central park at city walk -building 1": {
+      "count": 5
+    },
+    "apartment||city walk||no. 4a, no.4b, no.5 citywalk residential": {
+      "count": 6
+    },
+    "apartment||city walk||no. 6a and no.6b citywalk residential": {
+      "count": 2
+    },
+    "apartment||city walk||no.1, no.2a, no.2b, no.3a and 3b citywalk residential": {
+      "count": 3
+    },
+    "apartment||city walk||no.15 & no.16 citywalk residential": {
+      "count": 3
+    },
+    "apartment||city walk||no.17, no.18a,no.18b and no.19 citywalk residential": {
+      "count": 73
+    },
+    "apartment||city walk||no.20, no.21a, no.21b and no.22 citywalk residential": {
+      "count": 3
+    },
+    "apartment||city walk||no.9 & no.10 citywalk residential": {
+      "count": 5
+    },
+    "apartment||city walk||viridian": {
+      "count": 11
+    },
+    "apartment||damac hills||damac hills - artesia": {
+      "count": 35
+    },
+    "apartment||damac hills||damac hills - carson": {
+      "count": 75
+    },
+    "apartment||damac hills||damac hills - golf gate": {
+      "count": 22
+    },
+    "apartment||damac hills||damac hills - golf horizon": {
+      "count": 8
+    },
+    "apartment||damac hills||damac hills - golf panorama": {
+      "count": 7
+    },
+    "apartment||damac hills||damac hills - golf promenade": {
+      "count": 26
+    },
+    "apartment||damac hills||damac hills - golf terrace": {
+      "count": 6
+    },
+    "apartment||damac hills||damac hills - golf veduta": {
+      "count": 4
+    },
+    "apartment||damac hills||damac hills - golf vista": {
+      "count": 9
+    },
+    "apartment||damac hills||damac hills - golf vita": {
+      "count": 36
+    },
+    "apartment||damac hills||damac hills - jasmine": {
+      "count": 8
+    },
+    "apartment||damac hills||damac hills - loreto": {
+      "count": 22
+    },
+    "apartment||damac hills||damac hills - orchid": {
+      "count": 10
+    },
+    "apartment||down town jabal ali||alexis tower": {
+      "count": 19
+    },
+    "apartment||down town jabal ali||azizi aura residences": {
+      "count": 26
+    },
+    "apartment||down town jabal ali||equiti gates": {
+      "count": 6
+    },
+    "apartment||down town jabal ali||suberbia": {
+      "count": 17
+    },
+    "apartment||dubai creek harbour||17 icon bay": {
+      "count": 12
+    },
+    "apartment||dubai creek harbour||address harbour point": {
+      "count": 29
+    },
+    "apartment||dubai creek harbour||creek beach - bayshore": {
+      "count": 14
+    },
+    "apartment||dubai creek harbour||creek beach - breeze": {
+      "count": 10
+    },
+    "apartment||dubai creek harbour||creek beach - canopy - moor": {
+      "count": 55
+    },
+    "apartment||dubai creek harbour||creek beach - grove": {
+      "count": 16
+    },
+    "apartment||dubai creek harbour||creek beach - lotus": {
+      "count": 14
+    },
+    "apartment||dubai creek harbour||creek beach - orchid": {
+      "count": 15
+    },
+    "apartment||dubai creek harbour||creek beach - rosewater": {
+      "count": 28
+    },
+    "apartment||dubai creek harbour||creek beach - savanna-cedar-mangrove": {
+      "count": 42
+    },
+    "apartment||dubai creek harbour||creek beach - summer": {
+      "count": 5
+    },
+    "apartment||dubai creek harbour||creek beach - sunset": {
+      "count": 5
+    },
+    "apartment||dubai creek harbour||creek beach - surf": {
+      "count": 5
+    },
+    "apartment||dubai creek harbour||creek beach - vida residences": {
+      "count": 12
+    },
+    "apartment||dubai creek harbour||creek crescent": {
+      "count": 17
+    },
+    "apartment||dubai creek harbour||creek edge": {
+      "count": 26
+    },
+    "apartment||dubai creek harbour||creek gate": {
+      "count": 14
+    },
+    "apartment||dubai creek harbour||creek horizon": {
+      "count": 24
+    },
+    "apartment||dubai creek harbour||creek palace": {
+      "count": 29
+    },
+    "apartment||dubai creek harbour||creek rise": {
+      "count": 38
+    },
+    "apartment||dubai creek harbour||creekside 18": {
+      "count": 21
+    },
+    "apartment||dubai creek harbour||harbour gate": {
+      "count": 26
+    },
+    "apartment||dubai creek harbour||harbour views": {
+      "count": 27
+    },
+    "apartment||dubai creek harbour||island park i": {
+      "count": 16
+    },
+    "apartment||dubai creek harbour||island park ii": {
+      "count": 13
+    },
+    "apartment||dubai creek harbour||palace residences - dubai creek harbour": {
+      "count": 22
+    },
+    "apartment||dubai creek harbour||palace residences - north": {
+      "count": 53
+    },
+    "apartment||dubai creek harbour||the cove": {
+      "count": 19
+    },
+    "apartment||dubai creek harbour||the cove ll": {
+      "count": 19
+    },
+    "apartment||dubai creek harbour||the dubai creek residences": {
+      "count": 35
+    },
+    "apartment||dubai creek harbour||the grand": {
+      "count": 44
+    },
+    "apartment||dubai harbour||beach isle": {
+      "count": 10
+    },
+    "apartment||dubai harbour||beach mansion": {
+      "count": 37
+    },
+    "apartment||dubai harbour||beach vista": {
+      "count": 13
+    },
+    "apartment||dubai harbour||grand bleu tower interiors by elie saab": {
+      "count": 34
+    },
+    "apartment||dubai harbour||marina vista": {
+      "count": 19
+    },
+    "apartment||dubai harbour||palace beach residence": {
+      "count": 30
+    },
+    "apartment||dubai harbour||sunrise bay": {
+      "count": 16
+    },
+    "apartment||dubai healthcare city - phase 2||al waleed garden 2": {
+      "count": 4
+    },
+    "apartment||dubai healthcare city - phase 2||azizi aliyah residences": {
+      "count": 13
+    },
+    "apartment||dubai healthcare city - phase 2||binghatti avenue": {
+      "count": 29
+    },
+    "apartment||dubai healthcare city - phase 2||binghatti creek": {
+      "count": 11
+    },
+    "apartment||dubai healthcare city - phase 2||binghatti gateway": {
+      "count": 7
+    },
+    "apartment||dubai healthcare city - phase 2||farhad azizi residence": {
+      "count": 30
+    },
+    "apartment||dubai healthcare city - phase 2||fawad azizi residence": {
+      "count": 19
+    },
+    "apartment||dubai healthcare city - phase 2||kempinski residences the creek": {
+      "count": 22
+    },
+    "apartment||dubai healthcare city - phase 2||o10": {
+      "count": 7
+    },
+    "apartment||dubai hills||acacia at park heights": {
+      "count": 17
+    },
+    "apartment||dubai hills||collective": {
+      "count": 27
+    },
+    "apartment||dubai hills||collective 2.0": {
+      "count": 23
+    },
+    "apartment||dubai hills||ellington house": {
+      "count": 14
+    },
+    "apartment||dubai hills||ellington house ii": {
+      "count": 19
+    },
+    "apartment||dubai hills||golf grand": {
+      "count": 22
+    },
+    "apartment||dubai hills||golf suites - dubai hills": {
+      "count": 7
+    },
+    "apartment||dubai hills||golf ville": {
+      "count": 13
+    },
+    "apartment||dubai hills||lime gardens": {
+      "count": 30
+    },
+    "apartment||dubai hills||mulberry at park heights": {
+      "count": 27
+    },
+    "apartment||dubai hills||park field": {
+      "count": 25
+    },
+    "apartment||dubai hills||park heights i": {
+      "count": 15
+    },
+    "apartment||dubai hills||park heights ii": {
+      "count": 35
+    },
+    "apartment||dubai hills||park horizon": {
+      "count": 38
+    },
+    "apartment||dubai hills||park point": {
+      "count": 12
+    },
+    "apartment||dubai hills||park ridge": {
+      "count": 37
+    },
+    "apartment||dubai hills||prive residence": {
+      "count": 18
+    },
+    "apartment||dubai hills||socio": {
+      "count": 14
+    },
+    "apartment||dubai hills||the grove by iman": {
+      "count": 7
+    },
+    "apartment||dubai industrial city||al haseen residence": {
+      "count": 2
+    },
+    "apartment||dubai investment park second||centurion residence": {
+      "count": 12
+    },
+    "apartment||dubai investment park second||dunes village": {
+      "count": 13
+    },
+    "apartment||dubai investment park second||ritaj": {
+      "count": 128
+    },
+    "apartment||dubai land residence complex||aark residences": {
+      "count": 4
+    },
+    "apartment||dubai land residence complex||ajmal sarah": {
+      "count": 2
+    },
+    "apartment||dubai land residence complex||bliss homes": {
+      "count": 3
+    },
+    "apartment||dubai land residence complex||blue wave": {
+      "count": 21
+    },
+    "apartment||dubai land residence complex||desert sun tower": {
+      "count": 21
+    },
+    "apartment||dubai land residence complex||durar1": {
+      "count": 18
+    },
+    "apartment||dubai land residence complex||edison house": {
+      "count": 4
+    },
+    "apartment||dubai land residence complex||indigo tower": {
+      "count": 7
+    },
+    "apartment||dubai land residence complex||k1": {
+      "count": 4
+    },
+    "apartment||dubai land residence complex||phoenix tower": {
+      "count": 5
+    },
+    "apartment||dubai land residence complex||shorooq land 2": {
+      "count": 1
+    },
+    "apartment||dubai land residence complex||sky courts": {
+      "count": 139
+    },
+    "apartment||dubai land residence complex||solitaire cascades": {
+      "count": 2
+    },
+    "apartment||dubai land residence complex||the v tower": {
+      "count": 15
+    },
+    "apartment||dubai land residence complex||time 1": {
+      "count": 17
+    },
+    "apartment||dubai marina||23 marina": {
+      "count": 5
+    },
+    "apartment||dubai marina||5242": {
+      "count": 10
+    },
+    "apartment||dubai marina||alseef i": {
+      "count": 1
+    },
+    "apartment||dubai marina||bay central west & central towers": {
+      "count": 22
+    },
+    "apartment||dubai marina||bayside residence": {
+      "count": 3
+    },
+    "apartment||dubai marina||botanica": {
+      "count": 22
+    },
+    "apartment||dubai marina||cayan tower": {
+      "count": 23
+    },
+    "apartment||dubai marina||ciel": {
+      "count": 6
+    },
+    "apartment||dubai marina||continental tower": {
+      "count": 12
+    },
+    "apartment||dubai marina||damac heights": {
+      "count": 23
+    },
+    "apartment||dubai marina||dubai marina mall": {
+      "count": 18
+    },
+    "apartment||dubai marina||elite residence": {
+      "count": 25
+    },
+    "apartment||dubai marina||escan marina tower": {
+      "count": 15
+    },
+    "apartment||dubai marina||harbour residences": {
+      "count": 1
+    },
+    "apartment||dubai marina||liv marina": {
+      "count": 15
+    },
+    "apartment||dubai marina||liv residence": {
+      "count": 5
+    },
+    "apartment||dubai marina||mag218": {
+      "count": 18
+    },
+    "apartment||dubai marina||marina 101": {
+      "count": 3
+    },
+    "apartment||dubai marina||marina arcade": {
+      "count": 8
+    },
+    "apartment||dubai marina||marina living": {
+      "count": 11
+    },
+    "apartment||dubai marina||marina pinnacle": {
+      "count": 9
+    },
+    "apartment||dubai marina||marina quays": {
+      "count": 12
+    },
+    "apartment||dubai marina||marina star": {
+      "count": 19
+    },
+    "apartment||dubai marina||marina wharf i": {
+      "count": 6
+    },
+    "apartment||dubai marina||marina wharf ii": {
+      "count": 5
+    },
+    "apartment||dubai marina||marinascape": {
+      "count": 8
+    },
+    "apartment||dubai marina||no 9": {
+      "count": 4
+    },
+    "apartment||dubai marina||ocean heights": {
+      "count": 18
+    },
+    "apartment||dubai marina||orra marina": {
+      "count": 7
+    },
+    "apartment||dubai marina||park islands": {
+      "count": 38
+    },
+    "apartment||dubai marina||princess tower": {
+      "count": 26
+    },
+    "apartment||dubai marina||royal oceanic tower": {
+      "count": 9
+    },
+    "apartment||dubai marina||silverene": {
+      "count": 23
+    },
+    "apartment||dubai marina||sky view tower": {
+      "count": 14
+    },
+    "apartment||dubai marina||sparkle towers": {
+      "count": 14
+    },
+    "apartment||dubai marina||stella maris": {
+      "count": 12
+    },
+    "apartment||dubai marina||studio one": {
+      "count": 23
+    },
+    "apartment||dubai marina||sulafa tower": {
+      "count": 20
+    },
+    "apartment||dubai marina||tfg marina": {
+      "count": 10
+    },
+    "apartment||dubai marina||tfg one hotel": {
+      "count": 16
+    },
+    "apartment||dubai marina||the atlantic": {
+      "count": 1
+    },
+    "apartment||dubai marina||the belvedere": {
+      "count": 1
+    },
+    "apartment||dubai marina||the point": {
+      "count": 11
+    },
+    "apartment||dubai marina||the residences at marina gate 1": {
+      "count": 7
+    },
+    "apartment||dubai marina||the residences at marina gate 2": {
+      "count": 17
+    },
+    "apartment||dubai marina||the water front": {
+      "count": 2
+    },
+    "apartment||dubai marina||the zen": {
+      "count": 1
+    },
+    "apartment||dubai marina||torch tower": {
+      "count": 23
+    },
+    "apartment||dubai marina||trident grand": {
+      "count": 7
+    },
+    "apartment||dubai marina||vida residences dubai marina": {
+      "count": 13
+    },
+    "apartment||dubai marina||west avenue": {
+      "count": 7
+    },
+    "apartment||dubai marina||zumurud dubai marina": {
+      "count": 8
+    },
+    "apartment||dubai maritime city||riva residence": {
+      "count": 7
+    },
+    "apartment||dubai maritime city||the anwa by omniyat": {
+      "count": 9
+    },
+    "apartment||dubai production city||centrium tower": {
+      "count": 23
+    },
+    "apartment||dubai production city||jannat": {
+      "count": 10
+    },
+    "apartment||dubai production city||lago vista": {
+      "count": 36
+    },
+    "apartment||dubai production city||lakeside": {
+      "count": 89
+    },
+    "apartment||dubai production city||midtown - afnan": {
+      "count": 33
+    },
+    "apartment||dubai production city||midtown - dania": {
+      "count": 17
+    },
+    "apartment||dubai production city||midtown - mesk": {
+      "count": 15
+    },
+    "apartment||dubai production city||midtown - noor": {
+      "count": 29
+    },
+    "apartment||dubai production city||myka residence": {
+      "count": 7
+    },
+    "apartment||dubai production city||oakwood residency": {
+      "count": 9
+    },
+    "apartment||dubai production city||qasr sabah i , ii ,iii": {
+      "count": 57
+    },
+    "apartment||dubai production city||sun point dubai": {
+      "count": 8
+    },
+    "apartment||dubai production city||the crescent": {
+      "count": 40
+    },
+    "apartment||dubai production city||viera residences": {
+      "count": 15
+    },
+    "apartment||dubai science park||bella rose": {
+      "count": 17
+    },
+    "apartment||dubai science park||montrose": {
+      "count": 15
+    },
+    "apartment||dubai science park||opalz by danube": {
+      "count": 32
+    },
+    "apartment||dubai south||celestia": {
+      "count": 43
+    },
+    "apartment||dubai south||cresswell residences": {
+      "count": 14
+    },
+    "apartment||dubai south||kappa acca 3": {
+      "count": 7
+    },
+    "apartment||dubai south||mag 5 boulevard": {
+      "count": 51
+    },
+    "apartment||dubai south||majestique residence 1": {
+      "count": 12
+    },
+    "apartment||dubai south||majestique residence 2": {
+      "count": 14
+    },
+    "apartment||dubai south||manam prime": {
+      "count": 2
+    },
+    "apartment||dubai south||tenora": {
+      "count": 9
+    },
+    "apartment||dubai south||the pulse boulevard apartments": {
+      "count": 5
+    },
+    "apartment||dubai south||the pulse boulevard apartments - c3": {
+      "count": 4
+    },
+    "apartment||dubai south||the pulse boulevard apartments-c1": {
+      "count": 2
+    },
+    "apartment||dubai south||the pulse residence": {
+      "count": 13
+    },
+    "apartment||dubai south||the pulse residence icon": {
+      "count": 2
+    },
+    "apartment||dubai south||the pulse residence park": {
+      "count": 6
+    },
+    "apartment||dubai south||the pulse residence plaza": {
+      "count": 12
+    },
+    "apartment||dubai sports city||amal tower": {
+      "count": 29
+    },
+    "apartment||dubai sports city||arena apartments": {
+      "count": 6
+    },
+    "apartment||dubai sports city||bermuda views": {
+      "count": 7
+    },
+    "apartment||dubai sports city||canal residence west (phase 1)": {
+      "count": 22
+    },
+    "apartment||dubai sports city||canal residence west 2": {
+      "count": 13
+    },
+    "apartment||dubai sports city||champions tower1": {
+      "count": 5
+    },
+    "apartment||dubai sports city||condor golf links 18": {
+      "count": 44
+    },
+    "apartment||dubai sports city||coral international hotel apartment": {
+      "count": 1
+    },
+    "apartment||dubai sports city||cricket tower": {
+      "count": 3
+    },
+    "apartment||dubai sports city||eagle heights": {
+      "count": 14
+    },
+    "apartment||dubai sports city||elite 10 sports residence": {
+      "count": 27
+    },
+    "apartment||dubai sports city||elite 3 sports residence": {
+      "count": 13
+    },
+    "apartment||dubai sports city||elite 4 sports residence": {
+      "count": 6
+    },
+    "apartment||dubai sports city||elite 5 sports residence": {
+      "count": 4
+    },
+    "apartment||dubai sports city||elite 6 sports residence": {
+      "count": 14
+    },
+    "apartment||dubai sports city||elite 7 sports residence": {
+      "count": 8
+    },
+    "apartment||dubai sports city||elite 8 sports residence": {
+      "count": 11
+    },
+    "apartment||dubai sports city||elite 9 sports residence": {
+      "count": 8
+    },
+    "apartment||dubai sports city||elite ii sports residence": {
+      "count": 13
+    },
+    "apartment||dubai sports city||elite sports residence": {
+      "count": 9
+    },
+    "apartment||dubai sports city||frankfurt sports tower i": {
+      "count": 7
+    },
+    "apartment||dubai sports city||giovanni boutique": {
+      "count": 23
+    },
+    "apartment||dubai sports city||global golf residence 2": {
+      "count": 9
+    },
+    "apartment||dubai sports city||golf tower": {
+      "count": 1
+    },
+    "apartment||dubai sports city||golf view residence": {
+      "count": 11
+    },
+    "apartment||dubai sports city||golf vista heights": {
+      "count": 11
+    },
+    "apartment||dubai sports city||grand horizon 1": {
+      "count": 6
+    },
+    "apartment||dubai sports city||hamza tower": {
+      "count": 9
+    },
+    "apartment||dubai sports city||hera tower": {
+      "count": 39
+    },
+    "apartment||dubai sports city||hockey tower": {
+      "count": 3
+    },
+    "apartment||dubai sports city||hub canal 1 tower": {
+      "count": 8
+    },
+    "apartment||dubai sports city||hub canal 2 tower": {
+      "count": 2
+    },
+    "apartment||dubai sports city||lime light twin towers": {
+      "count": 1
+    },
+    "apartment||dubai sports city||oasis tower one": {
+      "count": 7
+    },
+    "apartment||dubai sports city||olympic park 1": {
+      "count": 4
+    },
+    "apartment||dubai sports city||olympic park 2": {
+      "count": 5
+    },
+    "apartment||dubai sports city||olympic park 3": {
+      "count": 6
+    },
+    "apartment||dubai sports city||olympic park 4": {
+      "count": 5
+    },
+    "apartment||dubai sports city||profile residence": {
+      "count": 3
+    },
+    "apartment||dubai sports city||red residence": {
+      "count": 13
+    },
+    "apartment||dubai sports city||royale residence1": {
+      "count": 22
+    },
+    "apartment||dubai sports city||royale residence2": {
+      "count": 8
+    },
+    "apartment||dubai sports city||stadium point": {
+      "count": 14
+    },
+    "apartment||dubai sports city||the bridge": {
+      "count": 11
+    },
+    "apartment||dubai sports city||the diamond": {
+      "count": 4
+    },
+    "apartment||dubai sports city||the matrix": {
+      "count": 17
+    },
+    "apartment||dubai sports city||the medalist": {
+      "count": 7
+    },
+    "apartment||dubai sports city||the spirit": {
+      "count": 13
+    },
+    "apartment||dubai sports city||uniestate sports tower": {
+      "count": 5
+    },
+    "apartment||dubai sports city||v2": {
+      "count": 8
+    },
+    "apartment||dubai sports city||vista by prestige one": {
+      "count": 22
+    },
+    "apartment||dubai sports city||zenith tower a1": {
+      "count": 3
+    },
+    "apartment||dubai sports city||zenith tower a2": {
+      "count": 2
+    },
+    "apartment||dubai studio city||azizi mirage 1": {
+      "count": 140
+    },
+    "apartment||dubai studio city||azizi vista": {
+      "count": 18
+    },
+    "apartment||dubai studio city||celia residence": {
+      "count": 6
+    },
+    "apartment||dubai studio city||divine residencia": {
+      "count": 1
+    },
+    "apartment||dubai studio city||glitz residence 1": {
+      "count": 7
+    },
+    "apartment||dubai studio city||glitz residence 2": {
+      "count": 3
+    },
+    "apartment||dubai studio city||glitz residence 3": {
+      "count": 16
+    },
+    "apartment||dubai studio city||laya heights": {
+      "count": 38
+    },
+    "apartment||dubai studio city||samana golf avenue": {
+      "count": 7
+    },
+    "apartment||dubai studio city||samana santorini": {
+      "count": 7
+    },
+    "apartment||dubai water canal||canal front residences cf1 & cf2": {
+      "count": 7
+    },
+    "apartment||dubai water canal||canal front residences-cf3&cf4": {
+      "count": 13
+    },
+    "apartment||dubai water canal||canal front residences-cf5&cf6": {
+      "count": 14
+    },
+    "apartment||dubai water canal||canal front residences-cf7 & cf8 & cf9": {
+      "count": 12
+    },
+    "apartment||dubai water canal||eden house the canal": {
+      "count": 4
+    },
+    "apartment||dubai water front||badra phase 1": {
+      "count": 9
+    },
+    "apartment||emaar south||golf views": {
+      "count": 15
+    },
+    "apartment||emaar south||urbana": {
+      "count": 8
+    },
+    "apartment||emaar south||urbana ii": {
+      "count": 4
+    },
+    "apartment||emaar south||urbana iii": {
+      "count": 10
+    },
+    "apartment||hadaeq sheikh mohammed bin rashid||elvira": {
+      "count": 2
+    },
+    "apartment||hadaeq sheikh mohammed bin rashid||hills park": {
+      "count": 34
+    },
+    "apartment||hadaeq sheikh mohammed bin rashid||parkside views": {
+      "count": 5
+    },
+    "apartment||international city ph 1||belvedere": {
+      "count": 2
+    },
+    "apartment||international city ph 1||classic apartments": {
+      "count": 22
+    },
+    "apartment||international city ph 1||dragon view": {
+      "count": 1
+    },
+    "apartment||international city ph 1||global green view ii": {
+      "count": 3
+    },
+    "apartment||international city ph 1||hds sunstar 1": {
+      "count": 8
+    },
+    "apartment||international city ph 1||indigo spectrum 2": {
+      "count": 3
+    },
+    "apartment||international city ph 1||indigo spectrum1": {
+      "count": 6
+    },
+    "apartment||international city ph 1||international city emarati": {
+      "count": 51
+    },
+    "apartment||international city ph 1||lady ratan manor": {
+      "count": 6
+    },
+    "apartment||international city ph 1||lawnz residence by danube": {
+      "count": 32
+    },
+    "apartment||international city ph 1||prime residency1": {
+      "count": 2
+    },
+    "apartment||international city ph 1||prime residency2": {
+      "count": 2
+    },
+    "apartment||international city ph 1||rufi gardens": {
+      "count": 2
+    },
+    "apartment||international city ph 1||tabeer 1": {
+      "count": 4
+    },
+    "apartment||international city ph 1||trafalgar central": {
+      "count": 2
+    },
+    "apartment||international city ph 2 & 3||al helal al zahaby 2": {
+      "count": 4
+    },
+    "apartment||international city ph 2 & 3||al helal al zahaby 3": {
+      "count": 5
+    },
+    "apartment||international city ph 2 & 3||al helal al zahaby building": {
+      "count": 4
+    },
+    "apartment||international city ph 2 & 3||al jawzaa": {
+      "count": 7
+    },
+    "apartment||international city ph 2 & 3||easy18": {
+      "count": 1
+    },
+    "apartment||international city ph 2 & 3||eaton": {
+      "count": 4
+    },
+    "apartment||international city ph 2 & 3||equiti apartments": {
+      "count": 10
+    },
+    "apartment||international city ph 2 & 3||glorious central residences": {
+      "count": 14
+    },
+    "apartment||international city ph 2 & 3||hz residences 4": {
+      "count": 4
+    },
+    "apartment||international city ph 2 & 3||modelux tower 1": {
+      "count": 7
+    },
+    "apartment||international city ph 2 & 3||park ville 07": {
+      "count": 3
+    },
+    "apartment||international city ph 2 & 3||ritz residence": {
+      "count": 5
+    },
+    "apartment||international city ph 2 & 3||silver park residency": {
+      "count": 11
+    },
+    "apartment||international city ph 2 & 3||suncity homes": {
+      "count": 1
+    },
+    "apartment||jabal ali first||the nook": {
+      "count": 38
+    },
+    "apartment||jaddaf waterfront||boutique xll": {
+      "count": 7
+    },
+    "apartment||jaddaf waterfront||d1": {
+      "count": 21
+    },
+    "apartment||jaddaf waterfront||dubai wharf": {
+      "count": 4
+    },
+    "apartment||jaddaf waterfront||dubai wharf - tower 2": {
+      "count": 7
+    },
+    "apartment||jaddaf waterfront||iris amber": {
+      "count": 4
+    },
+    "apartment||jaddaf waterfront||niloofar": {
+      "count": 2
+    },
+    "apartment||jaddaf waterfront||palazzo versace": {
+      "count": 9
+    },
+    "apartment||jaddaf waterfront||riah towers": {
+      "count": 3
+    },
+    "apartment||jaddaf waterfront||volna by kasco": {
+      "count": 8
+    },
+    "apartment||jumeirah beach residence||jumeirah gate": {
+      "count": 14
+    },
+    "apartment||jumeirah beach residence||la vie": {
+      "count": 7
+    },
+    "apartment||jumeirah beach residence||the one jbr": {
+      "count": 3
+    },
+    "apartment||jumeirah first||port de la mer - le soleil": {
+      "count": 23
+    },
+    "apartment||jumeirah golf||al andalus phase 2": {
+      "count": 4
+    },
+    "apartment||jumeirah golf||alandalus": {
+      "count": 10
+    },
+    "apartment||jumeirah golf||alandalus building d": {
+      "count": 9
+    },
+    "apartment||jumeirah golf||alandalus building e": {
+      "count": 2
+    },
+    "apartment||jumeirah golf||alandalus building g": {
+      "count": 3
+    },
+    "apartment||jumeirah heights||jumeirah heights clusters": {
+      "count": 8
+    },
+    "apartment||jumeirah lakes towers||al seef ii": {
+      "count": 6
+    },
+    "apartment||jumeirah lakes towers||alshera tower": {
+      "count": 2
+    },
+    "apartment||jumeirah lakes towers||armada towers": {
+      "count": 16
+    },
+    "apartment||jumeirah lakes towers||banyan tree residences hillside dubai": {
+      "count": 7
+    },
+    "apartment||jumeirah lakes towers||bonnington tower hotel & residence dubai": {
+      "count": 11
+    },
+    "apartment||jumeirah lakes towers||concorde tower": {
+      "count": 20
+    },
+    "apartment||jumeirah lakes towers||dubai arch tower": {
+      "count": 9
+    },
+    "apartment||jumeirah lakes towers||dubai star": {
+      "count": 8
+    },
+    "apartment||jumeirah lakes towers||global lake view": {
+      "count": 13
+    },
+    "apartment||jumeirah lakes towers||gold crest executive": {
+      "count": 13
+    },
+    "apartment||jumeirah lakes towers||gold crest views2": {
+      "count": 17
+    },
+    "apartment||jumeirah lakes towers||indigo tower": {
+      "count": 14
+    },
+    "apartment||jumeirah lakes towers||laguna tower": {
+      "count": 18
+    },
+    "apartment||jumeirah lakes towers||lake city tower": {
+      "count": 17
+    },
+    "apartment||jumeirah lakes towers||lake shore tower": {
+      "count": 10
+    },
+    "apartment||jumeirah lakes towers||lake terrace": {
+      "count": 17
+    },
+    "apartment||jumeirah lakes towers||lake view": {
+      "count": 16
+    },
+    "apartment||jumeirah lakes towers||lakeside residence": {
+      "count": 7
+    },
+    "apartment||jumeirah lakes towers||madina tower": {
+      "count": 4
+    },
+    "apartment||jumeirah lakes towers||mbl residence": {
+      "count": 11
+    },
+    "apartment||jumeirah lakes towers||mbl royal": {
+      "count": 12
+    },
+    "apartment||jumeirah lakes towers||me do re": {
+      "count": 9
+    },
+    "apartment||jumeirah lakes towers||new dubai gate1": {
+      "count": 7
+    },
+    "apartment||jumeirah lakes towers||new dubai gate2": {
+      "count": 15
+    },
+    "apartment||jumeirah lakes towers||orra the embankment": {
+      "count": 15
+    },
+    "apartment||jumeirah lakes towers||palladium": {
+      "count": 11
+    },
+    "apartment||jumeirah lakes towers||saba tower 2": {
+      "count": 17
+    },
+    "apartment||jumeirah lakes towers||saba tower 3": {
+      "count": 15
+    },
+    "apartment||jumeirah lakes towers||the residences": {
+      "count": 2
+    },
+    "apartment||jumeirah lakes towers||v3": {
+      "count": 7
+    },
+    "apartment||jumeirah living||asayel at madinat jumeirah living": {
+      "count": 12
+    },
+    "apartment||jumeirah living||madinat jumeirah living": {
+      "count": 7
+    },
+    "apartment||jumeirah living||madinat jumeriah living - phase 2": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||ab cavalier": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||aces chateau": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||al serh residences 11 by asak real estate development": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||alcove": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||alef noon residence": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||aria": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||ashton park residences": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||astoria residnece": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||aura by grovy": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||avalon tower": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||avanos": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||belgravia": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||belgravia 2": {
+      "count": 13
+    },
+    "apartment||jumeirah village circle||belgravia heights i": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||belgravia heights ii": {
+      "count": 12
+    },
+    "apartment||jumeirah village circle||belgravia iii": {
+      "count": 18
+    },
+    "apartment||jumeirah village circle||belgravia square": {
+      "count": 12
+    },
+    "apartment||jumeirah village circle||beverly residence": {
+      "count": 10
+    },
+    "apartment||jumeirah village circle||beverly residence 2": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||binghatti amber": {
+      "count": 37
+    },
+    "apartment||jumeirah village circle||binghatti apex": {
+      "count": 98
+    },
+    "apartment||jumeirah village circle||binghatti aurora": {
+      "count": 46
+    },
+    "apartment||jumeirah village circle||binghatti azure": {
+      "count": 37
+    },
+    "apartment||jumeirah village circle||binghatti corner": {
+      "count": 33
+    },
+    "apartment||jumeirah village circle||binghatti crescent": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||binghatti crest": {
+      "count": 12
+    },
+    "apartment||jumeirah village circle||binghatti emerald": {
+      "count": 14
+    },
+    "apartment||jumeirah village circle||binghatti galaxy": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||binghatti gardenia": {
+      "count": 19
+    },
+    "apartment||jumeirah village circle||binghatti gate": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||binghatti gems": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||binghatti heights": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||binghatti house": {
+      "count": 23
+    },
+    "apartment||jumeirah village circle||binghatti jasmine": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||binghatti lavender": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||binghatti luna": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||binghatti mirage": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||binghatti nova": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||binghatti onyx": {
+      "count": 36
+    },
+    "apartment||jumeirah village circle||binghatti orchid": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||binghatti phantom": {
+      "count": 32
+    },
+    "apartment||jumeirah village circle||binghatti phoenix": {
+      "count": 64
+    },
+    "apartment||jumeirah village circle||binghatti rose": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||binghatti royale": {
+      "count": 60
+    },
+    "apartment||jumeirah village circle||binghatti tulip": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||binghatti venus": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||bloom heights": {
+      "count": 31
+    },
+    "apartment||jumeirah village circle||bloom towers": {
+      "count": 47
+    },
+    "apartment||jumeirah village circle||botanica": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||cappadocia": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||catch residences by igo": {
+      "count": 10
+    },
+    "apartment||jumeirah village circle||chaimaa avenue": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||chaimaa avenue 2": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||chaimaa premiere": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||city apartments": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||concept 7 residences": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||crystal residence": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||cubix residences": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||dana tower": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||dawn by binghatti": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||dezire residences": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||diamond views 1": {
+      "count": 13
+    },
+    "apartment||jumeirah village circle||diamond views 2": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||diamond views 3": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||diamond views 4": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||dusk by binghatti": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||eaton place": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||elegance by chaimaa holding": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||elysee ii by pantheon": {
+      "count": 12
+    },
+    "apartment||jumeirah village circle||elysee iii by pantheon": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||emirates garden 1 (lavender - gardenia - rose)": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||emirates garden 2 (maple- magnola - mulberry)": {
+      "count": 10
+    },
+    "apartment||jumeirah village circle||emirates garden i - gardenia": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||emirates garden i - rose 1": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||emirates garden ii - magnolia": {
+      "count": 13
+    },
+    "apartment||jumeirah village circle||emirates garden ii - maple": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||empire residence": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||five at jumeirah village circle dubai": {
+      "count": 25
+    },
+    "apartment||jumeirah village circle||fortunato": {
+      "count": 12
+    },
+    "apartment||jumeirah village circle||ghalia": {
+      "count": 30
+    },
+    "apartment||jumeirah village circle||h three by aurora": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||hadley heights": {
+      "count": 23
+    },
+    "apartment||jumeirah village circle||hameni": {
+      "count": 25
+    },
+    "apartment||jumeirah village circle||hamilton house": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||hanover square": {
+      "count": 32
+    },
+    "apartment||jumeirah village circle||harrington house": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||hyati avenue": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||hyati residence": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||joya verde residences dubai": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||knight bridge court & kensngton manor": {
+      "count": 21
+    },
+    "apartment||jumeirah village circle||la residenza": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||la riviera azure": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||la-riviera apartments": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||laya mansion": {
+      "count": 13
+    },
+    "apartment||jumeirah village circle||laya residences": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||le grand chateau": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||living garden ii": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||loci residences": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||lolena": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||lucky residence": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||luma park views": {
+      "count": 113
+    },
+    "apartment||jumeirah village circle||luma21": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||luma22": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||lumina vista residences": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||manhattan": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||marwa heights": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||masaar residences": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||mass residence": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||may residence": {
+      "count": 21
+    },
+    "apartment||jumeirah village circle||mayas geneva": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||milano giovanni boutique suites": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||neva residences": {
+      "count": 24
+    },
+    "apartment||jumeirah village circle||nicholas residence": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||noora residence 1": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||o 2": {
+      "count": 13
+    },
+    "apartment||jumeirah village circle||oakley square residences": {
+      "count": 14
+    },
+    "apartment||jumeirah village circle||olivo park residences by evera": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||oxford 212": {
+      "count": 10
+    },
+    "apartment||jumeirah village circle||oxford boulevard": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||oxford residence": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||oxford residence 2": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||oxford terraces": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||oxford terraces 2": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||pantheon elysee": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||park corner": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||park lane 2 by heilbronn": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||park lane by heilbronn": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||park view tower": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||park villa's 3": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||park vista": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||pearl house i by imtiaz": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||pearl house ii by imtiaz": {
+      "count": 23
+    },
+    "apartment||jumeirah village circle||pearl house iii by imtiaz": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||platinum residence": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||plaza residences": {
+      "count": 37
+    },
+    "apartment||jumeirah village circle||plazzo heights": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||pulse smart residence": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||ra1n residence": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||reef residence": {
+      "count": 18
+    },
+    "apartment||jumeirah village circle||regent court": {
+      "count": 21
+    },
+    "apartment||jumeirah village circle||regina": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||rigel": {
+      "count": 9
+    },
+    "apartment||jumeirah village circle||rise residences": {
+      "count": 28
+    },
+    "apartment||jumeirah village circle||roxana residence": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||sandoval gardens": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||seasons community- autumn": {
+      "count": 19
+    },
+    "apartment||jumeirah village circle||seasons community- summer": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||serenity lakes 5": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||shamal residences 2": {
+      "count": 5
+    },
+    "apartment||jumeirah village circle||shamal waves": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||signature livings": {
+      "count": 11
+    },
+    "apartment||jumeirah village circle||siroya gardens": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||sobha daffodil": {
+      "count": 4
+    },
+    "apartment||jumeirah village circle||spica": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||stonehenge residences": {
+      "count": 16
+    },
+    "apartment||jumeirah village circle||stonehenge residences 2": {
+      "count": 20
+    },
+    "apartment||jumeirah village circle||the autograph": {
+      "count": 17
+    },
+    "apartment||jumeirah village circle||the east crest by meteora": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||the haven garden": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||the haven residences": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||the one": {
+      "count": 18
+    },
+    "apartment||jumeirah village circle||the residence by prestige one": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||the square": {
+      "count": 19
+    },
+    "apartment||jumeirah village circle||the vybe": {
+      "count": 13
+    },
+    "apartment||jumeirah village circle||tower 108": {
+      "count": 20
+    },
+    "apartment||jumeirah village circle||tuscan residence 1": {
+      "count": 2
+    },
+    "apartment||jumeirah village circle||tuscan residences1 - arezzo": {
+      "count": 8
+    },
+    "apartment||jumeirah village circle||tuscan residences1 - siena": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||uniestate prime tower": {
+      "count": 3
+    },
+    "apartment||jumeirah village circle||villa myra": {
+      "count": 1
+    },
+    "apartment||jumeirah village circle||villa pera": {
+      "count": 7
+    },
+    "apartment||jumeirah village circle||westwood grande by imtiaz": {
+      "count": 6
+    },
+    "apartment||jumeirah village circle||westwood grande ii by imtiaz": {
+      "count": 8
+    },
+    "apartment||jumeirah village triangle||555 park views": {
+      "count": 4
+    },
+    "apartment||jumeirah village triangle||al jawhara tower": {
+      "count": 24
+    },
+    "apartment||jumeirah village triangle||al manarah tower": {
+      "count": 11
+    },
+    "apartment||jumeirah village triangle||bali residences": {
+      "count": 8
+    },
+    "apartment||jumeirah village triangle||cloud tower": {
+      "count": 39
+    },
+    "apartment||jumeirah village triangle||edmonton elm": {
+      "count": 8
+    },
+    "apartment||jumeirah village triangle||emerald vision tower": {
+      "count": 7
+    },
+    "apartment||jumeirah village triangle||fh residency": {
+      "count": 3
+    },
+    "apartment||jumeirah village triangle||green park": {
+      "count": 5
+    },
+    "apartment||jumeirah village triangle||imperial residence": {
+      "count": 18
+    },
+    "apartment||jumeirah village triangle||jannat": {
+      "count": 7
+    },
+    "apartment||jumeirah village triangle||maya residences 5": {
+      "count": 6
+    },
+    "apartment||jumeirah village triangle||milestone residences": {
+      "count": 23
+    },
+    "apartment||jumeirah village triangle||park one": {
+      "count": 1
+    },
+    "apartment||jumeirah village triangle||plazzo residence": {
+      "count": 7
+    },
+    "apartment||jumeirah village triangle||taraf 2 residence": {
+      "count": 7
+    },
+    "apartment||jumeirah village triangle||terhab hotel & towers at jumeirah village triangle": {
+      "count": 40
+    },
+    "apartment||jumeirah village triangle||the community": {
+      "count": 36
+    },
+    "apartment||jumeirah village triangle||the ivy": {
+      "count": 10
+    },
+    "apartment||jumeirah village triangle||the one at jumeirah village triangle": {
+      "count": 21
+    },
+    "apartment||jumeirah village triangle||tranquil wellness tower": {
+      "count": 3
+    },
+    "apartment||jumeirah village triangle||zazen one": {
+      "count": 1
+    },
+    "apartment||la mer||la rive": {
+      "count": 13
+    },
+    "apartment||la mer||port de la mer - la cote": {
+      "count": 16
+    },
+    "apartment||la mer||port de la mer - la sirene": {
+      "count": 3
+    },
+    "apartment||la mer||port de la mer - la sirene 2": {
+      "count": 6
+    },
+    "apartment||la mer||port de la mer - la voile": {
+      "count": 3
+    },
+    "apartment||la mer||port de la mer - le pont": {
+      "count": 5
+    },
+    "apartment||living legends||living legends phase 5": {
+      "count": 20
+    },
+    "apartment||living legends||living legends phase 6": {
+      "count": 4
+    },
+    "apartment||living legends||living legends phase 7": {
+      "count": 8
+    },
+    "apartment||liwan||celine by vision": {
+      "count": 30
+    },
+    "apartment||liwan||karma": {
+      "count": 3
+    },
+    "apartment||liwan||qline (qpoint phase ii) r010": {
+      "count": 3
+    },
+    "apartment||liwan||qpoint liwan - plot r002": {
+      "count": 7
+    },
+    "apartment||liwan||qpoint liwan - plot r003": {
+      "count": 5
+    },
+    "apartment||liwan||qpoint liwan- r093": {
+      "count": 9
+    },
+    "apartment||liwan||qpoint liwan-plot r004": {
+      "count": 8
+    },
+    "apartment||liwan||qpoint liwan-plot r005": {
+      "count": 17
+    },
+    "apartment||liwan||qpoint liwan-plot r008 a&b": {
+      "count": 11
+    },
+    "apartment||liwan||qpoint liwan-plot r009": {
+      "count": 3
+    },
+    "apartment||liwan||qpoint liwan-plot r015": {
+      "count": 1
+    },
+    "apartment||liwan||qpoint liwan-plot r016": {
+      "count": 3
+    },
+    "apartment||liwan||qpoint liwan-plot r017": {
+      "count": 1
+    },
+    "apartment||liwan||qpoint liwan-plot r020": {
+      "count": 4
+    },
+    "apartment||liwan||qpoint liwan-plot r022": {
+      "count": 1
+    },
+    "apartment||liwan||qpoint liwan-plot r046": {
+      "count": 3
+    },
+    "apartment||liwan||qpoint liwan-plot r047": {
+      "count": 2
+    },
+    "apartment||liwan||qpoint liwan-plot r048": {
+      "count": 2
+    },
+    "apartment||liwan||qpoint liwan-plot r051": {
+      "count": 4
+    },
+    "apartment||liwan||qpoint liwan-plot r052": {
+      "count": 2
+    },
+    "apartment||liwan||qpoint liwan-plot r053": {
+      "count": 1
+    },
+    "apartment||liwan||qpoint liwan-plot r055": {
+      "count": 5
+    },
+    "apartment||liwan||qpoint liwan-plot r068": {
+      "count": 5
+    },
+    "apartment||liwan||qpoint liwan-plot r069": {
+      "count": 2
+    },
+    "apartment||liwan||qpoint liwan-plot r070": {
+      "count": 4
+    },
+    "apartment||liwan||qpoint liwan-plot r071": {
+      "count": 2
+    },
+    "apartment||liwan||qpoint liwan-plot r072": {
+      "count": 6
+    },
+    "apartment||liwan||qpoint liwan-plot r092": {
+      "count": 4
+    },
+    "apartment||liwan||qpoint liwan-plot r094": {
+      "count": 3
+    },
+    "apartment||liwan||qpoint liwan-plot r095": {
+      "count": 2
+    },
+    "apartment||liwan||qpoint liwan-plot r096": {
+      "count": 1
+    },
+    "apartment||liwan||qpoint liwan-plot r097": {
+      "count": 4
+    },
+    "apartment||liwan||qpoint liwan-plot r098": {
+      "count": 5
+    },
+    "apartment||liwan||qpoint liwan-plot r099": {
+      "count": 3
+    },
+    "apartment||liwan||qpoint liwan-plotr001": {
+      "count": 5
+    },
+    "apartment||liwan||qpoint liwan-r019": {
+      "count": 6
+    },
+    "apartment||liwan||symbolic alpha": {
+      "count": 8
+    },
+    "apartment||liwan||wavez residence": {
+      "count": 23
+    },
+    "apartment||madinat dubai almelaheyah||sunridge": {
+      "count": 2
+    },
+    "apartment||madinat hind 4||damac hills (2) - avencia": {
+      "count": 1
+    },
+    "apartment||madinat hind 4||damac hills (2) - navitas": {
+      "count": 11
+    },
+    "apartment||madinat hind 4||damac hills (2) - navitas (a & b)": {
+      "count": 10
+    },
+    "apartment||madinat hind 4||damac hills (2) - viridis": {
+      "count": 51
+    },
+    "apartment||majan||aras heights": {
+      "count": 8
+    },
+    "apartment||majan||barari views": {
+      "count": 5
+    },
+    "apartment||majan||deansgate by ade": {
+      "count": 4
+    },
+    "apartment||majan||forum residences": {
+      "count": 5
+    },
+    "apartment||majan||paradise view 1": {
+      "count": 140
+    },
+    "apartment||majan||sherena residence": {
+      "count": 15
+    },
+    "apartment||majan||the 50": {
+      "count": 14
+    },
+    "apartment||majan||the haven": {
+      "count": 32
+    },
+    "apartment||majan||tulip oasis 10": {
+      "count": 3
+    },
+    "apartment||marsa dubai||five luxe": {
+      "count": 8
+    },
+    "apartment||marsa dubai||jumeirah living marina gate": {
+      "count": 16
+    },
+    "apartment||marsa dubai||sensoria at five luxe": {
+      "count": 1
+    },
+    "apartment||mbr district 1||lagoon views at district one": {
+      "count": 1
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 11": {
+      "count": 3
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 13": {
+      "count": 8
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 14": {
+      "count": 4
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 15": {
+      "count": 6
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 16": {
+      "count": 2
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 18": {
+      "count": 1
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 19": {
+      "count": 1
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 22": {
+      "count": 2
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 23": {
+      "count": 2
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 25": {
+      "count": 2
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 26": {
+      "count": 31
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 28": {
+      "count": 2
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 3": {
+      "count": 1
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 5": {
+      "count": 5
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 6": {
+      "count": 3
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences 7": {
+      "count": 3
+    },
+    "apartment||mbr district 1||mohammed bin rashid al maktoum city , district one phase iii , residences12": {
+      "count": 2
+    },
+    "apartment||mbr district 7||mag eye phase 1": {
+      "count": 36
+    },
+    "apartment||meydan avenue||azizi gardens": {
+      "count": 4
+    },
+    "apartment||meydan avenue||azizi greenfield": {
+      "count": 2
+    },
+    "apartment||meydan avenue||azizi park avenue": {
+      "count": 2
+    },
+    "apartment||meydan avenue||flamingo lux residence": {
+      "count": 12
+    },
+    "apartment||meydan avenue||prime views": {
+      "count": 3
+    },
+    "apartment||meydan avenue||the derby residence 2&3": {
+      "count": 2
+    },
+    "apartment||meydan avenue||the polo residence": {
+      "count": 85
+    },
+    "apartment||meydan one||azizi riviera 1": {
+      "count": 12
+    },
+    "apartment||meydan one||azizi riviera 10": {
+      "count": 3
+    },
+    "apartment||meydan one||azizi riviera 11": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 12": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 13": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 14": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 15": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 16": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 17": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 18": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 19": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 2": {
+      "count": 1
+    },
+    "apartment||meydan one||azizi riviera 20": {
+      "count": 3
+    },
+    "apartment||meydan one||azizi riviera 21": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 22": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 23": {
+      "count": 8
+    },
+    "apartment||meydan one||azizi riviera 24": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 25": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 26": {
+      "count": 10
+    },
+    "apartment||meydan one||azizi riviera 27": {
+      "count": 12
+    },
+    "apartment||meydan one||azizi riviera 28": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 29": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 3": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 30": {
+      "count": 1
+    },
+    "apartment||meydan one||azizi riviera 31": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 32": {
+      "count": 5
+    },
+    "apartment||meydan one||azizi riviera 33": {
+      "count": 8
+    },
+    "apartment||meydan one||azizi riviera 34": {
+      "count": 3
+    },
+    "apartment||meydan one||azizi riviera 35": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 36": {
+      "count": 3
+    },
+    "apartment||meydan one||azizi riviera 37": {
+      "count": 10
+    },
+    "apartment||meydan one||azizi riviera 38": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 39": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 4": {
+      "count": 5
+    },
+    "apartment||meydan one||azizi riviera 40": {
+      "count": 1
+    },
+    "apartment||meydan one||azizi riviera 41": {
+      "count": 10
+    },
+    "apartment||meydan one||azizi riviera 42": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 43": {
+      "count": 14
+    },
+    "apartment||meydan one||azizi riviera 44": {
+      "count": 9
+    },
+    "apartment||meydan one||azizi riviera 45": {
+      "count": 6
+    },
+    "apartment||meydan one||azizi riviera 46": {
+      "count": 15
+    },
+    "apartment||meydan one||azizi riviera 47": {
+      "count": 7
+    },
+    "apartment||meydan one||azizi riviera 48": {
+      "count": 10
+    },
+    "apartment||meydan one||azizi riviera 5": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 59": {
+      "count": 5
+    },
+    "apartment||meydan one||azizi riviera 6": {
+      "count": 3
+    },
+    "apartment||meydan one||azizi riviera 61": {
+      "count": 12
+    },
+    "apartment||meydan one||azizi riviera 63": {
+      "count": 5
+    },
+    "apartment||meydan one||azizi riviera 65": {
+      "count": 16
+    },
+    "apartment||meydan one||azizi riviera 67": {
+      "count": 11
+    },
+    "apartment||meydan one||azizi riviera 69": {
+      "count": 35
+    },
+    "apartment||meydan one||azizi riviera 7": {
+      "count": 4
+    },
+    "apartment||meydan one||azizi riviera 8": {
+      "count": 16
+    },
+    "apartment||meydan one||azizi riviera 9": {
+      "count": 8
+    },
+    "apartment||meydan one||azizi riviera azure": {
+      "count": 11
+    },
+    "apartment||meydan one||azizi riviera beachfront": {
+      "count": 59
+    },
+    "apartment||mina rashid||seagate": {
+      "count": 12
+    },
+    "apartment||mirdif||mirdif hills- al multaqa avenue": {
+      "count": 14
+    },
+    "apartment||mirdif||mirdif hills- janayen avenue": {
+      "count": 3
+    },
+    "apartment||mirdif||mirdif hills- nasayem avenue": {
+      "count": 22
+    },
+    "apartment||mirdif||mirdif tulip": {
+      "count": 2
+    },
+    "apartment||motor city||casa flores and eden apartments": {
+      "count": 24
+    },
+    "apartment||motor city||oia residence": {
+      "count": 50
+    },
+    "apartment||mudon||mudon views": {
+      "count": 14
+    },
+    "apartment||nad al sheba gardens||the roof residence": {
+      "count": 5
+    },
+    "apartment||palm jumeirah||azizi mina": {
+      "count": 10
+    },
+    "apartment||palm jumeirah||azure residence": {
+      "count": 6
+    },
+    "apartment||palm jumeirah||balqis residence": {
+      "count": 6
+    },
+    "apartment||palm jumeirah||club vista mare": {
+      "count": 1
+    },
+    "apartment||palm jumeirah||ellington beach house": {
+      "count": 5
+    },
+    "apartment||palm jumeirah||emerald palace kempinski": {
+      "count": 12
+    },
+    "apartment||palm jumeirah||fairmont palm residence": {
+      "count": 12
+    },
+    "apartment||palm jumeirah||golden mile": {
+      "count": 28
+    },
+    "apartment||palm jumeirah||grandeur residences": {
+      "count": 8
+    },
+    "apartment||palm jumeirah||marina residence": {
+      "count": 33
+    },
+    "apartment||palm jumeirah||muraba residences palm jumeriah": {
+      "count": 2
+    },
+    "apartment||palm jumeirah||oceana hotel and apartments": {
+      "count": 1
+    },
+    "apartment||palm jumeirah||palm views - east": {
+      "count": 12
+    },
+    "apartment||palm jumeirah||palm views - west": {
+      "count": 8
+    },
+    "apartment||palm jumeirah||royal amwaj": {
+      "count": 21
+    },
+    "apartment||palm jumeirah||royal bay": {
+      "count": 5
+    },
+    "apartment||palm jumeirah||serenia living": {
+      "count": 9
+    },
+    "apartment||palm jumeirah||serenia residences the palm": {
+      "count": 11
+    },
+    "apartment||palm jumeirah||seven hotel and apartments the palm": {
+      "count": 35
+    },
+    "apartment||palm jumeirah||the 8": {
+      "count": 14
+    },
+    "apartment||palm jumeirah||the palm tower": {
+      "count": 18
+    },
+    "apartment||palm jumeirah||tiara residence": {
+      "count": 15
+    },
+    "apartment||palm jumeirah||viceroy hotel resorts residences": {
+      "count": 7
+    },
+    "apartment||palm jumeirah||w residences dubai - the palm": {
+      "count": 1
+    },
+    "apartment||pearl jumeira||nb residences": {
+      "count": 1
+    },
+    "apartment||remraam||remraam": {
+      "count": 122
+    },
+    "apartment||remraam||remraam - al ramth": {
+      "count": 13
+    },
+    "apartment||silicon oasis||al falak residence": {
+      "count": 3
+    },
+    "apartment||silicon oasis||altia one": {
+      "count": 15
+    },
+    "apartment||silicon oasis||altia residence": {
+      "count": 2
+    },
+    "apartment||silicon oasis||arabian gate": {
+      "count": 28
+    },
+    "apartment||silicon oasis||aura elegance": {
+      "count": 26
+    },
+    "apartment||silicon oasis||axis residences 1": {
+      "count": 14
+    },
+    "apartment||silicon oasis||axis residences 2": {
+      "count": 5
+    },
+    "apartment||silicon oasis||axis residences 3": {
+      "count": 4
+    },
+    "apartment||silicon oasis||axis residences 4": {
+      "count": 13
+    },
+    "apartment||silicon oasis||axis residences 5": {
+      "count": 5
+    },
+    "apartment||silicon oasis||axis residences 6": {
+      "count": 11
+    },
+    "apartment||silicon oasis||axis residences 8": {
+      "count": 5
+    },
+    "apartment||silicon oasis||axis silver": {
+      "count": 8
+    },
+    "apartment||silicon oasis||binghatti apartments": {
+      "count": 9
+    },
+    "apartment||silicon oasis||binghatti point": {
+      "count": 3
+    },
+    "apartment||silicon oasis||binghatti stars": {
+      "count": 5
+    },
+    "apartment||silicon oasis||binghatti views": {
+      "count": 9
+    },
+    "apartment||silicon oasis||coral residence": {
+      "count": 6
+    },
+    "apartment||silicon oasis||cordoba palace": {
+      "count": 1
+    },
+    "apartment||silicon oasis||imperial": {
+      "count": 7
+    },
+    "apartment||silicon oasis||jade residence": {
+      "count": 6
+    },
+    "apartment||silicon oasis||la visita 01": {
+      "count": 4
+    },
+    "apartment||silicon oasis||la visita 02": {
+      "count": 5
+    },
+    "apartment||silicon oasis||la vista 03": {
+      "count": 9
+    },
+    "apartment||silicon oasis||le presidium": {
+      "count": 4
+    },
+    "apartment||silicon oasis||lynx": {
+      "count": 7
+    },
+    "apartment||silicon oasis||mas tower": {
+      "count": 1
+    },
+    "apartment||silicon oasis||oasis high park": {
+      "count": 2
+    },
+    "apartment||silicon oasis||oasis star": {
+      "count": 1
+    },
+    "apartment||silicon oasis||palace tower": {
+      "count": 22
+    },
+    "apartment||silicon oasis||pearls by vision": {
+      "count": 11
+    },
+    "apartment||silicon oasis||platinum residence 1": {
+      "count": 5
+    },
+    "apartment||silicon oasis||platinum residence 2": {
+      "count": 3
+    },
+    "apartment||silicon oasis||ruby residence": {
+      "count": 5
+    },
+    "apartment||silicon oasis||s.p oasis": {
+      "count": 2
+    },
+    "apartment||silicon oasis||sapphire residence": {
+      "count": 6
+    },
+    "apartment||silicon oasis||selicon star 2": {
+      "count": 40
+    },
+    "apartment||silicon oasis||sevanam crown": {
+      "count": 4
+    },
+    "apartment||silicon oasis||silicon avenue": {
+      "count": 1
+    },
+    "apartment||silicon oasis||silicon boulevard": {
+      "count": 6
+    },
+    "apartment||silicon oasis||silicon gate 1": {
+      "count": 37
+    },
+    "apartment||silicon oasis||silicon gate 3": {
+      "count": 6
+    },
+    "apartment||silicon oasis||silicon gates 4": {
+      "count": 12
+    },
+    "apartment||silicon oasis||silicon heights": {
+      "count": 5
+    },
+    "apartment||silicon oasis||silicon heights2": {
+      "count": 8
+    },
+    "apartment||silicon oasis||the dunes": {
+      "count": 11
+    },
+    "apartment||silicon oasis||topaz residences 1": {
+      "count": 4
+    },
+    "apartment||silicon oasis||topaz residences 2": {
+      "count": 2
+    },
+    "apartment||silicon oasis||topaz residences 3": {
+      "count": 8
+    },
+    "apartment||silicon oasis||uniestate millennium tower": {
+      "count": 15
+    },
+    "apartment||sobha heartland||berkeley place": {
+      "count": 6
+    },
+    "apartment||sobha heartland||gemini splendor": {
+      "count": 14
+    },
+    "apartment||sobha heartland||kensington waters": {
+      "count": 20
+    },
+    "apartment||sobha heartland||sobha creek vistas": {
+      "count": 76
+    },
+    "apartment||sobha heartland||sobha creek vistas grande": {
+      "count": 21
+    },
+    "apartment||sobha heartland||sobha creek vistas reserve": {
+      "count": 35
+    },
+    "apartment||sobha heartland||sobha hartland - crest grande": {
+      "count": 74
+    },
+    "apartment||sobha heartland||sobha hartland - the crest": {
+      "count": 111
+    },
+    "apartment||sobha heartland||sobha hartland greens - phase iii": {
+      "count": 28
+    },
+    "apartment||sobha heartland||sobha hartland greens phase ii": {
+      "count": 13
+    },
+    "apartment||sobha heartland||sobha hartland greens- phase i": {
+      "count": 8
+    },
+    "apartment||sobha heartland||sobha hartland one park avenue": {
+      "count": 13
+    },
+    "apartment||sobha heartland||sobha hartland waves": {
+      "count": 22
+    },
+    "apartment||sobha heartland||sobha hartland waves grande": {
+      "count": 15
+    },
+    "apartment||sobha heartland||the terraces": {
+      "count": 13
+    },
+    "apartment||sobha heartland||wilton park residences": {
+      "count": 16
+    },
+    "apartment||sobha heartland||wilton terraces": {
+      "count": 25
+    },
+    "apartment||sufouh gardens||hiliana": {
+      "count": 4
+    },
+    "apartment||sufouh gardens||j5": {
+      "count": 2
+    },
+    "apartment||sufouh gardens||j8": {
+      "count": 4
+    },
+    "apartment||tecom site a||the s tower": {
+      "count": 6
+    },
+    "apartment||the greens||mosela": {
+      "count": 10
+    },
+    "apartment||the greens||panorama": {
+      "count": 4
+    },
+    "apartment||the greens||tanaro": {
+      "count": 7
+    },
+    "apartment||the lakes||golf heights": {
+      "count": 3
+    },
+    "apartment||the lakes||the hills": {
+      "count": 20
+    },
+    "apartment||the world||the heart of europe 2": {
+      "count": 1
+    },
+    "apartment||town square||ascot residences": {
+      "count": 12
+    },
+    "apartment||town square||hayat boulevard": {
+      "count": 32
+    },
+    "apartment||town square||liva": {
+      "count": 33
+    },
+    "apartment||town square||rawda apartments": {
+      "count": 34
+    },
+    "apartment||town square||the diplomat residences": {
+      "count": 12
+    },
+    "apartment||town square||town square jenna and warda": {
+      "count": 29
+    },
+    "apartment||town square||town square safi": {
+      "count": 33
+    },
+    "apartment||town square||town square zahra": {
+      "count": 61
+    },
+    "apartment||town square||una": {
+      "count": 24
+    },
+    "apartment||um suqaim third||al jazi - madinat jumeriah living": {
+      "count": 35
+    },
+    "apartment||um suqaim third||jadeel -madinat jumeirah living": {
+      "count": 12
+    },
+    "apartment||um suqaim third||lamaa": {
+      "count": 3
+    },
+    "apartment||wadi al safa 3||aras residence": {
+      "count": 5
+    },
+    "apartment||wadi al safa 3||grenland residence by arloid": {
+      "count": 3
+    },
+    "apartment||wadi al safa 3||living legends phase 7": {
+      "count": 3
+    },
+    "apartment||wadi al safa 3||madison residence": {
+      "count": 4
+    },
+    "apartment||wadi al safa 3||the spark by esnaad": {
+      "count": 3
+    },
+    "apartment||wadi al safa 7||rukan": {
+      "count": 35
+    },
+    "apartment||wadi al safa 7||rukan residence": {
+      "count": 5
+    },
+    "apartment||warsan first||olivz residence": {
+      "count": 14
+    },
+    "apartment||warsan first||petalz by danube": {
+      "count": 20
+    },
+    "apartment||zaabeel first||one za'abeel": {
+      "count": 8
+    },
+    "apartment||zaabeel second||downtown views": {
+      "count": 18
+    },
+    "apartment||zaabeel second||downtown views ii": {
+      "count": 43
+    },
+    "land||al furjan||al furjan": {
+      "count": 19
+    },
+    "land||al furjan||alfurjan package 4": {
+      "count": 8
+    },
+    "land||al furjan||alfurjan package 6": {
+      "count": 11
+    },
+    "land||al hebiah fifth||damac lagoons - costa brava (1)": {
+      "count": 60
+    },
+    "land||al hebiah fifth||damac lagoons - costa brava (2)": {
+      "count": 50
+    },
+    "land||al hebiah fifth||damac lagoons - ibiza": {
+      "count": 32
+    },
+    "land||al hebiah fifth||damac lagoons - malta (1)": {
+      "count": 53
+    },
+    "land||al hebiah fifth||damac lagoons - malta (2)": {
+      "count": 33
+    },
+    "land||al hebiah fifth||damac lagoons - marbella": {
+      "count": 22
+    },
+    "land||al hebiah fifth||damac lagoons - monte carlo": {
+      "count": 28
+    },
+    "land||al hebiah fifth||damac lagoons - morocco 1": {
+      "count": 11
+    },
+    "land||al hebiah fifth||damac lagoons - morocco 2": {
+      "count": 12
+    },
+    "land||al hebiah fifth||damac lagoons - mykonos": {
+      "count": 20
+    },
+    "land||al hebiah fifth||damac lagoons - nice 1": {
+      "count": 33
+    },
+    "land||al hebiah fifth||damac lagoons - nice 2": {
+      "count": 19
+    },
+    "land||al hebiah fifth||damac lagoons - portofino": {
+      "count": 69
+    },
+    "land||al hebiah fifth||damac lagoons - santorini (1)": {
+      "count": 51
+    },
+    "land||al hebiah fifth||damac lagoons - santorini (2)": {
+      "count": 33
+    },
+    "land||al hebiah fifth||damac lagoons - santorini (3)": {
+      "count": 10
+    },
+    "land||al hebiah fifth||damac lagoons - venice (1)": {
+      "count": 23
+    },
+    "land||al hebiah fourth||alaya": {
+      "count": 10
+    },
+    "land||al hebiah fourth||elysian mansions": {
+      "count": 2
+    },
+    "land||al hebiah fourth||harmony": {
+      "count": 28
+    },
+    "land||al hebiah fourth||serenity mansions": {
+      "count": 2
+    },
+    "land||al hebiah fourth||sevilla village": {
+      "count": 5
+    },
+    "land||al hebiah third||damac hills - autograph collection": {
+      "count": 5
+    },
+    "land||al hebiah third||damac hills - cavalli estates": {
+      "count": 4
+    },
+    "land||al hebiah third||damac hills - gems estates 1": {
+      "count": 2
+    },
+    "land||al hebiah third||damac hills - ivory": {
+      "count": 46
+    },
+    "land||al hebiah third||damac hills - silver springs 3": {
+      "count": 23
+    },
+    "land||al hebiah third||damac hills-bel air": {
+      "count": 7
+    },
+    "land||al hebiah third||damac hills-park residences 1": {
+      "count": 11
+    },
+    "land||al merkadh||mohammed bin rashid al maktoum city district one b extension villas": {
+      "count": 4
+    },
+    "land||al merkadh||mohammed bin rashid al maktoum city district one- c villas": {
+      "count": 6
+    },
+    "land||al merkadh||mohammed bin rashid al maktoum city district one, b villas": {
+      "count": 12
+    },
+    "land||al satwa||prestige gardens by prestige one": {
+      "count": 1
+    },
+    "land||al waha||al waha": {
+      "count": 10
+    },
+    "land||al yelayiss 1||damac islands - bali 1": {
+      "count": 9
+    },
+    "land||al yelayiss 1||damac islands - bali 2": {
+      "count": 6
+    },
+    "land||al yelayiss 1||damac islands - bali 3": {
+      "count": 27
+    },
+    "land||al yelayiss 1||damac islands - bali 4": {
+      "count": 6
+    },
+    "land||al yelayiss 1||damac islands - bora bora 1": {
+      "count": 14
+    },
+    "land||al yelayiss 1||damac islands - bora bora 2": {
+      "count": 10
+    },
+    "land||al yelayiss 1||damac islands - bora bora 3": {
+      "count": 10
+    },
+    "land||al yelayiss 1||damac islands - bora bora 4": {
+      "count": 4
+    },
+    "land||al yelayiss 1||damac islands - fiji 1": {
+      "count": 12
+    },
+    "land||al yelayiss 1||damac islands - fiji 2": {
+      "count": 31
+    },
+    "land||al yelayiss 1||damac islands - maldives 1": {
+      "count": 11
+    },
+    "land||al yelayiss 1||damac islands - maldives 2": {
+      "count": 2
+    },
+    "land||al yelayiss 1||damac islands - maldives 3": {
+      "count": 6
+    },
+    "land||al yelayiss 1||damac islands - maldives 4": {
+      "count": 15
+    },
+    "land||al yelayiss 1||damac islands - maldives 5": {
+      "count": 10
+    },
+    "land||al yelayiss 1||damac islands - seychelles 1": {
+      "count": 1
+    },
+    "land||al yelayiss 1||damac islands - seychelles 2": {
+      "count": 55
+    },
+    "land||al yelayiss 1||damac islands 2 - bahamas 1": {
+      "count": 15
+    },
+    "land||al yelayiss 1||damac islands 2 - bermuda": {
+      "count": 1
+    },
+    "land||al yelayiss 1||damac sun city": {
+      "count": 6
+    },
+    "land||al yufrah 1||elwood estates": {
+      "count": 24
+    },
+    "land||al yufrah 1||the valley - avelia": {
+      "count": 23
+    },
+    "land||al yufrah 1||the valley - farm gardens": {
+      "count": 9
+    },
+    "land||al yufrah 1||the valley - farm gardens 2": {
+      "count": 16
+    },
+    "land||al yufrah 1||the valley - farm grove": {
+      "count": 5
+    },
+    "land||al yufrah 1||the valley - farm grove 2": {
+      "count": 3
+    },
+    "land||al yufrah 1||the valley - ovelle": {
+      "count": 84
+    },
+    "land||arabian ranches i||arabian ranches - alvorada ii": {
+      "count": 2
+    },
+    "land||arabian ranches i||arabian ranches - alvorada iii": {
+      "count": 2
+    },
+    "land||arabian ranches i||aseel": {
+      "count": 4
+    },
+    "land||arabian ranches i||la avenida-2": {
+      "count": 2
+    },
+    "land||arabian ranches ii||arabian ranches - lila community": {
+      "count": 7
+    },
+    "land||arabian ranches ii||arabian ranches - palma community": {
+      "count": 6
+    },
+    "land||arabian ranches ii||arabian ranches - rasha community": {
+      "count": 3
+    },
+    "land||arabian ranches ii||arabian ranches - samara community": {
+      "count": 1
+    },
+    "land||arabian ranches ii||arabian ranches - yasmin community": {
+      "count": 2
+    },
+    "land||arabian ranches ii||arabian ranches- azalea community": {
+      "count": 6
+    },
+    "land||arabian ranches ii||arabian ranches- rosa community": {
+      "count": 1
+    },
+    "land||arabian ranches ii||arabian ranches-casa community": {
+      "count": 6
+    },
+    "land||arabian ranches polo club||polo homes": {
+      "count": 3
+    },
+    "land||bukadra||sobha estates": {
+      "count": 3
+    },
+    "land||damac hills||damac hills - autograph collection": {
+      "count": 1
+    },
+    "land||damac hills||damac hills - brookfield-1": {
+      "count": 2
+    },
+    "land||damac hills||damac hills - brookfield-2": {
+      "count": 2
+    },
+    "land||damac hills||damac hills - brookfield-3": {
+      "count": 1
+    },
+    "land||damac hills||damac hills - phoenix": {
+      "count": 3
+    },
+    "land||damac hills||damac hills - piccadilly green": {
+      "count": 9
+    },
+    "land||damac hills||damac hills - queens meadow": {
+      "count": 3
+    },
+    "land||damac hills||damac hills - rochester": {
+      "count": 8
+    },
+    "land||damac hills||damac hills - rockwood": {
+      "count": 10
+    },
+    "land||damac hills||damac hills - silver springs": {
+      "count": 12
+    },
+    "land||damac hills||damac hills - the field": {
+      "count": 2
+    },
+    "land||damac hills||damac hills - the flora": {
+      "count": 2
+    },
+    "land||damac hills||damac hills - the turf": {
+      "count": 1
+    },
+    "land||damac hills||damac hills - topanga": {
+      "count": 4
+    },
+    "land||damac hills||damac hills - trinity": {
+      "count": 1
+    },
+    "land||damac hills||damac hills - whitefield": {
+      "count": 6
+    },
+    "land||damac hills||damac hills- pelham": {
+      "count": 9
+    },
+    "land||damac hills||damac hills-bel air": {
+      "count": 8
+    },
+    "land||damac hills||damac hills-park residences 1": {
+      "count": 6
+    },
+    "land||damac hills||damac hills-park residences 4": {
+      "count": 7
+    },
+    "land||damac hills||damac hills-veneto": {
+      "count": 3
+    },
+    "land||dubai golf city||paradise hills": {
+      "count": 4
+    },
+    "land||dubai hills||fairway vistas": {
+      "count": 4
+    },
+    "land||dubai hills||golf place": {
+      "count": 6
+    },
+    "land||dubai hills||golf place ll": {
+      "count": 6
+    },
+    "land||dubai hills||majestic vistas": {
+      "count": 3
+    },
+    "land||dubai hills||parkway vistas": {
+      "count": 3
+    },
+    "land||dubai hills||sidra": {
+      "count": 15
+    },
+    "land||dubai hills||sidra 2": {
+      "count": 16
+    },
+    "land||dubai hills||sidra 3": {
+      "count": 10
+    },
+    "land||dubai industrial city||samana south haven 2": {
+      "count": 2
+    },
+    "land||dubai industrial city||south lofts 2 by premier choice": {
+      "count": 1
+    },
+    "land||dubai investment park second||grand polo - chevalia estate": {
+      "count": 2
+    },
+    "land||dubai investment park second||grand polo - chevalia estate 2": {
+      "count": 5
+    },
+    "land||dubai investment park second||grand polo - chevalia fields": {
+      "count": 1
+    },
+    "land||dubai investment park second||grand polo - equestra": {
+      "count": 26
+    },
+    "land||dubai investment park second||grand polo - equiterra": {
+      "count": 37
+    },
+    "land||dubai investment park second||grand polo - montura": {
+      "count": 3
+    },
+    "land||dubai investment park second||grand polo - montura 2": {
+      "count": 1
+    },
+    "land||dubai investment park second||grand polo - montura 3": {
+      "count": 2
+    },
+    "land||dubai investment park second||grand polo - selvara": {
+      "count": 1
+    },
+    "land||dubai investment park second||grand polo - selvara 2": {
+      "count": 4
+    },
+    "land||dubai investment park second||grand polo - selvara 3": {
+      "count": 5
+    },
+    "land||dubai investment park second||grand polo - selvara 4": {
+      "count": 3
+    },
+    "land||dubai science park||villa lantana 1": {
+      "count": 5
+    },
+    "land||dubai science park||villa lantana 2": {
+      "count": 2
+    },
+    "land||dubai south||divine haven": {
+      "count": 1
+    },
+    "land||dubai sports city||bloomingdale": {
+      "count": 3
+    },
+    "land||dubai sports city||gallery villas": {
+      "count": 2
+    },
+    "land||dubai sports city||marbella village": {
+      "count": 3
+    },
+    "land||dubai water front||dubai water front veneto": {
+      "count": 1
+    },
+    "land||emaar south||golf links": {
+      "count": 7
+    },
+    "land||falcon city of wonders||western residence - north": {
+      "count": 6
+    },
+    "land||falcon city of wonders||western residence - south": {
+      "count": 9
+    },
+    "land||ghadeer al tair||mohammed bin rashid al maktoum city -district one west - phase 2": {
+      "count": 14
+    },
+    "land||ghadeer al tair||mohammed bin rashid al maktoum city district one west - phase 1": {
+      "count": 30
+    },
+    "land||grand views||grand views": {
+      "count": 2
+    },
+    "land||hadaeq sheikh mohammed bin rashid||address hillcrest": {
+      "count": 4
+    },
+    "land||hadaeq sheikh mohammed bin rashid||eden hills": {
+      "count": 112
+    },
+    "land||hadaeq sheikh mohammed bin rashid||golf place ll": {
+      "count": 1
+    },
+    "land||hadaeq sheikh mohammed bin rashid||palm hills": {
+      "count": 1
+    },
+    "land||hadaeq sheikh mohammed bin rashid||park gate": {
+      "count": 2
+    },
+    "land||international city ph 2 & 3||lenjawi diamond": {
+      "count": 1
+    },
+    "land||jabal ali first||gardeniatownhomes @ wasl gate": {
+      "count": 5
+    },
+    "land||jabal ali first||jebel ali village": {
+      "count": 5
+    },
+    "land||jumeirah golf||alandalus townhouse": {
+      "count": 5
+    },
+    "land||jumeirah golf||olive point": {
+      "count": 5
+    },
+    "land||jumeirah golf||orange lake": {
+      "count": 2
+    },
+    "land||jumeirah golf||red wood park": {
+      "count": 2
+    },
+    "land||jumeirah golf||royal golf villas": {
+      "count": 1
+    },
+    "land||jumeirah golf||sienna lakes": {
+      "count": 1
+    },
+    "land||living legends||living legends phase 1": {
+      "count": 9
+    },
+    "land||living legends||living legends phase 2": {
+      "count": 4
+    },
+    "land||living legends||living legends phase 3": {
+      "count": 8
+    },
+    "land||madinat al mataar||discovery dunes": {
+      "count": 49
+    },
+    "land||madinat al mataar||expo city valley": {
+      "count": 1
+    },
+    "land||madinat al mataar||fairway villas": {
+      "count": 10
+    },
+    "land||madinat al mataar||fairway villas 2": {
+      "count": 10
+    },
+    "land||madinat al mataar||fairway villas 3": {
+      "count": 1
+    },
+    "land||madinat al mataar||golf lane": {
+      "count": 2
+    },
+    "land||madinat al mataar||south bay 2": {
+      "count": 1
+    },
+    "land||madinat al mataar||the pulse beachfront 2": {
+      "count": 1
+    },
+    "land||madinat al mataar||the pulse beachfront 3": {
+      "count": 1
+    },
+    "land||madinat al mataar||the pulse- beachfront": {
+      "count": 2
+    },
+    "land||madinat al mataar||waada- raiha": {
+      "count": 14
+    },
+    "land||madinat hind 4||damac hills (2) - acuna": {
+      "count": 1
+    },
+    "land||madinat hind 4||damac hills (2) - albizia": {
+      "count": 23
+    },
+    "land||madinat hind 4||damac hills (2) - amargo": {
+      "count": 16
+    },
+    "land||madinat hind 4||damac hills (2) - amargo 2": {
+      "count": 3
+    },
+    "land||madinat hind 4||damac hills (2) - amazonia": {
+      "count": 14
+    },
+    "land||madinat hind 4||damac hills (2) - aquilegia": {
+      "count": 21
+    },
+    "land||madinat hind 4||damac hills (2) - aster": {
+      "count": 19
+    },
+    "land||madinat hind 4||damac hills (2) - avencia-2": {
+      "count": 17
+    },
+    "land||madinat hind 4||damac hills (2) - basswood": {
+      "count": 14
+    },
+    "land||madinat hind 4||damac hills (2) - camelia": {
+      "count": 35
+    },
+    "land||madinat hind 4||damac hills (2) - centaury": {
+      "count": 24
+    },
+    "land||madinat hind 4||damac hills (2) - claret": {
+      "count": 12
+    },
+    "land||madinat hind 4||damac hills (2) - coursetia": {
+      "count": 9
+    },
+    "land||madinat hind 4||damac hills (2) - janusia": {
+      "count": 36
+    },
+    "land||madinat hind 4||damac hills (2) - juniper": {
+      "count": 13
+    },
+    "land||madinat hind 4||damac hills (2) - mimosa": {
+      "count": 12
+    },
+    "land||madinat hind 4||damac hills (2) - mulberry": {
+      "count": 6
+    },
+    "land||madinat hind 4||damac hills (2) - natura": {
+      "count": 10
+    },
+    "land||madinat hind 4||damac hills (2) - odora": {
+      "count": 6
+    },
+    "land||madinat hind 4||damac hills (2) - pacifica": {
+      "count": 31
+    },
+    "land||madinat hind 4||damac hills (2) - park greens 1": {
+      "count": 2
+    },
+    "land||madinat hind 4||damac hills (2) - park greens 2": {
+      "count": 4
+    },
+    "land||madinat hind 4||damac hills (2) - park greens 3": {
+      "count": 7
+    },
+    "land||madinat hind 4||damac hills (2) - primrose": {
+      "count": 19
+    },
+    "land||madinat hind 4||damac hills (2) - sanctnary": {
+      "count": 21
+    },
+    "land||madinat hind 4||damac hills (2) - sycamore": {
+      "count": 14
+    },
+    "land||madinat hind 4||damac hills (2) - trixis": {
+      "count": 7
+    },
+    "land||madinat hind 4||damac hills (2) - vardon": {
+      "count": 37
+    },
+    "land||madinat hind 4||damac hills (2) - verona": {
+      "count": 11
+    },
+    "land||madinat hind 4||damac hills (2) - victoria": {
+      "count": 24
+    },
+    "land||madinat hind 4||damac hills (2) - victoria 2": {
+      "count": 7
+    },
+    "land||madinat hind 4||damac hills (2) - violet": {
+      "count": 5
+    },
+    "land||madinat hind 4||damac hills (2) - violet 2": {
+      "count": 4
+    },
+    "land||madinat hind 4||damac hills (2) - violet 3": {
+      "count": 8
+    },
+    "land||madinat hind 4||damac hills (2) - violet 4": {
+      "count": 12
+    },
+    "land||madinat hind 4||damac hills (2) - zinnia": {
+      "count": 14
+    },
+    "land||mbr district 1||mohammed bin rashid al maktoum city- district one, phase 1": {
+      "count": 11
+    },
+    "land||mbr district 1||mohammed bin rashid al maktoum city-district one phase ii villas": {
+      "count": 3
+    },
+    "land||me'aisem first||ashwood estates": {
+      "count": 150
+    },
+    "land||me'aisem first||d villas": {
+      "count": 16
+    },
+    "land||me'aisem first||pinewood estate homes": {
+      "count": 70
+    },
+    "land||me'aisem first||terra golf collection": {
+      "count": 1
+    },
+    "land||me'aisem second||the oasis - palmiera": {
+      "count": 2
+    },
+    "land||meydan one||azizi riviera 25": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 31": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 36": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 37": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 38": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 39": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 40": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 41": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 43": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 44": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 45": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 46": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 47": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 48": {
+      "count": 1
+    },
+    "land||meydan one||azizi riviera 50": {
+      "count": 1
+    },
+    "land||millennium||millennium estates": {
+      "count": 3
+    },
+    "land||mudon||arabella 2 - townhouses at mudon": {
+      "count": 15
+    },
+    "land||mudon||arabella 3": {
+      "count": 17
+    },
+    "land||mudon||mudon": {
+      "count": 10
+    },
+    "land||mudon||mudon phase 3 _ neighbourhood i- arabella": {
+      "count": 18
+    },
+    "land||mudon||mudon-phase 2": {
+      "count": 12
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 10": {
+      "count": 3
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 11": {
+      "count": 93
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 2": {
+      "count": 25
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 3": {
+      "count": 6
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 4": {
+      "count": 4
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 5": {
+      "count": 1
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 7": {
+      "count": 3
+    },
+    "land||nad al shiba first||nad al sheba gardens phase 8 & 9": {
+      "count": 15
+    },
+    "land||silicon oasis||elyra residences by enaam": {
+      "count": 1
+    },
+    "land||sobha heartland||sobha hartland villas - phase ii": {
+      "count": 1
+    },
+    "land||sobha heartland||sobha hartland villas phase iii": {
+      "count": 2
+    },
+    "land||the lakes||the lakes - deema 1": {
+      "count": 1
+    },
+    "land||the lakes||the lakes deema 3": {
+      "count": 1
+    },
+    "land||the lakes||the lakes deema 4": {
+      "count": 3
+    },
+    "land||the villa||the villa": {
+      "count": 18
+    },
+    "land||villanova||la quinta": {
+      "count": 3
+    },
+    "land||villanova||villanova amaranta": {
+      "count": 1
+    },
+    "land||wadi al safa 2||sobha reserve": {
+      "count": 15
+    },
+    "land||wadi al safa 3||mohammed bin rashid al maktoum city, district 11- opal gardens": {
+      "count": 25
+    },
+    "land||wadi al safa 3||the wilds 1": {
+      "count": 31
+    },
+    "land||wadi al safa 3||the wilds 2": {
+      "count": 25
+    },
+    "land||wadi al safa 3||the wilds 3": {
+      "count": 30
+    },
+    "land||wadi al safa 3||wellington grand villas": {
+      "count": 1
+    },
+    "land||wadi al safa 5||arabian ranches lll - caya": {
+      "count": 22
+    },
+    "land||wadi al safa 5||arabian ranches lll - elie saab": {
+      "count": 7
+    },
+    "land||wadi al safa 5||arabian ranches lll - elie saab ll": {
+      "count": 16
+    },
+    "land||wadi al safa 5||athlon by al dar 1": {
+      "count": 23
+    },
+    "land||wadi al safa 5||athlon by al dar 2": {
+      "count": 28
+    },
+    "land||wadi al safa 5||haven by aldar 1": {
+      "count": 7
+    },
+    "land||wadi al safa 5||haven by aldar 2": {
+      "count": 4
+    },
+    "land||wadi al safa 5||haven by aldar 3": {
+      "count": 6
+    },
+    "land||wadi al safa 7||the acres": {
+      "count": 29
+    },
+    "land||wadi al safa 7||the acres 2 & estates 2": {
+      "count": 3
+    },
+    "land||wadi al safa 7||the acres 3 & estates": {
+      "count": 9
+    },
+    "office||arjan||diamond business center": {
+      "count": 25
+    },
+    "office||arjan||the light": {
+      "count": 3
+    },
+    "office||barsha heights||executive height": {
+      "count": 5
+    },
+    "office||barsha heights||i - rise tower": {
+      "count": 15
+    },
+    "office||barsha heights||smart heights": {
+      "count": 14
+    },
+    "office||barsha heights||the one tower": {
+      "count": 30
+    },
+    "office||burj khalifa||bd boulevard plaza": {
+      "count": 2
+    },
+    "office||business bay||014 tower": {
+      "count": 6
+    },
+    "office||business bay||51@business bay": {
+      "count": 7
+    },
+    "office||business bay||al manara": {
+      "count": 2
+    },
+    "office||business bay||b2b tower": {
+      "count": 12
+    },
+    "office||business bay||bay square": {
+      "count": 49
+    },
+    "office||business bay||bayswater": {
+      "count": 12
+    },
+    "office||business bay||burlington tower": {
+      "count": 15
+    },
+    "office||business bay||business tower": {
+      "count": 4
+    },
+    "office||business bay||churchill tower": {
+      "count": 21
+    },
+    "office||business bay||citadel tower": {
+      "count": 14
+    },
+    "office||business bay||clover bay": {
+      "count": 11
+    },
+    "office||business bay||crystal tower": {
+      "count": 5
+    },
+    "office||business bay||empire heights": {
+      "count": 9
+    },
+    "office||business bay||executive bay b": {
+      "count": 3
+    },
+    "office||business bay||iris bay": {
+      "count": 23
+    },
+    "office||business bay||lake central": {
+      "count": 2
+    },
+    "office||business bay||oberoi centre": {
+      "count": 8
+    },
+    "office||business bay||one business bay": {
+      "count": 2
+    },
+    "office||business bay||ontario tower": {
+      "count": 5
+    },
+    "office||business bay||opal tower": {
+      "count": 11
+    },
+    "office||business bay||park lane tower": {
+      "count": 13
+    },
+    "office||business bay||prime tower": {
+      "count": 7
+    },
+    "office||business bay||regal tower": {
+      "count": 19
+    },
+    "office||business bay||silver tower": {
+      "count": 18
+    },
+    "office||business bay||sobha ivory": {
+      "count": 1
+    },
+    "office||business bay||sobha ivory - ii": {
+      "count": 3
+    },
+    "office||business bay||sol bay": {
+      "count": 6
+    },
+    "office||business bay||tamani arts offices": {
+      "count": 32
+    },
+    "office||business bay||the binary by omniyat": {
+      "count": 8
+    },
+    "office||business bay||the court": {
+      "count": 7
+    },
+    "office||business bay||the exchange": {
+      "count": 6
+    },
+    "office||business bay||the mertopolis": {
+      "count": 9
+    },
+    "office||business bay||the opus by omniyat": {
+      "count": 2
+    },
+    "office||business bay||the prism": {
+      "count": 11
+    },
+    "office||business bay||westburry tower": {
+      "count": 5
+    },
+    "office||business bay||xl tower": {
+      "count": 2
+    },
+    "office||dubai investment park first||schon business park": {
+      "count": 17
+    },
+    "office||dubai investment park second||ritaj": {
+      "count": 1
+    },
+    "office||dubai marina||dm marina plaza": {
+      "count": 4
+    },
+    "office||dubai sports city||stadium point": {
+      "count": 2
+    },
+    "office||dubai sports city||the bridge": {
+      "count": 2
+    },
+    "office||international city ph 1||indigo optima 1": {
+      "count": 6
+    },
+    "office||jumeirah lakes towers||ag tower": {
+      "count": 7
+    },
+    "office||jumeirah lakes towers||al mas tower": {
+      "count": 7
+    },
+    "office||jumeirah lakes towers||armada towers": {
+      "count": 2
+    },
+    "office||jumeirah lakes towers||au tower": {
+      "count": 3
+    },
+    "office||jumeirah lakes towers||business avenue aa1": {
+      "count": 19
+    },
+    "office||jumeirah lakes towers||business avenue bb1": {
+      "count": 9
+    },
+    "office||jumeirah lakes towers||business avenue bb2": {
+      "count": 13
+    },
+    "office||jumeirah lakes towers||concorde tower": {
+      "count": 1
+    },
+    "office||jumeirah lakes towers||dubai arch tower": {
+      "count": 2
+    },
+    "office||jumeirah lakes towers||dubai star": {
+      "count": 19
+    },
+    "office||jumeirah lakes towers||gold crest executive": {
+      "count": 9
+    },
+    "office||jumeirah lakes towers||hds business centre": {
+      "count": 13
+    },
+    "office||jumeirah lakes towers||inigo icon": {
+      "count": 8
+    },
+    "office||jumeirah lakes towers||jumeirah business centre 4": {
+      "count": 13
+    },
+    "office||jumeirah lakes towers||jumeirah business centre 5": {
+      "count": 22
+    },
+    "office||jumeirah lakes towers||jumeirah business centre1": {
+      "count": 27
+    },
+    "office||jumeirah lakes towers||jumeirah business centre2": {
+      "count": 12
+    },
+    "office||jumeirah lakes towers||liwa heights": {
+      "count": 5
+    },
+    "office||jumeirah lakes towers||platinum tower": {
+      "count": 13
+    },
+    "office||jumeirah lakes towers||reef tower": {
+      "count": 4
+    },
+    "office||jumeirah lakes towers||saba tower 1": {
+      "count": 5
+    },
+    "office||jumeirah lakes towers||swiss tower": {
+      "count": 3
+    },
+    "office||jumeirah lakes towers||the dome tower": {
+      "count": 22
+    },
+    "office||jumeirah lakes towers||tiffany towers": {
+      "count": 7
+    },
+    "office||jumeirah village circle||binghatti apex": {
+      "count": 1
+    },
+    "office||jumeirah village circle||binghatti azure": {
+      "count": 9
+    },
+    "office||jumeirah village circle||binghatti emerald": {
+      "count": 1
+    },
+    "office||jumeirah village circle||binghatti house": {
+      "count": 3
+    },
+    "office||jumeirah village circle||prime business center": {
+      "count": 9
+    },
+    "office||motor city||detroit house": {
+      "count": 1
+    },
+    "office||silicon oasis||it plaza": {
+      "count": 6
+    },
+    "office||silicon oasis||lynx": {
+      "count": 3
+    },
+    "office||silicon oasis||palace tower": {
+      "count": 5
+    },
+    "office||silicon oasis||silicon boulevard": {
+      "count": 6
+    },
+    "office||silicon oasis||silicon information technology tower": {
+      "count": 18
+    },
+    "office||silicon oasis||the apricot": {
+      "count": 7
+    },
+    "office||the greens||the onyx": {
+      "count": 8
+    },
+    "office||trade center first||latifa tower": {
+      "count": 3
+    },
+    "retail||al furjan||al fouad": {
+      "count": 2
+    },
+    "retail||al furjan||azizi berton": {
+      "count": 2
+    },
+    "retail||al furjan||azizi farishta residence": {
+      "count": 1
+    },
+    "retail||al furjan||azizi pearl": {
+      "count": 3
+    },
+    "retail||al furjan||azizi shaista residence": {
+      "count": 1
+    },
+    "retail||al furjan||equiti home": {
+      "count": 5
+    },
+    "retail||al furjan||starz tower by danube": {
+      "count": 1
+    },
+    "retail||arjan||adhara star": {
+      "count": 2
+    },
+    "retail||arjan||beverly boulevard": {
+      "count": 2
+    },
+    "retail||arjan||diamond business center": {
+      "count": 4
+    },
+    "retail||arjan||elz residence": {
+      "count": 1
+    },
+    "retail||arjan||miraclz tower": {
+      "count": 1
+    },
+    "retail||arjan||oxford gardens": {
+      "count": 2
+    },
+    "retail||arjan||resortz residence": {
+      "count": 2
+    },
+    "retail||barsha heights||the one tower": {
+      "count": 1
+    },
+    "retail||burj khalifa||burj al nujoom": {
+      "count": 1
+    },
+    "retail||burj khalifa||imperial avenue": {
+      "count": 1
+    },
+    "retail||business bay||avanti tower": {
+      "count": 2
+    },
+    "retail||business bay||bayz tower": {
+      "count": 2
+    },
+    "retail||business bay||binghatti canal": {
+      "count": 1
+    },
+    "retail||business bay||business tower": {
+      "count": 3
+    },
+    "retail||business bay||capital bay a": {
+      "count": 1
+    },
+    "retail||business bay||capital bay b": {
+      "count": 1
+    },
+    "retail||business bay||clover bay": {
+      "count": 1
+    },
+    "retail||business bay||crystal tower": {
+      "count": 1
+    },
+    "retail||business bay||iris bay": {
+      "count": 1
+    },
+    "retail||business bay||mag 318": {
+      "count": 1
+    },
+    "retail||business bay||marquise square tower": {
+      "count": 1
+    },
+    "retail||business bay||oberoi centre": {
+      "count": 10
+    },
+    "retail||business bay||ontario tower": {
+      "count": 1
+    },
+    "retail||business bay||silver tower": {
+      "count": 2
+    },
+    "retail||business bay||tamani arts offices": {
+      "count": 1
+    },
+    "retail||business bay||the residence at business central": {
+      "count": 11
+    },
+    "retail||business bay||vyb": {
+      "count": 2
+    },
+    "retail||business bay||water's edge": {
+      "count": 2
+    },
+    "retail||business bay||westburry tower": {
+      "count": 1
+    },
+    "retail||business bay||xl tower": {
+      "count": 1
+    },
+    "retail||business bay||zada tower": {
+      "count": 2
+    },
+    "retail||dmcc-ez2||j&g plexs": {
+      "count": 4
+    },
+    "retail||down town jabal ali||suberbia": {
+      "count": 1
+    },
+    "retail||dubai healthcare city - phase 2||farhad azizi residence": {
+      "count": 5
+    },
+    "retail||dubai healthcare city - phase 2||fawad azizi residence": {
+      "count": 1
+    },
+    "retail||dubai investment park first||schon business park": {
+      "count": 4
+    },
+    "retail||dubai land residence complex||sky courts": {
+      "count": 8
+    },
+    "retail||dubai marina||continental tower": {
+      "count": 2
+    },
+    "retail||dubai marina||marina wharf ii": {
+      "count": 2
+    },
+    "retail||dubai marina||sparkle towers": {
+      "count": 1
+    },
+    "retail||dubai marina||the zen": {
+      "count": 1
+    },
+    "retail||dubai production city||lago vista": {
+      "count": 1
+    },
+    "retail||dubai production city||the crescent": {
+      "count": 2
+    },
+    "retail||dubai south||celestia": {
+      "count": 1
+    },
+    "retail||dubai water canal||canal front residences-cf7 & cf8 & cf9": {
+      "count": 1
+    },
+    "retail||international city ph 1||lawnz residence by danube": {
+      "count": 2
+    },
+    "retail||jaddaf waterfront||boutique xll": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||bonnington tower hotel & residence dubai": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||dubai arch tower": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||indigo tower": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||lake view": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||mbl residence": {
+      "count": 4
+    },
+    "retail||jumeirah lakes towers||mbl royal": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||new dubai gate1": {
+      "count": 1
+    },
+    "retail||jumeirah lakes towers||orra the embankment": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||binghatti apex": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||binghatti onyx": {
+      "count": 2
+    },
+    "retail||jumeirah village circle||binghatti orchid": {
+      "count": 2
+    },
+    "retail||jumeirah village circle||binghatti phantom": {
+      "count": 2
+    },
+    "retail||jumeirah village circle||binghatti phoenix": {
+      "count": 4
+    },
+    "retail||jumeirah village circle||binghatti royale": {
+      "count": 4
+    },
+    "retail||jumeirah village circle||binghatti tulip": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||botanica": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||dar al jawhara": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||pearl house ii by imtiaz": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||platinum residence": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||regent court": {
+      "count": 3
+    },
+    "retail||jumeirah village circle||the east crest by meteora": {
+      "count": 1
+    },
+    "retail||jumeirah village circle||the vybe": {
+      "count": 4
+    },
+    "retail||jumeirah village triangle||555 park views": {
+      "count": 1
+    },
+    "retail||liwan||wavez residence": {
+      "count": 3
+    },
+    "retail||madinat hind 4||damac hills (2) - viridis": {
+      "count": 2
+    },
+    "retail||meydan avenue||azizi greenfield": {
+      "count": 2
+    },
+    "retail||meydan avenue||azizi park avenue": {
+      "count": 1
+    },
+    "retail||meydan avenue||the galleries": {
+      "count": 2
+    },
+    "retail||meydan one||azizi riviera 11": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 15": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 16": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 20": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 25": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 3": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 32": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 37": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 40": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 46": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 5": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 7": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera 8": {
+      "count": 1
+    },
+    "retail||meydan one||azizi riviera beachfront": {
+      "count": 1
+    },
+    "retail||mirdif||mirdif hills- nasayem avenue": {
+      "count": 3
+    },
+    "retail||silicon oasis||it plaza": {
+      "count": 2
+    },
+    "retail||silicon oasis||selicon star 2": {
+      "count": 1
+    },
+    "retail||silicon oasis||silicon boulevard": {
+      "count": 1
+    },
+    "retail||sobha heartland||sobha creek vistas grande": {
+      "count": 1
+    },
+    "retail||sobha heartland||sobha hartland - the crest": {
+      "count": 1
+    },
+    "retail||sobha heartland||sobha hartland greens - phase iii": {
+      "count": 1
+    },
+    "retail||warsan first||olivz residence": {
+      "count": 2
+    },
+    "townhouse||dubai south||the pulse townhouses": {
+      "count": 3
+    },
+    "villa||al furjan||dreamz": {
+      "count": 8
+    },
+    "villa||al hebiah fourth||aura": {
+      "count": 62
+    },
+    "villa||al hebiah sixth||mudon al ranim 1": {
+      "count": 12
+    },
+    "villa||al hebiah sixth||mudon al ranim 2": {
+      "count": 18
+    },
+    "villa||al hebiah sixth||mudon al ranim 3": {
+      "count": 46
+    },
+    "villa||al hebiah sixth||mudon al ranim 4": {
+      "count": 34
+    },
+    "villa||al khail heights||al khail heights": {
+      "count": 6
+    },
+    "villa||al thanyah third||the lakes ghadeer": {
+      "count": 1
+    },
+    "villa||al yelayiss 2||maha townhouses": {
+      "count": 50
+    },
+    "villa||al yelayiss 2||naseem townhouses": {
+      "count": 4
+    },
+    "villa||al yelayiss 2||reem townhouses": {
+      "count": 12
+    },
+    "villa||al yelayiss 2||sama townhouses": {
+      "count": 8
+    },
+    "villa||al yelayiss 2||shams townhouses": {
+      "count": 9
+    },
+    "villa||al yufrah 1||the valley - elora": {
+      "count": 16
+    },
+    "villa||al yufrah 1||the valley - orania": {
+      "count": 68
+    },
+    "villa||al yufrah 1||the valley - talia": {
+      "count": 37
+    },
+    "villa||arabian ranches i||alma-2": {
+      "count": 1
+    },
+    "villa||arabian ranches ii||ar ii - reem community": {
+      "count": 6
+    },
+    "villa||arabian ranches ii||ar ii camelia": {
+      "count": 4
+    },
+    "villa||arabian ranches ii||ar ii camelia 2": {
+      "count": 4
+    },
+    "villa||arabian ranches iii||arabain ranches lll - bliss": {
+      "count": 20
+    },
+    "villa||arabian ranches iii||arabian ranches iii - joy": {
+      "count": 18
+    },
+    "villa||arabian ranches iii||arabian ranches iii - spring": {
+      "count": 4
+    },
+    "villa||arabian ranches iii||arabian ranches iii - sun": {
+      "count": 8
+    },
+    "villa||arabian ranches iii||arabian ranches lll - ruba": {
+      "count": 7
+    },
+    "villa||cherrywoods||cherrywoods": {
+      "count": 14
+    },
+    "villa||dubai hills||club villas at dubai hills": {
+      "count": 1
+    },
+    "villa||dubai hills||golf grove": {
+      "count": 7
+    },
+    "villa||dubai hills||maple": {
+      "count": 23
+    },
+    "villa||dubai hills||maple 2": {
+      "count": 17
+    },
+    "villa||dubai hills||maple iii": {
+      "count": 23
+    },
+    "villa||dubai industrial city||dubai spanish twin villa": {
+      "count": 1
+    },
+    "villa||dubai industrial city||sahara meadows1": {
+      "count": 8
+    },
+    "villa||dubai industrial city||sahara meadows2": {
+      "count": 1
+    },
+    "villa||dubai south||the pulse villas": {
+      "count": 5
+    },
+    "villa||emaar south||greenview": {
+      "count": 11
+    },
+    "villa||emaar south||greenview 2": {
+      "count": 14
+    },
+    "villa||emaar south||parkside": {
+      "count": 27
+    },
+    "villa||emaar south||parkside 2": {
+      "count": 14
+    },
+    "villa||emaar south||parkside 3": {
+      "count": 20
+    },
+    "villa||emirate living||emirates living - springs 1": {
+      "count": 14
+    },
+    "villa||emirate living||emirates living - springs 10": {
+      "count": 14
+    },
+    "villa||emirate living||emirates living - springs 11": {
+      "count": 18
+    },
+    "villa||emirate living||emirates living - springs 12": {
+      "count": 12
+    },
+    "villa||emirate living||emirates living - springs 14": {
+      "count": 16
+    },
+    "villa||emirate living||emirates living - springs 15": {
+      "count": 16
+    },
+    "villa||emirate living||emirates living - springs 2": {
+      "count": 12
+    },
+    "villa||emirate living||emirates living - springs 3": {
+      "count": 15
+    },
+    "villa||emirate living||emirates living - springs 4": {
+      "count": 12
+    },
+    "villa||emirate living||emirates living - springs 5": {
+      "count": 11
+    },
+    "villa||emirate living||emirates living - springs 6": {
+      "count": 10
+    },
+    "villa||emirate living||emirates living - springs 7": {
+      "count": 14
+    },
+    "villa||emirate living||emirates living - springs 8": {
+      "count": 16
+    },
+    "villa||emirate living||emirates living - springs 9": {
+      "count": 16
+    },
+    "villa||grand views||grand views": {
+      "count": 16
+    },
+    "villa||hadaeq sheikh mohammed bin rashid||mag eye phase 1": {
+      "count": 3
+    },
+    "villa||island 2||villa amalfi": {
+      "count": 2
+    },
+    "villa||jumeirah golf||jasmine lane": {
+      "count": 20
+    },
+    "villa||jumeirah park||royal park": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||7 west villas": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||celeste by westar": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||diamond view 1,2,3,4": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||diamond views 3 - villas a": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||erantis": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||grand glow": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||haven villas 1": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||hyati residence": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||indigo ville 1": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||las casas": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||le parc homes": {
+      "count": 8
+    },
+    "villa||jumeirah village circle||le parc homes ii": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||lotus park": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||marwa homes": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||marwa homes 2": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||mirabella": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||mirabella 4": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||mirabella 5": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||mirabella 6": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||mulberry mansions": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||mulberry park": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||palace estates": {
+      "count": 3
+    },
+    "villa||jumeirah village circle||park villa's": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||park villa's 2": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||royal park south 1": {
+      "count": 4
+    },
+    "villa||jumeirah village circle||sandoval lane": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||seasons community- autumn": {
+      "count": 10
+    },
+    "villa||jumeirah village circle||seasons community- summer": {
+      "count": 6
+    },
+    "villa||jumeirah village circle||shamal terraces 1": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||shamal terraces 2": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||somerset mews": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||sunset gardens": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||the veranda collection 1": {
+      "count": 4
+    },
+    "villa||jumeirah village circle||valencia": {
+      "count": 2
+    },
+    "villa||jumeirah village circle||westar azure": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||westar reflection": {
+      "count": 1
+    },
+    "villa||jumeirah village circle||westar terrace garden": {
+      "count": 1
+    },
+    "villa||jumeirah village triangle||al burooj residence 1": {
+      "count": 1
+    },
+    "villa||la mer||sur la mer": {
+      "count": 1
+    },
+    "villa||la mer||sur la mer 2": {
+      "count": 1
+    },
+    "villa||living legends||maya luxury collection": {
+      "count": 1
+    },
+    "villa||living legends||maya townhouses": {
+      "count": 1
+    },
+    "villa||liwan||sunrise boulevard 10": {
+      "count": 1
+    },
+    "villa||madinat al mataar||greenview 3": {
+      "count": 13
+    },
+    "villa||madinat al mataar||the pulse beachfront 2": {
+      "count": 10
+    },
+    "villa||madinat al mataar||the pulse beachfront 3": {
+      "count": 35
+    },
+    "villa||madinat al mataar||the pulse villas 2": {
+      "count": 2
+    },
+    "villa||madinat al mataar||the pulse- beachfront": {
+      "count": 20
+    },
+    "villa||mbr district 7||mag eye phase 1": {
+      "count": 16
+    },
+    "villa||me'aisem first||jumeirah luxury": {
+      "count": 8
+    },
+    "villa||mira||reem - mira oasis community": {
+      "count": 17
+    },
+    "villa||mira||reem - mira oasis community phase 2": {
+      "count": 22
+    },
+    "villa||mira||reem - mira oasis community phase 3": {
+      "count": 14
+    },
+    "villa||mira||reem-mira community ph 1": {
+      "count": 8
+    },
+    "villa||mira||reem-mira community ph 2": {
+      "count": 7
+    },
+    "villa||mira||reem-mira community ph 3": {
+      "count": 20
+    },
+    "villa||mira||reem-mira community ph 4": {
+      "count": 11
+    },
+    "villa||mira||reem-mira community ph5": {
+      "count": 6
+    },
+    "villa||motor city||green community motor city, phase ii - casa familia": {
+      "count": 1
+    },
+    "villa||nad al sheba gardens||mag 22": {
+      "count": 1
+    },
+    "villa||nad al shiba first||nad al sheba gardens phase 2": {
+      "count": 3
+    },
+    "villa||rukan||rukan 3": {
+      "count": 16
+    },
+    "villa||rukan||rukan2": {
+      "count": 3
+    },
+    "villa||serena||serena - casa viva": {
+      "count": 18
+    },
+    "villa||serena||serena bella casa": {
+      "count": 15
+    },
+    "villa||serena||serena casa dora": {
+      "count": 15
+    },
+    "villa||sobha heartland||sobha hartland estates - townhouses": {
+      "count": 1
+    },
+    "villa||sustainable city||the sustainable city": {
+      "count": 14
+    },
+    "villa||the field||the fields at d11 - mbrmc": {
+      "count": 72
+    },
+    "villa||the lakes||the lakes ghadeer": {
+      "count": 5
+    },
+    "villa||the lakes||the lakes zulal": {
+      "count": 7
+    },
+    "villa||the valley||the valley - eden": {
+      "count": 8
+    },
+    "villa||the valley||the valley-nara": {
+      "count": 55
+    },
+    "villa||tilal al ghaf||elan": {
+      "count": 33
+    },
+    "villa||town square||noor townhouses": {
+      "count": 19
+    },
+    "villa||town square||safi townhouses": {
+      "count": 8
+    },
+    "villa||town square||town square hayat": {
+      "count": 16
+    },
+    "villa||town square||town square zahra": {
+      "count": 13
+    },
+    "villa||villanova||amaranta 2": {
+      "count": 8
+    },
+    "villa||villanova||la rosa": {
+      "count": 5
+    },
+    "villa||villanova||la rosa 3": {
+      "count": 6
+    },
+    "villa||villanova||la rosa 5": {
+      "count": 5
+    },
+    "villa||villanova||la rosa 6": {
+      "count": 7
+    },
+    "villa||villanova||la rosa phase 2": {
+      "count": 6
+    },
+    "villa||villanova||la violeta 1": {
+      "count": 5
+    },
+    "villa||villanova||la violeta 2": {
+      "count": 28
+    },
+    "villa||villanova||villanova amaranta": {
+      "count": 9
+    },
+    "villa||villanova||villanova amaranta 3": {
+      "count": 12
+    },
+    "villa||villanova||villanova amaranta a": {
+      "count": 6
+    },
+    "villa||villanova||villanova amaranta b": {
+      "count": 11
+    },
+    "villa||wadi al safa 3||albarari ixora villas": {
+      "count": 12
+    },
+    "villa||wadi al safa 3||chorisia 2 villas": {
+      "count": 2
+    },
+    "villa||wadi al safa 4||california village": {
+      "count": 1
+    },
+    "villa||wadi al safa 5||arabian ranches lll - bliss 2": {
+      "count": 14
+    },
+    "villa||wadi al safa 5||arabian ranches lll - june": {
+      "count": 25
+    },
+    "villa||wadi al safa 5||arabian ranches lll - june 2": {
+      "count": 2
+    },
+    "villa||wadi al safa 5||arabian ranches lll - raya": {
+      "count": 20
+    },
+    "villa||wadi al safa 5||la rosa 4": {
+      "count": 2
+    },
+    "villa||wadi al safa 7||rukan 3": {
+      "count": 65
+    }
+  }
+}

@@ -2,14 +2,23 @@
 // Fetches actual transaction data from Dubai Land Department & Property Finder
 
 const axios = require('axios');
+const SCRAPE_SOLD_ENDPOINT_ENABLED = process.env.SCRAPE_SOLD_ENDPOINT_ENABLED === 'true';
 
 // ===== MAIN EXPORT =====
 exports.handler = async (event) => {
   const headers = {
-    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store'
   };
+
+  if (!SCRAPE_SOLD_ENDPOINT_ENABLED) {
+    return {
+      statusCode: 410,
+      headers,
+      body: JSON.stringify({ error: 'This legacy sold-properties endpoint is disabled.' })
+    };
+  }
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };

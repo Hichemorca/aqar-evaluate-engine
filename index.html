@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AQAR Valuation Intelligence Engine</title>
+  <title>MIAYAAR Valuation Intelligence Engine</title>
+  <link rel="icon" href="/assets/branding/favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="/shared/miayaar-brand.css" />
   <style>
     :root {
       --gold: #d4920e; --green: #00b86e; --red: #ff3c5a;
@@ -16,13 +18,35 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at 80% 0%, #173454 0, #07111f 45%), #07111f;
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
     #app-container { max-width: 720px; margin: 0 auto; padding: 30px 16px 60px; }
-    .brand { text-align: center; margin-bottom: 8px; }
+    /* The brand is a full-bleed masthead, not a content card. */
+    .brand {
+      width: 100vw;
+      margin: -30px 0 18px calc(50% - 50vw);
+      text-align: center;
+      line-height: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .brand .miayaar-brand-lockup {
+      display: flex;
+      width: 100%;
+      max-width: none;
+      justify-content: center;
+    }
+    .brand .miayaar-logo-horizontal {
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      height: auto;
+    }
     .brand .tag {
       font-size: 10px;
       letter-spacing: 5px;
@@ -46,6 +70,9 @@
       margin-left: 8px;
     }
     .section {
+      position: relative;
+      z-index: 1;
+      overflow: visible;
       background: var(--card);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -96,7 +123,10 @@
     }
     .fg input:read-only { opacity: .7; cursor: not-allowed; }
     .fg .note { font-size: 9px; color: #5a7090; margin-top: 2px; }
-    .autocomplete-container { position: relative; }
+    .autocomplete-container { position: relative; z-index: 3000; }
+    .section:has(.autocomplete-container:focus-within) { z-index: 1000; }
+    #gisSection { z-index: 10; }
+    #gisSection:has(.autocomplete-container:focus-within) { z-index: 1100; }
     .autocomplete-list {
       position: absolute;
       top: 100%;
@@ -107,8 +137,19 @@
       background: #0a1628;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 0 0 9px 9px;
-      z-index: 1000;
+      z-index: 3001;
       display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+    .autocomplete-container:focus-within { z-index: 1200; }
+    .autocomplete-list.autocomplete-portal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: auto;
+      width: 280px;
+      max-width: calc(100vw - 20px);
+      z-index: 2147483000;
     }
     .autocomplete-list .item {
       padding: 8px 12px;
@@ -119,6 +160,7 @@
       transition: background .15s;
     }
     .autocomplete-list .item:hover { background: rgba(212,146,14,0.08); }
+    #gisMap { position: relative; z-index: 0; }
     .btn {
       display: block;
       width: 100%;
@@ -344,20 +386,22 @@
     @media (max-width: 500px) {
       .row { flex-direction: column; gap: 0; }
       #app-container { padding: 20px 10px 40px; }
+      .brand { margin-top: -20px; margin-bottom: 16px; }
     }
   </style>
 </head>
 <body>
 <div id="app-container">
   <div class="brand">
-    <div class="tag">AQAR Valuation Intelligence <span class="beta-badge">BETA</span></div>
-    <div class="title">Real Estate Valuation Engine</div>
+    <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine">
+      <img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR — Valuation Intelligence Engine" />
+    </a>
   </div>
-  <div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:12px">
+  <div style="display:none" aria-hidden="true">
     📅 Data refreshed: <span id="lastDataRefresh">Loading...</span> •
     📊 Based on <span id="accuracyRecordCount">—</span> evaluated records • <span id="accuracyRate">—</span>% accuracy
   </div>
-  <div style="background:rgba(212,146,14,0.12);border:1px solid rgba(212,146,14,0.3);border-radius:12px;padding:10px 16px;margin-bottom:16px;text-align:center;backdrop-filter:blur(4px);">
+  <div style="display:none" aria-hidden="true">
     <span style="font-size:12px;font-weight:600;color:var(--gold);">BETA • Dubai data only</span>
   </div>
   <div class="section">
@@ -405,7 +449,7 @@
     <div class="row" id="rowYearCondition">
       <div class="fg">
         <label>📅 Year Built</label>
-        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026">
+        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026" oninput="updateExtraFieldVisibility()">
       </div>
       <div class="fg">
         <label>⭐ Condition</label>
@@ -505,11 +549,30 @@
       </div>
     </div>
   </div>
+  <div class="section" id="propertyExtraSection">
+    <div class="section-title">🏠 Additional Property Details</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional details used for project matching and later evidence analysis.</div>
+    <div class="row" id="rowPropertyAreas" style="display:none">
+      <div class="fg" id="fgBua" style="display:none">
+        <label>📐 BUA (Built-up Area, sqm)</label>
+        <input type="number" id="bua" min="1" step="0.01" placeholder="e.g. 250">
+      </div>
+      <div class="fg" id="fgPlotArea" style="display:none">
+        <label>🧱 Plot Area (sqm)</label>
+        <input type="number" id="plotArea" min="1" step="0.01" placeholder="e.g. 500">
+      </div>
+    </div>
+    <div class="fg" id="fgLastRenovation" style="display:none">
+      <label>🛠️ Last Renovation Year</label>
+      <input type="number" id="lastRenovationYear" min="1900" max="2026" step="1" placeholder="e.g. 2022">
+      <div class="note" style="font-size:10px;color:var(--muted);margin-top:4px">Shown for properties older than five years.</div>
+    </div>
+  </div>
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Facilities</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a DLD district to center the map on its representative location; adjust the marker if needed.</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a district to center the map; adjust the marker if needed.</div>
     <div class="fg">
-      <label>📍 District / Area <span class="note" style="font-weight:400;text-transform:none;color:var(--muted)">(Choose from DLD data)</span></label>
+      <label>📍 District / Area</label>
       <div class="autocomplete-container">
         <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" oninput="filterDistricts(this.value)" onfocus="this.select()">
         <div class="autocomplete-list" id="districtAutocomplete"></div>
@@ -518,29 +581,39 @@
         Selected: <span id="selectedDistrictDisplay">None</span>
       </div>
       <input type="hidden" id="selectedDistrict" value="">
-      <div class="district-count" id="districtCount">Loading districts from DLD data...</div>
+      <div class="district-count" id="districtCount">Loading districts...</div>
     </div>
-    <div class="row" id="gisCoordsRow" style="display:none">
-      <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly style="background:rgba(255,255,255,0.05)"></div>
-      <div class="fg"><label>🌐 Longitude</label><input type="text" id="gisLng" readonly style="background:rgba(255,255,255,0.05)"></div>
+    <div class="row" id="rowProjectBuilding" style="display:none">
+      <div class="fg">
+        <label>🏢 Project / Building Name</label>
+        <div class="autocomplete-container">
+          <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
+          <div class="autocomplete-list" id="projectBuildingAutocomplete"></div>
+          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a project or leave as Unknown.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="gisCoordsRow" style="display:none" aria-hidden="true">
+      <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
+      <div class="fg"><label>🌐 Longitude</label><input type="text" id="gisLng" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
     </div>
     <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
       <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
       <div id="gisFacilitiesList" style="font-size:11px;color:var(--muted);line-height:1.8"></div>
       <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
     </div>
+    <div id="gisProjectLabel" style="display:none;margin-top:10px;padding:9px 11px;border-radius:10px;background:rgba(212,146,14,0.08);border:1px solid rgba(212,146,14,0.22);font-size:10px;color:var(--muted)" aria-live="polite"></div>
     <div id="gisMap" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     <input type="hidden" id="gisRadius" value="1000">
-    <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">
-    </div>
+    <div id="gisRadiusContext" style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">Vital facilities are shown inside the radius around the current map marker.</div>
   </div>
   <div class="section">
-    <div class="section-title">🔍 DLD Market Evidence</div>
+    <div class="section-title">🔍 Market Data</div>
     <div class="row">
-      <div class="fg"><label>📊 DLD Price/sqm</label><input type="number" id="avgPriceSqm" placeholder="Load DLD evidence" readonly></div>
+      <div class="fg"><label>📊 Price / sqm</label><input type="number" id="avgPriceSqm" placeholder="Load market data" readonly></div>
       <div class="fg"><label>📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
     </div>
-    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load DLD Evidence</button>
+    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load market data</button>
     <div id="scrapeStatus" style="font-size:11px;margin-top:8px;text-align:center"></div>
     <div class="scrape-comps" id="scrapedComps"></div>
   </div>
@@ -562,6 +635,10 @@
     <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">🧮 Calculate Valuation</button>
     <button class="btn btn-reset" onclick="resetAll()" style="flex:1">Reset</button>
   </div>
+  <div id="observationConsentRow" style="margin-top:12px;padding:10px 12px;border:1px solid rgba(91,167,255,0.18);border-radius:10px;background:rgba(91,167,255,0.05);font-size:10px;line-height:1.55;color:var(--muted)">
+    <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="observationConsent" style="margin-top:2px"><span>Help improve MIAYAAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
+    <div id="observationStatus" style="margin-top:5px;color:var(--muted)" aria-live="polite"></div>
+  </div>
   <div id="resultSection" class="hidden"></div>
   <div class="footer-links">
     <a href="/admin-calibration" class="admin-link">Admin Login</a>
@@ -571,13 +648,17 @@
   </div>
 </div>
 <script src="/shared/aqar-policy.js"></script>
+<script src="/shared/property-extra-fields.js"></script>
+<script src="/shared/v21-shadow-multiplier-engine.js"></script>
 <script src="/shared/aqar-calibration-defaults.js"></script>
 <script src="/shared/calibration-engine.js"></script>
   <script src="/shared/evidence-state.js"></script>
   <script src="/shared/district-map-linking.js"></script>
+  <script src="/shared/comparable-bracket.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 let AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig();
+let AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
 function getCalibrationForProperty(propertyType) { return AQAR_CALIBRATION_DEFAULTS.getPropertyConfig(AQAR_ACTIVE_CALIBRATION, propertyType); }
 function getCalibrationCoefficient(propertyType, group, key, fallback) {
   const value = getCalibrationForProperty(propertyType)?.coefficients?.[group]?.[key];
@@ -589,9 +670,12 @@ async function loadCalibrationConfig() {
     if (!response.ok) throw new Error(`Calibration HTTP ${response.status}`);
     const payload = await response.json();
     if (payload.config) AQAR_ACTIVE_CALIBRATION = payload.config;
+    AQAR_V21_SHADOW_CONFIG = payload.config?.v21ShadowMultipliers || AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
     window.aqarCalibrationConfig = AQAR_ACTIVE_CALIBRATION;
+    window.aqarV21ShadowConfig = AQAR_V21_SHADOW_CONFIG;
   } catch (error) {
     window.aqarCalibrationConfig = AQAR_ACTIVE_CALIBRATION;
+    window.aqarV21ShadowConfig = AQAR_V21_SHADOW_CONFIG;
     console.warn('Using default AQAR calibration:', error.message);
   }
 }
@@ -641,9 +725,13 @@ const FALLBACK_COORDS = {
 let districtCoordsMap = {};
 let resolvedDistrictCoords = {};
 let districtResolveRequestId = 0;
-let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
+let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null, gisRequestId = 0, gisAbortController = null;
+let marketIntelligenceData = null;
+let dldTransactionsCache = [];
+let projectBuildingSummary = null;
+let selectedProjectBuilding = '';
 let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
-let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
+let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, projectMapLabelMarker = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
 // Centroid matching is deliberately conservative: an unknown point must not inherit a distant DLD district.
 const MAP_DISTRICT_MATCH_MAX_KM = 1.5;
 
@@ -665,6 +753,52 @@ function getCurrentEvidenceState(data = {}) {
     reason: data.reason || '',
     error: Boolean(data.error)
   });
+}
+function normalizeMarketLabel(value) {
+  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
+}
+function findMarketSegment(district, propertyType) {
+  const targetDistrict = normalizeMarketLabel(district);
+  const targetType = String(propertyType || '').toLowerCase();
+  return (marketIntelligenceData?.districtSegments || []).find(segment =>
+    normalizeMarketLabel(segment.district) === targetDistrict && String(segment.propertyType || '').toLowerCase() === targetType
+  ) || null;
+}
+async function loadMarketIntelligence() {
+  try {
+    const response = await fetch(`/data/market-intelligence.json?_market_context=${Date.now()}`, { cache: 'no-store' });
+    if (response.ok) marketIntelligenceData = await response.json();
+  } catch (error) {
+    console.warn('Could not load market intelligence context:', error.message);
+    marketIntelligenceData = null;
+  }
+  return marketIntelligenceData;
+}
+function getComparableBracket(targetValue, prices) {
+  return AQAR_COMPARABLE_BRACKET.getComparableBracket(targetValue, prices);
+}
+function buildMarketContextHTML(result, propData) {
+  const segment = findMarketSegment(propData.district, propData.propType);
+  const avgPpsm = Number(scrapedDistrictData?.avgPricePerSqm || propData.avgPriceSqm || 0);
+  const estimatedPpsm = propData.area > 0 ? Number(result.finalValue) / Number(propData.area) : 0;
+  const relativeToMedian = avgPpsm > 0 && estimatedPpsm > 0 ? ((estimatedPpsm / avgPpsm) - 1) * 100 : null;
+  const localGrowth = segment?.growth?.observedPeriodGrowthPct;
+  const localR2 = Number(segment?.growth?.r2);
+  const direction = Number.isFinite(Number(localGrowth)) && Number.isFinite(localR2) && localR2 >= 0.3
+    ? Number(localGrowth) > 3 ? 'leans upward' : Number(localGrowth) < -3 ? 'leans softer' : 'looks broadly stable'
+    : 'has a mixed or uncertain direction';
+  const comparisonText = Number.isFinite(relativeToMedian)
+    ? `The estimated unit value is <b>${Math.abs(relativeToMedian).toFixed(1)}% ${relativeToMedian >= 0 ? 'above' : 'below'}</b> the comparable median for this search.`
+    : '';
+  const periodText = segment?.growth?.periodLabel || (scrapedDistrictData?.timeWindow ? `the last ${scrapedDistrictData.timeWindow} days` : 'the available evidence window');
+  const segmentText = segment
+    ? `In <b>${escapeMapHtml(propData.district || 'the selected area')}</b>, comparable ${escapeMapHtml(propData.propType)} prices ${Number(localGrowth) >= 0 ? 'rose' : 'fell'} <b>${Math.abs(Number(localGrowth || 0)).toFixed(1)}%</b> over ${escapeMapHtml(periodText)}. The near-term direction ${direction}; this is a data-based signal, not a guaranteed forecast.`
+    : 'A reliable district-and-property-type Market Intelligence segment was not available for this selection, so no unsupported local forecast is shown.';
+  const qualityText = segment
+    ? `The local signal uses ${Number(segment.transactionCount || scrapedDistrictData?.count || 0).toLocaleString()} transactions, ${segment.monthsOfData || 'several'} months of data, and a ${segment.confidenceScore}/100 context score.`
+    : '';
+  if (!comparisonText && !segmentText) return '';
+  return `<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08)"><b>📈 Market indicators</b><br>${comparisonText}${comparisonText && segmentText ? '<br>' : ''}${segmentText}${qualityText ? `<small>${qualityText}</small>` : ''}</div>`;
 }
 
 // ===== LOAD DISTRICT COORDINATES =====
@@ -697,36 +831,209 @@ function getDistrictCoords(district) {
   return null;
 }
 
-// ===== LOAD DISTRICTS FROM DLD DATA =====
+// ===== LOAD LIGHTWEIGHT CLIENT SUMMARIES =====
 async function loadDistrictsFromDLD() {
   const countEl = document.getElementById('districtCount');
-  countEl.textContent = 'Loading districts from DLD data...';
+  countEl.textContent = 'Loading districts...';
   try {
-    const response = await fetch('/data/dld-transactions.json');
-    if (!response.ok) throw new Error('Failed to fetch DLD data');
-    const data = await response.json();
-    const districts = new Set();
-    data.forEach(t => {
-      if (t.district && t.district !== 'Unknown' && t.district !== '') {
-        districts.add(t.district);
+    const [districtResponse, projectResponse] = await Promise.all([
+      fetch('/data/district-list.json'),
+      fetch('/data/project-building-summary.json')
+    ]);
+    if (!districtResponse.ok) throw new Error(`District summary HTTP ${districtResponse.status}`);
+    const districtData = await districtResponse.json();
+    const districts = Array.isArray(districtData?.districts) ? districtData.districts.filter(Boolean) : [];
+    if (districts.length > 10) {
+      dubaiDistrictsList = [...new Set(districts)].sort();
+      projectBuildingSummary = null;
+      if (projectResponse.ok) {
+        try {
+          const projectData = await projectResponse.json();
+          if (Array.isArray(projectData?.entries)) projectBuildingSummary = projectData;
+        } catch (projectError) {
+          console.warn('⚠️ Could not parse project summary:', projectError.message);
+        }
       }
-    });
-    if (districts.size > 10) {
-      dubaiDistrictsList = Array.from(districts).sort();
-      countEl.textContent = `✅ Loaded ${dubaiDistrictsList.length} districts from DLD data`;
-      console.log(`✅ Loaded ${dubaiDistrictsList.length} districts from DLD data`);
+      countEl.textContent = `✅ ${dubaiDistrictsList.length} districts available`;
+      console.log(`✅ Loaded ${dubaiDistrictsList.length} districts from summary`);
       return;
     }
+    throw new Error('District summary is empty');
   } catch (e) {
-    console.warn('⚠️ Could not load districts from DLD:', e.message);
+    projectBuildingSummary = null;
+    console.warn('⚠️ Could not load client summaries:', e.message);
   }
   dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
   countEl.textContent = `📋 Using ${dubaiDistrictsList.length} districts (fallback)`;
 }
 
+function projectOptionsForCurrentContext() {
+  const type = document.getElementById('propType').value;
+  const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
+  if (!district) return [];
+  const options = new Set();
+  (projectBuildingSummary?.entries || []).forEach(entry => {
+    if (entry.propertyType !== type) return;
+    const rowDistrict = String(entry.district || '').toLowerCase();
+    if (district && !(rowDistrict.includes(district) || district.includes(rowDistrict))) return;
+    (entry.projects || []).forEach(project => {
+      if (project?.name && String(project.name).trim()) options.add(String(project.name).trim());
+    });
+  });
+  return [...options].sort((a, b) => a.localeCompare(b));
+}
+function refreshProjectSuggestions() {
+  const input = document.getElementById('projectBuildingInput');
+  const row = document.getElementById('rowProjectBuilding');
+  if (!input || !row) return;
+  const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(document.getElementById('propType').value, document.getElementById('yearBuilt').value);
+  row.style.display = visibility.projectBuilding ? 'flex' : 'none';
+  if (!visibility.projectBuilding) { selectedProjectBuilding = ''; input.value = ''; hideAutocompleteList(document.getElementById('projectBuildingAutocomplete')); }
+  else if (selectedProjectBuilding && !projectOptionsForCurrentContext().includes(selectedProjectBuilding)) { selectedProjectBuilding = ''; input.value = ''; }
+  updateProjectBuildingNotice();
+  updateProjectMapLabel();
+}
+function getProjectEvidence(name) {
+  const normalized = String(name || '').trim().toLowerCase();
+  const type = document.getElementById('propType').value;
+  const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
+  if (!normalized || !district) return { count: 0, verified: false };
+  const entry = (projectBuildingSummary?.entries || []).find(candidate => {
+    if (candidate.propertyType !== type) return false;
+    const candidateDistrict = String(candidate.district || '').toLowerCase();
+    return candidateDistrict === district || candidateDistrict.includes(district) || district.includes(candidateDistrict);
+  });
+  const project = entry?.projects?.find(candidate => String(candidate?.name || '').trim().toLowerCase() === normalized);
+  const count = Number(project?.transactionCount || 0);
+  return { count: Number.isFinite(count) ? count : 0, verified: count > 0 };
+}
+function updateProjectBuildingNotice() {
+  const input = document.getElementById('projectBuildingInput');
+  const notice = document.getElementById('projectBuildingNotice');
+  if (!input || !notice) return;
+  const value = input.value.trim();
+  if (!value) { notice.textContent = 'Choose a project or leave as Unknown.'; notice.style.color = 'var(--muted)'; return; }
+  if (!(document.getElementById('selectedDistrict').value || '').trim()) { notice.textContent = 'Select a district first to see project suggestions.'; notice.style.color = 'var(--gold)'; return; }
+  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { notice.textContent = 'No verified project match. The estimate remains based on the district.'; notice.style.color = 'var(--gold)'; return; }
+  const evidence = getProjectEvidence(value);
+  if (evidence.count < 5) { notice.textContent = `Limited project information (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). The estimate remains based on the district.`; notice.style.color = 'var(--gold)'; }
+  else { notice.textContent = `Project information: ${evidence.count} transactions. The estimate remains based on the district.`; notice.style.color = 'var(--green)'; }
+}
+function onProjectBuildingInput(value) {
+  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== String(value || '').trim().toLowerCase()) selectedProjectBuilding = '';
+  filterProjectBuildings(value);
+  updateProjectBuildingNotice();
+  updateProjectMapLabel();
+}
+function filterProjectBuildings(q) {
+  const list = document.getElementById('projectBuildingAutocomplete');
+  const input = document.getElementById('projectBuildingInput');
+  if (!list || !input) return;
+  promoteAutocompleteList(list);
+  closeOtherAutocompleteLists(list);
+  const options = projectOptionsForCurrentContext().filter(name => !q || name.toLowerCase().includes(q.toLowerCase().trim()));
+  list.replaceChildren();
+  if (!options.length) {
+    list.style.display = q ? 'block' : 'none';
+    if (q) positionAutocompleteList(list, input);
+    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); }
+    return;
+  }
+  options.slice(0, 15).forEach(name => { const item = document.createElement('div'); item.className = 'item'; item.textContent = name; item.onclick = () => selectProjectBuilding(name); list.appendChild(item); });
+  list.style.display = 'block';
+  positionAutocompleteList(list, input);
+}
+function selectProjectBuilding(name) {
+  selectedProjectBuilding = name;
+  document.getElementById('projectBuildingInput').value = name;
+  hideAutocompleteList(document.getElementById('projectBuildingAutocomplete'));
+  updateProjectBuildingNotice();
+  updateProjectMapLabel();
+  debouncedFetchGISData();
+}
+function escapeMapHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character])); }
+function updateProjectMapLabel() {
+  const label = document.getElementById('gisProjectLabel');
+  const input = document.getElementById('projectBuildingInput');
+  const value = input?.value.trim() || '';
+  const district = document.getElementById('selectedDistrict')?.value || document.getElementById('districtInput')?.value || '';
+  if (!label || !gisMapInstance || !value) {
+    if (projectMapLabelMarker && gisMapInstance) gisMapInstance.removeLayer(projectMapLabelMarker);
+    projectMapLabelMarker = null;
+    if (label) { label.style.display = 'none'; label.textContent = ''; }
+    return;
+  }
+  const verified = Boolean(selectedProjectBuilding && selectedProjectBuilding.toLowerCase() === value.toLowerCase() && getProjectEvidence(value).verified);
+  const sourceText = verified ? 'Project name; map point is the current selected marker.' : 'User-entered name; not verified and not used to invent a project location.';
+  const a = parseFloat(document.getElementById('gisLat')?.value), b = parseFloat(document.getElementById('gisLng')?.value);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return;
+  const html = `<div style="background:#d4920e;color:#06111d;border:2px solid #fff;border-radius:7px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap;box-shadow:0 2px 7px rgba(0,0,0,.35)">${escapeMapHtml(value)}</div>`;
+  const popup = `<strong>Project / Building</strong><br>${escapeMapHtml(value)}<br><span style="font-size:10px;color:#667">${escapeMapHtml(sourceText)}${district ? `<br>District: ${escapeMapHtml(district)}` : ''}</span>`;
+  const icon = L.divIcon({ className: 'project-map-label-icon', html, iconSize: [1, 1], iconAnchor: [-8, 18], popupAnchor: [8, -18] });
+  if (!projectMapLabelMarker) projectMapLabelMarker = L.marker([a, b], { icon, interactive: true, zIndexOffset: 500 }).addTo(gisMapInstance);
+  else projectMapLabelMarker.setLatLng([a, b]).setIcon(icon);
+  projectMapLabelMarker.bindPopup(popup);
+  label.innerHTML = `🏢 <b>${escapeMapHtml(value)}</b> <span style="color:var(--muted)">— ${escapeMapHtml(sourceText)}</span>`;
+  label.style.display = 'block';
+}
+function updateExtraFieldVisibility() {
+  const type = document.getElementById('propType').value;
+  const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(type, document.getElementById('yearBuilt').value);
+  const hasVisibleField = visibility.bua || visibility.plotArea || visibility.renovationYear;
+  document.getElementById('propertyExtraSection').style.display = hasVisibleField ? 'block' : 'none';
+  document.getElementById('rowPropertyAreas').style.display = (visibility.bua || visibility.plotArea) ? 'flex' : 'none';
+  document.getElementById('fgBua').style.display = visibility.bua ? '' : 'none';
+  document.getElementById('fgPlotArea').style.display = visibility.plotArea ? '' : 'none';
+  document.getElementById('fgLastRenovation').style.display = visibility.renovationYear ? '' : 'none';
+  if (!visibility.bua) document.getElementById('bua').value = '';
+  if (!visibility.plotArea) document.getElementById('plotArea').value = '';
+  if (!visibility.renovationYear) document.getElementById('lastRenovationYear').value = '';
+  refreshProjectSuggestions();
+}
+function promoteAutocompleteList(list) {
+  if (!list || list.dataset.portalized === 'true') return;
+  document.body.appendChild(list);
+  list.classList.add('autocomplete-portal');
+  list.dataset.portalized = 'true';
+}
+function positionAutocompleteList(list, input) {
+  if (!list || !input || list.dataset.portalized !== 'true') return;
+  const rect = input.getBoundingClientRect();
+  const listHeight = Math.min(240, Math.max(100, list.scrollHeight || 200));
+  let top = rect.bottom;
+  if (top + listHeight > window.innerHeight - 8 && rect.top > listHeight + 8) top = rect.top - listHeight;
+  list.style.top = `${Math.max(8, Math.round(top))}px`;
+  list.style.left = `${Math.max(8, Math.round(rect.left))}px`;
+  list.style.width = `${Math.round(rect.width)}px`;
+  list.style.maxHeight = `${Math.max(100, Math.min(240, window.innerHeight - Math.max(8, Math.round(top)) - 8))}px`;
+}
+function hideAutocompleteList(list) {
+  if (list) list.style.display = 'none';
+}
+function closeOtherAutocompleteLists(keep) {
+  ['districtAutocomplete', 'projectBuildingAutocomplete'].forEach(id => {
+    const list = document.getElementById(id);
+    if (list && list !== keep) hideAutocompleteList(list);
+  });
+}
+function repositionVisibleAutocompleteLists() {
+  const pairs = [
+    ['districtAutocomplete', 'districtInput'],
+    ['projectBuildingAutocomplete', 'projectBuildingInput']
+  ];
+  pairs.forEach(([listId, inputId]) => {
+    const list = document.getElementById(listId);
+    if (list?.style.display === 'block') positionAutocompleteList(list, document.getElementById(inputId));
+  });
+}
+window.addEventListener('scroll', repositionVisibleAutocompleteLists, true);
+window.addEventListener('resize', repositionVisibleAutocompleteLists);
 function filterDistricts(q) {
   const c = document.getElementById('districtAutocomplete');
-  if (!q || q.length < 1) { c.style.display = 'none'; return; }
+  const input = document.getElementById('districtInput');
+  if (!q || q.length < 1) { hideAutocompleteList(c); return; }
+  promoteAutocompleteList(c);
+  closeOtherAutocompleteLists(c);
   const r = dubaiDistrictsList.filter(d => d.toLowerCase().includes(q.toLowerCase().trim()));
   c.replaceChildren();
   if (r.length) {
@@ -748,6 +1055,7 @@ function filterDistricts(q) {
     c.appendChild(empty);
   }
   c.style.display = 'block';
+  positionAutocompleteList(c, input);
 }
 async function resolveDistrictCoords(district) {
   const cached = resolvedDistrictCoords[AQAR_DISTRICT_MAP_LINKING.normalizeName(district)];
@@ -775,7 +1083,8 @@ async function selectDistrict(d) {
   document.getElementById('districtInput').value = d;
   document.getElementById('selectedDistrict').value = d;
   document.getElementById('selectedDistrictDisplay').textContent = d;
-  document.getElementById('districtAutocomplete').style.display = 'none';
+  hideAutocompleteList(document.getElementById('districtAutocomplete'));
+  refreshProjectSuggestions();
   const requestId = ++districtResolveRequestId;
   const c = await resolveDistrictCoords(d);
   if (requestId !== districtResolveRequestId) return;
@@ -803,11 +1112,24 @@ function updateDistrictFromMapPoint(lat, lng) {
     input.value = match.name;
     hidden.value = match.name;
     display.textContent = match.name;
+    refreshProjectSuggestions();
     return match;
+  }
+  const previousDistrict = hidden.value || input.value.trim();
+  if (previousDistrict) {
+    input.value = previousDistrict;
+    hidden.value = previousDistrict;
+    display.textContent = `${previousDistrict} (map point outside matched DLD radius)`;
+    refreshProjectSuggestions();
+    return null;
   }
   input.value = '';
   hidden.value = '';
-  display.textContent = 'No matching DLD district';
+  display.textContent = 'No matching area';
+  selectedProjectBuilding = '';
+  const projectInput = document.getElementById('projectBuildingInput');
+  if (projectInput) projectInput.value = '';
+  refreshProjectSuggestions();
   return null;
 }
 function handleViewTypeChange(cb) {
@@ -823,9 +1145,11 @@ function updateMapMarker(lat, lng) {
   if (isNaN(a) || isNaN(b)) return;
   if (gisMarker) gisMarker.setLatLng([a, b]);
   if (gisCircleLayer) gisCircleLayer.setLatLng([a, b]);
+  if (projectMapLabelMarker) projectMapLabelMarker.setLatLng([a, b]);
   document.getElementById('gisLat').value = a.toFixed(6);
   document.getElementById('gisLng').value = b.toFixed(6);
-  document.getElementById('gisCoordsRow').style.display = 'flex';
+  document.getElementById('gisCoordsRow').style.display = 'none';
+  updateProjectMapLabel();
 }
 function addPOIsToMap(pois) {
   poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
@@ -834,12 +1158,20 @@ function addPOIsToMap(pois) {
   const colors = { school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71', metro: '#3498db', park: '#27ae60', gym: '#9b59b6', cafe: '#f1c40f', restaurant: '#e67e22' };
   pois.slice(0,30).forEach(p => {
     const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div style="background:${colors[p.type]||'#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
-    const marker = L.marker([p.lat, p.lng], { icon }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
+    const marker = L.marker([p.lat, p.lng], { icon, zIndexOffset: 700 }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
     poiMarkers.push(marker);
   });
 }
 function getGISRadiusMeters() {
   return Number(AQAR_ACTIVE_CALIBRATION.gis?.distanceRadiusMeters || 1000);
+}
+function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null) {
+  const context = document.getElementById('gisRadiusContext');
+  if (!context) return;
+  const roundedRadius = Math.round(Number(radius) || 0);
+  if (count === null) context.textContent = `Searching for vital facilities within ${roundedRadius}m of the current map marker…`;
+  else if (count > 0) context.textContent = `Showing ${count} vital facilities within ${roundedRadius}m of the current map marker.`;
+  else context.textContent = `No mapped vital facilities found within ${roundedRadius}m of the current map marker.`;
 }
 function initGISMap() {
   try {
@@ -854,24 +1186,82 @@ function initGISMap() {
     gisCircleLayer = L.circle([dLat, dLng], { radius: gisRadiusMeters, color: '#d4920e', fillColor: '#d4920e', fillOpacity: 0.1, weight: 2 }).addTo(gisMapInstance);
     document.getElementById('gisLat').value = dLat.toFixed(6);
     document.getElementById('gisLng').value = dLng.toFixed(6);
-    document.getElementById('gisCoordsRow').style.display = 'flex';
+    document.getElementById('gisCoordsRow').style.display = 'none';
     gisMapInstance.on('click', e => {
       updateMapMarker(e.latlng.lat, e.latlng.lng);
       updateDistrictFromMapPoint(e.latlng.lat, e.latlng.lng);
+      prepareGISRefresh();
       debouncedFetchGISData();
     });
     gisMarker.on('dragend', e => {
       const p = e.target.getLatLng();
       updateMapMarker(p.lat, p.lng);
       updateDistrictFromMapPoint(p.lat, p.lng);
+      prepareGISRefresh();
       debouncedFetchGISData();
     });
     mapInitialized = true;
+    updateProjectMapLabel();
     setTimeout(() => debouncedFetchGISData(), 500);
   } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>'; }
 }
+function prepareGISRefresh() {
+  gisRequestId++;
+  if (gisAbortController) gisAbortController.abort();
+  gisAbortController = null;
+  gisLoading = false;
+  gisData = null;
+  window.gisImpactMultiplier = 1;
+  window.gisImpactPercent = 0;
+  poiMarkers.forEach(marker => gisMapInstance?.removeLayer(marker));
+  poiMarkers = [];
+  updateGISRadiusContext(getGISRadiusMeters(), null);
+  const result = document.getElementById('gisResult');
+  if (result) result.style.display = 'none';
+}
 function debouncedFetchGISData() { if (gisFetchTimeout) clearTimeout(gisFetchTimeout); gisFetchTimeout = setTimeout(() => fetchGISData(), 800); }
-async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
+async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null) {
+  const buildResultFromServer = payload => {
+    const keys = ['school', 'hospital', 'supermarket', 'metro', 'park', 'gym', 'cafe', 'restaurant'];
+    const facilities = Object.fromEntries(keys.map(key => [key, { count: 0, distance: null, score: 0 }]));
+    const pois = [];
+    for (const poi of Array.isArray(payload?.pois) ? payload.pois : []) {
+      if (!facilities[poi.type] || !Number.isFinite(Number(poi.lat)) || !Number.isFinite(Number(poi.lng))) continue;
+      const distanceKm = Number(poi.distance);
+      const distance = Number.isFinite(distanceKm) ? distanceKm : haversineDistance(lat, lng, Number(poi.lat), Number(poi.lng));
+      if (distance > radius / 1000) continue;
+      pois.push({ type: poi.type, name: String(poi.name || `${poi.type} (${pois.length + 1})`), lat: Number(poi.lat), lng: Number(poi.lng), distance });
+      facilities[poi.type].count += 1;
+      const distanceMeters = Math.round(distance * 1000);
+      if (facilities[poi.type].distance === null || distanceMeters < facilities[poi.type].distance) facilities[poi.type].distance = distanceMeters;
+    }
+    const weights = AQAR_ACTIVE_CALIBRATION.gis?.facilityWeights || { school: 15, hospital: 20, supermarket: 12, metro: 25, park: 10, gym: 8, cafe: 5, restaurant: 5 };
+    let totalScore = 0;
+    for (const [type, details] of Object.entries(facilities)) {
+      if (details.count > 0) {
+        const score = Math.round((weights[type] || 5) * Math.max(0, 1 - (details.distance / 1000)) * 10) / 10;
+        details.score = score;
+        totalScore += score;
+      }
+    }
+    return { pois, facilities, totalScore, count: pois.length };
+  };
+  const serverTimeoutController = new AbortController();
+  const serverTimeout = setTimeout(() => serverTimeoutController.abort(), 10000);
+  try {
+    const serverSignal = requestSignal && typeof AbortSignal !== 'undefined' && AbortSignal.any
+      ? AbortSignal.any([requestSignal, serverTimeoutController.signal])
+      : serverTimeoutController.signal;
+    const serverResponse = await fetch(`/.netlify/functions/fetch-osm?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&radius=${encodeURIComponent(radius)}`, { cache: 'no-store', signal: serverSignal });
+    if (serverResponse.ok) {
+      const serverPayload = await serverResponse.json();
+      if (Array.isArray(serverPayload.pois)) return buildResultFromServer(serverPayload);
+    }
+  } catch (error) {
+    if (!requestSignal?.aborted) console.warn('⚠️ Same-origin OSM function failed; trying public Overpass endpoints:', error.message);
+  } finally {
+    clearTimeout(serverTimeout);
+  }
   const qs = [
     `node["amenity"="school"](around:${radius},${lat},${lng});`,
     `way["amenity"="school"](around:${radius},${lat},${lng});`,
@@ -891,10 +1281,31 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
     `way["amenity"="restaurant"](around:${radius},${lat},${lng});`
   ];
   const query = `[out:json][timeout:25];(${qs.join('')});out center;`;
+  const endpoints = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.private.coffee/api/interpreter'
+  ];
+  let data = null;
+  for (const endpoint of endpoints) {
+          const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 18000);
+      const signal = requestSignal && typeof AbortSignal !== 'undefined' && AbortSignal.any ? AbortSignal.any([requestSignal, controller.signal]) : controller.signal;
+      try {
+        const resp = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}`, signal });
+
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      data = await resp.json();
+      if (data && Array.isArray(data.elements)) break;
+      throw new Error('Invalid Overpass response');
+    } catch (error) {
+      console.warn(`⚠️ Overpass endpoint failed (${endpoint}):`, error.name === 'AbortError' ? 'timeout' : error.message);
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  if (!data || !Array.isArray(data.elements)) return null;
   try {
-    const resp = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(query)}` });
-    if (!resp.ok) { if (resp.status === 429) { console.warn('⚠️ Overpass API rate limit'); return null; } throw new Error(`HTTP ${resp.status}`); }
-    const data = await resp.json();
     const pois = [], facilities = { school: { count: 0, distance: null, score: 0 }, hospital: { count: 0, distance: null, score: 0 }, supermarket: { count: 0, distance: null, score: 0 }, metro: { count: 0, distance: null, score: 0 }, park: { count: 0, distance: null, score: 0 }, gym: { count: 0, distance: null, score: 0 }, cafe: { count: 0, distance: null, score: 0 }, restaurant: { count: 0, distance: null, score: 0 } };
     const weights = AQAR_ACTIVE_CALIBRATION.gis?.facilityWeights || { school: 15, hospital: 20, supermarket: 12, metro: 25, park: 10, gym: 8, cafe: 5, restaurant: 5 };
     const typeMap = { 'school':'school','hospital':'hospital','supermarket':'supermarket','station':'metro','park':'park','fitness_centre':'gym','cafe':'cafe','restaurant':'restaurant' };
@@ -928,17 +1339,23 @@ function haversineDistance(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 async function fetchGISData() {
-  if (gisLoading) return;
   const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
   if (!lat || !lng) return;
+  const requestId = ++gisRequestId;
+  if (gisAbortController) gisAbortController.abort();
+  gisAbortController = new AbortController();
+  const requestSignal = gisAbortController.signal;
   gisLoading = true;
   try {
     const a = parseFloat(lat), b = parseFloat(lng);
-    if (isNaN(a) || isNaN(b)) { gisLoading = false; return; }
+    if (isNaN(a) || isNaN(b)) return;
     const radius = getGISRadiusMeters();
-    const result = await fetchPOIsFromOSM(a, b, radius);
+    updateGISRadiusContext(radius, null);
+    const result = await fetchPOIsFromOSM(a, b, radius, requestSignal);
+    if (requestId !== gisRequestId || requestSignal.aborted) return;
     if (result && result.count > 0) {
       gisData = { facilities: result.facilities, count: result.count, totalScore: result.totalScore, lat: a, lng: b, pois: result.pois };
+      updateGISRadiusContext(radius, result.count);
       displayGISResult(gisData);
       addPOIsToMap(result.pois);
     } else {
@@ -948,8 +1365,11 @@ async function fetchGISData() {
       document.getElementById('gisResult').style.display = 'none';
       poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
       poiMarkers = [];
+      updateGISRadiusContext(radius, result ? 0 : null);
+      if (!result) document.getElementById('gisRadiusContext').textContent = `Facility data is temporarily unavailable. Please try again; the map does not invent facilities.`;
     }
   } catch(e) {
+    if (requestId !== gisRequestId || requestSignal.aborted) return;
     console.error('GIS Error:', e);
     gisData = null;
     window.gisImpactMultiplier = 1;
@@ -957,7 +1377,10 @@ async function fetchGISData() {
     document.getElementById('gisResult').style.display = 'none';
     poiMarkers.forEach(m => gisMapInstance.removeLayer(m));
     poiMarkers = [];
-  } finally { gisLoading = false; }
+    updateGISRadiusContext(getGISRadiusMeters(), 0);
+  } finally {
+    if (requestId === gisRequestId) { gisLoading = false; gisAbortController = null; }
+  }
 }
 function displayGISResult(gisData) {
   const container = document.getElementById('gisResult'), list = document.getElementById('gisFacilitiesList'), scoreDisplay = document.getElementById('gisScoreDisplay');
@@ -991,7 +1414,7 @@ async function scrapeRealData() {
   const area = parseFloat(document.getElementById('area').value)||0, btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
   if (!city || !district) { status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; showToast('Please select a city and enter a district name'); return; }
   if (area < 10) { status.innerHTML = '<span class="status-badge error">⚠️ Please enter a valid area</span>'; showToast('Please enter a valid area'); return; }
-  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data...</span>';
+  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span style="color:var(--muted)">🔍 Checking market data...</span>';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
   const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
@@ -1005,18 +1428,17 @@ async function scrapeRealData() {
       document.getElementById('recentSalesCount').value = data.count;
       document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
       const evidenceState = getCurrentEvidenceState(data);
-      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', evidenceState };
-      const levelNames = { 'project_size':'Project + type + size', 'project':'Project + type', 'district_size':'District + type + size', 'district':'District + type', 'district_type':'District + type', 'district_only':'District only' };
-      const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
-      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span><span style="font-size:9px;color:var(--muted);margin-left:8px;">Level: ${levelNames[data.level]||data.level} • ${data.timeWindow} days • ${data.confidence||'medium'} confidence</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
-      showToast(`${data.count} verified DLD comparable sales found in ${district}`);
+      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, minComparablePrice: data.minComparablePrice, maxComparablePrice: data.maxComparablePrice, comparablePrices: data.comparablePrices || [], comparablePriceBasis: data.comparablePriceBasis || 'actual_sale_price', count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', monthlyGrowthRate: data.monthlyGrowthRate, evidenceState };
+            const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
+      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
+      showToast(`${data.count} comparable sales found in ${district}`);
     } else {
       const evidenceState = getCurrentEvidenceState(data);
-      status.innerHTML = `<span class="status-badge warning">Insufficient DLD evidence — no reliable Sales Comparison value</span><br><span style="font-size:10px;color:var(--muted);">No fallback price will be invented. You may provide inputs for other applicable methods.</span>`;
+      status.innerHTML = `<span class="status-badge warning">Insufficient market evidence — no reliable estimate from sales</span><br><span style="font-size:10px;color:var(--muted);">Provide more market information to improve the estimate.</span>`;
       document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: data.reason || 'no-sufficient-data' };
     }
-  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">DLD evidence unavailable</span><br><span style="font-size:10px;color:var(--muted);">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
-  btn.disabled = false; btn.innerHTML = '🔄 Re-Scrape';
+  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">Market data unavailable</span><br><span style="font-size:10px;color:var(--muted);">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
+  btn.disabled = false; btn.innerHTML = '🔄 Refresh market data';
 }
 function getFallbackPrice(city, district) {
   const cd = (district||'').trim().toLowerCase();
@@ -1046,9 +1468,19 @@ function collectPropertyData() {
   }
   const readNumber = field => isRelevant(field) ? (parseFloat(document.getElementById(field).value) || 0) : 0;
   const readValue = field => isRelevant(field) ? document.getElementById(field).value : '';
+  const extraReadNumber = field => {
+    const value = document.getElementById(field).value;
+    return value === '' ? '' : parseFloat(value);
+  };
   return {
     city: document.getElementById('city').value,
     district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
+    projectBuilding: document.getElementById('projectBuildingInput').value.trim(),
+    projectBuildingSource: selectedProjectBuilding ? 'dld-suggestion' : (document.getElementById('projectBuildingInput').value.trim() ? 'user-entered' : ''),
+    projectEvidenceCount: selectedProjectBuilding ? getProjectEvidence(selectedProjectBuilding).count : 0,
+    bua: extraReadNumber('bua'),
+    plotArea: extraReadNumber('plotArea'),
+    lastRenovationYear: extraReadNumber('lastRenovationYear'),
     propType,
     area: parseFloat(document.getElementById('area').value) || 0,
     bedrooms: isRelevant('bedrooms') ? (parseInt(document.getElementById('bedrooms').value) || 0) : 0,
@@ -1069,7 +1501,9 @@ function collectPropertyData() {
     buildingCondition: readValue('buildingCondition'),
     furnishedStatus: readValue('furnishedStatus'),
     gisData: gisData,
-    gisRadius: 1000
+    gisRadius: 1000,
+    currentYear: 2026,
+    extraFieldsVersion: 'v2.1-ui-only'
   };
 }
 function salesComparisonApproach(data) {
@@ -1169,6 +1603,8 @@ function calculateWeightedValue(valuations, propData) {
     AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'
   );
   const final = combined.value;
+  const shadowConfig = window.aqarV21ShadowConfig || AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
+  const shadowTrace = AQAR_V21_SHADOW_MULTIPLIERS.compute(propData, shadowConfig);
   
   let confidencePct = 60;
   if (valuations.some(v => v.confidence === 'high')) confidencePct += 20;
@@ -1176,7 +1612,7 @@ function calculateWeightedValue(valuations, propData) {
   if (valuations.length >= 4) confidencePct += 5;
   confidencePct = Math.min(95, Math.max(20, confidencePct));
   const vals = valuations.map(v => v.value);
-  return { finalValue: final, confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low', confidencePct: confidencePct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) } };
+  return { finalValue: final, confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low', confidencePct: confidencePct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) }, shadowEnabled: Boolean(shadowConfig.enabled), shadowValue: Math.round(final * shadowTrace.multiplier), shadowMultiplier: shadowTrace.multiplier, shadowTrace };
 }
 function buildDecisionEngineLink(result, propData) {
   const p = new URLSearchParams();
@@ -1194,7 +1630,7 @@ function buildDecisionEngineLink(result, propData) {
 function displayEvidenceOnlyState(propData) {
   const section = document.getElementById('resultSection');
   const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT);
-  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide a valid DLD comparable sample or complete another applicable method, such as rental information where supported. The system will not display an invented market value.</small></div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 Review Inputs</button></div>`;
+  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide comparable sales or rental information to improve this estimate. The system will not display an invented market value.</small></div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 Review Inputs</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1204,6 +1640,7 @@ function displayResult(result, valuations, propData) {
   const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
   const dldCount = Number(scrapedDistrictData?.count || 0);
   const evidenceConfidence = dldCount > 0 ? confLevel : '⚪ Not available';
+  const shadowHTML = result.shadowEnabled ? `<div class="evidence-state warning"><strong>Experimental shadow multiplier</strong>Shadow value: <b>AED ${result.shadowValue.toLocaleString()}</b> (${result.shadowMultiplier.toFixed(4)}× baseline). This is analysis-only and does not replace the official valuation.<small>${(result.shadowTrace.applied || []).map(item => `${item.field}: ${Number(item.multiplier).toFixed(4)}×`).join(' • ') || 'No applicable v2.1 multiplier was applied.'}</small></div>` : '';
   const methodLabels = {
     'sales-comparison': 'Sales Comparison Approach',
     income: 'Income Capitalization Approach',
@@ -1222,8 +1659,13 @@ function displayResult(result, valuations, propData) {
   const evidenceState = propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
   const evidencePresentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
   const evidenceStateHTML = `<div class="evidence-state ${evidencePresentation.tone}"><strong>${evidencePresentation.title}</strong>${evidencePresentation.message}${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<small>Review the comparable sample before relying on this result.</small>' : ''}</div>`;
-  const evidenceHTML = `<div style="margin-top:10px"><b>Evidence classification</b><br><span style="color:var(--muted)">SOURCE FACT:</span> ${scrapedDistrictData?.count || 0} DLD comparable sales${scrapedDistrictData?.avgPricePerSqm ? `; ${Number(scrapedDistrictData.avgPricePerSqm).toLocaleString()} AED/sqm` : ''}.<br><span style="color:var(--muted)">DERIVED VALUE:</span> weighted reconciliation of the methods shown below.<br><span style="color:var(--muted)">ASSUMPTION:</span> optional rent/expense and consultancy defaults remain those of the current AQAR behavior.<br><span style="color:var(--muted)">MODEL OUTPUT:</span> final value and range shown above.</div>`;
+      const evidenceHTML = '';
+
   const adjustmentFacts = [
+    propData.projectBuilding ? `Project / Building: ${propData.projectBuilding} (${propData.projectBuildingSource === 'dld-suggestion' ? 'Verified project suggestion' : 'user-entered'})` : '',
+    propData.bua ? `BUA: ${propData.bua} sqm` : '',
+    propData.plotArea ? `Plot area: ${propData.plotArea} sqm` : '',
+    propData.lastRenovationYear ? `Last renovation: ${propData.lastRenovationYear}` : '',
     propData.condition ? `Condition: ${propData.condition}` : '',
     propData.finishQuality ? `Finish: ${propData.finishQuality}` : '',
     propData.viewTypes?.length ? `Views: ${propData.viewTypes.join(', ')}` : '',
@@ -1231,29 +1673,89 @@ function displayResult(result, valuations, propData) {
     propData.streetPosition ? `Street position: ${propData.streetPosition}` : '',
     propData.buildingCondition ? `Building condition: ${propData.buildingCondition}` : '',
     propData.furnishedStatus ? `Furnished status: ${propData.furnishedStatus}` : '',
-    window.gisImpactPercent ? `GIS impact: +${window.gisImpactPercent}%` : ''
   ].filter(Boolean);
-  const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Current adjustments / inputs</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>${evidenceStateHTML}• DLD comparable sales: <b>${dldCount > 0 ? `${dldCount} in ${propData.district || 'the selected area'}` : 'None available'}</b><br>• DLD evidence confidence: <b>${evidenceConfidence}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Calibration config: <b>${AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
-  let vHTML = '';
-  valuations.forEach(v => {
-    const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
-    vHTML += `<div class="method-card"><div class="m-header"><span class="m-name">${v.method}</span><span style="font-size:10px;color:${cColor}">● ${v.confidence} confidence</span></div><div class="m-value">${v.value.toLocaleString()} AED</div><div class="m-meta"><span>Weight: ${Math.round(v.weight*100)}%</span>${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}</div><div class="m-detail">${v.details}</div></div>`;
-  });
+  const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
+  const marketContextHTML = buildMarketContextHTML(result, propData);
+  const comparableBracket = getComparableBracket(result.finalValue, scrapedDistrictData?.comparablePrices);
+  const comparableRangeHTML = '';
+  const explanationFacts = [
+    dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${propData.district || 'the selected area'}</b>` : '',
+    dldCount > 0 ? `Evidence strength: <b>${evidenceConfidence}</b>` : '',
+    adjustmentsHTML
+  ].filter(Boolean).join('<br>');
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
+  const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div><div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Methods</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
+}
+function buildObservationPayload(propData, result) {
+  const verifiedProject = Boolean(selectedProjectBuilding && propData.projectBuildingSource === 'dld-suggestion' && propData.projectEvidenceCount >= Number(AQAR_V21_SHADOW_CONFIG.minProjectEvidence || 5));
+  const projectValue = verifiedProject ? propData.projectBuilding : null;
+  const trace = result.shadowTrace || {};
+  return {
+    consent: { analytics: true },
+    property: {
+      propertyType: propData.propType,
+      district: propData.district,
+      yearBuilt: propData.yearBuilt,
+      area: propData.area,
+      bedrooms: propData.bedrooms,
+      detailedUnitType: propData.detailedUnitType,
+      floor: propData.floor,
+      parkingCount: propData.parkingCount,
+      project: { value: projectValue, status: verifiedProject ? 'verified-dld' : 'unknown', source: verifiedProject ? 'dld-transactions' : null, normalizedKey: verifiedProject ? `${propData.propType}||${propData.district}||${propData.projectBuilding}`.toLowerCase() : null },
+      bua: propData.bua,
+      plotArea: propData.plotArea,
+      lastRenovationYear: propData.lastRenovationYear
+    },
+    valuation: {
+      baselineValue: result.finalValue,
+      shadowValue: result.shadowValue || result.finalValue,
+      shadowTrace: {
+        projectMultiplier: trace.factors?.projectBuilding ?? 1,
+        buaPlotMultiplier: trace.factors?.buaPlotArea ?? 1,
+        renovationMultiplier: trace.factors?.lastRenovation ?? 1,
+        combinedMultiplier: trace.multiplier ?? 1
+      },
+      calibrationConfigId: AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1',
+      evidenceState: propData.evidenceState
+    }
+  };
+}
+async function recordValuationObservation(propData, result) {
+  const checkbox = document.getElementById('observationConsent');
+  const status = document.getElementById('observationStatus');
+  if (!checkbox?.checked) { if (status) status.textContent = ''; return; }
+  if (status) { status.textContent = 'Saving anonymous observation…'; status.style.color = 'var(--muted)'; }
+  try {
+    const response = await fetch('/api/valuation-observation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildObservationPayload(propData, result)) });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
+    if (status) { status.textContent = 'Thank you. Your anonymous observation was saved for analysis.'; status.style.color = 'var(--green)'; }
+    window.aqarLastObservationId = payload.observationId || null;
+  } catch (error) {
+    console.warn('Observation was not saved:', error.message);
+    if (status) { status.textContent = 'Observation was not saved; your valuation is unaffected.'; status.style.color = 'var(--gold)'; }
+  }
 }
 function runValuation() {
   const area = parseFloat(document.getElementById('area').value);
   if (!area || area < 10) { document.getElementById('area').classList.add('error'); document.getElementById('area').focus(); showToast('Area must be at least 10 sqm'); setTimeout(() => document.getElementById('area').classList.remove('error'), 3000); return; }
   document.getElementById('btnValuate').disabled = true;
-  document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
+  document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating valuation...';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
   setTimeout(() => {
     const propData = collectPropertyData();
+    const extraValidation = AQAR_PROPERTY_EXTRA_FIELDS.validate(propData);
+    if (!extraValidation.valid) {
+      showToast(extraValidation.errors.map(error => error.code).join(', '));
+      document.getElementById('btnValuate').disabled = false;
+      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Valuation';
+      return;
+    }
     const validation = AQAR_POLICY.validatePropertyInput(propData);
     if (!validation.valid) {
       showToast(validation.errors.map(error => error.code).join(', '));
@@ -1285,6 +1787,7 @@ function runValuation() {
     document.getElementById('btnValuate').disabled = false;
     document.getElementById('btnValuate').innerHTML = '🧮 Recalculate Valuation';
     saveToHistory(finalResult, propData);
+    recordValuationObservation(propData, finalResult);
   }, 800);
 }
 function resetAll() {
@@ -1305,6 +1808,11 @@ function resetAll() {
   document.getElementById('annualExpenses').value = '';
   document.getElementById('landValue').value = '';
   document.getElementById('constructionCost').value = '';
+  document.getElementById('projectBuildingInput').value = '';
+  document.getElementById('bua').value = '';
+  document.getElementById('plotArea').value = '';
+  document.getElementById('lastRenovationYear').value = '';
+  selectedProjectBuilding = '';
   document.getElementById('finishQuality').value = '';
   document.querySelectorAll('#viewTypeGroup input[type="checkbox"]').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
   document.getElementById('floorLevel').value = '';
@@ -1322,13 +1830,17 @@ function resetAll() {
     if (gisCircleLayer) gisCircleLayer.setLatLng([dLat, dLng]);
     document.getElementById('gisLat').value = dLat.toFixed(6);
     document.getElementById('gisLng').value = dLng.toFixed(6);
-    document.getElementById('gisCoordsRow').style.display = 'flex';
+    document.getElementById('gisCoordsRow').style.display = 'none';
     poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
   }
   document.getElementById('scrapeStatus').innerHTML = '';
   document.getElementById('scrapedComps').innerHTML = '';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
+  const observationConsent = document.getElementById('observationConsent');
+  if (observationConsent) observationConsent.checked = false;
+  const observationStatus = document.getElementById('observationStatus');
+  if (observationStatus) observationStatus.textContent = '';
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
   scrapedDistrictData = null;
   currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
@@ -1349,7 +1861,7 @@ function saveToHistory(result, propData) {
 }
 async function loadAccuracyMeta() {
   try {
-    const response = await fetch('/data/accuracy-data.json');
+    const response = await fetch('/data/accuracy-summary.json');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     const metrics = data.metrics || {};
@@ -1401,6 +1913,7 @@ function onPropertyTypeChange() {
   document.getElementById('fgStreetPosition').style.display = isRelevant('streetPosition') ? '' : 'none';
   document.getElementById('fgBuildingCondition').style.display = isRelevant('buildingCondition') ? '' : 'none';
   document.getElementById('fgFurnishedStatus').style.display = isRelevant('furnishedStatus') ? '' : 'none';
+  updateExtraFieldVisibility();
   if (policy) {
     const fieldElements = {
       bedrooms: document.getElementById('bedrooms'),
@@ -1446,10 +1959,16 @@ document.addEventListener('DOMContentLoaded', function() {
   valuationButton.disabled = true;
   loadCalibrationConfig().finally(() => { valuationButton.disabled = false; setTimeout(initGISMap, 100); });
   loadAccuracyMeta();
+  loadMarketIntelligence();
   document.addEventListener('click', function(e) {
-    const container = document.getElementById('districtAutocomplete');
-    const input = document.getElementById('districtInput');
-    if (e.target !== input && !container.contains(e.target)) container.style.display = 'none';
+    const districtList = document.getElementById('districtAutocomplete');
+    const projectList = document.getElementById('projectBuildingAutocomplete');
+    const districtInput = document.getElementById('districtInput');
+    const projectInput = document.getElementById('projectBuildingInput');
+    const insideDistrict = e.target === districtInput || districtList?.contains(e.target);
+    const insideProject = e.target === projectInput || projectList?.contains(e.target);
+    if (!insideDistrict) hideAutocompleteList(districtList);
+    if (!insideProject) hideAutocompleteList(projectList);
   });
 });
 </script>

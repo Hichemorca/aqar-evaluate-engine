@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AQAR Calibration Console</title>
+  <title>MIAYAAR Calibration Console</title>
+  <link rel="icon" href="/assets/branding/favicon.png" type="image/png" />
   <style>
     :root { --bg:#07111f; --panel:#0d1b2d; --panel-2:#11243a; --line:rgba(255,255,255,.1); --text:#edf4fb; --muted:#93a7bd; --gold:#e3aa38; --green:#32d28b; --red:#ff6b7a; --blue:#5ba7ff; }
     * { box-sizing:border-box; }
@@ -57,14 +58,18 @@
     @media (max-width:900px) { .grid { grid-template-columns:1fr; } .sidebar { position:static; } }
     @media (max-width:640px) { .field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .topbar { display:block; } .status { text-align:left; margin-top:10px; } }
   </style>
+  <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
-      <div>
-        <div class="eyebrow">AQAR · Calibration Console</div>
-        <h1>Weights & coefficients control</h1>
-        <p class="subtitle">Edit the approved AQAR calibration parameters for each valuation method and property type. Saving is immediate and affects new valuations only; historical results retain their original configuration identity.</p>
+      <div class="miayaar-admin-brand">
+        <img class="miayaar-logo-icon" src="/assets/branding/miayaar-icon.png" alt="MIAYAAR" />
+        <div>
+          <div class="eyebrow">MIAYAAR · Calibration Console</div>
+          <h1>Weights & coefficients control</h1>
+          <p class="subtitle">Edit the approved MIAYAAR calibration parameters for each valuation method and property type. Saving is immediate and affects new valuations only; historical results retain their original configuration identity.</p>
+        </div>
       </div>
       <div class="status" id="status">Not connected</div>
     </header>
@@ -72,7 +77,7 @@
     <section class="panel">
       <div class="panel-head"><h2>Administrator access</h2><span class="panel-note">Single administrator</span></div>
       <div class="auth">
-        <input id="adminToken" type="password" autocomplete="current-password" placeholder="AQAR admin token" />
+        <input id="adminToken" type="password" autocomplete="current-password" placeholder="Administrator token" />
         <button class="secondary" id="loadButton">Load configuration</button>
       </div>
       <div id="notice" class="notice"></div>
@@ -102,6 +107,7 @@
     </div>
   </main>
 
+  <script src="/shared/v21-shadow-multiplier-engine.js"></script>
   <script>
     let activeConfig = null;
     let originalConfig = null;
@@ -126,6 +132,21 @@
         else if (child && typeof child === 'object' && !Array.isArray(child)) collectNumericLeaves(child, next, output);
       }
       return output;
+    }
+
+    function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character])); }
+    function pathForV21(propertyType, group, key, field) { return ['v21ShadowMultipliers', 'propertyTypes', propertyType, group, key, field].filter(segment => segment !== '').map(encodeURIComponent).join('.'); }
+    function pathForV21Band(propertyType, group, index, field) { return ['v21ShadowMultipliers', 'propertyTypes', propertyType, group, 'bands', index, field].map(encodeURIComponent).join('.'); }
+    function renderShadowSection(propertyType, propertyConfig) {
+      const shadow = activeConfig.v21ShadowMultipliers || {};
+      const v21 = shadow.propertyTypes?.[propertyType] || {};
+      const projectMap = v21.projectBuilding?.projectMultipliers || {};
+      const projectRows = Object.entries(projectMap).map(([key, value]) => `<div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end;margin-bottom:8px"><div class="field"><label>Project key (type | district | project)</label><input data-project-key-label="true" type="text" value="${escapeHtml(key)}" readonly></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'projectMultipliers', key)}" data-project-multiplier="true" data-project-key="${escapeHtml(key)}" type="number" min="0.01" step="0.001" value="${Number(value)}"></div><div class="field"><button type="button" class="secondary" onclick="removeProjectMultiplierRow(this)">Remove</button></div></div>`).join('');
+      const ratioBands = v21.buaPlotArea?.bands || [];
+      const renovationBands = v21.lastRenovation?.bands || [];
+      const renderBands = (group, bands, metricKey, labelText) => bands.map((band, index) => `<div class="field-grid" style="grid-template-columns:1fr 1fr;align-items:end;margin-bottom:8px"><div class="field"><label>${labelText} ${index + 1} max (${band[metricKey] === null ? 'open' : metricKey === 'maxRatio' ? 'ratio' : 'years'})</label><input data-path="${pathForV21Band(propertyType, group, index, metricKey)}" data-band-field="${metricKey}" data-null-if-empty="true" type="number" min="0" step="0.01" value="${band[metricKey] === null ? '' : Number(band[metricKey])}"></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21Band(propertyType, group, index, 'multiplier')}" data-band-field="multiplier" type="number" min="0.01" step="0.001" value="${Number(band.multiplier)}"></div></div>`).join('');
+      const globalControls = propertyType === 'apartment' ? `<div class="field-grid"><div class="field"><label>Shadow enabled (0/1)</label><input data-path="v21ShadowMultipliers.enabled" type="number" min="0" max="1" step="1" value="${shadow.enabled ? 1 : 0}"></div><div class="field"><label>Minimum project evidence</label><input data-path="v21ShadowMultipliers.minProjectEvidence" type="number" min="1" step="1" value="${Number(shadow.minProjectEvidence || 5)}"></div><div class="field"><label>Combined minimum ×</label><input data-path="v21ShadowMultipliers.combinedMinimumMultiplier" type="number" min="0.01" step="0.001" value="${Number(shadow.combinedMinimumMultiplier || 0.85)}"></div><div class="field"><label>Combined maximum ×</label><input data-path="v21ShadowMultipliers.combinedMaximumMultiplier" type="number" min="0.01" step="0.001" value="${Number(shadow.combinedMaximumMultiplier || 1.15)}"></div></div>` : '';
+      return `<div class="section"><div class="section-title"><span>v2.1 shadow multipliers</span><span class="panel-note">disabled by default · neutral = 1.00×</span></div><div class="small" style="margin-bottom:10px">These controls affect only the experimental shadow preview until separately approved for production.</div>${globalControls}<div class="section"><div class="section-title"><span>${propertyType} · Project multipliers</span><span class="panel-note">exact DLD key</span></div><div class="field-grid"><div class="field"><label>Default project multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'defaultMultiplier', '')}" type="number" min="0.01" step="0.001" value="${Number(v21.projectBuilding?.defaultMultiplier || 1)}"></div></div><div id="projectRows-${propertyType}">${projectRows || '<div class="small">No project-specific multipliers configured. Add one only after reviewing DLD evidence.</div>'}</div><div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end"><div class="field"><label>New project key: type | district | project</label><input id="newProjectKey-${propertyType}" type="text" placeholder="apartment | district | project"></div><div class="field"><label>Multiplier</label><input id="newProjectValue-${propertyType}" type="number" min="0.01" step="0.001" value="1"></div><div class="field"><button type="button" onclick="addProjectMultiplierRow('${propertyType}')">Add project</button></div></div></div><div class="section"><div class="section-title"><span>${propertyType} · BUA / Plot Area ratio</span><span class="panel-note">BUA ÷ Plot Area</span></div>${renderBands('buaPlotArea', ratioBands, 'maxRatio', 'Ratio band')}</div><div class="section"><div class="section-title"><span>${propertyType} · Renovation age</span><span class="panel-note">current year − renovation year</span></div>${renderBands('lastRenovation', renovationBands, 'maxAgeYears', 'Age band')}</div></div>`;
     }
 
     function renderNumericSection(title, object, prefix, allowedKeys=null) {
@@ -197,6 +218,7 @@
           const group = methodGroups[method];
           html += renderNumericSection(`${methodLabels[method] || method} coefficients`, propertyConfig.coefficients?.[group], ['propertyTypes', propertyType, 'coefficients', group]);
         }
+        if (['apartment', 'villa', 'townhouse'].includes(propertyType)) html += renderShadowSection(propertyType, propertyConfig);
         html += '</div></details>';
       }
       html += renderNumericSection('GIS coefficients', config.gis, ['gis']);
@@ -213,14 +235,21 @@
       updateChangeSummary();
     }
 
+    function decodePath(input) { return input.dataset.path.split('.').map(segment => decodeURIComponent(segment)); }
     function inputConfigValue(input) {
+      if (input.dataset.nullIfEmpty === 'true' && input.value.trim() === '') return null;
       const value = Number(input.value);
       return input.dataset.percent === 'true' ? value / 100 : value;
+    }
+    function valuesEqual(left, right) {
+      if (left === null && (right === null || right === undefined)) return true;
+      if (typeof right === 'boolean') return Boolean(Number(left)) === right;
+      return Number.isFinite(Number(left)) && Number.isFinite(Number(right)) ? Number(left) === Number(right) : left === right;
     }
 
     function updateChangeSummary() {
       if (!activeConfig || !originalConfig) return;
-      const changed = [...$('editor').querySelectorAll('input[data-path]')].filter(input => inputConfigValue(input) !== Number(getAt(originalConfig, input.dataset.path.split('.'))));
+      const changed = [...$('editor').querySelectorAll('input[data-path]')].filter(input => !valuesEqual(inputConfigValue(input), getAt(originalConfig, decodePath(input))));
       const total = $('editor').querySelectorAll('input[data-path]').length;
       const totalsValid = updateWeightSummaries();
       $('changeSummary').textContent = !totalsValid ? `${changed.length} of ${total} values changed. Save is blocked until every approved-method total equals 100%.` : changed.length ? `${changed.length} of ${total} numeric values changed. Save will activate a new version immediately.` : `No changes. ${total} numeric controls are loaded.`;
@@ -230,9 +259,35 @@
 
     function readEditedConfig() {
       const next = deepClone(activeConfig);
-      $('editor').querySelectorAll('input[data-path]').forEach(input => setAt(next, input.dataset.path.split('.'), inputConfigValue(input)));
+      for (const [propertyType, propertyConfig] of Object.entries(next.v21ShadowMultipliers?.propertyTypes || {})) {
+        const keys = new Set([...$('editor').querySelectorAll(`input[data-project-multiplier="true"][data-project-key]`)].filter(input => input.dataset.path.includes(`.${encodeURIComponent(propertyType)}.`)).map(input => input.dataset.projectKey));
+        for (const key of Object.keys(propertyConfig.projectBuilding?.projectMultipliers || {})) if (!keys.has(key)) delete propertyConfig.projectBuilding.projectMultipliers[key];
+      }
+      $('editor').querySelectorAll('input[data-path]').forEach(input => {
+        const path = decodePath(input);
+        const value = inputConfigValue(input);
+        if (path[0] === 'v21ShadowMultipliers' && path[1] === 'enabled') setAt(next, path, Boolean(value));
+        else if (path[0] === 'v21ShadowMultipliers' && path[3] === 'projectBuilding' && path[4] === 'defaultMultiplier') setAt(next, path, value);
+        else if (path[0] === 'v21ShadowMultipliers' && path[4] === 'projectMultipliers') {
+          if (input.dataset.projectMultiplier === 'true') setAt(next, [...path.slice(0, 5), decodeURIComponent(input.dataset.projectKey || '')], value);
+        } else if (path[0] === 'v21ShadowMultipliers' && path[4] === 'bands') {
+          setAt(next, path, value);
+        } else setAt(next, path, value);
+      });
       return next;
     }
+
+    function addProjectMultiplierRow(propertyType) {
+      const keyInput = $(`newProjectKey-${propertyType}`), valueInput = $(`newProjectValue-${propertyType}`), key = keyInput.value.trim().toLowerCase(), value = Number(valueInput.value);
+      if (!key || !Number.isFinite(value) || value <= 0) { showNotice('Enter a project key and a positive multiplier.', 'error'); return; }
+      const rows = $(`projectRows-${propertyType}`);
+      if (rows.querySelector(`[data-project-key="${CSS.escape(key)}"]`)) { showNotice('That project key is already listed.', 'error'); return; }
+      const wrapper = document.createElement('div'); wrapper.className = 'field-grid'; wrapper.style.cssText = 'grid-template-columns:2fr 1fr auto;align-items:end;margin-bottom:8px';
+      wrapper.innerHTML = `<div class="field"><label>Project key (type | district | project)</label><input data-project-key-label="true" type="text" value="${escapeHtml(key)}" readonly></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'projectMultipliers', key)}" data-project-multiplier="true" data-project-key="${escapeHtml(key)}" type="number" min="0.01" step="0.001" value="${value}"></div><div class="field"><button type="button" class="secondary" onclick="removeProjectMultiplierRow(this)">Remove</button></div>`;
+      rows.appendChild(wrapper); rows.querySelectorAll('input[data-path]').forEach(input => input.removeEventListener('input', updateChangeSummary)); rows.querySelectorAll('input[data-path]').forEach(input => input.addEventListener('input', updateChangeSummary));
+      keyInput.value = ''; valueInput.value = '1'; updateChangeSummary();
+    }
+    function removeProjectMultiplierRow(button) { button.closest('.field-grid').remove(); updateChangeSummary(); }
 
     function renderHistory(history) {
       $('history').innerHTML = history?.length ? history.slice(0, 12).map(item => `<div class="history-item"><strong>${item.configId}</strong><span>${formatDate(item.updatedAt)} · ${item.updatedBy || 'admin'}</span></div>`).join('') : '<div class="small">No saved versions yet.</div>';

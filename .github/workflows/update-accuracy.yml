@@ -28,7 +28,9 @@ jobs:
           python-version: '3.11'
           
       - name: Install Node dependencies
-        run: npm install axios
+        run: npm ci
+      - name: Run test suite
+        run: npm test
         
       - name: Install Python dependencies
         run: pip install xgboost pandas numpy scikit-learn
@@ -64,6 +66,9 @@ jobs:
 
       - name: Layer 8 — Evaluate all properties
         run: node scripts/evaluate-and-save.js
+
+      - name: Generate lightweight client summaries
+        run: node scripts/generate-client-summaries.js
         
       - name: Layer 9 — Train ML model
         run: python scripts/train-model.py

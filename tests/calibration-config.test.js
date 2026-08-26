@@ -39,3 +39,27 @@ test('calibration validation rejects non-applicable method weights', () => {
   assert.equal(result.valid, false);
   assert.ok(result.errors.some(error => error.includes('apartment.weights.cost must be 0')));
 });
+
+test('default calibration includes neutral disabled v2.1 shadow multipliers', () => {
+  const config = calibrationDefaults.createDefaultCalibrationConfig();
+  assert.equal(config.v21ShadowMultipliers.enabled, false);
+  assert.equal(config.v21ShadowMultipliers.propertyTypes.villa.buaPlotArea.bands.at(-1).maxRatio, null);
+  assert.equal(validateConfig(config).valid, true);
+});
+
+test('calibration merge preserves dynamic DLD project multiplier keys', () => {
+  const defaults = calibrationDefaults.createDefaultCalibrationConfig();
+  const key = 'apartment|burj khalifa|bahwan tower';
+  const merged = deepMergeKnown(defaults, { v21ShadowMultipliers: { enabled: true, propertyTypes: { apartment: { projectBuilding: { projectMultipliers: { [key]: 1.04 } } } } } });
+  assert.equal(merged.v21ShadowMultipliers.enabled, true);
+  assert.equal(merged.v21ShadowMultipliers.propertyTypes.apartment.projectBuilding.projectMultipliers[key], 1.04);
+  assert.equal(validateConfig(merged).valid, true);
+});
+
+test('calibration validation rejects non-positive v2.1 multipliers', () => {
+  const config = calibrationDefaults.createDefaultCalibrationConfig();
+  config.v21ShadowMultipliers.propertyTypes.villa.buaPlotArea.bands[0].multiplier = 0;
+  const result = validateConfig(config);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some(error => error.includes('villa.buaPlotArea.bands[0].multiplier')));
+});

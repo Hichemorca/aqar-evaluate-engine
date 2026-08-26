@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run test suite
+        run: npm test
+
+      - name: Validate summaries are current
+        run: node scripts/generate-client-summaries.js --check
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check netlify/functions/dld-lookup.js
+          node --check netlify/functions/scrape.js
+          node --check netlify/functions/scrape-sold.js
+          node --check scripts/evaluate-and-save.js
+          node --check scripts/generate-client-summaries.js
+
+      - name: Validate patch formatting
+        run: git diff --check

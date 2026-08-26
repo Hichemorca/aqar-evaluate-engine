@@ -5,6 +5,10 @@ function deepMergeKnown(base, input) {
   const output = { ...base };
   for (const [key, value] of Object.entries(input)) {
     if (!Object.prototype.hasOwnProperty.call(base, key)) continue;
+    if (key === 'projectMultipliers' && value && typeof value === 'object' && !Array.isArray(value) && base[key] && typeof base[key] === 'object') {
+      output[key] = { ...base[key], ...value };
+      continue;
+    }
     if (
       value &&
       typeof value === 'object' &&
@@ -29,6 +33,37 @@ function validateNumericLeaves(value, path, errors) {
   if (!value || typeof value !== 'object') return;
   for (const [key, child] of Object.entries(value)) {
     validateNumericLeaves(child, `${path}.${key}`, errors);
+  }
+}
+
+function validateV21ShadowConfig(shadow, errors) {
+  if (!shadow || typeof shadow !== 'object') { errors.push('v21ShadowMultipliers must be an object'); return; }
+  if (typeof shadow.enabled !== 'boolean') errors.push('v21ShadowMultipliers.enabled must be boolean');
+  if (!Number.isInteger(Number(shadow.minProjectEvidence)) || Number(shadow.minProjectEvidence) < 1) errors.push('v21ShadowMultipliers.minProjectEvidence must be a positive integer');
+  const minimum = Number(shadow.combinedMinimumMultiplier);
+  const maximum = Number(shadow.combinedMaximumMultiplier);
+  if (!Number.isFinite(minimum) || minimum <= 0) errors.push('v21ShadowMultipliers.combinedMinimumMultiplier must be positive');
+  if (!Number.isFinite(maximum) || maximum <= 0 || maximum < minimum) errors.push('v21ShadowMultipliers.combinedMaximumMultiplier must be >= minimum');
+  for (const propertyType of calibrationDefaults.PROPERTY_TYPES) {
+    const typeConfig = shadow.propertyTypes?.[propertyType];
+    if (!typeConfig) { errors.push(`v21ShadowMultipliers missing property type: ${propertyType}`); continue; }
+    const project = typeConfig.projectBuilding || {};
+    for (const [key, value] of Object.entries(project.projectMultipliers || {})) {
+      if (!Number.isFinite(Number(value)) || Number(value) <= 0) errors.push(`${propertyType}.projectBuilding.projectMultipliers.${key} must be positive`);
+    }
+    if (!Number.isFinite(Number(project.defaultMultiplier)) || Number(project.defaultMultiplier) <= 0) errors.push(`${propertyType}.projectBuilding.defaultMultiplier must be positive`);
+    for (const [group, metricKey] of [['buaPlotArea', 'maxRatio'], ['lastRenovation', 'maxAgeYears']]) {
+      const bands = typeConfig[group]?.bands;
+      if (!Array.isArray(bands) || !bands.length) { errors.push(`${propertyType}.${group}.bands must be a non-empty array`); continue; }
+      let previous = -Infinity;
+      bands.forEach((band, index) => {
+        const limit = band?.[metricKey] === null ? Infinity : Number(band?.[metricKey]);
+        if (!Number.isFinite(limit) && limit !== Infinity) errors.push(`${propertyType}.${group}.bands[${index}].${metricKey} must be finite or null`);
+        if (limit < previous) errors.push(`${propertyType}.${group}.bands must be ordered`);
+        previous = limit;
+        if (!Number.isFinite(Number(band?.multiplier)) || Number(band.multiplier) <= 0) errors.push(`${propertyType}.${group}.bands[${index}].multiplier must be positive`);
+      });
+    }
   }
 }
 
@@ -71,6 +106,7 @@ function validateConfig(config) {
   }
 
   validateNumericLeaves(config?.gis, 'gis', errors);
+  validateV21ShadowConfig(config?.v21ShadowMultipliers, errors);
   for (const propertyType of calibrationDefaults.PROPERTY_TYPES) {
     validateNumericLeaves(
       config?.propertyTypes?.[propertyType]?.coefficients,
@@ -82,4 +118,4 @@ function validateConfig(config) {
   return { valid: errors.length === 0, errors };
 }
 
-module.exports = { deepMergeKnown, validateConfig };
+module.exports = { deepMergeKnown, validateConfig, validateV21ShadowConfig };

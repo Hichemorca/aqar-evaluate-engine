@@ -1,0 +1,170 @@
+{
+  "generatedAt": "2026-08-26T01:26:29.180Z",
+  "cutoff": "2026-07-09",
+  "trainingDldRows": 24720,
+  "diagnosticsByType": {
+    "apartment": {
+      "cohorts": 757,
+      "highDispersion": 17,
+      "medianAbsoluteDateGapDays": 22,
+      "p90AbsoluteDateGapDays": 59,
+      "medianAreaRatio": 0.9947266167082986,
+      "p90AbsoluteRoomGap": 1,
+      "candidateAtBounds": 379,
+      "examples": [
+        {
+          "propertyType": "apartment",
+          "district": "JUMEIRAH VILLAGE TRIANGLE",
+          "project": "The One at Jumeirah Village Triangle",
+          "transactions": 19,
+          "peerTransactions": 259,
+          "projectMedianPpsm": 41279.6697626419,
+          "peerMedianPpsm": 14738.05411629246,
+          "relativeIndex": 2.8008900928792566,
+          "projectMedianArea": 29.24,
+          "peerMedianArea": 61.37,
+          "projectMedianRooms": 0,
+          "peerMedianRooms": 1,
+          "projectMedianDate": "2026-04-01",
+          "peerMedianDate": "2026-03-06",
+          "projectDispersion": 1.1710369459312,
+          "peerDispersion": 1.4048986807175805,
+          "candidateMultiplier": 1.05
+        },
+        {
+          "propertyType": "apartment",
+          "district": "JUMEIRAH BEACH RESIDENCE",
+          "project": "La Vie",
+          "transactions": 6,
+          "peerTransactions": 186,
+          "projectMedianPpsm": 45107.49548707616,
+          "peerMedianPpsm": 17100.753697759297,
+          "relativeIndex": 2.6377489720225937,
+          "projectMedianArea": 131.015,
+          "peerMedianArea": 131.26999999999998,
+          "projectMedianRooms": 2,
+          "peerMedianRooms": 2,
+          "projectMedianDate": "2026-04-19",
+          "peerMedianDate": "2026-03-26",
+          "projectDispersion": 1.101985753635993,
+          "peerDispersion": 1.3867233766167721,
+          "candidateMultiplier": 1.05
+        },
+        {
+          "propertyType": "apartment",
+          "district": "JUMEIRAH VILLAGE CIRCLE",
+          "project": "AVALON TOWER",
+          "transactions": 11,
+          "peerTransactions": 2009,
+          "projectMedianPpsm": 36732.929991356956,
+          "peerMedianPpsm": 14057.660233500119,
+          "relativeIndex": 2.6130187656563586,
+          "projectMedianArea": 23.41,
+          "peerMedianArea": 73.54,
+          "projectMedianRooms": 0,
+          "peerMedianRooms": 1,
+          "projectMedianDate": "2026-02-03",
+          "peerMedianDate": "2026-03-17",
+          "projectDispersion": 1.0577787050082448,
+          "peerDispersion": 1.525755654900914,
+          "candidateMultiplier": 1.05
+        }
+      ]
+    },
+    "villa": {
+      "cohorts": 79,
+      "highDispersion": 0,
+      "medianAbsoluteDateGapDays": 22,
+      "p90AbsoluteDateGapDays": 66.60000000000001,
+      "medianAreaRatio": 0.9913972701149426,
+      "p90AbsoluteRoomGap": 1,
+      "candidateAtBounds": 14,
+      "examples": [
+        {
+          "propertyType": "villa",
+          "district": "JUMEIRAH VILLAGE CIRCLE",
+          "project": "SEASONS COMMUNITY- AUTUMN",
+          "transactions": 9,
+          "peerTransactions": 82,
+          "projectMedianPpsm": 31591.53005464481,
+          "peerMedianPpsm": 18382.952729458364,
+          "relativeIndex": 1.7185231621696948,
+          "projectMedianArea": 137.48,
+          "peerMedianArea": 171.4,
+          "projectMedianRooms": 3,
+          "peerMedianRooms": 4,
+          "projectMedianDate": "2026-02-18",
+          "peerMedianDate": "2026-03-14",
+          "projectDispersion": 1.540983606557377,
+          "peerDispersion": 1.3072513141197146,
+          "candidateMultiplier": 1.05
+        },
+        {
+          "propertyType": "villa",
+          "district": "WADI AL SAFA 5",
+          "project": "Arabian Ranches lll - Bliss 2",
+          "transactions": 13,
+          "peerTransactions": 42,
+          "projectMedianPpsm": 25632.377740303542,
+          "peerMedianPpsm": 16707.505241831102,
+          "relativeIndex": 1.5341834324927792,
+          "projectMedianArea": 128.46,
+          "peerMedianArea": 302.16499999999996,
+          "projectMedianRooms": 3,
+          "peerMedianRooms": 4,
+          "projectMedianDate": "2026-05-11",
+          "peerMedianDate": "2026-05-01",
+          "projectDispersion": 1.1479291914635532,
+          "peerDispersion": 1.303767538509684,
+          "candidateMultiplier": 1.05
+        },
+        {
+          "propertyType": "villa",
+          "district": "ARABIAN RANCHES III",
+          "project": "Arabain Ranches lll - Bliss",
+          "transactions": 20,
+          "peerTransactions": 36,
+          "projectMedianPpsm": 27655.602470873404,
+          "peerMedianPpsm": 21801.64618900248,
+          "relativeIndex": 1.268509828621284,
+          "projectMedianArea": 132.305,
+          "peerMedianArea": 134.70499999999998,
+          "projectMedianRooms": 3,
+          "peerMedianRooms": 3,
+          "projectMedianDate": "2026-02-08",
+          "peerMedianDate": "2026-03-19",
+          "projectDispersion": 1.1451064202039094,
+          "peerDispersion": 1.251686517242971,
+          "candidateMultiplier": 1.05
+        }
+      ]
+    },
+    "townhouse": {
+      "cohorts": 0,
+      "highDispersion": 0,
+      "medianAbsoluteDateGapDays": null,
+      "p90AbsoluteDateGapDays": null,
+      "medianAreaRatio": null,
+      "p90AbsoluteRoomGap": null,
+      "candidateAtBounds": 0,
+      "examples": []
+    }
+  },
+  "holdoutResidualDiagnostics": {
+    "matchedRows": 962,
+    "correlationCandidateVsActualToBaseline": -0.1201,
+    "correlationRelativeIndexVsActualToBaseline": -0.1127,
+    "medianActualToBaseline": 0.9882521688711474,
+    "medianAbsoluteBaselineError": 0.08374332788671024,
+    "candidateMultiplierDistribution": {
+      "p25": 0.9580902581824617,
+      "median": 1.013334778352172,
+      "p75": null
+    }
+  },
+  "notes": [
+    "This diagnostic uses observed DLD and verified Accuracy values only.",
+    "Date, area, and room differences are diagnostic confounders; they are not used to invent missing BUA/Plot/Renovation values.",
+    "No official artifact or production evaluator is modified."
+  ]
+}

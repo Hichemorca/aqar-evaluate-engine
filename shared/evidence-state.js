@@ -21,14 +21,14 @@
   function getEvidencePresentation(state) {
     switch (state) {
       case STATES.READY:
-        return { tone: 'success', title: 'DLD evidence available', message: 'The valuation can use verified DLD comparable sales.' };
+        return { tone: 'success', title: 'Market evidence available', message: 'The valuation can use comparable sales.' };
       case STATES.LIMITED:
-        return { tone: 'warning', title: 'Limited DLD evidence', message: 'A valuation may be calculated, but the comparable sample is limited. Review the evidence before relying on the result.' };
+        return { tone: 'warning', title: 'Limited market evidence', message: 'A valuation may be calculated, but the comparable sample is limited. Review the evidence before relying on the result.' };
       case STATES.UNAVAILABLE:
-        return { tone: 'error', title: 'DLD evidence unavailable', message: 'The market-data service could not be reached. No synthetic market price will be created.' };
+        return { tone: 'error', title: 'Market data unavailable', message: 'The market-data service could not be reached. No synthetic market price will be created.' };
       case STATES.INSUFFICIENT:
       default:
-        return { tone: 'warning', title: 'Insufficient DLD evidence', message: 'There are not enough verified comparable sales for a reliable Sales Comparison value. No fallback price will be invented.' };
+        return { tone: 'warning', title: 'Insufficient market evidence', message: 'There are not enough comparable sales for a reliable estimate. No fallback price will be invented.' };
     }
   }
 

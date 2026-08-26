@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AQAR Accuracy Dashboard</title>
+  <title>MIAYAAR Accuracy Dashboard</title>
+  <link rel="icon" href="/assets/branding/favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -100,13 +101,15 @@
       th, td { padding: 5px 6px; }
     }
   </style>
+  <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
 <body>
 
 <div class="container">
   <div class="header">
-    <h1>📊 AQAR Accuracy Dashboard</h1>
-    <p>Real-time comparison: AQAR Valuation vs Actual Sale Prices • <span id="datasetRecordCount">—</span> validation records</p>
+    <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine"><img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR — Valuation Intelligence Engine" /></a>
+    <div class="miayaar-page-title">Accuracy Dashboard</div>
+    <p>Real-time comparison: MIAYAAR Valuation vs Actual Sale Prices • <span id="datasetRecordCount">—</span> validation records</p>
     <div class="last-update" id="lastUpdated">Loading...</div>
   </div>
 
@@ -114,7 +117,7 @@
     <div class="stat-card">
       <div class="stat-value green" id="avgAccuracy">—</div>
       <div class="stat-label">Average Accuracy</div>
-      <div class="stat-detail">AQAR vs Actual Sale Price</div>
+      <div class="stat-detail">MIAYAAR vs Actual Sale Price</div>
     </div>
     <div class="stat-card">
       <div class="stat-value gold" id="avgDeviation">—</div>
@@ -136,12 +139,12 @@
   <div class="section">
     <div class="refresh-bar">
       <div style="display:flex;align-items:center;gap:12px">
-        <div class="section-title" style="margin-bottom:0">📋 Recent Transactions — AQAR vs Actual</div>
+        <div class="section-title" style="margin-bottom:0">📋 Recent Transactions — MIAYAAR vs Actual</div>
         <span id="dataSourceBadge"></span>
       </div>
       <div style="display:flex;gap:8px">
         <button class="btn-s" onclick="loadFromLocal()">📁 Load Saved Data</button>
-        <span style="font-size:10px;color:var(--muted)">Verified DLD snapshot only</span>
+        <span style="font-size:10px;color:var(--muted)">Verified snapshot only</span>
       </div>
     </div>
     <div class="table-container" id="tableContainer">
@@ -189,13 +192,13 @@ async function loadFromLocal() {
       record.verifiedBy !== 'Government Record'
     );
     if (unverified.length > 0) {
-      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Accuracy snapshot rejected: it contains records without verified DLD provenance.</div>';
+      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Accuracy snapshot rejected: it contains records without verified provenance.</div>';
       return false;
     }
     updateStats(data.metrics);
     updateTable(data.records);
     updateLastUpdated(data.metadata?.lastUpdated);
-    updateSourceBadge('cached', '✅ Verified DLD Snapshot');
+    updateSourceBadge('cached', '✅ Verified Snapshot');
     currentDataSource = 'cached';
     return true;
   } catch (err) {
@@ -226,7 +229,7 @@ function updateTable(properties) {
   }
   let html = '<table><thead><tr>';
   html += '<th>Ref</th><th>City</th><th>Type</th><th>District</th><th>Area</th>';
-  html += '<th>Actual Price</th><th>AQAR Valuation</th><th>Diff</th>';
+  html += '<th>Actual Price</th><th>MIAYAAR Valuation</th><th>Diff</th>';
   html += '<th>Date</th>';
   html += '</tr></thead><tbody>';
   properties.slice(0, 100).forEach(p => {

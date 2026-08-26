@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const { applyAllFilters } = require('/home/ubuntu/aqar-evaluate-engine/scripts/cleaning-pipeline');
-const { comparableKey, buildComparableGroups } = require('/home/ubuntu/aqar-evaluate-engine/shared/comparable-diagnostics');
-const calibrationDefaults = require('/home/ubuntu/aqar-evaluate-engine/shared/aqar-calibration-defaults');
-const calibrationEngine = require('/home/ubuntu/aqar-evaluate-engine/shared/calibration-engine');
+const { applyAllFilters } = require('./cleaning-pipeline');
+const { comparableKey, buildComparableGroups } = require('../shared/comparable-diagnostics');
+const calibrationDefaults = require('../shared/aqar-calibration-defaults');
+const calibrationEngine = require('../shared/calibration-engine');
 
-const root='/home/ubuntu/aqar-evaluate-engine';
+const root = path.resolve(__dirname, '..');
 const accuracy=JSON.parse(fs.readFileSync(path.join(root,'data/accuracy-data.json'),'utf8'));
 const activeCalibration=JSON.parse(fs.readFileSync(path.join(root,'data/active-calibration.json'),'utf8'));
 const cleaningReport=JSON.parse(fs.readFileSync(path.join(root,'data/dld-cleaning-report.json'),'utf8'));
