@@ -1097,14 +1097,21 @@ async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null) {
     }
     return { pois, facilities, totalScore, count: pois.length };
   };
+  const serverTimeoutController = new AbortController();
+  const serverTimeout = setTimeout(() => serverTimeoutController.abort(), 10000);
   try {
-    const serverResponse = await fetch(`/.netlify/functions/fetch-osm?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&radius=${encodeURIComponent(radius)}`, { cache: 'no-store', signal: requestSignal || undefined });
+    const serverSignal = requestSignal && typeof AbortSignal !== 'undefined' && AbortSignal.any
+      ? AbortSignal.any([requestSignal, serverTimeoutController.signal])
+      : serverTimeoutController.signal;
+    const serverResponse = await fetch(`/.netlify/functions/fetch-osm?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&radius=${encodeURIComponent(radius)}`, { cache: 'no-store', signal: serverSignal });
     if (serverResponse.ok) {
       const serverPayload = await serverResponse.json();
       if (Array.isArray(serverPayload.pois)) return buildResultFromServer(serverPayload);
     }
   } catch (error) {
-    console.warn('⚠️ Same-origin OSM function failed; trying public Overpass endpoints:', error.message);
+    if (!requestSignal?.aborted) console.warn('⚠️ Same-origin OSM function failed; trying public Overpass endpoints:', error.message);
+  } finally {
+    clearTimeout(serverTimeout);
   }
   const qs = [
     `node["amenity"="school"](around:${radius},${lat},${lng});`,

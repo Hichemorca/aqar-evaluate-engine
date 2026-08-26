@@ -100,14 +100,17 @@ async function queryOverpass(query) {
   ];
   
   let lastError = null;
+  const deadline = Date.now() + 20000;
   
   for (const server of servers) {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) break;
     try {
       const url = `${server}?data=${encodeURIComponent(query)}`;
       console.log(`🌍 Querying: ${server}`);
       
       const response = await axios.get(url, {
-        timeout: 45000, // 45 ثانية
+        timeout: Math.min(10000, remaining),
         headers: {
           'User-Agent': 'AQAR-Valuation-Engine/2.0 (contact@aqar.ae)'
         }
@@ -151,7 +154,7 @@ async function fetchFacilities(lat, lng, radius = 500) {
   });
 
   const query = `
-    [out:json][timeout:45];
+    [out:json][timeout:20];
     (
       ${facilityQueries.join('')}
     );
