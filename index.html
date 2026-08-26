@@ -601,6 +601,7 @@
 </div>
 <script src="/shared/aqar-policy.js"></script>
 <script src="/shared/property-extra-fields.js"></script>
+<script src="/shared/v21-shadow-multiplier-engine.js"></script>
 <script src="/shared/aqar-calibration-defaults.js"></script>
 <script src="/shared/calibration-engine.js"></script>
   <script src="/shared/evidence-state.js"></script>
@@ -608,6 +609,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 let AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig();
+let AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
 function getCalibrationForProperty(propertyType) { return AQAR_CALIBRATION_DEFAULTS.getPropertyConfig(AQAR_ACTIVE_CALIBRATION, propertyType); }
 function getCalibrationCoefficient(propertyType, group, key, fallback) {
   const value = getCalibrationForProperty(propertyType)?.coefficients?.[group]?.[key];
@@ -619,9 +621,12 @@ async function loadCalibrationConfig() {
     if (!response.ok) throw new Error(`Calibration HTTP ${response.status}`);
     const payload = await response.json();
     if (payload.config) AQAR_ACTIVE_CALIBRATION = payload.config;
+    AQAR_V21_SHADOW_CONFIG = payload.config?.v21ShadowMultipliers || AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
     window.aqarCalibrationConfig = AQAR_ACTIVE_CALIBRATION;
+    window.aqarV21ShadowConfig = AQAR_V21_SHADOW_CONFIG;
   } catch (error) {
     window.aqarCalibrationConfig = AQAR_ACTIVE_CALIBRATION;
+    window.aqarV21ShadowConfig = AQAR_V21_SHADOW_CONFIG;
     console.warn('Using default AQAR calibration:', error.message);
   }
 }
@@ -1203,6 +1208,7 @@ function collectPropertyData() {
     furnishedStatus: readValue('furnishedStatus'),
     gisData: gisData,
     gisRadius: 1000,
+    currentYear: 2026,
     extraFieldsVersion: 'v2.1-ui-only'
   };
 }
@@ -1303,6 +1309,8 @@ function calculateWeightedValue(valuations, propData) {
     AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'
   );
   const final = combined.value;
+  const shadowConfig = window.aqarV21ShadowConfig || AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
+  const shadowTrace = AQAR_V21_SHADOW_MULTIPLIERS.compute(propData, shadowConfig);
   
   let confidencePct = 60;
   if (valuations.some(v => v.confidence === 'high')) confidencePct += 20;
@@ -1310,7 +1318,7 @@ function calculateWeightedValue(valuations, propData) {
   if (valuations.length >= 4) confidencePct += 5;
   confidencePct = Math.min(95, Math.max(20, confidencePct));
   const vals = valuations.map(v => v.value);
-  return { finalValue: final, confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low', confidencePct: confidencePct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) } };
+  return { finalValue: final, confidence: confidencePct >= 75 ? 'high' : confidencePct >= 50 ? 'medium' : 'low', confidencePct: confidencePct, valuations, range: { low: Math.round(Math.min(...vals)*.92), high: Math.round(Math.max(...vals)*1.08) }, shadowEnabled: Boolean(shadowConfig.enabled), shadowValue: Math.round(final * shadowTrace.multiplier), shadowMultiplier: shadowTrace.multiplier, shadowTrace };
 }
 function buildDecisionEngineLink(result, propData) {
   const p = new URLSearchParams();
@@ -1338,6 +1346,7 @@ function displayResult(result, valuations, propData) {
   const confLevel = result.confidencePct >= 80 ? '🟢 High' : result.confidencePct >= 60 ? '🟡 Medium' : '🔴 Basic';
   const dldCount = Number(scrapedDistrictData?.count || 0);
   const evidenceConfidence = dldCount > 0 ? confLevel : '⚪ Not available';
+  const shadowHTML = result.shadowEnabled ? `<div class="evidence-state warning"><strong>Experimental shadow multiplier</strong>Shadow value: <b>AED ${result.shadowValue.toLocaleString()}</b> (${result.shadowMultiplier.toFixed(4)}× baseline). This is analysis-only and does not replace the official valuation.<small>${(result.shadowTrace.applied || []).map(item => `${item.field}: ${Number(item.multiplier).toFixed(4)}×`).join(' • ') || 'No applicable v2.1 multiplier was applied.'}</small></div>` : '';
   const methodLabels = {
     'sales-comparison': 'Sales Comparison Approach',
     income: 'Income Capitalization Approach',
@@ -1379,7 +1388,7 @@ function displayResult(result, valuations, propData) {
     vHTML += `<div class="method-card"><div class="m-header"><span class="m-name">${v.method}</span><span style="font-size:10px;color:${cColor}">● ${v.confidence} confidence</span></div><div class="m-value">${v.value.toLocaleString()} AED</div><div class="m-meta"><span>Weight: ${Math.round(v.weight*100)}%</span>${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}</div><div class="m-detail">${v.details}</div></div>`;
   });
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div><div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Methods</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Methods</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }

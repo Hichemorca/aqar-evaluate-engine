@@ -79,7 +79,7 @@
       const evidenceCount = numberOr(input.projectEvidenceCount, 0);
       const minimumEvidence = Math.max(1, numberOr(config.minProjectEvidence, DEFAULT_MIN_EVIDENCE));
       const projectKey = keyForProject(input);
-      const configured = typeConfig.projectBuilding?.projectMultipliers?.[projectKey];
+      const configured = typeConfig.projectBuilding?.projectMultipliers?.[projectKey] ?? typeConfig.projectBuilding?.defaultMultiplier ?? NEUTRAL;
       if (evidenceCount >= minimumEvidence && Number.isFinite(Number(configured))) {
         factors.projectBuilding = numberOr(configured, NEUTRAL);
         applied.push({ field: 'projectBuilding', value: input.projectBuilding, evidenceCount, multiplier: factors.projectBuilding, source: 'DLD-project-config' });

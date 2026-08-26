@@ -82,6 +82,27 @@
     return JSON.parse(JSON.stringify(value));
   }
 
+  function createDefaultV21ShadowConfig() {
+    if (typeof AQAR_V21_SHADOW_MULTIPLIERS !== 'undefined' && AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig) {
+      return AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
+    }
+    const propertyTypes = {};
+    for (const propertyType of PROPERTY_TYPES) {
+      propertyTypes[propertyType] = {
+        projectBuilding: { defaultMultiplier: 1, projectMultipliers: {} },
+        buaPlotArea: { bands: [
+          { maxRatio: 0.25, multiplier: 1 }, { maxRatio: 0.5, multiplier: 1 },
+          { maxRatio: 0.75, multiplier: 1 }, { maxRatio: 1, multiplier: 1 }, { maxRatio: null, multiplier: 1 }
+        ] },
+        lastRenovation: { bands: [
+          { maxAgeYears: 2, multiplier: 1 }, { maxAgeYears: 5, multiplier: 1 },
+          { maxAgeYears: 10, multiplier: 1 }, { maxAgeYears: null, multiplier: 1 }
+        ] }
+      };
+    }
+    return { schemaVersion: 1, enabled: false, minProjectEvidence: 5, combinedMinimumMultiplier: 0.85, combinedMaximumMultiplier: 1.15, propertyTypes };
+  }
+
   function createDefaultCalibrationConfig() {
     const propertyTypes = {};
     for (const propertyType of PROPERTY_TYPES) {
@@ -109,7 +130,8 @@
       updatedAt: '2026-08-25T00:00:00.000Z',
       updatedBy: 'system-default',
       propertyTypes,
-      gis: clone(baseGIS)
+      gis: clone(baseGIS),
+      v21ShadowMultipliers: createDefaultV21ShadowConfig()
     };
   }
 

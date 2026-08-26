@@ -45,7 +45,8 @@ function createStore(event) {
 }
 
 async function readActive(store) {
-  return (await store.get(ACTIVE_KEY, { type: 'json' })) || calibrationDefaults.createDefaultCalibrationConfig();
+  const stored = await store.get(ACTIVE_KEY, { type: 'json' });
+  return deepMergeKnown(calibrationDefaults.createDefaultCalibrationConfig(), stored || {});
 }
 
 async function readHistory(store) {
