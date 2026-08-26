@@ -1,6 +1,40 @@
 ﻿// AQAR OSM Data Fetcher — Real Data from OpenStreetMap with Optimized Timeout
 const axios = require('axios');
 
+const DUBAI_BOUNDS = Object.freeze({ minLat: 24.6, maxLat: 25.7, minLng: 54.6, maxLng: 55.8 });
+const MAX_CACHE_ENTRIES = 250;
+const GIS_RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const GIS_RATE_LIMIT_MAX = 30;
+const GIS_RATE_LIMIT_MAX_KEYS = 5000;
+const gisRateLimit = new Map();
+
+function isWithinSupportedBounds(lat, lng) {
+  return lat >= DUBAI_BOUNDS.minLat && lat <= DUBAI_BOUNDS.maxLat && lng >= DUBAI_BOUNDS.minLng && lng <= DUBAI_BOUNDS.maxLng;
+}
+
+function rateLimitKey(event) {
+  return event?.headers?.['x-nf-client-connection-ip'] || event?.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'anonymous';
+}
+
+function isRateLimited(event) {
+  const key = rateLimitKey(event);
+  const now = Date.now();
+  for (const [storedKey, stored] of gisRateLimit) {
+    if (now - stored.startedAt >= GIS_RATE_LIMIT_WINDOW_MS) gisRateLimit.delete(storedKey);
+  }
+  if (!gisRateLimit.has(key) && gisRateLimit.size >= GIS_RATE_LIMIT_MAX_KEYS) {
+    const oldest = [...gisRateLimit.entries()].sort((left, right) => left[1].startedAt - right[1].startedAt)[0];
+    if (oldest) gisRateLimit.delete(oldest[0]);
+  }
+  const current = gisRateLimit.get(key);
+  if (!current || now - current.startedAt >= GIS_RATE_LIMIT_WINDOW_MS) {
+    gisRateLimit.set(key, { startedAt: now, count: 1 });
+    return false;
+  }
+  current.count += 1;
+  return current.count > GIS_RATE_LIMIT_MAX;
+}
+
 // ===== FACILITY TYPES =====
 const FACILITY_TYPES = {
   metro: {
@@ -80,13 +114,16 @@ function getCacheKey(lat, lng, radius) {
 
 function getCached(key) {
   const entry = gisCache.get(key);
-  if (entry && (Date.now() - entry.timestamp) < CACHE_TTL) {
-    return entry.data;
-  }
+  if (entry && (Date.now() - entry.timestamp) < CACHE_TTL) return entry.data;
+  if (entry) gisCache.delete(key);
   return null;
 }
 
 function setCache(key, data) {
+  if (gisCache.size >= MAX_CACHE_ENTRIES) {
+    const oldest = [...gisCache.entries()].sort((left, right) => left[1].timestamp - right[1].timestamp)[0];
+    if (oldest) gisCache.delete(oldest[0]);
+  }
   gisCache.set(key, { data, timestamp: Date.now() });
 }
 
@@ -301,20 +338,27 @@ async function reverseGeocode(lat, lng) {
 
 // ===== EXPORTS =====
 async function handler(event) {
+  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300, stale-while-revalidate=60' };
   if (event.httpMethod !== 'GET') {
-    return { statusCode: 405, headers: { Allow: 'GET', 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'Method not allowed' }) };
+    return { statusCode: 405, headers: { ...headers, Allow: 'GET' }, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
+  if (isRateLimited(event)) {
+    return { statusCode: 429, headers: { ...headers, 'Retry-After': '60' }, body: JSON.stringify({ error: 'Too many requests' }) };
   }
   const params = event.queryStringParameters || {};
   const lat = Number(params.lat), lng = Number(params.lng), radius = Number(params.radius || 1000);
-  if (!Number.isFinite(lat) || lat < -90 || lat > 90 || !Number.isFinite(lng) || lng < -180 || lng > 180 || !Number.isFinite(radius) || radius < 100 || radius > 5000) {
-    return { statusCode: 400, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'Valid lat, lng, and radius between 100 and 5000 meters are required' }) };
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || !Number.isFinite(radius) || radius < 100 || radius > 5000) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Valid lat, lng, and radius between 100 and 5000 meters are required' }) };
+  }
+  if (!isWithinSupportedBounds(lat, lng)) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Coordinates must be within the supported Dubai service area' }) };
   }
   try {
     const result = await fetchFacilities(lat, lng, radius);
-    return { statusCode: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' }, body: JSON.stringify(result) };
+    return { statusCode: 200, headers, body: JSON.stringify(result) };
   } catch (error) {
     console.error('OSM handler error:', error.message);
-    return { statusCode: 502, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'OSM facility service unavailable' }) };
+    return { statusCode: 502, headers, body: JSON.stringify({ error: 'OSM facility service unavailable' }) };
   }
 }
 
@@ -323,7 +367,14 @@ module.exports = {
   geocodeAddress,
   reverseGeocode,
   FACILITY_TYPES,
-  handler
+  handler,
+  DUBAI_BOUNDS,
+  MAX_CACHE_ENTRIES,
+  isWithinSupportedBounds,
+  getCached,
+  setCache,
+  gisCache,
+  isRateLimited
 };
 
 // اختبار

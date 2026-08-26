@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const { handler } = require('../netlify/functions/dld-lookup');
 
 async function invoke(queryStringParameters) {
-  const response = await handler({ queryStringParameters });
+  const response = await handler({ httpMethod: 'GET', queryStringParameters });
   return { statusCode: response.statusCode, body: JSON.parse(response.body) };
 }
 

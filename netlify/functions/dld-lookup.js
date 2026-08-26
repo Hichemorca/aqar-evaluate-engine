@@ -7,26 +7,60 @@ const url = require('url');
 const { getSizeCategory, applyAllFilters } = require('../../scripts/cleaning-pipeline');
 const { isSupportedPropertyType } = require('../../shared/aqar-policy');
 
+const DLD_CACHE_TTL_MS = 5 * 60 * 1000;
+const DLD_REQUEST_TIMEOUT_MS = 15000;
+const MAX_DLD_BODY_BYTES = 80 * 1024 * 1024;
+const PUBLIC_ORIGIN = 'https://aqar-valuation-engine.netlify.app';
+let dldCache = { data: null, expiresAt: 0 };
+let dldFetchInFlight = null;
+
 // ============================================================
 // HELPERS
 // ============================================================
-
 function fetchDLDData() {
-  return new Promise((resolve, reject) => {
-    const baseUrl = process.env.URL || 'https://aqar-evaluate-engine.netlify.app';
+  if (dldCache.data && Date.now() < dldCache.expiresAt) return Promise.resolve(dldCache.data);
+  if (dldFetchInFlight) return dldFetchInFlight;
+
+  dldFetchInFlight = new Promise((resolve, reject) => {
+    const baseUrl = process.env.URL || PUBLIC_ORIGIN;
     const fileUrl = `${baseUrl}/data/dld-transactions.json`;
     console.log('🔍 Fetching:', fileUrl);
-    const req = https.get(fileUrl, (res) => {
+    const req = https.get(fileUrl, { headers: { Accept: 'application/json' } }, (res) => {
       let data = '';
-      res.on('data', chunk => data += chunk);
+      let bodyBytes = 0;
+      const timeout = setTimeout(() => res.destroy(new Error('DLD request timeout')), DLD_REQUEST_TIMEOUT_MS);
+      res.setEncoding('utf8');
+      res.on('data', chunk => {
+        bodyBytes += Buffer.byteLength(chunk, 'utf8');
+        if (bodyBytes > MAX_DLD_BODY_BYTES) res.destroy(new Error('DLD response too large'));
+        else data += chunk;
+      });
+      res.on('error', error => { clearTimeout(timeout); reject(error); });
       res.on('end', () => {
-        try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error('Invalid JSON: ' + e.message)); }
+        clearTimeout(timeout);
+        if (res.statusCode !== 200) return reject(new Error(`DLD source returned HTTP ${res.statusCode}`));
+        try {
+          const parsed = JSON.parse(data);
+          if (!Array.isArray(parsed)) return reject(new Error('DLD source returned an invalid dataset'));
+          dldCache = { data: parsed, expiresAt: Date.now() + DLD_CACHE_TTL_MS };
+          resolve(parsed);
+        } catch (error) {
+          reject(new Error('DLD source returned invalid JSON'));
+        }
       });
     });
+    req.setTimeout(DLD_REQUEST_TIMEOUT_MS, () => req.destroy(new Error('DLD request timeout')));
     req.on('error', reject);
-    req.end();
-  });
+  }).finally(() => { dldFetchInFlight = null; });
+
+  return dldFetchInFlight;
+}
+
+function getCorsHeaders(event) {
+  const origin = event?.headers?.origin || event?.headers?.Origin;
+  const headers = { 'Access-Control-Allow-Headers': 'Content-Type', Vary: 'Origin' };
+  if (origin === (process.env.URL || PUBLIC_ORIGIN)) headers['Access-Control-Allow-Origin'] = origin;
+  return headers;
 }
 
 function median(values) {
@@ -150,100 +184,106 @@ function adaptiveSearch(district, propertyType, sizeCat, transactions, targetDat
 // HANDLER
 // ============================================================
 
+const dldRateLimit = new Map();
+const DLD_RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const DLD_RATE_LIMIT_MAX = 60;
+const DLD_RATE_LIMIT_MAX_KEYS = 5000;
+
+function rateLimitKey(event) {
+  return event?.headers?.['x-nf-client-connection-ip'] || event?.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'anonymous';
+}
+
+function isRateLimited(event) {
+  const key = rateLimitKey(event);
+  const now = Date.now();
+  for (const [storedKey, stored] of dldRateLimit) {
+    if (now - stored.startedAt >= DLD_RATE_LIMIT_WINDOW_MS) dldRateLimit.delete(storedKey);
+  }
+  if (!dldRateLimit.has(key) && dldRateLimit.size >= DLD_RATE_LIMIT_MAX_KEYS) {
+    const oldest = [...dldRateLimit.entries()].sort((left, right) => left[1].startedAt - right[1].startedAt)[0];
+    if (oldest) dldRateLimit.delete(oldest[0]);
+  }
+  const current = dldRateLimit.get(key);
+  if (!current || now - current.startedAt >= DLD_RATE_LIMIT_WINDOW_MS) {
+    dldRateLimit.set(key, { startedAt: now, count: 1 });
+    return false;
+  }
+  current.count += 1;
+  return current.count > DLD_RATE_LIMIT_MAX;
+}
+
+function jsonResponse(statusCode, headers, payload) {
+  return { statusCode, headers, body: JSON.stringify(payload) };
+}
+
 exports.handler = async (event) => {
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type'
+    'Content-Type': 'application/json; charset=utf-8',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET',
+    'Cache-Control': 'public, max-age=300, stale-while-revalidate=60',
+    Vary: 'Origin'
   };
+  const corsHeaders = getCorsHeaders(event);
+  Object.assign(headers, corsHeaders);
+
+  if (event.httpMethod !== 'GET') return jsonResponse(405, { ...headers, Allow: 'GET' }, { found: false, error: 'Method not allowed' });
+  if (isRateLimited(event)) return jsonResponse(429, { ...headers, 'Retry-After': '60' }, { found: false, error: 'Too many requests' });
 
   try {
-    const { district, propertyType, area } = event.queryStringParameters || {};
+    const { district: rawDistrict, propertyType, area } = event.queryStringParameters || {};
+    const district = typeof rawDistrict === 'string' ? rawDistrict.trim() : '';
 
-    if (!district || !propertyType || !area) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ found: false, error: 'district, propertyType, and area are required' })
-      };
+    if (!district || district.length > 120 || !propertyType || !area) {
+      return jsonResponse(400, headers, { found: false, error: 'district, propertyType, and area are required' });
     }
 
     const numericArea = Number(area);
     if (!isSupportedPropertyType(propertyType) || !Number.isFinite(numericArea) || numericArea <= 0) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ found: false, error: 'Unsupported property type or invalid area' })
-      };
+      return jsonResponse(400, headers, { found: false, error: 'Unsupported property type or invalid area' });
     }
 
     const raw = await fetchDLDData();
-    if (!raw || raw.length === 0) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ found: false, error: 'No DLD data' })
-      };
-    }
+    if (!raw || raw.length === 0) return jsonResponse(503, headers, { found: false, error: 'DLD data unavailable' });
 
     const cleaned = applyAllFilters(raw);
-    if (cleaned.length === 0) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ found: false, error: 'No clean data' })
-      };
-    }
+    if (cleaned.length === 0) return jsonResponse(503, headers, { found: false, error: 'DLD data unavailable' });
 
     const size = getSizeCategory(numericArea, propertyType);
     const result = adaptiveSearch(district, propertyType, size, cleaned, new Date());
 
     if (!result) {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          found: false,
-          reason: 'no-sufficient-data',
-          district,
-          propertyType,
-          size
-        })
-      };
+      return jsonResponse(200, headers, {
+        found: false,
+        reason: 'no-sufficient-data',
+        district,
+        propertyType,
+        size
+      });
     }
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        found: true,
-        avgPricePerSqm: result.avgPricePerSqm,
-        minComparablePrice: result.minComparablePrice,
-        maxComparablePrice: result.maxComparablePrice,
-        comparablePrices: result.comparablePrices,
-        comparablePriceBasis: result.comparablePriceBasis,
-        count: result.count,
-        timeWindow: result.timeWindow,
-        confidence: result.confidence,
-        monthlyGrowthRate: result.monthlyGrowthRate,
-        level: result.level,
-        source: 'dld',
-        weight: 1.0,
-        generatedAt: new Date().toISOString()
-      })
-    };
-
+    return jsonResponse(200, headers, {
+      found: true,
+      avgPricePerSqm: result.avgPricePerSqm,
+      minComparablePrice: result.minComparablePrice,
+      maxComparablePrice: result.maxComparablePrice,
+      comparablePrices: result.comparablePrices,
+      comparablePriceBasis: result.comparablePriceBasis,
+      count: result.count,
+      timeWindow: result.timeWindow,
+      confidence: result.confidence,
+      monthlyGrowthRate: result.monthlyGrowthRate,
+      level: result.level,
+      source: 'dld',
+      weight: 1.0,
+      generatedAt: new Date().toISOString()
+    });
   } catch (error) {
-    console.error('❌ Error:', error);
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        found: false,
-        error: error.message
-      })
-    };
+    console.error('❌ DLD lookup error:', error.message);
+    return jsonResponse(502, headers, { found: false, error: 'DLD lookup unavailable' });
   }
 };
 
 module.exports.buildResult = buildResult;
 module.exports.adaptiveSearch = adaptiveSearch;
+module.exports.getCorsHeaders = getCorsHeaders;
