@@ -654,6 +654,7 @@
 <script src="/shared/calibration-engine.js"></script>
   <script src="/shared/evidence-state.js"></script>
   <script src="/shared/district-map-linking.js"></script>
+  <script src="/shared/comparable-bracket.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 let AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig();
@@ -774,16 +775,7 @@ async function loadMarketIntelligence() {
   return marketIntelligenceData;
 }
 function getComparableBracket(targetValue, prices) {
-  const target = Number(targetValue);
-  const values = Array.isArray(prices) ? prices.map(Number).filter(price => Number.isFinite(price) && price > 0).sort((a, b) => a - b) : [];
-  if (!Number.isFinite(target) || !values.length) return null;
-  const lower = [...values].reverse().find(price => price < target);
-  const upper = values.find(price => price > target);
-  if (!Number.isFinite(lower) || !Number.isFinite(upper)) return null;
-  return {
-    lower: Number.isFinite(lower) ? lower : values[0],
-    upper: Number.isFinite(upper) ? upper : values[values.length - 1]
-  };
+  return AQAR_COMPARABLE_BRACKET.getComparableBracket(targetValue, prices);
 }
 function buildMarketContextHTML(result, propData) {
   const segment = findMarketSegment(propData.district, propData.propType);
