@@ -16,11 +16,11 @@
   <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
 <body>
-  <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine"><img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR — Valuation Intelligence Engine" /></a>
+  <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine"><img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR &mdash; Valuation Intelligence Engine" /></a>
   <div class="miayaar-page-title">Data Export</div>
   <div class="stats" id="stats">Loading...</div>
-  <button class="btn btn-csv" onclick="exportCSV()">?? Download CSV (Excel)</button>
-  <button class="btn btn-json" onclick="exportJSON()">?? Download JSON</button>
+  <button class="btn btn-csv" onclick="exportCSV()">Download CSV (Excel)</button>
+  <button class="btn btn-json" onclick="exportJSON()">Download JSON</button>
   <br><br>
   <a href="/admin-calibration" class="admin-link">Admin Login</a>
   <a href="/accuracy-dashboard" style="color:#8a9ab0;font-size:12px">Back to Dashboard</a>
@@ -33,12 +33,12 @@
         const res = await fetch('/data/accuracy-data.json');
         data = await res.json();
         document.getElementById('stats').innerHTML = `
-          ? ${data.metrics.totalRecords} transactions loaded | 
+          &bull; ${data.metrics.totalRecords} transactions loaded |
           MIAYAAR accuracy: <b style="color:#00b86e">${data.metrics.avgAccuracy}%</b> |
-          Deviation: ±${data.metrics.avgDeviation}%
+          Deviation: &plusmn;${data.metrics.avgDeviation}%
         `;
       } catch(e) {
-        document.getElementById('stats').textContent = '? Data not available';
+        document.getElementById('stats').textContent = 'Data not available';
       }
     }
 

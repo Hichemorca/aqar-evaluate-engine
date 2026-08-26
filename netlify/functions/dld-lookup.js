@@ -65,9 +65,13 @@ function getTimeAdjustedPrice(saleDate, pricePerSqm, growth, months) {
 function buildResult(transactions, windows, targetDate, level) {
   const growth = monthlyGrowthRate(transactions);
   for (const days of windows) {
-    const cutoff = new Date(targetDate);
-    cutoff.setDate(cutoff.getDate() - days);
-    const filtered = transactions.filter(t => new Date(t.saleDate) >= cutoff);
+    const filtered = days === Infinity
+      ? transactions
+      : (() => {
+          const cutoff = new Date(targetDate);
+          cutoff.setDate(cutoff.getDate() - days);
+          return transactions.filter(t => new Date(t.saleDate) >= cutoff);
+        })();
     if (filtered.length >= 5) {
       const adjusted = filtered.map(t => {
         const months = (targetDate - new Date(t.saleDate)) / (30.44 * 86400000);
@@ -240,3 +244,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
+module.exports.buildResult = buildResult;
+module.exports.adaptiveSearch = adaptiveSearch;
