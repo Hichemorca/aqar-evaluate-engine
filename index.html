@@ -405,7 +405,7 @@
     <div class="row" id="rowYearCondition">
       <div class="fg">
         <label>📅 Year Built</label>
-        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026">
+        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026" oninput="updateExtraFieldVisibility()">
       </div>
       <div class="fg">
         <label>⭐ Condition</label>
@@ -505,6 +505,35 @@
       </div>
     </div>
   </div>
+  <div class="section" id="propertyExtraSection">
+    <div class="section-title">🏠 Additional Property Details</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional details used for project matching and later evidence analysis.</div>
+    <div class="row" id="rowProjectBuilding" style="display:none">
+      <div class="fg">
+        <label>🏢 Project / Building Name</label>
+        <div class="autocomplete-container">
+          <input type="text" id="projectBuildingInput" placeholder="Choose from DLD projects..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
+          <div class="autocomplete-list" id="projectBuildingAutocomplete"></div>
+          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a DLD suggestion or leave as Unknown.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="rowPropertyAreas" style="display:none">
+      <div class="fg" id="fgBua" style="display:none">
+        <label>📐 BUA (Built-up Area, sqm)</label>
+        <input type="number" id="bua" min="1" step="0.01" placeholder="e.g. 250">
+      </div>
+      <div class="fg" id="fgPlotArea" style="display:none">
+        <label>🧱 Plot Area (sqm)</label>
+        <input type="number" id="plotArea" min="1" step="0.01" placeholder="e.g. 500">
+      </div>
+    </div>
+    <div class="fg" id="fgLastRenovation" style="display:none">
+      <label>🛠️ Last Renovation Year</label>
+      <input type="number" id="lastRenovationYear" min="1900" max="2026" step="1" placeholder="e.g. 2022">
+      <div class="note" style="font-size:10px;color:var(--muted);margin-top:4px">Shown for properties older than five years.</div>
+    </div>
+  </div>
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Facilities</div>
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a DLD district to center the map on its representative location; adjust the marker if needed.</div>
@@ -571,6 +600,7 @@
   </div>
 </div>
 <script src="/shared/aqar-policy.js"></script>
+<script src="/shared/property-extra-fields.js"></script>
 <script src="/shared/aqar-calibration-defaults.js"></script>
 <script src="/shared/calibration-engine.js"></script>
   <script src="/shared/evidence-state.js"></script>
@@ -642,6 +672,8 @@ let districtCoordsMap = {};
 let resolvedDistrictCoords = {};
 let districtResolveRequestId = 0;
 let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null;
+let dldTransactionsCache = [];
+let selectedProjectBuilding = '';
 let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
 let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
 // Centroid matching is deliberately conservative: an unknown point must not inherit a distant DLD district.
@@ -705,6 +737,7 @@ async function loadDistrictsFromDLD() {
     const response = await fetch('/data/dld-transactions.json');
     if (!response.ok) throw new Error('Failed to fetch DLD data');
     const data = await response.json();
+    dldTransactionsCache = Array.isArray(data) ? data : [];
     const districts = new Set();
     data.forEach(t => {
       if (t.district && t.district !== 'Unknown' && t.district !== '') {
@@ -724,6 +757,88 @@ async function loadDistrictsFromDLD() {
   countEl.textContent = `📋 Using ${dubaiDistrictsList.length} districts (fallback)`;
 }
 
+function projectOptionsForCurrentContext() {
+  const type = document.getElementById('propType').value;
+  const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
+  const options = new Set();
+  dldTransactionsCache.forEach(row => {
+    if (row.propertyType !== type) return;
+    const rowDistrict = String(row.district || '').toLowerCase();
+    if (district && !(rowDistrict.includes(district) || district.includes(rowDistrict))) return;
+    [row.masterProject, row.project].forEach(value => { if (value && String(value).trim()) options.add(String(value).trim()); });
+  });
+  return [...options].sort((a, b) => a.localeCompare(b));
+}
+function refreshProjectSuggestions() {
+  const input = document.getElementById('projectBuildingInput');
+  const row = document.getElementById('rowProjectBuilding');
+  if (!input || !row) return;
+  const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(document.getElementById('propType').value, document.getElementById('yearBuilt').value);
+  row.style.display = visibility.projectBuilding ? 'flex' : 'none';
+  if (!visibility.projectBuilding) { selectedProjectBuilding = ''; input.value = ''; document.getElementById('projectBuildingAutocomplete').style.display = 'none'; }
+  else if (selectedProjectBuilding && !projectOptionsForCurrentContext().includes(selectedProjectBuilding)) { selectedProjectBuilding = ''; input.value = ''; }
+  updateProjectBuildingNotice();
+}
+function getProjectEvidence(name) {
+  const normalized = String(name || '').trim().toLowerCase();
+  if (!normalized) return { count: 0, verified: false };
+  const rows = dldTransactionsCache.filter(row => {
+    if (row.propertyType !== document.getElementById('propType').value) return false;
+    const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
+    const rowDistrict = String(row.district || '').toLowerCase();
+    if (district && !(rowDistrict.includes(district) || district.includes(rowDistrict))) return false;
+    return [row.masterProject, row.project].some(value => String(value || '').trim().toLowerCase() === normalized);
+  });
+  return { count: rows.length, verified: rows.length > 0 };
+}
+function updateProjectBuildingNotice() {
+  const input = document.getElementById('projectBuildingInput');
+  const notice = document.getElementById('projectBuildingNotice');
+  if (!input || !notice) return;
+  const value = input.value.trim();
+  if (!value) { notice.textContent = 'Choose a DLD suggestion or leave as Unknown.'; notice.style.color = 'var(--muted)'; return; }
+  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { notice.textContent = 'No verified DLD project match. District evidence remains the fallback; no project price is invented.'; notice.style.color = 'var(--gold)'; return; }
+  const evidence = getProjectEvidence(value);
+  if (evidence.count < 5) { notice.textContent = `Limited DLD project evidence (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). District evidence remains the fallback.`; notice.style.color = 'var(--gold)'; }
+  else { notice.textContent = `DLD project evidence: ${evidence.count} transactions. Project data is captured for isolated analysis; current valuation remains district-based.`; notice.style.color = 'var(--green)'; }
+}
+function onProjectBuildingInput(value) {
+  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== String(value || '').trim().toLowerCase()) selectedProjectBuilding = '';
+  filterProjectBuildings(value);
+  updateProjectBuildingNotice();
+}
+function filterProjectBuildings(q) {
+  const list = document.getElementById('projectBuildingAutocomplete');
+  const input = document.getElementById('projectBuildingInput');
+  if (!list || !input) return;
+  const options = projectOptionsForCurrentContext().filter(name => !q || name.toLowerCase().includes(q.toLowerCase().trim()));
+  list.replaceChildren();
+  if (!options.length) {
+    list.style.display = q ? 'block' : 'none';
+    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No DLD projects found in this district'; list.appendChild(empty); }
+    return;
+  }
+  options.slice(0, 15).forEach(name => { const item = document.createElement('div'); item.className = 'item'; item.textContent = name; item.onclick = () => selectProjectBuilding(name); list.appendChild(item); });
+  list.style.display = 'block';
+}
+function selectProjectBuilding(name) {
+  selectedProjectBuilding = name;
+  document.getElementById('projectBuildingInput').value = name;
+  document.getElementById('projectBuildingAutocomplete').style.display = 'none';
+  updateProjectBuildingNotice();
+}
+function updateExtraFieldVisibility() {
+  const type = document.getElementById('propType').value;
+  const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(type, document.getElementById('yearBuilt').value);
+  document.getElementById('rowPropertyAreas').style.display = (visibility.bua || visibility.plotArea) ? 'flex' : 'none';
+  document.getElementById('fgBua').style.display = visibility.bua ? '' : 'none';
+  document.getElementById('fgPlotArea').style.display = visibility.plotArea ? '' : 'none';
+  document.getElementById('fgLastRenovation').style.display = visibility.renovationYear ? '' : 'none';
+  if (!visibility.bua) document.getElementById('bua').value = '';
+  if (!visibility.plotArea) document.getElementById('plotArea').value = '';
+  if (!visibility.renovationYear) document.getElementById('lastRenovationYear').value = '';
+  refreshProjectSuggestions();
+}
 function filterDistricts(q) {
   const c = document.getElementById('districtAutocomplete');
   if (!q || q.length < 1) { c.style.display = 'none'; return; }
@@ -776,6 +891,7 @@ async function selectDistrict(d) {
   document.getElementById('selectedDistrict').value = d;
   document.getElementById('selectedDistrictDisplay').textContent = d;
   document.getElementById('districtAutocomplete').style.display = 'none';
+  refreshProjectSuggestions();
   const requestId = ++districtResolveRequestId;
   const c = await resolveDistrictCoords(d);
   if (requestId !== districtResolveRequestId) return;
@@ -803,11 +919,16 @@ function updateDistrictFromMapPoint(lat, lng) {
     input.value = match.name;
     hidden.value = match.name;
     display.textContent = match.name;
+    refreshProjectSuggestions();
     return match;
   }
   input.value = '';
   hidden.value = '';
   display.textContent = 'No matching DLD district';
+  selectedProjectBuilding = '';
+  const projectInput = document.getElementById('projectBuildingInput');
+  if (projectInput) projectInput.value = '';
+  refreshProjectSuggestions();
   return null;
 }
 function handleViewTypeChange(cb) {
@@ -1046,9 +1167,19 @@ function collectPropertyData() {
   }
   const readNumber = field => isRelevant(field) ? (parseFloat(document.getElementById(field).value) || 0) : 0;
   const readValue = field => isRelevant(field) ? document.getElementById(field).value : '';
+  const extraReadNumber = field => {
+    const value = document.getElementById(field).value;
+    return value === '' ? '' : parseFloat(value);
+  };
   return {
     city: document.getElementById('city').value,
     district: document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value,
+    projectBuilding: document.getElementById('projectBuildingInput').value.trim(),
+    projectBuildingSource: selectedProjectBuilding ? 'dld-suggestion' : (document.getElementById('projectBuildingInput').value.trim() ? 'user-entered' : ''),
+    projectEvidenceCount: selectedProjectBuilding ? getProjectEvidence(selectedProjectBuilding).count : 0,
+    bua: extraReadNumber('bua'),
+    plotArea: extraReadNumber('plotArea'),
+    lastRenovationYear: extraReadNumber('lastRenovationYear'),
     propType,
     area: parseFloat(document.getElementById('area').value) || 0,
     bedrooms: isRelevant('bedrooms') ? (parseInt(document.getElementById('bedrooms').value) || 0) : 0,
@@ -1069,7 +1200,8 @@ function collectPropertyData() {
     buildingCondition: readValue('buildingCondition'),
     furnishedStatus: readValue('furnishedStatus'),
     gisData: gisData,
-    gisRadius: 1000
+    gisRadius: 1000,
+    extraFieldsVersion: 'v2.1-ui-only'
   };
 }
 function salesComparisonApproach(data) {
@@ -1224,6 +1356,10 @@ function displayResult(result, valuations, propData) {
   const evidenceStateHTML = `<div class="evidence-state ${evidencePresentation.tone}"><strong>${evidencePresentation.title}</strong>${evidencePresentation.message}${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<small>Review the comparable sample before relying on this result.</small>' : ''}</div>`;
   const evidenceHTML = `<div style="margin-top:10px"><b>Evidence classification</b><br><span style="color:var(--muted)">SOURCE FACT:</span> ${scrapedDistrictData?.count || 0} DLD comparable sales${scrapedDistrictData?.avgPricePerSqm ? `; ${Number(scrapedDistrictData.avgPricePerSqm).toLocaleString()} AED/sqm` : ''}.<br><span style="color:var(--muted)">DERIVED VALUE:</span> weighted reconciliation of the methods shown below.<br><span style="color:var(--muted)">ASSUMPTION:</span> optional rent/expense and consultancy defaults remain those of the current AQAR behavior.<br><span style="color:var(--muted)">MODEL OUTPUT:</span> final value and range shown above.</div>`;
   const adjustmentFacts = [
+    propData.projectBuilding ? `Project / Building: ${propData.projectBuilding} (${propData.projectBuildingSource === 'dld-suggestion' ? 'DLD suggestion' : 'user-entered'})` : '',
+    propData.bua ? `BUA: ${propData.bua} sqm` : '',
+    propData.plotArea ? `Plot area: ${propData.plotArea} sqm` : '',
+    propData.lastRenovationYear ? `Last renovation: ${propData.lastRenovationYear}` : '',
     propData.condition ? `Condition: ${propData.condition}` : '',
     propData.finishQuality ? `Finish: ${propData.finishQuality}` : '',
     propData.viewTypes?.length ? `Views: ${propData.viewTypes.join(', ')}` : '',
@@ -1254,6 +1390,13 @@ function runValuation() {
   document.getElementById('resultSection').innerHTML = '';
   setTimeout(() => {
     const propData = collectPropertyData();
+    const extraValidation = AQAR_PROPERTY_EXTRA_FIELDS.validate(propData);
+    if (!extraValidation.valid) {
+      showToast(extraValidation.errors.map(error => error.code).join(', '));
+      document.getElementById('btnValuate').disabled = false;
+      document.getElementById('btnValuate').innerHTML = '🧮 Calculate Valuation';
+      return;
+    }
     const validation = AQAR_POLICY.validatePropertyInput(propData);
     if (!validation.valid) {
       showToast(validation.errors.map(error => error.code).join(', '));
@@ -1305,6 +1448,11 @@ function resetAll() {
   document.getElementById('annualExpenses').value = '';
   document.getElementById('landValue').value = '';
   document.getElementById('constructionCost').value = '';
+  document.getElementById('projectBuildingInput').value = '';
+  document.getElementById('bua').value = '';
+  document.getElementById('plotArea').value = '';
+  document.getElementById('lastRenovationYear').value = '';
+  selectedProjectBuilding = '';
   document.getElementById('finishQuality').value = '';
   document.querySelectorAll('#viewTypeGroup input[type="checkbox"]').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
   document.getElementById('floorLevel').value = '';
@@ -1401,6 +1549,7 @@ function onPropertyTypeChange() {
   document.getElementById('fgStreetPosition').style.display = isRelevant('streetPosition') ? '' : 'none';
   document.getElementById('fgBuildingCondition').style.display = isRelevant('buildingCondition') ? '' : 'none';
   document.getElementById('fgFurnishedStatus').style.display = isRelevant('furnishedStatus') ? '' : 'none';
+  updateExtraFieldVisibility();
   if (policy) {
     const fieldElements = {
       bedrooms: document.getElementById('bedrooms'),
