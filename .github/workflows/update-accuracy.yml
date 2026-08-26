@@ -28,7 +28,9 @@ jobs:
           python-version: '3.11'
           
       - name: Install Node dependencies
-        run: npm install axios
+        run: npm ci
+      - name: Run test suite
+        run: npm test
         
       - name: Install Python dependencies
         run: pip install xgboost pandas numpy scikit-learn
