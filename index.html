@@ -900,6 +900,8 @@ function updateProjectMapLabel() {
 function updateExtraFieldVisibility() {
   const type = document.getElementById('propType').value;
   const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(type, document.getElementById('yearBuilt').value);
+  const hasVisibleField = visibility.bua || visibility.plotArea || visibility.renovationYear;
+  document.getElementById('propertyExtraSection').style.display = hasVisibleField ? 'block' : 'none';
   document.getElementById('rowPropertyAreas').style.display = (visibility.bua || visibility.plotArea) ? 'flex' : 'none';
   document.getElementById('fgBua').style.display = visibility.bua ? '' : 'none';
   document.getElementById('fgPlotArea').style.display = visibility.plotArea ? '' : 'none';
