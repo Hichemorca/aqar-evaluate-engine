@@ -591,6 +591,10 @@
     <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">🧮 Calculate Valuation</button>
     <button class="btn btn-reset" onclick="resetAll()" style="flex:1">Reset</button>
   </div>
+  <div id="observationConsentRow" style="margin-top:12px;padding:10px 12px;border:1px solid rgba(91,167,255,0.18);border-radius:10px;background:rgba(91,167,255,0.05);font-size:10px;line-height:1.55;color:var(--muted)">
+    <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="observationConsent" style="margin-top:2px"><span>Help improve AQAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
+    <div id="observationStatus" style="margin-top:5px;color:var(--muted)" aria-live="polite"></div>
+  </div>
   <div id="resultSection" class="hidden"></div>
   <div class="footer-links">
     <a href="/admin-calibration" class="admin-link">Admin Login</a>
@@ -1392,6 +1396,56 @@ function displayResult(result, valuations, propData) {
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
+function buildObservationPayload(propData, result) {
+  const verifiedProject = Boolean(selectedProjectBuilding && propData.projectBuildingSource === 'dld-suggestion' && propData.projectEvidenceCount >= Number(AQAR_V21_SHADOW_CONFIG.minProjectEvidence || 5));
+  const projectValue = verifiedProject ? propData.projectBuilding : null;
+  const trace = result.shadowTrace || {};
+  return {
+    consent: { analytics: true },
+    property: {
+      propertyType: propData.propType,
+      district: propData.district,
+      yearBuilt: propData.yearBuilt,
+      area: propData.area,
+      bedrooms: propData.bedrooms,
+      detailedUnitType: propData.detailedUnitType,
+      floor: propData.floor,
+      parkingCount: propData.parkingCount,
+      project: { value: projectValue, status: verifiedProject ? 'verified-dld' : 'unknown', source: verifiedProject ? 'dld-transactions' : null, normalizedKey: verifiedProject ? `${propData.propType}||${propData.district}||${propData.projectBuilding}`.toLowerCase() : null },
+      bua: propData.bua,
+      plotArea: propData.plotArea,
+      lastRenovationYear: propData.lastRenovationYear
+    },
+    valuation: {
+      baselineValue: result.finalValue,
+      shadowValue: result.shadowValue || result.finalValue,
+      shadowTrace: {
+        projectMultiplier: trace.factors?.projectBuilding ?? 1,
+        buaPlotMultiplier: trace.factors?.buaPlotArea ?? 1,
+        renovationMultiplier: trace.factors?.lastRenovation ?? 1,
+        combinedMultiplier: trace.multiplier ?? 1
+      },
+      calibrationConfigId: AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1',
+      evidenceState: propData.evidenceState
+    }
+  };
+}
+async function recordValuationObservation(propData, result) {
+  const checkbox = document.getElementById('observationConsent');
+  const status = document.getElementById('observationStatus');
+  if (!checkbox?.checked) { if (status) status.textContent = ''; return; }
+  if (status) { status.textContent = 'Saving anonymous observation…'; status.style.color = 'var(--muted)'; }
+  try {
+    const response = await fetch('/api/valuation-observation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildObservationPayload(propData, result)) });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
+    if (status) { status.textContent = 'Thank you. Your anonymous observation was saved for analysis.'; status.style.color = 'var(--green)'; }
+    window.aqarLastObservationId = payload.observationId || null;
+  } catch (error) {
+    console.warn('Observation was not saved:', error.message);
+    if (status) { status.textContent = 'Observation was not saved; your valuation is unaffected.'; status.style.color = 'var(--gold)'; }
+  }
+}
 function runValuation() {
   const area = parseFloat(document.getElementById('area').value);
   if (!area || area < 10) { document.getElementById('area').classList.add('error'); document.getElementById('area').focus(); showToast('Area must be at least 10 sqm'); setTimeout(() => document.getElementById('area').classList.remove('error'), 3000); return; }
@@ -1439,6 +1493,7 @@ function runValuation() {
     document.getElementById('btnValuate').disabled = false;
     document.getElementById('btnValuate').innerHTML = '🧮 Recalculate Valuation';
     saveToHistory(finalResult, propData);
+    recordValuationObservation(propData, finalResult);
   }, 800);
 }
 function resetAll() {
@@ -1488,6 +1543,10 @@ function resetAll() {
   document.getElementById('scrapedComps').innerHTML = '';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
+  const observationConsent = document.getElementById('observationConsent');
+  if (observationConsent) observationConsent.checked = false;
+  const observationStatus = document.getElementById('observationStatus');
+  if (observationStatus) observationStatus.textContent = '';
   document.querySelectorAll('#featuresGroup input:checked').forEach(cb => { cb.checked = false; cb.closest('.checkbox-item').classList.remove('checked'); });
   scrapedDistrictData = null;
   currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;

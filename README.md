@@ -94,7 +94,23 @@
 
 الإعداد النشط الموثق حاليًا هو `cal-1787651025399`، وإصدار المحرك `22.1.0`. لا تضع token الإداري في README أو commit أو command line أو logs. إذا احتاج السر إلى تغيير، يجب تدويره من إعدادات Netlify ثم اختبار المصادقة دون كشف قيمته.
 
-## 7. تنظيف بيانات DLD وسجل الأدلة
+## 7. User Input Observation Layer
+
+تحتفظ المنصة بحقول v2.1 الاختيارية وتتيح للمستخدم مشاركة مدخلات العقار ونتيجة التقييم للتحليل المجهول عبر موافقة اختيارية واضحة. عدم تحديد الموافقة لا يمنع التقييم ولا يغيّر القيمة الناتجة. عند الموافقة، يرسل المتصفح observation بعد اكتمال التقييم إلى `POST /api/valuation-observation`، ويكون فشل التسجيل غير حاجب للتقييم.
+
+تُحفظ observations في مساحة Netlify Blobs مستقلة باسم `aqar-input-observations`، ولا تُكتب في `data/accuracy-data.json` أو `data/dld-transactions.json` أو calibration history. كل سجل يحمل `schemaVersion` و`calibrationConfigId` و`baselineValue` و`shadowValue` و`shadowTrace` وحالة مصدر Project. القيم الفارغة وUnknown محايدة، والنص الحر للمشروع لا يُعامل كـDLD verified.
+
+| القاعدة | السلوك |
+|---|---|
+| Consent | opt-in صريح؛ لا يُسجل observation عند عدم الموافقة. |
+| Privacy | لا تُحفظ أسماء أو بريد أو هاتف أو authorization headers أو tokens أو أسرار. |
+| Validation | التحقق الخادمي يرفض النوع غير الصالح، الحقول غير المنطبقة، سنة التجديد غير الصحيحة، المشروع الموثق بلا مصدر DLD، والـpayload الكبير. |
+| Evidence | إدخال المستخدم ليس market truth؛ outcome لاحق لا يدخل أي تحليل Accuracy إلا بعد توثيقه. |
+| Production boundary | observations وshadow trace للتحليل فقط؛ لا تغيّر evaluator أو الأوزان أو fallback أو Accuracy الرسمية. |
+
+المواصفة الكاملة موجودة في `docs/v2.1-input-observation-spec.md`. مسار التسجيل في `netlify/functions/valuation-observation.js`، واختباراته في `tests/valuation-observation.test.js`. يجب مراجعة سياسة الاحتفاظ والخصوصية قبل فتح جمع البيانات على نطاق واسع.
+
+## 8. تنظيف بيانات DLD وسجل الأدلة
 
 الملف الخام `data/dld-transactions.csv` محفوظ كما هو ولا يُعدّل. ينتج `scripts/fetch-dld.js` طبقات منفصلة:
 
