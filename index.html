@@ -711,6 +711,7 @@ let districtCoordsMap = {};
 let resolvedDistrictCoords = {};
 let districtResolveRequestId = 0;
 let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null, gisRequestId = 0, gisAbortController = null;
+let marketIntelligenceData = null;
 let dldTransactionsCache = [];
 let selectedProjectBuilding = '';
 let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
@@ -736,6 +737,49 @@ function getCurrentEvidenceState(data = {}) {
     reason: data.reason || '',
     error: Boolean(data.error)
   });
+}
+function normalizeMarketLabel(value) {
+  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
+}
+function findMarketSegment(district, propertyType) {
+  const targetDistrict = normalizeMarketLabel(district);
+  const targetType = String(propertyType || '').toLowerCase();
+  return (marketIntelligenceData?.districtSegments || []).find(segment =>
+    normalizeMarketLabel(segment.district) === targetDistrict && String(segment.propertyType || '').toLowerCase() === targetType
+  ) || null;
+}
+async function loadMarketIntelligence() {
+  try {
+    const response = await fetch(`/data/market-intelligence.json?_market_context=${Date.now()}`, { cache: 'no-store' });
+    if (response.ok) marketIntelligenceData = await response.json();
+  } catch (error) {
+    console.warn('Could not load market intelligence context:', error.message);
+    marketIntelligenceData = null;
+  }
+  return marketIntelligenceData;
+}
+function buildMarketContextHTML(result, propData) {
+  const segment = findMarketSegment(propData.district, propData.propType);
+  const avgPpsm = Number(scrapedDistrictData?.avgPricePerSqm || propData.avgPriceSqm || 0);
+  const estimatedPpsm = propData.area > 0 ? Number(result.finalValue) / Number(propData.area) : 0;
+  const relativeToMedian = avgPpsm > 0 && estimatedPpsm > 0 ? ((estimatedPpsm / avgPpsm) - 1) * 100 : null;
+  const localGrowth = segment?.growth?.observedPeriodGrowthPct;
+  const localR2 = Number(segment?.growth?.r2);
+  const direction = Number.isFinite(Number(localGrowth)) && Number.isFinite(localR2) && localR2 >= 0.3
+    ? Number(localGrowth) > 3 ? 'leans upward' : Number(localGrowth) < -3 ? 'leans softer' : 'looks broadly stable'
+    : 'has a mixed or uncertain direction';
+  const comparisonText = Number.isFinite(relativeToMedian)
+    ? `The estimated unit value is <b>${Math.abs(relativeToMedian).toFixed(1)}% ${relativeToMedian >= 0 ? 'above' : 'below'}</b> the comparable median for this search.`
+    : '';
+  const periodText = segment?.growth?.periodLabel || (scrapedDistrictData?.timeWindow ? `the last ${scrapedDistrictData.timeWindow} days` : 'the available evidence window');
+  const segmentText = segment
+    ? `In <b>${escapeMapHtml(propData.district || 'the selected area')}</b>, comparable ${escapeMapHtml(propData.propType)} prices ${Number(localGrowth) >= 0 ? 'rose' : 'fell'} <b>${Math.abs(Number(localGrowth || 0)).toFixed(1)}%</b> over ${escapeMapHtml(periodText)}. The near-term direction ${direction}; this is a data-based signal, not a guaranteed forecast.`
+    : 'A reliable district-and-property-type Market Intelligence segment was not available for this selection, so no unsupported local forecast is shown.';
+  const qualityText = segment
+    ? `The local signal uses ${Number(segment.transactionCount || scrapedDistrictData?.count || 0).toLocaleString()} transactions, ${segment.monthsOfData || 'several'} months of data, and a ${segment.confidenceScore}/100 context score.`
+    : '';
+  if (!comparisonText && !segmentText) return '';
+  return `<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08)"><b>📈 Market indicators</b><br>${comparisonText}${comparisonText && segmentText ? '<br>' : ''}${segmentText}${qualityText ? `<small>${qualityText}</small>` : ''}</div>`;
 }
 
 // ===== LOAD DISTRICT COORDINATES =====
@@ -1307,7 +1351,7 @@ async function scrapeRealData() {
       document.getElementById('recentSalesCount').value = data.count;
       document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
       const evidenceState = getCurrentEvidenceState(data);
-      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', evidenceState };
+      scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, minComparablePrice: data.minComparablePrice, maxComparablePrice: data.maxComparablePrice, comparablePriceBasis: data.comparablePriceBasis || 'actual_sale_price', count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', monthlyGrowthRate: data.monthlyGrowthRate, evidenceState };
             const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
       status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
       showToast(`${data.count} comparable sales found in ${district}`);
@@ -1554,17 +1598,21 @@ function displayResult(result, valuations, propData) {
     propData.furnishedStatus ? `Furnished status: ${propData.furnishedStatus}` : '',
   ].filter(Boolean);
   const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
+  const marketContextHTML = buildMarketContextHTML(result, propData);
+  const comparableMin = Number(scrapedDistrictData?.minComparablePrice);
+  const comparableMax = Number(scrapedDistrictData?.maxComparablePrice);
+  const comparableRangeHTML = Number.isFinite(comparableMin) && Number.isFinite(comparableMax)
+    ? `<div style="margin:10px 0;font-size:13px;color:var(--muted)">Comparable price range: <b style="color:#dce8f5">AED ${comparableMin.toLocaleString()}</b> — <b style="color:#dce8f5">AED ${comparableMax.toLocaleString()}</b></div>`
+    : '';
   const explanationFacts = [
     dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${propData.district || 'the selected area'}</b>` : '',
     dldCount > 0 ? `Evidence strength: <b>${evidenceConfidence}</b>` : '',
-    scrapedDistrictData?.marketTrend ? `Market trend: <b>${scrapedDistrictData.marketTrend}</b>` : '',
-    `Valuation range reflects natural market variation`,
     adjustmentsHTML
   ].filter(Boolean).join('<br>');
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}</div>`;
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
   const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1837,6 +1885,7 @@ document.addEventListener('DOMContentLoaded', function() {
   valuationButton.disabled = true;
   loadCalibrationConfig().finally(() => { valuationButton.disabled = false; setTimeout(initGISMap, 100); });
   loadAccuracyMeta();
+  loadMarketIntelligence();
   document.addEventListener('click', function(e) {
     const container = document.getElementById('districtAutocomplete');
     const input = document.getElementById('districtInput');

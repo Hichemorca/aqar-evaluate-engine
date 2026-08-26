@@ -488,6 +488,9 @@ function analyzeMarket(data) {
     totalTransactions: data.length,
     qualifyingDistricts: districtMetrics.length,
     excludedDistricts: excluded,
+    // Full qualifying district/type metrics are used by the valuation result
+    // to explain the selected area's market context; ranking lists remain unchanged.
+    districtSegments: districtMetrics,
     bestInvestmentDistricts,
     fastestGrowing,
     highRiskAreas,

@@ -76,8 +76,12 @@ function buildResult(transactions, windows, targetDate, level) {
       const sorted = [...adjusted].sort((a, b) => a - b);
       const mid = Math.floor(sorted.length / 2);
       const medianVal = sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
+      const comparablePrices = filtered.map(t => Number(t.actualSalePrice)).filter(price => Number.isFinite(price) && price > 0);
       return {
         avgPricePerSqm: Math.round(medianVal),
+        minComparablePrice: comparablePrices.length ? Math.round(Math.min(...comparablePrices)) : null,
+        maxComparablePrice: comparablePrices.length ? Math.round(Math.max(...comparablePrices)) : null,
+        comparablePriceBasis: 'actual_sale_price',
         count: filtered.length,
         timeWindow: days,
         confidence: days <= 90 ? 'high' : days <= 180 ? 'medium' : 'low',
@@ -208,6 +212,9 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         found: true,
         avgPricePerSqm: result.avgPricePerSqm,
+        minComparablePrice: result.minComparablePrice,
+        maxComparablePrice: result.maxComparablePrice,
+        comparablePriceBasis: result.comparablePriceBasis,
         count: result.count,
         timeWindow: result.timeWindow,
         confidence: result.confidence,
