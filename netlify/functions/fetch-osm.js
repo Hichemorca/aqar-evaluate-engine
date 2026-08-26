@@ -154,9 +154,7 @@ async function fetchFacilities(lat, lng, radius = 500) {
     (
       ${facilityQueries.join('')}
     );
-    out body;
-    >;
-    out skel qt;
+    out center;
   `;
 
   const data = await queryOverpass(query);
@@ -179,9 +177,13 @@ async function fetchFacilities(lat, lng, radius = 500) {
   });
 
   const elements = data.elements || [];
+  const pois = [];
   let totalCount = 0;
 
   elements.forEach(el => {
+    const lat2 = el.lat || el.center?.lat;
+    const lng2 = el.lon || el.center?.lon;
+    if (!Number.isFinite(Number(lat2)) || !Number.isFinite(Number(lng2))) return;
     const tags = el.tags || {};
     for (const [key, type] of Object.entries(FACILITY_TYPES)) {
       const matched = type.tags.some(tag => {
@@ -189,10 +191,12 @@ async function fetchFacilities(lat, lng, radius = 500) {
         return tags[k] === v;
       });
       if (matched) {
-        results[key].count += 1;
-        totalCount += 1;
-        if (el.lat && el.lon) {
-          const dist = haversine(lat, lng, el.lat, el.lon);
+        const dist = haversine(lat, lng, Number(lat2), Number(lng2));
+        if (dist <= radius) {
+          const name = tags.name || tags['name:en'] || `${key} (${el.id})`;
+          pois.push({ type: key, name, lat: Number(lat2), lng: Number(lng2), distance: dist / 1000 });
+          results[key].count += 1;
+          totalCount += 1;
           if (results[key].distance === null || dist < results[key].distance) {
             results[key].distance = Math.round(dist);
           }
@@ -219,6 +223,7 @@ async function fetchFacilities(lat, lng, radius = 500) {
 
   const result = {
     facilities: results,
+    pois,
     totalScore: Math.min(1, totalScore),
     count: totalCount,
     queriedAt: new Date().toISOString(),
@@ -291,11 +296,30 @@ async function reverseGeocode(lat, lng) {
 }
 
 // ===== EXPORTS =====
+async function handler(event) {
+  if (event.httpMethod !== 'GET') {
+    return { statusCode: 405, headers: { Allow: 'GET', 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
+  const params = event.queryStringParameters || {};
+  const lat = Number(params.lat), lng = Number(params.lng), radius = Number(params.radius || 1000);
+  if (!Number.isFinite(lat) || lat < -90 || lat > 90 || !Number.isFinite(lng) || lng < -180 || lng > 180 || !Number.isFinite(radius) || radius < 100 || radius > 5000) {
+    return { statusCode: 400, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'Valid lat, lng, and radius between 100 and 5000 meters are required' }) };
+  }
+  try {
+    const result = await fetchFacilities(lat, lng, radius);
+    return { statusCode: 200, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' }, body: JSON.stringify(result) };
+  } catch (error) {
+    console.error('OSM handler error:', error.message);
+    return { statusCode: 502, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'OSM facility service unavailable' }) };
+  }
+}
+
 module.exports = {
   fetchFacilities,
   geocodeAddress,
   reverseGeocode,
-  FACILITY_TYPES
+  FACILITY_TYPES,
+  handler
 };
 
 // اختبار

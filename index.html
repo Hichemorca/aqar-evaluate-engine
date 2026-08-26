@@ -1048,6 +1048,40 @@ function initGISMap() {
 }
 function debouncedFetchGISData() { if (gisFetchTimeout) clearTimeout(gisFetchTimeout); gisFetchTimeout = setTimeout(() => fetchGISData(), 800); }
 async function fetchPOIsFromOSM(lat, lng, radius = 1000) {
+  const buildResultFromServer = payload => {
+    const keys = ['school', 'hospital', 'supermarket', 'metro', 'park', 'gym', 'cafe', 'restaurant'];
+    const facilities = Object.fromEntries(keys.map(key => [key, { count: 0, distance: null, score: 0 }]));
+    const pois = [];
+    for (const poi of Array.isArray(payload?.pois) ? payload.pois : []) {
+      if (!facilities[poi.type] || !Number.isFinite(Number(poi.lat)) || !Number.isFinite(Number(poi.lng))) continue;
+      const distanceKm = Number(poi.distance);
+      const distance = Number.isFinite(distanceKm) ? distanceKm : haversineDistance(lat, lng, Number(poi.lat), Number(poi.lng));
+      if (distance > radius / 1000) continue;
+      pois.push({ type: poi.type, name: String(poi.name || `${poi.type} (${pois.length + 1})`), lat: Number(poi.lat), lng: Number(poi.lng), distance });
+      facilities[poi.type].count += 1;
+      const distanceMeters = Math.round(distance * 1000);
+      if (facilities[poi.type].distance === null || distanceMeters < facilities[poi.type].distance) facilities[poi.type].distance = distanceMeters;
+    }
+    const weights = AQAR_ACTIVE_CALIBRATION.gis?.facilityWeights || { school: 15, hospital: 20, supermarket: 12, metro: 25, park: 10, gym: 8, cafe: 5, restaurant: 5 };
+    let totalScore = 0;
+    for (const [type, details] of Object.entries(facilities)) {
+      if (details.count > 0) {
+        const score = Math.round((weights[type] || 5) * Math.max(0, 1 - (details.distance / 1000)) * 10) / 10;
+        details.score = score;
+        totalScore += score;
+      }
+    }
+    return { pois, facilities, totalScore, count: pois.length };
+  };
+  try {
+    const serverResponse = await fetch(`/.netlify/functions/fetch-osm?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&radius=${encodeURIComponent(radius)}`, { cache: 'no-store' });
+    if (serverResponse.ok) {
+      const serverPayload = await serverResponse.json();
+      if (Array.isArray(serverPayload.pois)) return buildResultFromServer(serverPayload);
+    }
+  } catch (error) {
+    console.warn('⚠️ Same-origin OSM function failed; trying public Overpass endpoints:', error.message);
+  }
   const qs = [
     `node["amenity"="school"](around:${radius},${lat},${lng});`,
     `way["amenity"="school"](around:${radius},${lat},${lng});`,
