@@ -1,0 +1,5797 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-26T11:40:05.094Z",
+  "generatedBy": "scripts/review-accuracy-outliers.js",
+  "readOnly": true,
+  "scope": "severe-accuracy-outliers-over-100pct",
+  "thresholds": {
+    "severeAbsoluteErrorPct": 100,
+    "reviewRatio": 20,
+    "reviewAreaSqm": 10000
+  },
+  "source": {
+    "accuracyPath": "data/accuracy-data.json",
+    "dldPath": "data/dld-transactions.json",
+    "accuracySha256": "50b8473caab5fba30f097a55c57b16b2829d5f54c0bb9d1546e3973e712e74e8",
+    "dldSha256": "fc897736e4fe3c8cdf7acc0dfda8e36b5fc3f40468a444abfbd3a3ede67f4ce9",
+    "accuracyScope": "verified-dld-only"
+  },
+  "counts": {
+    "accuracyRecords": 8108,
+    "dldRecords": 26766,
+    "severeErrorRecords": 66,
+    "matchedByAnyOfficialKey": 66,
+    "exactCoreSourceMatches": 66,
+    "recordsWithDataIntegrityFlags": 1,
+    "recordsWithPerformanceFlags": 66,
+    "recordsWithDldFieldMismatch": 0,
+    "districtLevelRecords": 50
+  },
+  "flagCounts": {
+    "dataIntegrity": {
+      "review-area-over-10000sqm": 1,
+      "review-valuation-to-actual-over-20x": 1
+    },
+    "performance": {
+      "source-fields-match-review-as-performance-case": 66,
+      "district-level-evaluation": 50,
+      "comparable:land_xlarge": 2,
+      "comparable:moderate_peer_dispersion": 53,
+      "comparable:high_peer_dispersion": 6
+    }
+  },
+  "severeSlices": {
+    "byPropertyType": {
+      "apartment": 54,
+      "land": 10,
+      "villa": 1,
+      "retail": 1
+    },
+    "byEvalLevel": {
+      "district_size": 47,
+      "project_size": 15,
+      "district": 3,
+      "project": 1
+    },
+    "byDistrict": {
+      "INTERNATIONAL CITY PH 2 & 3": 40,
+      "JUMEIRAH VILLAGE TRIANGLE": 8,
+      "JUMEIRAH VILLAGE CIRCLE": 5,
+      "HOR AL ANZ": 2,
+      "MADINAT AL MATAAR": 1,
+      "HADAEQ SHEIKH MOHAMMED BIN RASHID": 1,
+      "DUBAI MARINA": 1,
+      "JABAL ALI INDUSTRIAL FIRST": 1,
+      "AL BADA": 1,
+      "AL RASHIDIYA": 1,
+      "JUMEIRAH GOLF": 1,
+      "AL KHAWANEEJ FIRST": 1,
+      "MADINAT HIND 4": 1,
+      "AL SATWA": 1,
+      "PALM JUMEIRAH": 1
+    }
+  },
+  "records": [
+    {
+      "id": "dld-41-8610-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-23",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "district": "MADINAT AL MATAAR",
+      "project": "",
+      "actualSalePrice": 3229200,
+      "aqarValuation": 139241014,
+      "absoluteErrorPct": 4211.935,
+      "signedErrorPct": 4211.935,
+      "area": 15760.16,
+      "procedureArea": 15760.16,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8610-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-41-8610-2026",
+        "transactionNumber": "41-8610-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8610-2026",
+        "actualSalePrice": 3229200,
+        "area": 15760.16,
+        "procedureArea": 15760.16,
+        "saleDate": "2026-06-23",
+        "propertyType": "land",
+        "district": "MADINAT AL MATAAR"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_xlarge",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 6,
+          "district": 143
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 6,
+        "selectedPeerPricePerSqm": {
+          "count": 6,
+          "min": 7194.01,
+          "q1": 7500.14,
+          "median": 7653.2,
+          "q3": 8591.67,
+          "max": 14640.9,
+          "iqrRatio": 0.1426,
+          "maxMinRatio": 2.0352
+        },
+        "selectedDispersion": "low",
+        "flags": [
+          "land_xlarge"
+        ]
+      },
+      "dataIntegrityFlags": [
+        "review-area-over-10000sqm",
+        "review-valuation-to-actual-over-20x"
+      ],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:land_xlarge"
+      ],
+      "disposition": "data-integrity-or-label-review-first"
+    },
+    {
+      "id": "dld-11-15929-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-12",
+      "propertyType": "villa",
+      "evalLevel": "project_size",
+      "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID",
+      "project": "MAG EYE Phase 1",
+      "actualSalePrice": 664651.09,
+      "aqarValuation": 2944397,
+      "absoluteErrorPct": 342.999,
+      "signedErrorPct": 342.999,
+      "area": 131.04,
+      "procedureArea": 65.52,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-15929-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-15929-2026",
+        "transactionNumber": "11-15929-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-15929-2026",
+        "actualSalePrice": 664651.09,
+        "area": 131.04,
+        "procedureArea": 65.52,
+        "saleDate": "2026-05-12",
+        "propertyType": "villa",
+        "district": "HADAEQ SHEIKH MOHAMMED BIN RASHID"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 16,
+          "project": 17,
+          "district_size": 2,
+          "district": 2
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": false,
+          "district": false
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 16,
+        "selectedPeerPricePerSqm": {
+          "count": 16,
+          "min": 21888.8,
+          "q1": 23656.9,
+          "median": 26348.76,
+          "q3": 27298.54,
+          "max": 30218.16,
+          "iqrRatio": 0.1382,
+          "maxMinRatio": 1.3805
+        },
+        "selectedDispersion": "low",
+        "flags": []
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-21757-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-07-15",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "DUBAI MARINA",
+      "project": "5242",
+      "actualSalePrice": 1000000,
+      "aqarValuation": 3081840,
+      "absoluteErrorPct": 208.184,
+      "signedErrorPct": 208.184,
+      "area": 93.97,
+      "procedureArea": 46.99,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21757-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-21757-2026",
+        "transactionNumber": "11-21757-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21757-2026",
+        "actualSalePrice": 1000000,
+        "area": 93.97,
+        "procedureArea": 46.99,
+        "saleDate": "2026-07-15",
+        "propertyType": "apartment",
+        "district": "DUBAI MARINA"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 8,
+          "project": 9,
+          "district_size": 518,
+          "district": 918
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 8,
+        "selectedPeerPricePerSqm": {
+          "count": 8,
+          "min": 26557.91,
+          "q1": 32796.32,
+          "median": 35983.44,
+          "q3": 36755.62,
+          "max": 38350.91,
+          "iqrRatio": 0.11,
+          "maxMinRatio": 1.444
+        },
+        "selectedDispersion": "low",
+        "flags": []
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-20178-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-30",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "district": "JABAL ALI INDUSTRIAL FIRST",
+      "project": "",
+      "actualSalePrice": 11000000,
+      "aqarValuation": 33583417,
+      "absoluteErrorPct": 205.304,
+      "signedErrorPct": 205.304,
+      "area": 1950.03,
+      "procedureArea": 1950.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20178-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-20178-2026",
+        "transactionNumber": "11-20178-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20178-2026",
+        "actualSalePrice": 11000000,
+        "area": 1950.03,
+        "procedureArea": 1950.03,
+        "saleDate": "2026-06-30",
+        "propertyType": "land",
+        "district": "JABAL ALI INDUSTRIAL FIRST"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_large",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 9,
+          "district": 11
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 9,
+        "selectedPeerPricePerSqm": {
+          "count": 9,
+          "min": 4941.68,
+          "q1": 10256.25,
+          "median": 14392.25,
+          "q3": 17222.26,
+          "max": 17700.89,
+          "iqrRatio": 0.484,
+          "maxMinRatio": 3.582
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14852-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 280000,
+      "aqarValuation": 837365,
+      "absoluteErrorPct": 199.059,
+      "signedErrorPct": 199.059,
+      "area": 34.06,
+      "procedureArea": 17.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14852-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14852-2026",
+        "transactionNumber": "11-14852-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14852-2026",
+        "actualSalePrice": 280000,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8440.99,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.1719
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14843-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 287500,
+      "aqarValuation": 837365,
+      "absoluteErrorPct": 191.257,
+      "signedErrorPct": 191.257,
+      "area": 34.06,
+      "procedureArea": 17.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14843-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14843-2026",
+        "transactionNumber": "11-14843-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14843-2026",
+        "actualSalePrice": 287500,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14847-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 290000,
+      "aqarValuation": 837365,
+      "absoluteErrorPct": 188.747,
+      "signedErrorPct": 188.747,
+      "area": 34.06,
+      "procedureArea": 17.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14847-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14847-2026",
+        "transactionNumber": "11-14847-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14847-2026",
+        "actualSalePrice": 290000,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-20033-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-29",
+      "propertyType": "apartment",
+      "evalLevel": "project",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "project": "OXFORD RESIDENCE 2",
+      "actualSalePrice": 930000,
+      "aqarValuation": 2631938,
+      "absoluteErrorPct": 183.004,
+      "signedErrorPct": 183.004,
+      "area": 155.46,
+      "procedureArea": 155.46,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20033-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-20033-2026",
+        "transactionNumber": "11-20033-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20033-2026",
+        "actualSalePrice": 930000,
+        "area": 155.46,
+        "procedureArea": 155.46,
+        "saleDate": "2026-06-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 1,
+          "project": 5,
+          "district_size": 749,
+          "district": 2063
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project",
+        "selectedComparableCount": 5,
+        "selectedPeerPricePerSqm": {
+          "count": 5,
+          "min": 10040.98,
+          "q1": 14530.36,
+          "median": 16930.34,
+          "q3": 17036.01,
+          "max": 19544.7,
+          "iqrRatio": 0.148,
+          "maxMinRatio": 1.9465
+        },
+        "selectedDispersion": "low",
+        "flags": []
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14841-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 309649,
+      "aqarValuation": 842774,
+      "absoluteErrorPct": 172.171,
+      "signedErrorPct": 172.171,
+      "area": 34.28,
+      "procedureArea": 17.14,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14841-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14841-2026",
+        "transactionNumber": "11-14841-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14841-2026",
+        "actualSalePrice": 309649,
+        "area": 34.28,
+        "procedureArea": 17.14,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14846-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 313789,
+      "aqarValuation": 837365,
+      "absoluteErrorPct": 166.856,
+      "signedErrorPct": 166.856,
+      "area": 34.06,
+      "procedureArea": 17.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14846-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14846-2026",
+        "transactionNumber": "11-14846-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14846-2026",
+        "actualSalePrice": 313789,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14855-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 316513,
+      "aqarValuation": 837365,
+      "absoluteErrorPct": 164.559,
+      "signedErrorPct": 164.559,
+      "area": 34.06,
+      "procedureArea": 17.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14855-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14855-2026",
+        "transactionNumber": "11-14855-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14855-2026",
+        "actualSalePrice": 316513,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14853-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-30",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 317208,
+      "aqarValuation": 837365,
+      "absoluteErrorPct": 163.98,
+      "signedErrorPct": 163.98,
+      "area": 34.06,
+      "procedureArea": 17.03,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14853-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14853-2026",
+        "transactionNumber": "11-14853-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14853-2026",
+        "actualSalePrice": 317208,
+        "area": 34.06,
+        "procedureArea": 17.03,
+        "saleDate": "2026-04-30",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-14840-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-04-29",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "project": "TERHAB HOTEL & TOWERS AT JUMEIRAH VILLAGE TRIANGLE",
+      "actualSalePrice": 328932,
+      "aqarValuation": 848674,
+      "absoluteErrorPct": 158.009,
+      "signedErrorPct": 158.009,
+      "area": 34.52,
+      "procedureArea": 17.26,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14840-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-14840-2026",
+        "transactionNumber": "11-14840-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-14840-2026",
+        "actualSalePrice": 328932,
+        "area": 34.52,
+        "procedureArea": 17.26,
+        "saleDate": "2026-04-29",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE TRIANGLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 38,
+          "project": 38,
+          "district_size": 191,
+          "district": 249
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 8220.79,
+          "q1": 17226.15,
+          "median": 20468.78,
+          "q3": 24864.91,
+          "max": 26774.32,
+          "iqrRatio": 0.3732,
+          "maxMinRatio": 3.2569
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16093-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 294560,
+      "aqarValuation": 754194,
+      "absoluteErrorPct": 156.041,
+      "signedErrorPct": 156.041,
+      "area": 75.51,
+      "procedureArea": 37.76,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16093-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16093-2026",
+        "transactionNumber": "11-16093-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16093-2026",
+        "actualSalePrice": 294560,
+        "area": 75.51,
+        "procedureArea": 37.76,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3974.08,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6045
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-18676-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-14",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "district": "HOR AL ANZ",
+      "project": "",
+      "actualSalePrice": 1455000,
+      "aqarValuation": 3671413,
+      "absoluteErrorPct": 152.331,
+      "signedErrorPct": 152.331,
+      "area": 238.76,
+      "procedureArea": 238.76,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18676-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-18676-2026",
+        "transactionNumber": "11-18676-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18676-2026",
+        "actualSalePrice": 1455000,
+        "area": 238.76,
+        "procedureArea": 238.76,
+        "saleDate": "2026-06-14",
+        "propertyType": "land",
+        "district": "HOR AL ANZ"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 38,
+          "district": 41
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 6239.97,
+          "q1": 8201.09,
+          "median": 10763.8,
+          "q3": 17979.65,
+          "max": 47314.88,
+          "iqrRatio": 0.9085,
+          "maxMinRatio": 7.5825
+        },
+        "selectedDispersion": "high",
+        "flags": [
+          "high_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:high_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16117-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 275364,
+      "aqarValuation": 692069,
+      "absoluteErrorPct": 151.329,
+      "signedErrorPct": 151.329,
+      "area": 69.29,
+      "procedureArea": 34.65,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16117-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16117-2026",
+        "transactionNumber": "11-16117-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16117-2026",
+        "actualSalePrice": 275364,
+        "area": 69.29,
+        "procedureArea": 34.65,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-21700-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-07-14",
+      "propertyType": "land",
+      "evalLevel": "district",
+      "district": "AL BADA",
+      "project": "",
+      "actualSalePrice": 19400000,
+      "aqarValuation": 48198571,
+      "absoluteErrorPct": 148.446,
+      "signedErrorPct": 148.446,
+      "area": 2799.17,
+      "procedureArea": 2799.17,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21700-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-21700-2026",
+        "transactionNumber": "11-21700-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21700-2026",
+        "actualSalePrice": 19400000,
+        "area": 2799.17,
+        "procedureArea": 2799.17,
+        "saleDate": "2026-07-14",
+        "propertyType": "land",
+        "district": "AL BADA"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_large",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 0,
+          "district": 18
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": false,
+          "district": true
+        },
+        "selectedLevel": "district",
+        "selectedComparableCount": 18,
+        "selectedPeerPricePerSqm": {
+          "count": 18,
+          "min": 5422.6,
+          "q1": 10407.9,
+          "median": 16145.81,
+          "q3": 17958.32,
+          "max": 30999.74,
+          "iqrRatio": 0.4676,
+          "maxMinRatio": 5.7168
+        },
+        "selectedDispersion": "high",
+        "flags": [
+          "high_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:high_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16158-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 291638,
+      "aqarValuation": 723631,
+      "absoluteErrorPct": 148.126,
+      "signedErrorPct": 148.126,
+      "area": 72.45,
+      "procedureArea": 36.23,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16158-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16158-2026",
+        "transactionNumber": "11-16158-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16158-2026",
+        "actualSalePrice": 291638,
+        "area": 72.45,
+        "procedureArea": 36.23,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16083-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 286608,
+      "aqarValuation": 710946,
+      "absoluteErrorPct": 148.055,
+      "signedErrorPct": 148.055,
+      "area": 71.18,
+      "procedureArea": 35.59,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16083-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16083-2026",
+        "transactionNumber": "11-16083-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16083-2026",
+        "actualSalePrice": 286608,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16091-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 286528,
+      "aqarValuation": 710746,
+      "absoluteErrorPct": 148.055,
+      "signedErrorPct": 148.055,
+      "area": 71.16,
+      "procedureArea": 35.58,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16091-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16091-2026",
+        "transactionNumber": "11-16091-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16091-2026",
+        "actualSalePrice": 286528,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16218-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 287761,
+      "aqarValuation": 710746,
+      "absoluteErrorPct": 146.992,
+      "signedErrorPct": 146.992,
+      "area": 71.16,
+      "procedureArea": 35.58,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16218-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16218-2026",
+        "transactionNumber": "11-16218-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16218-2026",
+        "actualSalePrice": 287761,
+        "area": 71.16,
+        "procedureArea": 35.58,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16193-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 287842,
+      "aqarValuation": 710946,
+      "absoluteErrorPct": 146.992,
+      "signedErrorPct": 146.992,
+      "area": 71.18,
+      "procedureArea": 35.59,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16193-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16193-2026",
+        "transactionNumber": "11-16193-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16193-2026",
+        "actualSalePrice": 287842,
+        "area": 71.18,
+        "procedureArea": 35.59,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-41-7078-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-11",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "project": "Elysee III by Pantheon",
+      "actualSalePrice": 459278,
+      "aqarValuation": 1113445,
+      "absoluteErrorPct": 142.434,
+      "signedErrorPct": 142.434,
+      "area": 73.88,
+      "procedureArea": 36.94,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-7078-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-41-7078-2026",
+        "transactionNumber": "41-7078-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-7078-2026",
+        "actualSalePrice": 459278,
+        "area": 73.88,
+        "procedureArea": 36.94,
+        "saleDate": "2026-05-11",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 9,
+          "project": 10,
+          "district_size": 1286,
+          "district": 2063
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 9,
+        "selectedPeerPricePerSqm": {
+          "count": 9,
+          "min": 14213.6,
+          "q1": 14836.33,
+          "median": 15305.85,
+          "q3": 16433.19,
+          "max": 17408.97,
+          "iqrRatio": 0.1043,
+          "maxMinRatio": 1.2248
+        },
+        "selectedDispersion": "low",
+        "flags": []
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16105-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 592294,
+      "aqarValuation": 1400179,
+      "absoluteErrorPct": 136.399,
+      "signedErrorPct": 136.399,
+      "area": 166.47,
+      "procedureArea": 83.24,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16105-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16105-2026",
+        "transactionNumber": "11-16105-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16105-2026",
+        "actualSalePrice": 592294,
+        "area": 166.47,
+        "procedureArea": 83.24,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 3754.07,
+          "q1": 6427.84,
+          "median": 8424.01,
+          "q3": 9728.57,
+          "max": 13993.07,
+          "iqrRatio": 0.3918,
+          "maxMinRatio": 3.7274
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16155-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 282922,
+      "aqarValuation": 656311,
+      "absoluteErrorPct": 131.976,
+      "signedErrorPct": 131.976,
+      "area": 65.71,
+      "procedureArea": 32.86,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16155-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16155-2026",
+        "transactionNumber": "11-16155-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16155-2026",
+        "actualSalePrice": 282922,
+        "area": 65.71,
+        "procedureArea": 32.86,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-19474-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-23",
+      "propertyType": "retail",
+      "evalLevel": "district_size",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "project": "Binghatti Phantom",
+      "actualSalePrice": 1717700,
+      "aqarValuation": 3917500,
+      "absoluteErrorPct": 128.067,
+      "signedErrorPct": 128.067,
+      "area": 159.58,
+      "procedureArea": 79.79,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-19474-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-19474-2026",
+        "transactionNumber": "11-19474-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-19474-2026",
+        "actualSalePrice": 1717700,
+        "area": 159.58,
+        "procedureArea": 79.79,
+        "saleDate": "2026-06-23",
+        "propertyType": "retail",
+        "district": "JUMEIRAH VILLAGE CIRCLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 1,
+          "district_size": 17,
+          "district": 27
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 17,
+        "selectedPeerPricePerSqm": {
+          "count": 17,
+          "min": 5920.14,
+          "q1": 7401.92,
+          "median": 26242.13,
+          "q3": 29330.23,
+          "max": 37587.5,
+          "iqrRatio": 0.8356,
+          "maxMinRatio": 6.3491
+        },
+        "selectedDispersion": "high",
+        "flags": [
+          "high_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:high_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16114-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 213243,
+      "aqarValuation": 485816,
+      "absoluteErrorPct": 127.823,
+      "signedErrorPct": 127.823,
+      "area": 48.64,
+      "procedureArea": 24.32,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16114-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16114-2026",
+        "transactionNumber": "11-16114-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16114-2026",
+        "actualSalePrice": 213243,
+        "area": 48.64,
+        "procedureArea": 24.32,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16109-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 214161,
+      "aqarValuation": 487814,
+      "absoluteErrorPct": 127.779,
+      "signedErrorPct": 127.779,
+      "area": 48.84,
+      "procedureArea": 24.43,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16109-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16109-2026",
+        "transactionNumber": "11-16109-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16109-2026",
+        "actualSalePrice": 214161,
+        "area": 48.84,
+        "procedureArea": 24.43,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16101-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 213523,
+      "aqarValuation": 484118,
+      "absoluteErrorPct": 126.729,
+      "signedErrorPct": 126.729,
+      "area": 48.47,
+      "procedureArea": 24.24,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16101-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16101-2026",
+        "transactionNumber": "11-16101-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16101-2026",
+        "actualSalePrice": 213523,
+        "area": 48.47,
+        "procedureArea": 24.24,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16174-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 502858,
+      "aqarValuation": 1126653,
+      "absoluteErrorPct": 124.05,
+      "signedErrorPct": 124.05,
+      "area": 133.95,
+      "procedureArea": 66.98,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16174-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16174-2026",
+        "transactionNumber": "11-16174-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16174-2026",
+        "actualSalePrice": 502858,
+        "area": 133.95,
+        "procedureArea": 66.98,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 3557.96,
+          "q1": 6427.84,
+          "median": 8424.01,
+          "q3": 9728.57,
+          "max": 13993.07,
+          "iqrRatio": 0.3918,
+          "maxMinRatio": 3.9329
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16166-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 507667,
+      "aqarValuation": 1137167,
+      "absoluteErrorPct": 123.999,
+      "signedErrorPct": 123.999,
+      "area": 135.2,
+      "procedureArea": 67.6,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16166-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16166-2026",
+        "transactionNumber": "11-16166-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16166-2026",
+        "actualSalePrice": 507667,
+        "area": 135.2,
+        "procedureArea": 67.6,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 3557.96,
+          "q1": 6427.84,
+          "median": 8424.01,
+          "q3": 9728.57,
+          "max": 13993.07,
+          "iqrRatio": 0.3918,
+          "maxMinRatio": 3.9329
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16079-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 209188,
+      "aqarValuation": 468337,
+      "absoluteErrorPct": 123.883,
+      "signedErrorPct": 123.883,
+      "area": 46.89,
+      "procedureArea": 23.45,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16079-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16079-2026",
+        "transactionNumber": "11-16079-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16079-2026",
+        "actualSalePrice": 209188,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16113-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 209825,
+      "aqarValuation": 468337,
+      "absoluteErrorPct": 123.204,
+      "signedErrorPct": 123.204,
+      "area": 46.89,
+      "procedureArea": 23.45,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16113-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16113-2026",
+        "transactionNumber": "11-16113-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16113-2026",
+        "actualSalePrice": 209825,
+        "area": 46.89,
+        "procedureArea": 23.45,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16112-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 357654,
+      "aqarValuation": 797699,
+      "absoluteErrorPct": 123.037,
+      "signedErrorPct": 123.037,
+      "area": 94.84,
+      "procedureArea": 47.42,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16112-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16112-2026",
+        "transactionNumber": "11-16112-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16112-2026",
+        "actualSalePrice": 357654,
+        "area": 94.84,
+        "procedureArea": 47.42,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 3557.96,
+          "q1": 6427.84,
+          "median": 8424.01,
+          "q3": 9728.57,
+          "max": 13993.07,
+          "iqrRatio": 0.3918,
+          "maxMinRatio": 3.9329
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16094-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 201742,
+      "aqarValuation": 449560,
+      "absoluteErrorPct": 122.839,
+      "signedErrorPct": 122.839,
+      "area": 45.01,
+      "procedureArea": 22.51,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16094-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16094-2026",
+        "transactionNumber": "11-16094-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16094-2026",
+        "actualSalePrice": 201742,
+        "area": 45.01,
+        "procedureArea": 22.51,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16095-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 209591,
+      "aqarValuation": 461945,
+      "absoluteErrorPct": 120.403,
+      "signedErrorPct": 120.403,
+      "area": 46.25,
+      "procedureArea": 23.13,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16095-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16095-2026",
+        "transactionNumber": "11-16095-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16095-2026",
+        "actualSalePrice": 209591,
+        "area": 46.25,
+        "procedureArea": 23.13,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-21625-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-07-14",
+      "propertyType": "land",
+      "evalLevel": "district",
+      "district": "AL RASHIDIYA",
+      "project": "",
+      "actualSalePrice": 7500000,
+      "aqarValuation": 16455702,
+      "absoluteErrorPct": 119.409,
+      "signedErrorPct": 119.409,
+      "area": 3716.12,
+      "procedureArea": 3716.12,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21625-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-21625-2026",
+        "transactionNumber": "11-21625-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21625-2026",
+        "actualSalePrice": 7500000,
+        "area": 3716.12,
+        "procedureArea": 3716.12,
+        "saleDate": "2026-07-14",
+        "propertyType": "land",
+        "district": "AL RASHIDIYA"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_xlarge",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 0,
+          "district": 24
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": false,
+          "district": true
+        },
+        "selectedLevel": "district",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 2363.62,
+          "q1": 3531.9,
+          "median": 4456.26,
+          "q3": 5082.97,
+          "max": 6364.91,
+          "iqrRatio": 0.3481,
+          "maxMinRatio": 2.6929
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion",
+          "land_xlarge"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion",
+        "comparable:land_xlarge"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16110-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 201010,
+      "aqarValuation": 439072,
+      "absoluteErrorPct": 118.433,
+      "signedErrorPct": 118.433,
+      "area": 43.96,
+      "procedureArea": 21.98,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16110-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16110-2026",
+        "transactionNumber": "11-16110-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16110-2026",
+        "actualSalePrice": 201010,
+        "area": 43.96,
+        "procedureArea": 21.98,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16078-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 199767,
+      "aqarValuation": 435377,
+      "absoluteErrorPct": 117.942,
+      "signedErrorPct": 117.942,
+      "area": 43.59,
+      "procedureArea": 21.8,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16078-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16078-2026",
+        "transactionNumber": "11-16078-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16078-2026",
+        "actualSalePrice": 199767,
+        "area": 43.59,
+        "procedureArea": 21.8,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16134-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 199708,
+      "aqarValuation": 435077,
+      "absoluteErrorPct": 117.857,
+      "signedErrorPct": 117.857,
+      "area": 43.56,
+      "procedureArea": 21.78,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16134-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16134-2026",
+        "transactionNumber": "11-16134-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16134-2026",
+        "actualSalePrice": 199708,
+        "area": 43.56,
+        "procedureArea": 21.78,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16127-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 199319,
+      "aqarValuation": 431482,
+      "absoluteErrorPct": 116.478,
+      "signedErrorPct": 116.478,
+      "area": 43.2,
+      "procedureArea": 21.6,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16127-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16127-2026",
+        "transactionNumber": "11-16127-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16127-2026",
+        "actualSalePrice": 199319,
+        "area": 43.2,
+        "procedureArea": 21.6,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16132-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 199425,
+      "aqarValuation": 431681,
+      "absoluteErrorPct": 116.463,
+      "signedErrorPct": 116.463,
+      "area": 43.22,
+      "procedureArea": 21.61,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16132-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16132-2026",
+        "transactionNumber": "11-16132-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16132-2026",
+        "actualSalePrice": 199425,
+        "area": 43.22,
+        "procedureArea": 21.61,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-21048-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-07-07",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "project": "THE VYBE",
+      "actualSalePrice": 550000,
+      "aqarValuation": 1186248,
+      "absoluteErrorPct": 115.681,
+      "signedErrorPct": 115.681,
+      "area": 79.02,
+      "procedureArea": 39.9,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21048-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-21048-2026",
+        "transactionNumber": "11-21048-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-21048-2026",
+        "actualSalePrice": 550000,
+        "area": 79.02,
+        "procedureArea": 39.9,
+        "saleDate": "2026-07-07",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 11,
+          "project": 12,
+          "district_size": 1286,
+          "district": 2063
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 11,
+        "selectedPeerPricePerSqm": {
+          "count": 11,
+          "min": 13226.42,
+          "q1": 15011.79,
+          "median": 16071.88,
+          "q3": 17016.38,
+          "max": 17653.76,
+          "iqrRatio": 0.1247,
+          "maxMinRatio": 1.3347
+        },
+        "selectedDispersion": "low",
+        "flags": []
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16088-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 344467,
+      "aqarValuation": 736719,
+      "absoluteErrorPct": 113.872,
+      "signedErrorPct": 113.872,
+      "area": 87.59,
+      "procedureArea": 43.8,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16088-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16088-2026",
+        "transactionNumber": "11-16088-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16088-2026",
+        "actualSalePrice": 344467,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 3557.96,
+          "q1": 6427.84,
+          "median": 8424.01,
+          "q3": 9728.57,
+          "max": 13993.07,
+          "iqrRatio": 0.3918,
+          "maxMinRatio": 3.9329
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16128-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 345908,
+      "aqarValuation": 736719,
+      "absoluteErrorPct": 112.981,
+      "signedErrorPct": 112.981,
+      "area": 87.59,
+      "procedureArea": 43.8,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16128-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16128-2026",
+        "transactionNumber": "11-16128-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16128-2026",
+        "actualSalePrice": 345908,
+        "area": 87.59,
+        "procedureArea": 43.8,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "medium",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 24,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 24,
+        "selectedPeerPricePerSqm": {
+          "count": 24,
+          "min": 3557.96,
+          "q1": 6427.84,
+          "median": 8424.01,
+          "q3": 9728.57,
+          "max": 13993.07,
+          "iqrRatio": 0.3918,
+          "maxMinRatio": 3.9329
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-20077-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-29",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "district": "JUMEIRAH GOLF",
+      "project": "ORANGE LAKE",
+      "actualSalePrice": 13000000,
+      "aqarValuation": 27618842,
+      "absoluteErrorPct": 112.453,
+      "signedErrorPct": 112.453,
+      "area": 934.3,
+      "procedureArea": 934.3,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20077-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-20077-2026",
+        "transactionNumber": "11-20077-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-20077-2026",
+        "actualSalePrice": 13000000,
+        "area": 934.3,
+        "procedureArea": 934.3,
+        "saleDate": "2026-06-29",
+        "propertyType": "land",
+        "district": "JUMEIRAH GOLF"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_medium",
+        "comparableCounts": {
+          "project_size": 1,
+          "project": 1,
+          "district_size": 11,
+          "district": 18
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 11,
+        "selectedPeerPricePerSqm": {
+          "count": 11,
+          "min": 15111.08,
+          "q1": 20119.42,
+          "median": 24117.03,
+          "q3": 29561,
+          "max": 48261.49,
+          "iqrRatio": 0.3915,
+          "maxMinRatio": 3.1938
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-17893-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-09",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "district": "AL KHAWANEEJ FIRST",
+      "project": "",
+      "actualSalePrice": 8250000,
+      "aqarValuation": 17484227,
+      "absoluteErrorPct": 111.93,
+      "signedErrorPct": 111.93,
+      "area": 1816.25,
+      "procedureArea": 1816.25,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-17893-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-17893-2026",
+        "transactionNumber": "11-17893-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-17893-2026",
+        "actualSalePrice": 8250000,
+        "area": 1816.25,
+        "procedureArea": 1816.25,
+        "saleDate": "2026-06-09",
+        "propertyType": "land",
+        "district": "AL KHAWANEEJ FIRST"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_large",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 6,
+          "district": 10
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 6,
+        "selectedPeerPricePerSqm": {
+          "count": 6,
+          "min": 3827.65,
+          "q1": 5189.75,
+          "median": 9519.28,
+          "q3": 9687.31,
+          "max": 10887.95,
+          "iqrRatio": 0.4725,
+          "maxMinRatio": 2.8446
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16097-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 201209,
+      "aqarValuation": 426388,
+      "absoluteErrorPct": 111.913,
+      "signedErrorPct": 111.913,
+      "area": 42.69,
+      "procedureArea": 21.35,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16097-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16097-2026",
+        "transactionNumber": "11-16097-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16097-2026",
+        "actualSalePrice": 201209,
+        "area": 42.69,
+        "procedureArea": 21.35,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16081-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194380,
+      "aqarValuation": 411805,
+      "absoluteErrorPct": 111.856,
+      "signedErrorPct": 111.856,
+      "area": 41.23,
+      "procedureArea": 20.62,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16081-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16081-2026",
+        "transactionNumber": "11-16081-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16081-2026",
+        "actualSalePrice": 194380,
+        "area": 41.23,
+        "procedureArea": 20.62,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16100-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 193701,
+      "aqarValuation": 410107,
+      "absoluteErrorPct": 111.722,
+      "signedErrorPct": 111.722,
+      "area": 41.06,
+      "procedureArea": 20.53,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16100-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16100-2026",
+        "transactionNumber": "11-16100-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16100-2026",
+        "actualSalePrice": 193701,
+        "area": 41.06,
+        "procedureArea": 20.53,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16107-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 195015,
+      "aqarValuation": 412205,
+      "absoluteErrorPct": 111.371,
+      "signedErrorPct": 111.371,
+      "area": 41.27,
+      "procedureArea": 20.64,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16107-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16107-2026",
+        "transactionNumber": "11-16107-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16107-2026",
+        "actualSalePrice": 195015,
+        "area": 41.27,
+        "procedureArea": 20.64,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16115-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194851,
+      "aqarValuation": 411805,
+      "absoluteErrorPct": 111.344,
+      "signedErrorPct": 111.344,
+      "area": 41.23,
+      "procedureArea": 20.62,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16115-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16115-2026",
+        "transactionNumber": "11-16115-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16115-2026",
+        "actualSalePrice": 194851,
+        "area": 41.23,
+        "procedureArea": 20.62,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16092-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194334,
+      "aqarValuation": 410507,
+      "absoluteErrorPct": 111.238,
+      "signedErrorPct": 111.238,
+      "area": 41.1,
+      "procedureArea": 20.55,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16092-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16092-2026",
+        "transactionNumber": "11-16092-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16092-2026",
+        "actualSalePrice": 194334,
+        "area": 41.1,
+        "procedureArea": 20.55,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16086-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194192,
+      "aqarValuation": 410207,
+      "absoluteErrorPct": 111.238,
+      "signedErrorPct": 111.238,
+      "area": 41.07,
+      "procedureArea": 20.54,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16086-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16086-2026",
+        "transactionNumber": "11-16086-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16086-2026",
+        "actualSalePrice": 194192,
+        "area": 41.07,
+        "procedureArea": 20.54,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-41-7512-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-21",
+      "propertyType": "land",
+      "evalLevel": "project_size",
+      "district": "MADINAT HIND 4",
+      "project": "DAMAC HILLS (2) - VERONA",
+      "actualSalePrice": 900000,
+      "aqarValuation": 1899998,
+      "absoluteErrorPct": 111.111,
+      "signedErrorPct": 111.111,
+      "area": 112.86,
+      "procedureArea": 56.43,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-7512-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-41-7512-2026",
+        "transactionNumber": "41-7512-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-7512-2026",
+        "actualSalePrice": 900000,
+        "area": 112.86,
+        "procedureArea": 56.43,
+        "saleDate": "2026-05-21",
+        "propertyType": "land",
+        "district": "MADINAT HIND 4"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_tiny",
+        "comparableCounts": {
+          "project_size": 10,
+          "project": 10,
+          "district_size": 450,
+          "district": 508
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 10,
+        "selectedPeerPricePerSqm": {
+          "count": 10,
+          "min": 12354,
+          "q1": 15235.21,
+          "median": 16214.78,
+          "q3": 16835.02,
+          "max": 18715.11,
+          "iqrRatio": 0.0987,
+          "maxMinRatio": 1.5149
+        },
+        "selectedDispersion": "low",
+        "flags": []
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16165-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194533,
+      "aqarValuation": 410507,
+      "absoluteErrorPct": 111.022,
+      "signedErrorPct": 111.022,
+      "area": 41.1,
+      "procedureArea": 20.55,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16165-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16165-2026",
+        "transactionNumber": "11-16165-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16165-2026",
+        "actualSalePrice": 194533,
+        "area": 41.1,
+        "procedureArea": 20.55,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16229-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194584,
+      "aqarValuation": 410107,
+      "absoluteErrorPct": 110.761,
+      "signedErrorPct": 110.761,
+      "area": 41.06,
+      "procedureArea": 20.53,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16229-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16229-2026",
+        "transactionNumber": "11-16229-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16229-2026",
+        "actualSalePrice": 194584,
+        "area": 41.06,
+        "procedureArea": 20.53,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16120-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194661,
+      "aqarValuation": 410207,
+      "absoluteErrorPct": 110.729,
+      "signedErrorPct": 110.729,
+      "area": 41.07,
+      "procedureArea": 20.54,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16120-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16120-2026",
+        "transactionNumber": "11-16120-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16120-2026",
+        "actualSalePrice": 194661,
+        "area": 41.07,
+        "procedureArea": 20.54,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16099-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194266,
+      "aqarValuation": 409009,
+      "absoluteErrorPct": 110.541,
+      "signedErrorPct": 110.541,
+      "area": 40.95,
+      "procedureArea": 20.48,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16099-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16099-2026",
+        "transactionNumber": "11-16099-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16099-2026",
+        "actualSalePrice": 194266,
+        "area": 40.95,
+        "procedureArea": 20.48,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-18224-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-12",
+      "propertyType": "land",
+      "evalLevel": "district",
+      "district": "AL SATWA",
+      "project": "",
+      "actualSalePrice": 11149250,
+      "aqarValuation": 23457377,
+      "absoluteErrorPct": 110.394,
+      "signedErrorPct": 110.394,
+      "area": 1096.26,
+      "procedureArea": 1096.26,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18224-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-18224-2026",
+        "transactionNumber": "11-18224-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18224-2026",
+        "actualSalePrice": 11149250,
+        "area": 1096.26,
+        "procedureArea": 1096.26,
+        "saleDate": "2026-06-12",
+        "propertyType": "land",
+        "district": "AL SATWA"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_large",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 2,
+          "district": 12
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": false,
+          "district": true
+        },
+        "selectedLevel": "district",
+        "selectedComparableCount": 12,
+        "selectedPeerPricePerSqm": {
+          "count": 12,
+          "min": 5238.42,
+          "q1": 15546.59,
+          "median": 21527.6,
+          "q3": 27985.88,
+          "max": 34444.16,
+          "iqrRatio": 0.5778,
+          "maxMinRatio": 6.5753
+        },
+        "selectedDispersion": "high",
+        "flags": [
+          "high_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:high_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16122-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 198178,
+      "aqarValuation": 416400,
+      "absoluteErrorPct": 110.114,
+      "signedErrorPct": 110.114,
+      "area": 41.69,
+      "procedureArea": 20.85,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16122-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16122-2026",
+        "transactionNumber": "11-16122-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16122-2026",
+        "actualSalePrice": 198178,
+        "area": 41.69,
+        "procedureArea": 20.85,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16206-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 194734,
+      "aqarValuation": 409009,
+      "absoluteErrorPct": 110.035,
+      "signedErrorPct": 110.035,
+      "area": 40.95,
+      "procedureArea": 20.48,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16206-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16206-2026",
+        "transactionNumber": "11-16206-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16206-2026",
+        "actualSalePrice": 194734,
+        "area": 40.95,
+        "procedureArea": 20.48,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-16152-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-20",
+      "propertyType": "apartment",
+      "evalLevel": "district_size",
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "project": "",
+      "actualSalePrice": 192021,
+      "aqarValuation": 401817,
+      "absoluteErrorPct": 109.257,
+      "signedErrorPct": 109.257,
+      "area": 40.23,
+      "procedureArea": 20.12,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16152-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-16152-2026",
+        "transactionNumber": "11-16152-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-16152-2026",
+        "actualSalePrice": 192021,
+        "area": 40.23,
+        "procedureArea": 20.12,
+        "saleDate": "2026-05-20",
+        "propertyType": "apartment",
+        "district": "INTERNATIONAL CITY PH 2 & 3"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 152,
+          "district": 181
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 152,
+        "selectedPeerPricePerSqm": {
+          "count": 152,
+          "min": 3900.94,
+          "q1": 7898.02,
+          "median": 10361.98,
+          "q3": 12291.83,
+          "max": 18298.64,
+          "iqrRatio": 0.424,
+          "maxMinRatio": 4.6908
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-15311-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-05-05",
+      "propertyType": "land",
+      "evalLevel": "district_size",
+      "district": "HOR AL ANZ",
+      "project": "",
+      "actualSalePrice": 1602000,
+      "aqarValuation": 3299808,
+      "absoluteErrorPct": 105.981,
+      "signedErrorPct": 105.981,
+      "area": 232.25,
+      "procedureArea": 232.25,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-15311-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-15311-2026",
+        "transactionNumber": "11-15311-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-15311-2026",
+        "actualSalePrice": 1602000,
+        "area": 232.25,
+        "procedureArea": 232.25,
+        "saleDate": "2026-05-05",
+        "propertyType": "land",
+        "district": "HOR AL ANZ"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "land_small",
+        "comparableCounts": {
+          "project_size": 0,
+          "project": 0,
+          "district_size": 38,
+          "district": 41
+        },
+        "qualifies": {
+          "project_size": false,
+          "project": false,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "district_size",
+        "selectedComparableCount": 38,
+        "selectedPeerPricePerSqm": {
+          "count": 38,
+          "min": 6093.99,
+          "q1": 8201.09,
+          "median": 10763.8,
+          "q3": 17979.65,
+          "max": 47314.88,
+          "iqrRatio": 0.9085,
+          "maxMinRatio": 7.7642
+        },
+        "selectedDispersion": "high",
+        "flags": [
+          "high_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "district-level-evaluation",
+        "comparable:high_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-11-18818-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-17",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "JUMEIRAH VILLAGE CIRCLE",
+      "project": "BOTANICA",
+      "actualSalePrice": 540000,
+      "aqarValuation": 1103002,
+      "absoluteErrorPct": 104.26,
+      "signedErrorPct": 104.26,
+      "area": 53.51,
+      "procedureArea": 53.51,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18818-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-11-18818-2026",
+        "transactionNumber": "11-18818-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:11-18818-2026",
+        "actualSalePrice": 540000,
+        "area": 53.51,
+        "procedureArea": 53.51,
+        "saleDate": "2026-06-17",
+        "propertyType": "apartment",
+        "district": "JUMEIRAH VILLAGE CIRCLE"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 19,
+          "project": 23,
+          "district_size": 1286,
+          "district": 2063
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 19,
+        "selectedPeerPricePerSqm": {
+          "count": 19,
+          "min": 9586.37,
+          "q1": 10681.86,
+          "median": 18103.95,
+          "q3": 21261.84,
+          "max": 26706.23,
+          "iqrRatio": 0.5844,
+          "maxMinRatio": 2.7859
+        },
+        "selectedDispersion": "high",
+        "flags": [
+          "high_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:high_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    },
+    {
+      "id": "dld-41-8232-2026",
+      "matchType": "propertyRef",
+      "dldMatched": true,
+      "date": "2026-06-17",
+      "propertyType": "apartment",
+      "evalLevel": "project_size",
+      "district": "PALM JUMEIRAH",
+      "project": "Seven Hotel and Apartments The Palm",
+      "actualSalePrice": 1282238,
+      "aqarValuation": 2567840,
+      "absoluteErrorPct": 100.262,
+      "signedErrorPct": 100.262,
+      "area": 66.44,
+      "procedureArea": 66.44,
+      "accuracySource": {
+        "dataSource": "dld-real-cleaned",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8232-2026"
+      },
+      "dldSource": {
+        "propertyRef": "DLD-41-8232-2026",
+        "transactionNumber": "41-8232-2026",
+        "dataSource": "dld-real",
+        "evidenceStatus": "eligible",
+        "verifiedBy": "Government Record",
+        "sourceTransactionId": "dld:41-8232-2026",
+        "actualSalePrice": 1282238,
+        "area": 66.44,
+        "procedureArea": 66.44,
+        "saleDate": "2026-06-17",
+        "propertyType": "apartment",
+        "district": "PALM JUMEIRAH"
+      },
+      "fieldChecks": {
+        "propertyRef": true,
+        "sourceTransactionId": true,
+        "transactionNumber": true,
+        "saleDate": true,
+        "propertyType": true,
+        "district": true,
+        "area": true,
+        "procedureArea": true,
+        "actualSalePrice": true
+      },
+      "comparableDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticsOnly": true,
+        "sizeCategory": "small",
+        "comparableCounts": {
+          "project_size": 30,
+          "project": 32,
+          "district_size": 64,
+          "district": 345
+        },
+        "qualifies": {
+          "project_size": true,
+          "project": true,
+          "district_size": true,
+          "district": true
+        },
+        "selectedLevel": "project_size",
+        "selectedComparableCount": 30,
+        "selectedPeerPricePerSqm": {
+          "count": 30,
+          "min": 16270.75,
+          "q1": 30474.45,
+          "median": 36627.3,
+          "q3": 42639.14,
+          "max": 49807.2,
+          "iqrRatio": 0.3321,
+          "maxMinRatio": 3.0612
+        },
+        "selectedDispersion": "moderate",
+        "flags": [
+          "moderate_peer_dispersion"
+        ]
+      },
+      "dataIntegrityFlags": [],
+      "performanceFlags": [
+        "source-fields-match-review-as-performance-case",
+        "comparable:moderate_peer_dispersion"
+      ],
+      "disposition": "performance-review-after-source-match"
+    }
+  ],
+  "safeguards": {
+    "officialAccuracyChanged": false,
+    "officialDldChanged": false,
+    "evaluatorChanged": false,
+    "calibrationChanged": false,
+    "recordsExcludedOrCapped": false,
+    "recommendationsAreNonOperational": true
+  }
+}
