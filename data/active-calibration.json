@@ -723,5 +723,364 @@
     "proximityFactorPerScore": -0.0156,
     "proximityMinimumMultiplier": 0.98,
     "proximityMaximumMultiplier": 1.01
+  },
+  "v21ShadowMultipliers": {
+    "schemaVersion": 1,
+    "enabled": false,
+    "minProjectEvidence": 5,
+    "combinedMinimumMultiplier": 0.85,
+    "combinedMaximumMultiplier": 1.15,
+    "propertyTypes": {
+      "apartment": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      },
+      "villa": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      },
+      "townhouse": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      },
+      "office": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      },
+      "retail": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      },
+      "warehouse": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      },
+      "land": {
+        "projectBuilding": {
+          "defaultMultiplier": 1,
+          "projectMultipliers": {}
+        },
+        "buaPlotArea": {
+          "bands": [
+            {
+              "maxRatio": 0.25,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.5,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 0.75,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": 1,
+              "multiplier": 1
+            },
+            {
+              "maxRatio": null,
+              "multiplier": 1
+            }
+          ]
+        },
+        "lastRenovation": {
+          "bands": [
+            {
+              "maxAgeYears": 2,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 5,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": 10,
+              "multiplier": 1
+            },
+            {
+              "maxAgeYears": null,
+              "multiplier": 1
+            }
+          ]
+        }
+      }
+    }
   }
 }

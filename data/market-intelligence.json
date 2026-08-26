@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T11:16:04.808Z",
+  "generatedAt": "2026-08-26T06:36:21.149Z",
   "dataWindow": {
     "firstTransactionDate": "2026-01",
     "lastTransactionDate": "2026-07",
@@ -347,7 +347,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 14732,
       "growth": {
         "observedPeriodGrowthPct": 7.8,
@@ -401,7 +401,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 31,
+      "daysSinceLastTransaction": 32,
       "medianPricePerSqm": 14033,
       "growth": {
         "observedPeriodGrowthPct": -2,
@@ -455,7 +455,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 31,
+      "daysSinceLastTransaction": 32,
       "medianPricePerSqm": 10591,
       "growth": {
         "observedPeriodGrowthPct": 3.9,
@@ -509,7 +509,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 31,
+      "daysSinceLastTransaction": 32,
       "medianPricePerSqm": 6940,
       "growth": {
         "observedPeriodGrowthPct": -5.6,
@@ -563,7 +563,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 15037,
       "growth": {
         "observedPeriodGrowthPct": 2.2,
@@ -617,7 +617,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 31,
+      "daysSinceLastTransaction": 32,
       "medianPricePerSqm": 25284,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -671,7 +671,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 21563,
       "growth": {
         "observedPeriodGrowthPct": -2.1,
@@ -725,7 +725,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 19999,
       "growth": {
         "observedPeriodGrowthPct": 7,
@@ -779,7 +779,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 15551,
       "growth": {
         "observedPeriodGrowthPct": -3,
@@ -833,7 +833,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 14192,
       "growth": {
         "observedPeriodGrowthPct": -0.3,
@@ -889,7 +889,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 24384,
       "growth": {
         "observedPeriodGrowthPct": 34.1,
@@ -943,7 +943,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 33,
+      "daysSinceLastTransaction": 34,
       "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
@@ -997,7 +997,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 34,
+      "daysSinceLastTransaction": 35,
       "medianPricePerSqm": 22011,
       "growth": {
         "observedPeriodGrowthPct": 14.4,
@@ -1051,7 +1051,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 33,
+      "daysSinceLastTransaction": 34,
       "medianPricePerSqm": 17363,
       "growth": {
         "observedPeriodGrowthPct": 13.1,
@@ -1105,7 +1105,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 8579,
       "growth": {
         "observedPeriodGrowthPct": 12.5,
@@ -1161,7 +1161,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 10549,
       "growth": {
         "observedPeriodGrowthPct": 12,
@@ -1215,7 +1215,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 12917,
       "growth": {
         "observedPeriodGrowthPct": 11.2,
@@ -1269,7 +1269,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 8824,
       "growth": {
         "observedPeriodGrowthPct": 10,
@@ -1323,7 +1323,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 14732,
       "growth": {
         "observedPeriodGrowthPct": 7.8,
@@ -1377,7 +1377,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 19999,
       "growth": {
         "observedPeriodGrowthPct": 7,
@@ -1433,7 +1433,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 10549,
       "growth": {
         "observedPeriodGrowthPct": 12,
@@ -1487,7 +1487,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 33,
+      "daysSinceLastTransaction": 34,
       "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
@@ -1541,7 +1541,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 33,
+      "daysSinceLastTransaction": 34,
       "medianPricePerSqm": 17363,
       "growth": {
         "observedPeriodGrowthPct": 13.1,
@@ -1595,7 +1595,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 36,
+      "daysSinceLastTransaction": 37,
       "medianPricePerSqm": 15501,
       "growth": {
         "observedPeriodGrowthPct": 3,
@@ -1649,7 +1649,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 8579,
       "growth": {
         "observedPeriodGrowthPct": 12.5,
@@ -1705,7 +1705,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 8824,
       "growth": {
         "observedPeriodGrowthPct": 10,
@@ -1759,7 +1759,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 16820,
       "growth": {
         "observedPeriodGrowthPct": 2.4,
@@ -1813,7 +1813,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 27958,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -1867,7 +1867,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 12917,
       "growth": {
         "observedPeriodGrowthPct": 11.2,
@@ -1921,7 +1921,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 32,
+      "daysSinceLastTransaction": 33,
       "medianPricePerSqm": 11096,
       "growth": {
         "observedPeriodGrowthPct": 0.7,
