@@ -144,8 +144,9 @@ async function fetchFacilities(lat, lng, radius = 500) {
   
   Object.values(FACILITY_TYPES).forEach(type => {
     type.tags.forEach(tag => {
-      facilityQueries.push(`node["${tag}"](around:${radius},${lat},${lng});`);
-      facilityQueries.push(`way["${tag}"](around:${radius},${lat},${lng});`);
+      const [tagKey, tagValue] = tag.split('=');
+      facilityQueries.push(`node["${tagKey}"="${tagValue}"](around:${radius},${lat},${lng});`);
+      facilityQueries.push(`way["${tagKey}"="${tagValue}"](around:${radius},${lat},${lng});`);
     });
   });
 
