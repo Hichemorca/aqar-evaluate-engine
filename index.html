@@ -354,14 +354,14 @@
 <body>
 <div id="app-container">
   <div class="brand">
-    <div class="tag">AQAR Valuation Intelligence <span class="beta-badge">BETA</span></div>
+    <div class="tag">AQAR Valuation Intelligence </div>
     <div class="title">Real Estate Valuation Engine</div>
   </div>
-  <div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:12px">
+  <div style="display:none" aria-hidden="true">
     📅 Data refreshed: <span id="lastDataRefresh">Loading...</span> •
     📊 Based on <span id="accuracyRecordCount">—</span> evaluated records • <span id="accuracyRate">—</span>% accuracy
   </div>
-  <div style="background:rgba(212,146,14,0.12);border:1px solid rgba(212,146,14,0.3);border-radius:12px;padding:10px 16px;margin-bottom:16px;text-align:center;backdrop-filter:blur(4px);">
+  <div style="display:none" aria-hidden="true">
     <span style="font-size:12px;font-weight:600;color:var(--gold);">BETA • Dubai data only</span>
   </div>
   <div class="section">
@@ -530,9 +530,9 @@
   </div>
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Facilities</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a DLD district to center the map on its representative location; adjust the marker if needed.</div>
+    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a district to center the map; adjust the marker if needed.</div>
     <div class="fg">
-      <label>📍 District / Area <span class="note" style="font-weight:400;text-transform:none;color:var(--muted)">(Choose from DLD data)</span></label>
+      <label>📍 District / Area</label>
       <div class="autocomplete-container">
         <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" oninput="filterDistricts(this.value)" onfocus="this.select()">
         <div class="autocomplete-list" id="districtAutocomplete"></div>
@@ -541,15 +541,15 @@
         Selected: <span id="selectedDistrictDisplay">None</span>
       </div>
       <input type="hidden" id="selectedDistrict" value="">
-      <div class="district-count" id="districtCount">Loading districts from DLD data...</div>
+      <div class="district-count" id="districtCount">Loading districts...</div>
     </div>
     <div class="row" id="rowProjectBuilding" style="display:none">
       <div class="fg">
         <label>🏢 Project / Building Name</label>
         <div class="autocomplete-container">
-          <input type="text" id="projectBuildingInput" placeholder="Choose from DLD projects..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
+          <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
           <div class="autocomplete-list" id="projectBuildingAutocomplete"></div>
-          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a DLD suggestion or leave as Unknown.</div>
+          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a project or leave as Unknown.</div>
         </div>
       </div>
     </div>
@@ -568,12 +568,12 @@
     <div id="gisRadiusContext" style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">Vital facilities are shown inside the radius around the current map marker.</div>
   </div>
   <div class="section">
-    <div class="section-title">🔍 DLD Market Evidence</div>
+    <div class="section-title">🔍 Market Data</div>
     <div class="row">
-      <div class="fg"><label>📊 DLD Price/sqm</label><input type="number" id="avgPriceSqm" placeholder="Load DLD evidence" readonly></div>
+      <div class="fg"><label>📊 Price / sqm</label><input type="number" id="avgPriceSqm" placeholder="Load market data" readonly></div>
       <div class="fg"><label>📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
     </div>
-    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load DLD Evidence</button>
+    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load market data</button>
     <div id="scrapeStatus" style="font-size:11px;margin-top:8px;text-align:center"></div>
     <div class="scrape-comps" id="scrapedComps"></div>
   </div>
@@ -745,7 +745,7 @@ function getDistrictCoords(district) {
 // ===== LOAD DISTRICTS FROM DLD DATA =====
 async function loadDistrictsFromDLD() {
   const countEl = document.getElementById('districtCount');
-  countEl.textContent = 'Loading districts from DLD data...';
+  countEl.textContent = 'Loading districts...';
   try {
     const response = await fetch('/data/dld-transactions.json');
     if (!response.ok) throw new Error('Failed to fetch DLD data');
@@ -759,8 +759,8 @@ async function loadDistrictsFromDLD() {
     });
     if (districts.size > 10) {
       dubaiDistrictsList = Array.from(districts).sort();
-      countEl.textContent = `✅ Loaded ${dubaiDistrictsList.length} districts from DLD data`;
-      console.log(`✅ Loaded ${dubaiDistrictsList.length} districts from DLD data`);
+      countEl.textContent = `✅ ${dubaiDistrictsList.length} districts available`;
+      console.log(`✅ ${dubaiDistrictsList.length} districts available`);
       return;
     }
   } catch (e) {
@@ -811,12 +811,12 @@ function updateProjectBuildingNotice() {
   const notice = document.getElementById('projectBuildingNotice');
   if (!input || !notice) return;
   const value = input.value.trim();
-  if (!value) { notice.textContent = 'Choose a DLD suggestion or leave as Unknown.'; notice.style.color = 'var(--muted)'; return; }
-  if (!(document.getElementById('selectedDistrict').value || '').trim()) { notice.textContent = 'Select a DLD district first to see verified project suggestions.'; notice.style.color = 'var(--gold)'; return; }
-  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { notice.textContent = 'No verified DLD project match. District evidence remains the fallback; no project price is invented.'; notice.style.color = 'var(--gold)'; return; }
+  if (!value) { notice.textContent = 'Choose a project or leave as Unknown.'; notice.style.color = 'var(--muted)'; return; }
+  if (!(document.getElementById('selectedDistrict').value || '').trim()) { notice.textContent = 'Select a district first to see project suggestions.'; notice.style.color = 'var(--gold)'; return; }
+  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { notice.textContent = 'No verified project match. The estimate remains based on the district.'; notice.style.color = 'var(--gold)'; return; }
   const evidence = getProjectEvidence(value);
-  if (evidence.count < 5) { notice.textContent = `Limited DLD project evidence (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). District evidence remains the fallback.`; notice.style.color = 'var(--gold)'; }
-  else { notice.textContent = `DLD project evidence: ${evidence.count} transactions. Project data is captured for isolated analysis; current valuation remains district-based.`; notice.style.color = 'var(--green)'; }
+  if (evidence.count < 5) { notice.textContent = `Limited project information (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). The estimate remains based on the district.`; notice.style.color = 'var(--gold)'; }
+  else { notice.textContent = `Project information: ${evidence.count} transactions. The estimate remains based on the district.`; notice.style.color = 'var(--green)'; }
 }
 function onProjectBuildingInput(value) {
   if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== String(value || '').trim().toLowerCase()) selectedProjectBuilding = '';
@@ -832,7 +832,7 @@ function filterProjectBuildings(q) {
   list.replaceChildren();
   if (!options.length) {
     list.style.display = q ? 'block' : 'none';
-    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No DLD projects found in this district'; list.appendChild(empty); }
+    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); }
     return;
   }
   options.slice(0, 15).forEach(name => { const item = document.createElement('div'); item.className = 'item'; item.textContent = name; item.onclick = () => selectProjectBuilding(name); list.appendChild(item); });
@@ -859,7 +859,7 @@ function updateProjectMapLabel() {
     return;
   }
   const verified = Boolean(selectedProjectBuilding && selectedProjectBuilding.toLowerCase() === value.toLowerCase() && getProjectEvidence(value).verified);
-  const sourceText = verified ? 'DLD project name; map point is the current selected marker.' : 'User-entered name; not verified and not used to invent a project location.';
+  const sourceText = verified ? 'Project name; map point is the current selected marker.' : 'User-entered name; not verified and not used to invent a project location.';
   const a = parseFloat(document.getElementById('gisLat')?.value), b = parseFloat(document.getElementById('gisLng')?.value);
   if (!Number.isFinite(a) || !Number.isFinite(b)) return;
   const html = `<div style="background:#d4920e;color:#06111d;border:2px solid #fff;border-radius:7px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap;box-shadow:0 2px 7px rgba(0,0,0,.35)">${escapeMapHtml(value)}</div>`;
@@ -976,7 +976,7 @@ function updateDistrictFromMapPoint(lat, lng) {
   }
   input.value = '';
   hidden.value = '';
-  display.textContent = 'No matching DLD district';
+  display.textContent = 'No matching area';
   selectedProjectBuilding = '';
   const projectInput = document.getElementById('projectBuildingInput');
   if (projectInput) projectInput.value = '';
@@ -1265,7 +1265,7 @@ async function scrapeRealData() {
   const area = parseFloat(document.getElementById('area').value)||0, btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
   if (!city || !district) { status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; showToast('Please select a city and enter a district name'); return; }
   if (area < 10) { status.innerHTML = '<span class="status-badge error">⚠️ Please enter a valid area</span>'; showToast('Please enter a valid area'); return; }
-  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span style="color:var(--muted)">🔍 Checking DLD real data...</span>';
+  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span style="color:var(--muted)">🔍 Checking market data...</span>';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
   const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
@@ -1280,17 +1280,16 @@ async function scrapeRealData() {
       document.getElementById('lastDataRefresh').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
       const evidenceState = getCurrentEvidenceState(data);
       scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', evidenceState };
-      const levelNames = { 'project_size':'Project + type + size', 'project':'Project + type', 'district_size':'District + type + size', 'district':'District + type', 'district_type':'District + type', 'district_only':'District only' };
-      const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
-      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span><span style="font-size:9px;color:var(--muted);margin-left:8px;">Level: ${levelNames[data.level]||data.level} • ${data.timeWindow} days • ${data.confidence||'medium'} confidence</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
-      showToast(`${data.count} verified DLD comparable sales found in ${district}`);
+            const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
+      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
+      showToast(`${data.count} comparable sales found in ${district}`);
     } else {
       const evidenceState = getCurrentEvidenceState(data);
-      status.innerHTML = `<span class="status-badge warning">Insufficient DLD evidence — no reliable Sales Comparison value</span><br><span style="font-size:10px;color:var(--muted);">No fallback price will be invented. You may provide inputs for other applicable methods.</span>`;
+      status.innerHTML = `<span class="status-badge warning">Insufficient market evidence — no reliable estimate from sales</span><br><span style="font-size:10px;color:var(--muted);">Provide more market information to improve the estimate.</span>`;
       document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: data.reason || 'no-sufficient-data' };
     }
-  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">DLD evidence unavailable</span><br><span style="font-size:10px;color:var(--muted);">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
-  btn.disabled = false; btn.innerHTML = '🔄 Re-Scrape';
+  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">Market data unavailable</span><br><span style="font-size:10px;color:var(--muted);">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
+  btn.disabled = false; btn.innerHTML = '🔄 Refresh market data';
 }
 function getFallbackPrice(city, district) {
   const cd = (district||'').trim().toLowerCase();
@@ -1482,7 +1481,7 @@ function buildDecisionEngineLink(result, propData) {
 function displayEvidenceOnlyState(propData) {
   const section = document.getElementById('resultSection');
   const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT);
-  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide a valid DLD comparable sample or complete another applicable method, such as rental information where supported. The system will not display an invented market value.</small></div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 Review Inputs</button></div>`;
+  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide comparable sales or rental information to improve this estimate. The system will not display an invented market value.</small></div><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 Review Inputs</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1511,7 +1510,8 @@ function displayResult(result, valuations, propData) {
   const evidenceState = propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
   const evidencePresentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
   const evidenceStateHTML = `<div class="evidence-state ${evidencePresentation.tone}"><strong>${evidencePresentation.title}</strong>${evidencePresentation.message}${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<small>Review the comparable sample before relying on this result.</small>' : ''}</div>`;
-  const evidenceHTML = `<div style="margin-top:10px"><b>Evidence classification</b><br><span style="color:var(--muted)">SOURCE FACT:</span> ${scrapedDistrictData?.count || 0} DLD comparable sales${scrapedDistrictData?.avgPricePerSqm ? `; ${Number(scrapedDistrictData.avgPricePerSqm).toLocaleString()} AED/sqm` : ''}.<br><span style="color:var(--muted)">DERIVED VALUE:</span> weighted reconciliation of the methods shown below.<br><span style="color:var(--muted)">ASSUMPTION:</span> optional rent/expense and consultancy defaults remain those of the current AQAR behavior.<br><span style="color:var(--muted)">MODEL OUTPUT:</span> final value and range shown above.</div>`;
+      const evidenceHTML = '';
+
   const adjustmentFacts = [
     propData.projectBuilding ? `Project / Building: ${propData.projectBuilding} (${propData.projectBuildingSource === 'dld-suggestion' ? 'DLD suggestion' : 'user-entered'})` : '',
     propData.bua ? `BUA: ${propData.bua} sqm` : '',
@@ -1524,17 +1524,19 @@ function displayResult(result, valuations, propData) {
     propData.streetPosition ? `Street position: ${propData.streetPosition}` : '',
     propData.buildingCondition ? `Building condition: ${propData.buildingCondition}` : '',
     propData.furnishedStatus ? `Furnished status: ${propData.furnishedStatus}` : '',
-    window.gisImpactPercent ? `GIS impact: +${window.gisImpactPercent}%` : ''
   ].filter(Boolean);
-  const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Current adjustments / inputs</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b><br>${evidenceStateHTML}• DLD comparable sales: <b>${dldCount > 0 ? `${dldCount} in ${propData.district || 'the selected area'}` : 'None available'}</b><br>• DLD evidence confidence: <b>${evidenceConfidence}</b><br>• Market trend: <b>${scrapedDistrictData?.marketTrend || 'stable'}</b><br>• Evaluated validation records: <b>${Number(window.aqarAccuracyMetrics?.totalRecords || 0).toLocaleString()}</b><br>• Calibration config: <b>${AQAR_ACTIVE_CALIBRATION.configId || 'base-22.1'}</b><br>• Valuation range reflects natural market variation${evidenceHTML}${adjustmentsHTML}<div style="margin-top:10px"><b>Method applicability</b>${methodStatusHTML}</div></div>`;
-  let vHTML = '';
-  valuations.forEach(v => {
-    const cColor = v.confidence === 'high' ? 'var(--green)' : v.confidence === 'medium' ? 'var(--gold)' : 'var(--red)';
-    vHTML += `<div class="method-card"><div class="m-header"><span class="m-name">${v.method}</span><span style="font-size:10px;color:${cColor}">● ${v.confidence} confidence</span></div><div class="m-value">${v.value.toLocaleString()} AED</div><div class="m-meta"><span>Weight: ${Math.round(v.weight*100)}%</span>${v.perSqm ? `<span>${v.perSqm.toLocaleString()} AED/sqm</span>` : ''}${v.rentalYield ? `<span>Yield: ${v.rentalYield}%</span>` : ''}</div><div class="m-detail">${v.details}</div></div>`;
-  });
+  const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
+  const explanationFacts = [
+    dldCount > 0 ? `Comparable sales: <b>${dldCount} in ${propData.district || 'the selected area'}</b>` : '',
+    dldCount > 0 ? `Evidence strength: <b>${evidenceConfidence}</b>` : '',
+    scrapedDistrictData?.marketTrend ? `Market trend: <b>${scrapedDistrictData.marketTrend}</b>` : '',
+    `Valuation range reflects natural market variation`,
+    adjustmentsHTML
+  ].filter(Boolean).join('<br>');
+  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}</div>`;
+  const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence • ${valuations.length} Methods</div></div>${explain}<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:10px">📊 Methods</div>${vHTML}</div><a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${propData.propType} • ${propData.district||'N/A'} • ${propData.area} sqm</div><div style="margin:10px 0;font-size:13px;color:var(--muted)">Range: <b style="color:#dce8f5">${result.range.low.toLocaleString()}</b> — <b style="color:#dce8f5">${result.range.high.toLocaleString()}</b> AED</div>${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" class="integration-btn">🧠 Analyze in AQAR Decision Engine →</a><button class="btn btn-s" onclick="document.getElementById('resultSection').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})" style="margin-top:12px">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1592,7 +1594,7 @@ function runValuation() {
   const area = parseFloat(document.getElementById('area').value);
   if (!area || area < 10) { document.getElementById('area').classList.add('error'); document.getElementById('area').focus(); showToast('Area must be at least 10 sqm'); setTimeout(() => document.getElementById('area').classList.remove('error'), 3000); return; }
   document.getElementById('btnValuate').disabled = true;
-  document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating methods...';
+  document.getElementById('btnValuate').innerHTML = '<span class="loading"></span> Calculating valuation...';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
   setTimeout(() => {
