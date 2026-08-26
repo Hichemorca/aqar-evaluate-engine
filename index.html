@@ -1041,18 +1041,34 @@ function initGISMap() {
     gisMapInstance.on('click', e => {
       updateMapMarker(e.latlng.lat, e.latlng.lng);
       updateDistrictFromMapPoint(e.latlng.lat, e.latlng.lng);
+      prepareGISRefresh();
       debouncedFetchGISData();
     });
     gisMarker.on('dragend', e => {
       const p = e.target.getLatLng();
       updateMapMarker(p.lat, p.lng);
       updateDistrictFromMapPoint(p.lat, p.lng);
+      prepareGISRefresh();
       debouncedFetchGISData();
     });
     mapInitialized = true;
     updateProjectMapLabel();
     setTimeout(() => debouncedFetchGISData(), 500);
   } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>'; }
+}
+function prepareGISRefresh() {
+  gisRequestId++;
+  if (gisAbortController) gisAbortController.abort();
+  gisAbortController = null;
+  gisLoading = false;
+  gisData = null;
+  window.gisImpactMultiplier = 1;
+  window.gisImpactPercent = 0;
+  poiMarkers.forEach(marker => gisMapInstance?.removeLayer(marker));
+  poiMarkers = [];
+  updateGISRadiusContext(getGISRadiusMeters(), null);
+  const result = document.getElementById('gisResult');
+  if (result) result.style.display = 'none';
 }
 function debouncedFetchGISData() { if (gisFetchTimeout) clearTimeout(gisFetchTimeout); gisFetchTimeout = setTimeout(() => fetchGISData(), 800); }
 async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null) {
