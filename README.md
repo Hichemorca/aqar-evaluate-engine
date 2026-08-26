@@ -125,6 +125,16 @@
 | Rejected ledger | `data/dld-transactions-rejected.json` | السجلات المرفوضة وأسباب الرفض، ولا تدخل Accuracy. |
 | Cleaning report | `data/dld-cleaning-report.json` | checksum والأعداد وأسباب الاستبعاد. |
 
+تستخدم الصفحة الرئيسية ملفات client summaries خفيفة مشتقة تلقائيًا من artifacts الرسمية لتقليل التحميل الأولي:
+
+| الملف | المصدر | الاستخدام في الواجهة |
+|---|---|---|
+| `data/district-list.json` | `data/dld-transactions.json` | قائمة District / Area فقط. |
+| `data/project-building-summary.json` | `data/dld-transactions.json` | اقتراحات Project / Building Name وعدد المعاملات المرتبطة بها. |
+| `data/accuracy-summary.json` | `data/accuracy-data.json` | أرقام Accuracy وتاريخ التحديث فقط. |
+
+تُولّد هذه الملفات عبر `scripts/generate-client-summaries.js` بعد تحديث البيانات، وتبقى الملفات الكاملة هي المصدر الرسمي الوحيد للمقارنات وAccuracy والتدقيق. يمكن تشغيل `node scripts/generate-client-summaries.js --check` للتحقق من أن summaries ليست قديمة.
+
 آخر snapshot موثق:
 
 | المؤشر | العدد |

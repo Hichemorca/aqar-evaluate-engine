@@ -727,6 +727,7 @@ let districtResolveRequestId = 0;
 let scrapedDistrictData = null, gisData = null, gisLoading = false, gisFetchTimeout = null, gisRequestId = 0, gisAbortController = null;
 let marketIntelligenceData = null;
 let dldTransactionsCache = [];
+let projectBuildingSummary = null;
 let selectedProjectBuilding = '';
 let currentEvidenceState = AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
 let gisMapInstance = null, gisMarker = null, gisCircleLayer = null, projectMapLabelMarker = null, poiMarkers = [], mapInitialized = false, dubaiDistrictsList = [];
@@ -838,29 +839,37 @@ function getDistrictCoords(district) {
   return null;
 }
 
-// ===== LOAD DISTRICTS FROM DLD DATA =====
+// ===== LOAD LIGHTWEIGHT CLIENT SUMMARIES =====
 async function loadDistrictsFromDLD() {
   const countEl = document.getElementById('districtCount');
   countEl.textContent = 'Loading districts...';
   try {
-    const response = await fetch('/data/dld-transactions.json');
-    if (!response.ok) throw new Error('Failed to fetch DLD data');
-    const data = await response.json();
-    dldTransactionsCache = Array.isArray(data) ? data : [];
-    const districts = new Set();
-    data.forEach(t => {
-      if (t.district && t.district !== 'Unknown' && t.district !== '') {
-        districts.add(t.district);
+    const [districtResponse, projectResponse] = await Promise.all([
+      fetch('/data/district-list.json'),
+      fetch('/data/project-building-summary.json')
+    ]);
+    if (!districtResponse.ok) throw new Error(`District summary HTTP ${districtResponse.status}`);
+    const districtData = await districtResponse.json();
+    const districts = Array.isArray(districtData?.districts) ? districtData.districts.filter(Boolean) : [];
+    if (districts.length > 10) {
+      dubaiDistrictsList = [...new Set(districts)].sort();
+      projectBuildingSummary = null;
+      if (projectResponse.ok) {
+        try {
+          const projectData = await projectResponse.json();
+          if (Array.isArray(projectData?.entries)) projectBuildingSummary = projectData;
+        } catch (projectError) {
+          console.warn('⚠️ Could not parse project summary:', projectError.message);
+        }
       }
-    });
-    if (districts.size > 10) {
-      dubaiDistrictsList = Array.from(districts).sort();
       countEl.textContent = `✅ ${dubaiDistrictsList.length} districts available`;
-      console.log(`✅ ${dubaiDistrictsList.length} districts available`);
+      console.log(`✅ Loaded ${dubaiDistrictsList.length} districts from summary`);
       return;
     }
+    throw new Error('District summary is empty');
   } catch (e) {
-    console.warn('⚠️ Could not load districts from DLD:', e.message);
+    projectBuildingSummary = null;
+    console.warn('⚠️ Could not load client summaries:', e.message);
   }
   dubaiDistrictsList = UAE_DISTRICTS.dubai || [];
   countEl.textContent = `📋 Using ${dubaiDistrictsList.length} districts (fallback)`;
@@ -871,11 +880,13 @@ function projectOptionsForCurrentContext() {
   const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
   if (!district) return [];
   const options = new Set();
-  dldTransactionsCache.forEach(row => {
-    if (row.propertyType !== type) return;
-    const rowDistrict = String(row.district || '').toLowerCase();
+  (projectBuildingSummary?.entries || []).forEach(entry => {
+    if (entry.propertyType !== type) return;
+    const rowDistrict = String(entry.district || '').toLowerCase();
     if (district && !(rowDistrict.includes(district) || district.includes(rowDistrict))) return;
-    [row.masterProject, row.project].forEach(value => { if (value && String(value).trim()) options.add(String(value).trim()); });
+    (entry.projects || []).forEach(project => {
+      if (project?.name && String(project.name).trim()) options.add(String(project.name).trim());
+    });
   });
   return [...options].sort((a, b) => a.localeCompare(b));
 }
@@ -892,15 +903,17 @@ function refreshProjectSuggestions() {
 }
 function getProjectEvidence(name) {
   const normalized = String(name || '').trim().toLowerCase();
-  if (!normalized || !(document.getElementById('selectedDistrict').value || '').trim()) return { count: 0, verified: false };
-  const rows = dldTransactionsCache.filter(row => {
-    if (row.propertyType !== document.getElementById('propType').value) return false;
-    const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
-    const rowDistrict = String(row.district || '').toLowerCase();
-    if (district && !(rowDistrict.includes(district) || district.includes(rowDistrict))) return false;
-    return [row.masterProject, row.project].some(value => String(value || '').trim().toLowerCase() === normalized);
+  const type = document.getElementById('propType').value;
+  const district = (document.getElementById('selectedDistrict').value || document.getElementById('districtInput').value || '').trim().toLowerCase();
+  if (!normalized || !district) return { count: 0, verified: false };
+  const entry = (projectBuildingSummary?.entries || []).find(candidate => {
+    if (candidate.propertyType !== type) return false;
+    const candidateDistrict = String(candidate.district || '').toLowerCase();
+    return candidateDistrict === district || candidateDistrict.includes(district) || district.includes(candidateDistrict);
   });
-  return { count: rows.length, verified: rows.length > 0 };
+  const project = entry?.projects?.find(candidate => String(candidate?.name || '').trim().toLowerCase() === normalized);
+  const count = Number(project?.transactionCount || 0);
+  return { count: Number.isFinite(count) ? count : 0, verified: count > 0 };
 }
 function updateProjectBuildingNotice() {
   const input = document.getElementById('projectBuildingInput');
@@ -1858,7 +1871,7 @@ function saveToHistory(result, propData) {
 }
 async function loadAccuracyMeta() {
   try {
-    const response = await fetch('/data/accuracy-data.json');
+    const response = await fetch('/data/accuracy-summary.json');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     const metrics = data.metrics || {};
