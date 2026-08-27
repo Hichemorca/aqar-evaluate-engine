@@ -108,6 +108,7 @@ const FACILITY_TYPES = {
 // ===== CACHE =====
 const gisCache = new Map();
 const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
+const STALE_CACHE_GRACE_MS = 24 * 60 * 60 * 1000; // 24 hours beyond the normal TTL
 
 function getCacheKey(lat, lng, radius) {
   return `${lat.toFixed(4)},${lng.toFixed(4)},${radius}`;
@@ -117,6 +118,15 @@ function getCached(key) {
   const entry = gisCache.get(key);
   if (entry && (Date.now() - entry.timestamp) < CACHE_TTL) return entry.data;
   if (entry) gisCache.delete(key);
+  return null;
+}
+
+function getStaleCached(key) {
+  const entry = gisCache.get(key);
+  if (!entry) return null;
+  const age = Date.now() - entry.timestamp;
+  if (age >= CACHE_TTL && age < CACHE_TTL + STALE_CACHE_GRACE_MS) return entry.data;
+  if (age >= CACHE_TTL + STALE_CACHE_GRACE_MS) gisCache.delete(key);
   return null;
 }
 
@@ -202,6 +212,11 @@ async function fetchFacilities(lat, lng, radius = 500) {
   const data = await queryOverpass(query);
   
   if (!data || !data.elements) {
+    const stale = getStaleCached(cacheKey);
+    if (stale) {
+      console.log(`⚠️ OSM unavailable; using stale cache for ${lat}, ${lng}`);
+      return { ...stale, cacheStatus: 'stale' };
+    }
     console.log('⚠️ No data from Overpass API');
     return {
       facilities: {},
@@ -373,8 +388,11 @@ module.exports = {
   MAX_CACHE_ENTRIES,
   isWithinSupportedBounds,
   getCached,
+  getStaleCached,
   setCache,
   gisCache,
+  CACHE_TTL,
+  STALE_CACHE_GRACE_MS,
   isRateLimited
 };
 
