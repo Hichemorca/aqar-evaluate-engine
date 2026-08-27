@@ -39,7 +39,7 @@ test('batch policy remains explicit where DCF is not part of the current offline
 });
 
 test('calibration console groups controls by property type and user-facing fields', () => {
-  const source = fs.readFileSync(path.join(__dirname, '..', 'calibration.html'), 'utf8');
+  const source = fs.readFileSync(path.join(__dirname, '..', 'shared', 'calibration.js'), 'utf8');
   assert.match(source, /<details class="type-card"/);
   assert.match(source, /data-property-type/);
   assert.match(source, /const propertyTypeLabels = \{ apartment: 'Apartment'/);
@@ -59,7 +59,7 @@ test('calibration console groups controls by property type and user-facing field
 });
 
 test('calibration console uses the public field names for factor cards', () => {
-  const source = fs.readFileSync(path.join(__dirname, '..', 'calibration.html'), 'utf8');
+  const source = fs.readFileSync(path.join(__dirname, '..', 'shared', 'calibration.js'), 'utf8');
   for (const fieldName of [
     'Total Area (sqm)', 'Bedrooms', 'Features & Amenities', 'Year Built', 'Condition',
     'Finish Quality', 'View Type', 'Floor Level', 'Street Position', 'Building Condition',
@@ -69,7 +69,7 @@ test('calibration console uses the public field names for factor cards', () => {
 });
 
 test('property-specific factor rendering filters by applicable method', () => {
-  const source = fs.readFileSync(path.join(__dirname, '..', 'calibration.html'), 'utf8');
+  const source = fs.readFileSync(path.join(__dirname, '..', 'shared', 'calibration.js'), 'utf8');
   assert.match(source, /definition\.groups\.filter\(definitionGroup => \(propertyConfig\.applicableMethods \|\| \[\]\)\.includes\(definitionGroup\.method\)\)/);
   assert.match(source, /const used = new Set\(valuationFieldDefinitions\.flatMap/);
   assert.match(source, /const group = methodGroups\[method\]/);

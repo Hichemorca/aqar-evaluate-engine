@@ -9,6 +9,8 @@ const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'marke
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
 const accuracyDashboardJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'accuracy-dashboard.js'), 'utf8');
+const calibrationHtml = fs.readFileSync(path.join(__dirname, '..', 'calibration.html'), 'utf8');
+const calibrationJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'calibration.js'), 'utf8');
 const exportHtml = fs.readFileSync(path.join(__dirname, '..', 'export.html'), 'utf8');
 const exportJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'export.js'), 'utf8');
 
@@ -67,6 +69,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(accuracyDashboardHtml, /<script>\s*[\s\S]*<\/script>/);
   assert.ok(accuracyDashboardJs.includes('function updateTable(properties)'));
   assert.ok(accuracyDashboardJs.includes("document.getElementById('loadSavedDataButton')?.addEventListener"));
+  assert.ok(calibrationHtml.includes('<script src="/shared/calibration.js"></script>'));
+  assert.doesNotMatch(calibrationHtml, /<script>\s*[\s\S]*<\/script>/);
+  assert.doesNotMatch(calibrationHtml, /onclick=/);
+  assert.ok(calibrationJs.includes('async function request(method=\'GET\', body)'));
+  assert.ok(calibrationJs.includes('data-action="add-project-multiplier"'));
+  assert.ok(calibrationJs.includes("$('saveButton').addEventListener('click', saveConfig)"));
   assert.ok(marketIntelligenceHtml.includes('<h1 class="miayaar-page-title">Market Intelligence</h1>'));
   assert.ok(marketIntelligenceHtml.includes('<script src="/shared/market-intelligence.js"></script>'));
   assert.doesNotMatch(marketIntelligenceHtml, /<script>\s*[\s\S]*<\/script>/);

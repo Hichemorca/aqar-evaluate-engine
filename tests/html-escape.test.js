@@ -33,7 +33,7 @@ test('market intelligence rendering escapes artifact text fields', () => {
 
 test('accuracy and calibration rendering use escaping for dynamic text', () => {
   const accuracy = readPage('shared/accuracy-dashboard.js');
-  const calibration = readPage('calibration.html');
+  const calibration = readPage('shared/calibration.js');
   assert.match(accuracy, /escapeHtml\(p\.district \|\| '—'\)/);
   assert.match(accuracy, /escapeHtml\(p\.propertyType \|\| '—'\)/);
   assert.match(calibration, /function escapeHtml\(value\) \{ return AQAR_HTML_ESCAPE\.escapeHtml\(value\); \}/);

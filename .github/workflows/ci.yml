@@ -50,6 +50,7 @@ jobs:
           node --check shared/export.js
           node --check shared/market-intelligence.js
           node --check shared/accuracy-dashboard.js
+          node --check shared/calibration.js
           node --check scripts/evaluate-and-save.js
           node --check scripts/generate-client-summaries.js
 
