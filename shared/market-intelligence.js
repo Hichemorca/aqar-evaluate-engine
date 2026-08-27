@@ -116,9 +116,9 @@ async function loadData() {
   } catch (e) {
     console.error(e);
     const errorMsg = '⚠️ Could not load market data. Please check your connection or try again later.';
-    document.getElementById('investmentTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
-    document.getElementById('growingTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
-    document.getElementById('riskTable').innerHTML = `<div class="loading" style="color:var(--red)">${errorMsg}</div>`;
+    document.getElementById('investmentTable').innerHTML = `<div class="loading loading-error">${errorMsg}</div>`;
+    document.getElementById('growingTable').innerHTML = `<div class="loading loading-error">${errorMsg}</div>`;
+    document.getElementById('riskTable').innerHTML = `<div class="loading loading-error">${errorMsg}</div>`;
   }
 }
 

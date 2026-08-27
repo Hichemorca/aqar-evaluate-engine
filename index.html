@@ -388,7 +388,16 @@
     .project-map-label { background: #d4920e; color: #06111d; border: 2px solid #fff; border-radius: 7px; padding: 3px 7px; font-size: 10px; font-weight: 800; white-space: nowrap; box-shadow: 0 2px 7px rgba(0,0,0,.35); }
     .project-map-popup-source { font-size: 10px; color: #667; }
     .project-map-source { color: var(--muted); }
-    .poi-marker { background: var(--poi-color, #888); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
+    .poi-marker { color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
+    .poi-marker.poi-school { background: #f39c12; }
+    .poi-marker.poi-hospital { background: #e74c3c; }
+    .poi-marker.poi-supermarket { background: #2ecc71; }
+    .poi-marker.poi-metro { background: #3498db; }
+    .poi-marker.poi-park { background: #27ae60; }
+    .poi-marker.poi-gym { background: #9b59b6; }
+    .poi-marker.poi-cafe { background: #f1c40f; }
+    .poi-marker.poi-restaurant { background: #e67e22; }
+    .poi-marker.poi-default { background: #888; }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
     .gis-result-panel { display: none; margin-top: 12px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.06); }
     .gis-result-panel.is-visible { display: block; }
@@ -988,7 +997,8 @@ function addPOIsToMap(pois) {
   const emojis = { school: '🏫', hospital: '🏥', supermarket: '🛒', metro: '🚇', park: '🌳', gym: '🏋️', cafe: '☕', restaurant: '🍽️' };
   const colors = { school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71', metro: '#3498db', park: '#27ae60', gym: '#9b59b6', cafe: '#f1c40f', restaurant: '#e67e22' };
   pois.slice(0,30).forEach(p => {
-    const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div class="poi-marker" style="--poi-color:${colors[p.type]||'#888'}">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
+    const poiClass = colors[p.type] ? `poi-${p.type}` : 'poi-default';
+    const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div class="poi-marker ${poiClass}">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
     const marker = L.marker([p.lat, p.lng], { icon, zIndexOffset: 700 }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span class="poi-popup-distance">${(p.distance*1000).toFixed(0)}m away</span>`);
     poiMarkers.push(marker);
   });
@@ -1503,7 +1513,8 @@ function displayResult(result, valuations, propData) {
   const explain = `<div class="result-explanation"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
   const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div class="result-header"><div class="result-eyebrow">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div class="result-property-meta">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="--confidence-width:${result.confidencePct}%"></div></div><div class="result-confidence-label ${cc}">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" rel="noopener noreferrer" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s result-action-button" data-action="new-valuation">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div class="result-header"><div class="result-eyebrow">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div class="result-property-meta">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}"></div></div><div class="result-confidence-label ${cc}">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" rel="noopener noreferrer" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s result-action-button" data-action="new-valuation">🔄 New Valuation</button></div>`;
+  section.querySelector('.confidence-fill')?.style.setProperty('--confidence-width', `${result.confidencePct}%`);
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1613,7 +1624,7 @@ function resetAll() {
   document.getElementById('selectedDistrict').value = '';
   document.getElementById('selectedDistrictDisplay').textContent = 'None';
   districtResolveRequestId++;
-  document.getElementById('districtAutocomplete').style.display = 'none';
+  document.getElementById('districtAutocomplete').classList.remove('is-visible');
   document.getElementById('propType').value = 'apartment';
   document.getElementById('area').value = '120';
   document.getElementById('bedrooms').value = '2';
