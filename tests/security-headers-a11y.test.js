@@ -18,6 +18,9 @@ test('Netlify headers define the required browser security protections', () => {
     'Strict-Transport-Security:'
   ]) assert.match(headers, new RegExp(header.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   assert.doesNotMatch(headers, /Access-Control-Allow-Origin:\s*\*/i);
+  assert.match(headers, /script-src 'self' https:\/\/unpkg\.com/);
+  assert.doesNotMatch(headers, /script-src[^;]*'unsafe-inline'/);
+  assert.match(headers, /style-src[^\n]*'unsafe-inline'/);
   assert.match(headers, /img-src[^\n]*https:\/\/unpkg\.com/);
 });
 
@@ -33,6 +36,9 @@ test('Netlify TOML repeats the required headers for deploys that omit _headers',
     'Cross-Origin-Opener-Policy = "same-origin"',
     'Strict-Transport-Security ='
   ]) assert.match(config, new RegExp(header.replace(/[.*+?^${}()|[\\]\\]/g, '\\\\$&')));
+  assert.match(config, /script-src 'self' https:\/\/unpkg\.com/);
+  assert.doesNotMatch(config, /script-src[^;]*'unsafe-inline'/);
+  assert.match(config, /style-src[^\n]*'unsafe-inline'/);
 });
 
 test('each public page exposes a keyboard skip link and main landmark', () => {
