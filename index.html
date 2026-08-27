@@ -412,6 +412,10 @@
     .gis-map-unavailable { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--muted); font-size: 12px; }
     .result-action-button { margin-top: 12px; }
     .result-method-row { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
+    .result-method-status { font-size: 10px; }
+    .result-method-status.used { color: var(--green); }
+    .result-method-status.not-applicable { color: var(--muted); }
+    .result-method-status.not-used { color: var(--gold); }
     .result-adjustments { margin-top: 10px; }
     .result-explanation { background: rgba(212,146,14,0.05); border: 1px solid rgba(212,146,14,0.15); border-radius: 12px; padding: 12px; margin-bottom: 12px; font-size: 11px; line-height: 1.8; }
     .result-header { text-align: center; }
@@ -425,6 +429,8 @@
     .observation-consent-label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
     .observation-consent-input { margin-top: 2px; }
     .observation-status { margin-top: 5px; color: var(--muted); }
+    .observation-status.success { color: var(--green); }
+    .observation-status.warning { color: var(--gold); }
     .selected-display span { color: var(--text); font-weight: 600; }
     .district-count { font-size: 10px; color: var(--muted); margin-top: 4px; }
     @media (max-width: 500px) {
@@ -1455,8 +1461,8 @@ function displayResult(result, valuations, propData) {
     const isApplicable = applicableMethods.has(method);
     const wasUsed = valuations.some(v => v.method === label);
     const status = !isApplicable ? 'NOT_APPLICABLE' : wasUsed ? 'USED' : 'NOT_USED — insufficient evidence or inputs';
-    const color = status === 'USED' ? 'var(--green)' : status === 'NOT_APPLICABLE' ? 'var(--muted)' : 'var(--gold)';
-    return `<div class="result-method-row"><span>${label}</span><b style="color:${color};font-size:10px">${status}</b></div>`;
+    const statusClass = status === 'USED' ? 'used' : status === 'NOT_APPLICABLE' ? 'not-applicable' : 'not-used';
+    return `<div class="result-method-row"><span>${label}</span><b class="result-method-status ${statusClass}">${status}</b></div>`;
   }).join('');
   const evidenceState = propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
   const evidencePresentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
@@ -1529,17 +1535,17 @@ function buildObservationPayload(propData, result) {
 async function recordValuationObservation(propData, result) {
   const checkbox = document.getElementById('observationConsent');
   const status = document.getElementById('observationStatus');
-  if (!checkbox?.checked) { if (status) status.textContent = ''; return; }
-  if (status) { status.textContent = 'Saving anonymous observation…'; status.style.color = 'var(--muted)'; }
+  if (!checkbox?.checked) { if (status) { status.className = 'observation-status'; status.textContent = ''; } return; }
+  if (status) { status.className = 'observation-status'; status.classList.add('loading'); status.textContent = 'Saving anonymous observation…'; }
   try {
     const response = await fetch('/api/valuation-observation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildObservationPayload(propData, result)) });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
-    if (status) { status.textContent = 'Thank you. Your anonymous observation was saved for analysis.'; status.style.color = 'var(--green)'; }
+    if (status) { status.className = 'observation-status success'; status.textContent = 'Thank you. Your anonymous observation was saved for analysis.'; }
     window.aqarLastObservationId = payload.observationId || null;
   } catch (error) {
     console.warn('Observation was not saved:', error.message);
-    if (status) { status.textContent = 'Observation was not saved; your valuation is unaffected.'; status.style.color = 'var(--gold)'; }
+    if (status) { status.className = 'observation-status warning'; status.textContent = 'Observation was not saved; your valuation is unaffected.'; }
   }
 }
 function runValuation() {
