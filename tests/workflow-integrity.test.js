@@ -25,6 +25,12 @@ test('daily accuracy workflow has deterministic concurrency, pinned actions, and
   assert.match(workflow, /Final integrity gate before commit/);
   assert.match(workflow, /Optional Layer 5/);
   assert.match(workflow, /Optional Layer 9/);
+  assert.match(workflow, /git fetch origin main/);
+  assert.match(workflow, /git rev-parse HEAD/);
+  assert.match(workflow, /refusing to push a stale generated snapshot/);
+  assert.match(workflow, /git diff --staged --check/);
+  assert.match(workflow, /git push origin HEAD:main/);
+  assert.doesNotMatch(workflow, /git stash pop \|\| true/);
 });
 
 test('pinned accuracy requirements contain no floating versions', () => {

@@ -89,19 +89,26 @@ jobs:
       - name: Final integrity gate before commit
         run: |
           node scripts/validate-official-artifacts.js
+          node scripts/generate-client-summaries.js --check
           git diff --name-only -- data/ models/ | sed '/^$/d' | sort
 
       - name: Commit and push changes
         run: |
+          set -euo pipefail
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git stash
-          git pull --rebase origin main
-          git stash pop || true
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "origin/main changed while the update was running; refusing to push a stale generated snapshot"
+            exit 1
+          fi
           git add data/ models/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            node scripts/validate-official-artifacts.js
+            node scripts/generate-client-summaries.js --check
+            git diff --staged --check
             git commit -m "📊 Auto-update all data layers + OSM GIS + Market Intelligence + ML [skip ci]"
-            git push origin main
+            git push origin HEAD:main
           fi
