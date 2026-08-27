@@ -16,6 +16,7 @@
 | [English user guide](docs/user-guide-en.md) | Platform usage steps and result interpretation in English. |
 | [دليل المدير العربي](docs/admin-guide-ar.md) | إدارة Calibration Console وقواعد الحفظ الآمن باللغة العربية. |
 | [English administrator guide](docs/admin-guide-en.md) | Calibration Console administration and safe-save procedures in English. |
+| [دليل المطورين العربي](docs/developer-guide-ar.md) | بنية الكود والـAPI وخوارزميات التقييم للمطورين. |
 
 ## الهوية البصرية
 
