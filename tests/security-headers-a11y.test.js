@@ -18,6 +18,7 @@ test('Netlify headers define the required browser security protections', () => {
     'Strict-Transport-Security:'
   ]) assert.match(headers, new RegExp(header.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   assert.doesNotMatch(headers, /Access-Control-Allow-Origin:\s*\*/i);
+  assert.match(headers, /img-src[^\n]*https:\/\/unpkg\.com/);
 });
 
 test('Netlify TOML repeats the required headers for deploys that omit _headers', () => {
