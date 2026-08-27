@@ -25,9 +25,45 @@ function deepMergeKnown(base, input) {
   return output;
 }
 
+function validateDomain(path, value, errors) {
+  const fail = (message) => errors.push(`${path} ${message}`);
+  const range = (minimum, maximum) => {
+    if (value < minimum || value > maximum) fail(`must be between ${minimum} and ${maximum}`);
+  };
+
+  if (path.startsWith('gis.')) {
+    if (path.startsWith('gis.facilityWeights.')) return range(0, 100);
+    if (path === 'gis.distanceRadiusMeters') return range(100, 5000);
+    if (path === 'gis.scoreCap') return range(0.01, 10);
+    if (path === 'gis.impactMaximumPercent') return range(0, 100);
+    if (path === 'gis.facilityContributionCap') return range(0.01, 10);
+    if (path === 'gis.distanceDecayBaseKm') return range(0.01, 20);
+    if (path === 'gis.proximityFactorPerScore') return range(-1, 1);
+    if (path === 'gis.proximityMinimumMultiplier' || path === 'gis.proximityMaximumMultiplier') return range(0.01, 2);
+  }
+
+  if (path.includes('.coefficients.')) {
+    const field = path.split('.').at(-1);
+    if (field === 'years') {
+      if (!Number.isInteger(value) || value < 1 || value > 50) fail('must be an integer between 1 and 50');
+      return;
+    }
+    if (['vacancyRatePercent', 'capRatePercent'].includes(field)) return range(0, 100);
+    if ([
+      'ageDepreciation', 'expenseRate', 'landValueFromMarketShare', 'landValueFromBuildShare',
+      'depreciationPerYear', 'maximumDepreciation', 'rentGrowthRate', 'valueGrowthRate',
+      'netOperatingIncomeRate', 'terminalValueRate', 'discountRate', 'fallbackCapRate'
+    ].includes(field)) return range(0, 1);
+    if (['maxPricePerSqm', 'featureBonusPerSqm', 'constructionCostPerSqm'].includes(field)) return range(0, 100000000);
+    if (path.includes('Factors.') || field.includes('Multiplier') || field.includes('Factor')) return range(0.01, 5);
+    if (value < 0) fail('must not be negative');
+  }
+}
+
 function validateNumericLeaves(value, path, errors) {
   if (typeof value === 'number') {
     if (!Number.isFinite(value)) errors.push(`${path} must be finite`);
+    else validateDomain(path, value, errors);
     return;
   }
   if (!value || typeof value !== 'object') return;
@@ -106,6 +142,11 @@ function validateConfig(config) {
   }
 
   validateNumericLeaves(config?.gis, 'gis', errors);
+  const minimumProximity = Number(config?.gis?.proximityMinimumMultiplier);
+  const maximumProximity = Number(config?.gis?.proximityMaximumMultiplier);
+  if (Number.isFinite(minimumProximity) && Number.isFinite(maximumProximity) && maximumProximity < minimumProximity) {
+    errors.push('gis.proximityMaximumMultiplier must be >= proximityMinimumMultiplier');
+  }
   validateV21ShadowConfig(config?.v21ShadowMultipliers, errors);
   for (const propertyType of calibrationDefaults.PROPERTY_TYPES) {
     validateNumericLeaves(

@@ -17,6 +17,21 @@ test('calibration validation rejects negative weights', () => {
   assert.ok(result.errors.some(error => error.includes('villa.weights.income')));
 });
 
+test('calibration validation rejects invalid GIS and coefficient ranges', () => {
+  const config = calibrationDefaults.createDefaultCalibrationConfig();
+  config.gis.scoreCap = -1;
+  config.gis.proximityMaximumMultiplier = 0.9;
+  config.gis.proximityMinimumMultiplier = 1.1;
+  config.propertyTypes.apartment.coefficients.income.capRatePercent = -5;
+  config.propertyTypes.villa.coefficients.sales.maxPricePerSqm = -100;
+  const result = validateConfig(config);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some(error => error.includes('gis.scoreCap')));
+  assert.ok(result.errors.some(error => error.includes('gis.proximityMaximumMultiplier')));
+  assert.ok(result.errors.some(error => error.includes('apartment.coefficients.income.capRatePercent')));
+  assert.ok(result.errors.some(error => error.includes('villa.coefficients.sales.maxPricePerSqm')));
+});
+
 test('calibration merge ignores unknown keys', () => {
   const defaults = calibrationDefaults.createDefaultCalibrationConfig();
   const merged = deepMergeKnown(defaults, { unknown: 123, gis: { scoreCap: 2 } });
