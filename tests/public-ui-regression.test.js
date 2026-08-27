@@ -14,6 +14,7 @@ const indexMapLinkingJs = fs.readFileSync(path.join(__dirname, '..', 'shared', '
 const indexFieldViewJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-field-view-runtime.js'), 'utf8');
 const indexMapMarkerJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-map-marker-runtime.js'), 'utf8');
 const indexGisFetchJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-fetch-runtime.js'), 'utf8');
+const indexGisDisplayJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-display-runtime.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -91,7 +92,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-map-linking-runtime.js') < indexHtml.indexOf('/shared/index-field-view-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-field-view-runtime.js') < indexHtml.indexOf('/shared/index-map-marker-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-map-marker-runtime.js') < indexHtml.indexOf('/shared/index-gis-fetch-runtime.js'));
-  assert.ok(indexHtml.indexOf('/shared/index-gis-fetch-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-gis-fetch-runtime.js') < indexHtml.indexOf('/shared/index-gis-display-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-gis-display-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexGisDisplayJs.includes('function displayGISResult(gisData)'));
   assert.ok(indexGisFetchJs.includes('function prepareGISRefresh()'));
   assert.ok(indexGisFetchJs.includes('function debouncedFetchGISData()'));
   assert.ok(indexGisFetchJs.includes('async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null)'));
@@ -137,6 +140,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function prepareGISRefresh\(\)/);
   assert.doesNotMatch(indexHtml, /function debouncedFetchGISData\(\)/);
   assert.doesNotMatch(indexHtml, /async function fetchPOIsFromOSM\(lat, lng, radius = 1000, requestSignal = null\)/);
+  assert.doesNotMatch(indexHtml, /function displayGISResult\(gisData\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
@@ -149,8 +153,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /onchange="onPropertyTypeChange\(\)"/);
   assert.doesNotMatch(indexHtml, /oninput="updateExtraFieldVisibility\(\)"/);
   assert.doesNotMatch(indexHtml, /onclick="(scrapeRealData|runValuation|resetAll)\(\)"/);
-  assert.ok(indexHtml.includes('class="gis-impact-label"'));
-  assert.ok(indexHtml.includes('class="gis-impact-detail"'));
+  assert.ok(indexGisDisplayJs.includes('class="gis-impact-label"'));
+  assert.ok(indexGisDisplayJs.includes('class="gis-impact-detail"'));
   assert.ok(indexHtml.includes('class="market-status-detail"'));
   assert.ok(indexHtml.includes('class="market-status-review"'));
   assert.ok(indexMapMarkerJs.includes('class="gis-map-unavailable"'));
@@ -190,7 +194,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /getElementById\('(rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)'\)\.style\.display/);
   assert.match(indexHtml, /\.gis-result-panel\.is-visible \{ display: block; \}/);
   assert.match(indexHtml, /\.gis-project-label\.is-visible \{ display: block; \}/);
-  assert.match(indexHtml, /container\.classList\.add\('is-visible'\)/);
+  assert.match(indexGisDisplayJs, /container\.classList\.add\('is-visible'\)/);
   assert.doesNotMatch(indexHtml, /(?:gisResult|gisProjectLabel).*style\.display/);
   assert.doesNotMatch(indexDistrictContextJs, /row\.style\.display = visibility\.projectBuilding/);
   assert.match(indexHtml, /\.autocomplete-list\.is-visible \{ display: block; \}/);
