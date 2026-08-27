@@ -132,6 +132,10 @@ test('public pages use semantic headings and safe external links', () => {
   assert.match(indexHtml, /<div class="row js-hidden" id="gisCoordsRow"/);
   assert.doesNotMatch(indexHtml, /(?:rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)"[^>]+style="display:none"/);
   assert.doesNotMatch(indexHtml, /getElementById\('(rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)'\)\.style\.display/);
+  assert.match(indexHtml, /\.gis-result-panel\.is-visible \{ display: block; \}/);
+  assert.match(indexHtml, /\.gis-project-label\.is-visible \{ display: block; \}/);
+  assert.match(indexHtml, /container\.classList\.add\('is-visible'\)/);
+  assert.doesNotMatch(indexHtml, /(?:gisResult|gisProjectLabel).*style\.display/);
   assert.doesNotMatch(indexDistrictContextJs, /row\.style\.display = visibility\.projectBuilding/);
   assert.doesNotMatch(indexHtml, /scoreDisplay\.innerHTML = `?[^`]*style="color:var\(--gold\)"/);
   assert.doesNotMatch(indexHtml, /<span style="color:var\(--muted\)">🔍 Checking market data/);
