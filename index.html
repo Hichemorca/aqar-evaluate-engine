@@ -740,6 +740,7 @@
 <script src="/shared/index-sales-approach-runtime.js"></script>
 <script src="/shared/index-income-approach-runtime.js"></script>
 <script src="/shared/index-cost-approach-runtime.js"></script>
+<script src="/shared/index-dcf-approach-runtime.js"></script>
 <script src="/shared/index-market-context.js"></script>
 <script src="/shared/index-district-context.js"></script>
 <script src="/shared/index-gis-helpers.js"></script>
@@ -820,21 +821,6 @@ async function scrapeRealData() {
     }
   } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">Market data unavailable</span><br><span class="market-status-detail">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
   btn.disabled = false; btn.innerHTML = '🔄 Refresh market data';
-}
-function dcfApproach(data) {
-  const calibration = getCalibrationForProperty(data.propType);
-  if (!calibration.applicableMethods.includes('dcf') || !data.annualRent || data.annualRent <= 0) return null;
-  const c = calibration.coefficients.dcf;
-  const cur = data.avgPriceSqm ? data.avgPriceSqm * data.area : data.annualRent / c.fallbackCapRate;
-  if (cur <= 0) return null;
-  let npv = -cur, runVal = cur, runRent = data.annualRent;
-  for (let y = 1; y <= c.years; y++) {
-    runRent *= 1 + c.rentGrowthRate; runVal *= 1 + c.valueGrowthRate;
-    npv += (runRent * c.netOperatingIncomeRate) / Math.pow(1 + c.discountRate, y);
-    if (y === c.years) npv += (runVal * c.terminalValueRate) / Math.pow(1 + c.discountRate, c.years);
-  }
-  const value = npv > 0 ? Math.round(npv) : Math.round(cur * c.negativeNpvFallback);
-  return { method: `DCF Analysis (${c.years}-Year)`, value, weight: calibration.weights.dcf, confidence: 'medium', details: `${c.years}-year projection. Rent growth: ${(c.rentGrowthRate*100).toFixed(1)}%/yr. Value growth: ${(c.valueGrowthRate*100).toFixed(1)}%/yr.`, perSqm: Math.round(value/data.area) };
 }
 function calculateWeightedValue(valuations, propData) {
   if (!valuations.length) {
