@@ -58,7 +58,7 @@ flowchart TD
   GIS[GET /.netlify/functions/fetch-osm]
   OBS[POST /api/valuation-observation]
   STORE[(Netlify Blobs)]
-  RAW[data/dld-transactions.csv]
+  RAW[data/dld-transactions.json]
   CLEAN[cleaning-pipeline.js]
   BATCH[scripts/evaluate-and-save.js]
   ACC[data/accuracy-data.json]
@@ -69,7 +69,6 @@ flowchart TD
   UI --> DLD
   UI --> GIS
   UI --> OBS
-  CAL --> ENGINE
   CAL --> STORE
   OBS --> STORE
   RAW --> CLEAN
