@@ -6,6 +6,7 @@ const { execFileSync } = require('node:child_process');
 
 const root = path.join(__dirname, '..');
 const workflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'update-accuracy.yml'), 'utf8');
+const ciWorkflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'ci.yml'), 'utf8');
 
 test('official artifact integrity gate passes on the current artifacts', () => {
   const output = execFileSync(process.execPath, ['scripts/validate-official-artifacts.js'], { cwd: root, encoding: 'utf8' });
@@ -31,6 +32,12 @@ test('daily accuracy workflow has deterministic concurrency, pinned actions, and
   assert.match(workflow, /git diff --staged --check/);
   assert.match(workflow, /git push origin HEAD:main/);
   assert.doesNotMatch(workflow, /git stash pop \|\| true/);
+});
+
+test('main CI workflow uses pinned action commits', () => {
+  assert.match(ciWorkflow, /actions\/checkout@11d5960a326750d5838078e36cf38b85af677262/);
+  assert.match(ciWorkflow, /actions\/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020/);
+  assert.doesNotMatch(ciWorkflow, /uses:\s*actions\/[^@\s]+@v\d/);
 });
 
 test('pinned accuracy requirements contain no floating versions', () => {
