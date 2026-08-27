@@ -223,6 +223,7 @@
     .checkbox-item input { position: absolute; width: 1px; height: 1px; opacity: 0; }
     .checkbox-item input:focus-visible { outline: none; }
     .hidden { display: none !important; }
+    .js-hidden { display: none; }
     .text-center { text-align: center; }
     .text-muted { color: var(--muted); font-size: 10px; }
     .mt-2 { margin-top: 8px; }
@@ -603,17 +604,17 @@
   <div class="section" id="propertyExtraSection">
     <div class="section-title">🏠 Additional Property Details</div>
     <div class="note section-note">Optional details used for project matching and later evidence analysis.</div>
-    <div class="row" id="rowPropertyAreas" style="display:none">
-      <div class="fg" id="fgBua" style="display:none">
+    <div class="row js-hidden" id="rowPropertyAreas">
+      <div class="fg js-hidden" id="fgBua">
         <label for="bua">📐 BUA (Built-up Area, sqm)</label>
         <input type="number" id="bua" min="1" step="0.01" placeholder="e.g. 250">
       </div>
-      <div class="fg" id="fgPlotArea" style="display:none">
+      <div class="fg js-hidden" id="fgPlotArea">
         <label for="plotArea">🧱 Plot Area (sqm)</label>
         <input type="number" id="plotArea" min="1" step="0.01" placeholder="e.g. 500">
       </div>
     </div>
-    <div class="fg" id="fgLastRenovation" style="display:none">
+    <div class="fg js-hidden" id="fgLastRenovation">
       <label for="lastRenovationYear">🛠️ Last Renovation Year</label>
       <input type="number" id="lastRenovationYear" min="1900" max="2026" step="1" placeholder="e.g. 2022">
       <div class="note renovation-note">Shown for properties older than five years.</div>
@@ -634,7 +635,7 @@
       <input type="hidden" id="selectedDistrict" value="">
       <div class="district-count" id="districtCount">Loading districts...</div>
     </div>
-    <div class="row" id="rowProjectBuilding" style="display:none">
+    <div class="row js-hidden" id="rowProjectBuilding">
       <div class="fg">
         <label for="projectBuildingInput">🏢 Project / Building Name</label>
         <div class="autocomplete-container">
@@ -644,7 +645,7 @@
         </div>
       </div>
     </div>
-    <div class="row" id="gisCoordsRow" style="display:none" aria-hidden="true">
+    <div class="row js-hidden" id="gisCoordsRow" aria-hidden="true">
       <div class="fg"><label for="gisLat">🌐 Latitude</label><input type="text" id="gisLat" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
       <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
     </div>
@@ -861,11 +862,11 @@ function updateExtraFieldVisibility() {
   const type = document.getElementById('propType').value;
   const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(type, document.getElementById('yearBuilt').value);
   const hasVisibleField = visibility.bua || visibility.plotArea || visibility.renovationYear;
-  document.getElementById('propertyExtraSection').style.display = hasVisibleField ? 'block' : 'none';
-  document.getElementById('rowPropertyAreas').style.display = (visibility.bua || visibility.plotArea) ? 'flex' : 'none';
-  document.getElementById('fgBua').style.display = visibility.bua ? '' : 'none';
-  document.getElementById('fgPlotArea').style.display = visibility.plotArea ? '' : 'none';
-  document.getElementById('fgLastRenovation').style.display = visibility.renovationYear ? '' : 'none';
+  document.getElementById('propertyExtraSection').classList.toggle('js-hidden', !hasVisibleField);
+  document.getElementById('rowPropertyAreas').classList.toggle('js-hidden', !(visibility.bua || visibility.plotArea));
+  document.getElementById('fgBua').classList.toggle('js-hidden', !visibility.bua);
+  document.getElementById('fgPlotArea').classList.toggle('js-hidden', !visibility.plotArea);
+  document.getElementById('fgLastRenovation').classList.toggle('js-hidden', !visibility.renovationYear);
   if (!visibility.bua) document.getElementById('bua').value = '';
   if (!visibility.plotArea) document.getElementById('plotArea').value = '';
   if (!visibility.renovationYear) document.getElementById('lastRenovationYear').value = '';
@@ -970,7 +971,7 @@ function updateMapMarker(lat, lng) {
   if (projectMapLabelMarker) projectMapLabelMarker.setLatLng([a, b]);
   document.getElementById('gisLat').value = a.toFixed(6);
   document.getElementById('gisLng').value = b.toFixed(6);
-  document.getElementById('gisCoordsRow').style.display = 'none';
+  document.getElementById('gisCoordsRow').classList.add('js-hidden');
   updateProjectMapLabel();
 }
 function addPOIsToMap(pois) {
@@ -999,7 +1000,7 @@ function initGISMap() {
     gisCircleLayer = L.circle([dLat, dLng], { radius: gisRadiusMeters, color: '#d4920e', fillColor: '#d4920e', fillOpacity: 0.1, weight: 2 }).addTo(gisMapInstance);
     document.getElementById('gisLat').value = dLat.toFixed(6);
     document.getElementById('gisLng').value = dLng.toFixed(6);
-    document.getElementById('gisCoordsRow').style.display = 'none';
+    document.getElementById('gisCoordsRow').classList.add('js-hidden');
     gisMapInstance.on('click', e => {
       updateMapMarker(e.latlng.lat, e.latlng.lng);
       updateDistrictFromMapPoint(e.latlng.lat, e.latlng.lng);
@@ -1629,7 +1630,7 @@ function resetAll() {
   document.getElementById('furnishedStatus').value = '';
   document.getElementById('gisLat').value = '';
   document.getElementById('gisLng').value = '';
-  document.getElementById('gisCoordsRow').style.display = 'none';
+  document.getElementById('gisCoordsRow').classList.add('js-hidden');
   document.getElementById('gisResult').style.display = 'none';
   if (mapInitialized && gisMapInstance) {
     const dLat = 25.2048, dLng = 55.2708;
@@ -1638,7 +1639,7 @@ function resetAll() {
     if (gisCircleLayer) gisCircleLayer.setLatLng([dLat, dLng]);
     document.getElementById('gisLat').value = dLat.toFixed(6);
     document.getElementById('gisLng').value = dLng.toFixed(6);
-    document.getElementById('gisCoordsRow').style.display = 'none';
+    document.getElementById('gisCoordsRow').classList.add('js-hidden');
     poiMarkers.forEach(m => gisMapInstance.removeLayer(m)); poiMarkers = [];
   }
   document.getElementById('scrapeStatus').innerHTML = '';
@@ -1705,22 +1706,22 @@ function onPropertyTypeChange() {
   const type = document.getElementById('propType').value;
   const policy = AQAR_POLICY.getPropertyPolicy(type);
   const isRelevant = field => policy ? !policy.irrelevantFields.includes(field) : false;
-  document.getElementById('rowBedrooms').style.display = isRelevant('bedrooms') ? 'flex' : 'none';
-  document.getElementById('rowFeatures').style.display = isRelevant('features') ? 'block' : 'none';
-  document.getElementById('rowYearCondition').style.display = (isRelevant('yearBuilt') || isRelevant('condition')) ? 'flex' : 'none';
-  document.getElementById('incomeSection').style.display = isRelevant('annualRent') ? 'block' : 'none';
-  document.getElementById('costSection').style.display = (isRelevant('landValue') || isRelevant('constructionCost')) ? 'block' : 'none';
+  document.getElementById('rowBedrooms').classList.toggle('js-hidden', !isRelevant('bedrooms'));
+  document.getElementById('rowFeatures').classList.toggle('js-hidden', !isRelevant('features'));
+  document.getElementById('rowYearCondition').classList.toggle('js-hidden', !(isRelevant('yearBuilt') || isRelevant('condition')));
+  document.getElementById('incomeSection').classList.toggle('js-hidden', !isRelevant('annualRent'));
+  document.getElementById('costSection').classList.toggle('js-hidden', !(isRelevant('landValue') || isRelevant('constructionCost')));
   document.querySelectorAll('#featuresGroup .checkbox-item').forEach(item => {
     const types = item.dataset.types||'';
-    item.style.display = isRelevant('features') && types.includes(type) ? 'flex' : 'none';
+    item.classList.toggle('js-hidden', !(isRelevant('features') && types.includes(type)));
     if (!types.includes(type)) { const cb = item.querySelector('input'); if (cb?.checked) { cb.checked = false; item.classList.remove('checked'); } }
   });
-  document.getElementById('fgFinishQuality').style.display = isRelevant('finishQuality') ? '' : 'none';
-  document.getElementById('fgViewType').style.display = isRelevant('viewTypes') ? '' : 'none';
-  document.getElementById('fgFloorLevel').style.display = isRelevant('floorLevel') ? '' : 'none';
-  document.getElementById('fgStreetPosition').style.display = isRelevant('streetPosition') ? '' : 'none';
-  document.getElementById('fgBuildingCondition').style.display = isRelevant('buildingCondition') ? '' : 'none';
-  document.getElementById('fgFurnishedStatus').style.display = isRelevant('furnishedStatus') ? '' : 'none';
+  document.getElementById('fgFinishQuality').classList.toggle('js-hidden', !isRelevant('finishQuality'));
+  document.getElementById('fgViewType').classList.toggle('js-hidden', !isRelevant('viewTypes'));
+  document.getElementById('fgFloorLevel').classList.toggle('js-hidden', !isRelevant('floorLevel'));
+  document.getElementById('fgStreetPosition').classList.toggle('js-hidden', !isRelevant('streetPosition'));
+  document.getElementById('fgBuildingCondition').classList.toggle('js-hidden', !isRelevant('buildingCondition'));
+  document.getElementById('fgFurnishedStatus').classList.toggle('js-hidden', !isRelevant('furnishedStatus'));
   updateExtraFieldVisibility();
   if (policy) {
     const fieldElements = {

@@ -126,6 +126,13 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /id="gisFacilitiesList"[^>]+style="font-size:11px;color:var\(--muted\);line-height:1\.8"/);
   assert.doesNotMatch(indexHtml, /id="gisMap"[^>]+style="margin-top:10px;height:320px/);
   assert.doesNotMatch(indexHtml, /<span style="font-size:10px;color:#888;">\$\{\(p\.distance\*1000\)/);
+  assert.match(indexHtml, /\.js-hidden \{ display: none; \}/);
+  assert.match(indexHtml, /<div class="row js-hidden" id="rowPropertyAreas">/);
+  assert.match(indexHtml, /<div class="row js-hidden" id="rowProjectBuilding">/);
+  assert.match(indexHtml, /<div class="row js-hidden" id="gisCoordsRow"/);
+  assert.doesNotMatch(indexHtml, /(?:rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)"[^>]+style="display:none"/);
+  assert.doesNotMatch(indexHtml, /getElementById\('(rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)'\)\.style\.display/);
+  assert.doesNotMatch(indexDistrictContextJs, /row\.style\.display = visibility\.projectBuilding/);
   assert.doesNotMatch(indexHtml, /scoreDisplay\.innerHTML = `?[^`]*style="color:var\(--gold\)"/);
   assert.doesNotMatch(indexHtml, /<span style="color:var\(--muted\)">🔍 Checking market data/);
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
