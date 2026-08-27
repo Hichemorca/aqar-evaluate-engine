@@ -10,6 +10,7 @@ const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared'
 const indexDistrictContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-context.js'), 'utf8');
 const indexGisHelpersJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-helpers.js'), 'utf8');
 const indexPrimaryInteractionsJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-primary-interactions.js'), 'utf8');
+const indexMapLinkingJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-map-linking-runtime.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -134,9 +135,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.includes('class="market-status-detail"'));
   assert.ok(indexHtml.includes('class="market-status-review"'));
   assert.ok(indexHtml.includes('class="gis-map-unavailable"'));
-  assert.ok(indexHtml.includes('class="project-map-label"'));
-  assert.ok(indexHtml.includes('class="project-map-popup-source"'));
-  assert.ok(indexHtml.includes('class="project-map-source"'));
+  assert.ok(indexMapLinkingJs.includes('class="project-map-label"'));
+  assert.ok(indexMapLinkingJs.includes('class="project-map-popup-source"'));
+  assert.ok(indexMapLinkingJs.includes('class="project-map-source"'));
   assert.ok(indexHtml.includes('class="gis-facilities-title"'));
   assert.ok(indexHtml.includes('class="gis-facilities-list"'));
   assert.ok(indexHtml.includes('class="gis-score-display"'));
@@ -144,6 +145,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.includes('class="poi-popup-distance"'));
   assert.ok(indexHtml.includes("const poiClass = colors[p.type] ? `poi-${p.type}` : 'poi-default';"));
   assert.ok(indexHtml.includes('class="poi-marker ${poiClass}"'));
+  assert.ok(indexMapLinkingJs.includes('async function resolveDistrictCoords(district)'));
+  assert.ok(indexMapLinkingJs.includes('async function selectDistrict(d)'));
+  assert.ok(indexMapLinkingJs.includes('function updateDistrictFromMapPoint(lat, lng)'));
   assert.doesNotMatch(indexHtml, /class="poi-marker" style="--poi-color:/);
   assert.ok(indexHtml.includes('.observation-status.success'));
   assert.ok(indexHtml.includes('.observation-status.warning'));
