@@ -11,9 +11,25 @@ test('size categories preserve current AQAR boundaries', () => {
   assert.equal(getSizeCategory(201, 'land'), 'land_small');
 });
 
+test('cleaning pipeline rejects records without explicit evidence eligibility', () => {
+  const records = [1, 2, 3].map((n) => ({
+    propertyRef: `UNMARKED-${n}`,
+    district: 'Dubai Marina',
+    propertyType: 'apartment',
+    area: 120,
+    actualSalePrice: 1_200_000,
+    saleDate: `2026-06-${String(10 + n).padStart(2, '0')}`,
+    procedure: 'Sale',
+    group: 'Sales',
+    isOffPlan: false
+  }));
+  assert.deepEqual(applyAllFilters(records), []);
+});
+
 test('cleaning pipeline removes invalid records and keeps a valid group', () => {
   const valid = [1, 2, 3].map((n) => ({
     propertyRef: `VALID-${n}`,
+    evidenceStatus: 'eligible',
     district: 'Dubai Marina',
     propertyType: 'apartment',
     area: 120,
@@ -37,4 +53,17 @@ test('cleaning pipeline removes invalid records and keeps a valid group', () => 
   const cleaned = applyAllFilters([...valid, invalid]);
   assert.equal(cleaned.length, 3);
   assert.ok(cleaned.every((record) => record.pricePerSqm === 10_000));
+});
+
+test('cleaning pipeline normalizes duplicate reference keys', () => {
+  const records = [
+    { propertyRef: 'REF-001', evidenceStatus: 'eligible', district: 'Dubai Marina', propertyType: 'apartment', area: 120, actualSalePrice: 1_200_000, saleDate: '2026-06-10', procedure: 'Sale', group: 'Sales' },
+    { propertyRef: ' ref-001 ', evidenceStatus: 'eligible', district: 'Dubai Marina', propertyType: 'apartment', area: 120, actualSalePrice: 1_201_000, saleDate: '2026-06-11', procedure: 'Sale', group: 'Sales' },
+    { propertyRef: 'REF-002', evidenceStatus: 'eligible', district: 'Dubai Marina', propertyType: 'apartment', area: 120, actualSalePrice: 1_202_000, saleDate: '2026-06-12', procedure: 'Sale', group: 'Sales' },
+    { propertyRef: 'REF-003', evidenceStatus: 'eligible', district: 'Dubai Marina', propertyType: 'apartment', area: 120, actualSalePrice: 1_203_000, saleDate: '2026-06-13', procedure: 'Sale', group: 'Sales' },
+    { propertyRef: 'REF-004', evidenceStatus: 'eligible', district: 'Dubai Marina', propertyType: 'apartment', area: 120, actualSalePrice: 1_204_000, saleDate: '2026-06-14', procedure: 'Sale', group: 'Sales' }
+  ];
+  const cleaned = applyAllFilters(records);
+  assert.equal(cleaned.length, 4);
+  assert.deepEqual(cleaned.map(record => record.propertyRef), ['REF-001', 'REF-002', 'REF-003', 'REF-004']);
 });

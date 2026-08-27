@@ -67,6 +67,15 @@ test('valid consented observation passes and optional fields are retained', () =
   assert.equal(observation.consent.analytics, true);
 });
 
+test('observation property dimensions must be valid and bounded', () => {
+  const invalid = validPayload({ property: { ...validPayload().property, area: -10, bedrooms: -3, parkingCount: -2 } });
+  const validation = validatePayload(invalid);
+  assert.equal(validation.valid, false);
+  assert.ok(validation.errors.some(error => error.code === 'area-invalid'));
+  assert.ok(validation.errors.some(error => error.code === 'bedrooms-invalid'));
+  assert.ok(validation.errors.some(error => error.code === 'parking-count-invalid'));
+});
+
 test('apartment cannot submit BUA', () => {
   const payload = validPayload({ property: { ...validPayload().property, propertyType: 'apartment', bua: 120, plotArea: null, lastRenovationYear: 2024 } });
   const validation = validatePayload(payload);
