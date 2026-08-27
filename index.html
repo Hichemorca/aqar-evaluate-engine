@@ -727,31 +727,12 @@
   <script src="/shared/comparable-bracket.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="/shared/index-accuracy-meta.js"></script>
+<script src="/shared/index-calibration-bootstrap.js"></script>
 <script src="/shared/index-market-context.js"></script>
 <script src="/shared/index-district-context.js"></script>
 <script src="/shared/index-gis-helpers.js"></script>
 <script src="/shared/index-primary-interactions.js"></script>
 <script>
-function getCalibrationForProperty(propertyType) { return AQAR_CALIBRATION_DEFAULTS.getPropertyConfig(AQAR_ACTIVE_CALIBRATION, propertyType); }
-function getCalibrationCoefficient(propertyType, group, key, fallback) {
-  const value = getCalibrationForProperty(propertyType)?.coefficients?.[group]?.[key];
-  return Number.isFinite(Number(value)) ? Number(value) : fallback;
-}
-async function loadCalibrationConfig() {
-  try {
-    const response = await fetch(`/api/calibration-config?_calibration_fetch=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Calibration HTTP ${response.status}`);
-    const payload = await response.json();
-    if (payload.config) AQAR_ACTIVE_CALIBRATION = payload.config;
-    AQAR_V21_SHADOW_CONFIG = payload.config?.v21ShadowMultipliers || AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
-    window.aqarCalibrationConfig = AQAR_ACTIVE_CALIBRATION;
-    window.aqarV21ShadowConfig = AQAR_V21_SHADOW_CONFIG;
-  } catch (error) {
-    window.aqarCalibrationConfig = AQAR_ACTIVE_CALIBRATION;
-    window.aqarV21ShadowConfig = AQAR_V21_SHADOW_CONFIG;
-    console.warn('Using default AQAR calibration:', error.message);
-  }
-}
 const UAE_DISTRICTS = {
   dubai: ["Dubai Marina","Palm Jumeirah","Downtown Dubai","Business Bay","Jumeirah Village Circle","Jumeirah Lake Towers","Dubai Hills Estate","Arabian Ranches","Emirates Hills","The Springs","The Meadows","Al Barsha","Deira","Bur Dubai","Damac Hills","Dubai Creek Harbour","Emaar Beachfront","Mirdif","Al Furjan","Discovery Gardens","Motor City","Dubai Sports City","Dubai Silicon Oasis","International City","Al Nahda","Al Qusais","Al Karama","Bluewaters Island","City Walk","DIFC","Dubai South","Jumeirah Beach Residence","La Mer","Mohammed Bin Rashid City","Palm Jebel Ali","Port de La Mer","Sobha Hartland","The Greens","Tilal Al Ghaf","Al Warqa"]
 };
