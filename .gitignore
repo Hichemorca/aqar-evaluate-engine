@@ -1,3 +1,20 @@
+# Local and generated development files
 models/*.pkl
 node_modules/
 .netlify/
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# Local secrets and transient files
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.bak
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
