@@ -4,6 +4,24 @@ const dld = require('../netlify/functions/dld-lookup');
 const osm = require('../netlify/functions/fetch-osm');
 
 const parseBody = response => JSON.parse(response.body);
+const requiredSecurityHeaders = {
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Cross-Origin-Opener-Policy': 'same-origin'
+};
+
+function assertSecurityHeaders(response) {
+  for (const [name, value] of Object.entries(requiredSecurityHeaders)) assert.equal(response.headers[name], value);
+  assert.match(response.headers['Strict-Transport-Security'], /max-age=31536000/);
+}
+
+test('active API responses carry shared security headers', async () => {
+  const dldResponse = await dld.handler({ httpMethod: 'POST', headers: { 'x-nf-client-connection-ip': 'test-security-dld' }, queryStringParameters: {} });
+  const osmResponse = await osm.handler({ httpMethod: 'POST', headers: { 'x-nf-client-connection-ip': 'test-security-osm' }, queryStringParameters: {} });
+  assertSecurityHeaders(dldResponse);
+  assertSecurityHeaders(osmResponse);
+});
 
 test('dld lookup rejects non-GET requests and does not expose wildcard CORS', async () => {
   const response = await dld.handler({
