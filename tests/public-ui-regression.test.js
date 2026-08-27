@@ -115,6 +115,11 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.includes('class="gis-map-container"'));
   assert.ok(indexHtml.includes('class="poi-popup-distance"'));
   assert.ok(indexHtml.includes('class="poi-marker" style="--poi-color:'));
+  assert.ok(indexHtml.includes('.observation-status.success'));
+  assert.ok(indexHtml.includes('.observation-status.warning'));
+  assert.ok(indexHtml.includes('class="result-method-status ${statusClass}"'));
+  assert.doesNotMatch(indexHtml, /status\.style\.color/);
+  assert.doesNotMatch(indexHtml, /<b style="color:\$\{color\};font-size:10px">/);
   assert.doesNotMatch(indexHtml, /<div style="background:#d4920e;color:#06111d/);
   assert.doesNotMatch(indexHtml, /<div style="background:\$\{colors\[p\.type\]/);
   assert.doesNotMatch(indexHtml, /<div style="font-size:12px;font-weight:700;color:var\(--gold\);margin-bottom:6px">📊 Nearby Facilities<\/div>/);
