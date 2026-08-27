@@ -48,6 +48,7 @@ jobs:
           node --check netlify/functions/scrape-sold.js
           node --check netlify/functions/valuation-observation.js
           node --check shared/export.js
+          node --check shared/market-intelligence.js
           node --check scripts/evaluate-and-save.js
           node --check scripts/generate-client-summaries.js
 

@@ -6,6 +6,7 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
+const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
 const exportHtml = fs.readFileSync(path.join(__dirname, '..', 'export.html'), 'utf8');
 const exportJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'export.js'), 'utf8');
@@ -61,6 +62,10 @@ test('public pages use semantic headings and safe external links', () => {
   }
   assert.ok(accuracyDashboardHtml.includes('<h1 class="miayaar-page-title">Accuracy Dashboard</h1>'));
   assert.ok(marketIntelligenceHtml.includes('<h1 class="miayaar-page-title">Market Intelligence</h1>'));
+  assert.ok(marketIntelligenceHtml.includes('<script src="/shared/market-intelligence.js"></script>'));
+  assert.doesNotMatch(marketIntelligenceHtml, /<script>\s*[\s\S]*<\/script>/);
+  assert.ok(marketIntelligenceJs.includes('function renderInvestmentTable()'));
+  assert.ok(marketIntelligenceJs.includes("document.getElementById('growthPeriodFilter').addEventListener"));
   assert.ok(exportHtml.includes('<h1 class="miayaar-page-title">Data Export</h1>'));
   assert.match(exportHtml, /<meta name="viewport" content="width=device-width, initial-scale=1\.0">/);
   assert.ok(exportHtml.includes('<script src="/shared/export.js"></script>'));
@@ -77,7 +82,7 @@ test('Market Intelligence tables stay intact inside horizontally scrollable card
   assert.match(marketIntelligenceHtml, /\.table-scroll/);
   assert.match(marketIntelligenceHtml, /overflow-x: auto/);
   assert.match(marketIntelligenceHtml, /\.table-scroll table \{ min-width: 520px; \}/);
-  assert.match(marketIntelligenceHtml, /role="region" tabindex="0" aria-label="Top 10 Investment Districts table"/);
+  assert.match(marketIntelligenceJs, /role="region" tabindex="0" aria-label="Top 10 Investment Districts table"/);
   assert.doesNotMatch(marketIntelligenceHtml, /\.table-scroll thead \{/);
   assert.doesNotMatch(marketIntelligenceHtml, /data-label="District"/);
 });

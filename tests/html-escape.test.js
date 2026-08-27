@@ -24,7 +24,7 @@ test('public valuation rendering escapes user-controlled property fields', () =>
 });
 
 test('market intelligence rendering escapes artifact text fields', () => {
-  const source = readPage('market-intelligence.html');
+  const source = readPage('shared/market-intelligence.js');
   assert.match(source, /escapeHtml\(d\.label\)/);
   assert.match(source, /escapeHtml\(w\.periodLabel\)/);
   assert.match(source, /escapeHtml\(def\.definition\)/);
