@@ -81,6 +81,15 @@ test('GIS handler rejects non-GET requests', async () => {
   assert.equal(parseBody(response).error, 'Method not allowed');
 });
 
+test('GIS stale cache is available only during the bounded grace window', () => {
+  const key = `stale-cache-${Date.now()}`;
+  const data = { facilities: {}, count: 2, source: 'osm' };
+  osm.gisCache.set(key, { data, timestamp: Date.now() - osm.CACHE_TTL - 1000 });
+  assert.deepEqual(osm.getStaleCached(key), data);
+  osm.gisCache.set(key, { data, timestamp: Date.now() - osm.CACHE_TTL - osm.STALE_CACHE_GRACE_MS - 1000 });
+  assert.equal(osm.getStaleCached(key), null);
+});
+
 test('GIS cache is bounded and Dubai bounds are explicit', () => {
   assert.equal(osm.isWithinSupportedBounds(25.2, 55.3), true);
   assert.equal(osm.isWithinSupportedBounds(0, 0), false);
