@@ -19,7 +19,7 @@
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <main id="main-content" tabindex="-1">
   <a class="miayaar-brand-lockup" href="/" aria-label="MIAYAAR Valuation Intelligence Engine"><img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR &mdash; Valuation Intelligence Engine" /></a>
-  <div class="miayaar-page-title">Data Export</div>
+  <h1 class="miayaar-page-title">Data Export</h1>
   <div class="stats" id="stats" aria-live="polite">Loading...</div>
   <button class="btn btn-csv" onclick="exportCSV()">Download CSV (Excel)</button>
   <button class="btn btn-json" onclick="exportJSON()">Download JSON</button>
@@ -44,13 +44,20 @@
       }
     }
 
+    function csvCell(value) {
+      const text = String(value ?? '');
+      const safeText = typeof value === 'string' && /^[=+\-@]/.test(text) ? `'${text}` : text;
+      return `"${safeText.replace(/"/g, '""')}"`;
+    }
+
     function exportCSV() {
       if (!data || !data.records) return alert('No data');
-      let csv = 'Ref,Type,District,Area (sqm),Actual Price (AED),MIAYAAR Valuation (AED),MIAYAAR vs Actual (%),Date\n';
-      data.records.forEach(r => {
-        csv += `"${r.propertyRef}","${r.propertyType}","${r.district}",${r.area},${r.actualSalePrice},${r.aqarValuation},${r.aqarVsActual},"${r.saleDate}"\n`;
-      });
-      downloadFile(csv, 'miayaar-accuracy-data.csv', 'text/csv');
+      const headers = ['Ref', 'Type', 'District', 'Area (sqm)', 'Actual Price (AED)', 'MIAYAAR Valuation (AED)', 'MIAYAAR vs Actual (%)', 'Date'];
+      const rows = data.records.map(r => [
+        r.propertyRef, r.propertyType, r.district, r.area, r.actualSalePrice,
+        r.aqarValuation, r.aqarVsActual, r.saleDate
+      ].map(csvCell).join(','));
+      downloadFile([headers.map(csvCell).join(','), ...rows].join('\n') + '\n', 'miayaar-accuracy-data.csv', 'text/csv;charset=utf-8');
     }
 
     function exportJSON() {
@@ -61,9 +68,11 @@
     function downloadFile(content, filename, type) {
       const blob = new Blob([content], { type });
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
       a.download = filename;
       a.click();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
     }
 
     loadData();

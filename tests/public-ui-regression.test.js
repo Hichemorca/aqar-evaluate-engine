@@ -6,6 +6,8 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
+const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
+const exportHtml = fs.readFileSync(path.join(__dirname, '..', 'export.html'), 'utf8');
 
 test('comparable bracket selects the nearest strict lower and upper prices', () => {
   assert.deepEqual(getComparableBracket(1802730, [1868000, 1680000, 2200000, 1500000]), {
@@ -34,6 +36,20 @@ test('autocomplete lists use a body-level fixed portal', () => {
   assert.match(indexHtml, /position: fixed/);
   assert.match(indexHtml, /document\.body\.appendChild\(list\)/);
   assert.match(indexHtml, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
+});
+
+test('public pages use semantic headings and safe external links', () => {
+  for (const source of [indexHtml, accuracyDashboardHtml, marketIntelligenceHtml]) {
+    assert.match(source, /target="_blank" rel="noopener noreferrer"/);
+    assert.doesNotMatch(source, /target="_blank"(?! rel="noopener noreferrer")/);
+  }
+  assert.ok(accuracyDashboardHtml.includes('<h1 class="miayaar-page-title">Accuracy Dashboard</h1>'));
+  assert.ok(marketIntelligenceHtml.includes('<h1 class="miayaar-page-title">Market Intelligence</h1>'));
+  assert.ok(exportHtml.includes('<h1 class="miayaar-page-title">Data Export</h1>'));
+  assert.ok(exportHtml.includes('function csvCell(value)'));
+  assert.ok(exportHtml.includes("typeof value === 'string'"));
+  assert.ok(exportHtml.includes("safeText.replace(/\"/g, '\"\"')"));
+  assert.ok(exportHtml.includes('/^[=+\\-@]/.test(text)'));
 });
 
 test('Market Intelligence tables stay intact inside horizontally scrollable cards', () => {
