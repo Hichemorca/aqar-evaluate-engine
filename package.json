@@ -13,6 +13,7 @@
     "review-accuracy-outliers": "node scripts/review-accuracy-outliers.js",
     "analyze-detailed-outliers": "node scripts/analyze-detailed-outliers.js",
     "mobile-smoke": "node tests/mobile-smoke.cjs",
+    "reproducibility-drift": "node scripts/reproducibility-drift.js",
     "validate-artifacts": "node scripts/validate-official-artifacts.js",
     "validate-dld": "node scripts/validate-dld-data.js",
     "fetch-calibration": "node scripts/fetch-calibration-config.js",
