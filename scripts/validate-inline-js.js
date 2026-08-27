@@ -10,6 +10,7 @@ const htmlFiles = fs.readdirSync(root)
   .sort();
 const scriptPattern = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
 let checked = 0;
+const inlineBlocks = [];
 
 for (const file of htmlFiles) {
   const source = fs.readFileSync(path.join(root, file), 'utf8');
@@ -21,8 +22,14 @@ for (const file of htmlFiles) {
     const code = match[2].trim();
     if (!code) continue;
     checked += 1;
+    inlineBlocks.push(`${file}#inline-${block}`);
     new vm.Script(code, { filename: `${file}#inline-${block}` });
   }
+}
+
+if (checked !== 0) {
+  console.error(`Inline JavaScript blocks are not allowed: ${inlineBlocks.join(', ')}`);
+  process.exitCode = 1;
 }
 
 console.log(`Inline JavaScript syntax OK: ${checked} block(s) across ${htmlFiles.length} HTML page(s)`);

@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const inlineValidatorJs = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'validate-inline-js.js'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
 const indexResultRenderingJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-result-rendering-runtime.js'), 'utf8');
@@ -232,6 +233,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function showToast\(msg, dur=3000\)/);
   assert.doesNotMatch(indexHtml, /function onPropertyTypeChange\(\)/);
   assert.doesNotMatch(indexHtml, /document.addEventListener\('DOMContentLoaded', function\(\)/);
+  assert.ok(inlineValidatorJs.includes('if (checked !== 0)'));
+  assert.ok(inlineValidatorJs.includes('Inline JavaScript blocks are not allowed'));
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
