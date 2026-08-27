@@ -49,7 +49,21 @@
       font-size: 11px; font-family: inherit; padding: 6px 10px; border-radius: 8px; cursor: pointer;
     }
 
+    .table-scroll {
+      width: 100%; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .table-scroll table { min-width: 520px; }
     table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    @media (max-width: 600px) {
+      .table-scroll { overflow-x: visible; }
+      .table-scroll table { min-width: 0; display: block; }
+      .table-scroll thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      .table-scroll tbody, .table-scroll tr { display: block; }
+      .table-scroll tr { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .table-scroll td { display: grid; grid-template-columns: minmax(92px, 42%) minmax(0, 1fr); gap: 8px; align-items: start; padding: 5px 0; border-bottom: 0; overflow-wrap: anywhere; }
+      .table-scroll td::before { content: attr(data-label); color: var(--muted); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+    }
     th { color: var(--muted); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
     td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #dce8f5; }
     tr:hover td { background: rgba(212,146,14,0.03); }
@@ -176,17 +190,17 @@ function renderInvestmentTable() {
   let html = '<table><thead><tr><th>#</th><th>District</th><th>Score</th><th>Growth</th><th>Volatility</th><th>Liquidity %ile</th><th>Confidence</th></tr></thead><tbody>';
   (marketData.bestInvestmentDistricts || []).forEach((d, i) => {
     html += `<tr>
-      <td>${i + 1}</td>
-      <td>${escapeHtml(d.label)}${warnBadge(d)}</td>
-      <td>${d.investmentScore}</td>
-      <td><span class="badge ${d.growth.observedPeriodGrowthPct > 0 ? 'green' : 'red'}">${fmtPct(d.growth.observedPeriodGrowthPct)}</span></td>
-      <td>${d.temporalVolatilityPct === null ? '—' : d.temporalVolatilityPct + '%'}</td>
-      <td>${d.liquidityPercentile}</td>
-      <td class="conf">${d.confidenceScore}/100</td>
+      <td data-label="#">${i + 1}</td>
+      <td data-label="District">${escapeHtml(d.label)}${warnBadge(d)}</td>
+      <td data-label="Score">${d.investmentScore}</td>
+      <td data-label="Growth"><span class="badge ${d.growth.observedPeriodGrowthPct > 0 ? 'green' : 'red'}">${fmtPct(d.growth.observedPeriodGrowthPct)}</span></td>
+      <td data-label="Volatility">${d.temporalVolatilityPct === null ? '—' : d.temporalVolatilityPct + '%'}</td>
+      <td data-label="Liquidity %ile">${d.liquidityPercentile}</td>
+      <td data-label="Confidence" class="conf">${d.confidenceScore}/100</td>
     </tr>`;
   });
   html += '</tbody></table>';
-  document.getElementById('investmentTable').innerHTML = html;
+    document.getElementById('investmentTable').innerHTML = `<div class="table-scroll" role="region" tabindex="0" aria-label="Top 10 Investment Districts table">${html}</div>`;
 }
 
 function renderGrowingTable(period) {
@@ -202,34 +216,34 @@ function renderGrowingTable(period) {
   top.forEach((d, i) => {
     const w = d._w;
     html += `<tr>
-      <td>${i + 1}</td>
-      <td>${escapeHtml(d.label)}${warnBadge(d)}</td>
-      <td><span class="badge green">${fmtPct(w.observedPeriodGrowthPct)}</span></td>
-      <td class="conf">${fmtPct(w.annualizedPct)} (R²=${w.r2})</td>
-      <td class="conf">${escapeHtml(w.periodLabel)}</td>
-      <td class="conf">${d.confidenceScore}/100</td>
-      <td>${d.transactionCount}</td>
+      <td data-label="#">${i + 1}</td>
+      <td data-label="District">${escapeHtml(d.label)}${warnBadge(d)}</td>
+      <td data-label="Growth (Observed)"><span class="badge green">${fmtPct(w.observedPeriodGrowthPct)}</span></td>
+      <td data-label="Trend (Annualized)" class="conf">${fmtPct(w.annualizedPct)} (R²=${w.r2})</td>
+      <td data-label="Period" class="conf">${escapeHtml(w.periodLabel)}</td>
+      <td data-label="Confidence" class="conf">${d.confidenceScore}/100</td>
+      <td data-label="Transactions">${d.transactionCount}</td>
     </tr>`;
   });
   html += '</tbody></table>';
-  document.getElementById('growingTable').innerHTML = html;
+    document.getElementById('growingTable').innerHTML = `<div class="table-scroll" role="region" tabindex="0" aria-label="Fastest Growing Areas table">${html}</div>`;
 }
 
 function renderRiskTable() {
   let html = '<table><thead><tr><th>#</th><th>District</th><th>Bubble Risk</th><th>Volatility</th><th>Acceleration</th><th>Confidence</th><th>Transactions</th></tr></thead><tbody>';
   (marketData.highRiskAreas || []).forEach((d, i) => {
     html += `<tr>
-      <td>${i + 1}</td>
-      <td>${escapeHtml(d.label)}${warnBadge(d)}</td>
-      <td><span class="badge red">${d.bubbleRiskScore}</span></td>
-      <td>${d.temporalVolatilityPct}%</td>
-      <td>${fmtPct(d.priceAccelerationPct)}</td>
-      <td class="conf">${d.confidenceScore}/100</td>
-      <td>${d.transactionCount}</td>
+      <td data-label="#">${i + 1}</td>
+      <td data-label="District">${escapeHtml(d.label)}${warnBadge(d)}</td>
+      <td data-label="Bubble Risk"><span class="badge red">${d.bubbleRiskScore}</span></td>
+      <td data-label="Volatility">${d.temporalVolatilityPct}%</td>
+      <td data-label="Acceleration">${fmtPct(d.priceAccelerationPct)}</td>
+      <td data-label="Confidence" class="conf">${d.confidenceScore}/100</td>
+      <td data-label="Transactions">${d.transactionCount}</td>
     </tr>`;
   });
   html += '</tbody></table>';
-  document.getElementById('riskTable').innerHTML = html;
+    document.getElementById('riskTable').innerHTML = `<div class="table-scroll" role="region" tabindex="0" aria-label="High Risk Areas table">${html}</div>`;
 }
 
 function renderMethodologyPanel() {

@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 
 test('comparable bracket selects the nearest strict lower and upper prices', () => {
   assert.deepEqual(getComparableBracket(1802730, [1868000, 1680000, 2200000, 1500000]), {
@@ -33,4 +34,12 @@ test('autocomplete lists use a body-level fixed portal', () => {
   assert.match(indexHtml, /position: fixed/);
   assert.match(indexHtml, /document\.body\.appendChild\(list\)/);
   assert.match(indexHtml, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
+});
+
+test('Market Intelligence tables use mobile-safe row cards', () => {
+  assert.match(marketIntelligenceHtml, /\.table-scroll/);
+  assert.match(marketIntelligenceHtml, /@media \(max-width: 600px\)/);
+  assert.match(marketIntelligenceHtml, /\.table-scroll thead/);
+  assert.match(marketIntelligenceHtml, /data-label="District"/);
+  assert.match(marketIntelligenceHtml, /overflow-x: visible/);
 });
