@@ -42,6 +42,14 @@
     .type-total.invalid { color:var(--red); }
     .type-content { padding-top:2px; }
     .field-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .field-card-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .field-card { background:rgba(9,23,39,.72); border:1px solid var(--line); border-radius:12px; padding:12px; min-width:0; }
+    .field-card-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; }
+    .field-card-head h3 { margin:0; color:#dcecff; font-size:13px; }
+    .field-card-count { color:var(--muted); font-size:10px; white-space:nowrap; }
+    .field-card .field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .advanced-grid { display:grid; gap:12px; }
+    .advanced-grid .field-card { background:rgba(7,17,31,.58); }
     .field label { display:block; color:var(--muted); font-size:10px; margin-bottom:5px; word-break:break-word; }
     .field input { padding:8px 9px; font-size:12px; }
     .sidebar { position:sticky; top:18px; }
@@ -56,7 +64,7 @@
     .weight-summary small { display:block; color:var(--muted); font-size:10px; margin-top:3px; }
     .weight-summary.invalid small { color:#ffc0c8; }
     @media (max-width:900px) { .grid { grid-template-columns:1fr; } .sidebar { position:static; } }
-    @media (max-width:640px) { .field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .topbar { display:block; } .status { text-align:left; margin-top:10px; } }
+    @media (max-width:640px) { .field-grid, .field-card .field-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .field-card-grid { grid-template-columns:1fr; } .topbar { display:block; } .status { text-align:left; margin-top:10px; } }
   </style>
   <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
@@ -119,6 +127,33 @@
     const formatDate = value => { const d = new Date(value); return Number.isNaN(d.getTime()) ? value : d.toLocaleString(); };
     const methodGroups = { 'sales-comparison': 'sales', income: 'income', cost: 'cost', dcf: 'dcf' };
     const methodLabels = { 'sales-comparison': 'Sales Comparison', income: 'Income', cost: 'Cost', dcf: 'DCF' };
+    const propertyTypeLabels = { apartment: 'Apartment', villa: 'Villa', townhouse: 'Townhouse', office: 'Office', retail: 'Retail / Shop', warehouse: 'Warehouse', land: 'Land' };
+    const valuationFieldDefinitions = [
+      { title: 'Total Area (sqm)', groups: [
+        { method: 'sales-comparison', group: 'sales', keys: ['maxPricePerSqm'] },
+        { method: 'cost', group: 'cost', keys: ['constructionCostPerSqm', 'landValueFromMarketShare', 'landValueFromBuildShare'] }
+      ] },
+      { title: 'Bedrooms', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['noBedroomMultiplier'] }] },
+      { title: 'Features & Amenities', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['featureBonusPerSqm'] }] },
+      { title: 'Year Built', groups: [
+        { method: 'sales-comparison', group: 'sales', keys: ['ageDepreciation', 'minimumAgeMultiplier'] },
+        { method: 'cost', group: 'cost', keys: ['depreciationPerYear', 'maximumDepreciation'] }
+      ] },
+      { title: 'Condition', groups: [
+        { method: 'sales-comparison', group: 'sales', keys: ['conditionFactors.excellent', 'conditionFactors.good', 'conditionFactors.fair', 'conditionFactors.needs-renovation'] },
+        { method: 'cost', group: 'cost', keys: ['conditionFactors.excellent', 'conditionFactors.good', 'conditionFactors.fair', 'conditionFactors.needs-renovation'] }
+      ] },
+      { title: 'Finish Quality', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['finishFactors.luxury', 'finishFactors.good', 'finishFactors.normal', 'finishFactors.basic', 'finishFactors.poor'] }] },
+      { title: 'View Type', groups: [
+        { method: 'sales-comparison', group: 'sales', keys: ['viewFactors.sea', 'viewFactors.partial-sea', 'viewFactors.city', 'viewFactors.garden', 'viewFactors.park', 'viewFactors.street', 'viewSecondaryFactor', 'viewMinimumMultiplier', 'viewMaximumMultiplier'] }
+      ] },
+      { title: 'Floor Level', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['floorFactors.penthouse', 'floorFactors.very-high', 'floorFactors.high', 'floorFactors.mid', 'floorFactors.low', 'floorFactors.ground'] }] },
+      { title: 'Street Position', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['streetFactors.main', 'streetFactors.corner', 'streetFactors.secondary', 'streetFactors.quiet'] }] },
+      { title: 'Building Condition', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['buildingConditionFactors.excellent', 'buildingConditionFactors.good', 'buildingConditionFactors.fair', 'buildingConditionFactors.old'] }] },
+      { title: 'Furnished Status', groups: [{ method: 'sales-comparison', group: 'sales', keys: ['furnishedFactors.furnished', 'furnishedFactors.semi-furnished', 'furnishedFactors.unfurnished'] }] },
+      { title: 'Annual Rent (AED)', groups: [{ method: 'income', group: 'income', keys: ['vacancyRatePercent', 'capRatePercent'] }] },
+      { title: 'Annual Expenses (AED)', groups: [{ method: 'income', group: 'income', keys: ['expenseRate'] }] }
+    ];
 
     function showNotice(message, type='info') { const box = $('notice'); box.textContent = message; box.className = `notice show ${type}`; }
     function setStatus(message) { $('status').textContent = message; }
@@ -148,20 +183,61 @@
       const renovationBands = v21.lastRenovation?.bands || [];
       const renderBands = (group, bands, metricKey, labelText) => bands.map((band, index) => `<div class="field-grid" style="grid-template-columns:1fr 1fr;align-items:end;margin-bottom:8px"><div class="field"><label>${escapeHtml(labelText)} ${index + 1} max (${band[metricKey] === null ? 'open' : metricKey === 'maxRatio' ? 'ratio' : 'years'})</label><input data-path="${pathForV21Band(propertyType, group, index, metricKey)}" data-band-field="${metricKey}" data-null-if-empty="true" type="number" min="0" step="0.01" value="${band[metricKey] === null ? '' : Number(band[metricKey])}"></div><div class="field"><label>Multiplier</label><input data-path="${pathForV21Band(propertyType, group, index, 'multiplier')}" data-band-field="multiplier" type="number" min="0.01" step="0.001" value="${Number(band.multiplier)}"></div></div>`).join('');
       const globalControls = propertyType === 'apartment' ? `<div class="field-grid"><div class="field"><label>Shadow enabled (0/1)</label><input data-path="v21ShadowMultipliers.enabled" type="number" min="0" max="1" step="1" value="${shadow.enabled ? 1 : 0}"></div><div class="field"><label>Minimum project evidence</label><input data-path="v21ShadowMultipliers.minProjectEvidence" type="number" min="1" step="1" value="${Number(shadow.minProjectEvidence || 5)}"></div><div class="field"><label>Combined minimum ×</label><input data-path="v21ShadowMultipliers.combinedMinimumMultiplier" type="number" min="0.01" step="0.001" value="${Number(shadow.combinedMinimumMultiplier || 0.85)}"></div><div class="field"><label>Combined maximum ×</label><input data-path="v21ShadowMultipliers.combinedMaximumMultiplier" type="number" min="0.01" step="0.001" value="${Number(shadow.combinedMaximumMultiplier || 1.15)}"></div></div>` : '';
-      return `<div class="section"><div class="section-title"><span>v2.1 shadow multipliers</span><span class="panel-note">disabled by default · neutral = 1.00×</span></div><div class="small" style="margin-bottom:10px">These controls affect only the experimental shadow preview until separately approved for production.</div>${globalControls}<div class="section"><div class="section-title"><span>${escapeHtml(propertyType)} · Project multipliers</span><span class="panel-note">exact DLD key</span></div><div class="field-grid"><div class="field"><label>Default project multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'defaultMultiplier', '')}" type="number" min="0.01" step="0.001" value="${Number(v21.projectBuilding?.defaultMultiplier || 1)}"></div></div><div id="projectRows-${escapeHtml(propertyType)}">${projectRows || '<div class="small">No project-specific multipliers configured. Add one only after reviewing DLD evidence.</div>'}</div><div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end"><div class="field"><label>New project key: type | district | project</label><input id="newProjectKey-${escapeHtml(propertyType)}" type="text" placeholder="apartment | district | project"></div><div class="field"><label>Multiplier</label><input id="newProjectValue-${escapeHtml(propertyType)}" type="number" min="0.01" step="0.001" value="1"></div><div class="field"><button type="button" onclick="addProjectMultiplierRow(${escapeHtml(JSON.stringify(propertyType))})">Add project</button></div></div></div><div class="section"><div class="section-title"><span>${escapeHtml(propertyType)} · BUA / Plot Area ratio</span><span class="panel-note">BUA ÷ Plot Area</span></div>${renderBands('buaPlotArea', ratioBands, 'maxRatio', 'Ratio band')}</div><div class="section"><div class="section-title"><span>${escapeHtml(propertyType)} · Renovation age</span><span class="panel-note">current year − renovation year</span></div>${renderBands('lastRenovation', renovationBands, 'maxAgeYears', 'Age band')}</div></div>`;
+      const projectCard = `<article class="field-card"><div class="field-card-head"><h3>Project / Building Name</h3><span class="field-card-count">Shadow controls</span></div><div class="field-grid"><div class="field"><label>Default project multiplier</label><input data-path="${pathForV21(propertyType, 'projectBuilding', 'defaultMultiplier', '')}" type="number" min="0.01" step="0.001" value="${Number(v21.projectBuilding?.defaultMultiplier || 1)}"></div></div><div id="projectRows-${escapeHtml(propertyType)}">${projectRows || '<div class="small">No project-specific multipliers configured. Add one only after reviewing DLD evidence.</div>'}</div><div class="field-grid" style="grid-template-columns:2fr 1fr auto;align-items:end"><div class="field"><label>New project key: type | district | project</label><input id="newProjectKey-${escapeHtml(propertyType)}" type="text" placeholder="apartment | district | project"></div><div class="field"><label>Multiplier</label><input id="newProjectValue-${escapeHtml(propertyType)}" type="number" min="0.01" step="0.001" value="1"></div><div class="field"><button type="button" onclick="addProjectMultiplierRow(${escapeHtml(JSON.stringify(propertyType))})">Add project</button></div></div></article>`;
+      const ratioCard = `<article class="field-card"><div class="field-card-head"><h3>BUA / Plot Area</h3><span class="field-card-count">Shadow controls</span></div>${renderBands('buaPlotArea', ratioBands, 'maxRatio', 'Ratio band')}</article>`;
+      const renovationCard = `<article class="field-card"><div class="field-card-head"><h3>Last Renovation Year</h3><span class="field-card-count">Shadow controls</span></div>${renderBands('lastRenovation', renovationBands, 'maxAgeYears', 'Age band')}</article>`;
+      const globalCard = globalControls ? `<article class="field-card advanced-field-card"><div class="field-card-head"><h3>Shadow Settings</h3><span class="field-card-count">Advanced</span></div>${globalControls}</article>` : '';
+      return `<div class="section"><div class="section-title"><span>Experimental Shadow Controls</span><span class="panel-note">disabled by default · neutral = 1.00×</span></div><div class="small" style="margin-bottom:10px">These controls affect only the experimental shadow preview until separately approved for production.</div><div class="field-card-grid">${projectCard}${ratioCard}${renovationCard}${globalCard}</div></div>`;
     }
 
-    function renderNumericSection(title, object, prefix, allowedKeys=null) {
-      const isWeights = prefix[prefix.length - 1] === 'weights';
-      const leaves = collectNumericLeaves(object, prefix).filter(({ path }) => !allowedKeys || allowedKeys.includes(path[prefix.length]));
-      if (!leaves.length) return '';
-      const fields = leaves.map(({ path, value }) => {
-        const displayValue = isWeights ? Number(value) * 100 : value;
-        const step = isWeights ? '0.1' : 'any';
-        const suffix = isWeights ? '<span class="panel-note">%</span>' : '';
-        return `<div class="field"><label for="${escapeHtml(path.join('__'))}">${escapeHtml(label(path.slice(-2)))}</label><div style="display:flex;align-items:center;gap:5px"><input id="${escapeHtml(path.join('__'))}" data-path="${escapeHtml(path.join('.'))}" data-percent="${isWeights}" type="number" step="${step}" value="${displayValue}">${suffix}</div></div>`;
-      }).join('');
-      return `<div class="section"><div class="section-title"><span>${title}</span><span class="panel-note">${leaves.length} controls</span></div><div class="field-grid">${fields}</div></div>`;
+    function renderInputField(path, value, options = {}) {
+      const displayValue = options.percent ? Number(value) * 100 : value;
+      const suffix = options.percent ? '<span class="panel-note">%</span>' : '';
+      const step = options.percent ? '0.1' : (options.step || 'any');
+      return `<div class="field"><label for="${escapeHtml(path.join('__'))}">${escapeHtml(label(path.slice(-2)))}</label><div style="display:flex;align-items:center;gap:5px"><input id="${escapeHtml(path.join('__'))}" data-path="${escapeHtml(path.join('.'))}" data-percent="${Boolean(options.percent)}" type="number" step="${step}" value="${displayValue}">${suffix}</div></div>`;
+    }
+
+    function renderFieldCard(title, groups, cardClass = '') {
+      const visibleGroups = groups.filter(group => group.fields.length);
+      if (!visibleGroups.length) return '';
+      const count = visibleGroups.reduce((total, group) => total + group.fields.length, 0);
+      const body = visibleGroups.map(group => `${group.heading ? `<div class="panel-note" style="margin:8px 0 6px">${escapeHtml(group.heading)}</div>` : ''}<div class="field-grid">${group.fields.join('')}</div>`).join('');
+      return `<article class="field-card ${cardClass}"><div class="field-card-head"><h3>${escapeHtml(title)}</h3><span class="field-card-count">${count} controls</span></div>${body}</article>`;
+    }
+
+    function renderValuationFactors(propertyType, propertyConfig) {
+      const cards = valuationFieldDefinitions.map(definition => {
+        const groups = definition.groups.filter(definitionGroup => (propertyConfig.applicableMethods || []).includes(definitionGroup.method)).map(definitionGroup => {
+          const coefficientObject = propertyConfig.coefficients?.[definitionGroup.group];
+          const leaves = collectNumericLeaves(coefficientObject, []).filter(({ path }) => definitionGroup.keys.includes(path.join('.')));
+          return {
+            heading: methodLabels[definitionGroup.method] || definitionGroup.method,
+            fields: leaves.map(({ path, value }) => renderInputField(['propertyTypes', propertyType, 'coefficients', definitionGroup.group, ...path], value))
+          };
+        });
+        return renderFieldCard(definition.title, groups);
+      }).filter(Boolean).join('');
+      return cards ? `<div class="section"><div class="section-title"><span>Valuation Factors</span><span class="panel-note">Grouped by user-facing fields</span></div><div class="field-card-grid">${cards}</div></div>` : '';
+    }
+
+    function renderValuationMethods(propertyType, propertyConfig) {
+      const fields = (propertyConfig.applicableMethods || []).filter(method => typeof propertyConfig.weights?.[method] === 'number').map(method => renderInputField(['propertyTypes', propertyType, 'weights', method], propertyConfig.weights[method], { percent: true }));
+      return `<div class="section"><div class="section-title"><span>Valuation Methods</span><span class="panel-note">Applicable methods only</span></div>${renderWeightSummary(propertyType, propertyConfig)}${renderFieldCard('Method weights', [{ heading: '', fields }])}</div>`;
+    }
+
+    function renderAdvancedCalibration(propertyType, propertyConfig) {
+      const used = new Set(valuationFieldDefinitions.flatMap(definition => definition.groups.filter(group => (propertyConfig.applicableMethods || []).includes(group.method)).flatMap(group => group.keys.map(key => `${group.group}:${key}`))));
+      const cards = (propertyConfig.applicableMethods || []).map(method => {
+        const group = methodGroups[method];
+        const leaves = collectNumericLeaves(propertyConfig.coefficients?.[group], []).filter(({ path }) => !used.has(`${group}:${path.join('.')}`));
+        return renderFieldCard(methodLabels[method] || method, [{ heading: '', fields: leaves.map(({ path, value }) => renderInputField(['propertyTypes', propertyType, 'coefficients', group, ...path], value)) }], 'advanced-field-card');
+      }).filter(Boolean).join('');
+      return cards ? `<div class="section"><div class="section-title"><span>Advanced Calibration</span><span class="panel-note">Additional method controls</span></div><div class="advanced-grid">${cards}</div></div>` : '';
+    }
+
+    function renderGlobalFactors(gis) {
+      const fields = collectNumericLeaves(gis, ['gis']).map(({ path, value }) => renderInputField(path, value));
+      return `<div class="section"><div class="section-title"><span>Valuation Factors</span><span class="panel-note">Shared Location & Facilities settings</span></div><div class="field-card-grid">${renderFieldCard('Location & Facilities', [{ heading: '', fields }])}</div></div>`;
     }
 
     function getApplicableWeightTotal(config) {
@@ -213,17 +289,14 @@
         const applicableMethods = propertyConfig.applicableMethods || [];
         const total = getApplicableWeightTotal(propertyConfig);
         const totalClass = Math.abs(total - 1) <= 0.000001 ? '' : ' invalid';
-        html += `<details class="type-card" data-property-type="${escapeHtml(propertyType)}"><summary class="type-title"><span>${escapeHtml(propertyType)}</span><span class="type-summary-meta"><span class="panel-note">${escapeHtml(applicableMethods.map(method => methodLabels[method] || method).join(' · '))}</span><strong class="type-total${totalClass}">${(total * 100).toFixed(1)}%</strong></span></summary><div class="type-content">`;
-        html += renderWeightSummary(propertyType, propertyConfig);
-        html += renderNumericSection('Method weights', propertyConfig.weights, ['propertyTypes', propertyType, 'weights'], applicableMethods);
-        for (const method of applicableMethods) {
-          const group = methodGroups[method];
-          html += renderNumericSection(`${escapeHtml(methodLabels[method] || method)} coefficients`, propertyConfig.coefficients?.[group], ['propertyTypes', propertyType, 'coefficients', group]);
-        }
+        html += `<details class="type-card" data-property-type="${escapeHtml(propertyType)}"><summary class="type-title"><span>${escapeHtml(propertyTypeLabels[propertyType] || propertyType)}</span><span class="type-summary-meta"><span class="panel-note">${escapeHtml(applicableMethods.map(method => methodLabels[method] || method).join(' · '))}</span><strong class="type-total${totalClass}">${(total * 100).toFixed(1)}%</strong></span></summary><div class="type-content">`;
+        html += renderValuationMethods(propertyType, propertyConfig);
+        html += renderValuationFactors(propertyType, propertyConfig);
+        html += renderAdvancedCalibration(propertyType, propertyConfig);
         if (['apartment', 'villa', 'townhouse'].includes(propertyType)) html += renderShadowSection(propertyType, propertyConfig);
         html += '</div></details>';
       }
-      html += renderNumericSection('GIS coefficients', config.gis, ['gis']);
+      html += renderGlobalFactors(config.gis);
       $('editor').innerHTML = html;
       const typePanels = [...$('editor').querySelectorAll('details[data-property-type]')];
       typePanels.forEach(panel => panel.addEventListener('toggle', () => {
