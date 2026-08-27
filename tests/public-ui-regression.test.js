@@ -82,7 +82,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(calibrationBootstrapJs.includes('function getCalibrationForProperty(propertyType)'));
   assert.ok(indexHtml.includes('<script src="/shared/index-runtime-state.js"></script>'));
   assert.ok(indexHtml.indexOf('/shared/index-calibration-bootstrap.js') < indexHtml.indexOf('/shared/index-runtime-state.js'));
-  assert.ok(indexHtml.indexOf('/shared/index-runtime-state.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-runtime-state.js') < indexHtml.indexOf('/shared/index-district-map-core.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-district-map-core.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  const districtMapCoreJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-map-core.js'), 'utf8');
+  assert.ok(districtMapCoreJs.includes('async function loadDistrictCoords()'));
+  assert.ok(districtMapCoreJs.includes('function getDistrictCoords(district)'));
+  assert.ok(districtMapCoreJs.includes('function escapeMapHtml(value)'));
   assert.doesNotMatch(indexHtml, /const UAE_DISTRICTS = \{/);
   assert.doesNotMatch(indexHtml, /const FALLBACK_COORDS = \{/);
   assert.doesNotMatch(indexHtml, /let districtCoordsMap = \{\}/);
@@ -109,6 +114,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function loadDistrictsFromDLD\(\)/);
   assert.doesNotMatch(indexHtml, /function getCalibrationForProperty\(propertyType\)/);
   assert.doesNotMatch(indexHtml, /async function loadCalibrationConfig\(\)/);
+  assert.doesNotMatch(indexHtml, /async function loadDistrictCoords\(\)/);
+  assert.doesNotMatch(indexHtml, /function getDistrictCoords\(district\)/);
+  assert.doesNotMatch(indexHtml, /function escapeMapHtml\(value\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
