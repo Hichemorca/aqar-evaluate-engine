@@ -158,7 +158,7 @@ checksum الحالي للملف الخام المنظف هو:
 
 ## 8. Accuracy والتشخيصات
 
-ملف `data/accuracy-data.json` هو artifact Accuracy الرسمي الحالي، ويحتوي على **8,221 نتيجة** ضمن نطاق البيانات والتنظيف والنافذة الزمنية المعتمدة. المؤشر الحالي يقارب **85.2% Accuracy**، مع متوسط انحراف مطلق يقارب **14.8%**. هذه مؤشرات snapshot وليست ضمانًا لأداء مستقبلي؛ يجب قراءة تاريخ تحديث البيانات و`calibrationConfigId` مع كل مقارنة.
+ملف `data/accuracy-data.json` هو artifact Accuracy الرسمي الحالي، ويحتوي على **8,108 نتائج** ضمن نطاق البيانات والتنظيف والنافذة الزمنية المعتمدة. المؤشر الحالي هو **85.1% Accuracy** تقريبًا، مع متوسط انحراف مطلق يقارب **14.9%**. هذه مؤشرات snapshot وليست ضمانًا لأداء مستقبلي؛ يجب قراءة تاريخ تحديث البيانات و`calibrationConfigId` مع كل مقارنة. وتُعد ملفات Accuracy وDLD الرسمية محمية ببوابة provenance وintegrity ولا يجوز تعديلها يدويًا.
 
 تحتوي كل نتيجة Accuracy، بالإضافة إلى أعمدة DLD، على إحداثيات GIS، نتيجة AQAR، الفرق عن السعر الفعلي، مستوى المقارنة، عدد المقارنات، معاملات GIS والإطلالة، هوية المعايرة، طرق التقييم، الافتراضات، وتشخيصات المقارنات.
 
@@ -189,7 +189,7 @@ checksum الحالي للملف الخام المنظف هو:
 
 `netlify/functions/scrape-sold.js` لا يختلق سجلات، لكنه legacy وغير مستخدم من مسار المنتج الحالي؛ لذلك عُطّل افتراضيًا ويعيد `410 Gone` دون CORS عام. أما `netlify/functions/scrape.js` فقد عُطّل افتراضيًا للسبب نفسه. لا تُفعّل أيًا منهما قبل إضافة حماية وصول وrate limiting ومراجعة تشغيلية مستقلة.
 
-يُعرّف `.github/workflows/ci.yml` فحوص ما قبل الدمج عند كل `push` و`pull_request`، وتشمل `npm ci` و`npm test` والتحقق من summaries وJavaScript syntax.
+يُعرّف `.github/workflows/ci.yml` فحوص ما قبل الدمج عند كل `push` و`pull_request`، وتشمل `npm ci` وPlaywright Chromium و`npm run mobile-smoke` و`npm test` والتحقق من summaries وJavaScript syntax وpatch formatting.
 
 ## 11. تدفق تحديث البيانات اليومي
 
@@ -207,12 +207,15 @@ checksum الحالي للملف الخام المنظف هو:
 | 8 | توليد Market Intelligence. |
 | 9 | تحميل active calibration. |
 | 10 | إعادة تقييم السجلات وتوليد Accuracy وartifacts. |
-| 11 | تدريب نموذج ML اختياري مع استمرار workflow عند فشله. |
-| 12 | إضافة `data/` و`models/` إلى commit الآلي عند وجود تغييرات. |
+| 11 | توليد diagnostics وclient summaries ثم تشغيل integrity/provenance gate. |
+| 12 | تدريب نموذج ML اختياري مع استمرار workflow عند فشله. |
+| 13 | تسوية الفرع مع `origin/main` ثم إضافة `data/` و`models/` إلى commit الآلي عند وجود تغييرات. |
+
+يحتوي workflow على concurrency وAction SHA pinning وPython requirements ثابتة وبوابة integrity رسمية. **تبقى مراجعة ما بعد `git pull --rebase` و`git stash pop` قبل commit مهمة مؤجلة**؛ لذلك يجب عدم اعتبار نجاح خطوة التحقق السابقة للتسوية ضمانًا كافيًا إذا حدث سباق مع تغيير upstream. هذه المراجعة لا تغيّر سلوك التقييم، لكنها سبب إضافي لفحص diff وartifacts قبل الاعتماد على أي تحديث يومي.
 
 البيانات الخارجية قد تتأخر أو تفشل أو تتغير. لذلك يجب فحص logs وchecksum وcounts وcalibration identity بعد أي تحديث مهم، وعدم اعتبار نجاح workflow وحده دليلًا كافيًا على سلامة النتائج.
 
-## 11. أوامر التطوير والاختبار
+## 12. أوامر التطوير والاختبار
 
 يتطلب المشروع Node.js 22 تقريبًا، مع Python 3.11 عند تشغيل تدريب النموذج. بعد تثبيت الاعتماديات يمكن استخدام:
 
@@ -226,6 +229,9 @@ checksum الحالي للملف الخام المنظف هو:
 | `npm run validate-dld` | التحقق من بيانات DLD ومنع rejected leakage. |
 | `npm run fetch-calibration` | تحميل active calibration إلى artifact محلي. |
 | `npm run fetch-osm` | تحديث بيانات OSM/GIS وفق الإعداد الحالي. |
+| `npm run validate-artifacts` | تشغيل بوابة integrity وprovenance للـofficial artifacts. |
+| `npm run mobile-smoke` | تشغيل mobile smoke بمحاكاة Pixel 5 وiPhone 13. |
+| `npm run reproducibility-drift` | إعادة تشغيل evaluator داخل مجلدات مؤقتة بتاريخ ثابت وقياس date drift، دون تعديل official artifacts. |
 | `node --check <file>` | فحص تركيب JavaScript لملف محدد. |
 | `node /home/ubuntu/check-inline-script.cjs` | فحص JavaScript المضمن داخل الصفحات عند توفر الأداة في بيئة العمل. |
 | `git diff --check` | فحص أخطاء المسافات والتنسيق قبل الالتزام. |
@@ -234,23 +240,27 @@ checksum الحالي للملف الخام المنظف هو:
 
 ينتج `npm run diagnostics` ملف `data/accuracy-diagnostics.json` بصورة حتمية من artifact Accuracy الرسمي `data/accuracy-data.json` فقط. يعرض الملف توزيع الخطأ المطلق، median وP90 وP95، bias، شرائح نوع العقار ومستوى التقييم والمساحة والشهر، أسوأ الشرائح ذات العينة الكافية، أعلى الأخطاء، وفحوص provenance واتساق buckets. هذا الملف **تشخيصي فقط**؛ لا يغيّر Accuracy الرسمية أو calibration أو الأوزان أو معاملات التقييم أو بيانات DLD.
 
+### PR-01: reproducibility وdate drift
+
+أُضيف `scripts/reproducibility-drift.js` كتجربة قراءة فقط. يعيد harness تشغيل evaluator الحالي داخل مجلدات مؤقتة مع `FIXED_NOW` ثابت، ويقارن `market-data.json` الكامل بصورة منفصلة عن Accuracy ذات نافذة 120 يومًا. تشغيلان بنفس التاريخ أنتجا artifacts متطابقة، بينما أدت مقارنة تواريخ مختلفة إلى drift قابل للقياس في القيم؛ لذلك يجب تثبيت تاريخ التقييم عند إعادة بناء Accuracy التاريخية. التفاصيل والنتائج محفوظة في `docs/reproducibility-drift-review-2026-08-27.md` و`docs/reproducibility-drift-2026-08-27.json`.
+
 يحتوي diagnostics على SHA-256 للـartifact المصدر حتى يمكن اكتشاف عدم التزامن بين المؤشرات والبيانات، ويجب إعادة توليده بعد كل تحديث رسمي للـAccuracy. لا يجوز استخدام outliers أو أي شريحة تشخيصية لتعديل المعاملات مباشرة؛ يلزم validation زمني/قطاعي مستقل وموافقة صريحة قبل أي تغيير منهجي.
 
-آخر baseline موثق للاختبارات هو **109/109 ناجحة**، وتشمل اختبارات المعايرة، تنظيف DLD، Accuracy، diagnostics، تشخيص المقارنات، حالات الأدلة، وربط الخريطة بالمناطق.
+آخر baseline موثق للاختبارات هو **121/121 ناجحة**، وتشمل اختبارات المعايرة، تنظيف DLD، Accuracy، diagnostics، تشخيص المقارنات، حالات الأدلة، ربط الخريطة بالمناطق، workflow integrity، mobile smoke، وتجربة reproducibility.
 
-## 12. الاختبارات المطلوبة قبل النشر
+## 13. الاختبارات المطلوبة قبل النشر
 
-قبل نشر أي تغيير، يجب تشغيل الاختبارات البرمجية، فحص JavaScript المضمن، ومراجعة `git diff --check`. وبعدها يجب اختبار المسارات الأساسية في المتصفح: تحميل الصفحة، اختيار منطقة، تحريك العلامة، جلب أدلة DLD، تقييم مع أدلة جاهزة، تقييم مع أدلة محدودة، غياب أدلة DLD، Income دون Sales evidence، Reset، وعدم بقاء نتيجة قديمة بعد تغيير العقار.
+قبل نشر أي تغيير، يجب تشغيل الاختبارات البرمجية، `npm run mobile-smoke`، بوابة `npm run validate-artifacts`، فحص JavaScript المضمن، ومراجعة `git diff --check`. وبعدها يجب اختبار المسارات الأساسية في المتصفح: تحميل الصفحة، اختيار منطقة، تحريك العلامة، جلب أدلة DLD، تقييم مع أدلة جاهزة، تقييم مع أدلة محدودة، غياب أدلة DLD، Income دون Sales evidence، Reset، وعدم بقاء نتيجة قديمة بعد تغيير العقار. لا تُشغّل `npm run evaluate` أو workflow اليومي لمجرد التحقيق؛ كلاهما قد يعيد كتابة artifacts.
 
 أي تغيير في Calibration أو evaluator يجب أن يضيف اختبارًا يثبت القاعدة الجديدة، ويجب أن يوضح ما إذا كان التغيير يؤثر على التقييمات الجديدة فقط أو يعيد توليد Accuracy. لا يُسمح بتغيير artifacts الرسمية يدويًا بهدف تحسين المؤشر.
 
-## 13. قرارات منهجية حاكمة
+## 14. قرارات منهجية حاكمة
 
 القرارات المعتمدة موثقة في `docs/methodology-decisions.md`. أهمها: استقلال AQAR عن MIAYAAR، إبقاء DCF ضمن القابلية الحالية فقط، اعتماد Sales Comparison وIncome للأراضي، منع البيانات الاصطناعية من Accuracy الرسمية، إزالة Appraiser comparison من Accuracy، اعتماد معاملات View وGIS الحالية، إظهار الافتراضات، والإبقاء على واجهة إنجليزية.
 
 كل نتيجة يجب أن تكون قابلة لتحديد نسخة المحرك ونسخة البيانات والمعايرة. يجب فصل `SOURCE_FACT` و`DERIVED_VALUE` و`ASSUMPTION` و`MODEL_OUTPUT` في trace، ويجب أن تبقى الطرق غير المنطبقة `NOT_APPLICABLE`.
 
-## 14. v2.1 حقول العقار الإضافية
+## 15. v2.1 حقول العقار الإضافية
 
 تم تنفيذ الإصدار v2.1 على فرع `feature/v2.1-property-fields` كواجهة وpayload وشرح نتيجة وتحليل معزول فقط. الحقول الجديدة الاختيارية هي: `Project / Building Name` للـ Apartment وVilla وTownhouse، و`BUA` للـ Villa وTownhouse فقط، و`Plot Area` للـ Villa وTownhouse وLand، و`Last Renovation Year` للـ Apartment وVilla وTownhouse عندما يكون عمر العقار أكبر من خمس سنوات. بقيت حقول `Detailed Unit Type` و`Floor` و`Parking Count` كما هي دون حذف أو تغيير.
 
@@ -260,19 +270,25 @@ checksum الحالي للملف الخام المنظف هو:
 
 تُدار direct multipliers من Calibration Console ضمن قسم مستقل عن أوزان المناهج. الإعداد الافتراضي shadow معطل، والشرائح المفتوحة تحفظ كـ `null`، ومفاتيح المشاريع تُحفظ بصيغة `property type | district | project`. أي تفعيل أو تغيير رسمي يتطلب مصدرًا موثقًا، تجربة shadow معزولة، مقارنة MAE وbias وP90 و±15% وcoverage وfallback transitions، ثم موافقة المالك الصريحة. لا يغيّر v2.1 الحالي أنواع العقارات أو طرق التقييم أو calibration الرسمي أو الأوزان أو fallback أو artifacts التاريخية.
 
-## 15. القيود المعروفة
+## 16. القيود المعروفة
 
 الخريطة تستخدم نقاطًا تمثيلية لبعض المناطق، وليست طبقة حدود رسمية. تعتمد المرافق على خدمات GIS خارجية قد تفشل أو تتأخر. قائمة DLD تتغير مع تحديث البيانات، وقد تتغير أعداد المناطق والسجلات والـAccuracy بعد إعادة التنظيف. بعض مناطق DLD الفرعية قد تشترك في مركز تمثيلي واحد.
 
 Accuracy الحالية تقيس snapshot محددًا من البيانات المعتمدة ولا تثبت أن كل عقار مستقبلي سيحصل على نتيجة مساوية. الحالات ذات الأدلة المحدودة أو dispersion العالي تحتاج مراجعة بشرية أكبر. لم تُطبّق بعد سياسة جديدة خاصة بـLand xlarge أو District size 5–9.
 
-## 16. قواعد العمل الآمن
+## 17. حالة الجاهزية والمهام المؤجلة
+
+النسخة الحالية مناسبة لـ**pilot محدود ومضبوط** وليست تقرير تقييم رسميًا أو بديلًا عن مراجعة مثمّن مرخّص. تم التحقق من mobile emulation على Pixel 5 وiPhone 13، لكن ذلك لا يعادل اختبار جهاز Android وiOS فعليين. كما أن PR-01 أثبت repeatability عند تثبيت تاريخ التقييم، وأثبت date drift عند تغييره.
+
+المهام التالية **مؤجلة وليست تغييرات مطلوبة للـpilot الحالي**: نقل integrity gate إلى ما بعد reconciliation النهائي في workflow، إنشاء مصدر واحد معتمد لمصفوفة المنهجية والأوزان، إضافة دورة Draft → Test → Review → Approved → Production للمعايرة، وإجراء اختبار reproducibility رسمي قائم على `asOfDate` داخل evaluator. لا تُنفذ هذه البنود تلقائيًا ولا تغيّر أي قيمة إنتاجية دون validation وموافقة صريحة.
+
+## 18. قواعد العمل الآمن
 
 احفظ الملف الخام ولا تعدّله. لا تخلط rejected ledger مع eligible data. لا تضع الأسرار في Git أو README أو logs أو command lines. لا تحفظ calibration غير صحيحة. لا تعِد حساب النتائج التاريخية بسبب تعديل جديد دون قرار واضح. لا تنشر سياسة fallback جديدة أو calibration جديدة آليًا دون تقرير مقارن وموافقة المالك.
 
 عند ظهور اختلاف بين الواجهة وoffline/Accuracy، يجب مراجعة `shared/calibration-engine.js` و`shared/evidence-state.js` والـartifacts المرتبطة قبل تعديل أي مسار منفرد. عند ظهور اختلاف في أعداد البيانات، ابدأ من raw checksum ثم cleaning report ثم validation ثم Accuracy metadata.
 
-## 17. مراجع المشروع
+## 19. مراجع المشروع
 
 [1]: https://github.com/Hichemorca/aqar-evaluate-engine "AQAR Valuation Engine repository"
 
@@ -285,3 +301,7 @@ Accuracy الحالية تقيس snapshot محددًا من البيانات ا�
 [5]: https://docs.netlify.com/ "Netlify documentation"
 
 [6]: https://docs.github.com/en/actions "GitHub Actions documentation"
+
+[7]: https://github.com/Hichemorca/aqar-evaluate-engine/blob/main/docs/reproducibility-drift-review-2026-08-27.md "PR-01 reproducibility and date-drift review"
+
+[8]: https://github.com/Hichemorca/aqar-evaluate-engine/blob/main/docs/real-trial-readiness-2026-08-27.md "Real-trial readiness runbook"
