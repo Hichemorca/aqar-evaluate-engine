@@ -77,17 +77,22 @@ function getProjectEvidence(name) {
   return { count: Number.isFinite(count) ? count : 0, verified: count > 0 };
 }
 
+function setProjectBuildingNotice(notice, text, tone) {
+  notice.classList.remove('neutral', 'attention', 'verified');
+  if (tone) notice.classList.add(tone);
+  notice.textContent = text;
+}
 function updateProjectBuildingNotice() {
   const input = document.getElementById('projectBuildingInput');
   const notice = document.getElementById('projectBuildingNotice');
   if (!input || !notice) return;
   const value = input.value.trim();
-  if (!value) { notice.textContent = 'Choose a project or leave as Unknown.'; notice.style.color = 'var(--muted)'; return; }
-  if (!(document.getElementById('selectedDistrict').value || '').trim()) { notice.textContent = 'Select a district first to see project suggestions.'; notice.style.color = 'var(--gold)'; return; }
-  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { notice.textContent = 'No verified project match. The estimate remains based on the district.'; notice.style.color = 'var(--gold)'; return; }
+  if (!value) { setProjectBuildingNotice(notice, 'Choose a project or leave as Unknown.', 'neutral'); return; }
+  if (!(document.getElementById('selectedDistrict').value || '').trim()) { setProjectBuildingNotice(notice, 'Select a district first to see project suggestions.', 'attention'); return; }
+  if (!selectedProjectBuilding || selectedProjectBuilding.toLowerCase() !== value.toLowerCase()) { setProjectBuildingNotice(notice, 'No verified project match. The estimate remains based on the district.', 'attention'); return; }
   const evidence = getProjectEvidence(value);
-  if (evidence.count < 5) { notice.textContent = `Limited project information (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). The estimate remains based on the district.`; notice.style.color = 'var(--gold)'; }
-  else { notice.textContent = `Project information: ${evidence.count} transactions. The estimate remains based on the district.`; notice.style.color = 'var(--green)'; }
+  if (evidence.count < 5) setProjectBuildingNotice(notice, `Limited project information (${evidence.count} transaction${evidence.count === 1 ? '' : 's'}). The estimate remains based on the district.`, 'attention');
+  else setProjectBuildingNotice(notice, `Project information: ${evidence.count} transactions. The estimate remains based on the district.`, 'verified');
 }
 
 function onProjectBuildingInput(value) {
@@ -122,9 +127,9 @@ function filterProjectBuildings(q) {
   const options = projectOptionsForCurrentContext().filter(name => !q || name.toLowerCase().includes(q.toLowerCase().trim()));
   list.replaceChildren();
   if (!options.length) {
-    list.style.display = q ? 'block' : 'none';
+    list.classList.toggle('is-visible', Boolean(q));
     if (q) positionAutocompleteList(list, input);
-    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); setAutocompleteExpanded(list, true); }
+    if (q) { const empty = document.createElement('div'); empty.className = 'item empty-state'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); setAutocompleteExpanded(list, true); }
     return;
   }
   options.slice(0, 15).forEach(name => {
@@ -136,7 +141,7 @@ function filterProjectBuildings(q) {
     setAutocompleteItem(item, select);
     list.appendChild(item);
   });
-  list.style.display = 'block';
+  list.classList.add('is-visible');
   setAutocompleteExpanded(list, true);
   positionAutocompleteList(list, input);
 }
@@ -171,7 +176,7 @@ function positionAutocompleteList(list, input) {
 
 function hideAutocompleteList(list) {
   if (list) {
-    list.style.display = 'none';
+    list.classList.remove('is-visible');
     setAutocompleteExpanded(list, false);
   }
 }
@@ -190,7 +195,7 @@ function repositionVisibleAutocompleteLists() {
   ];
   pairs.forEach(([listId, inputId]) => {
     const list = document.getElementById(listId);
-    if (list?.style.display === 'block') positionAutocompleteList(list, document.getElementById(inputId));
+    if (list?.classList.contains('is-visible')) positionAutocompleteList(list, document.getElementById(inputId));
   });
 }
 
@@ -221,12 +226,11 @@ function filterDistricts(q) {
     });
   } else {
     const empty = document.createElement('div');
-    empty.className = 'item';
-    empty.style.cssText = 'color:var(--muted);cursor:default;';
+    empty.className = 'item empty-state';
     empty.textContent = 'No districts found';
     c.appendChild(empty);
   }
-  c.style.display = 'block';
+  c.classList.add('is-visible');
   setAutocompleteExpanded(c, true);
   positionAutocompleteList(c, input);
 }

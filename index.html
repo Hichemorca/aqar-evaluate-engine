@@ -142,6 +142,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.35);
     }
     .autocomplete-container:focus-within { z-index: 1200; }
+    .autocomplete-list.is-visible { display: block; }
     .autocomplete-list.autocomplete-portal {
       position: fixed;
       top: 0;
@@ -160,6 +161,7 @@
       transition: background .15s;
     }
     .autocomplete-list .item:hover { background: rgba(212,146,14,0.08); }
+    .autocomplete-list .item.empty-state { color: var(--muted); cursor: default; }
     #gisMap { position: relative; z-index: 0; }
     .btn {
       display: block;
@@ -406,6 +408,8 @@
     .csp-beta-note { font-size: 12px; font-weight: 600; color: var(--gold); }
     .section-note { margin-bottom: 12px; font-size: 10px; color: var(--muted); }
     .project-building-notice { font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .project-building-notice.attention { color: var(--gold); }
+    .project-building-notice.verified { color: var(--green); }
     .renovation-note { font-size: 10px; color: var(--muted); margin-top: 4px; }
     .gis-coordinate-input { background: rgba(255,255,255,0.05); }
     .gis-impact-label { color: var(--gold); }
