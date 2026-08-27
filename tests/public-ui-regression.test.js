@@ -114,7 +114,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.includes('class="gis-score-display"'));
   assert.ok(indexHtml.includes('class="gis-map-container"'));
   assert.ok(indexHtml.includes('class="poi-popup-distance"'));
-  assert.ok(indexHtml.includes('class="poi-marker" style="--poi-color:'));
+  assert.ok(indexHtml.includes("const poiClass = colors[p.type] ? `poi-${p.type}` : 'poi-default';"));
+  assert.ok(indexHtml.includes('class="poi-marker ${poiClass}"'));
+  assert.doesNotMatch(indexHtml, /class="poi-marker" style="--poi-color:/);
   assert.ok(indexHtml.includes('.observation-status.success'));
   assert.ok(indexHtml.includes('.observation-status.warning'));
   assert.ok(indexHtml.includes('class="result-method-status ${statusClass}"'));
@@ -152,8 +154,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexMarketContextJs, /<div style="margin-top:12px;padding-top:10px/);
   assert.match(indexHtml, /\.market-indicators \{ margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba\(255,255,255,0\.08\); \}/);
   assert.match(indexHtml, /width: var\(--confidence-width, 0%\)/);
-  assert.match(indexHtml, /style="--confidence-width:\$\{result\.confidencePct\}%"/);
-  assert.doesNotMatch(indexHtml, /style="width:\$\{result\.confidencePct\}%"/);
+  assert.ok(indexHtml.includes("style.setProperty('--confidence-width', `${result.confidencePct}%`)"));
+  assert.doesNotMatch(indexHtml, /style="(?:--confidence-width|width):/);
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
   assert.doesNotMatch(indexHtml, /function buildMarketContextHTML\(result, propData\)/);
@@ -203,6 +205,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(marketIntelligenceHtml, /<script>\s*[\s\S]*<\/script>/);
   assert.ok(marketIntelligenceJs.includes('function renderInvestmentTable()'));
   assert.ok(marketIntelligenceJs.includes("document.getElementById('growthPeriodFilter').addEventListener"));
+  assert.ok(marketIntelligenceJs.includes('class="loading loading-error"'));
+  assert.doesNotMatch(marketIntelligenceJs, /style="/);
   assert.ok(exportHtml.includes('<h1 class="miayaar-page-title">Data Export</h1>'));
   assert.match(exportHtml, /<meta name="viewport" content="width=device-width, initial-scale=1\.0">/);
   assert.ok(exportHtml.includes('<script src="/shared/export.js"></script>'));
