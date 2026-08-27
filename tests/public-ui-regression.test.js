@@ -80,6 +80,18 @@ test('public pages use semantic headings and safe external links', () => {
   const calibrationBootstrapJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-calibration-bootstrap.js'), 'utf8');
   assert.ok(calibrationBootstrapJs.includes('async function loadCalibrationConfig()'));
   assert.ok(calibrationBootstrapJs.includes('function getCalibrationForProperty(propertyType)'));
+  assert.ok(indexHtml.includes('<script src="/shared/index-runtime-state.js"></script>'));
+  assert.ok(indexHtml.indexOf('/shared/index-calibration-bootstrap.js') < indexHtml.indexOf('/shared/index-runtime-state.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-runtime-state.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.doesNotMatch(indexHtml, /const UAE_DISTRICTS = \{/);
+  assert.doesNotMatch(indexHtml, /const FALLBACK_COORDS = \{/);
+  assert.doesNotMatch(indexHtml, /let districtCoordsMap = \{\}/);
+  assert.doesNotMatch(indexHtml, /const MAP_DISTRICT_MATCH_MAX_KM = 1\.5/);
+  const runtimeStateJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-runtime-state.js'), 'utf8');
+  assert.ok(runtimeStateJs.includes('const UAE_DISTRICTS = {'));
+  assert.ok(runtimeStateJs.includes('const FALLBACK_COORDS = {'));
+  assert.ok(runtimeStateJs.includes('let districtCoordsMap = {}'));
+  assert.ok(runtimeStateJs.includes('const MAP_DISTRICT_MATCH_MAX_KM = 1.5'));
   assert.ok(indexHtml.includes('<script src="/shared/index-market-context.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-district-context.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-gis-helpers.js"></script>'));
