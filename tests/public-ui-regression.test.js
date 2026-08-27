@@ -8,6 +8,7 @@ const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
 const indexDistrictContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-context.js'), 'utf8');
+const indexGisHelpersJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-helpers.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -74,11 +75,19 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexAccuracyMetaJs.includes('AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig()'));
   assert.ok(indexHtml.includes('<script src="/shared/index-market-context.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-district-context.js"></script>'));
+  assert.ok(indexHtml.includes('<script src="/shared/index-gis-helpers.js"></script>'));
   assert.ok(indexDistrictContextJs.includes('async function loadDistrictsFromDLD()'));
   assert.ok(indexDistrictContextJs.includes('function filterDistricts(q)'));
   assert.ok(indexDistrictContextJs.includes('function filterProjectBuildings(q)'));
   assert.doesNotMatch(indexHtml, /function loadDistrictsFromDLD\(\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
+  assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
+  assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
+  assert.ok(indexGisHelpersJs.includes('function haversineDistance(lat1, lng1, lat2, lng2)'));
+  assert.ok(indexGisHelpersJs.includes('function getFacilityLabel(k)'));
+  assert.ok(indexGisHelpersJs.includes('function getFacilityIcon(k)'));
+  assert.doesNotMatch(indexHtml, /function getGISRadiusMeters\(\)/);
+  assert.doesNotMatch(indexHtml, /function haversineDistance\(lat1, lng1, lat2, lng2\)/);
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
