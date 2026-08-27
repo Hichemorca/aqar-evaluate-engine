@@ -46,8 +46,8 @@ test('each public page exposes a keyboard skip link and main landmark', () => {
 
 test('dynamic statuses and interactive map are announced to assistive technology', () => {
   assert.match(read('export.html'), /id="stats" aria-live="polite"/);
-  assert.match(read('index.html'), /id="gisMap" role="region" aria-label="Interactive location map"/);
-  assert.match(read('index.html'), /id="gisFacilitiesList" role="status" aria-live="polite"/);
+  assert.match(read('index.html'), /id="gisMap" class="gis-map-container" role="region" aria-label="Interactive location map"/);
+  assert.match(read('index.html'), /id="gisFacilitiesList" class="gis-facilities-list" role="status" aria-live="polite"/);
   assert.match(read('index.html'), /id="scrapeStatus" class="scrape-status" role="status" aria-live="polite"/);
 });
 

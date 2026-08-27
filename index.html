@@ -388,6 +388,11 @@
     .poi-marker { background: var(--poi-color, #888); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
     .gis-result-panel { display: none; margin-top: 12px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.06); }
+    .gis-facilities-title { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+    .gis-facilities-list { font-size: 11px; color: var(--muted); line-height: 1.8; }
+    .gis-score-display { margin-top: 8px; font-size: 12px; font-weight: 700; }
+    .gis-map-container { margin-top: 10px; height: 320px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); overflow: hidden; }
+    .poi-popup-distance { font-size: 10px; color: #888; }
     .gis-project-label { display: none; margin-top: 10px; padding: 9px 11px; border-radius: 10px; background: rgba(212,146,14,0.08); border: 1px solid rgba(212,146,14,0.22); font-size: 10px; color: var(--muted); }
     .result-property-meta { font-size: 12px; color: var(--muted); }
     .result-confidence-label { font-size: 13px; font-weight: 700; }
@@ -638,12 +643,12 @@
       <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
     </div>
     <div id="gisResult" class="gis-result-panel">
-      <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
-      <div id="gisFacilitiesList" role="status" aria-live="polite" style="font-size:11px;color:var(--muted);line-height:1.8"></div>
-      <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
+      <div class="gis-facilities-title">📊 Nearby Facilities</div>
+      <div id="gisFacilitiesList" class="gis-facilities-list" role="status" aria-live="polite"></div>
+      <div class="gis-score-display" id="gisScoreDisplay"></div>
     </div>
     <div id="gisProjectLabel" class="gis-project-label" aria-live="polite"></div>
-    <div id="gisMap" role="region" aria-label="Interactive location map" tabindex="0" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
+    <div id="gisMap" class="gis-map-container" role="region" aria-label="Interactive location map" tabindex="0"></div>
     <input type="hidden" id="gisRadius" value="1000">
     <div id="gisRadiusContext" class="gis-radius-context">Vital facilities are shown inside the radius around the current map marker.</div>
   </div>
@@ -969,7 +974,7 @@ function addPOIsToMap(pois) {
   const colors = { school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71', metro: '#3498db', park: '#27ae60', gym: '#9b59b6', cafe: '#f1c40f', restaurant: '#e67e22' };
   pois.slice(0,30).forEach(p => {
     const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div class="poi-marker" style="--poi-color:${colors[p.type]||'#888'}">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
-    const marker = L.marker([p.lat, p.lng], { icon, zIndexOffset: 700 }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
+    const marker = L.marker([p.lat, p.lng], { icon, zIndexOffset: 700 }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span class="poi-popup-distance">${(p.distance*1000).toFixed(0)}m away</span>`);
     poiMarkers.push(marker);
   });
 }
