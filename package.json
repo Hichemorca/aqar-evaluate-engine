@@ -13,6 +13,7 @@
     "review-accuracy-outliers": "node scripts/review-accuracy-outliers.js",
     "analyze-detailed-outliers": "node scripts/analyze-detailed-outliers.js",
     "mobile-smoke": "node tests/mobile-smoke.cjs",
+    "validate-inline-js": "node scripts/validate-inline-js.js",
     "reproducibility-drift": "node scripts/reproducibility-drift.js",
     "calibration-impact-matrix": "node scripts/local-calibration-impact-matrix.js",
     "validate-artifacts": "node scripts/validate-official-artifacts.js",
