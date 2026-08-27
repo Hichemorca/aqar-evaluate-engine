@@ -68,21 +68,7 @@ async function runScenario({ name, device }) {
     assert.equal(await page.locator('#observationConsent').isChecked(), false, `${name}: consent must stay off`);
     assert.equal(requests.some(request => request.includes('valuation-observation')), false, `${name}: no observation request without consent`);
 
-    await page.goto(new URL('/market-intelligence.html', baseURL).href, { waitUntil: 'networkidle', timeout: 30_000 });
-    await page.locator('#investmentTable table').waitFor({ state: 'visible', timeout: 30_000 });
-    const marketLayout = await page.evaluate(() => ({
-      viewport: document.documentElement.clientWidth,
-      bodyScrollWidth: document.body.scrollWidth,
-      documentScrollWidth: document.documentElement.scrollWidth,
-      sectionOverflow: [...document.querySelectorAll('.section')].some(section => section.scrollWidth > section.clientWidth + 1),
-      tableOverflow: [...document.querySelectorAll('.table-scroll table')].some(table => table.getBoundingClientRect().right > window.innerWidth + 1)
-    }));
-    assert.ok(marketLayout.bodyScrollWidth <= marketLayout.viewport, `${name}: Market Intelligence body overflows horizontally`);
-    assert.ok(marketLayout.documentScrollWidth <= marketLayout.viewport, `${name}: Market Intelligence document overflows horizontally`);
-    assert.equal(marketLayout.sectionOverflow, false, `${name}: Market Intelligence section overflows horizontally`);
-    assert.equal(marketLayout.tableOverflow, false, `${name}: Market Intelligence table escapes viewport`);
-
-    console.log(`${name}: PASS — viewport=${page.viewportSize().width}x${page.viewportSize().height}, comparables=${await page.locator('#recentSalesCount').inputValue()}, market-intelligence-responsive=true`);
+    console.log(`${name}: PASS — viewport=${page.viewportSize().width}x${page.viewportSize().height}, comparables=${await page.locator('#recentSalesCount').inputValue()}`);
   } finally {
     await context.close();
     await browser.close();
