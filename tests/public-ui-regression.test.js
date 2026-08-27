@@ -71,9 +71,15 @@ test('public pages use semantic headings and safe external links', () => {
     assert.doesNotMatch(source, /target="_blank"(?! rel="noopener noreferrer")/);
   }
   assert.ok(indexHtml.includes('<script src="/shared/index-accuracy-meta.js"></script>'));
+  assert.ok(indexHtml.includes('<script src="/shared/index-calibration-bootstrap.js"></script>'));
+  assert.ok(indexHtml.indexOf('/shared/index-accuracy-meta.js') < indexHtml.indexOf('/shared/index-calibration-bootstrap.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-calibration-bootstrap.js') < indexHtml.indexOf('/shared/index-market-context.js'));
   assert.doesNotMatch(indexHtml, /let AQAR_ACTIVE_CALIBRATION\s*=/);
   assert.ok(indexAccuracyMetaJs.includes('AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig()'));
   assert.ok(indexAccuracyMetaJs.includes('AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig()'));
+  const calibrationBootstrapJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-calibration-bootstrap.js'), 'utf8');
+  assert.ok(calibrationBootstrapJs.includes('async function loadCalibrationConfig()'));
+  assert.ok(calibrationBootstrapJs.includes('function getCalibrationForProperty(propertyType)'));
   assert.ok(indexHtml.includes('<script src="/shared/index-market-context.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-district-context.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-gis-helpers.js"></script>'));
@@ -89,6 +95,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexDistrictContextJs.includes('function filterDistricts(q)'));
   assert.ok(indexDistrictContextJs.includes('function filterProjectBuildings(q)'));
   assert.doesNotMatch(indexHtml, /function loadDistrictsFromDLD\(\)/);
+  assert.doesNotMatch(indexHtml, /function getCalibrationForProperty\(propertyType\)/);
+  assert.doesNotMatch(indexHtml, /async function loadCalibrationConfig\(\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
