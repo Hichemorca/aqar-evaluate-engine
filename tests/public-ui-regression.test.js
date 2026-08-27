@@ -61,6 +61,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(accuracyDashboardHtml.includes('<h1 class="miayaar-page-title">Accuracy Dashboard</h1>'));
   assert.ok(marketIntelligenceHtml.includes('<h1 class="miayaar-page-title">Market Intelligence</h1>'));
   assert.ok(exportHtml.includes('<h1 class="miayaar-page-title">Data Export</h1>'));
+  assert.match(exportHtml, /<meta name="viewport" content="width=device-width, initial-scale=1\.0">/);
   assert.ok(exportHtml.includes('function csvCell(value)'));
   assert.ok(exportHtml.includes("typeof value === 'string'"));
   assert.ok(exportHtml.includes("safeText.replace(/\"/g, '\"\"')"));
