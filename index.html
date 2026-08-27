@@ -383,6 +383,12 @@
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .result-action-button { margin-top: 12px; }
+    .result-method-row { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
+    .result-adjustments { margin-top: 10px; }
+    .result-explanation { background: rgba(212,146,14,0.05); border: 1px solid rgba(212,146,14,0.15); border-radius: 12px; padding: 12px; margin-bottom: 12px; font-size: 11px; line-height: 1.8; }
+    .result-header { text-align: center; }
+    .result-eyebrow { font-size: 11px; letter-spacing: 3px; color: rgba(138,154,176,0.7); text-transform: uppercase; }
     .valuation-actions { display: flex; gap: 10px; }
     .valuation-submit { flex: 2; }
     .valuation-reset { flex: 1; }
@@ -1399,7 +1405,7 @@ function buildDecisionEngineLink(result, propData) {
 function displayEvidenceOnlyState(propData) {
   const section = document.getElementById('resultSection');
   const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT);
-  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide comparable sales or rental information to improve this estimate. The system will not display an invented market value.</small></div><button class="btn btn-s" data-action="review-inputs" style="margin-top:12px">🔄 Review Inputs</button></div>`;
+  section.innerHTML = `<div class="result-card"><div class="evidence-state ${presentation.tone}"><strong>${presentation.title}</strong>${presentation.message}<small>Provide comparable sales or rental information to improve this estimate. The system will not display an invented market value.</small></div><button class="btn btn-s result-action-button" data-action="review-inputs">🔄 Review Inputs</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1423,7 +1429,7 @@ function displayResult(result, valuations, propData) {
     const wasUsed = valuations.some(v => v.method === label);
     const status = !isApplicable ? 'NOT_APPLICABLE' : wasUsed ? 'USED' : 'NOT_USED — insufficient evidence or inputs';
     const color = status === 'USED' ? 'var(--green)' : status === 'NOT_APPLICABLE' ? 'var(--muted)' : 'var(--gold)';
-    return `<div style="display:flex;justify-content:space-between;gap:12px;padding:3px 0"><span>${label}</span><b style="color:${color};font-size:10px">${status}</b></div>`;
+    return `<div class="result-method-row"><span>${label}</span><b style="color:${color};font-size:10px">${status}</b></div>`;
   }).join('');
   const evidenceState = propData.evidenceState || AQAR_EVIDENCE_STATE.STATES.INSUFFICIENT;
   const evidencePresentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
@@ -1443,7 +1449,7 @@ function displayResult(result, valuations, propData) {
     propData.buildingCondition ? `Building condition: ${escapeMapHtml(propData.buildingCondition)}` : '',
     propData.furnishedStatus ? `Furnished status: ${escapeMapHtml(propData.furnishedStatus)}` : '',
   ].filter(Boolean);
-  const adjustmentsHTML = adjustmentFacts.length ? `<div style="margin-top:10px"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
+  const adjustmentsHTML = adjustmentFacts.length ? `<div class="result-adjustments"><b>Inputs considered</b><br>${adjustmentFacts.join(' • ')}</div>` : '';
   const marketContextHTML = buildMarketContextHTML(result, propData);
   const comparableBracket = getComparableBracket(result.finalValue, scrapedDistrictData?.comparablePrices);
   const comparableRangeHTML = '';
@@ -1452,10 +1458,10 @@ function displayResult(result, valuations, propData) {
     dldCount > 0 ? `Evidence strength: <b>${evidenceConfidence}</b>` : '',
     adjustmentsHTML
   ].filter(Boolean).join('<br>');
-  const explain = `<div style="background:rgba(212,146,14,0.05);border:1px solid rgba(212,146,14,0.15);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;line-height:1.8"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
+  const explain = `<div class="result-explanation"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
   const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div style="text-align:center"><div style="font-size:11px;letter-spacing:3px;color:rgba(138,154,176,0.7);text-transform:uppercase">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" rel="noopener noreferrer" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s" data-action="new-valuation" style="margin-top:12px">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div class="result-header"><div class="result-eyebrow">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div style="font-size:12px;color:var(--muted)">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div style="font-size:13px;font-weight:700;color:var(--${cc==='high'?'green':cc==='medium'?'gold':'red'})">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" rel="noopener noreferrer" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s result-action-button" data-action="new-valuation">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }
