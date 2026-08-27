@@ -738,6 +738,7 @@
 <script src="/shared/index-market-calculation-helpers.js"></script>
 <script src="/shared/index-property-data-runtime.js"></script>
 <script src="/shared/index-sales-approach-runtime.js"></script>
+<script src="/shared/index-income-approach-runtime.js"></script>
 <script src="/shared/index-market-context.js"></script>
 <script src="/shared/index-district-context.js"></script>
 <script src="/shared/index-gis-helpers.js"></script>
@@ -818,17 +819,6 @@ async function scrapeRealData() {
     }
   } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">Market data unavailable</span><br><span class="market-status-detail">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
   btn.disabled = false; btn.innerHTML = '🔄 Refresh market data';
-}
-function incomeCapitalizationApproach(data) {
-  if (!data.annualRent || data.annualRent <= 0) return null;
-  const c = getCalibrationForProperty(data.propType).coefficients.income;
-  const expenses = data.annualExpenses || Math.round(data.annualRent * c.expenseRate);
-  const vacancy = data.scrapedData?.vacancyRate ?? c.vacancyRatePercent;
-  const noi = data.annualRent * (1 - vacancy/100) - expenses;
-  if (noi <= 0) return null;
-  const cap = data.scrapedData?.capRate ? data.scrapedData.capRate/100 : c.capRatePercent / 100;
-  const value = Math.round(noi / cap);
-  return { method: 'Income Capitalization Approach', value, weight: getCalibrationForProperty(data.propType).weights.income, confidence: 'high', details: `NOI: ${Math.round(noi).toLocaleString()} AED / Cap Rate: ${(cap*100).toFixed(1)}%.`, perSqm: Math.round(value/data.area), rentalYield: Math.round((data.annualRent/value)*1000)/10 };
 }
 function costApproach(data) {
   if (data.propType === 'apartment' || data.propType === 'land') return null;
