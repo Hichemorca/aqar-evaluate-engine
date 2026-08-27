@@ -7,6 +7,7 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
+const indexDistrictContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-context.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -42,16 +43,18 @@ test('autocomplete controls expose keyboard and listbox semantics', () => {
   assert.match(indexHtml, /role="combobox" aria-autocomplete="list" aria-controls="districtAutocomplete" aria-expanded="false"/);
   assert.match(indexHtml, /id="districtAutocomplete" role="listbox"/);
   assert.match(indexHtml, /id="projectBuildingAutocomplete" role="listbox"/);
-  assert.match(indexHtml, /function setAutocompleteItem\(item, onSelect\)/);
-  assert.match(indexHtml, /item\.tabIndex = 0/);
-  assert.match(indexHtml, /event\.key === 'Enter' \|\| event\.key === ' '/);
+  assert.match(indexDistrictContextJs, /function setAutocompleteItem\(item, onSelect\)/);
+  assert.match(indexDistrictContextJs, /item\.tabIndex = 0/);
+  assert.match(indexDistrictContextJs, /event\.key === 'Enter' \|\| event\.key === ' '/);
 });
 
 test('autocomplete lists use a body-level fixed portal', () => {
   assert.match(indexHtml, /\.autocomplete-list\.autocomplete-portal/);
   assert.match(indexHtml, /position: fixed/);
-  assert.match(indexHtml, /document\.body\.appendChild\(list\)/);
-  assert.match(indexHtml, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
+  assert.match(indexDistrictContextJs, /document\.body\.appendChild\(list\)/);
+  assert.match(indexDistrictContextJs, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
+  assert.match(indexDistrictContextJs, /window\.addEventListener\('resize', repositionVisibleAutocompleteLists\)/);
+  assert.doesNotMatch(indexHtml, /function setAutocompleteItem\(item, onSelect\)/);
 });
 
 test('custom checkboxes preserve native focusability', () => {
@@ -70,6 +73,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexAccuracyMetaJs.includes('AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig()'));
   assert.ok(indexAccuracyMetaJs.includes('AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig()'));
   assert.ok(indexHtml.includes('<script src="/shared/index-market-context.js"></script>'));
+  assert.ok(indexHtml.includes('<script src="/shared/index-district-context.js"></script>'));
+  assert.ok(indexDistrictContextJs.includes('async function loadDistrictsFromDLD()'));
+  assert.ok(indexDistrictContextJs.includes('function filterDistricts(q)'));
+  assert.ok(indexDistrictContextJs.includes('function filterProjectBuildings(q)'));
+  assert.doesNotMatch(indexHtml, /function loadDistrictsFromDLD\(\)/);
+  assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
