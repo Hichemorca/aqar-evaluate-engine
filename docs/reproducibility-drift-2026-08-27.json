@@ -1,0 +1,695 @@
+{
+  "schemaVersion": 1,
+  "readOnly": true,
+  "scope": "isolated-evaluator-reruns-with-fixed-system-dates",
+  "officialBaseline": {
+    "accuracyRecords": 8108,
+    "dldRecords": 26766,
+    "accuracySha256": "50b8473caab5fba30f097a55c57b16b2829d5f54c0bb9d1546e3973e712e74e8",
+    "dldSha256": "fc897736e4fe3c8cdf7acc0dfda8e36b5fc3f40468a444abfbd3a3ede67f4ce9"
+  },
+  "fixedDates": [
+    "2026-07-27T00:00:00.000Z",
+    "2026-10-24T00:00:00.000Z",
+    "2027-07-26T00:00:00.000Z"
+  ],
+  "latestDldSaleDate": "2026-07-26T00:00:00.000Z",
+  "repeatability": {
+    "sameFixedDate": "2026-10-24T00:00:00.000Z",
+    "accuracy": {
+      "firstRunSha256": "2ecd73b1bd85e21e41f1996dd7c28792663cbe6f13cc07fbc7319e08c5f0d8b3",
+      "secondRunSha256": "2ecd73b1bd85e21e41f1996dd7c28792663cbe6f13cc07fbc7319e08c5f0d8b3",
+      "identicalArtifact": true,
+      "comparison": {
+        "source": "accuracy",
+        "leftFixedNow": "2026-10-24T00:00:00.000Z",
+        "rightFixedNow": "2026-10-24T00:00:00.000Z",
+        "commonRecords": 3104,
+        "changedRecordCount": 0,
+        "changedRecordRatePct": 0,
+        "meanAbsoluteValuationDelta": 0,
+        "maxAbsoluteValuationDelta": 0,
+        "meanAbsoluteErrorPctDelta": 0,
+        "maxAbsoluteErrorPctDelta": 0,
+        "metricDelta": {
+          "totalRecords": 0,
+          "avgAccuracy": 0,
+          "avgDeviation": 0
+        },
+        "topValuationDrift": []
+      }
+    },
+    "market": {
+      "firstRunSha256": "43ed99cef14a3962487916023a6aa04d04c2a45289f7884f2761c277d1cea07b",
+      "secondRunSha256": "43ed99cef14a3962487916023a6aa04d04c2a45289f7884f2761c277d1cea07b",
+      "identicalArtifact": true,
+      "comparison": {
+        "source": "market",
+        "leftFixedNow": "2026-10-24T00:00:00.000Z",
+        "rightFixedNow": "2026-10-24T00:00:00.000Z",
+        "commonRecords": 23000,
+        "changedRecordCount": 0,
+        "changedRecordRatePct": 0,
+        "meanAbsoluteValuationDelta": 0,
+        "maxAbsoluteValuationDelta": 0,
+        "meanAbsoluteErrorPctDelta": 0,
+        "maxAbsoluteErrorPctDelta": 0,
+        "metricDelta": {
+          "totalRecords": 0,
+          "avgAccuracy": 0,
+          "avgDeviation": 0
+        },
+        "topValuationDrift": []
+      }
+    }
+  },
+  "dateDrift": {
+    "fullMarketArtifact": [
+      {
+        "source": "market",
+        "leftFixedNow": "2026-10-24T00:00:00.000Z",
+        "rightFixedNow": "2026-07-27T00:00:00.000Z",
+        "commonRecords": 23000,
+        "changedRecordCount": 13741,
+        "changedRecordRatePct": 59.7435,
+        "meanAbsoluteValuationDelta": 80214.048652,
+        "maxAbsoluteValuationDelta": 23133523,
+        "meanAbsoluteErrorPctDelta": 5.096143,
+        "maxAbsoluteErrorPctDelta": 1713.9,
+        "metricDelta": {
+          "totalRecords": 0,
+          "avgAccuracy": -3.5,
+          "avgDeviation": 3.5
+        },
+        "topValuationDrift": [
+          {
+            "propertyRef": "DLD-41-1893-2026",
+            "leftValue": 1362599,
+            "rightValue": 24496122,
+            "absoluteValueDelta": 23133523,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1875-2026",
+            "leftValue": 1089702,
+            "rightValue": 19590128,
+            "absoluteValueDelta": 18500426,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1900-2026",
+            "leftValue": 1089184,
+            "rightValue": 19580810,
+            "absoluteValueDelta": 18491626,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1899-2026",
+            "leftValue": 981907,
+            "rightValue": 17652240,
+            "absoluteValueDelta": 16670333,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1898-2026",
+            "leftValue": 980220,
+            "rightValue": 17621911,
+            "absoluteValueDelta": 16641691,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1902-2026",
+            "leftValue": 958494,
+            "rightValue": 17231327,
+            "absoluteValueDelta": 16272833,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1903-2026",
+            "leftValue": 956626,
+            "rightValue": 17197745,
+            "absoluteValueDelta": 16241119,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-4357-2026",
+            "leftValue": 37836531,
+            "rightValue": 54038010,
+            "absoluteValueDelta": 16201479,
+            "leftErrorPct": 6.5,
+            "rightErrorPct": 52.1,
+            "absoluteErrorDelta": 45.6
+          },
+          {
+            "propertyRef": "DLD-41-1913-2026",
+            "leftValue": 934244,
+            "rightValue": 16795381,
+            "absoluteValueDelta": 15861137,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1901-2026",
+            "leftValue": 925379,
+            "rightValue": 16636000,
+            "absoluteValueDelta": 15710621,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1908-2026",
+            "leftValue": 921897,
+            "rightValue": 16573409,
+            "absoluteValueDelta": 15651512,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1891-2026",
+            "leftValue": 913159,
+            "rightValue": 16416313,
+            "absoluteValueDelta": 15503154,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1897-2026",
+            "leftValue": 803026,
+            "rightValue": 14436404,
+            "absoluteValueDelta": 13633378,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1907-2026",
+            "leftValue": 739725,
+            "rightValue": 13298409,
+            "absoluteValueDelta": 12558684,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1905-2026",
+            "leftValue": 721950,
+            "rightValue": 12978857,
+            "absoluteValueDelta": 12256907,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1904-2026",
+            "leftValue": 718996,
+            "rightValue": 12925759,
+            "absoluteValueDelta": 12206763,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1911-2026",
+            "leftValue": 718982,
+            "rightValue": 12925495,
+            "absoluteValueDelta": 12206513,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1912-2026",
+            "leftValue": 712341,
+            "rightValue": 12806113,
+            "absoluteValueDelta": 12093772,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1906-2026",
+            "leftValue": 709964,
+            "rightValue": 12763389,
+            "absoluteValueDelta": 12053425,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          },
+          {
+            "propertyRef": "DLD-41-1910-2026",
+            "leftValue": 686664,
+            "rightValue": 12344498,
+            "absoluteValueDelta": 11657834,
+            "leftErrorPct": 1,
+            "rightErrorPct": 1714.9,
+            "absoluteErrorDelta": 1713.9
+          }
+        ]
+      },
+      {
+        "source": "market",
+        "leftFixedNow": "2026-10-24T00:00:00.000Z",
+        "rightFixedNow": "2027-07-26T00:00:00.000Z",
+        "commonRecords": 23000,
+        "changedRecordCount": 13751,
+        "changedRecordRatePct": 59.787,
+        "meanAbsoluteValuationDelta": 47815.933652,
+        "maxAbsoluteValuationDelta": 12295069,
+        "meanAbsoluteErrorPctDelta": 1.710474,
+        "maxAbsoluteErrorPctDelta": 118.6,
+        "metricDelta": {
+          "totalRecords": 0,
+          "avgAccuracy": 0.2,
+          "avgDeviation": -0.2
+        },
+        "topValuationDrift": [
+          {
+            "propertyRef": "DLD-11-11503-2026",
+            "leftValue": 32448716,
+            "rightValue": 20153647,
+            "absoluteValueDelta": 12295069,
+            "leftErrorPct": 27.2,
+            "rightErrorPct": -21,
+            "absoluteErrorDelta": 48.2
+          },
+          {
+            "propertyRef": "DLD-11-16766-2026",
+            "leftValue": 10287378,
+            "rightValue": 18868121,
+            "absoluteValueDelta": 8580743,
+            "leftErrorPct": -51,
+            "rightErrorPct": -10.2,
+            "absoluteErrorDelta": 40.8
+          },
+          {
+            "propertyRef": "DLD-11-12713-2026",
+            "leftValue": 27010211,
+            "rightValue": 19883090,
+            "absoluteValueDelta": 7127121,
+            "leftErrorPct": 3.9,
+            "rightErrorPct": -23.5,
+            "absoluteErrorDelta": 27.4
+          },
+          {
+            "propertyRef": "DLD-11-2233-2026",
+            "leftValue": 29419456,
+            "rightValue": 23119105,
+            "absoluteValueDelta": 6300351,
+            "leftErrorPct": 73.1,
+            "rightErrorPct": 36,
+            "absoluteErrorDelta": 37.099999999999994
+          },
+          {
+            "propertyRef": "DLD-11-693-2026",
+            "leftValue": 20848478,
+            "rightValue": 14946144,
+            "absoluteValueDelta": 5902334,
+            "leftErrorPct": -14.9,
+            "rightErrorPct": -39,
+            "absoluteErrorDelta": 24.1
+          },
+          {
+            "propertyRef": "DLD-11-16549-2026",
+            "leftValue": 26365120,
+            "rightValue": 20718873,
+            "absoluteValueDelta": 5646247,
+            "leftErrorPct": 61,
+            "rightErrorPct": 26.5,
+            "absoluteErrorDelta": 34.5
+          },
+          {
+            "propertyRef": "DLD-11-7260-2026",
+            "leftValue": 25914620,
+            "rightValue": 20481634,
+            "absoluteValueDelta": 5432986,
+            "leftErrorPct": 22,
+            "rightErrorPct": -3.6,
+            "absoluteErrorDelta": 25.6
+          },
+          {
+            "propertyRef": "DLD-11-6617-2026",
+            "leftValue": 25146993,
+            "rightValue": 19874940,
+            "absoluteValueDelta": 5272053,
+            "leftErrorPct": -21.4,
+            "rightErrorPct": -37.9,
+            "absoluteErrorDelta": 16.5
+          },
+          {
+            "propertyRef": "DLD-11-22284-2026",
+            "leftValue": 19499502,
+            "rightValue": 24750286,
+            "absoluteValueDelta": 5250784,
+            "leftErrorPct": -21.2,
+            "rightErrorPct": 0,
+            "absoluteErrorDelta": 21.2
+          },
+          {
+            "propertyRef": "DLD-11-14991-2026",
+            "leftValue": 19871292,
+            "rightValue": 14648709,
+            "absoluteValueDelta": 5222583,
+            "leftErrorPct": -0.6,
+            "rightErrorPct": -26.8,
+            "absoluteErrorDelta": 26.2
+          },
+          {
+            "propertyRef": "DLD-11-15434-2026",
+            "leftValue": 6158088,
+            "rightValue": 11294575,
+            "absoluteValueDelta": 5136487,
+            "leftErrorPct": -52.6,
+            "rightErrorPct": -13.1,
+            "absoluteErrorDelta": 39.5
+          },
+          {
+            "propertyRef": "DLD-11-20077-2026",
+            "leftValue": 27618842,
+            "rightValue": 22532513,
+            "absoluteValueDelta": 5086329,
+            "leftErrorPct": 112.5,
+            "rightErrorPct": 73.3,
+            "absoluteErrorDelta": 39.2
+          },
+          {
+            "propertyRef": "DLD-11-13865-2026",
+            "leftValue": 21331943,
+            "rightValue": 16415602,
+            "absoluteValueDelta": 4916341,
+            "leftErrorPct": -25.2,
+            "rightErrorPct": -42.4,
+            "absoluteErrorDelta": 17.2
+          },
+          {
+            "propertyRef": "DLD-11-9741-2026",
+            "leftValue": 5418074,
+            "rightValue": 10112694,
+            "absoluteValueDelta": 4694620,
+            "leftErrorPct": -45.8,
+            "rightErrorPct": 1.1,
+            "absoluteErrorDelta": 46.9
+          },
+          {
+            "propertyRef": "DLD-41-8595-2026",
+            "leftValue": 22966950,
+            "rightValue": 27581094,
+            "absoluteValueDelta": 4614144,
+            "leftErrorPct": -37.1,
+            "rightErrorPct": -24.4,
+            "absoluteErrorDelta": 12.700000000000003
+          },
+          {
+            "propertyRef": "DLD-11-7723-2026",
+            "leftValue": 5418435,
+            "rightValue": 9937973,
+            "absoluteValueDelta": 4519538,
+            "leftErrorPct": -46.8,
+            "rightErrorPct": -2.4,
+            "absoluteErrorDelta": 44.4
+          },
+          {
+            "propertyRef": "DLD-11-10665-2026",
+            "leftValue": 15546444,
+            "rightValue": 11145149,
+            "absoluteValueDelta": 4401295,
+            "leftErrorPct": -13.6,
+            "rightErrorPct": -38.1,
+            "absoluteErrorDelta": 24.5
+          },
+          {
+            "propertyRef": "DLD-11-16184-2026",
+            "leftValue": 21555713,
+            "rightValue": 17361992,
+            "absoluteValueDelta": 4193721,
+            "leftErrorPct": 16.5,
+            "rightErrorPct": -6.2,
+            "absoluteErrorDelta": 22.7
+          },
+          {
+            "propertyRef": "DLD-11-13581-2026",
+            "leftValue": 22658234,
+            "rightValue": 18579737,
+            "absoluteValueDelta": 4078497,
+            "leftErrorPct": 46.2,
+            "rightErrorPct": 19.9,
+            "absoluteErrorDelta": 26.300000000000004
+          },
+          {
+            "propertyRef": "DLD-11-3020-2026",
+            "leftValue": 17235899,
+            "rightValue": 21242372,
+            "absoluteValueDelta": 4006473,
+            "leftErrorPct": -25.1,
+            "rightErrorPct": -7.6,
+            "absoluteErrorDelta": 17.5
+          }
+        ]
+      }
+    ],
+    "accuracyWindowArtifact": [
+      {
+        "source": "accuracy",
+        "leftFixedNow": "2026-10-24T00:00:00.000Z",
+        "rightFixedNow": "2026-07-27T00:00:00.000Z",
+        "commonRecords": 3104,
+        "changedRecordCount": 1720,
+        "changedRecordRatePct": 55.4124,
+        "meanAbsoluteValuationDelta": 50962.571198,
+        "maxAbsoluteValuationDelta": 8750589,
+        "meanAbsoluteErrorPctDelta": 1.807571,
+        "maxAbsoluteErrorPctDelta": 49.8,
+        "metricDelta": {
+          "totalRecords": 7956,
+          "avgAccuracy": -0.6,
+          "avgDeviation": 0.6
+        },
+        "topValuationDrift": [
+          {
+            "propertyRef": "DLD-41-9604-2026",
+            "leftValue": 548947,
+            "rightValue": 9299536,
+            "absoluteValueDelta": 8750589,
+            "leftErrorPct": -97.3,
+            "rightErrorPct": -53.5,
+            "absoluteErrorDelta": 43.8
+          },
+          {
+            "propertyRef": "DLD-11-22240-2026",
+            "leftValue": 29607067,
+            "rightValue": 36966168,
+            "absoluteValueDelta": 7359101,
+            "leftErrorPct": -10.3,
+            "rightErrorPct": 12,
+            "absoluteErrorDelta": 22.3
+          },
+          {
+            "propertyRef": "DLD-11-21583-2026",
+            "leftValue": 17549878,
+            "rightValue": 11987279,
+            "absoluteValueDelta": 5562599,
+            "leftErrorPct": 4.5,
+            "rightErrorPct": -28.6,
+            "absoluteErrorDelta": 33.1
+          },
+          {
+            "propertyRef": "DLD-41-9915-2026",
+            "leftValue": 24177799,
+            "rightValue": 29604122,
+            "absoluteValueDelta": 5426323,
+            "leftErrorPct": -47.3,
+            "rightErrorPct": -35.5,
+            "absoluteErrorDelta": 11.799999999999997
+          },
+          {
+            "propertyRef": "DLD-11-20999-2026",
+            "leftValue": 15561415,
+            "rightValue": 20221934,
+            "absoluteValueDelta": 4660519,
+            "leftErrorPct": -43.4,
+            "rightErrorPct": -26.5,
+            "absoluteErrorDelta": 16.9
+          },
+          {
+            "propertyRef": "DLD-11-20408-2026",
+            "leftValue": 6993945,
+            "rightValue": 4260568,
+            "absoluteValueDelta": 2733377,
+            "leftErrorPct": -3.5,
+            "rightErrorPct": -41.2,
+            "absoluteErrorDelta": 37.7
+          },
+          {
+            "propertyRef": "DLD-11-22419-2026",
+            "leftValue": 7366734,
+            "rightValue": 9041085,
+            "absoluteValueDelta": 1674351,
+            "leftErrorPct": -29.8,
+            "rightErrorPct": -13.9,
+            "absoluteErrorDelta": 15.9
+          },
+          {
+            "propertyRef": "DLD-11-21954-2026",
+            "leftValue": 11956100,
+            "rightValue": 10299482,
+            "absoluteValueDelta": 1656618,
+            "leftErrorPct": 70.8,
+            "rightErrorPct": 47.1,
+            "absoluteErrorDelta": 23.699999999999996
+          },
+          {
+            "propertyRef": "DLD-11-20321-2026",
+            "leftValue": 5621924,
+            "rightValue": 7221117,
+            "absoluteValueDelta": 1599193,
+            "leftErrorPct": 12.4,
+            "rightErrorPct": 44.4,
+            "absoluteErrorDelta": 32
+          },
+          {
+            "propertyRef": "DLD-11-20115-2026",
+            "leftValue": 4968893,
+            "rightValue": 3662966,
+            "absoluteValueDelta": 1305927,
+            "leftErrorPct": -23.6,
+            "rightErrorPct": -43.6,
+            "absoluteErrorDelta": 20
+          },
+          {
+            "propertyRef": "DLD-11-22154-2026",
+            "leftValue": 19790239,
+            "rightValue": 21087544,
+            "absoluteValueDelta": 1297305,
+            "leftErrorPct": -23.1,
+            "rightErrorPct": -18.1,
+            "absoluteErrorDelta": 5
+          },
+          {
+            "propertyRef": "DLD-11-21163-2026",
+            "leftValue": 33427936,
+            "rightValue": 32174216,
+            "absoluteValueDelta": 1253720,
+            "leftErrorPct": 11.4,
+            "rightErrorPct": 7.2,
+            "absoluteErrorDelta": 4.2
+          },
+          {
+            "propertyRef": "DLD-11-21064-2026",
+            "leftValue": 7699640,
+            "rightValue": 8928108,
+            "absoluteValueDelta": 1228468,
+            "leftErrorPct": -7.2,
+            "rightErrorPct": 7.6,
+            "absoluteErrorDelta": 14.8
+          },
+          {
+            "propertyRef": "DLD-11-20698-2026",
+            "leftValue": 2689853,
+            "rightValue": 3824176,
+            "absoluteValueDelta": 1134323,
+            "leftErrorPct": -22,
+            "rightErrorPct": 10.8,
+            "absoluteErrorDelta": 32.8
+          },
+          {
+            "propertyRef": "DLD-11-21223-2026",
+            "leftValue": 2485555,
+            "rightValue": 3564856,
+            "absoluteValueDelta": 1079301,
+            "leftErrorPct": -14.3,
+            "rightErrorPct": 22.9,
+            "absoluteErrorDelta": 37.2
+          },
+          {
+            "propertyRef": "DLD-11-22454-2026",
+            "leftValue": 2500047,
+            "rightValue": 3571462,
+            "absoluteValueDelta": 1071415,
+            "leftErrorPct": -24.2,
+            "rightErrorPct": 8.2,
+            "absoluteErrorDelta": 32.4
+          },
+          {
+            "propertyRef": "DLD-11-21405-2026",
+            "leftValue": 4065888,
+            "rightValue": 5039401,
+            "absoluteValueDelta": 973513,
+            "leftErrorPct": 29.1,
+            "rightErrorPct": 60,
+            "absoluteErrorDelta": 30.9
+          },
+          {
+            "propertyRef": "DLD-41-8863-2026",
+            "leftValue": 4947129,
+            "rightValue": 5907331,
+            "absoluteValueDelta": 960202,
+            "leftErrorPct": -26.4,
+            "rightErrorPct": -12.1,
+            "absoluteErrorDelta": 14.299999999999999
+          },
+          {
+            "propertyRef": "DLD-11-22124-2026",
+            "leftValue": 7016299,
+            "rightValue": 7941624,
+            "absoluteValueDelta": 925325,
+            "leftErrorPct": -29.8,
+            "rightErrorPct": -20.6,
+            "absoluteErrorDelta": 9.2
+          },
+          {
+            "propertyRef": "DLD-11-20204-2026",
+            "leftValue": 13396164,
+            "rightValue": 12471751,
+            "absoluteValueDelta": 924413,
+            "leftErrorPct": -8.6,
+            "rightErrorPct": -14.9,
+            "absoluteErrorDelta": 6.300000000000001
+          }
+        ]
+      },
+      {
+        "source": "accuracy",
+        "leftFixedNow": "2026-10-24T00:00:00.000Z",
+        "rightFixedNow": "2027-07-26T00:00:00.000Z",
+        "commonRecords": 0,
+        "changedRecordCount": 0,
+        "changedRecordRatePct": null,
+        "meanAbsoluteValuationDelta": null,
+        "maxAbsoluteValuationDelta": 0,
+        "meanAbsoluteErrorPctDelta": null,
+        "maxAbsoluteErrorPctDelta": 0,
+        "metricDelta": {
+          "totalRecords": -3104,
+          "avgAccuracy": -86.2,
+          "avgDeviation": -13.8
+        },
+        "topValuationDrift": []
+      }
+    ]
+  },
+  "safeguards": {
+    "officialAccuracyUnchanged": true,
+    "officialDldUnchanged": true,
+    "officialArtifactsNotWritten": true,
+    "evaluatorSourceUnchanged": true,
+    "calibrationUnchanged": true,
+    "recordsExcludedOrCapped": false
+  }
+}
