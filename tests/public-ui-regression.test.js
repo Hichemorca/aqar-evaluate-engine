@@ -36,10 +36,11 @@ test('autocomplete lists use a body-level fixed portal', () => {
   assert.match(indexHtml, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
 });
 
-test('Market Intelligence tables use mobile-safe row cards', () => {
+test('Market Intelligence tables stay intact inside horizontally scrollable cards', () => {
   assert.match(marketIntelligenceHtml, /\.table-scroll/);
-  assert.match(marketIntelligenceHtml, /@media \(max-width: 600px\)/);
-  assert.match(marketIntelligenceHtml, /\.table-scroll thead/);
-  assert.match(marketIntelligenceHtml, /data-label="District"/);
-  assert.match(marketIntelligenceHtml, /overflow-x: visible/);
+  assert.match(marketIntelligenceHtml, /overflow-x: auto/);
+  assert.match(marketIntelligenceHtml, /\.table-scroll table \{ min-width: 520px; \}/);
+  assert.match(marketIntelligenceHtml, /role="region" tabindex="0" aria-label="Top 10 Investment Districts table"/);
+  assert.doesNotMatch(marketIntelligenceHtml, /\.table-scroll thead \{/);
+  assert.doesNotMatch(marketIntelligenceHtml, /data-label="District"/);
 });
