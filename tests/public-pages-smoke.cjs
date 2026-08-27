@@ -6,7 +6,7 @@ const pages = [
   { name: 'Valuation', path: '/', marker: '#propType' },
   { name: 'Accuracy Dashboard', path: '/accuracy-dashboard', marker: '#main-content' },
   { name: 'Market Intelligence', path: '/market-intelligence', marker: '#main-content' },
-  { name: 'Data Export', path: '/export', marker: '#main-content' },
+  { name: 'Data Export', path: '/export', marker: '#main-content', exportButtons: true },
   { name: 'Calibration', path: '/calibration', marker: '#main-content' }
 ];
 
@@ -36,6 +36,15 @@ async function runPage(browser, definition) {
     await page.waitForLoadState('domcontentloaded', { timeout: 15_000 }).catch(() => {});
     await page.locator(definition.marker).first().waitFor({ state: 'visible', timeout: 15_000 });
     await page.waitForTimeout(750);
+    if (definition.exportButtons && (process.env.MIAYAAR_EXPECT_EXPORT_DOWNLOADS === '1' || await page.locator('#exportCsvButton').count())) {
+      await page.waitForFunction(() => /transactions loaded/.test(document.querySelector('#stats')?.textContent || ''), null, { timeout: 15_000 });
+      for (const [selector, filename] of [['#exportCsvButton', 'miayaar-accuracy-data.csv'], ['#exportJsonButton', 'miayaar-accuracy-data.json']]) {
+        const downloadPromise = page.waitForEvent('download', { timeout: 15_000 });
+        await page.locator(selector).click();
+        const download = await downloadPromise;
+        assert.equal(download.suggestedFilename(), filename, `Data Export: unexpected filename for ${selector}`);
+      }
+    }
 
     const layout = await page.evaluate(() => ({
       innerWidth: window.innerWidth,

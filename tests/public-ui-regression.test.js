@@ -8,6 +8,7 @@ const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
 const exportHtml = fs.readFileSync(path.join(__dirname, '..', 'export.html'), 'utf8');
+const exportJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'export.js'), 'utf8');
 
 test('comparable bracket selects the nearest strict lower and upper prices', () => {
   assert.deepEqual(getComparableBracket(1802730, [1868000, 1680000, 2200000, 1500000]), {
@@ -62,10 +63,14 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(marketIntelligenceHtml.includes('<h1 class="miayaar-page-title">Market Intelligence</h1>'));
   assert.ok(exportHtml.includes('<h1 class="miayaar-page-title">Data Export</h1>'));
   assert.match(exportHtml, /<meta name="viewport" content="width=device-width, initial-scale=1\.0">/);
-  assert.ok(exportHtml.includes('function csvCell(value)'));
-  assert.ok(exportHtml.includes("typeof value === 'string'"));
-  assert.ok(exportHtml.includes("safeText.replace(/\"/g, '\"\"')"));
-  assert.ok(exportHtml.includes('/^[=+\\-@]/.test(text)'));
+  assert.ok(exportHtml.includes('<script src="/shared/export.js"></script>'));
+  assert.ok(exportHtml.includes('id="exportCsvButton"'));
+  assert.ok(exportHtml.includes('id="exportJsonButton"'));
+  assert.doesNotMatch(exportHtml, /<script>\s*[\s\S]*<\/script>/);
+  assert.ok(exportJs.includes('function csvCell(value)'));
+  assert.ok(exportJs.includes("typeof value === 'string'"));
+  assert.ok(exportJs.includes("safeText.replace(/\"/g, '\"\"')"));
+  assert.ok(exportJs.includes('/^[=+\\-@]/.test(text)'));
 });
 
 test('Market Intelligence tables stay intact inside horizontally scrollable cards', () => {
