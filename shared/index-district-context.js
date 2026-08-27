@@ -55,7 +55,7 @@ function refreshProjectSuggestions() {
   const row = document.getElementById('rowProjectBuilding');
   if (!input || !row) return;
   const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(document.getElementById('propType').value, document.getElementById('yearBuilt').value);
-  row.style.display = visibility.projectBuilding ? 'flex' : 'none';
+  row.classList.toggle('js-hidden', !visibility.projectBuilding);
   if (!visibility.projectBuilding) { selectedProjectBuilding = ''; input.value = ''; hideAutocompleteList(document.getElementById('projectBuildingAutocomplete')); }
   else if (selectedProjectBuilding && !projectOptionsForCurrentContext().includes(selectedProjectBuilding)) { selectedProjectBuilding = ''; input.value = ''; }
   updateProjectBuildingNotice();
