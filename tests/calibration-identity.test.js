@@ -6,10 +6,11 @@ const calibrationDefaults = require('../shared/aqar-calibration-defaults');
 const calibrationEngine = require('../shared/calibration-engine');
 
 const indexSource = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const resetHistorySource = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-reset-history-runtime.js'), 'utf8');
 const batchSource = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'evaluate-and-save.js'), 'utf8');
 
 test('browser and offline paths persist the active calibration identity', () => {
-  assert.match(indexSource, /calibrationId: AQAR_ACTIVE_CALIBRATION\.configId/);
+  assert.match(resetHistorySource, /calibrationId: AQAR_ACTIVE_CALIBRATION\.configId/);
   assert.match(batchSource, /calibrationConfigId: evalResult\.calibrationId/);
   assert.match(batchSource, /valuationMethods: evalResult\.methodResults/);
 });
