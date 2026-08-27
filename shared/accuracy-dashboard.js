@@ -10,7 +10,7 @@ async function loadFromLocal() {
   try {
     const response = await fetch('/data/accuracy-data.json');
     if (!response.ok) {
-      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Could not load the verified DLD snapshot. Official accuracy is unavailable until a verified snapshot is restored.</div>';
+      document.getElementById('tableContainer').innerHTML = '<div class="loading loading-error">⚠️ Could not load the verified DLD snapshot. Official accuracy is unavailable until a verified snapshot is restored.</div>';
       return false;
     }
     const data = await response.json();
@@ -24,7 +24,7 @@ async function loadFromLocal() {
       record.verifiedBy !== 'Government Record'
     );
     if (unverified.length > 0) {
-      document.getElementById('tableContainer').innerHTML = '<div class="loading" style="color:var(--red)">⚠️ Accuracy snapshot rejected: it contains records without verified provenance.</div>';
+      document.getElementById('tableContainer').innerHTML = '<div class="loading loading-error">⚠️ Accuracy snapshot rejected: it contains records without verified provenance.</div>';
       return false;
     }
     updateStats(data.metrics);
@@ -68,19 +68,19 @@ function updateTable(properties) {
     const aqarDiff = p.aqarVsActual || 0;
     const diffClass = Math.abs(aqarDiff) < 15 ? 'green' : Math.abs(aqarDiff) < 25 ? 'gold' : 'red';
     html += '<tr>';
-    html += `<td style="font-family:monospace;font-size:9px">${escapeHtml((p.propertyRef || '—').substring(0, 12))}</td>`;
-    html += `<td style="font-size:10px">${escapeHtml(p.city || 'dubai')}</td>`;
+    html += `<td class="table-ref-cell">${escapeHtml((p.propertyRef || '—').substring(0, 12))}</td>`;
+    html += `<td class="table-city-cell">${escapeHtml(p.city || 'dubai')}</td>`;
     html += `<td>${escapeHtml(p.propertyType || '—')}</td>`;
     html += `<td>${escapeHtml(p.district || '—')}</td>`;
     html += `<td>${p.area ? p.area.toLocaleString() + ' sqm' : '—'}</td>`;
     html += `<td>${p.actualSalePrice ? Number(p.actualSalePrice).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td>${p.aqarValuation ? Number(p.aqarValuation).toLocaleString() + ' AED' : '—'}</td>`;
     html += `<td><span class="badge ${diffClass}">${aqarDiff > 0 ? '+' : ''}${aqarDiff}%</span></td>`;
-    html += `<td style="font-size:9px;color:var(--muted)">${escapeHtml(p.saleDate || '—')}</td>`;
+    html += `<td class="table-date-cell">${escapeHtml(p.saleDate || '—')}</td>`;
     html += '</tr>';
   });
   html += '</tbody></table>';
-  html += `<div style="text-align:center;padding:10px;font-size:10px;color:var(--muted)">Showing ${Math.min(properties.length, 100)} of ${properties.length} transactions</div>`;
+  html += `<div class="table-summary">Showing ${Math.min(properties.length, 100)} of ${properties.length} transactions</div>`;
   document.getElementById('tableContainer').innerHTML = html;
 }
 
