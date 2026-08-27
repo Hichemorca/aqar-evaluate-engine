@@ -12,6 +12,8 @@
 | `/accuracy-dashboard` | لوحة قياس Accuracy الرسمية. |
 | `/market-intelligence` | صفحة Market Intelligence. |
 | `/export` | صفحة التصدير العامة. |
+| [دليل المستخدم العربي](docs/user-guide-ar.md) | خطوات استخدام المنصة وقراءة النتيجة باللغة العربية. |
+| [English user guide](docs/user-guide-en.md) | Platform usage steps and result interpretation in English. |
 
 ## الهوية البصرية
 
