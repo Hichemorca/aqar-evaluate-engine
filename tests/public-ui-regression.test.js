@@ -15,6 +15,7 @@ const indexFieldViewJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'i
 const indexMapMarkerJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-map-marker-runtime.js'), 'utf8');
 const indexGisFetchJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-fetch-runtime.js'), 'utf8');
 const indexGisDisplayJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-display-runtime.js'), 'utf8');
+const indexMarketCalculationJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-calculation-helpers.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -94,7 +95,11 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-map-marker-runtime.js') < indexHtml.indexOf('/shared/index-gis-fetch-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-gis-fetch-runtime.js') < indexHtml.indexOf('/shared/index-gis-display-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-gis-display-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-gis-display-runtime.js') < indexHtml.indexOf('/shared/index-market-calculation-helpers.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-market-calculation-helpers.js') < indexHtml.indexOf('/shared/index-market-context.js'));
   assert.ok(indexGisDisplayJs.includes('function displayGISResult(gisData)'));
+  assert.ok(indexMarketCalculationJs.includes('function getFallbackPrice(city, district)'));
+  assert.ok(indexMarketCalculationJs.includes('function calculateViewMultiplier(viewTypes, propertyType)'));
   assert.ok(indexGisFetchJs.includes('function prepareGISRefresh()'));
   assert.ok(indexGisFetchJs.includes('function debouncedFetchGISData()'));
   assert.ok(indexGisFetchJs.includes('async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null)'));
@@ -141,6 +146,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function debouncedFetchGISData\(\)/);
   assert.doesNotMatch(indexHtml, /async function fetchPOIsFromOSM\(lat, lng, radius = 1000, requestSignal = null\)/);
   assert.doesNotMatch(indexHtml, /function displayGISResult\(gisData\)/);
+  assert.doesNotMatch(indexHtml, /function getFallbackPrice\(city, district\)/);
+  assert.doesNotMatch(indexHtml, /function calculateViewMultiplier\(viewTypes, propertyType\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
