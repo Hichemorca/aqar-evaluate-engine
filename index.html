@@ -383,6 +383,8 @@
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .gis-result-panel { display: none; margin-top: 12px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.06); }
+    .gis-project-label { display: none; margin-top: 10px; padding: 9px 11px; border-radius: 10px; background: rgba(212,146,14,0.08); border: 1px solid rgba(212,146,14,0.22); font-size: 10px; color: var(--muted); }
     .result-property-meta { font-size: 12px; color: var(--muted); }
     .result-confidence-label { font-size: 13px; font-weight: 700; }
     .result-confidence-label.high { color: var(--green); }
@@ -631,12 +633,12 @@
       <div class="fg"><label for="gisLat">🌐 Latitude</label><input type="text" id="gisLat" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
       <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
     </div>
-    <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
+    <div id="gisResult" class="gis-result-panel">
       <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
       <div id="gisFacilitiesList" role="status" aria-live="polite" style="font-size:11px;color:var(--muted);line-height:1.8"></div>
       <div style="margin-top:8px;font-size:12px;font-weight:700" id="gisScoreDisplay"></div>
     </div>
-    <div id="gisProjectLabel" style="display:none;margin-top:10px;padding:9px 11px;border-radius:10px;background:rgba(212,146,14,0.08);border:1px solid rgba(212,146,14,0.22);font-size:10px;color:var(--muted)" aria-live="polite"></div>
+    <div id="gisProjectLabel" class="gis-project-label" aria-live="polite"></div>
     <div id="gisMap" role="region" aria-label="Interactive location map" tabindex="0" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     <input type="hidden" id="gisRadius" value="1000">
     <div id="gisRadiusContext" class="gis-radius-context">Vital facilities are shown inside the radius around the current map marker.</div>
