@@ -137,6 +137,14 @@ test('public pages use semantic headings and safe external links', () => {
   assert.match(indexHtml, /container\.classList\.add\('is-visible'\)/);
   assert.doesNotMatch(indexHtml, /(?:gisResult|gisProjectLabel).*style\.display/);
   assert.doesNotMatch(indexDistrictContextJs, /row\.style\.display = visibility\.projectBuilding/);
+  assert.match(indexHtml, /\.autocomplete-list\.is-visible \{ display: block; \}/);
+  assert.match(indexHtml, /\.autocomplete-list \.item\.empty-state \{ color: var\(--muted\); cursor: default; \}/);
+  assert.match(indexHtml, /\.project-building-notice\.attention \{ color: var\(--gold\); \}/);
+  assert.match(indexHtml, /\.project-building-notice\.verified \{ color: var\(--green\); \}/);
+  assert.ok(indexDistrictContextJs.includes("function setProjectBuildingNotice(notice, text, tone)"));
+  assert.ok(indexDistrictContextJs.includes("empty.className = 'item empty-state'"));
+  assert.doesNotMatch(indexDistrictContextJs, /notice\.style\.color|empty\.style\.cssText/);
+  assert.doesNotMatch(indexDistrictContextJs, /list\.style\.display|c\.style\.display/);
   assert.doesNotMatch(indexHtml, /scoreDisplay\.innerHTML = `?[^`]*style="color:var\(--gold\)"/);
   assert.doesNotMatch(indexHtml, /<span style="color:var\(--muted\)">🔍 Checking market data/);
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
