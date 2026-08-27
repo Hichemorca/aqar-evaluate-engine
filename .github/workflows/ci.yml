@@ -55,6 +55,7 @@ jobs:
           node --check shared/index-market-context.js
           node --check shared/index-district-context.js
           node --check shared/index-gis-helpers.js
+          node --check shared/index-primary-interactions.js
           node --check scripts/evaluate-and-save.js
           node --check scripts/generate-client-summaries.js
 
