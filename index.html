@@ -383,6 +383,11 @@
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .gis-impact-label { color: var(--gold); }
+    .gis-impact-detail { font-size: 10px; color: var(--muted); margin-left: 12px; }
+    .market-status-detail { font-size: 10px; color: var(--muted); }
+    .market-status-review { font-size: 10px; color: var(--gold); }
+    .gis-map-unavailable { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--muted); font-size: 12px; }
     .result-action-button { margin-top: 12px; }
     .result-method-row { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
     .result-adjustments { margin-top: 10px; }
@@ -983,7 +988,7 @@ function initGISMap() {
     mapInitialized = true;
     updateProjectMapLabel();
     setTimeout(() => debouncedFetchGISData(), 500);
-  } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px">🗺️ Map unavailable</div>'; }
+  } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div class="gis-map-unavailable">🗺️ Map unavailable</div>'; }
 }
 function prepareGISRefresh() {
   gisRequestId++;
@@ -1180,7 +1185,7 @@ function displayGISResult(gisData) {
   list.innerHTML = html || 'No nearby facilities found';
   window.gisImpactMultiplier = 1 + impact/100;
   window.gisImpactPercent = impact;
-  scoreDisplay.innerHTML = `<span style="color:var(--gold)">⭐ Location impact on valuation: +${impact}%</span><span style="font-size:10px;color:var(--muted);margin-left:12px">(based on ${gisData.count||0} nearby facilities)</span>`;
+  scoreDisplay.innerHTML = `<span class="gis-impact-label">⭐ Location impact on valuation: +${impact}%</span><span class="gis-impact-detail">(based on ${gisData.count||0} nearby facilities)</span>`;
 }
 
 
@@ -1189,7 +1194,7 @@ async function scrapeRealData() {
   const area = parseFloat(document.getElementById('area').value)||0, btn = document.getElementById('btnScrape'), status = document.getElementById('scrapeStatus');
   if (!city || !district) { status.innerHTML = '<span class="status-badge error">⚠️ Select city and enter district</span>'; showToast('Please select a city and enter a district name'); return; }
   if (area < 10) { status.innerHTML = '<span class="status-badge error">⚠️ Please enter a valid area</span>'; showToast('Please enter a valid area'); return; }
-  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span style="color:var(--muted)">🔍 Checking market data...</span>';
+  btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Analyzing market...'; status.innerHTML = '<span class="market-status-detail">🔍 Checking market data...</span>';
   document.getElementById('resultSection').classList.add('hidden');
   document.getElementById('resultSection').innerHTML = '';
   const lat = document.getElementById('gisLat').value.trim(), lng = document.getElementById('gisLng').value.trim();
@@ -1205,14 +1210,14 @@ async function scrapeRealData() {
       const evidenceState = getCurrentEvidenceState(data);
       scrapedDistrictData = { avgPricePerSqm: data.avgPricePerSqm, minComparablePrice: data.minComparablePrice, maxComparablePrice: data.maxComparablePrice, comparablePrices: data.comparablePrices || [], comparablePriceBasis: data.comparablePriceBasis || 'actual_sale_price', count: data.count, dataSource: 'dld', level: data.level, source: 'dld', confidence: data.confidence || 'medium', timeWindow: data.timeWindow || 'N/A', monthlyGrowthRate: data.monthlyGrowthRate, evidenceState };
             const presentation = AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState);
-      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span style="font-size:10px;color:var(--gold);">Review this limited sample before relying on the result.</span>' : ''}`;
+      status.innerHTML = `<span class="status-badge ${presentation.tone}">${presentation.title} — ${data.count} comparable sales</span>${evidenceState === AQAR_EVIDENCE_STATE.STATES.LIMITED ? '<br><span class="market-status-review">Review this limited sample before relying on the result.</span>' : ''}`;
       showToast(`${data.count} comparable sales found in ${district}`);
     } else {
       const evidenceState = getCurrentEvidenceState(data);
-      status.innerHTML = `<span class="status-badge warning">Insufficient market evidence — no reliable estimate from sales</span><br><span style="font-size:10px;color:var(--muted);">Provide more market information to improve the estimate.</span>`;
+      status.innerHTML = `<span class="status-badge warning">Insufficient market evidence — no reliable estimate from sales</span><br><span class="market-status-detail">Provide more market information to improve the estimate.</span>`;
       document.getElementById('avgPriceSqm').value = ''; document.getElementById('recentSalesCount').value = ''; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: data.reason || 'no-sufficient-data' };
     }
-  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">Market data unavailable</span><br><span style="font-size:10px;color:var(--muted);">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
+  } catch(e) { console.error('Scrape error:', e); const evidenceState = getCurrentEvidenceState({ found: false, error: true }); status.innerHTML = `<span class="status-badge error">Market data unavailable</span><br><span class="market-status-detail">${AQAR_EVIDENCE_STATE.getEvidencePresentation(evidenceState).message}</span>`; scrapedDistrictData = { evidenceState, count: 0, dataSource: 'dld', reason: 'service-unavailable' }; }
   btn.disabled = false; btn.innerHTML = '🔄 Refresh market data';
 }
 function getFallbackPrice(city, district) {

@@ -101,6 +101,13 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /onchange="onPropertyTypeChange\(\)"/);
   assert.doesNotMatch(indexHtml, /oninput="updateExtraFieldVisibility\(\)"/);
   assert.doesNotMatch(indexHtml, /onclick="(scrapeRealData|runValuation|resetAll)\(\)"/);
+  assert.ok(indexHtml.includes('class="gis-impact-label"'));
+  assert.ok(indexHtml.includes('class="gis-impact-detail"'));
+  assert.ok(indexHtml.includes('class="market-status-detail"'));
+  assert.ok(indexHtml.includes('class="market-status-review"'));
+  assert.ok(indexHtml.includes('class="gis-map-unavailable"'));
+  assert.doesNotMatch(indexHtml, /scoreDisplay\.innerHTML = `?[^`]*style="color:var\(--gold\)"/);
+  assert.doesNotMatch(indexHtml, /<span style="color:var\(--muted\)">🔍 Checking market data/);
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
