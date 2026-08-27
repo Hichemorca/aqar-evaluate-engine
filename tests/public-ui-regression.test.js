@@ -13,6 +13,7 @@ const indexPrimaryInteractionsJs = fs.readFileSync(path.join(__dirname, '..', 's
 const indexMapLinkingJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-map-linking-runtime.js'), 'utf8');
 const indexFieldViewJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-field-view-runtime.js'), 'utf8');
 const indexMapMarkerJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-map-marker-runtime.js'), 'utf8');
+const indexGisFetchJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-fetch-runtime.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -88,7 +89,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-runtime-state.js') < indexHtml.indexOf('/shared/index-district-map-core.js'));
   assert.ok(indexHtml.indexOf('/shared/index-district-map-core.js') < indexHtml.indexOf('/shared/index-map-linking-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-map-linking-runtime.js') < indexHtml.indexOf('/shared/index-field-view-runtime.js'));
-  assert.ok(indexHtml.indexOf('/shared/index-field-view-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-field-view-runtime.js') < indexHtml.indexOf('/shared/index-map-marker-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-map-marker-runtime.js') < indexHtml.indexOf('/shared/index-gis-fetch-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-gis-fetch-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexGisFetchJs.includes('function prepareGISRefresh()'));
+  assert.ok(indexGisFetchJs.includes('function debouncedFetchGISData()'));
+  assert.ok(indexGisFetchJs.includes('async function fetchPOIsFromOSM(lat, lng, radius = 1000, requestSignal = null)'));
   assert.ok(indexFieldViewJs.includes('function updateExtraFieldVisibility()'));
   assert.ok(indexFieldViewJs.includes('function handleViewTypeChange(cb)'));
   assert.ok(indexFieldViewJs.includes('function getSelectedViewTypes()'));
@@ -128,6 +134,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function updateExtraFieldVisibility\(\)/);
   assert.doesNotMatch(indexHtml, /function handleViewTypeChange\(cb\)/);
   assert.doesNotMatch(indexHtml, /function getSelectedViewTypes\(\)/);
+  assert.doesNotMatch(indexHtml, /function prepareGISRefresh\(\)/);
+  assert.doesNotMatch(indexHtml, /function debouncedFetchGISData\(\)/);
+  assert.doesNotMatch(indexHtml, /async function fetchPOIsFromOSM\(lat, lng, radius = 1000, requestSignal = null\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
