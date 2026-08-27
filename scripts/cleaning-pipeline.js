@@ -22,7 +22,7 @@ function getSizeCategory(area, propertyType) {
 
 // ===== 10-STAGE CLEANING =====
 function filterEvidenceEligible(transactions) {
-  return transactions.filter(t => !t.evidenceStatus || t.evidenceStatus === 'eligible');
+  return transactions.filter(t => t.evidenceStatus === 'eligible');
 }
 
 function filterNonSaleTransactions(transactions) {
@@ -106,12 +106,26 @@ function filterReadyOnly(transactions) {
   });
 }
 
+function normalizeDedupeText(value) {
+  return String(value ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
 function filterDuplicates(transactions) {
   const seen = new Set();
   return transactions.filter(t => {
-    if (t.propertyRef && seen.has(t.propertyRef)) return false;
-    if (t.propertyRef) seen.add(t.propertyRef);
-    const key = `${t.district}__${t.area}__${Math.round(t.actualSalePrice / 1000)}__${t.saleDate}`;
+    const propertyRef = normalizeDedupeText(t.propertyRef);
+    if (propertyRef) {
+      const referenceKey = `ref:${propertyRef}`;
+      if (seen.has(referenceKey)) return false;
+      seen.add(referenceKey);
+    }
+    const key = [
+      normalizeDedupeText(t.district),
+      normalizeDedupeText(t.propertyType),
+      t.area,
+      Math.round(t.actualSalePrice / 1000),
+      normalizeDedupeText(t.saleDate)
+    ].join('__');
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

@@ -78,6 +78,15 @@ function validatePayload(payload = {}) {
   };
   if (!PROPERTY_TYPES.has(propertyType)) errors.push({ field: 'property.propertyType', code: 'property-type-invalid' });
   if (yearBuilt !== null && (!Number.isInteger(yearBuilt) || yearBuilt < 1800 || yearBuilt > currentYear)) errors.push({ field: 'property.yearBuilt', code: 'year-built-invalid' });
+  if (!finitePositive(property.area) || Number(property.area) > 100000) errors.push({ field: 'property.area', code: 'area-invalid' });
+  if (property.bedrooms !== undefined && property.bedrooms !== null && property.bedrooms !== '') {
+    const bedrooms = Number(property.bedrooms);
+    if (!Number.isInteger(bedrooms) || bedrooms < 0 || bedrooms > 100) errors.push({ field: 'property.bedrooms', code: 'bedrooms-invalid' });
+  }
+  if (property.parkingCount !== undefined && property.parkingCount !== null && property.parkingCount !== '') {
+    const parkingCount = Number(property.parkingCount);
+    if (!Number.isInteger(parkingCount) || parkingCount < 0 || parkingCount > 100) errors.push({ field: 'property.parkingCount', code: 'parking-count-invalid' });
+  }
   if (!text(property.district, 120)) errors.push({ field: 'property.district', code: 'district-required' });
 
   const fieldValidation = extraFields.validate(propertyInput, currentYear);
