@@ -4,7 +4,7 @@ const { chromium, devices } = require('playwright');
 const baseURL = process.env.MIAYAAR_BASE_URL || 'https://aqar-valuation-engine.netlify.app/';
 const pages = [
   { name: 'Valuation', path: '/', marker: '#propType' },
-  { name: 'Accuracy Dashboard', path: '/accuracy-dashboard', marker: '#main-content' },
+  { name: 'Accuracy Dashboard', path: '/accuracy-dashboard', marker: '#main-content', accuracyData: true },
   { name: 'Market Intelligence', path: '/market-intelligence', marker: '#main-content', marketData: true },
   { name: 'Data Export', path: '/export', marker: '#main-content', exportButtons: true },
   { name: 'Calibration', path: '/calibration', marker: '#main-content' }
@@ -37,6 +37,11 @@ async function runPage(browser, definition) {
     await page.locator(definition.marker).first().waitFor({ state: 'visible', timeout: 15_000 });
     await page.waitForTimeout(750);
     if (definition.marketData) await page.locator('#investmentTable table').waitFor({ state: 'visible', timeout: 15_000 });
+    if (definition.accuracyData && (process.env.MIAYAAR_EXPECT_ACCURACY_INTERACTION === '1' || await page.locator('#loadSavedDataButton').count())) {
+      await page.locator('#tableContainer table').waitFor({ state: 'visible', timeout: 15_000 });
+      await page.locator('#loadSavedDataButton').click();
+      await page.locator('#tableContainer table').waitFor({ state: 'visible', timeout: 15_000 });
+    }
     if (definition.exportButtons && (process.env.MIAYAAR_EXPECT_EXPORT_DOWNLOADS === '1' || await page.locator('#exportCsvButton').count())) {
       await page.waitForFunction(() => /transactions loaded/.test(document.querySelector('#stats')?.textContent || ''), null, { timeout: 15_000 });
       for (const [selector, filename] of [['#exportCsvButton', 'miayaar-accuracy-data.csv'], ['#exportJsonButton', 'miayaar-accuracy-data.json']]) {
