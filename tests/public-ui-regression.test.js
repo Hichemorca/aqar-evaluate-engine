@@ -19,6 +19,7 @@ const indexMarketCalculationJs = fs.readFileSync(path.join(__dirname, '..', 'sha
 const indexPropertyDataJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-property-data-runtime.js'), 'utf8');
 const indexSalesApproachJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-sales-approach-runtime.js'), 'utf8');
 const indexIncomeApproachJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-income-approach-runtime.js'), 'utf8');
+const indexCostApproachJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-cost-approach-runtime.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -102,7 +103,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-market-calculation-helpers.js') < indexHtml.indexOf('/shared/index-property-data-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-property-data-runtime.js') < indexHtml.indexOf('/shared/index-sales-approach-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-sales-approach-runtime.js') < indexHtml.indexOf('/shared/index-income-approach-runtime.js'));
-  assert.ok(indexHtml.indexOf('/shared/index-income-approach-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-income-approach-runtime.js') < indexHtml.indexOf('/shared/index-cost-approach-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-cost-approach-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexCostApproachJs.includes('function costApproach(data)'));
   assert.ok(indexIncomeApproachJs.includes('function incomeCapitalizationApproach(data)'));
   assert.ok(indexSalesApproachJs.includes('function salesComparisonApproach(data)'));
   assert.ok(indexPropertyDataJs.includes('function collectPropertyData()'));
@@ -160,6 +163,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function collectPropertyData\(\)/);
   assert.doesNotMatch(indexHtml, /function salesComparisonApproach\(data\)/);
   assert.doesNotMatch(indexHtml, /function incomeCapitalizationApproach\(data\)/);
+  assert.doesNotMatch(indexHtml, /function costApproach\(data\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
