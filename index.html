@@ -412,7 +412,7 @@
     <div class="row">
       <div class="fg" style="display:none;">
         <label for="city">📍 City</label>
-        <select id="city" onchange="onCityChange()">
+        <select id="city">
           <option value="dubai" selected>Dubai • دبي</option>
         </select>
       </div>
@@ -420,7 +420,7 @@
     <div class="row">
       <div class="fg">
         <label for="propType">🏗️ Property Type</label>
-        <select id="propType" onchange="onPropertyTypeChange()">
+        <select id="propType">
           <option value="apartment">Apartment</option>
           <option value="villa">Villa</option>
           <option value="townhouse">Townhouse</option>
@@ -452,7 +452,7 @@
     <div class="row" id="rowYearCondition">
       <div class="fg">
         <label for="yearBuilt">📅 Year Built</label>
-        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026" oninput="updateExtraFieldVisibility()">
+        <input type="number" id="yearBuilt" value="2020" min="1970" max="2026">
       </div>
       <div class="fg">
         <label for="condition">⭐ Condition</label>
@@ -495,14 +495,14 @@
       <div class="fg" id="fgViewType">
         <label>🌅 View Type</label>
         <div class="checkbox-group" id="viewTypeGroup">
-          <label class="checkbox-item"><input type="checkbox" value="sea" onchange="handleViewTypeChange(this)">🌊 Full Sea / Waterfront</label>
-          <label class="checkbox-item"><input type="checkbox" value="partial-sea" onchange="handleViewTypeChange(this)">🌊 Partial Sea View</label>
-          <label class="checkbox-item"><input type="checkbox" value="city" onchange="handleViewTypeChange(this)">🏙️ City Skyline</label>
-          <label class="checkbox-item"><input type="checkbox" value="garden" onchange="handleViewTypeChange(this)">🌳 Garden View (Private)</label>
-          <label class="checkbox-item"><input type="checkbox" value="park" onchange="handleViewTypeChange(this)">🌳 Park View (Public)</label>
-          <label class="checkbox-item"><input type="checkbox" value="street" onchange="handleViewTypeChange(this)">🛣️ Street / Main Road</label>
-          <label class="checkbox-item"><input type="checkbox" value="unknown" onchange="handleViewTypeChange(this)">❓ Unknown</label>
-          <label class="checkbox-item"><input type="checkbox" value="internal" onchange="handleViewTypeChange(this)">🚫 Internal / No View</label>
+          <label class="checkbox-item"><input type="checkbox" value="sea">🌊 Full Sea / Waterfront</label>
+          <label class="checkbox-item"><input type="checkbox" value="partial-sea">🌊 Partial Sea View</label>
+          <label class="checkbox-item"><input type="checkbox" value="city">🏙️ City Skyline</label>
+          <label class="checkbox-item"><input type="checkbox" value="garden">🌳 Garden View (Private)</label>
+          <label class="checkbox-item"><input type="checkbox" value="park">🌳 Park View (Public)</label>
+          <label class="checkbox-item"><input type="checkbox" value="street">🛣️ Street / Main Road</label>
+          <label class="checkbox-item"><input type="checkbox" value="unknown">❓ Unknown</label>
+          <label class="checkbox-item"><input type="checkbox" value="internal">🚫 Internal / No View</label>
         </div>
       </div>
     </div>
@@ -577,7 +577,7 @@
     <div class="fg">
       <label for="districtInput">📍 District / Area</label>
       <div class="autocomplete-container">
-        <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="districtAutocomplete" aria-expanded="false" oninput="filterDistricts(this.value)" onfocus="this.select()">
+        <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="districtAutocomplete" aria-expanded="false">
         <div class="autocomplete-list" id="districtAutocomplete" role="listbox"></div>
       </div>
       <div class="selected-display">
@@ -590,7 +590,7 @@
       <div class="fg">
         <label for="projectBuildingInput">🏢 Project / Building Name</label>
         <div class="autocomplete-container">
-          <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="projectBuildingAutocomplete" aria-expanded="false" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
+          <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="projectBuildingAutocomplete" aria-expanded="false">
           <div class="autocomplete-list" id="projectBuildingAutocomplete" role="listbox"></div>
           <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a project or leave as Unknown.</div>
         </div>
@@ -616,7 +616,7 @@
       <div class="fg"><label for="avgPriceSqm">📊 Price / sqm</label><input type="number" id="avgPriceSqm" placeholder="Load market data" readonly></div>
       <div class="fg"><label for="recentSalesCount">📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
     </div>
-    <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load market data</button>
+    <button class="btn btn-s" id="btnScrape">🔍 Load market data</button>
     <div id="scrapeStatus" role="status" aria-live="polite" style="font-size:11px;margin-top:8px;text-align:center"></div>
     <div class="scrape-comps" id="scrapedComps"></div>
   </div>
@@ -635,8 +635,8 @@
     </div>
   </div>
   <div style="display:flex;gap:10px">
-    <button class="btn btn-p" id="btnValuate" onclick="runValuation()" style="flex:2">🧮 Calculate Valuation</button>
-    <button class="btn btn-reset" onclick="resetAll()" style="flex:1">Reset</button>
+    <button class="btn btn-p" id="btnValuate" style="flex:2">🧮 Calculate Valuation</button>
+    <button class="btn btn-reset" id="btnReset" style="flex:1">Reset</button>
   </div>
   <div id="observationConsentRow" style="margin-top:12px;padding:10px 12px;border:1px solid rgba(91,167,255,0.18);border-radius:10px;background:rgba(91,167,255,0.05);font-size:10px;line-height:1.55;color:var(--muted)">
     <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="observationConsent" style="margin-top:2px"><span>Help improve MIAYAAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
@@ -664,6 +664,7 @@
 <script src="/shared/index-market-context.js"></script>
 <script src="/shared/index-district-context.js"></script>
 <script src="/shared/index-gis-helpers.js"></script>
+<script src="/shared/index-primary-interactions.js"></script>
 <script>
 function getCalibrationForProperty(propertyType) { return AQAR_CALIBRATION_DEFAULTS.getPropertyConfig(AQAR_ACTIVE_CALIBRATION, propertyType); }
 function getCalibrationCoefficient(propertyType, group, key, fallback) {
