@@ -383,6 +383,12 @@
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .csp-hidden { display: none; }
+    .csp-beta-note { font-size: 12px; font-weight: 600; color: var(--gold); }
+    .section-note { margin-bottom: 12px; font-size: 10px; color: var(--muted); }
+    .project-building-notice { font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .renovation-note { font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .gis-coordinate-input { background: rgba(255,255,255,0.05); }
     .gis-impact-label { color: var(--gold); }
     .gis-impact-detail { font-size: 10px; color: var(--muted); margin-left: 12px; }
     .market-status-detail { font-size: 10px; color: var(--muted); }
@@ -420,17 +426,17 @@
       <img class="miayaar-logo-horizontal" src="/assets/branding/miayaar-horizontal-dark.png" alt="MIAYAAR — Valuation Intelligence Engine" />
     </a>
   </div>
-  <div style="display:none" aria-hidden="true">
+  <div class="csp-hidden" aria-hidden="true">
     📅 Data refreshed: <span id="lastDataRefresh">Loading...</span> •
     📊 Based on <span id="accuracyRecordCount">—</span> evaluated records • <span id="accuracyRate">—</span>% accuracy
   </div>
-  <div style="display:none" aria-hidden="true">
-    <span style="font-size:12px;font-weight:600;color:var(--gold);">BETA • Dubai data only</span>
+  <div class="csp-hidden" aria-hidden="true">
+    <span class="csp-beta-note">BETA • Dubai data only</span>
   </div>
   <div class="section">
     <div class="section-title">🏠 Property Information</div>
     <div class="row">
-      <div class="fg" style="display:none;">
+      <div class="fg csp-hidden">
         <label for="city">📍 City</label>
         <select id="city">
           <option value="dubai" selected>Dubai • دبي</option>
@@ -499,7 +505,7 @@
   </div>
   <div class="section" id="expertSection">
     <div class="section-title">👁️ Property Details</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional inputs • leave blank if unknown.</div>
+    <div class="note section-note">Optional inputs • leave blank if unknown.</div>
     <div class="row">
       <div class="fg" id="fgFinishQuality">
         <label for="finishQuality">⭐ Finish Quality</label>
@@ -574,7 +580,7 @@
   </div>
   <div class="section" id="propertyExtraSection">
     <div class="section-title">🏠 Additional Property Details</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional details used for project matching and later evidence analysis.</div>
+    <div class="note section-note">Optional details used for project matching and later evidence analysis.</div>
     <div class="row" id="rowPropertyAreas" style="display:none">
       <div class="fg" id="fgBua" style="display:none">
         <label for="bua">📐 BUA (Built-up Area, sqm)</label>
@@ -588,12 +594,12 @@
     <div class="fg" id="fgLastRenovation" style="display:none">
       <label for="lastRenovationYear">🛠️ Last Renovation Year</label>
       <input type="number" id="lastRenovationYear" min="1900" max="2026" step="1" placeholder="e.g. 2022">
-      <div class="note" style="font-size:10px;color:var(--muted);margin-top:4px">Shown for properties older than five years.</div>
+      <div class="note renovation-note">Shown for properties older than five years.</div>
     </div>
   </div>
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Facilities</div>
-    <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a district to center the map; adjust the marker if needed.</div>
+    <div class="note section-note">Choose a district to center the map; adjust the marker if needed.</div>
     <div class="fg">
       <label for="districtInput">📍 District / Area</label>
       <div class="autocomplete-container">
@@ -612,13 +618,13 @@
         <div class="autocomplete-container">
           <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="projectBuildingAutocomplete" aria-expanded="false">
           <div class="autocomplete-list" id="projectBuildingAutocomplete" role="listbox"></div>
-          <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a project or leave as Unknown.</div>
+          <div class="note project-building-notice" id="projectBuildingNotice">Choose a project or leave as Unknown.</div>
         </div>
       </div>
     </div>
     <div class="row" id="gisCoordsRow" style="display:none" aria-hidden="true">
-      <div class="fg"><label for="gisLat">🌐 Latitude</label><input type="text" id="gisLat" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
-      <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
+      <div class="fg"><label for="gisLat">🌐 Latitude</label><input type="text" id="gisLat" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
+      <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
     </div>
     <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
       <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
