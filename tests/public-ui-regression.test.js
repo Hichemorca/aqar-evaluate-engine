@@ -148,6 +148,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /scoreDisplay\.innerHTML = `?[^`]*style="color:var\(--gold\)"/);
   assert.doesNotMatch(indexHtml, /<span style="color:var\(--muted\)">🔍 Checking market data/);
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
+  assert.ok(indexMarketContextJs.includes('class="market-indicators"'));
+  assert.doesNotMatch(indexMarketContextJs, /<div style="margin-top:12px;padding-top:10px/);
+  assert.match(indexHtml, /\.market-indicators \{ margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba\(255,255,255,0\.08\); \}/);
+  assert.match(indexHtml, /width: var\(--confidence-width, 0%\)/);
+  assert.match(indexHtml, /style="--confidence-width:\$\{result\.confidencePct\}%"/);
+  assert.doesNotMatch(indexHtml, /style="width:\$\{result\.confidencePct\}%"/);
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
   assert.doesNotMatch(indexHtml, /function buildMarketContextHTML\(result, propData\)/);
@@ -177,7 +183,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(exportJs.includes('function csvCell(value)'));
   assert.ok(exportJs.includes("typeof value === 'string'"));
   assert.ok(exportJs.includes("safeText.replace(/\"/g, '\"\"')"));
-  assert.ok(exportJs.includes('/^[=+\\-@]/.test(text)'));
+  assert.ok(exportJs.includes("/^[=+\\-@]/.test(text)"));
+  assert.ok(exportJs.includes('class="accuracy-value"'));
+  assert.ok(exportHtml.includes('.stats .accuracy-value'));
+  assert.ok(exportHtml.includes('class="dashboard-link"'));
+  assert.doesNotMatch(exportJs, /<b style="color:#00b86e">/);
+  assert.doesNotMatch(exportHtml, /href="\/accuracy-dashboard" style=/);
 });
 
 test('Market Intelligence tables stay intact inside horizontally scrollable cards', () => {

@@ -293,7 +293,7 @@
       letter-spacing: -1px;
     }
     .confidence-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); margin: 12px 0; overflow: hidden; }
-    .confidence-fill { height: 100%; border-radius: 3px; transition: width .8s ease; }
+    .confidence-fill { height: 100%; width: var(--confidence-width, 0%); border-radius: 3px; transition: width .8s ease; }
     .confidence-fill.high { background: var(--green); }
     .confidence-fill.medium { background: var(--gold); }
     .confidence-fill.low { background: var(--red); }
@@ -425,6 +425,8 @@
     .result-method-status.not-used { color: var(--gold); }
     .result-adjustments { margin-top: 10px; }
     .result-explanation { background: rgba(212,146,14,0.05); border: 1px solid rgba(212,146,14,0.15); border-radius: 12px; padding: 12px; margin-bottom: 12px; font-size: 11px; line-height: 1.8; }
+    .market-indicators { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .market-indicators small { display: block; }
     .result-header { text-align: center; }
     .result-eyebrow { font-size: 11px; letter-spacing: 3px; color: rgba(138,154,176,0.7); text-transform: uppercase; }
     .valuation-actions { display: flex; gap: 10px; }
@@ -1501,7 +1503,7 @@ function displayResult(result, valuations, propData) {
   const explain = `<div class="result-explanation"><b>📋 Why this valuation?</b>${explanationFacts ? `<br>${explanationFacts}` : ''}${marketContextHTML}</div>`;
   const vHTML = '';
   const deUrl = buildDecisionEngineLink(result, propData);
-  section.innerHTML = `<div class="result-card"><div class="result-header"><div class="result-eyebrow">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div class="result-property-meta">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="width:${result.confidencePct}%"></div></div><div class="result-confidence-label ${cc}">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" rel="noopener noreferrer" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s result-action-button" data-action="new-valuation">🔄 New Valuation</button></div>`;
+  section.innerHTML = `<div class="result-card"><div class="result-header"><div class="result-eyebrow">Estimated Market Value</div><div class="final-value">AED ${result.finalValue.toLocaleString()}</div><div class="result-property-meta">${escapeMapHtml(propData.propType)} • ${escapeMapHtml(propData.district||'N/A')} • ${propData.area} sqm</div>${comparableRangeHTML}${shadowHTML}<div class="confidence-bar"><div class="confidence-fill ${cc}" style="--confidence-width:${result.confidencePct}%"></div></div><div class="result-confidence-label ${cc}">${result.confidencePct}% Confidence</div></div>${explain}<a href="${deUrl}" target="_blank" rel="noopener noreferrer" class="integration-btn">🧠 Analyze in Decision Engine →</a><button class="btn btn-s result-action-button" data-action="new-valuation">🔄 New Valuation</button></div>`;
   section.classList.remove('hidden');
   section.scrollIntoView({ behavior: 'smooth' });
 }

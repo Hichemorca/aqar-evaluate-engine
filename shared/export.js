@@ -6,7 +6,7 @@ async function loadData() {
     data = await res.json();
     document.getElementById('stats').innerHTML = `
       &bull; ${data.metrics.totalRecords} transactions loaded |
-      MIAYAAR accuracy: <b style="color:#00b86e">${data.metrics.avgAccuracy}%</b> |
+      MIAYAAR accuracy: <b class="accuracy-value">${data.metrics.avgAccuracy}%</b> |
       Deviation: &plusmn;${data.metrics.avgDeviation}%
     `;
   } catch (e) {
