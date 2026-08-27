@@ -31,11 +31,26 @@ test('public result keeps Range hidden while retaining the internal bracket calc
   assert.match(indexHtml, /Verified project suggestion/);
 });
 
+test('autocomplete controls expose keyboard and listbox semantics', () => {
+  assert.match(indexHtml, /role="combobox" aria-autocomplete="list" aria-controls="districtAutocomplete" aria-expanded="false"/);
+  assert.match(indexHtml, /id="districtAutocomplete" role="listbox"/);
+  assert.match(indexHtml, /id="projectBuildingAutocomplete" role="listbox"/);
+  assert.match(indexHtml, /function setAutocompleteItem\(item, onSelect\)/);
+  assert.match(indexHtml, /item\.tabIndex = 0/);
+  assert.match(indexHtml, /event\.key === 'Enter' \|\| event\.key === ' '/);
+});
+
 test('autocomplete lists use a body-level fixed portal', () => {
   assert.match(indexHtml, /\.autocomplete-list\.autocomplete-portal/);
   assert.match(indexHtml, /position: fixed/);
   assert.match(indexHtml, /document\.body\.appendChild\(list\)/);
   assert.match(indexHtml, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
+});
+
+test('custom checkboxes preserve native focusability', () => {
+  assert.match(indexHtml, /\.checkbox-item:focus-within/);
+  assert.match(indexHtml, /\.checkbox-item input \{ position: absolute; width: 1px; height: 1px; opacity: 0; \}/);
+  assert.doesNotMatch(indexHtml, /\.checkbox-item input \{ display: none; \}/);
 });
 
 test('public pages use semantic headings and safe external links', () => {

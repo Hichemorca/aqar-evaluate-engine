@@ -218,8 +218,10 @@
       user-select: none;
     }
     .checkbox-item:hover { border-color: rgba(212,146,14,0.35); }
+    .checkbox-item:focus-within { outline: 2px solid var(--gold); outline-offset: 2px; }
     .checkbox-item.checked { border-color: var(--gold); color: var(--gold); background: rgba(212,146,14,0.1); }
-    .checkbox-item input { display: none; }
+    .checkbox-item input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    .checkbox-item input:focus-visible { outline: none; }
     .hidden { display: none !important; }
     .text-center { text-align: center; }
     .text-muted { color: var(--muted); font-size: 10px; }
@@ -409,7 +411,7 @@
     <div class="section-title">🏠 Property Information</div>
     <div class="row">
       <div class="fg" style="display:none;">
-        <label>📍 City</label>
+        <label for="city">📍 City</label>
         <select id="city" onchange="onCityChange()">
           <option value="dubai" selected>Dubai • دبي</option>
         </select>
@@ -417,7 +419,7 @@
     </div>
     <div class="row">
       <div class="fg">
-        <label>🏗️ Property Type</label>
+        <label for="propType">🏗️ Property Type</label>
         <select id="propType" onchange="onPropertyTypeChange()">
           <option value="apartment">Apartment</option>
           <option value="villa">Villa</option>
@@ -429,13 +431,13 @@
         </select>
       </div>
       <div class="fg">
-        <label>📐 Total Area (sqm)</label>
+        <label for="area">📐 Total Area (sqm)</label>
         <input type="number" id="area" placeholder="e.g. 150" value="120" min="10">
       </div>
     </div>
     <div class="row" id="rowBedrooms">
       <div class="fg">
-        <label>🛏️ Bedrooms</label>
+        <label for="bedrooms">🛏️ Bedrooms</label>
         <select id="bedrooms">
           <option value="0">Studio (Studio)</option>
           <option value="1">1 Bedroom</option>
@@ -449,11 +451,11 @@
     </div>
     <div class="row" id="rowYearCondition">
       <div class="fg">
-        <label>📅 Year Built</label>
+        <label for="yearBuilt">📅 Year Built</label>
         <input type="number" id="yearBuilt" value="2020" min="1970" max="2026" oninput="updateExtraFieldVisibility()">
       </div>
       <div class="fg">
-        <label>⭐ Condition</label>
+        <label for="condition">⭐ Condition</label>
         <select id="condition">
           <option value="excellent">Excellent</option>
           <option value="good" selected>Good</option>
@@ -480,7 +482,7 @@
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional inputs • leave blank if unknown.</div>
     <div class="row">
       <div class="fg" id="fgFinishQuality">
-        <label>⭐ Finish Quality</label>
+        <label for="finishQuality">⭐ Finish Quality</label>
         <select id="finishQuality">
           <option value="">Unknown</option>
           <option value="luxury">Luxury / High-end</option>
@@ -506,7 +508,7 @@
     </div>
     <div class="row">
       <div class="fg" id="fgFloorLevel">
-        <label>🏢 Floor Level</label>
+        <label for="floorLevel">🏢 Floor Level</label>
         <select id="floorLevel">
           <option value="">Unknown</option>
           <option value="ground">Ground Floor</option>
@@ -518,7 +520,7 @@
         </select>
       </div>
       <div class="fg" id="fgStreetPosition">
-        <label>📍 Street Position</label>
+        <label for="streetPosition">📍 Street Position</label>
         <select id="streetPosition">
           <option value="">Unknown</option>
           <option value="main">Main Street</option>
@@ -530,7 +532,7 @@
     </div>
     <div class="row">
       <div class="fg" id="fgBuildingCondition">
-        <label>🏗️ Building Condition</label>
+        <label for="buildingCondition">🏗️ Building Condition</label>
         <select id="buildingCondition">
           <option value="">Unknown</option>
           <option value="excellent">Excellent</option>
@@ -540,7 +542,7 @@
         </select>
       </div>
       <div class="fg" id="fgFurnishedStatus">
-        <label>🛋️ Furnished Status</label>
+        <label for="furnishedStatus">🛋️ Furnished Status</label>
         <select id="furnishedStatus">
           <option value="">Unknown</option>
           <option value="furnished">Fully Furnished</option>
@@ -555,16 +557,16 @@
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Optional details used for project matching and later evidence analysis.</div>
     <div class="row" id="rowPropertyAreas" style="display:none">
       <div class="fg" id="fgBua" style="display:none">
-        <label>📐 BUA (Built-up Area, sqm)</label>
+        <label for="bua">📐 BUA (Built-up Area, sqm)</label>
         <input type="number" id="bua" min="1" step="0.01" placeholder="e.g. 250">
       </div>
       <div class="fg" id="fgPlotArea" style="display:none">
-        <label>🧱 Plot Area (sqm)</label>
+        <label for="plotArea">🧱 Plot Area (sqm)</label>
         <input type="number" id="plotArea" min="1" step="0.01" placeholder="e.g. 500">
       </div>
     </div>
     <div class="fg" id="fgLastRenovation" style="display:none">
-      <label>🛠️ Last Renovation Year</label>
+      <label for="lastRenovationYear">🛠️ Last Renovation Year</label>
       <input type="number" id="lastRenovationYear" min="1900" max="2026" step="1" placeholder="e.g. 2022">
       <div class="note" style="font-size:10px;color:var(--muted);margin-top:4px">Shown for properties older than five years.</div>
     </div>
@@ -573,10 +575,10 @@
     <div class="section-title">📍 Location & Facilities</div>
     <div class="note" style="margin-bottom:12px;font-size:10px;color:var(--muted)">Choose a district to center the map; adjust the marker if needed.</div>
     <div class="fg">
-      <label>📍 District / Area</label>
+      <label for="districtInput">📍 District / Area</label>
       <div class="autocomplete-container">
-        <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" oninput="filterDistricts(this.value)" onfocus="this.select()">
-        <div class="autocomplete-list" id="districtAutocomplete"></div>
+        <input type="text" id="districtInput" placeholder="Start typing a district name..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="districtAutocomplete" aria-expanded="false" oninput="filterDistricts(this.value)" onfocus="this.select()">
+        <div class="autocomplete-list" id="districtAutocomplete" role="listbox"></div>
       </div>
       <div class="selected-display">
         Selected: <span id="selectedDistrictDisplay">None</span>
@@ -586,17 +588,17 @@
     </div>
     <div class="row" id="rowProjectBuilding" style="display:none">
       <div class="fg">
-        <label>🏢 Project / Building Name</label>
+        <label for="projectBuildingInput">🏢 Project / Building Name</label>
         <div class="autocomplete-container">
-          <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
-          <div class="autocomplete-list" id="projectBuildingAutocomplete"></div>
+          <input type="text" id="projectBuildingInput" placeholder="Choose from project suggestions..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="projectBuildingAutocomplete" aria-expanded="false" oninput="onProjectBuildingInput(this.value)" onfocus="filterProjectBuildings(this.value)">
+          <div class="autocomplete-list" id="projectBuildingAutocomplete" role="listbox"></div>
           <div class="note" id="projectBuildingNotice" style="font-size:10px;color:var(--muted);margin-top:4px">Choose a project or leave as Unknown.</div>
         </div>
       </div>
     </div>
     <div class="row" id="gisCoordsRow" style="display:none" aria-hidden="true">
-      <div class="fg"><label>🌐 Latitude</label><input type="text" id="gisLat" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
-      <div class="fg"><label>🌐 Longitude</label><input type="text" id="gisLng" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
+      <div class="fg"><label for="gisLat">🌐 Latitude</label><input type="text" id="gisLat" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
+      <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" readonly tabindex="-1" aria-hidden="true" style="background:rgba(255,255,255,0.05)"></div>
     </div>
     <div id="gisResult" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06)">
       <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">📊 Nearby Facilities</div>
@@ -611,8 +613,8 @@
   <div class="section">
     <div class="section-title">🔍 Market Data</div>
     <div class="row">
-      <div class="fg"><label>📊 Price / sqm</label><input type="number" id="avgPriceSqm" placeholder="Load market data" readonly></div>
-      <div class="fg"><label>📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
+      <div class="fg"><label for="avgPriceSqm">📊 Price / sqm</label><input type="number" id="avgPriceSqm" placeholder="Load market data" readonly></div>
+      <div class="fg"><label for="recentSalesCount">📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
     </div>
     <button class="btn btn-s" id="btnScrape" onclick="scrapeRealData()">🔍 Load market data</button>
     <div id="scrapeStatus" role="status" aria-live="polite" style="font-size:11px;margin-top:8px;text-align:center"></div>
@@ -621,15 +623,15 @@
   <div class="section" id="incomeSection">
     <div class="section-title">💰 Income Approach</div>
       <div class="row">
-        <div class="fg"><label>📊 Annual Rent (AED)</label><input type="number" id="annualRent" placeholder="e.g. 80000"></div>
-      <div class="fg"><label>🛠️ Annual Expenses (AED)</label><input type="number" id="annualExpenses" placeholder="~20% of rent"></div>
+        <div class="fg"><label for="annualRent">📊 Annual Rent (AED)</label><input type="number" id="annualRent" placeholder="e.g. 80000"></div>
+      <div class="fg"><label for="annualExpenses">🛠️ Annual Expenses (AED)</label><input type="number" id="annualExpenses" placeholder="~20% of rent"></div>
     </div>
   </div>
   <div class="section" id="costSection">
     <div class="section-title">🔨 Cost Approach</div>
     <div class="row">
-      <div class="fg"><label>🏗️ Land Value (AED)</label><input type="number" id="landValue" placeholder="Auto: ~30% of market value"></div>
-      <div class="fg"><label>🔨 Build Cost/sqm (AED)</label><input type="number" id="constructionCost" placeholder="e.g. 3000"></div>
+      <div class="fg"><label for="landValue">🏗️ Land Value (AED)</label><input type="number" id="landValue" placeholder="Auto: ~30% of market value"></div>
+      <div class="fg"><label for="constructionCost">🔨 Build Cost/sqm (AED)</label><input type="number" id="constructionCost" placeholder="e.g. 3000"></div>
     </div>
   </div>
   <div style="display:flex;gap:10px">
@@ -927,6 +929,20 @@ function onProjectBuildingInput(value) {
   updateProjectBuildingNotice();
   updateProjectMapLabel();
 }
+function setAutocompleteExpanded(list, expanded) {
+  const inputId = { districtAutocomplete: 'districtInput', projectBuildingAutocomplete: 'projectBuildingInput' }[list?.id];
+  if (inputId) document.getElementById(inputId)?.setAttribute('aria-expanded', String(expanded));
+}
+function setAutocompleteItem(item, onSelect) {
+  item.setAttribute('role', 'option');
+  item.tabIndex = 0;
+  item.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onSelect();
+    }
+  });
+}
 function filterProjectBuildings(q) {
   const list = document.getElementById('projectBuildingAutocomplete');
   const input = document.getElementById('projectBuildingInput');
@@ -938,11 +954,20 @@ function filterProjectBuildings(q) {
   if (!options.length) {
     list.style.display = q ? 'block' : 'none';
     if (q) positionAutocompleteList(list, input);
-    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); }
+    if (q) { const empty = document.createElement('div'); empty.className = 'item'; empty.style.cssText = 'color:var(--muted);cursor:default;'; empty.textContent = 'No projects found in this district'; list.appendChild(empty); setAutocompleteExpanded(list, true); }
     return;
   }
-  options.slice(0, 15).forEach(name => { const item = document.createElement('div'); item.className = 'item'; item.textContent = name; item.onclick = () => selectProjectBuilding(name); list.appendChild(item); });
+  options.slice(0, 15).forEach(name => {
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.textContent = name;
+    const select = () => selectProjectBuilding(name);
+    item.addEventListener('click', select);
+    setAutocompleteItem(item, select);
+    list.appendChild(item);
+  });
   list.style.display = 'block';
+  setAutocompleteExpanded(list, true);
   positionAutocompleteList(list, input);
 }
 function selectProjectBuilding(name) {
@@ -1010,7 +1035,10 @@ function positionAutocompleteList(list, input) {
   list.style.maxHeight = `${Math.max(100, Math.min(240, window.innerHeight - Math.max(8, Math.round(top)) - 8))}px`;
 }
 function hideAutocompleteList(list) {
-  if (list) list.style.display = 'none';
+  if (list) {
+    list.style.display = 'none';
+    setAutocompleteExpanded(list, false);
+  }
 }
 function closeOtherAutocompleteLists(keep) {
   ['districtAutocomplete', 'projectBuildingAutocomplete'].forEach(id => {
@@ -1043,10 +1071,12 @@ function filterDistricts(q) {
       const item = document.createElement('div');
       item.className = 'item';
       item.textContent = d;
+      const select = () => selectDistrict(d);
       item.addEventListener('mousedown', event => {
         event.preventDefault();
-        selectDistrict(d);
+        select();
       });
+      setAutocompleteItem(item, select);
       c.appendChild(item);
     });
   } else {
@@ -1057,6 +1087,7 @@ function filterDistricts(q) {
     c.appendChild(empty);
   }
   c.style.display = 'block';
+  setAutocompleteExpanded(c, true);
   positionAutocompleteList(c, input);
 }
 async function resolveDistrictCoords(district) {
