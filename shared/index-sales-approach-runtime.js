@@ -1,0 +1,32 @@
+function salesComparisonApproach(data) {
+  if (!data.avgPriceSqm && !data.scrapedData?.avgPricePerSqm) return null;
+  const calibration = getCalibrationForProperty(data.propType);
+  const c = calibration.coefficients.sales;
+  let avgPrice = data.avgPriceSqm || data.scrapedData?.avgPricePerSqm;
+  if (!avgPrice || avgPrice <= 0) return null;
+  if (avgPrice > c.maxPricePerSqm) avgPrice = c.maxPricePerSqm;
+  let value = avgPrice * data.area;
+  if (data.bedrooms === 0 && data.propType === 'apartment') value *= c.noBedroomMultiplier;
+  value *= c.conditionFactors[data.condition] ?? 1;
+  const age = 2026 - data.yearBuilt;
+  value *= Math.max(c.minimumAgeMultiplier, 1 - age * c.ageDepreciation);
+  value += data.features.length * data.area * c.featureBonusPerSqm;
+  if (data.finishQuality) value *= c.finishFactors[data.finishQuality] ?? 1;
+  value *= calculateViewMultiplier(data.viewTypes || [], data.propType);
+  if (data.floorLevel) value *= c.floorFactors[data.floorLevel] ?? 1;
+  if (data.streetPosition) value *= c.streetFactors[data.streetPosition] ?? 1;
+  if (data.buildingCondition) value *= c.buildingConditionFactors[data.buildingCondition] ?? 1;
+  if (data.furnishedStatus) value *= c.furnishedFactors[data.furnishedStatus] ?? 1;
+  const gisImpact = window.gisImpactPercent || 0;
+  const gisMultiplier = 1 + (gisImpact / 100);
+  if (gisMultiplier > 1) value = Math.round(value * gisMultiplier);
+  value = Math.round(value);
+  const count = data.scrapedData?.count || 0;
+  const conf = count >= 10 ? 'High' : count >= 5 ? 'Medium' : 'Basic';
+  let details = `Based on ${count} comparable sales (${conf} confidence). ${avgPrice.toLocaleString()} AED/sqm × ${data.area} sqm.`;
+  if (data.finishQuality) details += ` Finish: ${data.finishQuality}.`;
+  if (data.viewTypes?.length) details += ` Views: ${data.viewTypes.join(', ')}.`;
+  details += ` Condition: ${data.condition}, Age: ${age}y.`;
+  if (gisImpact > 0) details += ` GIS premium: +${gisImpact}% (${data.gisData?.count||0} facilities).`;
+  return { method: 'Sales Comparison Approach', value, weight: calibration.weights['sales-comparison'], confidence: count > 3 ? 'high' : 'medium', details, perSqm: avgPrice };
+}
