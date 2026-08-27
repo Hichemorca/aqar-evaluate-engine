@@ -41,6 +41,17 @@
       border-radius: 16px; padding: 20px; margin-bottom: 20px;
     }
     .section-title { font-size: 15px; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
+    .refresh-bar-heading { display:flex; align-items:center; gap:12px; }
+    .refresh-section-title { margin-bottom:0; }
+    .refresh-actions { display:flex; gap:8px; align-items:center; }
+    .refresh-source-note { font-size:10px; color:var(--muted); }
+    .dashboard-footer-links { display:flex; gap:16px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
+    .dashboard-footer-separator { color:var(--muted); }
+    .table-ref-cell { font-family:monospace; font-size:9px; }
+    .table-city-cell { font-size:10px; }
+    .table-date-cell { font-size:9px; color:var(--muted); }
+    .table-summary { text-align:center; padding:10px; font-size:10px; color:var(--muted); }
+    .loading-error { color:var(--red); }
 
     table { width: 100%; border-collapse: collapse; font-size: 11px; }
     th { color: var(--muted); font-weight: 600; padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; background: var(--bg); }
@@ -138,13 +149,13 @@
 
   <div class="section">
     <div class="refresh-bar">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="section-title" style="margin-bottom:0">📋 Recent Transactions — MIAYAAR vs Actual</div>
+      <div class="refresh-bar-heading">
+        <div class="section-title refresh-section-title">📋 Recent Transactions — MIAYAAR vs Actual</div>
         <span id="dataSourceBadge"></span>
       </div>
-      <div style="display:flex;gap:8px">
+      <div class="refresh-actions">
         <button class="btn-s" id="loadSavedDataButton">📁 Load Saved Data</button>
-        <span style="font-size:10px;color:var(--muted)">Verified snapshot only</span>
+        <span class="refresh-source-note">Verified snapshot only</span>
       </div>
     </div>
     <div class="table-container" id="tableContainer">
@@ -155,13 +166,13 @@
     </div>
   </div>
 
-  <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+  <div class="dashboard-footer-links">
     <a href="/admin-calibration" class="back-link admin-link">Admin Login</a>
-    <span style="color:var(--muted)">•</span>
+    <span class="dashboard-footer-separator">•</span>
     <a href="/" class="back-link">← Valuation Engine</a>
-    <span style="color:var(--muted)">•</span>
+    <span class="dashboard-footer-separator">•</span>
     <a href="/market-intelligence" class="back-link">📊 Market Intelligence →</a>
-    <span style="color:var(--muted)">•</span>
+    <span class="dashboard-footer-separator">•</span>
     <a href="https://aqar-decision-engine.netlify.app" class="back-link" target="_blank" rel="noopener noreferrer">🧠 Decision Engine →</a>
   </div>
 </div>

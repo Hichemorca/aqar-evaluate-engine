@@ -41,8 +41,11 @@
       border-radius: 16px; padding: 20px; margin-bottom: 20px;
     }
     .section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .section-title { font-size: 15px; font-weight: 900; color: var(--gold); }
-    .section-note { font-size: 10px; color: var(--muted); margin-top: 2px; max-width: 640px; line-height: 1.5; }
+    .section-title { font-size: 15px; font-weight: 900; color: var(--gold); margin-bottom: 14px; }
+    .methodology-panel { margin-top:12px; }
+    .dashboard-footer-links { display:flex; gap:16px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
+    .dashboard-footer-separator { color:var(--muted); }
+nt-size: 10px; color: var(--muted); margin-top: 2px; max-width: 640px; line-height: 1.5; }
 
     select.period-filter {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--text);
@@ -144,17 +147,17 @@
   <div class="section">
     <details class="methodology-toggle">
       <summary>ⓘ Methodology — definitions, calculations, assumptions &amp; limitations</summary>
-      <div class="methodology" id="methodologyPanel" style="margin-top:12px">Loading…</div>
+      <div class="methodology methodology-panel" id="methodologyPanel">Loading…</div>
     </details>
   </div>
 
-  <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+  <div class="dashboard-footer-links">
     <a href="/admin-calibration" class="back-link admin-link">Admin Login</a>
-    <span style="color:var(--muted)">•</span>
+    <span class="dashboard-footer-separator">•</span>
     <a href="/" class="back-link">← Valuation Engine</a>
-    <span style="color:var(--muted)">•</span>
+    <span class="dashboard-footer-separator">•</span>
     <a href="/accuracy-dashboard" class="back-link">📊 Accuracy Dashboard</a>
-    <span style="color:var(--muted)">•</span>
+    <span class="dashboard-footer-separator">•</span>
     <a href="https://aqar-decision-engine.netlify.app" class="back-link" target="_blank" rel="noopener noreferrer">🧠 Decision Engine →</a>
   </div>
 </div>
