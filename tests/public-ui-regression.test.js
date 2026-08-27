@@ -12,6 +12,7 @@ const indexObservationRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'sh
 const indexRunValuationRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-run-valuation-runtime.js'), 'utf8');
 const indexResetHistoryRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-reset-history-runtime.js'), 'utf8');
 const indexMetadataUiRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-metadata-ui-runtime.js'), 'utf8');
+const indexDomBootstrapRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-dom-bootstrap-runtime.js'), 'utf8');
 const indexDistrictContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-context.js'), 'utf8');
 const indexGisHelpersJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-helpers.js'), 'utf8');
 const indexPrimaryInteractionsJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-primary-interactions.js'), 'utf8');
@@ -123,6 +124,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-observation-runtime.js') < indexHtml.indexOf('/shared/index-run-valuation-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-run-valuation-runtime.js') < indexHtml.indexOf('/shared/index-reset-history-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-reset-history-runtime.js') < indexHtml.indexOf('/shared/index-metadata-ui-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-metadata-ui-runtime.js') < indexHtml.indexOf('/shared/index-dom-bootstrap-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-dom-bootstrap-runtime.js') < indexHtml.indexOf('</body>'));
   assert.ok(indexHtml.indexOf('/shared/index-metadata-ui-runtime.js') < indexHtml.indexOf('/shared/index-district-context.js'));
   assert.ok(indexDcfApproachJs.includes('function dcfApproach(data)'));
   assert.ok(indexWeightedRuntimeJs.includes('function calculateWeightedValue(valuations, propData)'));
@@ -144,6 +147,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexMetadataUiRuntimeJs.includes('function showToast(msg, dur=3000)'));
   assert.ok(indexMetadataUiRuntimeJs.includes('function onPropertyTypeChange()'));
   assert.ok(indexMetadataUiRuntimeJs.includes("AQAR_POLICY.getPropertyPolicy(type)"));
+  assert.ok(indexDomBootstrapRuntimeJs.includes("document.addEventListener('DOMContentLoaded', function()"));
+  assert.ok(indexDomBootstrapRuntimeJs.includes('loadCalibrationConfig().finally'));
+  assert.ok(indexDomBootstrapRuntimeJs.includes('loadMarketIntelligence()'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_CALIBRATION_ENGINE.combineMethodResults'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_V21_SHADOW_MULTIPLIERS.compute(propData, shadowConfig)'));
   assert.ok(indexCostApproachJs.includes('function costApproach(data)'));
@@ -225,6 +231,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /async function loadAccuracyMeta\(\)/);
   assert.doesNotMatch(indexHtml, /function showToast\(msg, dur=3000\)/);
   assert.doesNotMatch(indexHtml, /function onPropertyTypeChange\(\)/);
+  assert.doesNotMatch(indexHtml, /document.addEventListener\('DOMContentLoaded', function\(\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
