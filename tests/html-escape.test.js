@@ -17,10 +17,11 @@ test('html escape neutralizes markup, attributes, and quotes', () => {
 
 test('public valuation rendering escapes user-controlled property fields', () => {
   const source = readPage('index.html');
+  const marketContext = readPage('shared/index-market-context.js');
   assert.match(source, /escapeMapHtml\(propData\.projectBuilding\)/);
   assert.match(source, /escapeMapHtml\(propData\.district \|\| 'the selected area'\)/);
   assert.match(source, /escapeMapHtml\(propData\.propType\)/);
-  assert.match(source, /escapeMapHtml\(detail\)/);
+  assert.match(marketContext, /escapeMapHtml\(detail\)/);
 });
 
 test('market intelligence rendering escapes artifact text fields', () => {

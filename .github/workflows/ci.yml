@@ -52,6 +52,7 @@ jobs:
           node --check shared/accuracy-dashboard.js
           node --check shared/calibration.js
           node --check shared/index-accuracy-meta.js
+          node --check shared/index-market-context.js
           node --check scripts/evaluate-and-save.js
           node --check scripts/generate-client-summaries.js
 

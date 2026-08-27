@@ -6,6 +6,7 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
+const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
@@ -30,7 +31,7 @@ test('comparable bracket ignores invalid values and returns null without both si
 });
 
 test('public result keeps Range hidden while retaining the internal bracket calculation', () => {
-  assert.match(indexHtml, /function getComparableBracket\(targetValue, prices\)/);
+  assert.match(indexMarketContextJs, /function getComparableBracket\(targetValue, prices\)/);
   assert.match(indexHtml, /const comparableBracket = getComparableBracket\(/);
   assert.match(indexHtml, /const comparableRangeHTML = '';/);
   assert.doesNotMatch(indexHtml, /DLD suggestion/);
@@ -68,6 +69,11 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /let AQAR_ACTIVE_CALIBRATION\s*=/);
   assert.ok(indexAccuracyMetaJs.includes('AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig()'));
   assert.ok(indexAccuracyMetaJs.includes('AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig()'));
+  assert.ok(indexHtml.includes('<script src="/shared/index-market-context.js"></script>'));
+  assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
+  assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
+  assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
+  assert.doesNotMatch(indexHtml, /function buildMarketContextHTML\(result, propData\)/);
   assert.ok(accuracyDashboardHtml.includes('<h1 class="miayaar-page-title">Accuracy Dashboard</h1>'));
   assert.ok(accuracyDashboardHtml.includes('<script src="/shared/accuracy-dashboard.js"></script>'));
   assert.ok(accuracyDashboardHtml.includes('id="loadSavedDataButton"'));
