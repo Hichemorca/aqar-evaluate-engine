@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const calibrationDefaults = require('../shared/aqar-calibration-defaults');
-const { validateConfig, deepMergeKnown } = require('../netlify/functions/calibration-config');
+const { validateConfig, deepMergeKnown, handler, isWriteRateLimited, constants } = require('../netlify/functions/calibration-config');
 
 test('default calibration configuration is valid', () => {
   const config = calibrationDefaults.createDefaultCalibrationConfig();
@@ -77,4 +77,28 @@ test('calibration validation rejects non-positive v2.1 multipliers', () => {
   const result = validateConfig(config);
   assert.equal(result.valid, false);
   assert.ok(result.errors.some(error => error.includes('villa.buaPlotArea.bands[0].multiplier')));
+});
+
+test('calibration POST rejects oversized bodies before parsing', async () => {
+  const previousToken = process.env.AQAR_ADMIN_TOKEN;
+  process.env.AQAR_ADMIN_TOKEN = 'unit-test-token';
+  try {
+    const response = await handler({
+      httpMethod: 'POST',
+      headers: { authorization: 'Bearer unit-test-token', 'content-length': String(constants.MAX_BODY_BYTES + 1) },
+      body: '{}'
+    });
+    assert.equal(response.statusCode, 413);
+  } finally {
+    if (previousToken === undefined) delete process.env.AQAR_ADMIN_TOKEN;
+    else process.env.AQAR_ADMIN_TOKEN = previousToken;
+  }
+});
+
+test('calibration write rate limit blocks the request after the configured window quota', () => {
+  constants.writeRateLimit.clear();
+  const event = { headers: { 'x-nf-client-connection-ip': 'unit-test-calibration-rate-limit' } };
+  for (let attempt = 1; attempt <= constants.WRITE_RATE_LIMIT_MAX; attempt++) assert.equal(isWriteRateLimited(event), false);
+  assert.equal(isWriteRateLimited(event), true);
+  constants.writeRateLimit.clear();
 });

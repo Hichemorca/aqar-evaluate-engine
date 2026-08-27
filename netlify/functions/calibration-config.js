@@ -11,6 +11,11 @@ const JSON_HEADERS = withSecurityHeaders({
 const STORE_NAME = 'aqar-calibration';
 const ACTIVE_KEY = 'active';
 const HISTORY_KEY = 'history/index';
+const MAX_BODY_BYTES = 64 * 1024;
+const WRITE_RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const WRITE_RATE_LIMIT_MAX = 10;
+const WRITE_RATE_LIMIT_MAX_KEYS = 1000;
+const writeRateLimit = new Map();
 
 function getEnv(name) {
   try {
@@ -24,6 +29,37 @@ function getEnv(name) {
 
 function response(statusCode, payload) {
   return { statusCode, headers: JSON_HEADERS, body: JSON.stringify(payload) };
+}
+
+function bodyByteLength(body) {
+  return Buffer.byteLength(String(body || ''), 'utf8');
+}
+
+function rateLimitKey(event) {
+  return event?.headers?.['x-nf-client-connection-ip'] || event?.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'anonymous';
+}
+
+function isWriteRateLimited(event) {
+  const key = rateLimitKey(event);
+  const now = Date.now();
+  for (const [storedKey, stored] of writeRateLimit) {
+    if (now - stored.startedAt >= WRITE_RATE_LIMIT_WINDOW_MS) writeRateLimit.delete(storedKey);
+  }
+  if (!writeRateLimit.has(key) && writeRateLimit.size >= WRITE_RATE_LIMIT_MAX_KEYS) {
+    const oldest = [...writeRateLimit.entries()].sort((left, right) => left[1].startedAt - right[1].startedAt)[0];
+    if (oldest) writeRateLimit.delete(oldest[0]);
+  }
+  const current = writeRateLimit.get(key);
+  if (!current || now - current.startedAt >= WRITE_RATE_LIMIT_WINDOW_MS) {
+    writeRateLimit.set(key, { startedAt: now, count: 1 });
+    return false;
+  }
+  current.count += 1;
+  return current.count > WRITE_RATE_LIMIT_MAX;
+}
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
 function safeEqual(left, right) {
@@ -62,6 +98,13 @@ async function handler(event) {
   if (event.httpMethod === 'POST' && !configuredToken) {
     return response(503, { success: false, error: 'AQAR_ADMIN_TOKEN is not configured' });
   }
+  if (event.httpMethod === 'POST') {
+    const contentLength = Number(event.headers?.['content-length'] || event.headers?.['Content-Length'] || 0);
+    if (contentLength > MAX_BODY_BYTES || bodyByteLength(event.body) > MAX_BODY_BYTES) {
+      return response(413, { success: false, error: 'Calibration payload is too large' });
+    }
+    if (isWriteRateLimited(event)) return response(429, { success: false, error: 'Too many calibration writes', retryAfterSeconds: 60 });
+  }
   if (event.httpMethod === 'POST' || includeHistory) {
     if (!isAuthorized(event)) return response(401, { success: false, error: 'Unauthorized' });
   }
@@ -74,16 +117,19 @@ async function handler(event) {
     }
 
     const payload = JSON.parse(event.body || '{}');
+    if (!isPlainObject(payload)) return response(400, { success: false, error: 'Calibration payload must be an object' });
+    const requestedConfig = payload.config === undefined ? payload : payload.config;
+    if (!isPlainObject(requestedConfig)) return response(400, { success: false, error: 'Calibration config must be an object' });
     const defaults = calibrationDefaults.createDefaultCalibrationConfig();
     const current = await readActive(store);
-    const candidate = deepMergeKnown(defaults, payload.config || payload);
+    const candidate = deepMergeKnown(defaults, requestedConfig);
     candidate.configId = `cal-${Date.now()}`;
     candidate.status = 'active';
     candidate.createdAt = current.createdAt || new Date().toISOString();
     candidate.updatedAt = new Date().toISOString();
     candidate.updatedBy = 'admin';
     candidate.engineVersion = current.engineVersion || defaults.engineVersion;
-    candidate.propertyTypes = deepMergeKnown(defaults.propertyTypes, payload.config?.propertyTypes || payload.propertyTypes || {});
+    candidate.propertyTypes = deepMergeKnown(defaults.propertyTypes, requestedConfig.propertyTypes || {});
 
     const validation = validateConfig(candidate);
     if (!validation.valid) return response(400, { success: false, error: 'Invalid calibration configuration', errors: validation.errors });
@@ -100,4 +146,4 @@ async function handler(event) {
   }
 }
 
-module.exports = { handler, validateConfig, deepMergeKnown, getEnv, isAuthorized };
+module.exports = { handler, validateConfig, deepMergeKnown, getEnv, isAuthorized, isWriteRateLimited, constants: { MAX_BODY_BYTES, WRITE_RATE_LIMIT_WINDOW_MS, WRITE_RATE_LIMIT_MAX, writeRateLimit } };

@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { handler, validatePayload, normalizeObservation, isSameOriginRequest } = require('../netlify/functions/valuation-observation');
+const { handler, validatePayload, normalizeObservation, isSameOriginRequest, isRateLimited, constants } = require('../netlify/functions/valuation-observation');
 
 function validPayload(overrides = {}) {
   return {
@@ -45,6 +45,14 @@ test('observation endpoint rejects missing consent before storage', async () => 
   const response = await handler({ httpMethod: 'POST', headers: { 'content-length': '2' }, body: '{}' });
   assert.equal(response.statusCode, 400);
   assert.match(response.body, /explicit-consent-required/);
+});
+
+test('observation rate limit blocks the request after the configured window quota', () => {
+  constants.observationRateLimit.clear();
+  const event = { headers: { 'x-nf-client-connection-ip': 'unit-test-observation-rate-limit' } };
+  for (let attempt = 1; attempt <= constants.RATE_LIMIT_MAX; attempt++) assert.equal(isRateLimited(event), false);
+  assert.equal(isRateLimited(event), true);
+  constants.observationRateLimit.clear();
 });
 
 test('observation requires explicit analytics consent', () => {

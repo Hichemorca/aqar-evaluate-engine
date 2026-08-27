@@ -13,6 +13,10 @@ const KEY_PREFIX = 'events/';
 const SCHEMA_VERSION = 'v2.1-observation-1';
 const CONSENT_VERSION = 'v2.1-observation-consent-1';
 const MAX_BODY_BYTES = 32 * 1024;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 30;
+const RATE_LIMIT_MAX_KEYS = 5000;
+const observationRateLimit = new Map();
 const PROPERTY_TYPES = new Set(['apartment', 'villa', 'townhouse', 'office', 'retail', 'warehouse', 'land']);
 const PROJECT_TYPES = new Set(['apartment', 'villa', 'townhouse']);
 const STATUS_VALUES = new Set(['verified-dld', 'unknown', 'unverified-user']);
@@ -30,6 +34,29 @@ function isSameOriginRequest(event = {}) {
 }
 
 function bodyByteLength(body) { return Buffer.byteLength(String(body || ''), 'utf8'); }
+
+function rateLimitKey(event) {
+  return event?.headers?.['x-nf-client-connection-ip'] || event?.headers?.['x-forwarded-for']?.split(',')[0]?.trim() || 'anonymous';
+}
+
+function isRateLimited(event) {
+  const key = rateLimitKey(event);
+  const now = Date.now();
+  for (const [storedKey, stored] of observationRateLimit) {
+    if (now - stored.startedAt >= RATE_LIMIT_WINDOW_MS) observationRateLimit.delete(storedKey);
+  }
+  if (!observationRateLimit.has(key) && observationRateLimit.size >= RATE_LIMIT_MAX_KEYS) {
+    const oldest = [...observationRateLimit.entries()].sort((left, right) => left[1].startedAt - right[1].startedAt)[0];
+    if (oldest) observationRateLimit.delete(oldest[0]);
+  }
+  const current = observationRateLimit.get(key);
+  if (!current || now - current.startedAt >= RATE_LIMIT_WINDOW_MS) {
+    observationRateLimit.set(key, { startedAt: now, count: 1 });
+    return false;
+  }
+  current.count += 1;
+  return current.count > RATE_LIMIT_MAX;
+}
 
 function text(value, max = 160) {
   if (value === undefined || value === null) return null;
@@ -195,6 +222,7 @@ async function handler(event) {
   const contentLength = Number(event.headers?.['content-length'] || event.headers?.['Content-Length'] || 0);
   if (contentLength > MAX_BODY_BYTES) return response(413, { success: false, error: 'Observation payload is too large' });
   if (!event.body || bodyByteLength(event.body) > MAX_BODY_BYTES) return response(400, { success: false, error: 'Observation payload is invalid' });
+  if (isRateLimited(event)) return response(429, { success: false, error: 'Too many observations', retryAfterSeconds: 60 });
 
   let payload;
   try { payload = JSON.parse(event.body); } catch { return response(400, { success: false, error: 'Observation payload is invalid' }); }
@@ -214,4 +242,4 @@ async function handler(event) {
   }
 }
 
-module.exports = { handler, validatePayload, normalizeObservation, isSameOriginRequest, constants: { STORE_NAME, KEY_PREFIX, SCHEMA_VERSION, CONSENT_VERSION, MAX_BODY_BYTES } };
+module.exports = { handler, validatePayload, normalizeObservation, isSameOriginRequest, isRateLimited, constants: { STORE_NAME, KEY_PREFIX, SCHEMA_VERSION, CONSENT_VERSION, MAX_BODY_BYTES, RATE_LIMIT_WINDOW_MS, RATE_LIMIT_MAX, observationRateLimit } };
