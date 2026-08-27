@@ -12,7 +12,9 @@
     .btn-json { background: #3c8cdc; color: #fff; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
     .stats { margin: 20px 0; font-size: 14px; color: #8a9ab0; }
+    .stats .accuracy-value { color: #00b86e; }
     .admin-link { color: #d4920e; font-size: 12px; font-weight: 700; margin-right: 16px; }
+    .dashboard-link { color: #8a9ab0; font-size: 12px; }
   </style>
   <link rel="stylesheet" href="/shared/miayaar-brand.css" />
 </head>
@@ -26,7 +28,7 @@
   <button class="btn btn-json" id="exportJsonButton">Download JSON</button>
   <br><br>
   <a href="/admin-calibration" class="admin-link">Admin Login</a>
-  <a href="/accuracy-dashboard" style="color:#8a9ab0;font-size:12px">Back to Dashboard</a>
+  <a href="/accuracy-dashboard" class="dashboard-link">Back to Dashboard</a>
 
   <script src="/shared/export.js"></script>
   </main>

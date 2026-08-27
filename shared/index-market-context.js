@@ -61,5 +61,5 @@ function buildMarketContextHTML(result, propData) {
     ? `The local signal uses ${Number(segment.transactionCount || scrapedDistrictData?.count || 0).toLocaleString()} transactions, ${segment.monthsOfData || 'several'} months of data, and a ${segment.confidenceScore}/100 context score.`
     : '';
   if (!comparisonText && !segmentText) return '';
-  return `<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08)"><b>📈 Market indicators</b><br>${comparisonText}${comparisonText && segmentText ? '<br>' : ''}${segmentText}${qualityText ? `<small>${qualityText}</small>` : ''}</div>`;
+  return `<div class="market-indicators"><b>📈 Market indicators</b><br>${comparisonText}${comparisonText && segmentText ? '<br>' : ''}${segmentText}${qualityText ? `<small>${qualityText}</small>` : ''}</div>`;
 }
