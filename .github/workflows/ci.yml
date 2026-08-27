@@ -28,6 +28,9 @@ jobs:
       - name: Run mobile smoke tests
         run: npm run mobile-smoke
 
+      - name: Run public pages smoke tests
+        run: npm run public-pages-smoke
+
       - name: Validate inline JavaScript syntax
         run: npm run validate-inline-js
 
