@@ -16,11 +16,11 @@ test('html escape neutralizes markup, attributes, and quotes', () => {
 });
 
 test('public valuation rendering escapes user-controlled property fields', () => {
-  const source = readPage('index.html');
+  const resultRendering = readPage('shared/index-result-rendering-runtime.js');
   const marketContext = readPage('shared/index-market-context.js');
-  assert.match(source, /escapeMapHtml\(propData\.projectBuilding\)/);
-  assert.match(source, /escapeMapHtml\(propData\.district \|\| 'the selected area'\)/);
-  assert.match(source, /escapeMapHtml\(propData\.propType\)/);
+  assert.match(resultRendering, /escapeMapHtml\(propData\.projectBuilding\)/);
+  assert.match(resultRendering, /escapeMapHtml\(propData\.district \|\| 'the selected area'\)/);
+  assert.match(resultRendering, /escapeMapHtml\(propData\.propType\)/);
   assert.match(marketContext, /escapeMapHtml\(detail\)/);
 });
 

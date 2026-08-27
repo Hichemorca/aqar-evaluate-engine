@@ -7,6 +7,7 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
+const indexResultRenderingJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-result-rendering-runtime.js'), 'utf8');
 const indexDistrictContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-context.js'), 'utf8');
 const indexGisHelpersJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-helpers.js'), 'utf8');
 const indexPrimaryInteractionsJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-primary-interactions.js'), 'utf8');
@@ -49,10 +50,10 @@ test('comparable bracket ignores invalid values and returns null without both si
 
 test('public result keeps Range hidden while retaining the internal bracket calculation', () => {
   assert.match(indexMarketContextJs, /function getComparableBracket\(targetValue, prices\)/);
-  assert.match(indexHtml, /const comparableBracket = getComparableBracket\(/);
-  assert.match(indexHtml, /const comparableRangeHTML = '';/);
+  assert.match(indexResultRenderingJs, /const comparableBracket = getComparableBracket\(/);
+  assert.match(indexResultRenderingJs, /const comparableRangeHTML = '';/);
   assert.doesNotMatch(indexHtml, /DLD suggestion/);
-  assert.match(indexHtml, /Verified project suggestion/);
+  assert.match(indexResultRenderingJs, /Verified project suggestion/);
 });
 
 test('autocomplete controls expose keyboard and listbox semantics', () => {
@@ -113,8 +114,13 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-cost-approach-runtime.js') < indexHtml.indexOf('/shared/index-dcf-approach-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-dcf-approach-runtime.js') < indexHtml.indexOf('/shared/index-weighted-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-weighted-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-market-context.js') < indexHtml.indexOf('/shared/index-result-rendering-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-result-rendering-runtime.js') < indexHtml.indexOf('/shared/index-district-context.js'));
   assert.ok(indexDcfApproachJs.includes('function dcfApproach(data)'));
   assert.ok(indexWeightedRuntimeJs.includes('function calculateWeightedValue(valuations, propData)'));
+  assert.ok(indexResultRenderingJs.includes('function buildDecisionEngineLink(result, propData)'));
+  assert.ok(indexResultRenderingJs.includes('function displayEvidenceOnlyState(propData)'));
+  assert.ok(indexResultRenderingJs.includes('function displayResult(result, valuations, propData)'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_CALIBRATION_ENGINE.combineMethodResults'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_V21_SHADOW_MULTIPLIERS.compute(propData, shadowConfig)'));
   assert.ok(indexCostApproachJs.includes('function costApproach(data)'));
@@ -156,8 +162,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexPrimaryInteractionsJs.includes("addEventListener('change', onPropertyTypeChange)"));
   assert.ok(indexPrimaryInteractionsJs.includes("closest?.('[data-action]')"));
   assert.ok(indexPrimaryInteractionsJs.includes("action !== 'review-inputs' && action !== 'new-valuation'"));
-  assert.match(indexHtml, /data-action="review-inputs"/);
-  assert.match(indexHtml, /data-action="new-valuation"/);
+  assert.match(indexResultRenderingJs, /data-action="review-inputs"/);
+  assert.match(indexResultRenderingJs, /data-action="new-valuation"/);
   assert.doesNotMatch(indexHtml, /onclick="document\.getElementById\('resultSection'\)/);
   assert.ok(indexDistrictContextJs.includes('async function loadDistrictsFromDLD()'));
   assert.ok(indexDistrictContextJs.includes('function filterDistricts(q)'));
@@ -185,6 +191,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function costApproach\(data\)/);
   assert.doesNotMatch(indexHtml, /function dcfApproach\(data\)/);
   assert.doesNotMatch(indexHtml, /function calculateWeightedValue\(valuations, propData\)/);
+  assert.doesNotMatch(indexHtml, /function buildDecisionEngineLink\(result, propData\)/);
+  assert.doesNotMatch(indexHtml, /function displayEvidenceOnlyState\(propData\)/);
+  assert.doesNotMatch(indexHtml, /function displayResult\(result, valuations, propData\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
@@ -221,7 +230,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /class="poi-marker" style="--poi-color:/);
   assert.ok(indexHtml.includes('.observation-status.success'));
   assert.ok(indexHtml.includes('.observation-status.warning'));
-  assert.ok(indexHtml.includes('class="result-method-status ${statusClass}"'));
+  assert.ok(indexResultRenderingJs.includes('class="result-method-status ${statusClass}"'));
   assert.doesNotMatch(indexHtml, /status\.style\.color/);
   assert.doesNotMatch(indexHtml, /<b style="color:\$\{color\};font-size:10px">/);
   assert.doesNotMatch(indexHtml, /<div style="background:#d4920e;color:#06111d/);
@@ -256,7 +265,7 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexMarketContextJs, /<div style="margin-top:12px;padding-top:10px/);
   assert.match(indexHtml, /\.market-indicators \{ margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba\(255,255,255,0\.08\); \}/);
   assert.match(indexHtml, /width: var\(--confidence-width, 0%\)/);
-  assert.ok(indexHtml.includes("style.setProperty('--confidence-width', `${result.confidencePct}%`)"));
+  assert.ok(indexResultRenderingJs.includes("style.setProperty('--confidence-width', `${result.confidencePct}%`)"));
   assert.doesNotMatch(indexHtml, /style="(?:--confidence-width|width):/);
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
