@@ -18,6 +18,13 @@
     document.getElementById('btnScrape')?.addEventListener('click', scrapeRealData);
     document.getElementById('btnValuate')?.addEventListener('click', runValuation);
     document.getElementById('btnReset')?.addEventListener('click', resetAll);
+    const resultSection = document.getElementById('resultSection');
+    resultSection?.addEventListener('click', event => {
+      const action = event.target?.closest?.('[data-action]')?.dataset.action;
+      if (action !== 'review-inputs' && action !== 'new-valuation') return;
+      resultSection.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, { once: true });

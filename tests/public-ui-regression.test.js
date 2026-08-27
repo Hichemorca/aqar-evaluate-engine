@@ -80,6 +80,11 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.includes('<script src="/shared/index-primary-interactions.js"></script>'));
   assert.ok(indexPrimaryInteractionsJs.includes("addEventListener('click', runValuation)"));
   assert.ok(indexPrimaryInteractionsJs.includes("addEventListener('change', onPropertyTypeChange)"));
+  assert.ok(indexPrimaryInteractionsJs.includes("closest?.('[data-action]')"));
+  assert.ok(indexPrimaryInteractionsJs.includes("action !== 'review-inputs' && action !== 'new-valuation'"));
+  assert.match(indexHtml, /data-action="review-inputs"/);
+  assert.match(indexHtml, /data-action="new-valuation"/);
+  assert.doesNotMatch(indexHtml, /onclick="document\.getElementById\('resultSection'\)/);
   assert.ok(indexDistrictContextJs.includes('async function loadDistrictsFromDLD()'));
   assert.ok(indexDistrictContextJs.includes('function filterDistricts(q)'));
   assert.ok(indexDistrictContextJs.includes('function filterProjectBuildings(q)'));
