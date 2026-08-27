@@ -383,6 +383,15 @@
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .valuation-actions { display: flex; gap: 10px; }
+    .valuation-submit { flex: 2; }
+    .valuation-reset { flex: 1; }
+    .gis-radius-context { margin-top: 8px; font-size: 10px; color: var(--muted); text-align: center; }
+    .scrape-status { font-size: 11px; margin-top: 8px; text-align: center; }
+    .observation-consent-row { margin-top: 12px; padding: 10px 12px; border: 1px solid rgba(91,167,255,0.18); border-radius: 10px; background: rgba(91,167,255,0.05); font-size: 10px; line-height: 1.55; color: var(--muted); }
+    .observation-consent-label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+    .observation-consent-input { margin-top: 2px; }
+    .observation-status { margin-top: 5px; color: var(--muted); }
     .selected-display span { color: var(--text); font-weight: 600; }
     .district-count { font-size: 10px; color: var(--muted); margin-top: 4px; }
     @media (max-width: 500px) {
@@ -608,7 +617,7 @@
     <div id="gisProjectLabel" style="display:none;margin-top:10px;padding:9px 11px;border-radius:10px;background:rgba(212,146,14,0.08);border:1px solid rgba(212,146,14,0.22);font-size:10px;color:var(--muted)" aria-live="polite"></div>
     <div id="gisMap" role="region" aria-label="Interactive location map" tabindex="0" style="margin-top:10px;height:320px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);overflow:hidden"></div>
     <input type="hidden" id="gisRadius" value="1000">
-    <div id="gisRadiusContext" style="margin-top:8px;font-size:10px;color:var(--muted);text-align:center">Vital facilities are shown inside the radius around the current map marker.</div>
+    <div id="gisRadiusContext" class="gis-radius-context">Vital facilities are shown inside the radius around the current map marker.</div>
   </div>
   <div class="section">
     <div class="section-title">🔍 Market Data</div>
@@ -617,7 +626,7 @@
       <div class="fg"><label for="recentSalesCount">📋 Comparables</label><input type="number" id="recentSalesCount" placeholder="0" readonly></div>
     </div>
     <button class="btn btn-s" id="btnScrape">🔍 Load market data</button>
-    <div id="scrapeStatus" role="status" aria-live="polite" style="font-size:11px;margin-top:8px;text-align:center"></div>
+    <div id="scrapeStatus" class="scrape-status" role="status" aria-live="polite"></div>
     <div class="scrape-comps" id="scrapedComps"></div>
   </div>
   <div class="section" id="incomeSection">
@@ -634,13 +643,13 @@
       <div class="fg"><label for="constructionCost">🔨 Build Cost/sqm (AED)</label><input type="number" id="constructionCost" placeholder="e.g. 3000"></div>
     </div>
   </div>
-  <div style="display:flex;gap:10px">
-    <button class="btn btn-p" id="btnValuate" style="flex:2">🧮 Calculate Valuation</button>
-    <button class="btn btn-reset" id="btnReset" style="flex:1">Reset</button>
+  <div class="valuation-actions">
+    <button class="btn btn-p valuation-submit" id="btnValuate">🧮 Calculate Valuation</button>
+    <button class="btn btn-reset valuation-reset" id="btnReset">Reset</button>
   </div>
-  <div id="observationConsentRow" style="margin-top:12px;padding:10px 12px;border:1px solid rgba(91,167,255,0.18);border-radius:10px;background:rgba(91,167,255,0.05);font-size:10px;line-height:1.55;color:var(--muted)">
-    <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" id="observationConsent" style="margin-top:2px"><span>Help improve MIAYAAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
-    <div id="observationStatus" style="margin-top:5px;color:var(--muted)" aria-live="polite"></div>
+  <div id="observationConsentRow" class="observation-consent-row">
+    <label class="observation-consent-label"><input type="checkbox" id="observationConsent" class="observation-consent-input"><span>Help improve MIAYAAR by sharing this property input and valuation result for anonymous analysis. This is optional and does not affect your valuation.</span></label>
+    <div id="observationStatus" class="observation-status" aria-live="polite"></div>
   </div>
   <div id="resultSection" class="hidden"></div>
   <div class="footer-links">

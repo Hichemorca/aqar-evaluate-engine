@@ -48,7 +48,7 @@ test('dynamic statuses and interactive map are announced to assistive technology
   assert.match(read('export.html'), /id="stats" aria-live="polite"/);
   assert.match(read('index.html'), /id="gisMap" role="region" aria-label="Interactive location map"/);
   assert.match(read('index.html'), /id="gisFacilitiesList" role="status" aria-live="polite"/);
-  assert.match(read('index.html'), /id="scrapeStatus" role="status" aria-live="polite"/);
+  assert.match(read('index.html'), /id="scrapeStatus" class="scrape-status" role="status" aria-live="polite"/);
 });
 
 test('skip link CSS is visible on keyboard focus', () => {
