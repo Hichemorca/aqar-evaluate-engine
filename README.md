@@ -14,6 +14,8 @@
 | `/export` | صفحة التصدير العامة. |
 | [دليل المستخدم العربي](docs/user-guide-ar.md) | خطوات استخدام المنصة وقراءة النتيجة باللغة العربية. |
 | [English user guide](docs/user-guide-en.md) | Platform usage steps and result interpretation in English. |
+| [دليل المدير العربي](docs/admin-guide-ar.md) | إدارة Calibration Console وقواعد الحفظ الآمن باللغة العربية. |
+| [English administrator guide](docs/admin-guide-en.md) | Calibration Console administration and safe-save procedures in English. |
 
 ## الهوية البصرية
 
