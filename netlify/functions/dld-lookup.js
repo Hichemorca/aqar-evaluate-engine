@@ -13,6 +13,7 @@ const DLD_REQUEST_TIMEOUT_MS = 15000;
 const MAX_DLD_BODY_BYTES = 80 * 1024 * 1024;
 const PUBLIC_ORIGIN = 'https://aqar-valuation-engine.netlify.app';
 let dldCache = { data: null, expiresAt: 0 };
+let dldCleanedCache = { data: null, source: null, expiresAt: 0 };
 let dldFetchInFlight = null;
 
 // ============================================================
@@ -55,6 +56,13 @@ function fetchDLDData() {
   }).finally(() => { dldFetchInFlight = null; });
 
   return dldFetchInFlight;
+}
+
+function getCleanedDLDData(raw) {
+  if (dldCleanedCache.source === raw && dldCleanedCache.data && Date.now() < dldCleanedCache.expiresAt) return dldCleanedCache.data;
+  const cleaned = applyAllFilters(raw);
+  dldCleanedCache = { data: cleaned, source: raw, expiresAt: Date.now() + DLD_CACHE_TTL_MS };
+  return cleaned;
 }
 
 function getCorsHeaders(event) {
@@ -247,7 +255,7 @@ exports.handler = async (event) => {
     const raw = await fetchDLDData();
     if (!raw || raw.length === 0) return jsonResponse(503, headers, { found: false, error: 'DLD data unavailable' });
 
-    const cleaned = applyAllFilters(raw);
+    const cleaned = getCleanedDLDData(raw);
     if (cleaned.length === 0) return jsonResponse(503, headers, { found: false, error: 'DLD data unavailable' });
 
     const size = getSizeCategory(numericArea, propertyType);
@@ -288,3 +296,4 @@ exports.handler = async (event) => {
 module.exports.buildResult = buildResult;
 module.exports.adaptiveSearch = adaptiveSearch;
 module.exports.getCorsHeaders = getCorsHeaders;
+module.exports.getCleanedDLDData = getCleanedDLDData;
