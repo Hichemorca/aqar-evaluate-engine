@@ -8,6 +8,7 @@ const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
 const indexResultRenderingJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-result-rendering-runtime.js'), 'utf8');
+const indexObservationRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-observation-runtime.js'), 'utf8');
 const indexDistrictContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-district-context.js'), 'utf8');
 const indexGisHelpersJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-gis-helpers.js'), 'utf8');
 const indexPrimaryInteractionsJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-primary-interactions.js'), 'utf8');
@@ -115,12 +116,17 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexHtml.indexOf('/shared/index-dcf-approach-runtime.js') < indexHtml.indexOf('/shared/index-weighted-runtime.js'));
   assert.ok(indexHtml.indexOf('/shared/index-weighted-runtime.js') < indexHtml.indexOf('/shared/index-market-context.js'));
   assert.ok(indexHtml.indexOf('/shared/index-market-context.js') < indexHtml.indexOf('/shared/index-result-rendering-runtime.js'));
-  assert.ok(indexHtml.indexOf('/shared/index-result-rendering-runtime.js') < indexHtml.indexOf('/shared/index-district-context.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-result-rendering-runtime.js') < indexHtml.indexOf('/shared/index-observation-runtime.js'));
+  assert.ok(indexHtml.indexOf('/shared/index-observation-runtime.js') < indexHtml.indexOf('/shared/index-district-context.js'));
   assert.ok(indexDcfApproachJs.includes('function dcfApproach(data)'));
   assert.ok(indexWeightedRuntimeJs.includes('function calculateWeightedValue(valuations, propData)'));
   assert.ok(indexResultRenderingJs.includes('function buildDecisionEngineLink(result, propData)'));
   assert.ok(indexResultRenderingJs.includes('function displayEvidenceOnlyState(propData)'));
   assert.ok(indexResultRenderingJs.includes('function displayResult(result, valuations, propData)'));
+  assert.ok(indexObservationRuntimeJs.includes('function buildObservationPayload(propData, result)'));
+  assert.ok(indexObservationRuntimeJs.includes('async function recordValuationObservation(propData, result)'));
+  assert.ok(indexObservationRuntimeJs.includes("fetch('/api/valuation-observation'"));
+  assert.ok(indexObservationRuntimeJs.includes("status: verifiedProject ? 'verified-dld' : 'unknown'"));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_CALIBRATION_ENGINE.combineMethodResults'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_V21_SHADOW_MULTIPLIERS.compute(propData, shadowConfig)'));
   assert.ok(indexCostApproachJs.includes('function costApproach(data)'));
@@ -194,6 +200,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function buildDecisionEngineLink\(result, propData\)/);
   assert.doesNotMatch(indexHtml, /function displayEvidenceOnlyState\(propData\)/);
   assert.doesNotMatch(indexHtml, /function displayResult\(result, valuations, propData\)/);
+  assert.doesNotMatch(indexHtml, /function buildObservationPayload\(propData, result\)/);
+  assert.doesNotMatch(indexHtml, /async function recordValuationObservation\(propData, result\)/);
   assert.doesNotMatch(indexHtml, /function filterDistricts\(q\)/);
   assert.ok(indexGisHelpersJs.includes('function getGISRadiusMeters()'));
   assert.ok(indexGisHelpersJs.includes('function updateGISRadiusContext(radius = getGISRadiusMeters(), count = null)'));
