@@ -660,9 +660,8 @@
   <script src="/shared/district-map-linking.js"></script>
   <script src="/shared/comparable-bracket.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="/shared/index-accuracy-meta.js"></script>
 <script>
-let AQAR_ACTIVE_CALIBRATION = AQAR_CALIBRATION_DEFAULTS.createDefaultCalibrationConfig();
-let AQAR_V21_SHADOW_CONFIG = AQAR_V21_SHADOW_MULTIPLIERS.createNeutralConfig();
 function getCalibrationForProperty(propertyType) { return AQAR_CALIBRATION_DEFAULTS.getPropertyConfig(AQAR_ACTIVE_CALIBRATION, propertyType); }
 function getCalibrationCoefficient(propertyType, group, key, fallback) {
   const value = getCalibrationForProperty(propertyType)?.coefficients?.[group]?.[key];
