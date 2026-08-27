@@ -20,6 +20,20 @@ test('Netlify headers define the required browser security protections', () => {
   assert.doesNotMatch(headers, /Access-Control-Allow-Origin:\s*\*/i);
 });
 
+test('Netlify TOML repeats the required headers for deploys that omit _headers', () => {
+  const config = read('netlify.toml');
+  assert.match(config, /\[\[headers\]\]/);
+  for (const header of [
+    'Content-Security-Policy =',
+    'Referrer-Policy = "strict-origin-when-cross-origin"',
+    'X-Content-Type-Options = "nosniff"',
+    'X-Frame-Options = "DENY"',
+    'Permissions-Policy =',
+    'Cross-Origin-Opener-Policy = "same-origin"',
+    'Strict-Transport-Security ='
+  ]) assert.match(config, new RegExp(header.replace(/[.*+?^${}()|[\\]\\]/g, '\\\\$&')));
+});
+
 test('each public page exposes a keyboard skip link and main landmark', () => {
   for (const page of ['index.html', 'market-intelligence.html', 'accuracy-dashboard.html', 'calibration.html', 'export.html']) {
     const source = read(page);

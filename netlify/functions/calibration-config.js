@@ -2,11 +2,12 @@ const crypto = require('crypto');
 const { connectLambda, getStore } = require('@netlify/blobs');
 const calibrationDefaults = require('../../shared/aqar-calibration-defaults');
 const { deepMergeKnown, validateConfig } = require('../../shared/calibration-validation');
+const { withSecurityHeaders } = require('../../shared/http-security-headers');
 
-const JSON_HEADERS = {
+const JSON_HEADERS = withSecurityHeaders({
   'Content-Type': 'application/json; charset=utf-8',
   'Cache-Control': 'no-store, max-age=0'
-};
+});
 const STORE_NAME = 'aqar-calibration';
 const ACTIVE_KEY = 'active';
 const HISTORY_KEY = 'history/index';

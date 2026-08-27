@@ -3,14 +3,15 @@
 
 const axios = require('axios');
 const SCRAPE_SOLD_ENDPOINT_ENABLED = process.env.SCRAPE_SOLD_ENDPOINT_ENABLED === 'true';
+const { withSecurityHeaders } = require('../../shared/http-security-headers');
 
 // ===== MAIN EXPORT =====
 exports.handler = async (event) => {
-  const headers = {
+  const headers = withSecurityHeaders({
     'Access-Control-Allow-Headers': 'Content-Type',
     'Content-Type': 'application/json',
     'Cache-Control': 'no-store'
-  };
+  });
 
   if (!SCRAPE_SOLD_ENDPOINT_ENABLED) {
     return {

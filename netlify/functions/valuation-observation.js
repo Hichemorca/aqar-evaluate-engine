@@ -2,11 +2,12 @@ const crypto = require('crypto');
 const { connectLambda, getStore } = require('@netlify/blobs');
 const extraFields = require('../../shared/property-extra-fields');
 const projectEvidenceIndex = require('../../data/dld-project-evidence-index.json');
+const { withSecurityHeaders } = require('../../shared/http-security-headers');
 
-const JSON_HEADERS = {
+const JSON_HEADERS = withSecurityHeaders({
   'Content-Type': 'application/json; charset=utf-8',
   'Cache-Control': 'no-store, max-age=0'
-};
+});
 const STORE_NAME = 'aqar-input-observations';
 const KEY_PREFIX = 'events/';
 const SCHEMA_VERSION = 'v2.1-observation-1';

@@ -6,6 +6,7 @@ const url = require('url');
 // ============================================================
 const { getSizeCategory, applyAllFilters } = require('../../scripts/cleaning-pipeline');
 const { isSupportedPropertyType } = require('../../shared/aqar-policy');
+const { withSecurityHeaders } = require('../../shared/http-security-headers');
 
 const DLD_CACHE_TTL_MS = 5 * 60 * 1000;
 const DLD_REQUEST_TIMEOUT_MS = 15000;
@@ -217,13 +218,13 @@ function jsonResponse(statusCode, headers, payload) {
 }
 
 exports.handler = async (event) => {
-  const headers = {
+  const headers = withSecurityHeaders({
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'GET',
     'Cache-Control': 'public, max-age=300, stale-while-revalidate=60',
     Vary: 'Origin'
-  };
+  });
   const corsHeaders = getCorsHeaders(event);
   Object.assign(headers, corsHeaders);
 

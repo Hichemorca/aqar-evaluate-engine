@@ -3,7 +3,8 @@ const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
 
-const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_KEY || '';
+const SCRAPINGBEE_KEY = process.env.SCRAPINGBEE_API_KEY || '';
+const { withSecurityHeaders } = require('../../shared/http-security-headers');
 const SCRAPINGBEE_URL = 'https://app.scrapingbee.com/api/v1';
 const SCRAPE_ENDPOINT_ENABLED = process.env.SCRAPE_ENDPOINT_ENABLED === 'true';
 
@@ -1254,11 +1255,11 @@ function generateSalesFallback(city, district, propertyType, count) {
 
 // ===== MAIN EXPORT =====
 exports.handler = async (event) => {
-  const headers = {
+  const headers = withSecurityHeaders({
     'Access-Control-Allow-Headers': 'Content-Type',
     'Content-Type': 'application/json',
     'Cache-Control': 'no-store'
-  };
+  });
 
   if (!SCRAPE_ENDPOINT_ENABLED) {
     return {

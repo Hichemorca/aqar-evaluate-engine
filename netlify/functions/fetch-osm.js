@@ -1,5 +1,6 @@
 ﻿// AQAR OSM Data Fetcher — Real Data from OpenStreetMap with Optimized Timeout
 const axios = require('axios');
+const { withSecurityHeaders } = require('../../shared/http-security-headers');
 
 const DUBAI_BOUNDS = Object.freeze({ minLat: 24.6, maxLat: 25.7, minLng: 54.6, maxLng: 55.8 });
 const MAX_CACHE_ENTRIES = 250;
@@ -338,7 +339,7 @@ async function reverseGeocode(lat, lng) {
 
 // ===== EXPORTS =====
 async function handler(event) {
-  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300, stale-while-revalidate=60' };
+  const headers = withSecurityHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300, stale-while-revalidate=60' });
   if (event.httpMethod !== 'GET') {
     return { statusCode: 405, headers: { ...headers, Allow: 'GET' }, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
