@@ -382,6 +382,10 @@
     .footer-links .admin-link { color: var(--gold); font-weight: 700; }
     #gisMap .leaflet-control-attribution { font-size: 8px; background: rgba(0,0,0,0.5); color: var(--muted); }
     #gisMap .leaflet-control-attribution a { color: var(--gold); }
+    .project-map-label { background: #d4920e; color: #06111d; border: 2px solid #fff; border-radius: 7px; padding: 3px 7px; font-size: 10px; font-weight: 800; white-space: nowrap; box-shadow: 0 2px 7px rgba(0,0,0,.35); }
+    .project-map-popup-source { font-size: 10px; color: #667; }
+    .project-map-source { color: var(--muted); }
+    .poi-marker { background: var(--poi-color, #888); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
     .selected-display { font-size: 11px; color: var(--muted); margin-top: 6px; }
     .gis-result-panel { display: none; margin-top: 12px; padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.06); }
     .gis-project-label { display: none; margin-top: 10px; padding: 9px 11px; border-radius: 10px; background: rgba(212,146,14,0.08); border: 1px solid rgba(212,146,14,0.22); font-size: 10px; color: var(--muted); }
@@ -833,13 +837,13 @@ function updateProjectMapLabel() {
   const sourceText = verified ? 'Project name; map point is the current selected marker.' : 'User-entered name; not verified and not used to invent a project location.';
   const a = parseFloat(document.getElementById('gisLat')?.value), b = parseFloat(document.getElementById('gisLng')?.value);
   if (!Number.isFinite(a) || !Number.isFinite(b)) return;
-  const html = `<div style="background:#d4920e;color:#06111d;border:2px solid #fff;border-radius:7px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap;box-shadow:0 2px 7px rgba(0,0,0,.35)">${escapeMapHtml(value)}</div>`;
-  const popup = `<strong>Project / Building</strong><br>${escapeMapHtml(value)}<br><span style="font-size:10px;color:#667">${escapeMapHtml(sourceText)}${district ? `<br>District: ${escapeMapHtml(district)}` : ''}</span>`;
+  const html = `<div class="project-map-label">${escapeMapHtml(value)}</div>`;
+  const popup = `<strong>Project / Building</strong><br>${escapeMapHtml(value)}<br><span class="project-map-popup-source">${escapeMapHtml(sourceText)}${district ? `<br>District: ${escapeMapHtml(district)}` : ''}</span>`;
   const icon = L.divIcon({ className: 'project-map-label-icon', html, iconSize: [1, 1], iconAnchor: [-8, 18], popupAnchor: [8, -18] });
   if (!projectMapLabelMarker) projectMapLabelMarker = L.marker([a, b], { icon, interactive: true, zIndexOffset: 500 }).addTo(gisMapInstance);
   else projectMapLabelMarker.setLatLng([a, b]).setIcon(icon);
   projectMapLabelMarker.bindPopup(popup);
-  label.innerHTML = `🏢 <b>${escapeMapHtml(value)}</b> <span style="color:var(--muted)">— ${escapeMapHtml(sourceText)}</span>`;
+  label.innerHTML = `🏢 <b>${escapeMapHtml(value)}</b> <span class="project-map-source">— ${escapeMapHtml(sourceText)}</span>`;
   label.style.display = 'block';
 }
 function updateExtraFieldVisibility() {
@@ -964,7 +968,7 @@ function addPOIsToMap(pois) {
   const emojis = { school: '🏫', hospital: '🏥', supermarket: '🛒', metro: '🚇', park: '🌳', gym: '🏋️', cafe: '☕', restaurant: '🍽️' };
   const colors = { school: '#f39c12', hospital: '#e74c3c', supermarket: '#2ecc71', metro: '#3498db', park: '#27ae60', gym: '#9b59b6', cafe: '#f1c40f', restaurant: '#e67e22' };
   pois.slice(0,30).forEach(p => {
-    const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div style="background:${colors[p.type]||'#888'};color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 2px 6px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
+    const icon = L.divIcon({ className: 'custom-poi-icon', html: `<div class="poi-marker" style="--poi-color:${colors[p.type]||'#888'}">${emojis[p.type]||'📍'}</div>`, iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11] });
     const marker = L.marker([p.lat, p.lng], { icon, zIndexOffset: 700 }).addTo(gisMapInstance).bindPopup(`<strong>${p.type.charAt(0).toUpperCase()+p.type.slice(1)}</strong><br>${p.name}<br><span style="font-size:10px;color:#888;">${(p.distance*1000).toFixed(0)}m away</span>`);
     poiMarkers.push(marker);
   });
