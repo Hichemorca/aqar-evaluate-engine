@@ -1,0 +1,71 @@
+{
+  "measuredAt": "2026-08-28T05:13:09.400Z",
+  "results": [
+    {
+      "scenario": "desktop",
+      "baseURL": "http://127.0.0.1:8765/",
+      "runs": [
+        {
+          "run": 1,
+          "ttfb": 1.5,
+          "domContentLoaded": 231.29999995231628,
+          "load": 338.09999990463257,
+          "mapVisible": true,
+          "firstGISRequest": null,
+          "elapsedToLoadWallClock": 480
+        },
+        {
+          "run": 2,
+          "ttfb": 1.3000001907348633,
+          "domContentLoaded": 134.10000014305115,
+          "load": 303.30000019073486,
+          "mapVisible": true,
+          "firstGISRequest": null,
+          "elapsedToLoadWallClock": 378
+        },
+        {
+          "run": 3,
+          "ttfb": 1.2999999523162842,
+          "domContentLoaded": 170.39999985694885,
+          "load": 262.59999990463257,
+          "mapVisible": true,
+          "firstGISRequest": null,
+          "elapsedToLoadWallClock": 396
+        }
+      ]
+    },
+    {
+      "scenario": "mobile",
+      "baseURL": "http://127.0.0.1:8765/",
+      "runs": [
+        {
+          "run": 1,
+          "ttfb": 1.7999999523162842,
+          "domContentLoaded": 208.29999995231628,
+          "load": 345.19999980926514,
+          "mapVisible": true,
+          "firstGISRequest": null,
+          "elapsedToLoadWallClock": 471
+        },
+        {
+          "run": 2,
+          "ttfb": 1.2999999523162842,
+          "domContentLoaded": 221.40000009536743,
+          "load": 303.5,
+          "mapVisible": true,
+          "firstGISRequest": null,
+          "elapsedToLoadWallClock": 477
+        },
+        {
+          "run": 3,
+          "ttfb": 1.5999999046325684,
+          "domContentLoaded": 155.59999990463257,
+          "load": 277.7000000476837,
+          "mapVisible": true,
+          "firstGISRequest": null,
+          "elapsedToLoadWallClock": 375
+        }
+      ]
+    }
+  ]
+}

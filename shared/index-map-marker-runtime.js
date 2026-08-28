@@ -24,7 +24,47 @@ function addPOIsToMap(pois) {
   });
 }
 
+let gisMapInitScheduled = false;
+let gisLeafletLoadPromise = null;
+
+function loadLeafletLibrary() {
+  if (window.L) return Promise.resolve();
+  if (gisLeafletLoadPromise) return gisLeafletLoadPromise;
+  gisLeafletLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+    script.crossOrigin = '';
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Leaflet library failed to load'));
+    document.head.appendChild(script);
+  });
+  return gisLeafletLoadPromise;
+}
+
+function scheduleGISMapInit() {
+  if (mapInitialized || gisMapInitScheduled) return;
+  gisMapInitScheduled = true;
+  const start = () => {
+    gisMapInitScheduled = false;
+    loadLeafletLibrary().then(initGISMap).catch(error => {
+      console.warn('Leaflet lazy load failed:', error);
+      initGISMap();
+    });
+  };
+  const scheduleAfterLoad = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(start, { timeout: 1200 });
+    } else {
+      window.setTimeout(start, 0);
+    }
+  };
+  if (document.readyState === 'complete') scheduleAfterLoad();
+  else window.addEventListener('load', scheduleAfterLoad, { once: true });
+}
+
 function initGISMap() {
+  if (mapInitialized) return;
   try {
     const container = document.getElementById('gisMap');
     if (!container) { console.warn('GIS Map container not found'); return; }

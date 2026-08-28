@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
   onPropertyTypeChange();
   const valuationButton = document.getElementById('btnValuate');
   valuationButton.disabled = true;
-  loadCalibrationConfig().finally(() => { valuationButton.disabled = false; setTimeout(initGISMap, 100); });
+  loadCalibrationConfig().finally(() => { valuationButton.disabled = false; });
   loadAccuracyMeta();
   loadMarketIntelligence();
+  scheduleGISMapInit();
   document.addEventListener('click', function(e) {
     const districtList = document.getElementById('districtAutocomplete');
     const projectList = document.getElementById('projectBuildingAutocomplete');
