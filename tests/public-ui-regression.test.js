@@ -6,6 +6,7 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const indexPageCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-page.css'), 'utf8');
+const brandCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'miayaar-brand.css'), 'utf8');
 const inlineValidatorJs = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'validate-inline-js.js'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
@@ -109,6 +110,10 @@ test('public pages use semantic headings and safe external links', () => {
     assert.doesNotMatch(source, /\sstyle\s*=/);
   }
   assert.ok(indexHtml.includes('<script src="/shared/index-accuracy-meta.js"></script>'));
+  assert.match(brandCss, /\.miayaar-brand-lockup::before/);
+  assert.match(brandCss, /linear-gradient\(180deg, rgba\(23, 52, 84, \.68\).*rgba\(7, 17, 31, 0\)/);
+  assert.match(brandCss, /\.miayaar-admin-brand::before/);
+  for (const source of [accuracyDashboardHtml, marketIntelligenceHtml, exportHtml, calibrationHtml]) assert.match(source, /miayaar-(?:brand-lockup|admin-brand)/);
   assert.ok(indexHtml.includes('<script src="/shared/index-calibration-bootstrap.js"></script>'));
   assert.ok(indexHtml.indexOf('/shared/index-accuracy-meta.js') < indexHtml.indexOf('/shared/index-calibration-bootstrap.js'));
   assert.ok(indexHtml.indexOf('/shared/index-calibration-bootstrap.js') < indexHtml.indexOf('/shared/index-market-context.js'));

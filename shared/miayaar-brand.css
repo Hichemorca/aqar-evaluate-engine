@@ -14,10 +14,37 @@ body {
 }
 
 .miayaar-brand-lockup {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   max-width: min(100%, 560px);
+  padding: 18px 20px 26px;
+  overflow: hidden;
   text-decoration: none;
+}
+
+.miayaar-brand-lockup::before,
+.miayaar-admin-brand::before {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  inset: 0;
+  background: linear-gradient(180deg, rgba(23, 52, 84, .68) 0%, rgba(12, 34, 58, .34) 52%, rgba(7, 17, 31, 0) 100%);
+  pointer-events: none;
+}
+
+.miayaar-brand-lockup::after,
+.miayaar-admin-brand::after {
+  position: absolute;
+  right: 12%;
+  bottom: 10px;
+  left: 12%;
+  height: 1px;
+  content: '';
+  background: linear-gradient(90deg, transparent, rgba(35, 201, 139, .4), transparent);
+  pointer-events: none;
 }
 
 .miayaar-logo-horizontal {
@@ -36,9 +63,13 @@ body {
 }
 
 .miayaar-admin-brand {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  padding: 12px 18px 24px;
+  overflow: hidden;
 }
 
 .miayaar-page-title {
@@ -123,6 +154,11 @@ button.primary:hover:not(:disabled) {
 @media (max-width: 640px) {
   .miayaar-logo-horizontal {
     width: min(100%, 340px);
+  }
+
+  .miayaar-brand-lockup {
+    padding-right: 12px;
+    padding-left: 12px;
   }
 
   .miayaar-admin-brand {
