@@ -33,12 +33,16 @@ const indexCostApproachJs = fs.readFileSync(path.join(__dirname, '..', 'shared',
 const indexDcfApproachJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-dcf-approach-runtime.js'), 'utf8');
 const indexWeightedRuntimeJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-weighted-runtime.js'), 'utf8');
 const marketIntelligenceHtml = fs.readFileSync(path.join(__dirname, '..', 'market-intelligence.html'), 'utf8');
+const marketIntelligenceCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence-page.css'), 'utf8');
 const marketIntelligenceJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'market-intelligence.js'), 'utf8');
 const accuracyDashboardHtml = fs.readFileSync(path.join(__dirname, '..', 'accuracy-dashboard.html'), 'utf8');
+const accuracyDashboardCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'accuracy-dashboard-page.css'), 'utf8');
 const accuracyDashboardJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'accuracy-dashboard.js'), 'utf8');
 const calibrationHtml = fs.readFileSync(path.join(__dirname, '..', 'calibration.html'), 'utf8');
+const calibrationCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'calibration-page.css'), 'utf8');
 const calibrationJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'calibration.js'), 'utf8');
 const exportHtml = fs.readFileSync(path.join(__dirname, '..', 'export.html'), 'utf8');
+const exportCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'export-page.css'), 'utf8');
 const exportJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'export.js'), 'utf8');
 
 test('comparable bracket selects the nearest strict lower and upper prices', () => {
@@ -316,11 +320,11 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /function buildMarketContextHTML\(result, propData\)/);
   assert.ok(accuracyDashboardHtml.includes('<h1 class="miayaar-page-title">Accuracy Dashboard</h1>'));
   assert.ok(accuracyDashboardHtml.includes('<script src="/shared/accuracy-dashboard.js"></script>'));
-  assert.ok(accuracyDashboardHtml.includes('.refresh-bar-heading'));
-  assert.ok(accuracyDashboardHtml.includes('.refresh-actions'));
-  assert.ok(accuracyDashboardHtml.includes('.dashboard-footer-links'));
-  assert.ok(accuracyDashboardHtml.includes('.table-ref-cell'));
-  assert.ok(accuracyDashboardHtml.includes('.table-date-cell'));
+  assert.ok(accuracyDashboardCss.includes('.refresh-bar-heading'));
+  assert.ok(accuracyDashboardCss.includes('.refresh-actions'));
+  assert.ok(accuracyDashboardCss.includes('.dashboard-footer-links'));
+  assert.ok(accuracyDashboardCss.includes('.table-ref-cell'));
+  assert.ok(accuracyDashboardCss.includes('.table-date-cell'));
   assert.doesNotMatch(accuracyDashboardHtml, /<[^>]+style="/);
   assert.ok(accuracyDashboardHtml.includes('id="loadSavedDataButton"'));
   assert.doesNotMatch(accuracyDashboardHtml, /<script>\s*[\s\S]*<\/script>/);
@@ -338,12 +342,12 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(calibrationJs.includes('async function request(method=\'GET\', body)'));
   assert.ok(calibrationJs.includes('data-action="add-project-multiplier"'));
   assert.ok(calibrationJs.includes("$('saveButton').addEventListener('click', saveConfig)"));
-  assert.ok(calibrationHtml.includes('.project-multiplier-row'));
-  assert.ok(calibrationHtml.includes('.shadow-project-row'));
-  assert.ok(calibrationHtml.includes('.shadow-band-row'));
-  assert.ok(calibrationHtml.includes('.shadow-add-row'));
-  assert.ok(calibrationHtml.includes('.calibration-input-row'));
-  assert.ok(calibrationHtml.includes('.calibration-group-heading'));
+  assert.ok(calibrationCss.includes('.project-multiplier-row'));
+  assert.ok(calibrationCss.includes('.shadow-project-row'));
+  assert.ok(calibrationCss.includes('.shadow-band-row'));
+  assert.ok(calibrationCss.includes('.shadow-add-row'));
+  assert.ok(calibrationCss.includes('.calibration-input-row'));
+  assert.ok(calibrationCss.includes('.calibration-group-heading'));
   assert.ok(calibrationJs.includes('class="field-grid shadow-project-row"'));
   assert.ok(calibrationJs.includes('class="field-grid shadow-band-row"'));
   assert.ok(calibrationJs.includes('class="field-grid shadow-add-row"'));
@@ -354,8 +358,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(calibrationJs, /style\.cssText/);
   assert.ok(marketIntelligenceHtml.includes('<h1 class="miayaar-page-title">Market Intelligence</h1>'));
   assert.ok(marketIntelligenceHtml.includes('<script src="/shared/market-intelligence.js"></script>'));
-  assert.ok(marketIntelligenceHtml.includes('.methodology-panel'));
-  assert.ok(marketIntelligenceHtml.includes('.dashboard-footer-links'));
+  assert.ok(marketIntelligenceCss.includes('.methodology-panel'));
+  assert.ok(marketIntelligenceCss.includes('.dashboard-footer-links'));
   assert.doesNotMatch(marketIntelligenceHtml, /<[^>]+style="/);
   assert.doesNotMatch(marketIntelligenceHtml, /<script>\s*[\s\S]*<\/script>/);
   assert.ok(marketIntelligenceJs.includes('function renderInvestmentTable()'));
@@ -373,16 +377,16 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(exportJs.includes("safeText.replace(/\"/g, '\"\"')"));
   assert.ok(exportJs.includes("/^[=+\\-@]/.test(text)"));
   assert.ok(exportJs.includes('class="accuracy-value"'));
-  assert.ok(exportHtml.includes('.stats .accuracy-value'));
+  assert.ok(exportCss.includes('.stats .accuracy-value'));
   assert.ok(exportHtml.includes('class="dashboard-link"'));
   assert.doesNotMatch(exportJs, /<b style="color:#00b86e">/);
   assert.doesNotMatch(exportHtml, /href="\/accuracy-dashboard" style=/);
 });
 
 test('Market Intelligence tables stay intact inside horizontally scrollable cards', () => {
-  assert.match(marketIntelligenceHtml, /\.table-scroll/);
-  assert.match(marketIntelligenceHtml, /overflow-x: auto/);
-  assert.match(marketIntelligenceHtml, /\.table-scroll table \{ min-width: 520px; \}/);
+  assert.match(marketIntelligenceCss, /\.table-scroll/);
+  assert.match(marketIntelligenceCss, /overflow-x: auto/);
+  assert.match(marketIntelligenceCss, /\.table-scroll table \{ min-width: 520px; \}/);
   assert.match(marketIntelligenceJs, /role="region" tabindex="0" aria-label="Top 10 Investment Districts table"/);
   assert.doesNotMatch(marketIntelligenceHtml, /\.table-scroll thead \{/);
   assert.doesNotMatch(marketIntelligenceHtml, /data-label="District"/);
