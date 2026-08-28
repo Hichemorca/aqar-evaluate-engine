@@ -96,8 +96,18 @@ test('public pages use semantic headings and safe external links', () => {
     assert.match(source, /target="_blank" rel="noopener noreferrer"/);
     assert.doesNotMatch(source, /target="_blank"(?! rel="noopener noreferrer")/);
   }
-  assert.ok(indexHtml.includes('<link rel="stylesheet" href="/shared/index-page.css" />'));
-  assert.doesNotMatch(indexHtml, /<style>/);
+  const externalPageStyles = [
+    [indexHtml, '/shared/index-page.css'],
+    [marketIntelligenceHtml, '/shared/market-intelligence-page.css'],
+    [accuracyDashboardHtml, '/shared/accuracy-dashboard-page.css'],
+    [calibrationHtml, '/shared/calibration-page.css'],
+    [exportHtml, '/shared/export-page.css']
+  ];
+  for (const [source, href] of externalPageStyles) {
+    assert.ok(source.includes(`<link rel="stylesheet" href="${href}" />`));
+    assert.doesNotMatch(source, /<style\b/);
+    assert.doesNotMatch(source, /\sstyle\s*=/);
+  }
   assert.ok(indexHtml.includes('<script src="/shared/index-accuracy-meta.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-calibration-bootstrap.js"></script>'));
   assert.ok(indexHtml.indexOf('/shared/index-accuracy-meta.js') < indexHtml.indexOf('/shared/index-calibration-bootstrap.js'));
