@@ -152,7 +152,7 @@ function selectProjectBuilding(name) {
   hideAutocompleteList(document.getElementById('projectBuildingAutocomplete'));
   updateProjectBuildingNotice();
   updateProjectMapLabel();
-  debouncedFetchGISData();
+  prepareGISRefresh();
 }
 
 function promoteAutocompleteList(list) {

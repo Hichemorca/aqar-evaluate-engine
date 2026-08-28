@@ -168,6 +168,14 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexDomBootstrapRuntimeJs.includes("document.addEventListener('DOMContentLoaded', function()"));
   assert.ok(indexDomBootstrapRuntimeJs.includes('loadCalibrationConfig().finally'));
   assert.ok(indexDomBootstrapRuntimeJs.includes('loadMarketIntelligence()'));
+  assert.ok(indexHtml.includes('id="btnLoadFacilities" type="button" disabled aria-busy="false"'));
+  assert.ok(indexHtml.indexOf('id="gisMap"') < indexHtml.indexOf('id="btnLoadFacilities"'));
+  assert.ok(indexHtml.indexOf('id="btnLoadFacilities"') < indexHtml.indexOf('id="gisResult"'));
+  assert.ok(indexGisFetchJs.includes('async function loadNearbyFacilities()'));
+  assert.ok(indexPrimaryInteractionsJs.includes("getElementById('btnLoadFacilities')?.addEventListener('click', loadNearbyFacilities)"));
+  assert.doesNotMatch(indexMapMarkerJs, /debouncedFetchGISData\(\)/);
+  assert.doesNotMatch(indexMapLinkingJs, /debouncedFetchGISData\(\)/);
+  assert.doesNotMatch(indexDistrictContextJs, /debouncedFetchGISData\(\)/);
   assert.ok(indexDomBootstrapRuntimeJs.includes('scheduleGISMapInit()'));
   assert.ok(indexMapMarkerJs.includes('function scheduleGISMapInit()'));
   assert.ok(indexMapMarkerJs.includes("'requestIdleCallback' in window"));

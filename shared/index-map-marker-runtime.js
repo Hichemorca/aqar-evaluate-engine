@@ -82,17 +82,15 @@ function initGISMap() {
       updateMapMarker(e.latlng.lat, e.latlng.lng);
       updateDistrictFromMapPoint(e.latlng.lat, e.latlng.lng);
       prepareGISRefresh();
-      debouncedFetchGISData();
     });
     gisMarker.on('dragend', e => {
       const p = e.target.getLatLng();
       updateMapMarker(p.lat, p.lng);
       updateDistrictFromMapPoint(p.lat, p.lng);
       prepareGISRefresh();
-      debouncedFetchGISData();
     });
     mapInitialized = true;
+    setGISLoadButtonState(false);
     updateProjectMapLabel();
-    setTimeout(() => debouncedFetchGISData(), 500);
   } catch(e) { console.warn('Leaflet map init failed:', e); document.getElementById('gisMap').innerHTML = '<div class="gis-map-unavailable">🗺️ Map unavailable</div>'; }
 }

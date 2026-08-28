@@ -1,5 +1,34 @@
 // GIS refresh and POI fetch runtime for the public valuation page.
 
+function setGISLoadButtonState(loading) {
+  const button = document.getElementById('btnLoadFacilities');
+  const label = document.getElementById('gisLoadButtonLabel');
+  const spinner = document.getElementById('gisLoadButtonSpinner');
+  if (!button) return;
+  button.disabled = loading || !mapInitialized;
+  button.setAttribute('aria-busy', String(loading));
+  if (label) label.textContent = loading ? 'Loading nearby facilities…' : 'Load Nearby Facilities';
+  if (spinner) spinner.classList.toggle('js-hidden', !loading);
+}
+
+function setGISLoadStatus(message) {
+  const status = document.getElementById('gisLoadStatus');
+  if (status) status.textContent = message || '';
+}
+
+async function loadNearbyFacilities() {
+  if (!mapInitialized || gisLoading) return;
+  setGISLoadButtonState(true);
+  setGISLoadStatus('Loading nearby facilities…');
+  try {
+    await fetchGISData();
+    if (gisData?.count > 0) setGISLoadStatus(`Loaded ${gisData.count} nearby facilities.`);
+    else setGISLoadStatus('No mapped vital facilities found in the selected radius.');
+  } finally {
+    setGISLoadButtonState(false);
+  }
+}
+
 function prepareGISRefresh() {
   gisRequestId++;
   if (gisAbortController) gisAbortController.abort();
@@ -10,7 +39,11 @@ function prepareGISRefresh() {
   window.gisImpactPercent = 0;
   poiMarkers.forEach(marker => gisMapInstance?.removeLayer(marker));
   poiMarkers = [];
-  updateGISRadiusContext(getGISRadiusMeters(), null);
+  const radius = getGISRadiusMeters();
+  const context = document.getElementById('gisRadiusContext');
+  if (context) context.textContent = `Facilities will be searched within ${Math.round(radius)}m of the marker.`;
+  setGISLoadStatus('');
+  setGISLoadButtonState(false);
   const result = document.getElementById('gisResult');
   if (result) result.classList.remove('is-visible');
 }

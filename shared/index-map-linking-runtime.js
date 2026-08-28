@@ -58,7 +58,7 @@ async function selectDistrict(d) {
   if (c) {
     updateMapMarker(c.lat, c.lng);
     if (gisMapInstance) gisMapInstance.setView([c.lat, c.lng], 14);
-    debouncedFetchGISData();
+    prepareGISRefresh();
   } else {
     document.getElementById('selectedDistrictDisplay').textContent = `${d} (map location unavailable)`;
     showToast('Map location unavailable for this district');

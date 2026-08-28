@@ -191,7 +191,7 @@
   </div>
   <div class="section" id="gisSection">
     <div class="section-title">📍 Location & Facilities</div>
-    <div class="note section-note">Choose a district to center the map; adjust the marker if needed.</div>
+    <div class="note section-note">Choose a district to center the map, then place the marker on the exact property location.</div>
     <div class="fg">
       <label for="districtInput">📍 District / Area</label>
       <div class="autocomplete-container">
@@ -218,15 +218,21 @@
       <div class="fg"><label for="gisLat">🌐 Latitude</label><input type="text" id="gisLat" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
       <div class="fg"><label for="gisLng">🌐 Longitude</label><input type="text" id="gisLng" class="gis-coordinate-input" readonly tabindex="-1" aria-hidden="true"></div>
     </div>
+    <div id="gisProjectLabel" class="gis-project-label" aria-live="polite"></div>
+    <div id="gisMap" class="gis-map-container" role="region" aria-label="Interactive location map" tabindex="0"></div>
+    <div id="gisMapInstruction" class="gis-radius-context">Place the marker on the exact property location, then load nearby facilities.</div>
+    <button class="btn btn-s gis-facilities-load" id="btnLoadFacilities" type="button" disabled aria-busy="false">
+      <span id="gisLoadButtonLabel">Load Nearby Facilities</span>
+      <span id="gisLoadButtonSpinner" class="loading js-hidden" aria-hidden="true"></span>
+    </button>
+    <input type="hidden" id="gisRadius" value="1000">
+    <div id="gisRadiusContext" class="gis-radius-context">Facilities will be searched within the selected radius of the marker.</div>
+    <div id="gisLoadStatus" class="scrape-status" role="status" aria-live="polite"></div>
     <div id="gisResult" class="gis-result-panel">
       <div class="gis-facilities-title">📊 Nearby Facilities</div>
       <div id="gisFacilitiesList" class="gis-facilities-list" role="status" aria-live="polite"></div>
       <div class="gis-score-display" id="gisScoreDisplay"></div>
     </div>
-    <div id="gisProjectLabel" class="gis-project-label" aria-live="polite"></div>
-    <div id="gisMap" class="gis-map-container" role="region" aria-label="Interactive location map" tabindex="0"></div>
-    <input type="hidden" id="gisRadius" value="1000">
-    <div id="gisRadiusContext" class="gis-radius-context">Vital facilities are shown inside the radius around the current map marker.</div>
   </div>
   <div class="section">
     <div class="section-title">🔍 Market Data</div>

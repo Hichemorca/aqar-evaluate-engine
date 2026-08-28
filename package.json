@@ -13,6 +13,7 @@
     "review-accuracy-outliers": "node scripts/review-accuracy-outliers.js",
     "analyze-detailed-outliers": "node scripts/analyze-detailed-outliers.js",
     "mobile-smoke": "node tests/mobile-smoke.cjs",
+    "manual-gis-smoke": "node tests/manual-gis-flow.cjs",
     "public-pages-smoke": "node tests/public-pages-smoke.cjs",
     "validate-inline-js": "node scripts/validate-inline-js.js",
     "reproducibility-drift": "node scripts/reproducibility-drift.js",
