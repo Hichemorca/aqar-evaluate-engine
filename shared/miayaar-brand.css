@@ -41,6 +41,10 @@ main > .miayaar-brand-lockup {
   margin-right: calc(50% - 50vw);
 }
 
+.header > .miayaar-brand-lockup {
+  margin-top: -30px;
+}
+
 .miayaar-logo-icon {
   display: block;
   width: 58px;
