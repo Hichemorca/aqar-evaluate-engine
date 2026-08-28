@@ -15,20 +15,20 @@ body {
 
 .miayaar-brand-lockup {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
   max-width: none;
-  padding: 18px 20px 26px;
+  padding: 0 12px 18px;
   text-decoration: none;
 }
 
 .miayaar-logo-horizontal {
   display: block;
-  width: 100%;
+  width: min(100%, 960px);
   height: auto;
-  max-width: none;
-  max-height: none;
+  max-width: 960px;
+  max-height: 220px;
   object-fit: contain;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 75%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 75%, transparent 100%);
@@ -43,6 +43,7 @@ main > .miayaar-brand-lockup {
 
 .header > .miayaar-brand-lockup {
   margin-top: -30px;
+  padding-top: 0;
 }
 
 .miayaar-logo-icon {
@@ -144,11 +145,14 @@ button.primary:hover:not(:disabled) {
 @media (max-width: 640px) {
   .miayaar-logo-horizontal {
     width: 100%;
+    max-width: 100%;
+    max-height: none;
   }
 
   .miayaar-brand-lockup {
     padding-right: 0;
     padding-left: 0;
+    padding-bottom: 12px;
   }
 
   .miayaar-admin-brand {
