@@ -16,6 +16,7 @@
     projectInput?.addEventListener('focus', () => filterProjectBuildings(projectInput.value));
 
     document.getElementById('btnScrape')?.addEventListener('click', scrapeRealData);
+    document.getElementById('btnLoadFacilities')?.addEventListener('click', loadNearbyFacilities);
     document.getElementById('btnValuate')?.addEventListener('click', runValuation);
     document.getElementById('btnReset')?.addEventListener('click', resetAll);
     const resultSection = document.getElementById('resultSection');

@@ -56,6 +56,7 @@ function resetAll() {
   gisData = null;
   window.gisImpactMultiplier = 1;
   window.gisImpactPercent = 0;
+  prepareGISRefresh();
   onPropertyTypeChange();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   showToast('All fields cleared');
