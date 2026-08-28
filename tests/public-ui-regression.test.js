@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 const { getComparableBracket } = require('../shared/comparable-bracket');
 
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const indexPageCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-page.css'), 'utf8');
 const inlineValidatorJs = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'validate-inline-js.js'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
@@ -72,8 +73,8 @@ test('autocomplete controls expose keyboard and listbox semantics', () => {
 });
 
 test('autocomplete lists use a body-level fixed portal', () => {
-  assert.match(indexHtml, /\.autocomplete-list\.autocomplete-portal/);
-  assert.match(indexHtml, /position: fixed/);
+  assert.match(indexPageCss, /\.autocomplete-list\.autocomplete-portal/);
+  assert.match(indexPageCss, /position: fixed/);
   assert.match(indexDistrictContextJs, /document\.body\.appendChild\(list\)/);
   assert.match(indexDistrictContextJs, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
   assert.match(indexDistrictContextJs, /window\.addEventListener\('resize', repositionVisibleAutocompleteLists\)/);
@@ -81,9 +82,9 @@ test('autocomplete lists use a body-level fixed portal', () => {
 });
 
 test('custom checkboxes preserve native focusability', () => {
-  assert.match(indexHtml, /\.checkbox-item:focus-within/);
-  assert.match(indexHtml, /\.checkbox-item input \{ position: absolute; width: 1px; height: 1px; opacity: 0; \}/);
-  assert.doesNotMatch(indexHtml, /\.checkbox-item input \{ display: none; \}/);
+  assert.match(indexPageCss, /\.checkbox-item:focus-within/);
+  assert.match(indexPageCss, /\.checkbox-item input \{ position: absolute; width: 1px; height: 1px; opacity: 0; \}/);
+  assert.doesNotMatch(indexPageCss, /\.checkbox-item input \{ display: none; \}/);
 });
 
 test('public pages use semantic headings and safe external links', () => {
@@ -91,6 +92,8 @@ test('public pages use semantic headings and safe external links', () => {
     assert.match(source, /target="_blank" rel="noopener noreferrer"/);
     assert.doesNotMatch(source, /target="_blank"(?! rel="noopener noreferrer")/);
   }
+  assert.ok(indexHtml.includes('<link rel="stylesheet" href="/shared/index-page.css" />'));
+  assert.doesNotMatch(indexHtml, /<style>/);
   assert.ok(indexHtml.includes('<script src="/shared/index-accuracy-meta.js"></script>'));
   assert.ok(indexHtml.includes('<script src="/shared/index-calibration-bootstrap.js"></script>'));
   assert.ok(indexHtml.indexOf('/shared/index-accuracy-meta.js') < indexHtml.indexOf('/shared/index-calibration-bootstrap.js'));
@@ -269,8 +272,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexMapLinkingJs.includes('async function selectDistrict(d)'));
   assert.ok(indexMapLinkingJs.includes('function updateDistrictFromMapPoint(lat, lng)'));
   assert.doesNotMatch(indexHtml, /class="poi-marker" style="--poi-color:/);
-  assert.ok(indexHtml.includes('.observation-status.success'));
-  assert.ok(indexHtml.includes('.observation-status.warning'));
+  assert.ok(indexPageCss.includes('.observation-status.success'));
+  assert.ok(indexPageCss.includes('.observation-status.warning'));
   assert.ok(indexResultRenderingJs.includes('class="result-method-status ${statusClass}"'));
   assert.doesNotMatch(indexHtml, /status\.style\.color/);
   assert.doesNotMatch(indexHtml, /<b style="color:\$\{color\};font-size:10px">/);
@@ -280,21 +283,21 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /id="gisFacilitiesList"[^>]+style="font-size:11px;color:var\(--muted\);line-height:1\.8"/);
   assert.doesNotMatch(indexHtml, /id="gisMap"[^>]+style="margin-top:10px;height:320px/);
   assert.doesNotMatch(indexHtml, /<span style="font-size:10px;color:#888;">\$\{\(p\.distance\*1000\)/);
-  assert.match(indexHtml, /\.js-hidden \{ display: none; \}/);
+  assert.match(indexPageCss, /\.js-hidden \{ display: none; \}/);
   assert.match(indexHtml, /<div class="row js-hidden" id="rowPropertyAreas">/);
   assert.match(indexHtml, /<div class="row js-hidden" id="rowProjectBuilding">/);
   assert.match(indexHtml, /<div class="row js-hidden" id="gisCoordsRow"/);
   assert.doesNotMatch(indexHtml, /(?:rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)"[^>]+style="display:none"/);
   assert.doesNotMatch(indexHtml, /getElementById\('(rowPropertyAreas|fgBua|fgPlotArea|fgLastRenovation|rowProjectBuilding|gisCoordsRow)'\)\.style\.display/);
-  assert.match(indexHtml, /\.gis-result-panel\.is-visible \{ display: block; \}/);
-  assert.match(indexHtml, /\.gis-project-label\.is-visible \{ display: block; \}/);
+  assert.match(indexPageCss, /\.gis-result-panel\.is-visible \{ display: block; \}/);
+  assert.match(indexPageCss, /\.gis-project-label\.is-visible \{ display: block; \}/);
   assert.match(indexGisDisplayJs, /container\.classList\.add\('is-visible'\)/);
   assert.doesNotMatch(indexHtml, /(?:gisResult|gisProjectLabel).*style\.display/);
   assert.doesNotMatch(indexDistrictContextJs, /row\.style\.display = visibility\.projectBuilding/);
-  assert.match(indexHtml, /\.autocomplete-list\.is-visible \{ display: block; \}/);
-  assert.match(indexHtml, /\.autocomplete-list \.item\.empty-state \{ color: var\(--muted\); cursor: default; \}/);
-  assert.match(indexHtml, /\.project-building-notice\.attention \{ color: var\(--gold\); \}/);
-  assert.match(indexHtml, /\.project-building-notice\.verified \{ color: var\(--green\); \}/);
+  assert.match(indexPageCss, /\.autocomplete-list\.is-visible \{ display: block; \}/);
+  assert.match(indexPageCss, /\.autocomplete-list \.item\.empty-state \{ color: var\(--muted\); cursor: default; \}/);
+  assert.match(indexPageCss, /\.project-building-notice\.attention \{ color: var\(--gold\); \}/);
+  assert.match(indexPageCss, /\.project-building-notice\.verified \{ color: var\(--green\); \}/);
   assert.ok(indexDistrictContextJs.includes("function setProjectBuildingNotice(notice, text, tone)"));
   assert.ok(indexDistrictContextJs.includes("empty.className = 'item empty-state'"));
   assert.doesNotMatch(indexDistrictContextJs, /notice\.style\.color|empty\.style\.cssText/);
@@ -304,8 +307,8 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexMarketContextJs.includes('function buildMarketContextHTML(result, propData)'));
   assert.ok(indexMarketContextJs.includes('class="market-indicators"'));
   assert.doesNotMatch(indexMarketContextJs, /<div style="margin-top:12px;padding-top:10px/);
-  assert.match(indexHtml, /\.market-indicators \{ margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba\(255,255,255,0\.08\); \}/);
-  assert.match(indexHtml, /width: var\(--confidence-width, 0%\)/);
+  assert.match(indexPageCss, /\.market-indicators \{ margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba\(255,255,255,0\.08\); \}/);
+  assert.match(indexPageCss, /width: var\(--confidence-width, 0%\)/);
   assert.ok(indexResultRenderingJs.includes("style.setProperty('--confidence-width', `${result.confidencePct}%`)"));
   assert.doesNotMatch(indexHtml, /style="(?:--confidence-width|width):/);
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
