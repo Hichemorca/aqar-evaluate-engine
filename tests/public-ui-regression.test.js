@@ -168,6 +168,16 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexDomBootstrapRuntimeJs.includes("document.addEventListener('DOMContentLoaded', function()"));
   assert.ok(indexDomBootstrapRuntimeJs.includes('loadCalibrationConfig().finally'));
   assert.ok(indexDomBootstrapRuntimeJs.includes('loadMarketIntelligence()'));
+  assert.ok(indexDomBootstrapRuntimeJs.includes('scheduleGISMapInit()'));
+  assert.ok(indexMapMarkerJs.includes('function scheduleGISMapInit()'));
+  assert.ok(indexMapMarkerJs.includes("'requestIdleCallback' in window"));
+  assert.ok(indexMapMarkerJs.includes("script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'"));
+  assert.ok(indexMapMarkerJs.includes('script.integrity ='));
+  assert.ok(indexMapMarkerJs.includes('if (mapInitialized) return;'));
+  assert.ok(indexMapMarkerJs.includes("window.addEventListener('load', scheduleAfterLoad, { once: true })"));
+  assert.ok(indexGisFetchCoordinatorJs.includes('sessionStorage'));
+  assert.ok(indexGisFetchCoordinatorJs.includes('gisInFlightKey === cacheKey'));
+  assert.ok(indexGisFetchCoordinatorJs.includes('gisAbortController.abort()'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_CALIBRATION_ENGINE.combineMethodResults'));
   assert.ok(indexWeightedRuntimeJs.includes('AQAR_V21_SHADOW_MULTIPLIERS.compute(propData, shadowConfig)'));
   assert.ok(indexCostApproachJs.includes('function costApproach(data)'));

@@ -23,6 +23,8 @@ test('Netlify headers define the required browser security protections', () => {
   assert.match(headers, /style-src 'self' https:\/\/fonts\.googleapis\.com https:\/\/unpkg\.com/);
   assert.doesNotMatch(headers, /style-src[^;]*'unsafe-inline'/);
   assert.match(headers, /img-src[^\n]*https:\/\/unpkg\.com/);
+  assert.match(headers, /\/shared\/\*\n\s+Cache-Control: public, max-age=86400, stale-while-revalidate=604800/);
+  assert.match(headers, /\/assets\/\*\n\s+Cache-Control: public, max-age=86400, stale-while-revalidate=604800/);
 });
 
 test('Netlify TOML repeats the required headers for deploys that omit _headers', () => {
@@ -41,6 +43,8 @@ test('Netlify TOML repeats the required headers for deploys that omit _headers',
   assert.doesNotMatch(config, /script-src[^;]*'unsafe-inline'/);
   assert.match(config, /style-src 'self' https:\/\/fonts\.googleapis\.com https:\/\/unpkg\.com/);
   assert.doesNotMatch(config, /style-src[^;]*'unsafe-inline'/);
+  assert.match(config, /for = "\/shared\/\*"[\s\S]*?Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"/);
+  assert.match(config, /for = "\/assets\/\*"[\s\S]*?Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"/);
 });
 
 test('each public page exposes a keyboard skip link and main landmark', () => {
