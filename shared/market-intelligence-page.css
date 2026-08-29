@@ -37,7 +37,7 @@
     .methodology-panel { margin-top:12px; }
     .dashboard-footer-links { display:flex; gap:16px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
     .dashboard-footer-separator { color:var(--muted); }
-.section-note { font-size: 10px; color: var(--muted); margin-top: 2px; max-width: 640px; line-height: 1.5; }
+nt-size: 10px; color: var(--muted); margin-top: 2px; max-width: 640px; line-height: 1.5; }
 
     select.period-filter {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--text);
