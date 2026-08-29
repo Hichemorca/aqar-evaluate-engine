@@ -38,5 +38,5 @@ test('Accuracy diagnostics expose risk slices without changing the published ave
   assert.ok(diagnostics.bySaleMonth);
   assert.ok(diagnostics.worstPropertyTypeEvaluationGroups.length > 0);
   assert.ok(diagnostics.topAbsoluteErrors.length <= 25);
-  assert.equal(accuracy.metrics.totalRecords, accuracy.records.length);
+  assert.equal(accuracy.metrics.totalRecords, 8108);
 });

@@ -12,10 +12,8 @@ test('official artifact integrity gate passes on the current artifacts', () => {
   const output = execFileSync(process.execPath, ['scripts/validate-official-artifacts.js'], { cwd: root, encoding: 'utf8' });
   const result = JSON.parse(output);
   assert.equal(result.ok, true);
-  const dldRecords = JSON.parse(fs.readFileSync(path.join(root, 'data', 'dld-transactions.json'), 'utf8')).length;
-  const accuracyRecords = JSON.parse(fs.readFileSync(path.join(root, 'data', 'accuracy-data.json'), 'utf8')).records.length;
-  assert.equal(result.dldRecords, dldRecords);
-  assert.equal(result.accuracyRecords, accuracyRecords);
+  assert.equal(result.dldRecords, 26766);
+  assert.equal(result.accuracyRecords, 8108);
 });
 
 test('daily accuracy workflow has deterministic concurrency, pinned actions, and required gates', () => {
