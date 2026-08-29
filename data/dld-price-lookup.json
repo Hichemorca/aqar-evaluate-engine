@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T06:36:29.083Z",
+  "generatedAt": "2026-08-29T12:03:46.240Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 23160,
   "tables": {
@@ -133,7 +133,7 @@
         "count": 21
       },
       "DT 1__apartment__medium": {
-        "medianPricePerSqm": 23174,
+        "medianPricePerSqm": 25089,
         "count": 9
       },
       "Boulevard Point__apartment__medium": {
@@ -169,7 +169,7 @@
         "count": 8
       },
       "29 BOULEVARD__apartment__medium": {
-        "medianPricePerSqm": 23837,
+        "medianPricePerSqm": 24930,
         "count": 14
       },
       "DD STAND POINT__apartment__medium": {
@@ -313,7 +313,7 @@
         "count": 7
       },
       "THE ADDRESS - THE BLVD__apartment__medium": {
-        "medianPricePerSqm": 38943,
+        "medianPricePerSqm": 39736,
         "count": 13
       },
       "Grande__apartment__small": {
@@ -365,7 +365,7 @@
         "count": 5
       },
       "The Address Residence-Fountain Views__apartment__medium": {
-        "medianPricePerSqm": 41688,
+        "medianPricePerSqm": 41654,
         "count": 6
       },
       "THE ADDRESS DUBAI OPERA__apartment__small": {
@@ -497,7 +497,7 @@
         "count": 14
       },
       "Luma Park Views__apartment__small": {
-        "medianPricePerSqm": 17381,
+        "medianPricePerSqm": 17402,
         "count": 53
       },
       "BLOOM HEIGHTS__apartment__small": {
@@ -745,7 +745,7 @@
         "count": 11
       },
       "MANHATTAN__apartment__medium": {
-        "medianPricePerSqm": 8491,
+        "medianPricePerSqm": 9039,
         "count": 6
       },
       "BOTANICA__apartment__small": {
@@ -773,7 +773,7 @@
         "count": 2
       },
       "HAMENI__apartment__medium": {
-        "medianPricePerSqm": 14579,
+        "medianPricePerSqm": 14576,
         "count": 8
       },
       "Mayas Geneva__apartment__medium": {
@@ -937,7 +937,7 @@
         "count": 2
       },
       "LOCI Residences__apartment__small": {
-        "medianPricePerSqm": 16052,
+        "medianPricePerSqm": 16829,
         "count": 4
       },
       "Nicholas Residence__apartment__medium": {
@@ -1009,7 +1009,7 @@
         "count": 2
       },
       "CHAIMAA PREMIERE__apartment__small": {
-        "medianPricePerSqm": 9942,
+        "medianPricePerSqm": 11309,
         "count": 3
       },
       "SPICA__apartment__medium": {
@@ -1021,11 +1021,11 @@
         "count": 6
       },
       "Binghatti Mirage__apartment__medium": {
-        "medianPricePerSqm": 9410,
+        "medianPricePerSqm": 11802,
         "count": 3
       },
       "Binghatti Crest__apartment__small": {
-        "medianPricePerSqm": 15854,
+        "medianPricePerSqm": 15641,
         "count": 7
       },
       "The Autograph__apartment__medium": {
@@ -1377,7 +1377,7 @@
         "count": 6
       },
       "INTERNATIONAL CITY EMARATI__apartment__small": {
-        "medianPricePerSqm": 6864,
+        "medianPricePerSqm": 6861,
         "count": 50
       },
       "CLASSIC APARTMENTS__apartment__medium": {
@@ -1701,7 +1701,7 @@
         "count": 2
       },
       "SPARKLE TOWERS__apartment__small": {
-        "medianPricePerSqm": 26089,
+        "medianPricePerSqm": 26741,
         "count": 8
       },
       "ROYAL OCEANIC TOWER__apartment__medium": {
@@ -1733,7 +1733,7 @@
         "count": 29
       },
       "MAG218__apartment__medium": {
-        "medianPricePerSqm": 14700,
+        "medianPricePerSqm": 14702,
         "count": 14
       },
       "TFG MARINA__apartment__small": {
@@ -1829,7 +1829,7 @@
         "count": 10
       },
       "MARINA ARCADE__apartment__medium": {
-        "medianPricePerSqm": 16464,
+        "medianPricePerSqm": 16945,
         "count": 5
       },
       "MARINA STAR__apartment__large": {
@@ -2097,7 +2097,7 @@
         "count": 16
       },
       "THE POLO RESIDENCE__apartment__medium": {
-        "medianPricePerSqm": 17892,
+        "medianPricePerSqm": 17893,
         "count": 23
       },
       "Azizi Gardens__apartment__small": {
@@ -2389,7 +2389,7 @@
         "count": 4
       },
       "Alexis Tower__apartment__small": {
-        "medianPricePerSqm": 15887,
+        "medianPricePerSqm": 15690,
         "count": 18
       },
       "SUBERBIA__apartment__small": {
@@ -2497,7 +2497,7 @@
         "count": 5
       },
       "ELITE 6 SPORTS RESIDENCE__apartment__small": {
-        "medianPricePerSqm": 10704,
+        "medianPricePerSqm": 10419,
         "count": 14
       },
       "ELITE 3 SPORTS RESIDENCE__apartment__small": {
@@ -3241,7 +3241,7 @@
         "count": 39
       },
       "THE IVY__apartment__small": {
-        "medianPricePerSqm": 15726,
+        "medianPricePerSqm": 15958,
         "count": 7
       },
       "The Community__apartment__small": {
@@ -3405,7 +3405,7 @@
         "count": 8
       },
       "17 ICON BAY__apartment__medium": {
-        "medianPricePerSqm": 22284,
+        "medianPricePerSqm": 26324,
         "count": 5
       },
       "The Grand__apartment__small": {
@@ -3589,7 +3589,7 @@
         "count": 3
       },
       "Glorious Central Residences__apartment__small": {
-        "medianPricePerSqm": 14028,
+        "medianPricePerSqm": 13845,
         "count": 13
       },
       "EQUITI APARTMENTS__apartment__small": {
@@ -3837,7 +3837,7 @@
         "count": 33
       },
       "DAMAC HILLS (2) - PRIMROSE__land__land_tiny": {
-        "medianPricePerSqm": 13444,
+        "medianPricePerSqm": 13158,
         "count": 15
       },
       "DAMAC HILLS (2) - TRIXIS__land__land_tiny": {
@@ -4217,7 +4217,7 @@
         "count": 4
       },
       "AYKON CITY__apartment__small": {
-        "medianPricePerSqm": 16422,
+        "medianPricePerSqm": 16376,
         "count": 43
       },
       "THE PAD__apartment__small": {
@@ -4673,7 +4673,7 @@
         "count": 5
       },
       "JUMEIRAH BUSINESS CENTRE1__office__medium": {
-        "medianPricePerSqm": 29386,
+        "medianPricePerSqm": 30946,
         "count": 18
       },
       "AG TOWER__office__small": {
@@ -4897,7 +4897,7 @@
         "count": 5
       },
       "Park Heights I__apartment__medium": {
-        "medianPricePerSqm": 21399,
+        "medianPricePerSqm": 21243,
         "count": 7
       },
       "Park Field__apartment__medium": {
@@ -5537,7 +5537,7 @@
         "count": 3
       },
       "LA RIVE__apartment__medium": {
-        "medianPricePerSqm": 26033,
+        "medianPricePerSqm": 25140,
         "count": 8
       },
       "LA RIVE__apartment__small": {
@@ -5949,7 +5949,7 @@
         "count": 19
       },
       "Binghatti Gateway__apartment__small": {
-        "medianPricePerSqm": 13095,
+        "medianPricePerSqm": 12842,
         "count": 6
       },
       "Binghatti Creek__apartment__small": {
@@ -6213,7 +6213,7 @@
         "count": 28
       },
       "SMART HEIGHTS__office__small": {
-        "medianPricePerSqm": 17606,
+        "medianPricePerSqm": 13605,
         "count": 4
       },
       "SMART HEIGHTS__office__medium": {
@@ -6477,7 +6477,7 @@
         "count": 8
       },
       "SIDRA__land__land_medium": {
-        "medianPricePerSqm": 20498,
+        "medianPricePerSqm": 23807,
         "count": 3
       },
       "Golf Place__land__land_medium": {
@@ -6573,7 +6573,7 @@
         "count": 22
       },
       "THE FIELDS AT D11 - MBRMC__villa__large": {
-        "medianPricePerSqm": 15536,
+        "medianPricePerSqm": 15340,
         "count": 24
       },
       "THE FIELDS AT D11 - MBRMC__villa__medium": {
@@ -6793,7 +6793,7 @@
         "count": 2
       },
       "DAMAC HILLS-PARK RESIDENCES 1__land__land_tiny": {
-        "medianPricePerSqm": 21011,
+        "medianPricePerSqm": 20667,
         "count": 10
       },
       "DAMAC HILLS - THE FLORA__land__land_medium": {
@@ -6905,7 +6905,7 @@
         "count": 4
       },
       "Palace Beach Residence__apartment__small": {
-        "medianPricePerSqm": 34094,
+        "medianPricePerSqm": 33973,
         "count": 16
       },
       "BEACH VISTA__apartment__medium": {
@@ -6933,7 +6933,7 @@
         "count": 2
       },
       "Nad Al Sheba Gardens Phase 11__land__land_medium": {
-        "medianPricePerSqm": 23639,
+        "medianPricePerSqm": 23563,
         "count": 87
       },
       "Nad Al Sheba Gardens Phase 8 & 9__land__land_medium": {
@@ -6961,7 +6961,7 @@
         "count": 2
       },
       "MAG EYE Phase 1__apartment__small": {
-        "medianPricePerSqm": 18135,
+        "medianPricePerSqm": 18320,
         "count": 33
       },
       "MAG EYE Phase 1__apartment__medium": {
@@ -7345,7 +7345,7 @@
         "count": 7
       },
       "LIVING LEGENDS PHASE 1__land__land_medium": {
-        "medianPricePerSqm": 6924,
+        "medianPricePerSqm": 8057,
         "count": 4
       },
       "LIVING LEGENDS PHASE 1__land__land_small": {
@@ -7561,7 +7561,7 @@
         "count": 2
       },
       "Eden Hills__land__land_medium": {
-        "medianPricePerSqm": 27600,
+        "medianPricePerSqm": 27509,
         "count": 97
       },
       "Eden Hills__land__land_large": {
@@ -7961,11 +7961,11 @@
         "count": 46
       },
       "Ashwood Estates__land__land_medium": {
-        "medianPricePerSqm": 20910,
+        "medianPricePerSqm": 20926,
         "count": 120
       },
       "Ashwood Estates__land__land_large": {
-        "medianPricePerSqm": 22314,
+        "medianPricePerSqm": 22076,
         "count": 22
       },
       "D Villas__land__land_small": {
@@ -8021,7 +8021,7 @@
         "count": 4
       },
       "DAMAC ISLANDS 2 - BAHAMAS 1__land__land_small": {
-        "medianPricePerSqm": 20406,
+        "medianPricePerSqm": 20389,
         "count": 15
       },
       "DAMAC ISLANDS - FIJI 2__land__land_tiny": {
@@ -8133,7 +8133,7 @@
         "count": 16
       },
       "The Valley - Farm Gardens__land__land_medium": {
-        "medianPricePerSqm": 8611,
+        "medianPricePerSqm": 8669,
         "count": 9
       },
       "The Valley - Farm Grove 2__land__land_small": {
@@ -8447,7 +8447,7 @@
         "count": 4
       },
       "AVANOS__apartment": {
-        "medianPricePerSqm": 12783,
+        "medianPricePerSqm": 11845,
         "count": 4
       },
       "BELGRAVIA HEIGHTS II__apartment": {
@@ -8683,7 +8683,7 @@
         "count": 7
       },
       "Binghatti Onyx__apartment": {
-        "medianPricePerSqm": 14533,
+        "medianPricePerSqm": 14710,
         "count": 36
       },
       "CITY APARTMENTS__apartment": {
@@ -8739,7 +8739,7 @@
         "count": 4
       },
       "Binghatti Tulip__apartment": {
-        "medianPricePerSqm": 19299,
+        "medianPricePerSqm": 18769,
         "count": 11
       },
       "Oxford 212__apartment": {
@@ -8847,7 +8847,7 @@
         "count": 5
       },
       "Rise Residences__apartment": {
-        "medianPricePerSqm": 13642,
+        "medianPricePerSqm": 13491,
         "count": 27
       },
       "SIROYA GARDENS__apartment": {
@@ -8883,7 +8883,7 @@
         "count": 5
       },
       "CHAIMAA PREMIERE__apartment": {
-        "medianPricePerSqm": 9942,
+        "medianPricePerSqm": 11309,
         "count": 3
       },
       "SPICA__apartment": {
@@ -9063,7 +9063,7 @@
         "count": 8
       },
       "INTERNATIONAL CITY EMARATI__apartment": {
-        "medianPricePerSqm": 6864,
+        "medianPricePerSqm": 6861,
         "count": 50
       },
       "CLASSIC APARTMENTS__apartment": {
@@ -9111,7 +9111,7 @@
         "count": 12
       },
       "MARINA RESIDENCE__apartment": {
-        "medianPricePerSqm": 22198,
+        "medianPricePerSqm": 23210,
         "count": 33
       },
       "GRANDEUR RESIDENCES__apartment": {
@@ -9283,7 +9283,7 @@
         "count": 2
       },
       "Studio One__apartment": {
-        "medianPricePerSqm": 27586,
+        "medianPricePerSqm": 28257,
         "count": 21
       },
       "TORCH TOWER__apartment": {
@@ -9571,11 +9571,11 @@
         "count": 24
       },
       "LA FONTANA DI TREVI__apartment": {
-        "medianPricePerSqm": 8740,
+        "medianPricePerSqm": 9791,
         "count": 5
       },
       "Adhara Star__apartment": {
-        "medianPricePerSqm": 15825,
+        "medianPricePerSqm": 15717,
         "count": 20
       },
       "MIRACLZ TOWER__apartment": {
@@ -9627,7 +9627,7 @@
         "count": 22
       },
       "SUNRISE LEGEND__apartment": {
-        "medianPricePerSqm": 13300,
+        "medianPricePerSqm": 13200,
         "count": 8
       },
       "Floarea Residence__apartment": {
@@ -9715,7 +9715,7 @@
         "count": 16
       },
       "Alexis Tower__apartment": {
-        "medianPricePerSqm": 15887,
+        "medianPricePerSqm": 15690,
         "count": 18
       },
       "STADIUM POINT__apartment": {
@@ -9727,7 +9727,7 @@
         "count": 9
       },
       "GOLF VIEW RESIDENCE__apartment": {
-        "medianPricePerSqm": 9024,
+        "medianPricePerSqm": 8861,
         "count": 10
       },
       "Hera Tower__apartment": {
@@ -9803,7 +9803,7 @@
         "count": 8
       },
       "ELITE 6 SPORTS RESIDENCE__apartment": {
-        "medianPricePerSqm": 10704,
+        "medianPricePerSqm": 10419,
         "count": 14
       },
       "ELITE 3 SPORTS RESIDENCE__apartment": {
@@ -9847,7 +9847,7 @@
         "count": 13
       },
       "ROYALE RESIDENCE1__apartment": {
-        "medianPricePerSqm": 9497,
+        "medianPricePerSqm": 9934,
         "count": 21
       },
       "OLYMPIC PARK 4__apartment": {
@@ -9887,7 +9887,7 @@
         "count": 23
       },
       "UNIESTATE SPORTS TOWER__apartment": {
-        "medianPricePerSqm": 8885,
+        "medianPricePerSqm": 10648,
         "count": 4
       },
       "V2__apartment": {
@@ -10407,7 +10407,7 @@
         "count": 50
       },
       "HARBOUR VIEWS__apartment": {
-        "medianPricePerSqm": 24421,
+        "medianPricePerSqm": 25202,
         "count": 25
       },
       "Creek Beach - Breeze__apartment": {
@@ -11027,7 +11027,7 @@
         "count": 13
       },
       "Trillionaire Residences by Binghatti__apartment": {
-        "medianPricePerSqm": 24826,
+        "medianPricePerSqm": 25124,
         "count": 15
       },
       "J ONE__apartment": {
@@ -11063,7 +11063,7 @@
         "count": 13
       },
       "REVA RESIDENCES__apartment": {
-        "medianPricePerSqm": 21734,
+        "medianPricePerSqm": 21719,
         "count": 12
       },
       "WEST FIVE BUSINESS BAY RESIDENCES__apartment": {
@@ -11263,7 +11263,7 @@
         "count": 3
       },
       "DUBAI STAR__office": {
-        "medianPricePerSqm": 16587,
+        "medianPricePerSqm": 16725,
         "count": 19
       },
       "PLATINUM TOWER__office": {
@@ -11419,7 +11419,7 @@
         "count": 9
       },
       "MUDON PHASE 3 _  NEIGHBOURHOOD I- ARABELLA__land": {
-        "medianPricePerSqm": 15997,
+        "medianPricePerSqm": 15793,
         "count": 18
       },
       "ARABELLA 2 - TOWNHOUSES AT MUDON__land": {
@@ -11427,7 +11427,7 @@
         "count": 15
       },
       "Mudon-Phase 2__land": {
-        "medianPricePerSqm": 11933,
+        "medianPricePerSqm": 11546,
         "count": 9
       },
       "Arabella 3__land": {
@@ -11727,7 +11727,7 @@
         "count": 9
       },
       "CELESTIA__apartment": {
-        "medianPricePerSqm": 11967,
+        "medianPricePerSqm": 12011,
         "count": 41
       },
       "The Pulse Residence Park__apartment": {
@@ -11863,7 +11863,7 @@
         "count": 48
       },
       "CASA FLORES AND EDEN APARTMENTS__apartment": {
-        "medianPricePerSqm": 10711,
+        "medianPricePerSqm": 10241,
         "count": 24
       },
       "Azizi  Riviera 34__apartment": {
@@ -12079,7 +12079,7 @@
         "count": 27
       },
       "Farhad Azizi Residence__apartment": {
-        "medianPricePerSqm": 20659,
+        "medianPricePerSqm": 20675,
         "count": 28
       },
       "Azizi Aliyah Residences__apartment": {
@@ -12211,7 +12211,7 @@
         "count": 67
       },
       "Parkside__villa": {
-        "medianPricePerSqm": 15341,
+        "medianPricePerSqm": 15431,
         "count": 26
       },
       "Parkside 3__villa": {
@@ -12739,7 +12739,7 @@
         "count": 19
       },
       "Nad Al Sheba Gardens Phase 11__land": {
-        "medianPricePerSqm": 23639,
+        "medianPricePerSqm": 23563,
         "count": 87
       },
       "Nad Al Sheba Gardens Phase 8 & 9__land": {
@@ -12851,7 +12851,7 @@
         "count": 11
       },
       "DAMAC LAGOONS - MYKONOS__land": {
-        "medianPricePerSqm": 18542,
+        "medianPricePerSqm": 18054,
         "count": 19
       },
       "DAMAC LAGOONS - COSTA BRAVA (2)__land": {
@@ -12903,7 +12903,7 @@
         "count": 2
       },
       "GOLF LINKS__land": {
-        "medianPricePerSqm": 9271,
+        "medianPricePerSqm": 9234,
         "count": 7
       },
       "BADRA PHASE 1__apartment": {
@@ -13179,7 +13179,7 @@
         "count": 12
       },
       "Eden Hills__land": {
-        "medianPricePerSqm": 27503,
+        "medianPricePerSqm": 27466,
         "count": 101
       },
       "Mohammed Bin Rashid Al Maktoum City -District One West - Phase 2__land": {
@@ -13227,7 +13227,7 @@
         "count": 29
       },
       "The Wilds 2__land": {
-        "medianPricePerSqm": 15814,
+        "medianPricePerSqm": 15847,
         "count": 23
       },
       "The Wilds 3__land": {
@@ -13327,7 +13327,7 @@
         "count": 5
       },
       "One Za'abeel__apartment": {
-        "medianPricePerSqm": 42274,
+        "medianPricePerSqm": 44600,
         "count": 7
       },
       "MBL RESIDENCE__retail": {
@@ -13487,7 +13487,7 @@
         "count": 25
       },
       "Grand Polo - Equiterra__land": {
-        "medianPricePerSqm": 21717,
+        "medianPricePerSqm": 21716,
         "count": 36
       },
       "Grand Polo - Selvara 3__land": {
@@ -13523,7 +13523,7 @@
         "count": 13
       },
       "DAMAC ISLANDS 2 - BAHAMAS 1__land": {
-        "medianPricePerSqm": 20406,
+        "medianPricePerSqm": 20389,
         "count": 15
       },
       "DAMAC ISLANDS - FIJI 2__land": {
@@ -13587,7 +13587,7 @@
         "count": 16
       },
       "The Valley - Farm Gardens__land": {
-        "medianPricePerSqm": 8611,
+        "medianPricePerSqm": 8669,
         "count": 9
       },
       "The Valley - Farm Grove 2__land": {
@@ -13649,7 +13649,7 @@
         "count": 133
       },
       "BURJ KHALIFA__apartment__medium": {
-        "medianPricePerSqm": 26228,
+        "medianPricePerSqm": 26271,
         "count": 580
       },
       "BURJ KHALIFA__apartment__small": {
@@ -13669,7 +13669,7 @@
         "count": 4
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__small": {
-        "medianPricePerSqm": 14632,
+        "medianPricePerSqm": 14638,
         "count": 1287
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__medium": {
@@ -13737,7 +13737,7 @@
         "count": 6
       },
       "JUMEIRAH LAKES TOWERS__apartment__medium": {
-        "medianPricePerSqm": 14765,
+        "medianPricePerSqm": 14777,
         "count": 223
       },
       "JUMEIRAH LAKES TOWERS__apartment__small": {
@@ -13761,11 +13761,11 @@
         "count": 6
       },
       "ARJAN__apartment__small": {
-        "medianPricePerSqm": 15147,
+        "medianPricePerSqm": 15144,
         "count": 514
       },
       "ARJAN__apartment__medium": {
-        "medianPricePerSqm": 14221,
+        "medianPricePerSqm": 14193,
         "count": 151
       },
       "DOWN TOWN JABAL ALI__apartment__small": {
@@ -13781,7 +13781,7 @@
         "count": 335
       },
       "DUBAI SPORTS CITY__apartment__medium": {
-        "medianPricePerSqm": 9478,
+        "medianPricePerSqm": 9459,
         "count": 170
       },
       "DUBAI SPORTS CITY__apartment__large": {
@@ -13853,7 +13853,7 @@
         "count": 20
       },
       "INTERNATIONAL CITY PH 2 & 3__apartment__small": {
-        "medianPricePerSqm": 9976,
+        "medianPricePerSqm": 9988,
         "count": 153
       },
       "INTERNATIONAL CITY PH 2 & 3__apartment__medium": {
@@ -13865,7 +13865,7 @@
         "count": 4
       },
       "DISCOVERY GARDENS__apartment__small": {
-        "medianPricePerSqm": 11176,
+        "medianPricePerSqm": 11184,
         "count": 330
       },
       "DISCOVERY GARDENS__apartment__medium": {
@@ -13889,7 +13889,7 @@
         "count": 167
       },
       "DUBAI LAND RESIDENCE COMPLEX__apartment__medium": {
-        "medianPricePerSqm": 8049,
+        "medianPricePerSqm": 8073,
         "count": 115
       },
       "DUBAI LAND RESIDENCE COMPLEX__apartment__large": {
@@ -13913,7 +13913,7 @@
         "count": 155
       },
       "LIWAN__apartment__medium": {
-        "medianPricePerSqm": 10314,
+        "medianPricePerSqm": 10549,
         "count": 126
       },
       "BUSINESS BAY__apartment__small": {
@@ -13961,7 +13961,7 @@
         "count": 3
       },
       "DUBAI WATER CANAL__apartment__medium": {
-        "medianPricePerSqm": 29847,
+        "medianPricePerSqm": 30311,
         "count": 45
       },
       "DUBAI WATER CANAL__apartment__large": {
@@ -13993,7 +13993,7 @@
         "count": 11
       },
       "JABEL ALI HILLS__land__land_medium": {
-        "medianPricePerSqm": 3498,
+        "medianPricePerSqm": 3614,
         "count": 54
       },
       "JABEL ALI HILLS__land__land_large": {
@@ -14085,7 +14085,7 @@
         "count": 68
       },
       "SILICON OASIS__apartment__small": {
-        "medianPricePerSqm": 12912,
+        "medianPricePerSqm": 12835,
         "count": 71
       },
       "JUMEIRAH FIRST__apartment__medium": {
@@ -14101,7 +14101,7 @@
         "count": 6
       },
       "MAJAN__apartment__small": {
-        "medianPricePerSqm": 13493,
+        "medianPricePerSqm": 13450,
         "count": 163
       },
       "MAJAN__apartment__medium": {
@@ -14233,11 +14233,11 @@
         "count": 2
       },
       "AL SATWA__apartment__medium": {
-        "medianPricePerSqm": 18238,
+        "medianPricePerSqm": 17716,
         "count": 23
       },
       "AL SATWA__apartment__small": {
-        "medianPricePerSqm": 18712,
+        "medianPricePerSqm": 18705,
         "count": 26
       },
       "DUBAI HILLS__villa__medium": {
@@ -14265,7 +14265,7 @@
         "count": 219
       },
       "SOBHA HEARTLAND__apartment__medium": {
-        "medianPricePerSqm": 21206,
+        "medianPricePerSqm": 21152,
         "count": 198
       },
       "SOBHA HEARTLAND__apartment__large": {
@@ -14309,7 +14309,7 @@
         "count": 8
       },
       "JUMEIRAH VILLAGE CIRCLE__retail__medium": {
-        "medianPricePerSqm": 28159,
+        "medianPricePerSqm": 28070,
         "count": 18
       },
       "JUMEIRAH VILLAGE CIRCLE__retail__large": {
@@ -14341,7 +14341,7 @@
         "count": 21
       },
       "JUMEIRAH GOLF__apartment__small": {
-        "medianPricePerSqm": 15575,
+        "medianPricePerSqm": 15510,
         "count": 13
       },
       "AL BARARI__land__land_large": {
@@ -14441,7 +14441,7 @@
         "count": 2
       },
       "THE FIELD__villa__large": {
-        "medianPricePerSqm": 15536,
+        "medianPricePerSqm": 15340,
         "count": 24
       },
       "THE FIELD__villa__medium": {
@@ -14457,7 +14457,7 @@
         "count": 37
       },
       "MEYDAN ONE__land__land_xlarge": {
-        "medianPricePerSqm": 5385,
+        "medianPricePerSqm": 5384,
         "count": 12
       },
       "MEYDAN ONE__land__land_large": {
@@ -14633,7 +14633,7 @@
         "count": 2
       },
       "MBR DISTRICT 7__apartment__small": {
-        "medianPricePerSqm": 18135,
+        "medianPricePerSqm": 18320,
         "count": 33
       },
       "MBR DISTRICT 7__apartment__medium": {
@@ -14641,7 +14641,7 @@
         "count": 2
       },
       "ARABIAN RANCHES I__villa__large": {
-        "medianPricePerSqm": 15285,
+        "medianPricePerSqm": 15231,
         "count": 59
       },
       "AL HEBIAH THIRD__land__land_small": {
@@ -14793,7 +14793,7 @@
         "count": 84
       },
       "AL YELAYISS 2__apartment__small": {
-        "medianPricePerSqm": 15028,
+        "medianPricePerSqm": 15082,
         "count": 41
       },
       "AL YELAYISS 2__apartment__large": {
@@ -15173,7 +15173,7 @@
         "count": 2
       },
       "AL BARSHA THIRD__land__land_large": {
-        "medianPricePerSqm": 5167,
+        "medianPricePerSqm": 6961,
         "count": 8
       },
       "FALCON CITY OF WONDERS__land__land_small": {
@@ -15509,7 +15509,7 @@
         "count": 2
       },
       "AL MAMZER__land__land_large": {
-        "medianPricePerSqm": 5796,
+        "medianPricePerSqm": 6445,
         "count": 8
       },
       "BURJ KHALIFA__office__large": {
@@ -15533,7 +15533,7 @@
         "count": 3
       },
       "ME'AISEM FIRST__land__land_medium": {
-        "medianPricePerSqm": 20737,
+        "medianPricePerSqm": 20773,
         "count": 126
       },
       "ME'AISEM FIRST__land__land_small": {
@@ -15553,7 +15553,7 @@
         "count": 32
       },
       "AL YELAYISS 1__land__land_tiny": {
-        "medianPricePerSqm": 20469,
+        "medianPricePerSqm": 20431,
         "count": 153
       },
       "AL YELAYISS 1__land__land_small": {
@@ -15631,7 +15631,7 @@
         "count": 44
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment": {
-        "medianPricePerSqm": 13854,
+        "medianPricePerSqm": 13857,
         "count": 2064
       },
       "INTERNATIONAL CITY PH 1__apartment": {
@@ -15639,19 +15639,19 @@
         "count": 534
       },
       "PALM JUMEIRAH__apartment": {
-        "medianPricePerSqm": 26882,
+        "medianPricePerSqm": 26990,
         "count": 346
       },
       "REMRAAM__apartment": {
-        "medianPricePerSqm": 10151,
+        "medianPricePerSqm": 10169,
         "count": 122
       },
       "DUBAI MARINA__apartment": {
-        "medianPricePerSqm": 20021,
+        "medianPricePerSqm": 20036,
         "count": 919
       },
       "ARABIAN RANCHES I__land": {
-        "medianPricePerSqm": 14377,
+        "medianPricePerSqm": 14469,
         "count": 73
       },
       "JUMEIRAH LAKES TOWERS__apartment": {
@@ -15663,11 +15663,11 @@
         "count": 67
       },
       "ARJAN__apartment": {
-        "medianPricePerSqm": 14825,
+        "medianPricePerSqm": 14818,
         "count": 666
       },
       "DOWN TOWN JABAL ALI__apartment": {
-        "medianPricePerSqm": 14832,
+        "medianPricePerSqm": 14697,
         "count": 66
       },
       "DUBAI SPORTS CITY__apartment": {
@@ -15699,7 +15699,7 @@
         "count": 630
       },
       "INTERNATIONAL CITY PH 2 & 3__apartment": {
-        "medianPricePerSqm": 9729,
+        "medianPricePerSqm": 9732,
         "count": 182
       },
       "DISCOVERY GARDENS__apartment": {
@@ -15735,7 +15735,7 @@
         "count": 281
       },
       "BUSINESS BAY__apartment": {
-        "medianPricePerSqm": 19597,
+        "medianPricePerSqm": 19645,
         "count": 1280
       },
       "JABAL ALI FIRST__apartment": {
@@ -15743,7 +15743,7 @@
         "count": 33
       },
       "JUMEIRAH LAKES TOWERS__office": {
-        "medianPricePerSqm": 18299,
+        "medianPricePerSqm": 18294,
         "count": 319
       },
       "THE GREENS__apartment": {
@@ -15751,7 +15751,7 @@
         "count": 211
       },
       "DUBAI WATER CANAL__apartment": {
-        "medianPricePerSqm": 29847,
+        "medianPricePerSqm": 30311,
         "count": 47
       },
       "JUMEIRAH VILLAGE TRIANGLE__land": {
@@ -15807,7 +15807,7 @@
         "count": 22
       },
       "MAJAN__apartment": {
-        "medianPricePerSqm": 12129,
+        "medianPricePerSqm": 12127,
         "count": 315
       },
       "AL MERKADH__land": {
@@ -15851,7 +15851,7 @@
         "count": 30
       },
       "MOTOR CITY__apartment": {
-        "medianPricePerSqm": 10844,
+        "medianPricePerSqm": 10852,
         "count": 325
       },
       "MEYDAN ONE__apartment": {
@@ -15863,7 +15863,7 @@
         "count": 46
       },
       "DUBAI HEALTHCARE CITY - PHASE 2__apartment": {
-        "medianPricePerSqm": 19561,
+        "medianPricePerSqm": 19543,
         "count": 205
       },
       "AL SATWA__apartment": {
@@ -15951,7 +15951,7 @@
         "count": 122
       },
       "JUMEIRAH VILLAGE CIRCLE__office": {
-        "medianPricePerSqm": 16337,
+        "medianPricePerSqm": 17222,
         "count": 23
       },
       "AL WARQA THIRD__land": {
@@ -16055,7 +16055,7 @@
         "count": 151
       },
       "NAD AL SHIBA FIRST__land": {
-        "medianPricePerSqm": 23678,
+        "medianPricePerSqm": 23674,
         "count": 134
       },
       "MBR DISTRICT 7__apartment": {
@@ -16087,7 +16087,7 @@
         "count": 23
       },
       "TOWN SQUARE__villa": {
-        "medianPricePerSqm": 13852,
+        "medianPricePerSqm": 14005,
         "count": 53
       },
       "JUMEIRAH GOLF__land": {
@@ -16095,7 +16095,7 @@
         "count": 19
       },
       "EMAAR SOUTH__land": {
-        "medianPricePerSqm": 9271,
+        "medianPricePerSqm": 9234,
         "count": 7
       },
       "DUBAI MARINA__villa": {
@@ -16115,7 +16115,7 @@
         "count": 54
       },
       "AL SATWA__land": {
-        "medianPricePerSqm": 15870,
+        "medianPricePerSqm": 21528,
         "count": 13
       },
       "DUBAI PRODUCTION CITY__retail": {
@@ -16251,7 +16251,7 @@
         "count": 18
       },
       "AL WASL__land": {
-        "medianPricePerSqm": 11410,
+        "medianPricePerSqm": 12488,
         "count": 9
       },
       "ABU HAIL__land": {
@@ -16327,7 +16327,7 @@
         "count": 12
       },
       "AL FURJAN__retail": {
-        "medianPricePerSqm": 26919,
+        "medianPricePerSqm": 27886,
         "count": 15
       },
       "NAD AL SHIBA THIRD__land": {
@@ -16363,7 +16363,7 @@
         "count": 7
       },
       "ZAABEEL FIRST__apartment": {
-        "medianPricePerSqm": 42274,
+        "medianPricePerSqm": 44600,
         "count": 7
       },
       "NAD AL HAMAR__land": {
@@ -16583,7 +16583,7 @@
         "count": 3
       },
       "AL MAMZER__land": {
-        "medianPricePerSqm": 5796,
+        "medianPricePerSqm": 6445,
         "count": 8
       },
       "BURJ KHALIFA__office": {
@@ -16611,7 +16611,7 @@
         "count": 216
       },
       "DUBAI INVESTMENT PARK SECOND__land": {
-        "medianPricePerSqm": 21998,
+        "medianPricePerSqm": 22168,
         "count": 74
       },
       "AL YELAYISS 1__land": {
