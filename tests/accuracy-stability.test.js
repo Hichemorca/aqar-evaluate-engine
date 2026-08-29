@@ -30,8 +30,9 @@ test('accuracy stability analyzer produces read-only, provenance-bound output', 
   assert.equal(report.source.accuracySha256, accuracyHashBefore);
   assert.equal(report.source.dldSha256, dldHashBefore);
   assert.equal(report.source.accuracyScope, 'verified-dld-only');
-  assert.equal(report.sourceCounts.accuracy.records, 8108);
-  assert.equal(report.scored.scoredRecords, 8108);
+  const accuracyRecords = JSON.parse(fs.readFileSync(accuracyPath, 'utf8')).records.length;
+  assert.equal(report.sourceCounts.accuracy.records, accuracyRecords);
+  assert.equal(report.scored.scoredRecords, accuracyRecords);
   assert.equal(report.safeguards.officialAccuracyChanged, false);
   assert.equal(report.safeguards.officialDldChanged, false);
   assert.equal(report.safeguards.recordsExcludedOrCapped, false);
