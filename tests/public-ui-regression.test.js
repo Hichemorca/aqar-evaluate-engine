@@ -358,6 +358,18 @@ test('public pages use semantic headings and safe external links', () => {
   assert.ok(indexMarketContextJs.includes('function renderEvidenceState(state, container, detail = \'\')'));
   assert.ok(indexMarketContextJs.includes('escapeMapHtml(propData.district || \'the selected area\')'));
   assert.doesNotMatch(indexHtml, /function buildMarketContextHTML\(result, propData\)/);
+  for (const pageHtml of [indexHtml, accuracyDashboardHtml, marketIntelligenceHtml, calibrationHtml, exportHtml]) {
+    assert.match(pageHtml, /class="miayaar-nav"/);
+    assert.match(pageHtml, /href="\/accuracy-dashboard"/);
+    assert.match(pageHtml, /href="\/market-intelligence"/);
+    assert.match(pageHtml, /href="\/export"/);
+    assert.match(pageHtml, /href="\/admin-calibration"/);
+  }
+  assert.match(brandCss, /--miayaar-surface-strong/);
+  assert.match(brandCss, /\.miayaar-nav/);
+  assert.match(brandCss, /prefers-reduced-motion/);
+  assert.match(indexResultRenderingJs, /class="result-evidence-facts"/);
+  assert.match(indexResultRenderingJs, /class="result-methodology"/);
   assert.ok(accuracyDashboardHtml.includes('<h1 class="miayaar-page-title">Accuracy Dashboard</h1>'));
   assert.ok(accuracyDashboardHtml.includes('<script src="/shared/accuracy-dashboard.js"></script>'));
   assert.ok(accuracyDashboardCss.includes('.refresh-bar-heading'));
