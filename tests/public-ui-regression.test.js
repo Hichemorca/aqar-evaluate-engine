@@ -111,7 +111,8 @@ test('public pages use semantic headings and safe external links', () => {
   }
   assert.ok(indexHtml.includes('<script src="/shared/index-accuracy-meta.js"></script>'));
   assert.match(brandCss, /\.miayaar-brand-lockup\s*\{/);
-  assert.match(brandCss, /\.miayaar-logo-horizontal\s*\{[\s\S]*-webkit-mask-image:\s*linear-gradient\(to bottom, #000 0%, #000 75%, transparent 100%\)/);
+  assert.match(brandCss, /\.miayaar-brand-lockup::after\s*\{[\s\S]*height:\s*28%[\s\S]*background:\s*linear-gradient\([\s\S]*#07111f 100%/);
+  assert.doesNotMatch(brandCss, /\.miayaar-logo-horizontal\s*\{[\s\S]*-webkit-mask-image:/);
   assert.match(brandCss, /\.header > \.miayaar-brand-lockup,[\s\S]*width: 100vw/);
   assert.match(brandCss, /main > \.miayaar-brand-lockup/);
   assert.match(brandCss, /\.header > \.miayaar-brand-lockup\s*\{[\s\S]*margin-top:\s*-30px[\s\S]*padding-top:\s*0/);
