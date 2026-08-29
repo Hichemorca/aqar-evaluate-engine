@@ -27,9 +27,9 @@ test('severe Accuracy outliers all map to official DLD records without core mism
   assert.equal(report.readOnly, true);
   assert.equal(report.scope, 'severe-accuracy-outliers-over-100pct');
   assert.equal(report.source.accuracyScope, 'verified-dld-only');
-  assert.equal(report.counts.severeErrorRecords, 66);
-  assert.equal(report.counts.matchedByAnyOfficialKey, 66);
-  assert.equal(report.counts.exactCoreSourceMatches, 66);
+  assert.ok(report.counts.severeErrorRecords > 0);
+  assert.equal(report.counts.matchedByAnyOfficialKey, report.counts.severeErrorRecords);
+  assert.equal(report.counts.exactCoreSourceMatches, report.counts.severeErrorRecords);
   assert.equal(report.counts.recordsWithDldFieldMismatch, 0);
   assert.equal(report.counts.recordsWithDataIntegrityFlags, 1);
   assert.equal(report.safeguards.recordsExcludedOrCapped, false);

@@ -159,3 +159,273 @@ button.primary:hover:not(:disabled) {
     align-items: flex-start;
   }
 }
+
+
+/* MIAYAAR Decision Intelligence design system — presentation only. */
+:root {
+  --miayaar-bg: #07111f;
+  --miayaar-bg-elevated: #0b1a2d;
+  --miayaar-surface: rgba(13, 31, 51, .82);
+  --miayaar-surface-strong: #0d2035;
+  --miayaar-surface-soft: rgba(255, 255, 255, .045);
+  --miayaar-border: rgba(160, 191, 220, .16);
+  --miayaar-border-strong: rgba(35, 201, 139, .34);
+  --miayaar-text: #f4f7fb;
+  --miayaar-text-secondary: #c5d2e0;
+  --miayaar-text-muted: #93a7bd;
+  --miayaar-accent: #23c98b;
+  --miayaar-accent-strong: #0aa66f;
+  --miayaar-warning: #e4b65a;
+  --miayaar-danger: #ff6b7a;
+  --miayaar-radius-sm: 9px;
+  --miayaar-radius-md: 14px;
+  --miayaar-radius-lg: 20px;
+  --miayaar-shadow-sm: 0 8px 24px rgba(0, 0, 0, .16);
+  --miayaar-shadow-md: 0 18px 50px rgba(0, 0, 0, .22);
+  --miayaar-focus: 0 0 0 3px rgba(35, 201, 139, .25);
+  --miayaar-ease: cubic-bezier(.23, 1, .32, 1);
+}
+
+html { background: var(--miayaar-bg); }
+body {
+  color: var(--miayaar-text);
+  letter-spacing: .002em;
+  text-rendering: optimizeLegibility;
+}
+
+/* Shared page frame: full-bleed brand, then a readable content column. */
+.container,
+.shell,
+#app-container {
+  position: relative;
+}
+
+.container,
+.shell {
+  max-width: 1280px;
+}
+
+.miayaar-brand-lockup {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.miayaar-brand-lockup::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 25%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, var(--miayaar-bg) 100%);
+  opacity: .9;
+  z-index: 1;
+}
+
+.miayaar-logo-horizontal {
+  position: relative;
+  z-index: 0;
+  transition: opacity .22s var(--miayaar-ease), transform .22s var(--miayaar-ease);
+}
+
+.miayaar-brand-lockup:hover .miayaar-logo-horizontal {
+  transform: scale(1.004);
+}
+
+.header,
+.topbar {
+  position: relative;
+}
+
+.header h1,
+.miayaar-page-title,
+.topbar h1 {
+  letter-spacing: -.025em;
+}
+
+.section,
+.panel,
+.stat-card,
+.result-card {
+  border-color: var(--miayaar-border);
+  border-radius: var(--miayaar-radius-lg);
+  box-shadow: var(--miayaar-shadow-sm);
+}
+
+.section:hover,
+.panel:hover,
+.stat-card:hover {
+  border-color: rgba(35, 201, 139, .22);
+}
+
+.section-title,
+.panel-head,
+.section-heading {
+  letter-spacing: .025em;
+}
+
+input:not([type="checkbox"]),
+select,
+textarea,
+button,
+.btn,
+.btn-s,
+.integration-btn {
+  min-height: 42px;
+  border-radius: var(--miayaar-radius-sm);
+}
+
+input:not([type="checkbox"]):focus,
+select:focus,
+textarea:focus,
+button:focus-visible,
+a:focus-visible,
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--miayaar-focus);
+}
+
+button,
+.btn,
+.integration-btn,
+.checkbox-item,
+.type-card > summary {
+  transition: transform .16s var(--miayaar-ease), border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+button:active:not(:disabled),
+.btn:active:not(:disabled),
+.integration-btn:active:not(:disabled) {
+  transform: scale(.98);
+}
+
+.btn-p,
+button.primary,
+.integration-btn {
+  color: #03170f !important;
+  background: linear-gradient(135deg, var(--miayaar-accent), var(--miayaar-accent-strong)) !important;
+  box-shadow: 0 8px 24px rgba(10, 166, 111, .2);
+}
+
+.btn-p:hover:not(:disabled),
+button.primary:hover:not(:disabled),
+.integration-btn:hover:not(:disabled) {
+  box-shadow: 0 12px 32px rgba(10, 166, 111, .32);
+}
+
+.stat-card,
+.field-card,
+.type-card,
+.method-card {
+  background: var(--miayaar-surface) !important;
+}
+
+.stat-value,
+.final-value,
+.type-total,
+.m-value {
+  font-variant-numeric: tabular-nums;
+}
+
+table th {
+  color: var(--miayaar-text-muted);
+  background: var(--miayaar-surface-strong);
+}
+
+table td { color: var(--miayaar-text-secondary); }
+
+tbody tr:hover td { background: rgba(35, 201, 139, .055); }
+
+.dashboard-footer-links,
+.footer-links {
+  border-top: 1px solid var(--miayaar-border);
+  padding-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .container,
+  .shell,
+  #app-container { width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .miayaar-brand-lockup::after { height: 25%; }
+  .section,
+  .panel,
+  .stat-card,
+  .result-card { border-radius: var(--miayaar-radius-md); }
+  .section,
+  .panel { padding: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+
+[dir="rtl"] { text-align: right; }
+[dir="rtl"] .dashboard-footer-links,
+[dir="rtl"] .footer-links { direction: rtl; }
+[dir="rtl"] table th,
+[dir="rtl"] table td { text-align: right; }
+
+
+/* Shared product navigation. Links only expose implemented surfaces. */
+.miayaar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  width: min(100%, 1180px);
+  margin: 0 auto 24px;
+  padding: 6px;
+  border: 1px solid var(--miayaar-border);
+  border-radius: 999px;
+  background: rgba(7, 17, 31, .72);
+  box-shadow: var(--miayaar-shadow-sm);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.miayaar-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  color: var(--miayaar-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .16s ease, background .16s ease, transform .16s var(--miayaar-ease);
+}
+
+.miayaar-nav a:hover,
+.miayaar-nav a[aria-current="page"] {
+  color: var(--miayaar-text);
+  background: rgba(35, 201, 139, .14);
+}
+
+.miayaar-nav a:active { transform: scale(.98); }
+
+@media (max-width: 640px) {
+  .miayaar-nav {
+    justify-content: flex-start;
+    border-radius: var(--miayaar-radius-md);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+  }
+  .miayaar-nav a { flex: 0 0 auto; }
+}
