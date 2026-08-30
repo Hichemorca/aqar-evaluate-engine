@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T12:03:46.240Z",
+  "generatedAt": "2026-08-30T10:57:37.333Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 23160,
   "tables": {
@@ -1153,7 +1153,7 @@
         "count": 3
       },
       "REEF RESIDENCE__apartment__medium": {
-        "medianPricePerSqm": 10155,
+        "medianPricePerSqm": 10235,
         "count": 8
       },
       "La-Riviera Apartments__apartment__small": {
@@ -1773,7 +1773,7 @@
         "count": 8
       },
       "THE POINT__apartment__small": {
-        "medianPricePerSqm": 23384,
+        "medianPricePerSqm": 21909,
         "count": 8
       },
       "MARINA QUAYS__apartment__small": {
@@ -2401,7 +2401,7 @@
         "count": 3
       },
       "HAMZA TOWER__apartment__small": {
-        "medianPricePerSqm": 6685,
+        "medianPricePerSqm": 8510,
         "count": 3
       },
       "GOLF VIEW RESIDENCE__apartment__small": {
@@ -7613,7 +7613,7 @@
         "count": 10
       },
       "Myrtle__apartment__medium": {
-        "medianPricePerSqm": 31699,
+        "medianPricePerSqm": 32677,
         "count": 8
       },
       "Mohammed Bin Rashid Al Maktoum City, District 11- Opal Gardens__land__land_medium": {
@@ -9671,7 +9671,7 @@
         "count": 8
       },
       "UNIESTATE SUPREME RESIDENCE__apartment": {
-        "medianPricePerSqm": 12491,
+        "medianPricePerSqm": 14508,
         "count": 5
       },
       "Marquis Galleria__apartment": {
@@ -9811,7 +9811,7 @@
         "count": 13
       },
       "RED RESIDENCE__apartment": {
-        "medianPricePerSqm": 8553,
+        "medianPricePerSqm": 8525,
         "count": 13
       },
       "OASIS TOWER ONE__apartment": {
@@ -10095,7 +10095,7 @@
         "count": 22
       },
       "THE PRISM__office": {
-        "medianPricePerSqm": 19900,
+        "medianPricePerSqm": 19707,
         "count": 11
       },
       "BAYSWATER__office": {
@@ -10827,7 +10827,7 @@
         "count": 11
       },
       "QPOINT LIWAN-PLOT R055__apartment": {
-        "medianPricePerSqm": 7894,
+        "medianPricePerSqm": 7972,
         "count": 4
       },
       "QPOINT LIWAN-PLOT R097__apartment": {
@@ -12283,7 +12283,7 @@
         "count": 12
       },
       "Mudon Al Ranim 2__villa": {
-        "medianPricePerSqm": 17165,
+        "medianPricePerSqm": 16947,
         "count": 17
       },
       "Mudon Al Ranim 4__villa": {
@@ -13119,7 +13119,7 @@
         "count": 7
       },
       "ARAS Residence__apartment": {
-        "medianPricePerSqm": 10895,
+        "medianPricePerSqm": 12219,
         "count": 5
       },
       "MADISON RESIDENCE__apartment": {
@@ -13475,7 +13475,7 @@
         "count": 52
       },
       "Ashwood Estates__land": {
-        "medianPricePerSqm": 20926,
+        "medianPricePerSqm": 21032,
         "count": 142
       },
       "D Villas__land": {
@@ -13669,7 +13669,7 @@
         "count": 4
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__small": {
-        "medianPricePerSqm": 14638,
+        "medianPricePerSqm": 14647,
         "count": 1287
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__medium": {
@@ -13681,7 +13681,7 @@
         "count": 27
       },
       "INTERNATIONAL CITY PH 1__apartment__small": {
-        "medianPricePerSqm": 6826,
+        "medianPricePerSqm": 6840,
         "count": 447
       },
       "INTERNATIONAL CITY PH 1__apartment__medium": {
@@ -13717,7 +13717,7 @@
         "count": 8
       },
       "DUBAI MARINA__apartment__small": {
-        "medianPricePerSqm": 22695,
+        "medianPricePerSqm": 22734,
         "count": 320
       },
       "DUBAI MARINA__apartment__medium": {
@@ -14161,7 +14161,7 @@
         "count": 9
       },
       "JUMEIRAH LIVING__apartment__medium": {
-        "medianPricePerSqm": 25990,
+        "medianPricePerSqm": 27226,
         "count": 14
       },
       "JADDAF WATERFRONT__apartment__medium": {
@@ -14225,7 +14225,7 @@
         "count": 152
       },
       "DUBAI HEALTHCARE CITY - PHASE 2__apartment__medium": {
-        "medianPricePerSqm": 18770,
+        "medianPricePerSqm": 18584,
         "count": 51
       },
       "DUBAI HEALTHCARE CITY - PHASE 2__apartment__large": {
@@ -14649,7 +14649,7 @@
         "count": 11
       },
       "AL HEBIAH THIRD__land__land_tiny": {
-        "medianPricePerSqm": 22690,
+        "medianPricePerSqm": 22675,
         "count": 60
       },
       "AL HEBIAH THIRD__land__land_medium": {
@@ -15081,7 +15081,7 @@
         "count": 11
       },
       "AL WASL__apartment__medium": {
-        "medianPricePerSqm": 31699,
+        "medianPricePerSqm": 32677,
         "count": 8
       },
       "WADI AL SAFA 3__land__land_large": {
@@ -15807,7 +15807,7 @@
         "count": 22
       },
       "MAJAN__apartment": {
-        "medianPricePerSqm": 12127,
+        "medianPricePerSqm": 12082,
         "count": 315
       },
       "AL MERKADH__land": {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T06:36:53.289Z",
+  "generatedAt": "2026-08-30T10:57:19.148Z",
   "totalDistricts": 25,
   "successCount": 0,
   "data": {
@@ -10,7 +10,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:28:59.747Z",
+      "queriedAt": "2026-08-30T10:55:34.769Z",
       "radius": 800,
       "source": "empty"
     },
@@ -21,7 +21,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:29:02.810Z",
+      "queriedAt": "2026-08-30T10:55:37.632Z",
       "radius": 800,
       "source": "empty"
     },
@@ -32,7 +32,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:29:06.833Z",
+      "queriedAt": "2026-08-30T10:55:41.052Z",
       "radius": 800,
       "source": "empty"
     },
@@ -43,7 +43,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:29:11.685Z",
+      "queriedAt": "2026-08-30T10:55:44.655Z",
       "radius": 800,
       "source": "empty"
     },
@@ -54,7 +54,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:29:15.939Z",
+      "queriedAt": "2026-08-30T10:55:47.929Z",
       "radius": 800,
       "source": "empty"
     },
@@ -65,7 +65,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:30:36.287Z",
+      "queriedAt": "2026-08-30T10:55:51.234Z",
       "radius": 800,
       "source": "empty"
     },
@@ -76,7 +76,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:31:29.034Z",
+      "queriedAt": "2026-08-30T10:55:54.756Z",
       "radius": 800,
       "source": "empty"
     },
@@ -87,7 +87,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:31:32.936Z",
+      "queriedAt": "2026-08-30T10:55:57.893Z",
       "radius": 800,
       "source": "empty"
     },
@@ -98,7 +98,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:31:36.245Z",
+      "queriedAt": "2026-08-30T10:56:01.088Z",
       "radius": 800,
       "source": "empty"
     },
@@ -109,7 +109,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:31:39.598Z",
+      "queriedAt": "2026-08-30T10:56:04.536Z",
       "radius": 800,
       "source": "empty"
     },
@@ -120,7 +120,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:32:53.200Z",
+      "queriedAt": "2026-08-30T10:56:14.540Z",
       "radius": 800,
       "source": "empty"
     },
@@ -131,7 +131,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:32:56.738Z",
+      "queriedAt": "2026-08-30T10:56:18.627Z",
       "radius": 800,
       "source": "empty"
     },
@@ -142,7 +142,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:33:05.672Z",
+      "queriedAt": "2026-08-30T10:56:22.172Z",
       "radius": 800,
       "source": "empty"
     },
@@ -153,7 +153,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:33:16.842Z",
+      "queriedAt": "2026-08-30T10:56:25.646Z",
       "radius": 800,
       "source": "empty"
     },
@@ -164,7 +164,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:33:28.938Z",
+      "queriedAt": "2026-08-30T10:56:30.138Z",
       "radius": 800,
       "source": "empty"
     },
@@ -175,7 +175,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:33:56.357Z",
+      "queriedAt": "2026-08-30T10:56:39.166Z",
       "radius": 800,
       "source": "empty"
     },
@@ -186,7 +186,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:34:00.060Z",
+      "queriedAt": "2026-08-30T10:56:42.333Z",
       "radius": 800,
       "source": "empty"
     },
@@ -197,7 +197,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:34:21.356Z",
+      "queriedAt": "2026-08-30T10:56:45.234Z",
       "radius": 800,
       "source": "empty"
     },
@@ -208,7 +208,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:34:26.354Z",
+      "queriedAt": "2026-08-30T10:56:48.604Z",
       "radius": 800,
       "source": "empty"
     },
@@ -219,7 +219,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:34:36.474Z",
+      "queriedAt": "2026-08-30T10:56:52.117Z",
       "radius": 800,
       "source": "empty"
     },
@@ -230,7 +230,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:34:41.590Z",
+      "queriedAt": "2026-08-30T10:56:55.523Z",
       "radius": 800,
       "source": "empty"
     },
@@ -241,7 +241,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:35:18.235Z",
+      "queriedAt": "2026-08-30T10:56:58.636Z",
       "radius": 800,
       "source": "empty"
     },
@@ -252,7 +252,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:36:02.883Z",
+      "queriedAt": "2026-08-30T10:57:02.934Z",
       "radius": 800,
       "source": "empty"
     },
@@ -263,7 +263,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:36:07.007Z",
+      "queriedAt": "2026-08-30T10:57:06.471Z",
       "radius": 800,
       "source": "empty"
     },
@@ -274,7 +274,7 @@
       "facilities": {},
       "totalScore": 0,
       "count": 0,
-      "queriedAt": "2026-08-25T06:36:51.287Z",
+      "queriedAt": "2026-08-30T10:57:17.146Z",
       "radius": 800,
       "source": "empty"
     }
