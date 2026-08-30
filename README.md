@@ -6,7 +6,7 @@
 
 | الرابط | الاستخدام |
 |---|---|
-| [المنصة الحية](https://aqar-valuation-engine.netlify.app/) | نموذج التقييم التفاعلي. |
+| [المنصة الحية](https://miayaar-dxb.netlify.app/) | نموذج التقييم التفاعلي المنشور. |
 | [المستودع](https://github.com/Hichemorca/aqar-evaluate-engine) | الكود والبيانات والاختبارات وسجل التغييرات. |
 | `/admin-calibration` | مسار لوحة Calibration Console الإدارية. |
 | `/accuracy-dashboard` | لوحة قياس Accuracy الرسمية. |
@@ -49,13 +49,29 @@
 
 إعداد Netlify موجود في `netlify.toml`. مسارات `/api/*` تُحوّل إلى Netlify Functions، والمسار `/admin-calibration` يُحوّل إلى `calibration.html`. يجب عدم وضع أسرار أو tokens داخل الكود أو ملفات `data/` أو سجلات Git.
 
+### التشغيل المحلي
+
+يتطلب التشغيل Node.js 22 تقريبًا. ثبّت الاعتماديات من جذر المستودع عبر `npm ci`، ثم شغّل الاختبارات باستخدام `npm test`. يمكن تشغيل الواجهة الثابتة محليًا عبر خادم ملفات ثابت، أو اختبار وظائف Netlify عبر Netlify CLI إذا كان مثبتًا في بيئة التطوير. لا يحتاج مسار الواجهة إلى build bundling؛ الأمر `npm run build` هو فحص تأكيدي فقط.
+
+### واجهات API الرئيسية
+
+| المسار | الوظيفة | ملاحظات الوصول |
+|---|---|---|
+| `GET /api/calibration-config` | قراءة الإعداد النشط العام للمعايرة. | لا يعرض secret الإدارة. |
+| `POST /api/calibration-config` | حفظ إعداد معايرة جديد. | يتطلب تحقق المدير وقواعد الأوزان الصحيحة. |
+| `GET /api/dld-lookup` | البحث عن معاملات DLD والمقارنات. | يطبّق التحقق والحدود والحالة المصدرية. |
+| `GET /api/fetch-osm` | جلب مرافق GIS عند طلب المستخدم. | يُستدعى من تدفق GIS اليدوي وليس عند اختيار المنطقة وحده. |
+| `POST /api/valuation-observation` | تسجيل observation اختياري بعد موافقة المستخدم. | يفشل بشكل غير حاجب للتقييم ولا يقبل التسجيل دون consent. |
+
+تُدار أسرار Netlify من إعدادات البيئة في Netlify فقط. المتغيرات الاختيارية المرتبطة بالمسارات الحالية تشمل `SCRAPE_ENDPOINT_ENABLED` و`SCRAPE_SOLD_ENDPOINT_ENABLED` للمسارات legacy، و`FIXED_NOW` و`REPRODUCIBILITY_OUTPUT` لتجارب reproducibility المحلية. لا تُنسخ القيم السرية إلى README أو أوامر shell أو سجلات CI.
+
 وظيفة `netlify/functions/scrape.js` legacy وليست جزءًا من مسار التقييم الحالي؛ الواجهة تستخدم `dld-lookup` و`fetch-osm` بدلًا منها. لذلك تكون وظيفة ScrapingBee معطلة افتراضيًا وتعيد `410 Gone` ولا تسمح بـ CORS عام. لا تُفعّلها إلا بعد إضافة حماية وصول وrate limiting ومراجعة تشغيلية مستقلة عبر متغير البيئة `SCRAPE_ENDPOINT_ENABLED=true`.
 
 ## 3. صفحات المستخدم
 
 تبدأ العملية من الصفحة الرئيسية بإدخال نوع العقار، المساحة، الغرف، السنة، الحالة، التشطيب، الإطلالة، الطابق، حالة المبنى، والتأثيث عند توفرها. ثم يختار المستخدم District / Area من قائمة DLD ويستطيع تعديل نقطة العقار على الخريطة.
 
-اختيار المنطقة يحرّك العلامة إلى **مركز تمثيلي** للمنطقة، وينقل دائرة البحث عن المرافق إليها. والعكس صحيح: النقر على الخريطة أو سحب العلامة يحاول مطابقة النقطة مع أقرب منطقة موجودة في قائمة DLD ضمن حد محافظ. إذا لم توجد مطابقة موثوقة، يُمسح اسم المنطقة بدل إسناد منطقة بعيدة أو غير صحيحة.
+اختيار المنطقة يحرّك العلامة إلى **مركز تمثيلي** للمنطقة، ولا يبدأ جلب المرافق تلقائيًا. يظهر أسفل الخريطة زر `Load Nearby Facilities`؛ بعد وضع العلامة يدويًا في الموقع الأدق يضغط المستخدم الزر مرة واحدة، فيبدأ جلب المرافق ضمن القطر المحدد، ويتعطل الزر أثناء التحميل ثم يعاد تفعيله بعد اكتمال الطلب أو فشله. تظهر نتائج المرافق **أسفل الخريطة**. والعكس صحيح: النقر على الخريطة أو سحب العلامة يحاول مطابقة النقطة مع أقرب منطقة موجودة في قائمة DLD ضمن حد محافظ. إذا لم توجد مطابقة موثوقة، يُمسح اسم المنطقة بدل إسناد منطقة بعيدة أو غير صحيحة.
 
 تحتوي قائمة DLD الحالية على **204 منطقة**. ملف `data/district-coordinates.json` يحتوي على 202 مدخلًا يغطي أسماء المناطق الـ204 عبر المطابقة المطبّعة والمرادفات. هذه الإحداثيات نقاط تمثيلية وليست حدودًا قانونية رسمية؛ لذلك يجب تعديل العلامة يدويًا عندما يكون موقع العقار معروفًا بدقة.
 
@@ -162,9 +178,9 @@ checksum الحالي للملف الخام المنظف هو:
 
 تُستخدم السجلات verified والصالحة فقط في Accuracy الرسمية. Commercial وGeneral Use land مستبعدة من Accuracy الرسمية لكنها محفوظة في raw/rejected ledger للتدقيق. لا يجوز استخدام السجل المرفوض في المقارنات أو إدخاله إلى Accuracy عن طريق مسار بديل.
 
-## 8. Accuracy والتشخيصات
+## 9. Accuracy والتشخيصات
 
-ملف `data/accuracy-data.json` هو artifact Accuracy الرسمي الحالي، ويحتوي على **8,108 نتائج** ضمن نطاق البيانات والتنظيف والنافذة الزمنية المعتمدة. المؤشر الحالي هو **85.1% Accuracy** تقريبًا، مع متوسط انحراف مطلق يقارب **14.9%**. هذه مؤشرات snapshot وليست ضمانًا لأداء مستقبلي؛ يجب قراءة تاريخ تحديث البيانات و`calibrationConfigId` مع كل مقارنة. وتُعد ملفات Accuracy وDLD الرسمية محمية ببوابة provenance وintegrity ولا يجوز تعديلها يدويًا.
+ملف `data/accuracy-data.json` هو artifact Accuracy الرسمي الحالي، ويحتوي في آخر snapshot منشور على **7,721 نتيجة** ضمن نطاق البيانات والتنظيف والنافذة الزمنية المعتمدة. وتبلغ المؤشرات المشتقة من `data/accuracy-summary.json` نحو **85.2% Accuracy** ومتوسط انحراف **14.8%**، مع آخر تحديث في **2026-08-29**. هذه مؤشرات snapshot وليست ضمانًا لأداء مستقبلي؛ يجب قراءة تاريخ تحديث البيانات و`calibrationConfigId` مع كل مقارنة. وتُعد ملفات Accuracy وDLD الرسمية محمية ببوابة provenance وintegrity ولا يجوز تعديلها يدويًا.
 
 تحتوي كل نتيجة Accuracy، بالإضافة إلى أعمدة DLD، على إحداثيات GIS، نتيجة AQAR، الفرق عن السعر الفعلي، مستوى المقارنة، عدد المقارنات، معاملات GIS والإطلالة، هوية المعايرة، طرق التقييم، الافتراضات، وتشخيصات المقارنات.
 
@@ -179,7 +195,7 @@ checksum الحالي للملف الخام المنظف هو:
 
 تشخيصات `comparableDiagnostics` وصفية ولا تغيّر القيمة الحالية. تشمل counts حسب مستوى المقارنة، توزيعات سعر المتر، quartiles، IQR، max/min ratio، dispersion flags، وLand xlarge flag. أُجريت تجربة fallback معزولة لرفع حد District size من 5 إلى 10 وحماية Land xlarge، لكن لم تُطبّق أي من السياسات البديلة إنتاجيًا. الوضع الحالي يبقي fallback الإنتاجي كما هو.
 
-## 9. أعمدة البيانات
+## 10. أعمدة البيانات
 
 ### أعمدة معاملات DLD
 
@@ -189,39 +205,35 @@ checksum الحالي للملف الخام المنظف هو:
 
 تضيف Accuracy: `lat`، `lng`، `gisScore`، `gisFacilities`، `gisMatchedBy`، `hasGis`، `aqarValuation`، `aqarVsActual`، `evalLevel`، `evalCount`، `gisMultiplier`، `viewMultiplier`، `viewTypes`، `calibrationConfigId`، `valuationMethods`، `calibrationAssumptions`، و`comparableDiagnostics`.
 
-## 10. فصل المسارات التجريبية عن Accuracy الرسمية
+## 11. فصل المسارات التجريبية عن Accuracy الرسمية
 
 `scripts/fetch-transactions.js` مولد تجريبي قديم ينشئ `data/fetched-transactions.json` باستخدام قيم تقديرية وعشوائية لأغراض العرض أو الاختبار فقط. لا يُستخدم في workflow الحالي، ولا يكتب `dld-transactions.json` أو `accuracy-data.json`، ولا يجوز استخدام مخرجاته في المقارنات أو Accuracy الرسمية. المسار الرسمي يعتمد على `scripts/fetch-dld.js` ثم `scripts/evaluate-and-save.js` باستخدام artifacts DLD المنظفة.
 
 `netlify/functions/scrape-sold.js` لا يختلق سجلات، لكنه legacy وغير مستخدم من مسار المنتج الحالي؛ لذلك عُطّل افتراضيًا ويعيد `410 Gone` دون CORS عام. أما `netlify/functions/scrape.js` فقد عُطّل افتراضيًا للسبب نفسه. لا تُفعّل أيًا منهما قبل إضافة حماية وصول وrate limiting ومراجعة تشغيلية مستقلة.
 
-يُعرّف `.github/workflows/ci.yml` فحوص ما قبل الدمج عند كل `push` و`pull_request`، وتشمل `npm ci` وPlaywright Chromium و`npm run mobile-smoke` و`npm test` والتحقق من summaries وJavaScript syntax وpatch formatting.
+يُعرّف `.github/workflows/ci.yml` فحوص ما قبل الدمج عند كل `push` و`pull_request`، وتشمل `npm ci` وPlaywright Chromium و`npm run mobile-smoke` و`npm run public-pages-smoke` و`npm run validate-inline-js` و`npm test` والتحقق من summaries وJavaScript syntax وpatch formatting. أما `npm run manual-gis-smoke` فهو اختبار متخصص يمكن تشغيله محليًا، لكنه ليس خطوة مستقلة في CI الحالي.
 
-## 11. تدفق تحديث البيانات اليومي
+## 12. تدفق تحديث البيانات اليومي
 
-يُعرّف التدفق في `.github/workflows/update-accuracy.yml` ويُشغّل يوميًا عند الساعة 06:00 UTC أو يدويًا عبر `workflow_dispatch`. الترتيب الحالي هو:
+يُعرّف التدفق في `.github/workflows/update-accuracy.yml` ويُشغّل يوميًا عند الساعة 06:00 UTC أو يدويًا عبر `workflow_dispatch`. بعد تثبيت Node.js 22 وPython 3.11 وتشغيل `npm test`، يكون الترتيب الفعلي للطبقات كما يلي:
 
 | الطبقة | العملية |
 |---:|---|
-| 1 | جلب consultancy reports. |
-| 2 | جلب developer projects. |
-| 3 | جلب government data. |
-| 4 | جلب DLD transactions الخام وتنظيفها. |
-| 5 | التحقق من verified DLD ومنع تسرب rejected records. |
-| 6 | جلب/تحديث OSM GIS مع timeout ومواصلة workflow عند الفشل. |
-| 7 | إثراء السجلات eligible بالإحداثيات وبيانات GIS. |
-| 8 | توليد Market Intelligence. |
-| 9 | تحميل active calibration. |
-| 10 | إعادة تقييم السجلات وتوليد Accuracy وartifacts. |
-| 11 | توليد diagnostics وclient summaries ثم تشغيل integrity/provenance gate. |
-| 12 | تدريب نموذج ML اختياري مع استمرار workflow عند فشله. |
-| 13 | تسوية الفرع مع `origin/main` ثم إضافة `data/` و`models/` إلى commit الآلي عند وجود تغييرات. |
+| 1 | جلب consultancy reports وdeveloper projects وgovernment data. |
+| 2 | جلب معاملات DLD الحقيقية وتنظيفها ثم التحقق من verified records ومنع تسرب rejected records. |
+| 3 | جلب/تحديث OSM GIS بمهلة زمنية؛ وهو مسار اختياري يستمر workflow عند فشله. |
+| 4 | إثراء السجلات eligible بالإحداثيات وبيانات GIS عند توفرها. |
+| 5 | توليد Market Intelligence. |
+| 6 | تحميل active calibration. |
+| 7 | إعادة تقييم السجلات وتوليد Accuracy وartifacts. |
+| 8 | توليد diagnostics وclient summaries ثم تشغيل integrity/provenance gate. |
+| 9 | تدريب نموذج ML اختياري مع استمرار workflow عند فشله، ثم رفض الدفع إذا تغيّر `origin/main` أثناء التشغيل قبل commit الآلي. |
 
 يحتوي workflow على concurrency وAction SHA pinning وPython requirements ثابتة وبوابة integrity رسمية. **تبقى مراجعة ما بعد `git pull --rebase` و`git stash pop` قبل commit مهمة مؤجلة**؛ لذلك يجب عدم اعتبار نجاح خطوة التحقق السابقة للتسوية ضمانًا كافيًا إذا حدث سباق مع تغيير upstream. هذه المراجعة لا تغيّر سلوك التقييم، لكنها سبب إضافي لفحص diff وartifacts قبل الاعتماد على أي تحديث يومي.
 
 البيانات الخارجية قد تتأخر أو تفشل أو تتغير. لذلك يجب فحص logs وchecksum وcounts وcalibration identity بعد أي تحديث مهم، وعدم اعتبار نجاح workflow وحده دليلًا كافيًا على سلامة النتائج.
 
-## 12. أوامر التطوير والاختبار
+## 13. أوامر التطوير والاختبار
 
 يتطلب المشروع Node.js 22 تقريبًا، مع Python 3.11 عند تشغيل تدريب النموذج. بعد تثبيت الاعتماديات يمكن استخدام:
 
@@ -230,13 +242,20 @@ checksum الحالي للملف الخام المنظف هو:
 | `npm test` | تشغيل جميع اختبارات Node. |
 | `npm run build` | فحص البناء؛ المشروع الثابت لا يحتاج build فعليًا ويطبع رسالة تأكيد. |
 | `npm run fetch` | تشغيل جلب المعاملات وفق script الحالي. |
-| `npm run evaluate` | تشغيل evaluator وتوليد artifacts التقييم. |
+| `npm run evaluate` | تشغيل evaluator وتوليد artifacts التقييم. قد يكتب ملفات data الرسمية؛ استخدمه ضمن workflow مقصود فقط. |
 | `npm run diagnostics` | توليد مؤشرات تشخيصية مشتقة فقط من `data/accuracy-data.json` إلى `data/accuracy-diagnostics.json`. |
 | `npm run validate-dld` | التحقق من بيانات DLD ومنع rejected leakage. |
 | `npm run fetch-calibration` | تحميل active calibration إلى artifact محلي. |
 | `npm run fetch-osm` | تحديث بيانات OSM/GIS وفق الإعداد الحالي. |
 | `npm run validate-artifacts` | تشغيل بوابة integrity وprovenance للـofficial artifacts. |
 | `npm run mobile-smoke` | تشغيل mobile smoke بمحاكاة Pixel 5 وiPhone 13. |
+| `npm run manual-gis-smoke` | اختبار أن GIS لا يبدأ قبل ضغط المستخدم، وأن الزر يتعطل أثناء الطلب وتظهر النتائج أسفل الخريطة. |
+| `npm run public-pages-smoke` | اختبار تحميل الصفحات العامة والمسارات الأساسية. |
+| `npm run validate-inline-js` | فحص JavaScript المضمن داخل صفحات HTML. |
+| `npm run analyze-accuracy-stability` | تحليل استقرار Accuracy عبر الشرائح الزمنية. |
+| `npm run review-accuracy-outliers` | مراجعة outliers في Accuracy دون تعديل artifacts. |
+| `npm run analyze-detailed-outliers` | تحليل تفصيلي للحالات ذات الخطأ المرتفع. |
+| `npm run calibration-impact-matrix` | اختبار محلي معزول لأثر تغييرات المعايرة. |
 | `npm run reproducibility-drift` | إعادة تشغيل evaluator داخل مجلدات مؤقتة بتاريخ ثابت وقياس date drift، دون تعديل official artifacts. |
 | `node --check <file>` | فحص تركيب JavaScript لملف محدد. |
 | `node /home/ubuntu/check-inline-script.cjs` | فحص JavaScript المضمن داخل الصفحات عند توفر الأداة في بيئة العمل. |
@@ -252,21 +271,21 @@ checksum الحالي للملف الخام المنظف هو:
 
 يحتوي diagnostics على SHA-256 للـartifact المصدر حتى يمكن اكتشاف عدم التزامن بين المؤشرات والبيانات، ويجب إعادة توليده بعد كل تحديث رسمي للـAccuracy. لا يجوز استخدام outliers أو أي شريحة تشخيصية لتعديل المعاملات مباشرة؛ يلزم validation زمني/قطاعي مستقل وموافقة صريحة قبل أي تغيير منهجي.
 
-آخر baseline موثق للاختبارات هو **121/121 ناجحة**، وتشمل اختبارات المعايرة، تنظيف DLD، Accuracy، diagnostics، تشخيص المقارنات، حالات الأدلة، ربط الخريطة بالمناطق، workflow integrity، mobile smoke، وتجربة reproducibility.
+آخر baseline موثق للاختبارات هو **141/141 ناجحة**، وتشمل اختبارات المعايرة، تنظيف DLD، Accuracy، diagnostics، تشخيص المقارنات، حالات الأدلة، ربط الخريطة بالمناطق، workflow integrity، mobile smoke، وتجربة reproducibility.
 
-## 13. الاختبارات المطلوبة قبل النشر
+## 14. الاختبارات المطلوبة قبل النشر
 
 قبل نشر أي تغيير، يجب تشغيل الاختبارات البرمجية، `npm run mobile-smoke`، بوابة `npm run validate-artifacts`، فحص JavaScript المضمن، ومراجعة `git diff --check`. وبعدها يجب اختبار المسارات الأساسية في المتصفح: تحميل الصفحة، اختيار منطقة، تحريك العلامة، جلب أدلة DLD، تقييم مع أدلة جاهزة، تقييم مع أدلة محدودة، غياب أدلة DLD، Income دون Sales evidence، Reset، وعدم بقاء نتيجة قديمة بعد تغيير العقار. لا تُشغّل `npm run evaluate` أو workflow اليومي لمجرد التحقيق؛ كلاهما قد يعيد كتابة artifacts.
 
 أي تغيير في Calibration أو evaluator يجب أن يضيف اختبارًا يثبت القاعدة الجديدة، ويجب أن يوضح ما إذا كان التغيير يؤثر على التقييمات الجديدة فقط أو يعيد توليد Accuracy. لا يُسمح بتغيير artifacts الرسمية يدويًا بهدف تحسين المؤشر.
 
-## 14. قرارات منهجية حاكمة
+## 15. قرارات منهجية حاكمة
 
 القرارات المعتمدة موثقة في `docs/methodology-decisions.md`. أهمها: استقلال AQAR عن MIAYAAR، إبقاء DCF ضمن القابلية الحالية فقط، اعتماد Sales Comparison وIncome للأراضي، منع البيانات الاصطناعية من Accuracy الرسمية، إزالة Appraiser comparison من Accuracy، اعتماد معاملات View وGIS الحالية، إظهار الافتراضات، والإبقاء على واجهة إنجليزية.
 
 كل نتيجة يجب أن تكون قابلة لتحديد نسخة المحرك ونسخة البيانات والمعايرة. يجب فصل `SOURCE_FACT` و`DERIVED_VALUE` و`ASSUMPTION` و`MODEL_OUTPUT` في trace، ويجب أن تبقى الطرق غير المنطبقة `NOT_APPLICABLE`.
 
-## 15. v2.1 حقول العقار الإضافية
+## 16. v2.1 حقول العقار الإضافية
 
 تم تنفيذ الإصدار v2.1 على فرع `feature/v2.1-property-fields` كواجهة وpayload وشرح نتيجة وتحليل معزول فقط. الحقول الجديدة الاختيارية هي: `Project / Building Name` للـ Apartment وVilla وTownhouse، و`BUA` للـ Villa وTownhouse فقط، و`Plot Area` للـ Villa وTownhouse وLand، و`Last Renovation Year` للـ Apartment وVilla وTownhouse عندما يكون عمر العقار أكبر من خمس سنوات. بقيت حقول `Detailed Unit Type` و`Floor` و`Parking Count` كما هي دون حذف أو تغيير.
 
@@ -276,29 +295,29 @@ checksum الحالي للملف الخام المنظف هو:
 
 تُدار direct multipliers من Calibration Console ضمن قسم مستقل عن أوزان المناهج. الإعداد الافتراضي shadow معطل، والشرائح المفتوحة تحفظ كـ `null`، ومفاتيح المشاريع تُحفظ بصيغة `property type | district | project`. أي تفعيل أو تغيير رسمي يتطلب مصدرًا موثقًا، تجربة shadow معزولة، مقارنة MAE وbias وP90 و±15% وcoverage وfallback transitions، ثم موافقة المالك الصريحة. لا يغيّر v2.1 الحالي أنواع العقارات أو طرق التقييم أو calibration الرسمي أو الأوزان أو fallback أو artifacts التاريخية.
 
-## 16. القيود المعروفة
+## 17. القيود المعروفة
 
 الخريطة تستخدم نقاطًا تمثيلية لبعض المناطق، وليست طبقة حدود رسمية. تعتمد المرافق على خدمات GIS خارجية قد تفشل أو تتأخر. قائمة DLD تتغير مع تحديث البيانات، وقد تتغير أعداد المناطق والسجلات والـAccuracy بعد إعادة التنظيف. بعض مناطق DLD الفرعية قد تشترك في مركز تمثيلي واحد.
 
 Accuracy الحالية تقيس snapshot محددًا من البيانات المعتمدة ولا تثبت أن كل عقار مستقبلي سيحصل على نتيجة مساوية. الحالات ذات الأدلة المحدودة أو dispersion العالي تحتاج مراجعة بشرية أكبر. لم تُطبّق بعد سياسة جديدة خاصة بـLand xlarge أو District size 5–9.
 
-## 17. حالة الجاهزية والمهام المؤجلة
+## 18. حالة الجاهزية والمهام المؤجلة
 
 النسخة الحالية مناسبة لـ**pilot محدود ومضبوط** وليست تقرير تقييم رسميًا أو بديلًا عن مراجعة مثمّن مرخّص. تم التحقق من mobile emulation على Pixel 5 وiPhone 13، لكن ذلك لا يعادل اختبار جهاز Android وiOS فعليين. كما أن PR-01 أثبت repeatability عند تثبيت تاريخ التقييم، وأثبت date drift عند تغييره.
 
 المهام التالية **مؤجلة وليست تغييرات مطلوبة للـpilot الحالي**: نقل integrity gate إلى ما بعد reconciliation النهائي في workflow، إنشاء مصدر واحد معتمد لمصفوفة المنهجية والأوزان، إضافة دورة Draft → Test → Review → Approved → Production للمعايرة، وإجراء اختبار reproducibility رسمي قائم على `asOfDate` داخل evaluator. لا تُنفذ هذه البنود تلقائيًا ولا تغيّر أي قيمة إنتاجية دون validation وموافقة صريحة.
 
-## 18. قواعد العمل الآمن
+## 19. قواعد العمل الآمن
 
 احفظ الملف الخام ولا تعدّله. لا تخلط rejected ledger مع eligible data. لا تضع الأسرار في Git أو README أو logs أو command lines. لا تحفظ calibration غير صحيحة. لا تعِد حساب النتائج التاريخية بسبب تعديل جديد دون قرار واضح. لا تنشر سياسة fallback جديدة أو calibration جديدة آليًا دون تقرير مقارن وموافقة المالك.
 
 عند ظهور اختلاف بين الواجهة وoffline/Accuracy، يجب مراجعة `shared/calibration-engine.js` و`shared/evidence-state.js` والـartifacts المرتبطة قبل تعديل أي مسار منفرد. عند ظهور اختلاف في أعداد البيانات، ابدأ من raw checksum ثم cleaning report ثم validation ثم Accuracy metadata.
 
-## 19. مراجع المشروع
+## 20. مراجع المشروع
 
 [1]: https://github.com/Hichemorca/aqar-evaluate-engine "AQAR Valuation Engine repository"
 
-[2]: https://aqar-valuation-engine.netlify.app/ "AQAR live platform"
+[2]: https://miayaar-dxb.netlify.app/ "MIAYAAR live platform"
 
 [3]: https://www.openstreetmap.org/ "OpenStreetMap map data"
 
