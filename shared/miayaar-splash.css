@@ -1,0 +1,139 @@
+/* MIAYAAR full-screen welcome experience */
+#miayaar-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #030b18;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 700ms cubic-bezier(.23, 1, .32, 1), visibility 700ms;
+}
+
+#miayaar-splash::before {
+  content: "";
+  position: absolute;
+  inset: -7%;
+  background-image: linear-gradient(180deg, rgba(3, 11, 24, .08), rgba(3, 11, 24, .18)), url('/assets/branding/miayaar-splash.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+  animation: miayaar-splash-zoom 5.2s ease-out both;
+}
+
+#miayaar-splash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 28%, rgba(2, 9, 20, .28) 100%),
+    linear-gradient(105deg, transparent 35%, rgba(35, 201, 139, .15) 48%, transparent 61%);
+  mix-blend-mode: screen;
+  animation: miayaar-splash-scan 4.8s ease-in-out both;
+}
+
+.miayaar-splash-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  width: min(90vw, 760px);
+  opacity: 0;
+  transform: translateY(12px) scale(.97);
+  animation: miayaar-splash-content-in 1.2s .25s cubic-bezier(.23, 1, .32, 1) forwards;
+}
+
+.miayaar-splash-status {
+  margin: 0;
+  color: rgba(244, 247, 251, .84);
+  font: 600 clamp(11px, 1.4vw, 15px)/1.4 Inter, system-ui, sans-serif;
+  letter-spacing: .22em;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, .8);
+}
+
+.miayaar-splash-skip {
+  min-width: 92px;
+  padding: 9px 17px;
+  border: 1px solid rgba(117, 224, 181, .6);
+  border-radius: 999px;
+  background: rgba(3, 11, 24, .36);
+  color: #f4f7fb;
+  cursor: pointer;
+  font: 600 12px/1 Inter, system-ui, sans-serif;
+  letter-spacing: .08em;
+  opacity: .82;
+  backdrop-filter: blur(8px);
+  transition: opacity 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.miayaar-splash-skip:hover,
+.miayaar-splash-skip:focus-visible {
+  background: rgba(10, 166, 111, .32);
+  opacity: 1;
+  outline: 2px solid #75e0b5;
+  outline-offset: 3px;
+}
+
+.miayaar-splash-skip:active {
+  transform: scale(.97);
+}
+
+body:has(#miayaar-splash) {
+  overflow: hidden;
+}
+
+body.miayaar-splash-complete #miayaar-splash {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.miayaar-splash-complete {
+  overflow: auto;
+}
+
+@keyframes miayaar-splash-zoom {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes miayaar-splash-scan {
+  from { opacity: .2; transform: translateX(-22%); }
+  45% { opacity: .62; }
+  to { opacity: .12; transform: translateX(22%); }
+}
+
+@keyframes miayaar-splash-content-in {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 640px) {
+  #miayaar-splash::before {
+    background-position: 50% center;
+  }
+
+  .miayaar-splash-content {
+    gap: 18px;
+    width: 92vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #miayaar-splash::before,
+  #miayaar-splash::after,
+  .miayaar-splash-content {
+    animation: none;
+  }
+
+  .miayaar-splash-content {
+    opacity: 1;
+    transform: none;
+  }
+}
