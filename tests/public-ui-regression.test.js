@@ -7,6 +7,8 @@ const { getComparableBracket } = require('../shared/comparable-bracket');
 const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const indexPageCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-page.css'), 'utf8');
 const brandCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'miayaar-brand.css'), 'utf8');
+const splashCss = fs.readFileSync(path.join(__dirname, '..', 'shared', 'miayaar-splash.css'), 'utf8');
+const splashJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'miayaar-splash.js'), 'utf8');
 const inlineValidatorJs = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'validate-inline-js.js'), 'utf8');
 const indexAccuracyMetaJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-accuracy-meta.js'), 'utf8');
 const indexMarketContextJs = fs.readFileSync(path.join(__dirname, '..', 'shared', 'index-market-context.js'), 'utf8');
@@ -84,6 +86,20 @@ test('autocomplete lists use a body-level fixed portal', () => {
   assert.match(indexDistrictContextJs, /window\.addEventListener\('scroll', repositionVisibleAutocompleteLists, true\)/);
   assert.match(indexDistrictContextJs, /window\.addEventListener\('resize', repositionVisibleAutocompleteLists\)/);
   assert.doesNotMatch(indexHtml, /function setAutocompleteItem\(item, onSelect\)/);
+});
+
+test('MIAYAAR welcome splash covers the viewport and exits safely', () => {
+  assert.ok(indexHtml.includes('<div id="miayaar-splash"'));
+  assert.ok(indexHtml.includes('<link rel="stylesheet" href="/shared/miayaar-splash.css" />'));
+  assert.ok(indexHtml.includes('<script src="/shared/miayaar-splash.js" defer></script>'));
+  assert.match(splashCss, /position:\s*fixed/);
+  assert.match(splashCss, /inset:\s*0/);
+  assert.match(splashCss, /background-size:\s*cover/);
+  assert.match(splashCss, /miayaar-splash-zoom/);
+  assert.match(splashCss, /prefers-reduced-motion:\s*reduce/);
+  assert.match(splashJs, /const duration = 4800/);
+  assert.match(splashJs, /data-splash-skip/);
+  assert.match(splashJs, /miayaar-splash-complete/);
 });
 
 test('custom checkboxes preserve native focusability', () => {
