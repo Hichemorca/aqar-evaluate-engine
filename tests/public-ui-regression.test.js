@@ -329,6 +329,9 @@ test('public pages use semantic headings and safe external links', () => {
   assert.doesNotMatch(indexHtml, /id="gisMap"[^>]+style="margin-top:10px;height:320px/);
   assert.doesNotMatch(indexHtml, /<span style="font-size:10px;color:#888;">\$\{\(p\.distance\*1000\)/);
   assert.match(indexPageCss, /\.js-hidden \{ display: none; \}/);
+  assert.match(indexHtml, /<div class="section js-hidden" id="propertyExtraSection">/);
+  assert.match(indexFieldViewJs, /currentYear - yearBuilt > 5/);
+  assert.match(indexFieldViewJs, /olderThanFiveYears && \(visibility\.bua \|\| visibility\.plotArea \|\| visibility\.renovationYear\)/);
   assert.match(indexHtml, /<div class="row js-hidden" id="rowPropertyAreas">/);
   assert.match(indexHtml, /<div class="row js-hidden" id="rowProjectBuilding">/);
   assert.match(indexHtml, /<div class="row js-hidden" id="gisCoordsRow"/);

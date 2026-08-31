@@ -1,7 +1,10 @@
 function updateExtraFieldVisibility() {
   const type = document.getElementById('propType').value;
-  const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(type, document.getElementById('yearBuilt').value);
-  const hasVisibleField = visibility.bua || visibility.plotArea || visibility.renovationYear;
+  const yearBuilt = Number(document.getElementById('yearBuilt').value);
+  const currentYear = AQAR_PROPERTY_EXTRA_FIELDS.CURRENT_YEAR;
+  const visibility = AQAR_PROPERTY_EXTRA_FIELDS.getVisibility(type, yearBuilt, currentYear);
+  const olderThanFiveYears = Number.isFinite(yearBuilt) && currentYear - yearBuilt > 5;
+  const hasVisibleField = olderThanFiveYears && (visibility.bua || visibility.plotArea || visibility.renovationYear);
   document.getElementById('propertyExtraSection').classList.toggle('js-hidden', !hasVisibleField);
   document.getElementById('rowPropertyAreas').classList.toggle('js-hidden', !(visibility.bua || visibility.plotArea));
   document.getElementById('fgBua').classList.toggle('js-hidden', !visibility.bua);
