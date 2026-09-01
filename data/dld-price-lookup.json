@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T12:15:21.984Z",
+  "generatedAt": "2026-09-01T10:52:34.061Z",
   "source": "dld-transactions.csv",
   "totalTransactionsUsed": 23160,
   "tables": {
@@ -885,7 +885,7 @@
         "count": 2
       },
       "THE ONE__apartment__small": {
-        "medianPricePerSqm": 29405,
+        "medianPricePerSqm": 29940,
         "count": 5
       },
       "Hyati Avenue__apartment__medium": {
@@ -1893,7 +1893,7 @@
         "count": 4
       },
       "LAKE TERRACE__apartment__small": {
-        "medianPricePerSqm": 17697,
+        "medianPricePerSqm": 17177,
         "count": 14
       },
       "INDIGO TOWER__apartment__small": {
@@ -2305,7 +2305,7 @@
         "count": 9
       },
       "Adhara Star__apartment__medium": {
-        "medianPricePerSqm": 16621,
+        "medianPricePerSqm": 16175,
         "count": 10
       },
       "Jewelz Residence__apartment__medium": {
@@ -2721,7 +2721,7 @@
         "count": 21
       },
       "AZIZI AMBER__apartment__medium": {
-        "medianPricePerSqm": 15357,
+        "medianPricePerSqm": 14535,
         "count": 9
       },
       "Azizi Berton__apartment__small": {
@@ -2753,7 +2753,7 @@
         "count": 23
       },
       "Azizi Samia Residence__apartment__small": {
-        "medianPricePerSqm": 13098,
+        "medianPricePerSqm": 12082,
         "count": 12
       },
       "Azizi. Iris__apartment__medium": {
@@ -3465,7 +3465,7 @@
         "count": 3
       },
       "Creek Beach - Orchid__apartment__small": {
-        "medianPricePerSqm": 22753,
+        "medianPricePerSqm": 23855,
         "count": 6
       },
       "CREEK CRESCENT__apartment__small": {
@@ -6833,7 +6833,7 @@
         "count": 7
       },
       "ALFURJAN PACKAGE 4__land__land_medium": {
-        "medianPricePerSqm": 11667,
+        "medianPricePerSqm": 11917,
         "count": 6
       },
       "ALFURJAN PACKAGE 6__land__land_small": {
@@ -9943,7 +9943,7 @@
         "count": 26
       },
       "AZIZI AMBER__apartment": {
-        "medianPricePerSqm": 15357,
+        "medianPricePerSqm": 14535,
         "count": 9
       },
       "Azizi Berton__apartment": {
@@ -10255,7 +10255,7 @@
         "count": 7
       },
       "TOWN SQUARE ZAHRA__apartment": {
-        "medianPricePerSqm": 12898,
+        "medianPricePerSqm": 12948,
         "count": 57
       },
       "TOWN SQUARE JENNA AND WARDA__apartment": {
@@ -10827,7 +10827,7 @@
         "count": 11
       },
       "QPOINT LIWAN-PLOT R055__apartment": {
-        "medianPricePerSqm": 7972,
+        "medianPricePerSqm": 7894,
         "count": 4
       },
       "QPOINT LIWAN-PLOT R097__apartment": {
@@ -11399,7 +11399,7 @@
         "count": 18
       },
       "ACACIA AT PARK HEIGHTS__apartment": {
-        "medianPricePerSqm": 23811,
+        "medianPricePerSqm": 23936,
         "count": 17
       },
       "Al Jazi - Madinat Jumeriah Living__apartment": {
@@ -11439,7 +11439,7 @@
         "count": 47
       },
       "SHAMS TOWNHOUSES__villa": {
-        "medianPricePerSqm": 16379,
+        "medianPricePerSqm": 16178,
         "count": 9
       },
       "REEM TOWNHOUSES__villa": {
@@ -11651,7 +11651,7 @@
         "count": 22
       },
       "THE HAVEN__apartment": {
-        "medianPricePerSqm": 14113,
+        "medianPricePerSqm": 14409,
         "count": 32
       },
       "SHERENA RESIDENCE__apartment": {
@@ -12159,7 +12159,7 @@
         "count": 22
       },
       "Sobha Creek Vistas__apartment": {
-        "medianPricePerSqm": 21344,
+        "medianPricePerSqm": 21339,
         "count": 50
       },
       "KENSINGTON WATERS__apartment": {
@@ -13119,7 +13119,7 @@
         "count": 7
       },
       "ARAS Residence__apartment": {
-        "medianPricePerSqm": 12219,
+        "medianPricePerSqm": 10895,
         "count": 5
       },
       "MADISON RESIDENCE__apartment": {
@@ -13669,7 +13669,7 @@
         "count": 4
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__small": {
-        "medianPricePerSqm": 14647,
+        "medianPricePerSqm": 14650,
         "count": 1287
       },
       "JUMEIRAH VILLAGE CIRCLE__apartment__medium": {
@@ -13789,7 +13789,7 @@
         "count": 3
       },
       "AL FURJAN__apartment__small": {
-        "medianPricePerSqm": 14536,
+        "medianPricePerSqm": 14528,
         "count": 237
       },
       "AL FURJAN__apartment__large": {
@@ -14121,7 +14121,7 @@
         "count": 8
       },
       "DUBAI SOUTH__apartment__small": {
-        "medianPricePerSqm": 11991,
+        "medianPricePerSqm": 12010,
         "count": 255
       },
       "DUBAI SOUTH__apartment__medium": {
@@ -15217,7 +15217,7 @@
         "count": 4
       },
       "AL WARQA FOURTH__land__land_large": {
-        "medianPricePerSqm": 3609,
+        "medianPricePerSqm": 3452,
         "count": 4
       },
       "JABAL ALI FIRST__land__land_small": {
@@ -15393,7 +15393,7 @@
         "count": 87
       },
       "MADINAT AL MATAAR__land__land_xlarge": {
-        "medianPricePerSqm": 8835,
+        "medianPricePerSqm": 8592,
         "count": 7
       },
       "MADINAT AL MATAAR__land__land_small": {
@@ -15727,7 +15727,7 @@
         "count": 3
       },
       "MADINAT HIND 4__land": {
-        "medianPricePerSqm": 11453,
+        "medianPricePerSqm": 11451,
         "count": 509
       },
       "LIWAN__apartment": {
@@ -15807,7 +15807,7 @@
         "count": 22
       },
       "MAJAN__apartment": {
-        "medianPricePerSqm": 12082,
+        "medianPricePerSqm": 12045,
         "count": 315
       },
       "AL MERKADH__land": {
@@ -16139,7 +16139,7 @@
         "count": 8
       },
       "NAD AL HAMAR__apartment": {
-        "medianPricePerSqm": 10834,
+        "medianPricePerSqm": 11089,
         "count": 14
       },
       "AL YELAYISS 2__apartment": {
@@ -16491,7 +16491,7 @@
         "count": 4
       },
       "MADINAT AL MATAAR__land": {
-        "medianPricePerSqm": 8875,
+        "medianPricePerSqm": 8835,
         "count": 144
       },
       "MILLENNIUM__land": {
