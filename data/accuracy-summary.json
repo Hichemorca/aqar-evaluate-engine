@@ -1,12 +1,12 @@
 {
   "source": "accuracy-data.json",
   "metrics": {
-    "totalRecords": 7063,
+    "totalRecords": 7062,
     "avgAccuracy": 85.1,
     "avgDeviation": 14.9
   },
   "metadata": {
-    "totalRecords": 7063,
-    "lastUpdated": "2026-09-06T10:00:21.454Z"
+    "totalRecords": 7062,
+    "lastUpdated": "2026-09-07T11:08:18.171Z"
   }
 }
