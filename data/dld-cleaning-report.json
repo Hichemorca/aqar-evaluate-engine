@@ -2,7 +2,7 @@
   "source": "Dubai Land Department",
   "sourceFile": "data/dld-transactions.csv",
   "sourceChecksum": "5d863484f69278615cd6b116ade988d50b77ef0406b20b22495f18c0e0a3d019",
-  "generatedAt": "2026-09-11T10:14:00.334Z",
+  "generatedAt": "2026-09-12T09:47:57.419Z",
   "recordsRead": 30475,
   "normalized": 30328,
   "uniqueTransactionIds": 30456,
