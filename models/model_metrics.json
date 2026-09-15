@@ -14,7 +14,7 @@
     "hasMall",
     "daysSinceStart"
   ],
-  "previousAccuracy": 85.1,
-  "trainedAt": "2026-09-14T11:20:47.077367",
+  "previousAccuracy": 85,
+  "trainedAt": "2026-09-15T10:47:11.711605",
   "modelVersion": "2.0.0"
 }
