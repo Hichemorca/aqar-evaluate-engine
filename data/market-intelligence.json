@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T10:40:33.911Z",
+  "generatedAt": "2026-09-23T10:33:58.026Z",
   "dataWindow": {
     "firstTransactionDate": "2026-01",
     "lastTransactionDate": "2026-07",
@@ -347,7 +347,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 18281,
       "growth": {
         "observedPeriodGrowthPct": -6.6,
@@ -389,9 +389,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 22.1,
-      "investmentScore": 57.6,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 21.4,
+      "investmentScore": 56.7,
       "liquidityPercentile": 62
     },
     {
@@ -401,7 +401,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 27578,
       "growth": {
         "observedPeriodGrowthPct": -18,
@@ -443,9 +443,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 20.1,
-      "investmentScore": 57.2,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 19.4,
+      "investmentScore": 56.3,
       "liquidityPercentile": 96
     },
     {
@@ -455,7 +455,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 58,
+      "daysSinceLastTransaction": 59,
       "medianPricePerSqm": 14082,
       "growth": {
         "observedPeriodGrowthPct": -8.2,
@@ -509,7 +509,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 6940,
       "growth": {
         "observedPeriodGrowthPct": -5.6,
@@ -563,7 +563,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 27958,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -605,9 +605,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 71,
-      "investmentScore": 51.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 68.8,
+      "investmentScore": 50.2,
       "liquidityPercentile": 77
     },
     {
@@ -617,7 +617,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 10398,
       "growth": {
         "observedPeriodGrowthPct": -0.5,
@@ -671,7 +671,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 19999,
       "growth": {
         "observedPeriodGrowthPct": 7,
@@ -713,9 +713,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 61.1,
-      "investmentScore": 74.7,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 59.2,
+      "investmentScore": 73.8,
       "liquidityPercentile": 97
     },
     {
@@ -725,7 +725,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15551,
       "growth": {
         "observedPeriodGrowthPct": -3,
@@ -767,9 +767,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 50.4,
-      "investmentScore": 73.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 48.8,
+      "investmentScore": 72.2,
       "liquidityPercentile": 82
     },
     {
@@ -779,7 +779,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 16314,
       "growth": {
         "observedPeriodGrowthPct": -7.9,
@@ -835,7 +835,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14732,
       "growth": {
         "observedPeriodGrowthPct": 7.8,
@@ -877,9 +877,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 31.4,
-      "investmentScore": 83.5,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 30.4,
+      "investmentScore": 82.6,
       "liquidityPercentile": 95
     },
     {
@@ -889,7 +889,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15677,
       "growth": {
         "observedPeriodGrowthPct": -10.6,
@@ -931,9 +931,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 70,
+      "confidenceScore": 64,
       "bubbleRiskScore": null,
-      "investmentScore": 28.8,
+      "investmentScore": 27.9,
       "liquidityPercentile": 32
     },
     {
@@ -943,7 +943,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 10591,
       "growth": {
         "observedPeriodGrowthPct": 3.9,
@@ -997,7 +997,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 14033,
       "growth": {
         "observedPeriodGrowthPct": -2,
@@ -1051,7 +1051,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15037,
       "growth": {
         "observedPeriodGrowthPct": 2.2,
@@ -1093,9 +1093,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 28.3,
-      "investmentScore": 76.2,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 27.4,
+      "investmentScore": 75.3,
       "liquidityPercentile": 66
     },
     {
@@ -1105,7 +1105,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14192,
       "growth": {
         "observedPeriodGrowthPct": -0.3,
@@ -1147,9 +1147,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 34,
-      "investmentScore": 72,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 33,
+      "investmentScore": 71.1,
       "liquidityPercentile": 69
     },
     {
@@ -1159,7 +1159,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 14762,
       "growth": {
         "observedPeriodGrowthPct": -9.7,
@@ -1213,7 +1213,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 25284,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -1267,7 +1267,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 8579,
       "growth": {
         "observedPeriodGrowthPct": 12.5,
@@ -1311,9 +1311,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 77.9,
-      "investmentScore": 59,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 75.4,
+      "investmentScore": 58.1,
       "liquidityPercentile": 68
     },
     {
@@ -1323,7 +1323,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 10652,
       "growth": {
         "observedPeriodGrowthPct": -14.2,
@@ -1365,9 +1365,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 31.8,
-      "investmentScore": 59,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 30.8,
+      "investmentScore": 58.1,
       "liquidityPercentile": 92
     },
     {
@@ -1377,7 +1377,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 10613,
       "growth": {
         "observedPeriodGrowthPct": -8,
@@ -1431,7 +1431,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 8824,
       "growth": {
         "observedPeriodGrowthPct": 10,
@@ -1473,9 +1473,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 76.1,
-      "investmentScore": 68.5,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 73.7,
+      "investmentScore": 67.6,
       "liquidityPercentile": 74
     },
     {
@@ -1485,7 +1485,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 10549,
       "growth": {
         "observedPeriodGrowthPct": 12,
@@ -1527,9 +1527,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 87.8,
-      "investmentScore": 64.8,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 85,
+      "investmentScore": 63.9,
       "liquidityPercentile": 73
     },
     {
@@ -1539,7 +1539,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 19792,
       "growth": {
         "observedPeriodGrowthPct": 0.4,
@@ -1593,7 +1593,7 @@
       "monthCoverageRatio": 0.5,
       "firstMonth": "2026-02",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15881,
       "growth": {
         "observedPeriodGrowthPct": -18.4,
@@ -1635,9 +1635,9 @@
           "periodLabel": "2026-03 to 2026-07"
         }
       },
-      "confidenceScore": 47,
+      "confidenceScore": 41,
       "bubbleRiskScore": null,
-      "investmentScore": 36.6,
+      "investmentScore": 35.7,
       "liquidityPercentile": 1
     },
     {
@@ -1647,7 +1647,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 19942,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -1701,7 +1701,7 @@
       "monthCoverageRatio": 0.57,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 32327,
       "growth": {
         "observedPeriodGrowthPct": -11.5,
@@ -1755,7 +1755,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 25469,
       "growth": {
         "observedPeriodGrowthPct": -5.9,
@@ -1797,9 +1797,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 28.3,
-      "investmentScore": 64.2,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 27.4,
+      "investmentScore": 63.3,
       "liquidityPercentile": 78
     },
     {
@@ -1809,7 +1809,7 @@
       "monthCoverageRatio": 0.57,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 30112,
       "growth": {
         "observedPeriodGrowthPct": -13.2,
@@ -1851,9 +1851,9 @@
           "periodLabel": "2026-02 to 2026-07"
         }
       },
-      "confidenceScore": 55,
+      "confidenceScore": 49,
       "bubbleRiskScore": null,
-      "investmentScore": 30.4,
+      "investmentScore": 29.5,
       "liquidityPercentile": 27
     },
     {
@@ -1863,7 +1863,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 64,
+      "daysSinceLastTransaction": 65,
       "medianPricePerSqm": 15501,
       "growth": {
         "observedPeriodGrowthPct": 3,
@@ -1917,7 +1917,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14630,
       "growth": {
         "observedPeriodGrowthPct": -6,
@@ -1959,9 +1959,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 23.5,
-      "investmentScore": 69.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 22.7,
+      "investmentScore": 68.2,
       "liquidityPercentile": 70
     },
     {
@@ -1971,7 +1971,7 @@
       "monthCoverageRatio": 0.57,
       "firstMonth": "2026-01",
       "lastMonth": "2026-05",
-      "daysSinceLastTransaction": 75,
+      "daysSinceLastTransaction": 76,
       "medianPricePerSqm": 20126,
       "growth": {
         "observedPeriodGrowthPct": -15.9,
@@ -2025,7 +2025,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-01",
       "lastMonth": "2026-05",
-      "daysSinceLastTransaction": 67,
+      "daysSinceLastTransaction": 68,
       "medianPricePerSqm": 12632,
       "growth": {
         "observedPeriodGrowthPct": -7.5,
@@ -2079,7 +2079,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 12917,
       "growth": {
         "observedPeriodGrowthPct": 11.2,
@@ -2121,9 +2121,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 67.2,
-      "investmentScore": 65.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 65.1,
+      "investmentScore": 64.2,
       "liquidityPercentile": 58
     },
     {
@@ -2133,7 +2133,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 9326,
       "growth": {
         "observedPeriodGrowthPct": 0,
@@ -2189,7 +2189,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 11660,
       "growth": {
         "observedPeriodGrowthPct": 3.4,
@@ -2231,9 +2231,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 35.8,
-      "investmentScore": 71.7,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 34.7,
+      "investmentScore": 70.8,
       "liquidityPercentile": 81
     },
     {
@@ -2243,7 +2243,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 30223,
       "growth": {
         "observedPeriodGrowthPct": -7.9,
@@ -2285,9 +2285,9 @@
           "periodLabel": "2026-04 to 2026-07"
         }
       },
-      "confidenceScore": 61,
+      "confidenceScore": 55,
       "bubbleRiskScore": null,
-      "investmentScore": 38.7,
+      "investmentScore": 37.8,
       "liquidityPercentile": 9
     },
     {
@@ -2297,7 +2297,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 19380,
       "growth": {
         "observedPeriodGrowthPct": -4.5,
@@ -2351,7 +2351,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 67,
+      "daysSinceLastTransaction": 68,
       "medianPricePerSqm": 13843,
       "growth": {
         "observedPeriodGrowthPct": 0.7,
@@ -2405,7 +2405,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 11096,
       "growth": {
         "observedPeriodGrowthPct": 0.7,
@@ -2447,9 +2447,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 65.5,
-      "investmentScore": 69.9,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 63.4,
+      "investmentScore": 69,
       "liquidityPercentile": 76
     },
     {
@@ -2459,7 +2459,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 21563,
       "growth": {
         "observedPeriodGrowthPct": -2.1,
@@ -2501,9 +2501,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 24.9,
-      "investmentScore": 75.2,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 24.1,
+      "investmentScore": 74.3,
       "liquidityPercentile": 84
     },
     {
@@ -2513,7 +2513,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 64,
+      "daysSinceLastTransaction": 65,
       "medianPricePerSqm": 20215,
       "growth": {
         "observedPeriodGrowthPct": -9.2,
@@ -2567,7 +2567,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 19666,
       "growth": {
         "observedPeriodGrowthPct": -8.8,
@@ -2621,7 +2621,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 18412,
       "growth": {
         "observedPeriodGrowthPct": -13.9,
@@ -2675,7 +2675,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 22011,
       "growth": {
         "observedPeriodGrowthPct": 14.4,
@@ -2729,7 +2729,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 21911,
       "growth": {
         "observedPeriodGrowthPct": -9.4,
@@ -2771,9 +2771,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 21.3,
-      "investmentScore": 68,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 20.6,
+      "investmentScore": 67.1,
       "liquidityPercentile": 85
     },
     {
@@ -2783,7 +2783,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-01",
       "lastMonth": "2026-06",
-      "daysSinceLastTransaction": 63,
+      "daysSinceLastTransaction": 64,
       "medianPricePerSqm": 15386,
       "growth": {
         "observedPeriodGrowthPct": -7.7,
@@ -2837,7 +2837,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-01",
       "lastMonth": "2026-06",
-      "daysSinceLastTransaction": 67,
+      "daysSinceLastTransaction": 68,
       "medianPricePerSqm": 18173,
       "growth": {
         "observedPeriodGrowthPct": -5.9,
@@ -2891,7 +2891,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 18980,
       "growth": {
         "observedPeriodGrowthPct": -0.8,
@@ -2945,7 +2945,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 13212,
       "growth": {
         "observedPeriodGrowthPct": -8.9,
@@ -2987,9 +2987,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 27.5,
-      "investmentScore": 54.4,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 26.7,
+      "investmentScore": 53.5,
       "liquidityPercentile": 45
     },
     {
@@ -2999,7 +2999,7 @@
       "monthCoverageRatio": 0.57,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 16478,
       "growth": {
         "observedPeriodGrowthPct": -9.6,
@@ -3041,9 +3041,9 @@
           "periodLabel": "2026-02 to 2026-07"
         }
       },
-      "confidenceScore": 50,
+      "confidenceScore": 44,
       "bubbleRiskScore": null,
-      "investmentScore": 35.2,
+      "investmentScore": 34.3,
       "liquidityPercentile": 1
     },
     {
@@ -3053,7 +3053,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15718,
       "growth": {
         "observedPeriodGrowthPct": -11.1,
@@ -3095,9 +3095,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 18.4,
-      "investmentScore": 52.8,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 17.8,
+      "investmentScore": 51.9,
       "liquidityPercentile": 49
     },
     {
@@ -3107,7 +3107,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 16820,
       "growth": {
         "observedPeriodGrowthPct": 2.4,
@@ -3149,9 +3149,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 72,
-      "investmentScore": 58,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 69.7,
+      "investmentScore": 57.1,
       "liquidityPercentile": 61
     },
     {
@@ -3161,7 +3161,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 28778,
       "growth": {
         "observedPeriodGrowthPct": -1.5,
@@ -3205,9 +3205,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 94,
-      "bubbleRiskScore": 30.2,
-      "investmentScore": 63.7,
+      "confidenceScore": 88,
+      "bubbleRiskScore": 29.3,
+      "investmentScore": 62.8,
       "liquidityPercentile": 55
     },
     {
@@ -3217,7 +3217,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 27973,
       "growth": {
         "observedPeriodGrowthPct": -10.6,
@@ -3259,9 +3259,9 @@
           "periodLabel": "2026-04 to 2026-07"
         }
       },
-      "confidenceScore": 70,
+      "confidenceScore": 64,
       "bubbleRiskScore": null,
-      "investmentScore": 46.2,
+      "investmentScore": 45.3,
       "liquidityPercentile": 22
     },
     {
@@ -3271,7 +3271,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 17363,
       "growth": {
         "observedPeriodGrowthPct": 13.1,
@@ -3325,7 +3325,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15661,
       "growth": {
         "observedPeriodGrowthPct": -4.9,
@@ -3367,9 +3367,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 11.6,
-      "investmentScore": 70.8,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 11.2,
+      "investmentScore": 69.9,
       "liquidityPercentile": 51
     },
     {
@@ -3379,7 +3379,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
@@ -3433,7 +3433,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 20746,
       "growth": {
         "observedPeriodGrowthPct": -8.4,
@@ -3487,7 +3487,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 18398,
       "growth": {
         "observedPeriodGrowthPct": -5.2,
@@ -3529,9 +3529,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 86,
-      "bubbleRiskScore": 39.9,
-      "investmentScore": 48.7,
+      "confidenceScore": 80,
+      "bubbleRiskScore": 38.6,
+      "investmentScore": 47.8,
       "liquidityPercentile": 42
     },
     {
@@ -3541,7 +3541,7 @@
       "monthCoverageRatio": 0.63,
       "firstMonth": "2026-01",
       "lastMonth": "2026-06",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14943,
       "growth": {
         "observedPeriodGrowthPct": -12.2,
@@ -3583,9 +3583,9 @@
           "periodLabel": "2026-03 to 2026-06"
         }
       },
-      "confidenceScore": 63,
+      "confidenceScore": 57,
       "bubbleRiskScore": null,
-      "investmentScore": 40.5,
+      "investmentScore": 39.6,
       "liquidityPercentile": 34
     },
     {
@@ -3595,7 +3595,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 36483,
       "growth": {
         "observedPeriodGrowthPct": -2,
@@ -3649,7 +3649,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 18900,
       "growth": {
         "observedPeriodGrowthPct": -9,
@@ -3703,7 +3703,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 15645,
       "growth": {
         "observedPeriodGrowthPct": 5.1,
@@ -3757,7 +3757,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 74,
+      "daysSinceLastTransaction": 75,
       "medianPricePerSqm": 23283,
       "growth": {
         "observedPeriodGrowthPct": -30.3,
@@ -3811,7 +3811,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 64,
+      "daysSinceLastTransaction": 65,
       "medianPricePerSqm": 14102,
       "growth": {
         "observedPeriodGrowthPct": -3.6,
@@ -3865,7 +3865,7 @@
       "monthCoverageRatio": 0.5,
       "firstMonth": "2026-01",
       "lastMonth": "2026-04",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 10182,
       "growth": {
         "observedPeriodGrowthPct": 1.7,
@@ -3907,9 +3907,9 @@
           "periodLabel": "2026-02 to 2026-04"
         }
       },
-      "confidenceScore": 56,
+      "confidenceScore": 50,
       "bubbleRiskScore": null,
-      "investmentScore": 64.1,
+      "investmentScore": 63.2,
       "liquidityPercentile": 36
     },
     {
@@ -3919,7 +3919,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 20997,
       "growth": {
         "observedPeriodGrowthPct": -20.1,
@@ -3973,7 +3973,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 15106,
       "growth": {
         "observedPeriodGrowthPct": -5.2,
@@ -4027,7 +4027,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 24384,
       "growth": {
         "observedPeriodGrowthPct": 34.1,
@@ -4069,9 +4069,9 @@
           "periodLabel": "2026-04 to 2026-07"
         }
       },
-      "confidenceScore": 67,
+      "confidenceScore": 61,
       "bubbleRiskScore": null,
-      "investmentScore": 47.2,
+      "investmentScore": 46.3,
       "liquidityPercentile": 14
     },
     {
@@ -4081,7 +4081,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 28800,
       "growth": {
         "observedPeriodGrowthPct": -7.9,
@@ -4135,7 +4135,7 @@
       "monthCoverageRatio": 0.5,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 12815,
       "growth": {
         "observedPeriodGrowthPct": -11.2,
@@ -4177,9 +4177,9 @@
           "periodLabel": "2026-02 to 2026-07"
         }
       },
-      "confidenceScore": 45,
+      "confidenceScore": 39,
       "bubbleRiskScore": null,
-      "investmentScore": 14.8,
+      "investmentScore": 13.9,
       "liquidityPercentile": 0
     },
     {
@@ -4189,7 +4189,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 14243,
       "growth": {
         "observedPeriodGrowthPct": 1.3,
@@ -4243,7 +4243,7 @@
       "monthCoverageRatio": 0.71,
       "firstMonth": "2026-02",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 18333,
       "growth": {
         "observedPeriodGrowthPct": -16,
@@ -4285,9 +4285,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 65,
+      "confidenceScore": 59,
       "bubbleRiskScore": null,
-      "investmentScore": 29.3,
+      "investmentScore": 28.4,
       "liquidityPercentile": 28
     },
     {
@@ -4297,7 +4297,7 @@
       "monthCoverageRatio": 0.57,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 12678,
       "growth": {
         "observedPeriodGrowthPct": -17.9,
@@ -4351,7 +4351,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 64,
+      "daysSinceLastTransaction": 65,
       "medianPricePerSqm": 14826,
       "growth": {
         "observedPeriodGrowthPct": 4,
@@ -4407,7 +4407,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14732,
       "growth": {
         "observedPeriodGrowthPct": 7.8,
@@ -4449,9 +4449,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 31.4,
-      "investmentScore": 83.5,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 30.4,
+      "investmentScore": 82.6,
       "liquidityPercentile": 95
     },
     {
@@ -4461,7 +4461,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 14033,
       "growth": {
         "observedPeriodGrowthPct": -2,
@@ -4515,7 +4515,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 10591,
       "growth": {
         "observedPeriodGrowthPct": 3.9,
@@ -4569,7 +4569,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 6940,
       "growth": {
         "observedPeriodGrowthPct": -5.6,
@@ -4617,67 +4617,13 @@
       "liquidityPercentile": 89
     },
     {
-      "district": "DUBAI STUDIO CITY",
-      "transactionCount": 220,
-      "monthsOfData": 7,
-      "monthCoverageRatio": 0.88,
-      "firstMonth": "2026-01",
-      "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
-      "medianPricePerSqm": 15037,
-      "growth": {
-        "observedPeriodGrowthPct": 2.2,
-        "annualizedPct": -3.2,
-        "method": "ols_trend_full_history",
-        "r2": 0.02,
-        "monthsUsed": 7,
-        "periodLabel": "2026-01 to 2026-07"
-      },
-      "temporalVolatilityPct": 16,
-      "valuationDispersionCV": 13.8,
-      "priceAccelerationPct": -39.5,
-      "volumeTrendPctPerMonth": -10.8,
-      "avgMonthlyTransactions": 31.4,
-      "smallSampleWarning": false,
-      "anomalousMonths": null,
-      "label": "DUBAI STUDIO CITY (Apartment)",
-      "propertyType": "apartment",
-      "windowedGrowth": {
-        "full": {
-          "observedPeriodGrowthPct": 2.2,
-          "annualizedPct": -3.2,
-          "monthsUsed": 7,
-          "r2": 0.02,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": -2.4,
-          "annualizedPct": -14.5,
-          "monthsUsed": 6,
-          "r2": 0.38,
-          "periodLabel": "2026-02 to 2026-07"
-        },
-        "last3m": {
-          "observedPeriodGrowthPct": 0.3,
-          "annualizedPct": 2.1,
-          "monthsUsed": 3,
-          "r2": 0.24,
-          "periodLabel": "2026-05 to 2026-07"
-        }
-      },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 28.3,
-      "investmentScore": 76.2,
-      "liquidityPercentile": 66
-    },
-    {
       "district": "DUBAI CREEK HARBOUR",
       "transactionCount": 653,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 59,
+      "daysSinceLastTransaction": 60,
       "medianPricePerSqm": 25284,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -4725,13 +4671,67 @@
       "liquidityPercentile": 93
     },
     {
+      "district": "DUBAI STUDIO CITY",
+      "transactionCount": 220,
+      "monthsOfData": 7,
+      "monthCoverageRatio": 0.88,
+      "firstMonth": "2026-01",
+      "lastMonth": "2026-07",
+      "daysSinceLastTransaction": 61,
+      "medianPricePerSqm": 15037,
+      "growth": {
+        "observedPeriodGrowthPct": 2.2,
+        "annualizedPct": -3.2,
+        "method": "ols_trend_full_history",
+        "r2": 0.02,
+        "monthsUsed": 7,
+        "periodLabel": "2026-01 to 2026-07"
+      },
+      "temporalVolatilityPct": 16,
+      "valuationDispersionCV": 13.8,
+      "priceAccelerationPct": -39.5,
+      "volumeTrendPctPerMonth": -10.8,
+      "avgMonthlyTransactions": 31.4,
+      "smallSampleWarning": false,
+      "anomalousMonths": null,
+      "label": "DUBAI STUDIO CITY (Apartment)",
+      "propertyType": "apartment",
+      "windowedGrowth": {
+        "full": {
+          "observedPeriodGrowthPct": 2.2,
+          "annualizedPct": -3.2,
+          "monthsUsed": 7,
+          "r2": 0.02,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": -2.4,
+          "annualizedPct": -14.5,
+          "monthsUsed": 6,
+          "r2": 0.38,
+          "periodLabel": "2026-02 to 2026-07"
+        },
+        "last3m": {
+          "observedPeriodGrowthPct": 0.3,
+          "annualizedPct": 2.1,
+          "monthsUsed": 3,
+          "r2": 0.24,
+          "periodLabel": "2026-05 to 2026-07"
+        }
+      },
+      "confidenceScore": 84,
+      "bubbleRiskScore": 27.4,
+      "investmentScore": 75.3,
+      "liquidityPercentile": 66
+    },
+    {
       "district": "MEYDAN ONE",
       "transactionCount": 448,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 21563,
       "growth": {
         "observedPeriodGrowthPct": -2.1,
@@ -4773,9 +4773,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 24.9,
-      "investmentScore": 75.2,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 24.1,
+      "investmentScore": 74.3,
       "liquidityPercentile": 84
     },
     {
@@ -4785,7 +4785,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 19999,
       "growth": {
         "observedPeriodGrowthPct": 7,
@@ -4827,9 +4827,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 61.1,
-      "investmentScore": 74.7,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 59.2,
+      "investmentScore": 73.8,
       "liquidityPercentile": 97
     },
     {
@@ -4839,7 +4839,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 15551,
       "growth": {
         "observedPeriodGrowthPct": -3,
@@ -4881,9 +4881,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 50.4,
-      "investmentScore": 73.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 48.8,
+      "investmentScore": 72.2,
       "liquidityPercentile": 82
     },
     {
@@ -4893,7 +4893,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14192,
       "growth": {
         "observedPeriodGrowthPct": -0.3,
@@ -4935,9 +4935,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 34,
-      "investmentScore": 72,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 33,
+      "investmentScore": 71.1,
       "liquidityPercentile": 69
     }
   ],
@@ -4949,7 +4949,7 @@
       "monthCoverageRatio": 0.86,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 24384,
       "growth": {
         "observedPeriodGrowthPct": 34.1,
@@ -4991,9 +4991,9 @@
           "periodLabel": "2026-04 to 2026-07"
         }
       },
-      "confidenceScore": 67,
+      "confidenceScore": 61,
       "bubbleRiskScore": null,
-      "investmentScore": 47.2,
+      "investmentScore": 46.3,
       "liquidityPercentile": 14
     },
     {
@@ -5003,7 +5003,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
@@ -5057,7 +5057,7 @@
       "monthCoverageRatio": 0.75,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 62,
+      "daysSinceLastTransaction": 63,
       "medianPricePerSqm": 22011,
       "growth": {
         "observedPeriodGrowthPct": 14.4,
@@ -5111,7 +5111,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 17363,
       "growth": {
         "observedPeriodGrowthPct": 13.1,
@@ -5165,7 +5165,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 8579,
       "growth": {
         "observedPeriodGrowthPct": 12.5,
@@ -5209,9 +5209,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 77.9,
-      "investmentScore": 59,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 75.4,
+      "investmentScore": 58.1,
       "liquidityPercentile": 68
     },
     {
@@ -5221,7 +5221,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 10549,
       "growth": {
         "observedPeriodGrowthPct": 12,
@@ -5263,9 +5263,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 87.8,
-      "investmentScore": 64.8,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 85,
+      "investmentScore": 63.9,
       "liquidityPercentile": 73
     },
     {
@@ -5275,7 +5275,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 12917,
       "growth": {
         "observedPeriodGrowthPct": 11.2,
@@ -5317,9 +5317,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 67.2,
-      "investmentScore": 65.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 65.1,
+      "investmentScore": 64.2,
       "liquidityPercentile": 58
     },
     {
@@ -5329,7 +5329,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 8824,
       "growth": {
         "observedPeriodGrowthPct": 10,
@@ -5371,9 +5371,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 76.1,
-      "investmentScore": 68.5,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 73.7,
+      "investmentScore": 67.6,
       "liquidityPercentile": 74
     },
     {
@@ -5383,7 +5383,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 14732,
       "growth": {
         "observedPeriodGrowthPct": 7.8,
@@ -5425,9 +5425,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 31.4,
-      "investmentScore": 83.5,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 30.4,
+      "investmentScore": 82.6,
       "liquidityPercentile": 95
     },
     {
@@ -5437,7 +5437,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 19999,
       "growth": {
         "observedPeriodGrowthPct": 7,
@@ -5479,9 +5479,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 61.1,
-      "investmentScore": 74.7,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 59.2,
+      "investmentScore": 73.8,
       "liquidityPercentile": 97
     }
   ],
@@ -5493,7 +5493,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 10549,
       "growth": {
         "observedPeriodGrowthPct": 12,
@@ -5535,9 +5535,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 87.8,
-      "investmentScore": 64.8,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 85,
+      "investmentScore": 63.9,
       "liquidityPercentile": 73
     },
     {
@@ -5547,7 +5547,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 11661,
       "growth": {
         "observedPeriodGrowthPct": 16.2,
@@ -5601,7 +5601,7 @@
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 61,
+      "daysSinceLastTransaction": 62,
       "medianPricePerSqm": 17363,
       "growth": {
         "observedPeriodGrowthPct": 13.1,
@@ -5649,69 +5649,13 @@
       "liquidityPercentile": 24
     },
     {
-      "district": "INTERNATIONAL CITY PH 2 & 3",
-      "transactionCount": 245,
-      "monthsOfData": 7,
-      "monthCoverageRatio": 0.88,
-      "firstMonth": "2026-01",
-      "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
-      "medianPricePerSqm": 8579,
-      "growth": {
-        "observedPeriodGrowthPct": 12.5,
-        "annualizedPct": -19.2,
-        "method": "ols_trend_full_history",
-        "r2": 0.01,
-        "monthsUsed": 7,
-        "periodLabel": "2026-01 to 2026-07"
-      },
-      "temporalVolatilityPct": 174.4,
-      "valuationDispersionCV": 43.7,
-      "priceAccelerationPct": 21303.9,
-      "volumeTrendPctPerMonth": 3.5,
-      "avgMonthlyTransactions": 35,
-      "smallSampleWarning": false,
-      "anomalousMonths": [
-        "2026-05"
-      ],
-      "label": "INTERNATIONAL CITY PH 2 & 3 (Apartment)",
-      "propertyType": "apartment",
-      "windowedGrowth": {
-        "full": {
-          "observedPeriodGrowthPct": 12.5,
-          "annualizedPct": -19.2,
-          "monthsUsed": 7,
-          "r2": 0.01,
-          "periodLabel": "2026-01 to 2026-07"
-        },
-        "last6m": {
-          "observedPeriodGrowthPct": 6.7,
-          "annualizedPct": -22.3,
-          "monthsUsed": 6,
-          "r2": 0.01,
-          "periodLabel": "2026-02 to 2026-07"
-        },
-        "last3m": {
-          "observedPeriodGrowthPct": 144.7,
-          "annualizedPct": 21355.2,
-          "monthsUsed": 3,
-          "r2": 0.76,
-          "periodLabel": "2026-05 to 2026-07"
-        }
-      },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 77.9,
-      "investmentScore": 59,
-      "liquidityPercentile": 68
-    },
-    {
       "district": "AL YELAYISS 2",
       "transactionCount": 80,
       "monthsOfData": 7,
       "monthCoverageRatio": 1,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 64,
+      "daysSinceLastTransaction": 65,
       "medianPricePerSqm": 15501,
       "growth": {
         "observedPeriodGrowthPct": 3,
@@ -5759,13 +5703,69 @@
       "liquidityPercentile": 39
     },
     {
+      "district": "INTERNATIONAL CITY PH 2 & 3",
+      "transactionCount": 245,
+      "monthsOfData": 7,
+      "monthCoverageRatio": 0.88,
+      "firstMonth": "2026-01",
+      "lastMonth": "2026-07",
+      "daysSinceLastTransaction": 61,
+      "medianPricePerSqm": 8579,
+      "growth": {
+        "observedPeriodGrowthPct": 12.5,
+        "annualizedPct": -19.2,
+        "method": "ols_trend_full_history",
+        "r2": 0.01,
+        "monthsUsed": 7,
+        "periodLabel": "2026-01 to 2026-07"
+      },
+      "temporalVolatilityPct": 174.4,
+      "valuationDispersionCV": 43.7,
+      "priceAccelerationPct": 21303.9,
+      "volumeTrendPctPerMonth": 3.5,
+      "avgMonthlyTransactions": 35,
+      "smallSampleWarning": false,
+      "anomalousMonths": [
+        "2026-05"
+      ],
+      "label": "INTERNATIONAL CITY PH 2 & 3 (Apartment)",
+      "propertyType": "apartment",
+      "windowedGrowth": {
+        "full": {
+          "observedPeriodGrowthPct": 12.5,
+          "annualizedPct": -19.2,
+          "monthsUsed": 7,
+          "r2": 0.01,
+          "periodLabel": "2026-01 to 2026-07"
+        },
+        "last6m": {
+          "observedPeriodGrowthPct": 6.7,
+          "annualizedPct": -22.3,
+          "monthsUsed": 6,
+          "r2": 0.01,
+          "periodLabel": "2026-02 to 2026-07"
+        },
+        "last3m": {
+          "observedPeriodGrowthPct": 144.7,
+          "annualizedPct": 21355.2,
+          "monthsUsed": 3,
+          "r2": 0.76,
+          "periodLabel": "2026-05 to 2026-07"
+        }
+      },
+      "confidenceScore": 84,
+      "bubbleRiskScore": 75.4,
+      "investmentScore": 58.1,
+      "liquidityPercentile": 68
+    },
+    {
       "district": "DUBAI LAND RESIDENCE COMPLEX",
       "transactionCount": 299,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 8824,
       "growth": {
         "observedPeriodGrowthPct": 10,
@@ -5807,9 +5807,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 76.1,
-      "investmentScore": 68.5,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 73.7,
+      "investmentScore": 67.6,
       "liquidityPercentile": 74
     },
     {
@@ -5819,7 +5819,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 16820,
       "growth": {
         "observedPeriodGrowthPct": 2.4,
@@ -5861,9 +5861,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 72,
-      "investmentScore": 58,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 69.7,
+      "investmentScore": 57.1,
       "liquidityPercentile": 61
     },
     {
@@ -5873,7 +5873,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 27958,
       "growth": {
         "observedPeriodGrowthPct": -7.1,
@@ -5915,9 +5915,9 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 71,
-      "investmentScore": 51.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 68.8,
+      "investmentScore": 50.2,
       "liquidityPercentile": 77
     },
     {
@@ -5927,7 +5927,7 @@
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
-      "daysSinceLastTransaction": 60,
+      "daysSinceLastTransaction": 61,
       "medianPricePerSqm": 12917,
       "growth": {
         "observedPeriodGrowthPct": 11.2,
@@ -5969,64 +5969,64 @@
           "periodLabel": "2026-05 to 2026-07"
         }
       },
-      "confidenceScore": 90,
-      "bubbleRiskScore": 67.2,
-      "investmentScore": 65.1,
+      "confidenceScore": 84,
+      "bubbleRiskScore": 65.1,
+      "investmentScore": 64.2,
       "liquidityPercentile": 58
     },
     {
-      "district": "MOTOR CITY",
-      "transactionCount": 331,
+      "district": "JUMEIRAH VILLAGE TRIANGLE",
+      "transactionCount": 270,
       "monthsOfData": 7,
       "monthCoverageRatio": 0.88,
       "firstMonth": "2026-01",
       "lastMonth": "2026-07",
       "daysSinceLastTransaction": 60,
-      "medianPricePerSqm": 11096,
+      "medianPricePerSqm": 14762,
       "growth": {
-        "observedPeriodGrowthPct": 0.7,
-        "annualizedPct": -7.7,
+        "observedPeriodGrowthPct": -9.7,
+        "annualizedPct": -29,
         "method": "ols_trend_full_history",
-        "r2": 0.08,
+        "r2": 0.42,
         "monthsUsed": 7,
         "periodLabel": "2026-01 to 2026-07"
       },
-      "temporalVolatilityPct": 23.1,
-      "valuationDispersionCV": 16.1,
-      "priceAccelerationPct": 134.6,
-      "volumeTrendPctPerMonth": -14.9,
-      "avgMonthlyTransactions": 47.3,
+      "temporalVolatilityPct": 26.7,
+      "valuationDispersionCV": 29.5,
+      "priceAccelerationPct": 211.5,
+      "volumeTrendPctPerMonth": -18.4,
+      "avgMonthlyTransactions": 38.6,
       "smallSampleWarning": false,
       "anomalousMonths": null,
-      "label": "MOTOR CITY (Apartment)",
+      "label": "JUMEIRAH VILLAGE TRIANGLE (Apartment)",
       "propertyType": "apartment",
       "windowedGrowth": {
         "full": {
-          "observedPeriodGrowthPct": 0.7,
-          "annualizedPct": -7.7,
+          "observedPeriodGrowthPct": -9.7,
+          "annualizedPct": -29,
           "monthsUsed": 7,
-          "r2": 0.08,
+          "r2": 0.42,
           "periodLabel": "2026-01 to 2026-07"
         },
         "last6m": {
-          "observedPeriodGrowthPct": 2.2,
-          "annualizedPct": -5.1,
+          "observedPeriodGrowthPct": -9.4,
+          "annualizedPct": -23,
           "monthsUsed": 6,
-          "r2": 0.02,
+          "r2": 0.22,
           "periodLabel": "2026-02 to 2026-07"
         },
         "last3m": {
-          "observedPeriodGrowthPct": 15.1,
-          "annualizedPct": 132.4,
+          "observedPeriodGrowthPct": 17.2,
+          "annualizedPct": 159.2,
           "monthsUsed": 3,
           "r2": 1,
           "periodLabel": "2026-05 to 2026-07"
         }
       },
       "confidenceScore": 90,
-      "bubbleRiskScore": 65.5,
-      "investmentScore": 69.9,
-      "liquidityPercentile": 76
+      "bubbleRiskScore": 64.9,
+      "investmentScore": 48.1,
+      "liquidityPercentile": 72
     }
   ],
   "liquidityIndex": [
