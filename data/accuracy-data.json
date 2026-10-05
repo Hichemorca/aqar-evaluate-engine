@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "22.1.0",
-    "lastUpdated": "2026-10-04T11:37:20.485Z",
-    "totalRecords": 4958,
+    "lastUpdated": "2026-10-05T13:07:46.130Z",
+    "totalRecords": 4957,
     "methodology": "v22.1 Calibrated with Mean + optimized multipliers",
     "dataSource": "DLD + Consultancy + Government + GIS",
     "accuracyScope": "verified-dld-only",
@@ -1110,14 +1110,14 @@
     "priceBand10": 51,
     "priceBand15": 67,
     "priceBand25": 85,
-    "totalRecords": 4958,
+    "totalRecords": 4957,
     "levels": {
       "project_size": 3425,
       "project": 215,
-      "district_size": 1265,
+      "district_size": 1264,
       "district": 53
     },
-    "gisAvailable": 2947,
+    "gisAvailable": 2946,
     "gisApplied": 336,
     "viewApplied": 0
   },
@@ -8605,122 +8605,6 @@
       }
     },
     {
-      "propertyRef": "DLD-11-17810-2026",
-      "transactionNumber": "11-17810-2026",
-      "instanceDate": "2026-06-07 12:06:40",
-      "saleDate": "2026-06-07",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "BURJ KHALIFA",
-      "area": 90.49,
-      "procedureArea": 90.49,
-      "actualSalePrice": 1750000,
-      "rooms": 1,
-      "parking": 0,
-      "nearestMetro": "Buj Khalifa Dubai Mall Metro Station",
-      "nearestMall": "Dubai Mall",
-      "nearestLandmark": "Downtown Dubai",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-17810-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 19339.153497624047,
-      "lat": 25.195,
-      "lng": 55.274,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "alias",
-      "hasGis": true,
-      "aqarValuation": 2395270,
-      "aqarVsActual": 36.9,
-      "evalLevel": "district_size",
-      "evalCount": 579,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 2395270,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 579,
-          "district": 805
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 579,
-        "selectedPeerPricePerSqm": {
-          "count": 579,
-          "min": 11412.73,
-          "q1": 22150.44,
-          "median": 27374.76,
-          "q3": 33794.04,
-          "max": 49897.4,
-          "iqrRatio": 0.4253,
-          "maxMinRatio": 4.3721
-        },
-        "selectedDispersion": "moderate",
-        "flags": [
-          "moderate_peer_dispersion"
-        ]
-      }
-    },
-    {
       "propertyRef": "DLD-11-17811-2026",
       "transactionNumber": "11-17811-2026",
       "instanceDate": "2026-06-08 08:15:25",
@@ -10244,8 +10128,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 4854333,
-      "aqarVsActual": 38,
+      "aqarValuation": 4862953,
+      "aqarVsActual": 38.3,
       "evalLevel": "district_size",
       "evalCount": 579,
       "gisMultiplier": 1,
@@ -10256,7 +10140,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 4854333,
+          "value": 4862953,
           "weight": 0.55,
           "assumptions": []
         },
@@ -10704,8 +10588,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 2227980,
-      "aqarVsActual": 62,
+      "aqarValuation": 2231936,
+      "aqarVsActual": 62.3,
       "evalLevel": "district_size",
       "evalCount": 579,
       "gisMultiplier": 1,
@@ -10716,7 +10600,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2227980,
+          "value": 2231936,
           "weight": 0.55,
           "assumptions": []
         },
@@ -10934,7 +10818,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 2161879,
+      "aqarValuation": 2163514,
       "aqarVsActual": -27.9,
       "evalLevel": "district_size",
       "evalCount": 579,
@@ -10946,7 +10830,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2161879,
+          "value": 2163514,
           "weight": 0.55,
           "assumptions": []
         },
@@ -24118,8 +24002,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1499196,
-      "aqarVsActual": -10.8,
+      "aqarValuation": 1721393,
+      "aqarVsActual": 2.5,
       "evalLevel": "project_size",
       "evalCount": 13,
       "gisMultiplier": 1,
@@ -24130,7 +24014,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1499196,
+          "value": 1721393,
           "weight": 0.55,
           "assumptions": []
         },
@@ -29842,7 +29726,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 812339,
+      "aqarValuation": 812450,
       "aqarVsActual": 4.8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -29854,7 +29738,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 812339,
+          "value": 812450,
           "weight": 0.55,
           "assumptions": []
         },
@@ -31676,7 +31560,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1150544,
+      "aqarValuation": 1150700,
       "aqarVsActual": 26.1,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -31688,7 +31572,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1150544,
+          "value": 1150700,
           "weight": 0.55,
           "assumptions": []
         },
@@ -33510,8 +33394,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1683639,
-      "aqarVsActual": 6.6,
+      "aqarValuation": 1648655,
+      "aqarVsActual": 4.3,
       "evalLevel": "project",
       "evalCount": 8,
       "gisMultiplier": 1,
@@ -33522,7 +33406,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1683639,
+          "value": 1648655,
           "weight": 0.55,
           "assumptions": []
         },
@@ -34086,7 +33970,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1006505,
+      "aqarValuation": 1006641,
       "aqarVsActual": 40.9,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -34098,7 +33982,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1006505,
+          "value": 1006641,
           "weight": 0.55,
           "assumptions": []
         },
@@ -34548,7 +34432,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1106462,
+      "aqarValuation": 1106612,
       "aqarVsActual": 41.8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -34560,7 +34444,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1106462,
+          "value": 1106612,
           "weight": 0.55,
           "assumptions": []
         },
@@ -35580,7 +35464,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 507454,
+      "aqarValuation": 507523,
       "aqarVsActual": 12.8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -35592,7 +35476,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 507454,
+          "value": 507523,
           "weight": 0.55,
           "assumptions": []
         },
@@ -35812,7 +35696,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 529612,
+      "aqarValuation": 529756,
       "aqarVsActual": -17.2,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -35824,7 +35708,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 529612,
+          "value": 529756,
           "weight": 0.55,
           "assumptions": []
         },
@@ -36272,7 +36156,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 955335,
+      "aqarValuation": 955594,
       "aqarVsActual": -4.2,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -36284,7 +36168,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 955335,
+          "value": 955594,
           "weight": 0.55,
           "assumptions": []
         },
@@ -37306,7 +37190,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 587951,
+      "aqarValuation": 588031,
       "aqarVsActual": 6.9,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -37318,7 +37202,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 587951,
+          "value": 588031,
           "weight": 0.55,
           "assumptions": []
         },
@@ -39944,7 +39828,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 708254,
+      "aqarValuation": 708350,
       "aqarVsActual": 28.8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -39956,7 +39840,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 708254,
+          "value": 708350,
           "weight": 0.55,
           "assumptions": []
         },
@@ -40176,7 +40060,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 642058,
+      "aqarValuation": 642145,
       "aqarVsActual": 28.4,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -40188,7 +40072,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 642058,
+          "value": 642145,
           "weight": 0.55,
           "assumptions": []
         },
@@ -40522,7 +40406,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 545491,
+      "aqarValuation": 545565,
       "aqarVsActual": 8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -40534,7 +40418,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 545491,
+          "value": 545565,
           "weight": 0.55,
           "assumptions": []
         },
@@ -41208,7 +41092,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1160864,
+      "aqarValuation": 1161021,
       "aqarVsActual": 56.9,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -41220,7 +41104,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1160864,
+          "value": 1161021,
           "weight": 0.55,
           "assumptions": []
         },
@@ -41438,7 +41322,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1046016,
+      "aqarValuation": 1046158,
       "aqarVsActual": 7.3,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -41450,7 +41334,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1046016,
+          "value": 1046158,
           "weight": 0.55,
           "assumptions": []
         },
@@ -43504,7 +43388,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1026555,
+      "aqarValuation": 1026694,
       "aqarVsActual": 9.2,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -43516,7 +43400,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1026555,
+          "value": 1026694,
           "weight": 0.55,
           "assumptions": []
         },
@@ -43620,7 +43504,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 585150,
+      "aqarValuation": 585229,
       "aqarVsActual": 6.4,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -43632,7 +43516,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 585150,
+          "value": 585229,
           "weight": 0.55,
           "assumptions": []
         },
@@ -44194,8 +44078,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 655714,
-      "aqarVsActual": -3.6,
+      "aqarValuation": 667348,
+      "aqarVsActual": -1.9,
       "evalLevel": "project_size",
       "evalCount": 21,
       "gisMultiplier": 1,
@@ -44206,7 +44090,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 655714,
+          "value": 667348,
           "weight": 0.55,
           "assumptions": []
         },
@@ -45234,7 +45118,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 597976,
+      "aqarValuation": 598057,
       "aqarVsActual": 32.9,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -45246,7 +45130,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 597976,
+          "value": 598057,
           "weight": 0.55,
           "assumptions": []
         },
@@ -46262,8 +46146,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1409025,
-      "aqarVsActual": 14.7,
+      "aqarValuation": 1416790,
+      "aqarVsActual": 15.4,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -46274,7 +46158,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1409025,
+          "value": 1416790,
           "weight": 0.55,
           "assumptions": []
         },
@@ -49466,7 +49350,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 899618,
+      "aqarValuation": 899740,
       "aqarVsActual": 26.7,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -49478,7 +49362,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 899618,
+          "value": 899740,
           "weight": 0.55,
           "assumptions": []
         },
@@ -51064,7 +50948,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1056041,
+      "aqarValuation": 1056184,
       "aqarVsActual": 26.5,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -51076,7 +50960,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1056041,
+          "value": 1056184,
           "weight": 0.55,
           "assumptions": []
         },
@@ -51522,7 +51406,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 983800,
+      "aqarValuation": 983934,
       "aqarVsActual": 9.3,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -51534,7 +51418,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 983800,
+          "value": 983934,
           "weight": 0.55,
           "assumptions": []
         },
@@ -54058,7 +53942,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1060930,
+      "aqarValuation": 1061722,
       "aqarVsActual": -7.7,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -54070,7 +53954,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1060930,
+          "value": 1061722,
           "weight": 0.55,
           "assumptions": []
         },
@@ -59778,8 +59662,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1876763,
-      "aqarVsActual": -6.1,
+      "aqarValuation": 1957406,
+      "aqarVsActual": -2.1,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -59790,7 +59674,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1876763,
+          "value": 1957406,
           "weight": 0.55,
           "assumptions": []
         },
@@ -62182,8 +62066,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 519639,
-      "aqarVsActual": -13.4,
+      "aqarValuation": 520027,
+      "aqarVsActual": -13.3,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -62194,7 +62078,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 519639,
+          "value": 520027,
           "weight": 0.55,
           "assumptions": []
         },
@@ -65504,8 +65388,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1533613,
-      "aqarVsActual": 27.8,
+      "aqarValuation": 1601891,
+      "aqarVsActual": 33.5,
       "evalLevel": "project_size",
       "evalCount": 31,
       "gisMultiplier": 1,
@@ -65516,7 +65400,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1533613,
+          "value": 1601891,
           "weight": 0.55,
           "assumptions": []
         },
@@ -75462,8 +75346,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 560586,
-      "aqarVsActual": -17.6,
+      "aqarValuation": 560852,
+      "aqarVsActual": -17.5,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -75474,7 +75358,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 560586,
+          "value": 560852,
           "weight": 0.55,
           "assumptions": []
         },
@@ -75692,7 +75576,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 544973,
+      "aqarValuation": 545232,
       "aqarVsActual": -6.8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -75704,7 +75588,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 544973,
+          "value": 545232,
           "weight": 0.55,
           "assumptions": []
         },
@@ -77756,8 +77640,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 584447,
-      "aqarVsActual": -19.4,
+      "aqarValuation": 584724,
+      "aqarVsActual": -19.3,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -77768,7 +77652,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 584447,
+          "value": 584724,
           "weight": 0.55,
           "assumptions": []
         },
@@ -79132,8 +79016,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1035743,
-      "aqarVsActual": -6.7,
+      "aqarValuation": 1036236,
+      "aqarVsActual": -6.6,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -79144,7 +79028,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1035743,
+          "value": 1036236,
           "weight": 0.55,
           "assumptions": []
         },
@@ -87020,8 +86904,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2178791,
-      "aqarVsActual": 11.2,
+      "aqarValuation": 2190797,
+      "aqarVsActual": 11.8,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -87032,7 +86916,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2178791,
+          "value": 2190797,
           "weight": 0.55,
           "assumptions": []
         },
@@ -87134,8 +87018,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2177929,
-      "aqarVsActual": 8.9,
+      "aqarValuation": 2189931,
+      "aqarVsActual": 9.5,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -87146,7 +87030,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2177929,
+          "value": 2189931,
           "weight": 0.55,
           "assumptions": []
         },
@@ -87820,8 +87704,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1984598,
-      "aqarVsActual": -8,
+      "aqarValuation": 2069875,
+      "aqarVsActual": -4,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -87832,7 +87716,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1984598,
+          "value": 2069875,
           "weight": 0.55,
           "assumptions": []
         },
@@ -87934,8 +87818,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1988187,
-      "aqarVsActual": -12.1,
+      "aqarValuation": 2073618,
+      "aqarVsActual": -8.3,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -87946,7 +87830,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1988187,
+          "value": 2073618,
           "weight": 0.55,
           "assumptions": []
         },
@@ -88504,8 +88388,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1978399,
-      "aqarVsActual": -13.2,
+      "aqarValuation": 2063409,
+      "aqarVsActual": -9.5,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -88516,7 +88400,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1978399,
+          "value": 2063409,
           "weight": 0.55,
           "assumptions": []
         },
@@ -89532,8 +89416,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1978399,
-      "aqarVsActual": -19.3,
+      "aqarValuation": 2063409,
+      "aqarVsActual": -15.9,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -89544,7 +89428,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1978399,
+          "value": 2063409,
           "weight": 0.55,
           "assumptions": []
         },
@@ -91358,7 +91242,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1017479,
+      "aqarValuation": 1017963,
       "aqarVsActual": -22.3,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -91370,7 +91254,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1017479,
+          "value": 1017963,
           "weight": 0.55,
           "assumptions": []
         },
@@ -91474,7 +91358,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 915702,
+      "aqarValuation": 916137,
       "aqarVsActual": -31.8,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -91486,7 +91370,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 915702,
+          "value": 916137,
           "weight": 0.55,
           "assumptions": []
         },
@@ -106540,8 +106424,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 4849615,
-      "aqarVsActual": 29.3,
+      "aqarValuation": 4859802,
+      "aqarVsActual": 29.6,
       "evalLevel": "district_size",
       "evalCount": 199,
       "gisMultiplier": 1,
@@ -106552,7 +106436,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 4849615,
+          "value": 4859802,
           "weight": 0.55,
           "assumptions": []
         },
@@ -106770,8 +106654,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3858327,
-      "aqarVsActual": 0.2,
+      "aqarValuation": 3866432,
+      "aqarVsActual": 0.4,
       "evalLevel": "district_size",
       "evalCount": 199,
       "gisMultiplier": 1,
@@ -106782,7 +106666,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3858327,
+          "value": 3866432,
           "weight": 0.55,
           "assumptions": []
         },
@@ -107114,8 +106998,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 4849615,
-      "aqarVsActual": 32.9,
+      "aqarValuation": 4859802,
+      "aqarVsActual": 33.1,
       "evalLevel": "district_size",
       "evalCount": 199,
       "gisMultiplier": 1,
@@ -107126,7 +107010,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 4849615,
+          "value": 4859802,
           "weight": 0.55,
           "assumptions": []
         },
@@ -109640,8 +109524,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3772185,
-      "aqarVsActual": 14.3,
+      "aqarValuation": 3780109,
+      "aqarVsActual": 14.5,
       "evalLevel": "district_size",
       "evalCount": 199,
       "gisMultiplier": 1,
@@ -109652,7 +109536,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3772185,
+          "value": 3780109,
           "weight": 0.55,
           "assumptions": []
         },
@@ -120642,8 +120526,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1564940,
-      "aqarVsActual": 10.2,
+      "aqarValuation": 1566575,
+      "aqarVsActual": 10.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -120654,7 +120538,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1564940,
+          "value": 1566575,
           "weight": 0.55,
           "assumptions": []
         },
@@ -122248,8 +122132,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2978459,
-      "aqarVsActual": 19.1,
+      "aqarValuation": 2981571,
+      "aqarVsActual": 19.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -122260,7 +122144,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2978459,
+          "value": 2981571,
           "weight": 0.55,
           "assumptions": []
         },
@@ -123048,8 +122932,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2438818,
-      "aqarVsActual": 2.7,
+      "aqarValuation": 2441366,
+      "aqarVsActual": 2.8,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -123060,7 +122944,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2438818,
+          "value": 2441366,
           "weight": 0.55,
           "assumptions": []
         },
@@ -123278,8 +123162,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3036654,
-      "aqarVsActual": 21.5,
+      "aqarValuation": 3039827,
+      "aqarVsActual": 21.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -123290,7 +123174,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3036654,
+          "value": 3039827,
           "weight": 0.55,
           "assumptions": []
         },
@@ -123624,8 +123508,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2164887,
-      "aqarVsActual": -44.2,
+      "aqarValuation": 2167945,
+      "aqarVsActual": -44.1,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -123636,7 +123520,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2164887,
+          "value": 2167945,
           "weight": 0.55,
           "assumptions": []
         },
@@ -124542,8 +124426,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2500564,
-      "aqarVsActual": -18,
+      "aqarValuation": 2504096,
+      "aqarVsActual": -17.9,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -124554,7 +124438,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2500564,
+          "value": 2504096,
           "weight": 0.55,
           "assumptions": []
         },
@@ -124658,8 +124542,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3444783,
-      "aqarVsActual": 43.5,
+      "aqarValuation": 3448382,
+      "aqarVsActual": 43.7,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -124670,7 +124554,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3444783,
+          "value": 3448382,
           "weight": 0.55,
           "assumptions": []
         },
@@ -125694,8 +125578,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2435378,
-      "aqarVsActual": -4.5,
+      "aqarValuation": 2438818,
+      "aqarVsActual": -4.4,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -125706,7 +125590,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2435378,
+          "value": 2438818,
           "weight": 0.55,
           "assumptions": []
         },
@@ -125924,8 +125808,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1961583,
-      "aqarVsActual": 4.6,
+      "aqarValuation": 1963633,
+      "aqarVsActual": 4.7,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -125936,7 +125820,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1961583,
+          "value": 1963633,
           "weight": 0.55,
           "assumptions": []
         },
@@ -126386,8 +126270,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1797145,
-      "aqarVsActual": 29.5,
+      "aqarValuation": 1799022,
+      "aqarVsActual": 29.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -126398,7 +126282,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1797145,
+          "value": 1799022,
           "weight": 0.55,
           "assumptions": []
         },
@@ -126732,8 +126616,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2651306,
-      "aqarVsActual": 24.2,
+      "aqarValuation": 2654076,
+      "aqarVsActual": 24.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -126744,7 +126628,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2651306,
+          "value": 2654076,
           "weight": 0.55,
           "assumptions": []
         },
@@ -126848,8 +126732,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2091099,
-      "aqarVsActual": -52.6,
+      "aqarValuation": 2094053,
+      "aqarVsActual": -52.5,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -126860,7 +126744,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2091099,
+          "value": 2094053,
           "weight": 0.55,
           "assumptions": []
         },
@@ -127080,8 +126964,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3677345,
-      "aqarVsActual": -12.4,
+      "aqarValuation": 3682539,
+      "aqarVsActual": -12.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -127092,7 +126976,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3677345,
+          "value": 3682539,
           "weight": 0.55,
           "assumptions": []
         },
@@ -127310,8 +127194,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3094116,
-      "aqarVsActual": -40.4,
+      "aqarValuation": 3098486,
+      "aqarVsActual": -40.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -127322,7 +127206,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3094116,
+          "value": 3098486,
           "weight": 0.55,
           "assumptions": []
         },
@@ -127768,8 +127652,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2296787,
-      "aqarVsActual": -0.1,
+      "aqarValuation": 2302434,
+      "aqarVsActual": 0.1,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -127780,7 +127664,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2296787,
+          "value": 2302434,
           "weight": 0.55,
           "assumptions": []
         },
@@ -127884,8 +127768,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2182111,
-      "aqarVsActual": 74.6,
+      "aqarValuation": 2184390,
+      "aqarVsActual": 74.8,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -127896,7 +127780,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2182111,
+          "value": 2184390,
           "weight": 0.55,
           "assumptions": []
         },
@@ -128232,8 +128116,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2510222,
-      "aqarVsActual": 43.4,
+      "aqarValuation": 2512844,
+      "aqarVsActual": 43.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -128244,7 +128128,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2510222,
+          "value": 2512844,
           "weight": 0.55,
           "assumptions": []
         },
@@ -128808,8 +128692,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2627760,
-      "aqarVsActual": 83.1,
+      "aqarValuation": 2630505,
+      "aqarVsActual": 83.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -128820,7 +128704,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2627760,
+          "value": 2630505,
           "weight": 0.55,
           "assumptions": []
         },
@@ -128924,8 +128808,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2562691,
-      "aqarVsActual": -30.7,
+      "aqarValuation": 2566311,
+      "aqarVsActual": -30.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -128936,7 +128820,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2562691,
+          "value": 2566311,
           "weight": 0.55,
           "assumptions": []
         },
@@ -129268,8 +129152,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2186297,
-      "aqarVsActual": -44.8,
+      "aqarValuation": 2189385,
+      "aqarVsActual": -44.7,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -129280,7 +129164,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2186297,
+          "value": 2189385,
           "weight": 0.55,
           "assumptions": []
         },
@@ -129384,7 +129268,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2166416,
+      "aqarValuation": 2169476,
       "aqarVsActual": -43.1,
       "evalLevel": "district_size",
       "evalCount": 518,
@@ -129396,7 +129280,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2166416,
+          "value": 2169476,
           "weight": 0.55,
           "assumptions": []
         },
@@ -129730,8 +129614,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1821074,
-      "aqarVsActual": 26.5,
+      "aqarValuation": 1822976,
+      "aqarVsActual": 26.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -129742,7 +129626,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1821074,
+          "value": 1822976,
           "weight": 0.55,
           "assumptions": []
         },
@@ -130078,8 +129962,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3094116,
-      "aqarVsActual": -42.5,
+      "aqarValuation": 3098486,
+      "aqarVsActual": -42.4,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -130090,7 +129974,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3094116,
+          "value": 3098486,
           "weight": 0.55,
           "assumptions": []
         },
@@ -130538,7 +130422,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2087467,
+      "aqarValuation": 2090416,
       "aqarVsActual": -51.4,
       "evalLevel": "district_size",
       "evalCount": 518,
@@ -130550,7 +130434,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2087467,
+          "value": 2090416,
           "weight": 0.55,
           "assumptions": []
         },
@@ -130654,8 +130538,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3094116,
-      "aqarVsActual": -39.7,
+      "aqarValuation": 3098486,
+      "aqarVsActual": -39.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -130666,7 +130550,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3094116,
+          "value": 3098486,
           "weight": 0.55,
           "assumptions": []
         },
@@ -131114,8 +130998,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3094116,
-      "aqarVsActual": -41.5,
+      "aqarValuation": 3098486,
+      "aqarVsActual": -41.4,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -131126,7 +131010,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3094116,
+          "value": 3098486,
           "weight": 0.55,
           "assumptions": []
         },
@@ -132260,8 +132144,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3603175,
-      "aqarVsActual": -9.9,
+      "aqarValuation": 3608264,
+      "aqarVsActual": -9.8,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -132272,7 +132156,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3603175,
+          "value": 3608264,
           "weight": 0.55,
           "assumptions": []
         },
@@ -144696,8 +144580,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1114986,
-      "aqarVsActual": -25.7,
+      "aqarValuation": 1155563,
+      "aqarVsActual": -23,
       "evalLevel": "project_size",
       "evalCount": 15,
       "gisMultiplier": 1,
@@ -144708,7 +144592,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1114986,
+          "value": 1155563,
           "weight": 0.55,
           "assumptions": []
         },
@@ -145040,8 +144924,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 915552,
-      "aqarVsActual": 14.4,
+      "aqarValuation": 905580,
+      "aqarVsActual": 13.2,
       "evalLevel": "project_size",
       "evalCount": 11,
       "gisMultiplier": 1,
@@ -145052,7 +144936,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 915552,
+          "value": 905580,
           "weight": 0.55,
           "assumptions": []
         },
@@ -160892,8 +160776,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 607634,
-      "aqarVsActual": -1.2,
+      "aqarValuation": 608174,
+      "aqarVsActual": -1.1,
       "evalLevel": "project_size",
       "evalCount": 67,
       "gisMultiplier": 0.99376,
@@ -160904,7 +160788,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 607634,
+          "value": 608174,
           "weight": 0.55,
           "assumptions": []
         },
@@ -167048,7 +166932,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 706565,
+      "aqarValuation": 706640,
       "aqarVsActual": 17.8,
       "evalLevel": "project_size",
       "evalCount": 15,
@@ -167060,7 +166944,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 706565,
+          "value": 706640,
           "weight": 0.55,
           "assumptions": []
         },
@@ -180060,8 +179944,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 531552,
-      "aqarVsActual": 0.3,
+      "aqarValuation": 556312,
+      "aqarVsActual": 5,
       "evalLevel": "project_size",
       "evalCount": 19,
       "gisMultiplier": 1,
@@ -180072,7 +179956,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 531552,
+          "value": 556312,
           "weight": 0.55,
           "assumptions": []
         },
@@ -180630,8 +180514,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 531552,
-      "aqarVsActual": 16.7,
+      "aqarValuation": 556312,
+      "aqarVsActual": 22.2,
       "evalLevel": "project_size",
       "evalCount": 19,
       "gisMultiplier": 1,
@@ -180642,7 +180526,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 531552,
+          "value": 556312,
           "weight": 0.55,
           "assumptions": []
         },
@@ -184408,8 +184292,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1231573,
-      "aqarVsActual": 23.2,
+      "aqarValuation": 1266628,
+      "aqarVsActual": 26.7,
       "evalLevel": "project_size",
       "evalCount": 16,
       "gisMultiplier": 1,
@@ -184420,7 +184304,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1231573,
+          "value": 1266628,
           "weight": 0.55,
           "assumptions": []
         },
@@ -189082,8 +188966,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 496846,
-      "aqarVsActual": -0.6,
+      "aqarValuation": 502979,
+      "aqarVsActual": 0.6,
       "evalLevel": "project_size",
       "evalCount": 22,
       "gisMultiplier": 1,
@@ -189094,7 +188978,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 496846,
+          "value": 502979,
           "weight": 0.55,
           "assumptions": []
         },
@@ -215066,8 +214950,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 465728,
-      "aqarVsActual": -0.9,
+      "aqarValuation": 453106,
+      "aqarVsActual": -3.6,
       "evalLevel": "project_size",
       "evalCount": 10,
       "gisMultiplier": 1,
@@ -215078,7 +214962,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 465728,
+          "value": 453106,
           "weight": 0.55,
           "assumptions": []
         },
@@ -215180,8 +215064,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 456212,
-      "aqarVsActual": -2.9,
+      "aqarValuation": 443848,
+      "aqarVsActual": -5.6,
       "evalLevel": "project_size",
       "evalCount": 10,
       "gisMultiplier": 1,
@@ -215192,7 +215076,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 456212,
+          "value": 443848,
           "weight": 0.55,
           "assumptions": []
         },
@@ -216092,8 +215976,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1169462,
-      "aqarVsActual": 11.4,
+      "aqarValuation": 1174770,
+      "aqarVsActual": 11.9,
       "evalLevel": "project_size",
       "evalCount": 24,
       "gisMultiplier": 1,
@@ -216104,7 +215988,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1169462,
+          "value": 1174770,
           "weight": 0.55,
           "assumptions": []
         },
@@ -216320,8 +216204,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1070387,
-      "aqarVsActual": 1,
+      "aqarValuation": 1076983,
+      "aqarVsActual": 1.6,
       "evalLevel": "project_size",
       "evalCount": 43,
       "gisMultiplier": 1,
@@ -216332,7 +216216,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1070387,
+          "value": 1076983,
           "weight": 0.55,
           "assumptions": []
         },
@@ -216548,8 +216432,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1105639,
-      "aqarVsActual": 8.4,
+      "aqarValuation": 1112453,
+      "aqarVsActual": 9.1,
       "evalLevel": "project_size",
       "evalCount": 43,
       "gisMultiplier": 1,
@@ -216560,7 +216444,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1105639,
+          "value": 1112453,
           "weight": 0.55,
           "assumptions": []
         },
@@ -219740,8 +219624,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 544894,
-      "aqarVsActual": 1.8,
+      "aqarValuation": 549020,
+      "aqarVsActual": 2.6,
       "evalLevel": "project_size",
       "evalCount": 23,
       "gisMultiplier": 1,
@@ -219752,7 +219636,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 544894,
+          "value": 549020,
           "weight": 0.55,
           "assumptions": []
         },
@@ -223278,8 +223162,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 823938,
-      "aqarVsActual": -2.3,
+      "aqarValuation": 695127,
+      "aqarVsActual": -17.6,
       "evalLevel": "project_size",
       "evalCount": 38,
       "gisMultiplier": 1,
@@ -223290,7 +223174,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 823938,
+          "value": 695127,
           "weight": 0.55,
           "assumptions": []
         },
@@ -223394,8 +223278,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1108046,
-      "aqarVsActual": -2.3,
+      "aqarValuation": 934819,
+      "aqarVsActual": -17.6,
       "evalLevel": "project_size",
       "evalCount": 38,
       "gisMultiplier": 1,
@@ -223406,7 +223290,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1108046,
+          "value": 934819,
           "weight": 0.55,
           "assumptions": []
         },
@@ -223510,8 +223394,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1000091,
-      "aqarVsActual": 0,
+      "aqarValuation": 1076810,
+      "aqarVsActual": 7.7,
       "evalLevel": "project_size",
       "evalCount": 18,
       "gisMultiplier": 1,
@@ -223522,7 +223406,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1000091,
+          "value": 1076810,
           "weight": 0.55,
           "assumptions": []
         },
@@ -241984,8 +241868,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 359959,
-      "aqarVsActual": -26.9,
+      "aqarValuation": 360873,
+      "aqarVsActual": -26.7,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -241996,7 +241880,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 359959,
+          "value": 360873,
           "weight": 0.55,
           "assumptions": []
         },
@@ -242100,8 +241984,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 367835,
-      "aqarVsActual": -25.2,
+      "aqarValuation": 368770,
+      "aqarVsActual": -25,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -242112,7 +241996,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 367835,
+          "value": 368770,
           "weight": 0.55,
           "assumptions": []
         },
@@ -242216,8 +242100,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 679103,
-      "aqarVsActual": -28.1,
+      "aqarValuation": 680829,
+      "aqarVsActual": -27.9,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -242228,7 +242112,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 679103,
+          "value": 680829,
           "weight": 0.55,
           "assumptions": []
         },
@@ -243138,8 +243022,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 505911,
-      "aqarVsActual": 17.7,
+      "aqarValuation": 506398,
+      "aqarVsActual": 17.8,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -243150,7 +243034,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 505911,
+          "value": 506398,
           "weight": 0.55,
           "assumptions": []
         },
@@ -243370,8 +243254,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 470139,
-      "aqarVsActual": 6.8,
+      "aqarValuation": 470591,
+      "aqarVsActual": 7,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -243382,7 +243266,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 470139,
+          "value": 470591,
           "weight": 0.55,
           "assumptions": []
         },
@@ -245786,8 +245670,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 838620,
-      "aqarVsActual": 7.5,
+      "aqarValuation": 839340,
+      "aqarVsActual": 7.6,
       "evalLevel": "district_size",
       "evalCount": 249,
       "gisMultiplier": 1,
@@ -245798,7 +245682,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 838620,
+          "value": 839340,
           "weight": 0.55,
           "assumptions": []
         },
@@ -245900,8 +245784,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 866574,
-      "aqarVsActual": 25.6,
+      "aqarValuation": 867318,
+      "aqarVsActual": 25.7,
       "evalLevel": "district_size",
       "evalCount": 249,
       "gisMultiplier": 1,
@@ -245912,7 +245796,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 866574,
+          "value": 867318,
           "weight": 0.55,
           "assumptions": []
         },
@@ -246242,7 +246126,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1250755,
+      "aqarValuation": 1251829,
       "aqarVsActual": 0.1,
       "evalLevel": "district_size",
       "evalCount": 249,
@@ -246254,7 +246138,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1250755,
+          "value": 1251829,
           "weight": 0.55,
           "assumptions": []
         },
@@ -246812,8 +246696,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 847938,
-      "aqarVsActual": 10.1,
+      "aqarValuation": 848666,
+      "aqarVsActual": 10.2,
       "evalLevel": "district_size",
       "evalCount": 249,
       "gisMultiplier": 1,
@@ -246824,7 +246708,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 847938,
+          "value": 848666,
           "weight": 0.55,
           "assumptions": []
         },
@@ -247382,8 +247266,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 829302,
-      "aqarVsActual": 11,
+      "aqarValuation": 830014,
+      "aqarVsActual": 11.1,
       "evalLevel": "district_size",
       "evalCount": 249,
       "gisMultiplier": 1,
@@ -247394,7 +247278,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 829302,
+          "value": 830014,
           "weight": 0.55,
           "assumptions": []
         },
@@ -247838,8 +247722,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1257930,
-      "aqarVsActual": 0.6,
+      "aqarValuation": 1259010,
+      "aqarVsActual": 0.7,
       "evalLevel": "district_size",
       "evalCount": 249,
       "gisMultiplier": 1,
@@ -247850,7 +247734,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1257930,
+          "value": 1259010,
           "weight": 0.55,
           "assumptions": []
         },
@@ -248294,7 +248178,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 838620,
+      "aqarValuation": 839340,
       "aqarVsActual": 6.2,
       "evalLevel": "district_size",
       "evalCount": 249,
@@ -248306,7 +248190,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 838620,
+          "value": 839340,
           "weight": 0.55,
           "assumptions": []
         },
@@ -254564,8 +254448,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 466003,
-      "aqarVsActual": -6.6,
+      "aqarValuation": 466378,
+      "aqarVsActual": -6.5,
       "evalLevel": "district_size",
       "evalCount": 329,
       "gisMultiplier": 1,
@@ -254576,7 +254460,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 466003,
+          "value": 466378,
           "weight": 0.55,
           "assumptions": []
         },
@@ -256160,8 +256044,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 477877,
-      "aqarVsActual": -5.4,
+      "aqarValuation": 478261,
+      "aqarVsActual": -5.3,
       "evalLevel": "district_size",
       "evalCount": 329,
       "gisMultiplier": 1,
@@ -256172,7 +256056,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 477877,
+          "value": 478261,
           "weight": 0.55,
           "assumptions": []
         },
@@ -257642,8 +257526,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 904302,
-      "aqarVsActual": -9.6,
+      "aqarValuation": 925755,
+      "aqarVsActual": -7.4,
       "evalLevel": "project_size",
       "evalCount": 10,
       "gisMultiplier": 1,
@@ -257654,7 +257538,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 904302,
+          "value": 925755,
           "weight": 0.55,
           "assumptions": []
         },
@@ -258896,8 +258780,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 933211,
-      "aqarVsActual": 6.7,
+      "aqarValuation": 940226,
+      "aqarVsActual": 7.5,
       "evalLevel": "project_size",
       "evalCount": 22,
       "gisMultiplier": 1,
@@ -258908,7 +258792,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 933211,
+          "value": 940226,
           "weight": 0.55,
           "assumptions": []
         },
@@ -267334,8 +267218,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 798580,
-      "aqarVsActual": -11.3,
+      "aqarValuation": 816576,
+      "aqarVsActual": -9.3,
       "evalLevel": "project_size",
       "evalCount": 22,
       "gisMultiplier": 1,
@@ -267346,7 +267230,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 798580,
+          "value": 816576,
           "weight": 0.55,
           "assumptions": []
         },
@@ -272372,8 +272256,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 540346,
-      "aqarVsActual": -4.4,
+      "aqarValuation": 569999,
+      "aqarVsActual": 0.9,
       "evalLevel": "project_size",
       "evalCount": 9,
       "gisMultiplier": 1,
@@ -272384,7 +272268,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 540346,
+          "value": 569999,
           "weight": 0.55,
           "assumptions": []
         },
@@ -295128,8 +295012,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 845325,
-      "aqarVsActual": -6.6,
+      "aqarValuation": 858774,
+      "aqarVsActual": -5.1,
       "evalLevel": "project_size",
       "evalCount": 26,
       "gisMultiplier": 1,
@@ -295140,7 +295024,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 845325,
+          "value": 858774,
           "weight": 0.55,
           "assumptions": []
         },
@@ -295584,7 +295468,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2105345,
+      "aqarValuation": 2107036,
       "aqarVsActual": -1.5,
       "evalLevel": "project_size",
       "evalCount": 64,
@@ -295596,7 +295480,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2105345,
+          "value": 2107036,
           "weight": 0.55,
           "assumptions": []
         },
@@ -296954,8 +296838,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1025465,
-      "aqarVsActual": 2.3,
+      "aqarValuation": 1022272,
+      "aqarVsActual": 2,
       "evalLevel": "project_size",
       "evalCount": 42,
       "gisMultiplier": 1,
@@ -296966,7 +296850,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1025465,
+          "value": 1022272,
           "weight": 0.55,
           "assumptions": []
         },
@@ -306674,8 +306558,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 799994,
-      "aqarVsActual": 11.6,
+      "aqarValuation": 806818,
+      "aqarVsActual": 12.5,
       "evalLevel": "project_size",
       "evalCount": 21,
       "gisMultiplier": 1,
@@ -306686,7 +306570,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 799994,
+          "value": 806818,
           "weight": 0.55,
           "assumptions": []
         },
@@ -306902,8 +306786,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2973024,
-      "aqarVsActual": 10.5,
+      "aqarValuation": 2983738,
+      "aqarVsActual": 10.9,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -306914,7 +306798,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2973024,
+          "value": 2983738,
           "weight": 0.55,
           "assumptions": []
         },
@@ -308046,8 +307930,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1704327,
-      "aqarVsActual": 6.5,
+      "aqarValuation": 1710469,
+      "aqarVsActual": 6.9,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -308058,7 +307942,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1704327,
+          "value": 1710469,
           "weight": 0.55,
           "assumptions": []
         },
@@ -308622,8 +308506,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1582344,
-      "aqarVsActual": 24.1,
+      "aqarValuation": 1588046,
+      "aqarVsActual": 24.6,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -308634,7 +308518,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1582344,
+          "value": 1588046,
           "weight": 0.55,
           "assumptions": []
         },
@@ -308966,8 +308850,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2664538,
-      "aqarVsActual": 2.9,
+      "aqarValuation": 2674140,
+      "aqarVsActual": 3.3,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -308978,7 +308862,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2664538,
+          "value": 2674140,
           "weight": 0.55,
           "assumptions": []
         },
@@ -314672,8 +314556,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1934821,
-      "aqarVsActual": 27.8,
+      "aqarValuation": 1867900,
+      "aqarVsActual": 23.4,
       "evalLevel": "project_size",
       "evalCount": 4,
       "gisMultiplier": 1,
@@ -314684,7 +314568,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1934821,
+          "value": 1867900,
           "weight": 0.55,
           "assumptions": []
         },
@@ -333436,8 +333320,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3502199,
-      "aqarVsActual": -21.3,
+      "aqarValuation": 3513936,
+      "aqarVsActual": -21,
       "evalLevel": "district_size",
       "evalCount": 111,
       "gisMultiplier": 1,
@@ -333448,7 +333332,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3502199,
+          "value": 3513936,
           "weight": 0.55,
           "assumptions": []
         },
@@ -333550,8 +333434,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 4505538,
-      "aqarVsActual": -2.1,
+      "aqarValuation": 4511978,
+      "aqarVsActual": -1.9,
       "evalLevel": "district",
       "evalCount": 210,
       "gisMultiplier": 1,
@@ -333562,7 +333446,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 4505538,
+          "value": 4511978,
           "weight": 0.55,
           "assumptions": []
         },
@@ -333778,8 +333662,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1593263,
-      "aqarVsActual": -8.4,
+      "aqarValuation": 1598602,
+      "aqarVsActual": -8.1,
       "evalLevel": "district_size",
       "evalCount": 111,
       "gisMultiplier": 1,
@@ -333790,7 +333674,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1593263,
+          "value": 1598602,
           "weight": 0.55,
           "assumptions": []
         },
@@ -334462,8 +334346,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1653609,
-      "aqarVsActual": -7.6,
+      "aqarValuation": 1659151,
+      "aqarVsActual": -7.3,
       "evalLevel": "district_size",
       "evalCount": 111,
       "gisMultiplier": 1,
@@ -334474,7 +334358,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1653609,
+          "value": 1659151,
           "weight": 0.55,
           "assumptions": []
         },
@@ -334918,8 +334802,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1332817,
-      "aqarVsActual": 6.6,
+      "aqarValuation": 1334570,
+      "aqarVsActual": 6.8,
       "evalLevel": "district_size",
       "evalCount": 95,
       "gisMultiplier": 1,
@@ -334930,7 +334814,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1332817,
+          "value": 1334570,
           "weight": 0.55,
           "assumptions": []
         },
@@ -335032,8 +334916,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1458476,
-      "aqarVsActual": -5.9,
+      "aqarValuation": 1460261,
+      "aqarVsActual": -5.8,
       "evalLevel": "district_size",
       "evalCount": 95,
       "gisMultiplier": 1,
@@ -335044,7 +334928,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1458476,
+          "value": 1460261,
           "weight": 0.55,
           "assumptions": []
         },
@@ -335374,7 +335258,7 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 754547,
+      "aqarValuation": 755470,
       "aqarVsActual": -28.1,
       "evalLevel": "district_size",
       "evalCount": 95,
@@ -335386,7 +335270,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 754547,
+          "value": 755470,
           "weight": 0.55,
           "assumptions": []
         },
@@ -336172,8 +336056,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2305760,
-      "aqarVsActual": 7.7,
+      "aqarValuation": 2311832,
+      "aqarVsActual": 8,
       "evalLevel": "district_size",
       "evalCount": 111,
       "gisMultiplier": 1,
@@ -336184,7 +336068,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2305760,
+          "value": 2311832,
           "weight": 0.55,
           "assumptions": []
         },
@@ -336286,8 +336170,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2348176,
-      "aqarVsActual": 2.1,
+      "aqarValuation": 2354360,
+      "aqarVsActual": 2.4,
       "evalLevel": "district_size",
       "evalCount": 111,
       "gisMultiplier": 1,
@@ -336298,7 +336182,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2348176,
+          "value": 2354360,
           "weight": 0.55,
           "assumptions": []
         },
@@ -336514,8 +336398,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2533722,
-      "aqarVsActual": 11.4,
+      "aqarValuation": 2540394,
+      "aqarVsActual": 11.7,
       "evalLevel": "district_size",
       "evalCount": 111,
       "gisMultiplier": 1,
@@ -336526,7 +336410,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2533722,
+          "value": 2540394,
           "weight": 0.55,
           "assumptions": []
         },
@@ -343944,8 +343828,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 2771755,
-      "aqarVsActual": 15.5,
+      "aqarValuation": 2799178,
+      "aqarVsActual": 16.6,
       "evalLevel": "project_size",
       "evalCount": 16,
       "gisMultiplier": 1,
@@ -343956,7 +343840,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2771755,
+          "value": 2799178,
           "weight": 0.55,
           "assumptions": []
         },
@@ -350670,8 +350554,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3518611,
-      "aqarVsActual": 19.2,
+      "aqarValuation": 3543300,
+      "aqarVsActual": 20,
       "evalLevel": "district_size",
       "evalCount": 53,
       "gisMultiplier": 1,
@@ -350682,7 +350566,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3518611,
+          "value": 3543300,
           "weight": 0.55,
           "assumptions": []
         },
@@ -350784,8 +350668,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3694542,
-      "aqarVsActual": 21.2,
+      "aqarValuation": 3720465,
+      "aqarVsActual": 22,
       "evalLevel": "district_size",
       "evalCount": 53,
       "gisMultiplier": 1,
@@ -350796,7 +350680,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3694542,
+          "value": 3720465,
           "weight": 0.55,
           "assumptions": []
         },
@@ -354204,8 +354088,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 6152112,
-      "aqarVsActual": 73.1,
+      "aqarValuation": 6139930,
+      "aqarVsActual": 72.8,
       "evalLevel": "project_size",
       "evalCount": 8,
       "gisMultiplier": 1,
@@ -354216,7 +354100,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 6152112,
+          "value": 6139930,
           "weight": 0.55,
           "assumptions": []
         },
@@ -358446,8 +358330,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1066763,
-      "aqarVsActual": -10,
+      "aqarValuation": 1155214,
+      "aqarVsActual": -2.5,
       "evalLevel": "project",
       "evalCount": 9,
       "gisMultiplier": 1,
@@ -358458,7 +358342,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1066763,
+          "value": 1155214,
           "weight": 0.55,
           "assumptions": []
         },
@@ -363016,8 +362900,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 646223,
-      "aqarVsActual": 7.7,
+      "aqarValuation": 667885,
+      "aqarVsActual": 11.3,
       "evalLevel": "project_size",
       "evalCount": 15,
       "gisMultiplier": 1,
@@ -363028,7 +362912,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 646223,
+          "value": 667885,
           "weight": 0.55,
           "assumptions": []
         },
@@ -366986,8 +366870,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1491694,
-      "aqarVsActual": 1.5,
+      "aqarValuation": 1540565,
+      "aqarVsActual": 4.8,
       "evalLevel": "district_size",
       "evalCount": 28,
       "gisMultiplier": 1,
@@ -366998,7 +366882,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1491694,
+          "value": 1540565,
           "weight": 0.55,
           "assumptions": []
         },
@@ -373284,8 +373168,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1067995,
-      "aqarVsActual": 10.1,
+      "aqarValuation": 1095075,
+      "aqarVsActual": 12.9,
       "evalLevel": "project_size",
       "evalCount": 23,
       "gisMultiplier": 1,
@@ -373296,7 +373180,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1067995,
+          "value": 1095075,
           "weight": 0.55,
           "assumptions": []
         },
@@ -374432,8 +374316,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 632303,
-      "aqarVsActual": -13,
+      "aqarValuation": 629648,
+      "aqarVsActual": -13.4,
       "evalLevel": "district_size",
       "evalCount": 162,
       "gisMultiplier": 1,
@@ -374444,7 +374328,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 632303,
+          "value": 629648,
           "weight": 0.55,
           "assumptions": []
         },
@@ -375464,8 +375348,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2579481,
-      "aqarVsActual": 39.1,
+      "aqarValuation": 2569088,
+      "aqarVsActual": 38.5,
       "evalLevel": "district",
       "evalCount": 314,
       "gisMultiplier": 1,
@@ -375476,7 +375360,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2579481,
+          "value": 2569088,
           "weight": 0.55,
           "assumptions": []
         },
@@ -375580,8 +375464,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 568103,
-      "aqarVsActual": -11.2,
+      "aqarValuation": 565718,
+      "aqarVsActual": -11.6,
       "evalLevel": "district_size",
       "evalCount": 162,
       "gisMultiplier": 1,
@@ -375592,7 +375476,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 568103,
+          "value": 565718,
           "weight": 0.55,
           "assumptions": []
         },
@@ -395778,8 +395662,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1645725,
-      "aqarVsActual": 37.1,
+      "aqarValuation": 1646184,
+      "aqarVsActual": 37.2,
       "evalLevel": "district_size",
       "evalCount": 197,
       "gisMultiplier": 1,
@@ -395790,7 +395674,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1645725,
+          "value": 1646184,
           "weight": 0.55,
           "assumptions": []
         },
@@ -396120,7 +396004,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1641743,
+      "aqarValuation": 1642201,
       "aqarVsActual": 14,
       "evalLevel": "district_size",
       "evalCount": 197,
@@ -396132,7 +396016,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1641743,
+          "value": 1642201,
           "weight": 0.55,
           "assumptions": []
         },
@@ -396234,8 +396118,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 853526,
-      "aqarVsActual": 26.4,
+      "aqarValuation": 849904,
+      "aqarVsActual": 25.9,
       "evalLevel": "district_size",
       "evalCount": 84,
       "gisMultiplier": 1,
@@ -396246,7 +396130,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 853526,
+          "value": 849904,
           "weight": 0.55,
           "assumptions": []
         },
@@ -396462,7 +396346,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1645725,
+      "aqarValuation": 1646184,
       "aqarVsActual": 64.6,
       "evalLevel": "district_size",
       "evalCount": 197,
@@ -396474,7 +396358,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1645725,
+          "value": 1646184,
           "weight": 0.55,
           "assumptions": []
         },
@@ -398172,8 +398056,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 978129,
-      "aqarVsActual": -29.1,
+      "aqarValuation": 979772,
+      "aqarVsActual": -29,
       "evalLevel": "district_size",
       "evalCount": 197,
       "gisMultiplier": 1,
@@ -398184,7 +398068,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 978129,
+          "value": 979772,
           "weight": 0.55,
           "assumptions": []
         },
@@ -402846,8 +402730,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1743205,
-      "aqarVsActual": 14.3,
+      "aqarValuation": 1726199,
+      "aqarVsActual": 13.2,
       "evalLevel": "district_size",
       "evalCount": 33,
       "gisMultiplier": 1,
@@ -402858,7 +402742,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1743205,
+          "value": 1726199,
           "weight": 0.55,
           "assumptions": []
         },
@@ -402960,8 +402844,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1781370,
-      "aqarVsActual": 40.6,
+      "aqarValuation": 1763991,
+      "aqarVsActual": 39.2,
       "evalLevel": "district_size",
       "evalCount": 33,
       "gisMultiplier": 1,
@@ -402972,7 +402856,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1781370,
+          "value": 1763991,
           "weight": 0.55,
           "assumptions": []
         },
@@ -403416,8 +403300,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 888149,
-      "aqarVsActual": -3.6,
+      "aqarValuation": 876316,
+      "aqarVsActual": -4.9,
       "evalLevel": "project_size",
       "evalCount": 15,
       "gisMultiplier": 1,
@@ -403428,7 +403312,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 888149,
+          "value": 876316,
           "weight": 0.55,
           "assumptions": []
         },
@@ -410530,8 +410414,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 709428,
-      "aqarVsActual": 18.2,
+      "aqarValuation": 671761,
+      "aqarVsActual": 12,
       "evalLevel": "project_size",
       "evalCount": 26,
       "gisMultiplier": 1,
@@ -410542,7 +410426,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 709428,
+          "value": 671761,
           "weight": 0.55,
           "assumptions": []
         },
@@ -413392,8 +413276,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 1368469,
-      "aqarVsActual": 19,
+      "aqarValuation": 1357861,
+      "aqarVsActual": 18.1,
       "evalLevel": "district_size",
       "evalCount": 25,
       "gisMultiplier": 0.99376,
@@ -413404,7 +413288,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1368469,
+          "value": 1357861,
           "weight": 0.55,
           "assumptions": []
         },
@@ -422030,8 +421914,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2671709,
-      "aqarVsActual": 6.9,
+      "aqarValuation": 2658952,
+      "aqarVsActual": 6.4,
       "evalLevel": "project_size",
       "evalCount": 49,
       "gisMultiplier": 1,
@@ -422042,7 +421926,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2671709,
+          "value": 2658952,
           "weight": 0.55,
           "assumptions": []
         },
@@ -425678,8 +425562,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2684985,
-      "aqarVsActual": -10.5,
+      "aqarValuation": 2695036,
+      "aqarVsActual": -10.2,
       "evalLevel": "project_size",
       "evalCount": 41,
       "gisMultiplier": 1,
@@ -425690,7 +425574,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2684985,
+          "value": 2695036,
           "weight": 0.55,
           "assumptions": []
         },
@@ -432541,8 +432425,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 8120922,
-      "aqarVsActual": -22.7,
+      "aqarValuation": 7366734,
+      "aqarVsActual": -29.8,
       "evalLevel": "district",
       "evalCount": 27,
       "gisMultiplier": 1,
@@ -432553,7 +432437,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 9664666,
+          "value": 8732524,
           "weight": 0.4,
           "assumptions": []
         },
@@ -432568,7 +432452,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 4004270,
+          "value": 3724627,
           "weight": 0.15,
           "assumptions": [
             {
@@ -432578,14 +432462,14 @@
             },
             {
               "field": "landValue",
-              "value": 2899400,
+              "value": 2619757,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 368.29,
             "constructionCostPerSqm": 3000,
-            "landValue": 2899400,
+            "landValue": 2619757,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -432609,7 +432493,7 @@
         },
         {
           "field": "landValue",
-          "value": 2899400,
+          "value": 2619757,
           "source": "ASSUMPTION"
         }
       ],
@@ -434993,8 +434877,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2807582,
-      "aqarVsActual": -14.9,
+      "aqarValuation": 2837419,
+      "aqarVsActual": -14,
       "evalLevel": "project_size",
       "evalCount": 19,
       "gisMultiplier": 1,
@@ -435005,7 +434889,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3298196,
+          "value": 3335073,
           "weight": 0.4,
           "assumptions": []
         },
@@ -435020,7 +434904,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 1499279,
+          "value": 1510342,
           "weight": 0.15,
           "assumptions": [
             {
@@ -435030,14 +434914,14 @@
             },
             {
               "field": "landValue",
-              "value": 989459,
+              "value": 1000522,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 169.94,
             "constructionCostPerSqm": 3000,
-            "landValue": 989459,
+            "landValue": 1000522,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -435061,7 +434945,7 @@
         },
         {
           "field": "landValue",
-          "value": 989459,
+          "value": 1000522,
           "source": "ASSUMPTION"
         }
       ],
@@ -443653,8 +443537,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2391956,
-      "aqarVsActual": -2.4,
+      "aqarValuation": 2444814,
+      "aqarVsActual": -0.2,
       "evalLevel": "project_size",
       "evalCount": 3,
       "gisMultiplier": 1,
@@ -443665,7 +443549,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2769726,
+          "value": 2835057,
           "weight": 0.4,
           "assumptions": []
         },
@@ -443680,7 +443564,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 1384568,
+          "value": 1404167,
           "weight": 0.15,
           "assumptions": [
             {
@@ -443690,14 +443574,14 @@
             },
             {
               "field": "landValue",
-              "value": 830918,
+              "value": 850517,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 184.55,
             "constructionCostPerSqm": 3000,
-            "landValue": 830918,
+            "landValue": 850517,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -443721,7 +443605,7 @@
         },
         {
           "field": "landValue",
-          "value": 830918,
+          "value": 850517,
           "source": "ASSUMPTION"
         }
       ],
@@ -458531,8 +458415,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 4798964,
-      "aqarVsActual": -4,
+      "aqarValuation": 4968839,
+      "aqarVsActual": -0.6,
       "evalLevel": "district_size",
       "evalCount": 11,
       "gisMultiplier": 0.99376,
@@ -458543,7 +458427,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 4798964,
+          "value": 4968839,
           "weight": 0.55,
           "assumptions": []
         },
@@ -461033,8 +460917,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2326875,
-      "aqarVsActual": -16.9,
+      "aqarValuation": 2330958,
+      "aqarVsActual": -16.8,
       "evalLevel": "project_size",
       "evalCount": 47,
       "gisMultiplier": 1,
@@ -461045,7 +460929,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2699958,
+          "value": 2705004,
           "weight": 0.4,
           "assumptions": []
         },
@@ -461060,7 +460944,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 1331987,
+          "value": 1333501,
           "weight": 0.15,
           "assumptions": [
             {
@@ -461070,14 +460954,14 @@
             },
             {
               "field": "landValue",
-              "value": 809987,
+              "value": 811501,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 174,
             "constructionCostPerSqm": 3000,
-            "landValue": 809987,
+            "landValue": 811501,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -461101,7 +460985,7 @@
         },
         {
           "field": "landValue",
-          "value": 809987,
+          "value": 811501,
           "source": "ASSUMPTION"
         }
       ],
@@ -467931,8 +467815,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 648540,
-      "aqarVsActual": -5.5,
+      "aqarValuation": 650892,
+      "aqarVsActual": -5.2,
       "evalLevel": "district_size",
       "evalCount": 56,
       "gisMultiplier": 1,
@@ -467943,7 +467827,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 734744,
+          "value": 737651,
           "weight": 0.4,
           "assumptions": []
         },
@@ -467958,7 +467842,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 418663,
+          "value": 419535,
           "weight": 0.15,
           "assumptions": [
             {
@@ -467968,14 +467852,14 @@
             },
             {
               "field": "landValue",
-              "value": 220423,
+              "value": 221295,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 66.08,
             "constructionCostPerSqm": 3000,
-            "landValue": 220423,
+            "landValue": 221295,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -467999,7 +467883,7 @@
         },
         {
           "field": "landValue",
-          "value": 220423,
+          "value": 221295,
           "source": "ASSUMPTION"
         }
       ],
@@ -468077,8 +467961,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 569239,
-      "aqarVsActual": 25.1,
+      "aqarValuation": 571304,
+      "aqarVsActual": 25.6,
       "evalLevel": "district_size",
       "evalCount": 56,
       "gisMultiplier": 1,
@@ -468089,7 +467973,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 644902,
+          "value": 647454,
           "weight": 0.4,
           "assumptions": []
         },
@@ -468104,7 +467988,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 367471,
+          "value": 368236,
           "weight": 0.15,
           "assumptions": [
             {
@@ -468114,14 +467998,14 @@
             },
             {
               "field": "landValue",
-              "value": 193471,
+              "value": 194236,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 58,
             "constructionCostPerSqm": 3000,
-            "landValue": 193471,
+            "landValue": 194236,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -468145,7 +468029,7 @@
         },
         {
           "field": "landValue",
-          "value": 193471,
+          "value": 194236,
           "source": "ASSUMPTION"
         }
       ],
@@ -475853,8 +475737,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 5616604,
-      "aqarVsActual": -22.5,
+      "aqarValuation": 5694150,
+      "aqarVsActual": -21.5,
       "evalLevel": "district_size",
       "evalCount": 70,
       "gisMultiplier": 1,
@@ -475865,7 +475749,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 5616604,
+          "value": 5694150,
           "weight": 0.55,
           "assumptions": []
         },
@@ -488303,8 +488187,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 4642750,
-      "aqarVsActual": -7.1,
+      "aqarValuation": 4690613,
+      "aqarVsActual": -6.1,
       "evalLevel": "district_size",
       "evalCount": 58,
       "gisMultiplier": 1,
@@ -488315,7 +488199,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 5382154,
+          "value": 5441310,
           "weight": 0.4,
           "assumptions": []
         },
@@ -488330,7 +488214,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 2671006,
+          "value": 2688753,
           "weight": 0.15,
           "assumptions": [
             {
@@ -488340,14 +488224,14 @@
             },
             {
               "field": "landValue",
-              "value": 1614646,
+              "value": 1632393,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 352.12,
             "constructionCostPerSqm": 3000,
-            "landValue": 1614646,
+            "landValue": 1632393,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -488371,7 +488255,7 @@
         },
         {
           "field": "landValue",
-          "value": 1614646,
+          "value": 1632393,
           "source": "ASSUMPTION"
         }
       ],
@@ -510243,8 +510127,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3283824,
-      "aqarVsActual": -21.2,
+      "aqarValuation": 3435833,
+      "aqarVsActual": -17.5,
       "evalLevel": "project_size",
       "evalCount": 6,
       "gisMultiplier": 1,
@@ -510255,7 +510139,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3283824,
+          "value": 3435833,
           "weight": 0.55,
           "assumptions": []
         },
@@ -522775,8 +522659,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1474505,
-      "aqarVsActual": 23.8,
+      "aqarValuation": 1497468,
+      "aqarVsActual": 25.7,
       "evalLevel": "project_size",
       "evalCount": 38,
       "gisMultiplier": 1,
@@ -522787,7 +522671,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1474505,
+          "value": 1497468,
           "weight": 0.55,
           "assumptions": []
         },
@@ -522889,8 +522773,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1408660,
-      "aqarVsActual": 21.3,
+      "aqarValuation": 1430598,
+      "aqarVsActual": 23.2,
       "evalLevel": "project_size",
       "evalCount": 38,
       "gisMultiplier": 1,
@@ -522901,7 +522785,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1408660,
+          "value": 1430598,
           "weight": 0.55,
           "assumptions": []
         },
@@ -523003,8 +522887,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1238239,
-      "aqarVsActual": 23.8,
+      "aqarValuation": 1257522,
+      "aqarVsActual": 25.8,
       "evalLevel": "project_size",
       "evalCount": 38,
       "gisMultiplier": 1,
@@ -523015,7 +522899,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1238239,
+          "value": 1257522,
           "weight": 0.55,
           "assumptions": []
         },
@@ -523231,8 +523115,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1442956,
-      "aqarVsActual": -0.5,
+      "aqarValuation": 1447521,
+      "aqarVsActual": -0.2,
       "evalLevel": "project_size",
       "evalCount": 36,
       "gisMultiplier": 1,
@@ -523243,7 +523127,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1442956,
+          "value": 1447521,
           "weight": 0.55,
           "assumptions": []
         },
@@ -523345,8 +523229,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1883002,
-      "aqarVsActual": 22.3,
+      "aqarValuation": 1886229,
+      "aqarVsActual": 22.5,
       "evalLevel": "project_size",
       "evalCount": 36,
       "gisMultiplier": 1,
@@ -523357,7 +523241,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1883002,
+          "value": 1886229,
           "weight": 0.55,
           "assumptions": []
         },
@@ -525979,7 +525863,7 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3299950,
+      "aqarValuation": 3299486,
       "aqarVsActual": -36.5,
       "evalLevel": "district_size",
       "evalCount": 38,
@@ -525991,7 +525875,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3299950,
+          "value": 3299486,
           "weight": 0.55,
           "assumptions": []
         },
@@ -528395,8 +528279,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2313835,
-      "aqarVsActual": 15.7,
+      "aqarValuation": 2341660,
+      "aqarVsActual": 17.1,
       "evalLevel": "project_size",
       "evalCount": 17,
       "gisMultiplier": 1,
@@ -528407,7 +528291,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2313835,
+          "value": 2341660,
           "weight": 0.55,
           "assumptions": []
         },
@@ -528741,8 +528625,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3110292,
-      "aqarVsActual": 8.2,
+      "aqarValuation": 3130911,
+      "aqarVsActual": 8.9,
       "evalLevel": "project_size",
       "evalCount": 29,
       "gisMultiplier": 1,
@@ -528753,7 +528637,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3110292,
+          "value": 3130911,
           "weight": 0.55,
           "assumptions": []
         },
@@ -533709,8 +533593,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 8603872,
-      "aqarVsActual": 22.9,
+      "aqarValuation": 6419142,
+      "aqarVsActual": -8.3,
       "evalLevel": "district_size",
       "evalCount": 7,
       "gisMultiplier": 1,
@@ -533721,7 +533605,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 8603872,
+          "value": 6419142,
           "weight": 0.55,
           "assumptions": []
         },
@@ -554863,8 +554747,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 5684289,
-      "aqarVsActual": -12.5,
+      "aqarValuation": 5702707,
+      "aqarVsActual": -12.3,
       "evalLevel": "district_size",
       "evalCount": 67,
       "gisMultiplier": 0.99376,
@@ -554875,7 +554759,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 5684289,
+          "value": 5702707,
           "weight": 0.55,
           "assumptions": []
         },
@@ -577107,8 +576991,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3046451,
-      "aqarVsActual": 10.1,
+      "aqarValuation": 2855804,
+      "aqarVsActual": 3.2,
       "evalLevel": "project_size",
       "evalCount": 5,
       "gisMultiplier": 1,
@@ -577119,7 +577003,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3046451,
+          "value": 2855804,
           "weight": 0.55,
           "assumptions": []
         },
