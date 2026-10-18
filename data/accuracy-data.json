@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "22.1.0",
-    "lastUpdated": "2026-10-17T10:00:07.287Z",
-    "totalRecords": 3704,
+    "lastUpdated": "2026-10-18T10:11:38.416Z",
+    "totalRecords": 3683,
     "methodology": "v22.1 Calibrated with Mean + optimized multipliers",
     "dataSource": "DLD + Consultancy + Government + GIS",
     "accuracyScope": "verified-dld-only",
@@ -1110,15 +1110,15 @@
     "priceBand10": 51,
     "priceBand15": 67,
     "priceBand25": 85,
-    "totalRecords": 3704,
+    "totalRecords": 3683,
     "levels": {
-      "project_size": 2570,
-      "project": 161,
-      "district_size": 934,
+      "project_size": 2557,
+      "project": 160,
+      "district_size": 927,
       "district": 39
     },
-    "gisAvailable": 2220,
-    "gisApplied": 234,
+    "gisAvailable": 2202,
+    "gisApplied": 227,
     "viewApplied": 0
   },
   "records": [
@@ -9638,8 +9638,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1294225,
-      "aqarVsActual": -23.9,
+      "aqarValuation": 1297552,
+      "aqarVsActual": -23.7,
       "evalLevel": "district_size",
       "evalCount": 184,
       "gisMultiplier": 1,
@@ -9650,7 +9650,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1294225,
+          "value": 1297552,
           "weight": 0.55,
           "assumptions": []
         },
@@ -12732,8 +12732,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1974653,
-      "aqarVsActual": 9.7,
+      "aqarValuation": 2188733,
+      "aqarVsActual": 21.6,
       "evalLevel": "project_size",
       "evalCount": 6,
       "gisMultiplier": 1,
@@ -12744,7 +12744,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1974653,
+          "value": 2188733,
           "weight": 0.55,
           "assumptions": []
         },
@@ -21210,8 +21210,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 2006115,
-      "aqarVsActual": 33.7,
+      "aqarValuation": 2010852,
+      "aqarVsActual": 34.1,
       "evalLevel": "district_size",
       "evalCount": 184,
       "gisMultiplier": 1,
@@ -21222,7 +21222,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2006115,
+          "value": 2010852,
           "weight": 0.55,
           "assumptions": []
         },
@@ -23268,8 +23268,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2362768,
-      "aqarVsActual": 68.8,
+      "aqarValuation": 2361464,
+      "aqarVsActual": 68.7,
       "evalLevel": "district_size",
       "evalCount": 749,
       "gisMultiplier": 1,
@@ -23280,7 +23280,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2362768,
+          "value": 2361464,
           "weight": 0.55,
           "assumptions": []
         },
@@ -26022,8 +26022,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1058012,
-      "aqarVsActual": 10.2,
+      "aqarValuation": 1057429,
+      "aqarVsActual": 10.1,
       "evalLevel": "district_size",
       "evalCount": 749,
       "gisMultiplier": 1,
@@ -26034,7 +26034,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1058012,
+          "value": 1057429,
           "weight": 0.55,
           "assumptions": []
         },
@@ -28654,8 +28654,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1601734,
-      "aqarVsActual": 5.4,
+      "aqarValuation": 1600851,
+      "aqarVsActual": 5.3,
       "evalLevel": "district_size",
       "evalCount": 749,
       "gisMultiplier": 1,
@@ -28666,7 +28666,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1601734,
+          "value": 1600851,
           "weight": 0.55,
           "assumptions": []
         },
@@ -30026,8 +30026,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2089267,
-      "aqarVsActual": -1.8,
+      "aqarValuation": 2097418,
+      "aqarVsActual": -1.4,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -30038,7 +30038,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2089267,
+          "value": 2097418,
           "weight": 0.55,
           "assumptions": []
         },
@@ -33476,8 +33476,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1065324,
-      "aqarVsActual": -7.4,
+      "aqarValuation": 1067196,
+      "aqarVsActual": -7.2,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -33488,7 +33488,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1065324,
+          "value": 1067196,
           "weight": 0.55,
           "assumptions": []
         },
@@ -38738,7 +38738,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1269361,
+      "aqarValuation": 1268661,
       "aqarVsActual": 1.5,
       "evalLevel": "district_size",
       "evalCount": 749,
@@ -38750,7 +38750,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1269361,
+          "value": 1268661,
           "weight": 0.55,
           "assumptions": []
         },
@@ -41600,7 +41600,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 521791,
+      "aqarValuation": 521897,
       "aqarVsActual": -13,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -41612,7 +41612,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 521791,
+          "value": 521897,
           "weight": 0.55,
           "assumptions": []
         },
@@ -54880,7 +54880,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 562907,
+      "aqarValuation": 563022,
       "aqarVsActual": -17.2,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -54892,7 +54892,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 562907,
+          "value": 563022,
           "weight": 0.55,
           "assumptions": []
         },
@@ -55110,8 +55110,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 547230,
-      "aqarVsActual": -6.5,
+      "aqarValuation": 547341,
+      "aqarVsActual": -6.4,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -55122,7 +55122,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 547230,
+          "value": 547341,
           "weight": 0.55,
           "assumptions": []
         },
@@ -57174,8 +57174,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 586867,
-      "aqarVsActual": -19.1,
+      "aqarValuation": 586986,
+      "aqarVsActual": -19,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -57186,7 +57186,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 586867,
+          "value": 586986,
           "weight": 0.55,
           "assumptions": []
         },
@@ -58550,7 +58550,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1040033,
+      "aqarValuation": 1040244,
       "aqarVsActual": -6.3,
       "evalLevel": "district_size",
       "evalCount": 1286,
@@ -58562,7 +58562,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1040033,
+          "value": 1040244,
           "weight": 0.55,
           "assumptions": []
         },
@@ -63810,8 +63810,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 531207,
-      "aqarVsActual": -10,
+      "aqarValuation": 532266,
+      "aqarVsActual": -9.8,
       "evalLevel": "project_size",
       "evalCount": 32,
       "gisMultiplier": 1,
@@ -63822,7 +63822,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 531207,
+          "value": 532266,
           "weight": 0.55,
           "assumptions": []
         },
@@ -64496,8 +64496,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2131341,
-      "aqarVsActual": -6.6,
+      "aqarValuation": 2139656,
+      "aqarVsActual": -6.2,
       "evalLevel": "project_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -64508,7 +64508,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2131341,
+          "value": 2139656,
           "weight": 0.55,
           "assumptions": []
         },
@@ -69290,8 +69290,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1021693,
-      "aqarVsActual": -22,
+      "aqarValuation": 1021900,
+      "aqarVsActual": -21.9,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -69302,7 +69302,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1021693,
+          "value": 1021900,
           "weight": 0.55,
           "assumptions": []
         },
@@ -69406,8 +69406,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 919494,
-      "aqarVsActual": -31.6,
+      "aqarValuation": 919681,
+      "aqarVsActual": -31.5,
       "evalLevel": "district_size",
       "evalCount": 1286,
       "gisMultiplier": 1,
@@ -69418,7 +69418,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 919494,
+          "value": 919681,
           "weight": 0.55,
           "assumptions": []
         },
@@ -70847,234 +70847,6 @@
           "max": 22567.65,
           "iqrRatio": 0.2448,
           "maxMinRatio": 1.606
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19204-2026",
-      "transactionNumber": "11-19204-2026",
-      "instanceDate": "2026-06-20 11:07:12",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "INTERNATIONAL CITY PH 1",
-      "area": 44,
-      "procedureArea": 44,
-      "actualSalePrice": 275000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "Rashidiya Metro Station",
-      "nearestMall": "City Centre Mirdif",
-      "nearestLandmark": "",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19204-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 6250,
-      "lat": 25.16,
-      "lng": 55.47,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 304128,
-      "aqarVsActual": 10.6,
-      "evalLevel": "district_size",
-      "evalCount": 446,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 304128,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 446,
-          "district": 533
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 446,
-        "selectedPeerPricePerSqm": {
-          "count": 446,
-          "min": 4946.67,
-          "q1": 6492.54,
-          "median": 6976.74,
-          "q3": 7777.78,
-          "max": 10518.01,
-          "iqrRatio": 0.1842,
-          "maxMinRatio": 2.1263
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19209-2026",
-      "transactionNumber": "11-19209-2026",
-      "instanceDate": "2026-06-20 11:51:15",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "INTERNATIONAL CITY PH 1",
-      "area": 69,
-      "procedureArea": 69,
-      "actualSalePrice": 425000,
-      "rooms": 1,
-      "parking": 0,
-      "nearestMetro": "Rashidiya Metro Station",
-      "nearestMall": "City Centre Mirdif",
-      "nearestLandmark": "",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19209-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 6159.420289855072,
-      "lat": 25.16,
-      "lng": 55.47,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 476928,
-      "aqarVsActual": 12.2,
-      "evalLevel": "district_size",
-      "evalCount": 446,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 476928,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 446,
-          "district": 533
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 446,
-        "selectedPeerPricePerSqm": {
-          "count": 446,
-          "min": 4946.67,
-          "q1": 6492.54,
-          "median": 6976.74,
-          "q3": 7777.78,
-          "max": 10518.01,
-          "iqrRatio": 0.1842,
-          "maxMinRatio": 2.1263
         },
         "selectedDispersion": "low",
         "flags": []
@@ -76364,8 +76136,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 310005,
-      "aqarVsActual": -1.6,
+      "aqarValuation": 310320,
+      "aqarVsActual": -1.5,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -76376,7 +76148,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 310005,
+          "value": 310320,
           "weight": 0.55,
           "assumptions": []
         },
@@ -76706,8 +76478,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 303116,
-      "aqarVsActual": -5.3,
+      "aqarValuation": 303424,
+      "aqarVsActual": -5.2,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -76718,7 +76490,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 303116,
+          "value": 303424,
           "weight": 0.55,
           "assumptions": []
         },
@@ -77048,8 +76820,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 766360,
-      "aqarVsActual": 25.3,
+      "aqarValuation": 773577,
+      "aqarVsActual": 26.5,
       "evalLevel": "district_size",
       "evalCount": 59,
       "gisMultiplier": 1,
@@ -77060,7 +76832,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 766360,
+          "value": 773577,
           "weight": 0.55,
           "assumptions": []
         },
@@ -77162,7 +76934,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 306561,
+      "aqarValuation": 306872,
       "aqarVsActual": -11.1,
       "evalLevel": "district_size",
       "evalCount": 446,
@@ -77174,7 +76946,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 306561,
+          "value": 306872,
           "weight": 0.55,
           "assumptions": []
         },
@@ -77276,8 +77048,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 310005,
-      "aqarVsActual": -32.6,
+      "aqarValuation": 310320,
+      "aqarVsActual": -32.5,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -77288,7 +77060,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 310005,
+          "value": 310320,
           "weight": 0.55,
           "assumptions": []
         },
@@ -78188,8 +77960,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 296227,
-      "aqarVsActual": -1.3,
+      "aqarValuation": 296528,
+      "aqarVsActual": -1.2,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -78200,7 +77972,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 296227,
+          "value": 296528,
           "weight": 0.55,
           "assumptions": []
         },
@@ -78416,7 +78188,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 310005,
+      "aqarValuation": 310320,
       "aqarVsActual": -10.1,
       "evalLevel": "district_size",
       "evalCount": 446,
@@ -78428,7 +78200,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 310005,
+          "value": 310320,
           "weight": 0.55,
           "assumptions": []
         },
@@ -78530,8 +78302,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 310005,
-      "aqarVsActual": -6.1,
+      "aqarValuation": 310320,
+      "aqarVsActual": -6,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -78542,7 +78314,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 310005,
+          "value": 310320,
           "weight": 0.55,
           "assumptions": []
         },
@@ -78644,8 +78416,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 288925,
-      "aqarVsActual": -11.1,
+      "aqarValuation": 289218,
+      "aqarVsActual": -11,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -78656,7 +78428,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 288925,
+          "value": 289218,
           "weight": 0.55,
           "assumptions": []
         },
@@ -79214,8 +78986,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 303116,
-      "aqarVsActual": -0.6,
+      "aqarValuation": 303424,
+      "aqarVsActual": -0.5,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -79226,7 +78998,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 303116,
+          "value": 303424,
           "weight": 0.55,
           "assumptions": []
         },
@@ -79442,8 +79214,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 296227,
-      "aqarVsActual": -1.3,
+      "aqarValuation": 296528,
+      "aqarVsActual": -1.2,
       "evalLevel": "district_size",
       "evalCount": 446,
       "gisMultiplier": 1,
@@ -79454,7 +79226,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 296227,
+          "value": 296528,
           "weight": 0.55,
           "assumptions": []
         },
@@ -84834,8 +84606,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3961222,
-      "aqarVsActual": 33.2,
+      "aqarValuation": 3984731,
+      "aqarVsActual": 33.9,
       "evalLevel": "district_size",
       "evalCount": 199,
       "gisMultiplier": 1,
@@ -84846,7 +84618,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3961222,
+          "value": 3984731,
           "weight": 0.55,
           "assumptions": []
         },
@@ -85866,8 +85638,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 746266,
-      "aqarVsActual": 8.2,
+      "aqarValuation": 751718,
+      "aqarVsActual": 8.9,
       "evalLevel": "project_size",
       "evalCount": 55,
       "gisMultiplier": 1,
@@ -85878,7 +85650,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 746266,
+          "value": 751718,
           "weight": 0.55,
           "assumptions": []
         },
@@ -85980,8 +85752,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 723169,
-      "aqarVsActual": 7.9,
+      "aqarValuation": 728453,
+      "aqarVsActual": 8.7,
       "evalLevel": "project_size",
       "evalCount": 55,
       "gisMultiplier": 1,
@@ -85992,7 +85764,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 723169,
+          "value": 728453,
           "weight": 0.55,
           "assumptions": []
         },
@@ -87303,236 +87075,6 @@
           "max": 16179.92,
           "iqrRatio": 0.0498,
           "maxMinRatio": 1.3351
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19202-2026",
-      "transactionNumber": "11-19202-2026",
-      "instanceDate": "2026-06-20 10:32:52",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "DUBAI MARINA",
-      "area": 81.75,
-      "procedureArea": 81.75,
-      "actualSalePrice": 1420075,
-      "rooms": 1,
-      "parking": 102,
-      "nearestMetro": "Dubai Marina",
-      "nearestMall": "Marina Mall",
-      "nearestLandmark": "Burj Al Arab",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19202-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 17370.948012232417,
-      "lat": 25.0734,
-      "lng": 55.1312,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 1573361,
-      "aqarVsActual": 10.8,
-      "evalLevel": "district_size",
-      "evalCount": 518,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1573361,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 518,
-          "district": 918
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 518,
-        "selectedPeerPricePerSqm": {
-          "count": 518,
-          "min": 9914.07,
-          "q1": 15681.74,
-          "median": 19022.04,
-          "q3": 24233.54,
-          "max": 49833.89,
-          "iqrRatio": 0.4496,
-          "maxMinRatio": 5.0266
-        },
-        "selectedDispersion": "high",
-        "flags": [
-          "high_peer_dispersion"
-        ]
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19207-2026",
-      "transactionNumber": "11-19207-2026",
-      "instanceDate": "2026-06-20 12:01:09",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "DUBAI MARINA",
-      "area": 84.45,
-      "procedureArea": 84.45,
-      "actualSalePrice": 1880000,
-      "rooms": 1,
-      "parking": 0,
-      "nearestMetro": "Jumeirah Beach Resdency",
-      "nearestMall": "Marina Mall",
-      "nearestLandmark": "Burj Al Arab",
-      "masterProject": "",
-      "project": "PARK ISLANDS",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19207-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 22261.69330965068,
-      "lat": 25.0734,
-      "lng": 55.1312,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 1599990,
-      "aqarVsActual": -14.9,
-      "evalLevel": "project_size",
-      "evalCount": 28,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1599990,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 28,
-          "project": 34,
-          "district_size": 518,
-          "district": 918
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 28,
-        "selectedPeerPricePerSqm": {
-          "count": 28,
-          "min": 14846.73,
-          "q1": 17884.68,
-          "median": 18946.12,
-          "q3": 22774.49,
-          "max": 26092.3,
-          "iqrRatio": 0.2581,
-          "maxMinRatio": 1.7574
         },
         "selectedDispersion": "low",
         "flags": []
@@ -91248,8 +90790,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2504096,
-      "aqarVsActual": -17.9,
+      "aqarValuation": 2506712,
+      "aqarVsActual": -17.8,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -91260,7 +90802,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2504096,
+          "value": 2506712,
           "weight": 0.55,
           "assumptions": []
         },
@@ -92400,8 +91942,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2438818,
-      "aqarVsActual": -4.4,
+      "aqarValuation": 2441366,
+      "aqarVsActual": -4.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -92412,7 +91954,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2438818,
+          "value": 2441366,
           "weight": 0.55,
           "assumptions": []
         },
@@ -93554,7 +93096,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2094053,
+      "aqarValuation": 2096241,
       "aqarVsActual": -52.5,
       "evalLevel": "district_size",
       "evalCount": 518,
@@ -93566,7 +93108,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2094053,
+          "value": 2096241,
           "weight": 0.55,
           "assumptions": []
         },
@@ -93786,8 +93328,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3682539,
-      "aqarVsActual": -12.3,
+      "aqarValuation": 3686386,
+      "aqarVsActual": -12.2,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -93798,7 +93340,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3682539,
+          "value": 3686386,
           "weight": 0.55,
           "assumptions": []
         },
@@ -94016,8 +93558,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3098486,
-      "aqarVsActual": -40.3,
+      "aqarValuation": 3101723,
+      "aqarVsActual": -40.2,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -94028,7 +93570,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3098486,
+          "value": 3101723,
           "weight": 0.55,
           "assumptions": []
         },
@@ -95630,7 +95172,7 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2566311,
+      "aqarValuation": 2568992,
       "aqarVsActual": -30.6,
       "evalLevel": "district_size",
       "evalCount": 518,
@@ -95642,7 +95184,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2566311,
+          "value": 2568992,
           "weight": 0.55,
           "assumptions": []
         },
@@ -95974,8 +95516,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2189385,
-      "aqarVsActual": -44.7,
+      "aqarValuation": 2191672,
+      "aqarVsActual": -44.6,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -95986,7 +95528,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2189385,
+          "value": 2191672,
           "weight": 0.55,
           "assumptions": []
         },
@@ -96090,8 +95632,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2169476,
-      "aqarVsActual": -43.1,
+      "aqarValuation": 2171743,
+      "aqarVsActual": -43,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -96102,7 +95644,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2169476,
+          "value": 2171743,
           "weight": 0.55,
           "assumptions": []
         },
@@ -96784,8 +96326,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 3098486,
-      "aqarVsActual": -42.4,
+      "aqarValuation": 3101723,
+      "aqarVsActual": -42.3,
       "evalLevel": "district_size",
       "evalCount": 518,
       "gisMultiplier": 1,
@@ -96796,7 +96338,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3098486,
+          "value": 3101723,
           "weight": 0.55,
           "assumptions": []
         },
@@ -99196,8 +98738,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1324753,
-      "aqarVsActual": 1.6,
+      "aqarValuation": 1324423,
+      "aqarVsActual": 1.5,
       "evalLevel": "project_size",
       "evalCount": 18,
       "gisMultiplier": 1,
@@ -99208,7 +98750,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1324753,
+          "value": 1324423,
           "weight": 0.55,
           "assumptions": []
         },
@@ -110221,120 +109763,6 @@
       }
     },
     {
-      "propertyRef": "DLD-11-19201-2026",
-      "transactionNumber": "11-19201-2026",
-      "instanceDate": "2026-06-20 10:33:40",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "JUMEIRAH LAKES TOWERS",
-      "area": 122.13,
-      "procedureArea": 122.13,
-      "actualSalePrice": 1670000,
-      "rooms": 2,
-      "parking": 2,
-      "nearestMetro": "Marina Mall Metro Station",
-      "nearestMall": "Marina Mall",
-      "nearestLandmark": "Burj Al Arab",
-      "masterProject": "",
-      "project": "ARMADA TOWERS",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19201-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 13673.953983460247,
-      "lat": null,
-      "lng": null,
-      "gisScore": null,
-      "gisFacilities": null,
-      "gisMatchedBy": null,
-      "hasGis": false,
-      "aqarValuation": 1656205,
-      "aqarVsActual": -0.8,
-      "evalLevel": "project_size",
-      "evalCount": 8,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1656205,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 8,
-          "project": 13,
-          "district_size": 222,
-          "district": 427
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 8,
-        "selectedPeerPricePerSqm": {
-          "count": 8,
-          "min": 11272,
-          "q1": 12238.4,
-          "median": 13560.54,
-          "q3": 15120.6,
-          "max": 17686.07,
-          "iqrRatio": 0.2125,
-          "maxMinRatio": 1.569
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
       "propertyRef": "DLD-11-19268-2026",
       "transactionNumber": "11-19268-2026",
       "instanceDate": "2026-06-22 11:09:30",
@@ -110602,8 +110030,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1638060,
-      "aqarVsActual": 28,
+      "aqarValuation": 1643335,
+      "aqarVsActual": 28.4,
       "evalLevel": "district_size",
       "evalCount": 222,
       "gisMultiplier": 1,
@@ -110614,7 +110042,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1638060,
+          "value": 1643335,
           "weight": 0.55,
           "assumptions": []
         },
@@ -118315,348 +117743,6 @@
           "max": 19908.12,
           "iqrRatio": 0.079,
           "maxMinRatio": 1.3793
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19203-2026",
-      "transactionNumber": "11-19203-2026",
-      "instanceDate": "2026-06-20 10:34:23",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "ARJAN",
-      "area": 131.73,
-      "procedureArea": 131.73,
-      "actualSalePrice": 1350000,
-      "rooms": 2,
-      "parking": 0,
-      "nearestMetro": "Sharaf Dg Metro Station",
-      "nearestMall": "Mall of the Emirates",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "Divine Living",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19203-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 10248.235026189936,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "added",
-      "hasGis": true,
-      "aqarValuation": 1857977,
-      "aqarVsActual": 37.6,
-      "evalLevel": "project_size",
-      "evalCount": 10,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1857977,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 10,
-          "project": 13,
-          "district_size": 150,
-          "district": 665
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 10,
-        "selectedPeerPricePerSqm": {
-          "count": 10,
-          "min": 11614.67,
-          "q1": 12952.68,
-          "median": 13927.58,
-          "q3": 14192.69,
-          "max": 16535.76,
-          "iqrRatio": 0.089,
-          "maxMinRatio": 1.4237
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19211-2026",
-      "transactionNumber": "11-19211-2026",
-      "instanceDate": "2026-06-20 12:53:59",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "ARJAN",
-      "area": 44.81,
-      "procedureArea": 44.81,
-      "actualSalePrice": 485000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "Sharaf Dg Metro Station",
-      "nearestMall": "Mall of the Emirates",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "LINCOLN PARK",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19211-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 10823.476902477125,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "added",
-      "hasGis": true,
-      "aqarValuation": 486005,
-      "aqarVsActual": 0.2,
-      "evalLevel": "project_size",
-      "evalCount": 22,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 486005,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 22,
-          "project": 23,
-          "district_size": 513,
-          "district": 665
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 22,
-        "selectedPeerPricePerSqm": {
-          "count": 22,
-          "min": 8244.02,
-          "q1": 10303.21,
-          "median": 10913.59,
-          "q3": 11567,
-          "max": 13630.23,
-          "iqrRatio": 0.1158,
-          "maxMinRatio": 1.6533
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19215-2026",
-      "transactionNumber": "11-19215-2026",
-      "instanceDate": "2026-06-20 14:47:27",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "ARJAN",
-      "area": 33.44,
-      "procedureArea": 33.44,
-      "actualSalePrice": 510000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "Sharaf Dg Metro Station",
-      "nearestMall": "Mall of the Emirates",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "SKYZ By Danube",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19215-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 15251.196172248805,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "added",
-      "hasGis": true,
-      "aqarValuation": 546556,
-      "aqarVsActual": 7.2,
-      "evalLevel": "project_size",
-      "evalCount": 52,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 546556,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 52,
-          "project": 60,
-          "district_size": 513,
-          "district": 665
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 52,
-        "selectedPeerPricePerSqm": {
-          "count": 52,
-          "min": 13477.09,
-          "q1": 15615.43,
-          "median": 16447.37,
-          "q3": 18111.46,
-          "max": 21269.94,
-          "iqrRatio": 0.1518,
-          "maxMinRatio": 1.5782
         },
         "selectedDispersion": "low",
         "flags": []
@@ -126757,120 +125843,6 @@
       }
     },
     {
-      "propertyRef": "DLD-41-8478-2026",
-      "transactionNumber": "41-8478-2026",
-      "instanceDate": "2026-06-20 09:45:36",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "ARJAN",
-      "area": 39.39,
-      "procedureArea": 39.39,
-      "actualSalePrice": 605000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "Sharaf Dg Metro Station",
-      "nearestMall": "Mall of the Emirates",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "ELEVATE by Prescott",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Delayed Sell",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:41-8478-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 15359.228230515359,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "added",
-      "hasGis": true,
-      "aqarValuation": 666587,
-      "aqarVsActual": 10.2,
-      "evalLevel": "project_size",
-      "evalCount": 14,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 666587,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 14,
-          "project": 21,
-          "district_size": 513,
-          "district": 665
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 14,
-        "selectedPeerPricePerSqm": {
-          "count": 14,
-          "min": 11725.76,
-          "q1": 16364.39,
-          "median": 16980.33,
-          "q3": 17675.48,
-          "max": 19275.25,
-          "iqrRatio": 0.0772,
-          "maxMinRatio": 1.6438
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
       "propertyRef": "DLD-41-8517-2026",
       "transactionNumber": "41-8517-2026",
       "instanceDate": "2026-06-22 11:19:05",
@@ -127936,8 +126908,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 1128805,
-      "aqarVsActual": 10.7,
+      "aqarValuation": 1126546,
+      "aqarVsActual": 10.4,
       "evalLevel": "district_size",
       "evalCount": 150,
       "gisMultiplier": 0.99376,
@@ -127948,7 +126920,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1128805,
+          "value": 1126546,
           "weight": 0.55,
           "assumptions": []
         },
@@ -130747,120 +129719,6 @@
       }
     },
     {
-      "propertyRef": "DLD-11-19213-2026",
-      "transactionNumber": "11-19213-2026",
-      "instanceDate": "2026-06-20 13:45:01",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "DUBAI SPORTS CITY",
-      "area": 39.36,
-      "procedureArea": 39.36,
-      "actualSalePrice": 495000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "Nakheel Metro Station",
-      "nearestMall": "Marina Mall",
-      "nearestLandmark": "Sports City Swimming Academy",
-      "masterProject": "",
-      "project": "EAGLE HEIGHTS",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19213-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 12576.219512195123,
-      "lat": 25.03,
-      "lng": 55.2,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 431700,
-      "aqarVsActual": -12.8,
-      "evalLevel": "project_size",
-      "evalCount": 13,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 431700,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 13,
-          "project": 13,
-          "district_size": 334,
-          "district": 507
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 13,
-        "selectedPeerPricePerSqm": {
-          "count": 13,
-          "min": 10100.82,
-          "q1": 10882.79,
-          "median": 10967.83,
-          "q3": 11788.31,
-          "max": 14575.74,
-          "iqrRatio": 0.0826,
-          "maxMinRatio": 1.443
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
       "propertyRef": "DLD-11-19218-2026",
       "transactionNumber": "11-19218-2026",
       "instanceDate": "2026-06-21 10:33:53",
@@ -130900,8 +129758,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 876347,
-      "aqarVsActual": -4.7,
+      "aqarValuation": 873589,
+      "aqarVsActual": -5,
       "evalLevel": "district_size",
       "evalCount": 169,
       "gisMultiplier": 1,
@@ -130912,7 +129770,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 876347,
+          "value": 873589,
           "weight": 0.55,
           "assumptions": []
         },
@@ -132616,8 +131474,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1033094,
-      "aqarVsActual": -12.1,
+      "aqarValuation": 1029842,
+      "aqarVsActual": -12.4,
       "evalLevel": "district_size",
       "evalCount": 169,
       "gisMultiplier": 1,
@@ -132628,7 +131486,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1033094,
+          "value": 1029842,
           "weight": 0.55,
           "assumptions": []
         },
@@ -137072,8 +135930,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 452288,
-      "aqarVsActual": -2.7,
+      "aqarValuation": 452080,
+      "aqarVsActual": -2.8,
       "evalLevel": "district_size",
       "evalCount": 334,
       "gisMultiplier": 1,
@@ -137084,7 +135942,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 452288,
+          "value": 452080,
           "weight": 0.55,
           "assumptions": []
         },
@@ -147688,8 +146546,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1611891,
-      "aqarVsActual": 3.3,
+      "aqarValuation": 1613602,
+      "aqarVsActual": 3.4,
       "evalLevel": "district_size",
       "evalCount": 214,
       "gisMultiplier": 1,
@@ -147700,7 +146558,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1611891,
+          "value": 1613602,
           "weight": 0.55,
           "assumptions": []
         },
@@ -150078,8 +148936,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1656698,
-      "aqarVsActual": -31,
+      "aqarValuation": 1685212,
+      "aqarVsActual": -29.8,
       "evalLevel": "project_size",
       "evalCount": 8,
       "gisMultiplier": 1,
@@ -150090,7 +148948,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1965866,
+          "value": 2001108,
           "weight": 0.4,
           "assumptions": []
         },
@@ -150105,7 +148963,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 832250,
+          "value": 842822,
           "weight": 0.15,
           "assumptions": [
             {
@@ -150115,14 +148973,14 @@
             },
             {
               "field": "landValue",
-              "value": 589760,
+              "value": 600332,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 80.83,
             "constructionCostPerSqm": 3000,
-            "landValue": 589760,
+            "landValue": 600332,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -150146,7 +149004,7 @@
         },
         {
           "field": "landValue",
-          "value": 589760,
+          "value": 600332,
           "source": "ASSUMPTION"
         }
       ],
@@ -168463,234 +167321,6 @@
       }
     },
     {
-      "propertyRef": "DLD-41-8481-2026",
-      "transactionNumber": "41-8481-2026",
-      "instanceDate": "2026-06-20 11:22:03",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "JUMEIRAH VILLAGE TRIANGLE",
-      "area": 124.68,
-      "procedureArea": 124.68,
-      "actualSalePrice": 1918046,
-      "rooms": 2,
-      "parking": 0,
-      "nearestMetro": "Damac Properties",
-      "nearestMall": "Marina Mall",
-      "nearestLandmark": "Sports City Swimming Academy",
-      "masterProject": "",
-      "project": "Milestone Residences",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Delayed Sell",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:41-8481-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 15383.750401026628,
-      "lat": 25.05,
-      "lng": 55.18,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "alias",
-      "hasGis": true,
-      "aqarValuation": 1865587,
-      "aqarVsActual": -2.7,
-      "evalLevel": "project_size",
-      "evalCount": 6,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1865587,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 6,
-          "project": 20,
-          "district_size": 56,
-          "district": 249
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 6,
-        "selectedPeerPricePerSqm": {
-          "count": 6,
-          "min": 12892.44,
-          "q1": 14640.67,
-          "median": 14962.82,
-          "q3": 16041.07,
-          "max": 17362.88,
-          "iqrRatio": 0.0936,
-          "maxMinRatio": 1.3467
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-41-8482-2026",
-      "transactionNumber": "41-8482-2026",
-      "instanceDate": "2026-06-20 11:37:26",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "JUMEIRAH VILLAGE TRIANGLE",
-      "area": 83.77,
-      "procedureArea": 83.77,
-      "actualSalePrice": 1226449,
-      "rooms": 1,
-      "parking": 0,
-      "nearestMetro": "Damac Properties",
-      "nearestMall": "Marina Mall",
-      "nearestLandmark": "Sports City Swimming Academy",
-      "masterProject": "",
-      "project": "Milestone Residences",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Delayed Sell",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:41-8482-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 14640.67088456488,
-      "lat": 25.05,
-      "lng": 55.18,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "alias",
-      "hasGis": true,
-      "aqarValuation": 1253451,
-      "aqarVsActual": 2.2,
-      "evalLevel": "project_size",
-      "evalCount": 6,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1253451,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 6,
-          "project": 20,
-          "district_size": 56,
-          "district": 249
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 6,
-        "selectedPeerPricePerSqm": {
-          "count": 6,
-          "min": 12892.44,
-          "q1": 14962.82,
-          "median": 15383.75,
-          "q3": 16041.07,
-          "max": 17362.88,
-          "iqrRatio": 0.0701,
-          "maxMinRatio": 1.3467
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
       "propertyRef": "DLD-41-8772-2026",
       "transactionNumber": "41-8772-2026",
       "instanceDate": "2026-06-26 10:57:21",
@@ -185054,8 +183684,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 511166,
-      "aqarVsActual": 18.9,
+      "aqarValuation": 512625,
+      "aqarVsActual": 19.2,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -185066,7 +183696,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 511166,
+          "value": 512625,
           "weight": 0.55,
           "assumptions": []
         },
@@ -185286,8 +183916,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 475021,
-      "aqarVsActual": 8,
+      "aqarValuation": 476378,
+      "aqarVsActual": 8.3,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -185298,7 +183928,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 475021,
+          "value": 476378,
           "weight": 0.55,
           "assumptions": []
         },
@@ -186322,8 +184952,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 604993,
-      "aqarVsActual": 0.3,
+      "aqarValuation": 606720,
+      "aqarVsActual": 0.6,
       "evalLevel": "district_size",
       "evalCount": 152,
       "gisMultiplier": 1,
@@ -186334,7 +184964,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 604993,
+          "value": 606720,
           "weight": 0.55,
           "assumptions": []
         },
@@ -187145,120 +185775,6 @@
           "method": "sales-comparison",
           "status": "APPLIED",
           "value": 830548,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 249,
-          "district": 579
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 249,
-        "selectedPeerPricePerSqm": {
-          "count": 249,
-          "min": 7419.35,
-          "q1": 8956.04,
-          "median": 9542.64,
-          "q3": 10139.39,
-          "max": 13993.07,
-          "iqrRatio": 0.124,
-          "maxMinRatio": 1.886
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19214-2026",
-      "transactionNumber": "11-19214-2026",
-      "instanceDate": "2026-06-20 14:15:23",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "DISCOVERY GARDENS",
-      "area": 92,
-      "procedureArea": 92,
-      "actualSalePrice": 750000,
-      "rooms": 1,
-      "parking": 0,
-      "nearestMetro": "Harbour Tower",
-      "nearestMall": "Ibn-e-Battuta Mall",
-      "nearestLandmark": "Sports City Swimming Academy",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19214-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 8152.173913043478,
-      "lat": 25.01,
-      "lng": 55.14,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 858544,
-      "aqarVsActual": 14.5,
-      "evalLevel": "district_size",
-      "evalCount": 249,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 858544,
           "weight": 0.55,
           "assumptions": []
         },
@@ -196366,8 +194882,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 914118,
-      "aqarVsActual": -12.9,
+      "aqarValuation": 908077,
+      "aqarVsActual": -13.5,
       "evalLevel": "district_size",
       "evalCount": 94,
       "gisMultiplier": 1,
@@ -196378,7 +194894,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 914118,
+          "value": 908077,
           "weight": 0.55,
           "assumptions": []
         },
@@ -204462,8 +202978,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 816576,
-      "aqarVsActual": -9.3,
+      "aqarValuation": 845877,
+      "aqarVsActual": -6,
       "evalLevel": "project_size",
       "evalCount": 22,
       "gisMultiplier": 1,
@@ -204474,7 +202990,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 816576,
+          "value": 845877,
           "weight": 0.55,
           "assumptions": []
         },
@@ -206746,8 +205262,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 933410,
-      "aqarVsActual": -6.2,
+      "aqarValuation": 929943,
+      "aqarVsActual": -6.5,
       "evalLevel": "project_size",
       "evalCount": 60,
       "gisMultiplier": 1,
@@ -206758,7 +205274,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 933410,
+          "value": 929943,
           "weight": 0.55,
           "assumptions": []
         },
@@ -208924,8 +207440,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 495618,
-      "aqarVsActual": 0.1,
+      "aqarValuation": 496791,
+      "aqarVsActual": 0.4,
       "evalLevel": "district_size",
       "evalCount": 166,
       "gisMultiplier": 1,
@@ -208936,7 +207452,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 495618,
+          "value": 496791,
           "weight": 0.55,
           "assumptions": []
         },
@@ -212924,8 +211440,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1914934,
-      "aqarVsActual": -11.3,
+      "aqarValuation": 1977512,
+      "aqarVsActual": -8.4,
       "evalLevel": "project_size",
       "evalCount": 14,
       "gisMultiplier": 1,
@@ -212936,7 +211452,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1914934,
+          "value": 1977512,
           "weight": 0.55,
           "assumptions": []
         },
@@ -231680,8 +230196,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1711063,
-      "aqarVsActual": 6.9,
+      "aqarValuation": 1715719,
+      "aqarVsActual": 7.2,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -231692,7 +230208,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1711063,
+          "value": 1715719,
           "weight": 0.55,
           "assumptions": []
         },
@@ -232256,8 +230772,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1588598,
-      "aqarVsActual": 24.6,
+      "aqarValuation": 1592920,
+      "aqarVsActual": 24.9,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -232268,7 +230784,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1588598,
+          "value": 1592920,
           "weight": 0.55,
           "assumptions": []
         },
@@ -232600,8 +231116,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2675070,
-      "aqarVsActual": 3.3,
+      "aqarValuation": 2682348,
+      "aqarVsActual": 3.6,
       "evalLevel": "district_size",
       "evalCount": 558,
       "gisMultiplier": 1,
@@ -232612,7 +231128,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2675070,
+          "value": 2682348,
           "weight": 0.55,
           "assumptions": []
         },
@@ -238876,8 +237392,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1746440,
-      "aqarVsActual": 0.4,
+      "aqarValuation": 1747420,
+      "aqarVsActual": 0.5,
       "evalLevel": "project_size",
       "evalCount": 89,
       "gisMultiplier": 1,
@@ -238888,7 +237404,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1746440,
+          "value": 1747420,
           "weight": 0.55,
           "assumptions": []
         },
@@ -239450,8 +237966,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 2189962,
-      "aqarVsActual": 25.1,
+      "aqarValuation": 2191192,
+      "aqarVsActual": 25.2,
       "evalLevel": "project_size",
       "evalCount": 89,
       "gisMultiplier": 1,
@@ -239462,7 +237978,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2189962,
+          "value": 2191192,
           "weight": 0.55,
           "assumptions": []
         },
@@ -239564,8 +238080,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1306901,
-      "aqarVsActual": 0.5,
+      "aqarValuation": 1409015,
+      "aqarVsActual": 8.4,
       "evalLevel": "project_size",
       "evalCount": 9,
       "gisMultiplier": 1,
@@ -239576,7 +238092,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1306901,
+          "value": 1409015,
           "weight": 0.55,
           "assumptions": []
         },
@@ -242776,8 +241292,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "exact",
       "hasGis": true,
-      "aqarValuation": 1933155,
-      "aqarVsActual": 7.4,
+      "aqarValuation": 1942051,
+      "aqarVsActual": 7.9,
       "evalLevel": "project_size",
       "evalCount": 64,
       "gisMultiplier": 1,
@@ -242788,7 +241304,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1933155,
+          "value": 1942051,
           "weight": 0.55,
           "assumptions": []
         },
@@ -254894,8 +253410,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1500006,
-      "aqarVsActual": 17.6,
+      "aqarValuation": 1508799,
+      "aqarVsActual": 18.3,
       "evalLevel": "district_size",
       "evalCount": 95,
       "gisMultiplier": 1,
@@ -254906,7 +253422,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1500006,
+          "value": 1508799,
           "weight": 0.55,
           "assumptions": []
         },
@@ -264598,8 +263114,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 1019450,
-      "aqarVsActual": 0.6,
+      "aqarValuation": 1020032,
+      "aqarVsActual": 0.7,
       "evalLevel": "district_size",
       "evalCount": 195,
       "gisMultiplier": 1,
@@ -264610,7 +263126,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1019450,
+          "value": 1020032,
           "weight": 0.55,
           "assumptions": []
         },
@@ -265510,8 +264026,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3545664,
-      "aqarVsActual": 28.9,
+      "aqarValuation": 3574944,
+      "aqarVsActual": 30,
       "evalLevel": "district_size",
       "evalCount": 53,
       "gisMultiplier": 1,
@@ -265522,7 +264038,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3545664,
+          "value": 3574944,
           "weight": 0.55,
           "assumptions": []
         },
@@ -270355,120 +268871,6 @@
           "max": 16761.56,
           "iqrRatio": 0.0325,
           "maxMinRatio": 1.1264
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19206-2026",
-      "transactionNumber": "11-19206-2026",
-      "instanceDate": "2026-06-20 11:34:09",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "DAMAC HILLS",
-      "area": 71.23,
-      "procedureArea": 71.23,
-      "actualSalePrice": 1000000,
-      "rooms": 1,
-      "parking": 0,
-      "nearestMetro": "",
-      "nearestMall": "",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "DAMAC HILLS - CARSON",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19206-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 14039.028499227852,
-      "lat": 25.03,
-      "lng": 55.17,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 1050001,
-      "aqarVsActual": 5,
-      "evalLevel": "project_size",
-      "evalCount": 69,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1050001,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 69,
-          "project": 74,
-          "district_size": 197,
-          "district": 256
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 69,
-        "selectedPeerPricePerSqm": {
-          "count": 69,
-          "min": 12326.61,
-          "q1": 14262.65,
-          "median": 14869.89,
-          "q3": 15405.05,
-          "max": 17394.05,
-          "iqrRatio": 0.0768,
-          "maxMinRatio": 1.4111
         },
         "selectedDispersion": "low",
         "flags": []
@@ -283860,8 +282262,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2539678,
-      "aqarVsActual": 36.9,
+      "aqarValuation": 2499211,
+      "aqarVsActual": 34.7,
       "evalLevel": "district",
       "evalCount": 314,
       "gisMultiplier": 1,
@@ -283872,7 +282274,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2539678,
+          "value": 2499211,
           "weight": 0.55,
           "assumptions": []
         },
@@ -291921,120 +290323,6 @@
       }
     },
     {
-      "propertyRef": "DLD-41-8420-2026",
-      "transactionNumber": "41-8420-2026",
-      "instanceDate": "2026-06-20 12:44:48",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "DUBAI SOUTH",
-      "area": 133.24,
-      "procedureArea": 133.24,
-      "actualSalePrice": 1600000,
-      "rooms": 2,
-      "parking": 0,
-      "nearestMetro": "",
-      "nearestMall": "",
-      "nearestLandmark": "Expo 2020 Site",
-      "masterProject": "",
-      "project": "Cresswell Residences",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Delayed Sell",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:41-8420-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 12008.405884118882,
-      "lat": null,
-      "lng": null,
-      "gisScore": null,
-      "gisFacilities": null,
-      "gisMatchedBy": null,
-      "hasGis": false,
-      "aqarValuation": 1627260,
-      "aqarVsActual": 1.7,
-      "evalLevel": "project_size",
-      "evalCount": 11,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1627260,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 11,
-          "project": 11,
-          "district_size": 127,
-          "district": 382
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 11,
-        "selectedPeerPricePerSqm": {
-          "count": 11,
-          "min": 10895.7,
-          "q1": 12018.33,
-          "median": 12258.99,
-          "q3": 12406.02,
-          "max": 13089.01,
-          "iqrRatio": 0.0316,
-          "maxMinRatio": 1.2013
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
       "propertyRef": "DLD-41-8801-2026",
       "transactionNumber": "41-8801-2026",
       "instanceDate": "2026-06-26 14:41:58",
@@ -296916,8 +295204,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3706812,
-      "aqarVsActual": -9.6,
+      "aqarValuation": 3757763,
+      "aqarVsActual": -8.3,
       "evalLevel": "project_size",
       "evalCount": 15,
       "gisMultiplier": 1,
@@ -296928,7 +295216,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 4371288,
+          "value": 4434261,
           "weight": 0.4,
           "assumptions": []
         },
@@ -296943,7 +295231,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 1934877,
+          "value": 1953768,
           "weight": 0.15,
           "assumptions": [
             {
@@ -296953,14 +295241,14 @@
             },
             {
               "field": "landValue",
-              "value": 1311387,
+              "value": 1330278,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 207.83,
             "constructionCostPerSqm": 3000,
-            "landValue": 1311387,
+            "landValue": 1330278,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -296984,7 +295272,7 @@
         },
         {
           "field": "landValue",
-          "value": 1311387,
+          "value": 1330278,
           "source": "ASSUMPTION"
         }
       ],
@@ -297591,234 +295879,6 @@
           "max": 24268.24,
           "iqrRatio": 0.1187,
           "maxMinRatio": 1.3025
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19200-2026",
-      "transactionNumber": "11-19200-2026",
-      "instanceDate": "2026-06-20 09:03:28",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "MOTOR CITY",
-      "area": 152.92,
-      "procedureArea": 152.92,
-      "actualSalePrice": 1200000,
-      "rooms": 1,
-      "parking": 310,
-      "nearestMetro": "Sharaf Dg Metro Station",
-      "nearestMall": "Mall of the Emirates",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19200-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 7847.240387130526,
-      "lat": 25.04,
-      "lng": 55.19,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 1653218,
-      "aqarVsActual": 37.8,
-      "evalLevel": "district_size",
-      "evalCount": 197,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1653218,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "medium",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 197,
-          "district": 324
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 197,
-        "selectedPeerPricePerSqm": {
-          "count": 197,
-          "min": 6539.37,
-          "q1": 9582.62,
-          "median": 10764.6,
-          "q3": 12237.47,
-          "max": 15111.7,
-          "iqrRatio": 0.2466,
-          "maxMinRatio": 2.3109
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19212-2026",
-      "transactionNumber": "11-19212-2026",
-      "instanceDate": "2026-06-20 13:24:30",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Flat",
-      "usage": "Residential",
-      "district": "MOTOR CITY",
-      "area": 67.63,
-      "procedureArea": 67.63,
-      "actualSalePrice": 700000,
-      "rooms": 0,
-      "parking": 2,
-      "nearestMetro": "Sharaf Dg Metro Station",
-      "nearestMall": "Mall of the Emirates",
-      "nearestLandmark": "Motor City",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19212-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 10350.436196954015,
-      "lat": 25.04,
-      "lng": 55.19,
-      "gisScore": 0,
-      "gisFacilities": {},
-      "gisMatchedBy": "exact",
-      "hasGis": true,
-      "aqarValuation": 855384,
-      "aqarVsActual": 22.2,
-      "evalLevel": "district_size",
-      "evalCount": 84,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 855384,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 84,
-          "district": 324
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 84,
-        "selectedPeerPricePerSqm": {
-          "count": 84,
-          "min": 8176.72,
-          "q1": 11302.69,
-          "median": 12562.18,
-          "q3": 12885.15,
-          "max": 15097.81,
-          "iqrRatio": 0.126,
-          "maxMinRatio": 1.8464
         },
         "selectedDispersion": "low",
         "flags": []
@@ -301626,8 +299686,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 743177,
-      "aqarVsActual": 30.2,
+      "aqarValuation": 743881,
+      "aqarVsActual": 30.3,
       "evalLevel": "district_size",
       "evalCount": 347,
       "gisMultiplier": 1,
@@ -301638,7 +299698,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 743177,
+          "value": 743881,
           "weight": 0.55,
           "assumptions": []
         },
@@ -301740,8 +299800,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 801399,
-      "aqarVsActual": 23.9,
+      "aqarValuation": 802159,
+      "aqarVsActual": 24,
       "evalLevel": "district_size",
       "evalCount": 347,
       "gisMultiplier": 1,
@@ -301752,7 +299812,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 801399,
+          "value": 802159,
           "weight": 0.55,
           "assumptions": []
         },
@@ -312138,8 +310198,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 1357861,
-      "aqarVsActual": 18.1,
+      "aqarValuation": 1344473,
+      "aqarVsActual": 16.9,
       "evalLevel": "district_size",
       "evalCount": 25,
       "gisMultiplier": 0.99376,
@@ -312150,7 +310210,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1357861,
+          "value": 1344473,
           "weight": 0.55,
           "assumptions": []
         },
@@ -316948,8 +315008,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 976759,
-      "aqarVsActual": 6.2,
+      "aqarValuation": 999948,
+      "aqarVsActual": 8.7,
       "evalLevel": "project_size",
       "evalCount": 40,
       "gisMultiplier": 1,
@@ -316960,7 +315020,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 976759,
+          "value": 999948,
           "weight": 0.55,
           "assumptions": []
         },
@@ -317746,8 +315806,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1029708,
-      "aqarVsActual": -4.7,
+      "aqarValuation": 1023608,
+      "aqarVsActual": -5.2,
       "evalLevel": "project_size",
       "evalCount": 24,
       "gisMultiplier": 1,
@@ -317758,7 +315818,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1029708,
+          "value": 1023608,
           "weight": 0.55,
           "assumptions": []
         },
@@ -321964,7 +320024,7 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1186754,
+      "aqarValuation": 1187141,
       "aqarVsActual": 3.2,
       "evalLevel": "project_size",
       "evalCount": 62,
@@ -321976,7 +320036,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1186754,
+          "value": 1187141,
           "weight": 0.55,
           "assumptions": []
         },
@@ -337529,8 +335589,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2130313,
-      "aqarVsActual": 27.4,
+      "aqarValuation": 2135199,
+      "aqarVsActual": 27.7,
       "evalLevel": "district_size",
       "evalCount": 139,
       "gisMultiplier": 1,
@@ -337541,7 +335601,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2130313,
+          "value": 2135199,
           "weight": 0.55,
           "assumptions": []
         },
@@ -338219,8 +336279,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2026763,
-      "aqarVsActual": 9.6,
+      "aqarValuation": 2031412,
+      "aqarVsActual": 9.8,
       "evalLevel": "district_size",
       "evalCount": 139,
       "gisMultiplier": 1,
@@ -338231,7 +336291,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2026763,
+          "value": 2031412,
           "weight": 0.55,
           "assumptions": []
         },
@@ -338449,8 +336509,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2117556,
-      "aqarVsActual": 0.8,
+      "aqarValuation": 2122413,
+      "aqarVsActual": 1.1,
       "evalLevel": "district_size",
       "evalCount": 139,
       "gisMultiplier": 1,
@@ -338461,7 +336521,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2117556,
+          "value": 2122413,
           "weight": 0.55,
           "assumptions": []
         },
@@ -338563,8 +336623,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1904672,
-      "aqarVsActual": -21.5,
+      "aqarValuation": 1909167,
+      "aqarVsActual": -21.3,
       "evalLevel": "district_size",
       "evalCount": 139,
       "gisMultiplier": 1,
@@ -338575,7 +336635,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1904672,
+          "value": 1909167,
           "weight": 0.55,
           "assumptions": []
         },
@@ -339023,8 +337083,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1956560,
-      "aqarVsActual": -6.8,
+      "aqarValuation": 1961178,
+      "aqarVsActual": -6.6,
       "evalLevel": "district_size",
       "evalCount": 139,
       "gisMultiplier": 1,
@@ -339035,7 +337095,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1956560,
+          "value": 1961178,
           "weight": 0.55,
           "assumptions": []
         },
@@ -339251,8 +337311,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2214681,
-      "aqarVsActual": -14.8,
+      "aqarValuation": 2219907,
+      "aqarVsActual": -14.6,
       "evalLevel": "district_size",
       "evalCount": 139,
       "gisMultiplier": 1,
@@ -339263,7 +337323,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2214681,
+          "value": 2219907,
           "weight": 0.55,
           "assumptions": []
         },
@@ -346081,8 +344141,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 2386267,
-      "aqarVsActual": -11.6,
+      "aqarValuation": 2390417,
+      "aqarVsActual": -11.5,
       "evalLevel": "project_size",
       "evalCount": 47,
       "gisMultiplier": 1,
@@ -346093,7 +344153,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 2770431,
+          "value": 2775561,
           "weight": 0.4,
           "assumptions": []
         },
@@ -346108,7 +344168,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 1361829,
+          "value": 1363368,
           "weight": 0.15,
           "assumptions": [
             {
@@ -346118,14 +344178,14 @@
             },
             {
               "field": "landValue",
-              "value": 831129,
+              "value": 832668,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 176.9,
             "constructionCostPerSqm": 3000,
-            "landValue": 831129,
+            "landValue": 832668,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -346149,7 +344209,7 @@
         },
         {
           "field": "landValue",
-          "value": 831129,
+          "value": 832668,
           "source": "ASSUMPTION"
         }
       ],
@@ -349606,120 +347666,6 @@
           "max": 27124.77,
           "iqrRatio": 0.0896,
           "maxMinRatio": 1.2885
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19216-2026",
-      "transactionNumber": "11-19216-2026",
-      "instanceDate": "2026-06-20 15:00:42",
-      "saleDate": "2026-06-20",
-      "propertyType": "apartment",
-      "propType": "Unit",
-      "propSubType": "Hotel Apartment",
-      "usage": "Residential",
-      "district": "MADINAT HIND 4",
-      "area": 37.84,
-      "procedureArea": 37.84,
-      "actualSalePrice": 410000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "",
-      "nearestMall": "",
-      "nearestLandmark": "",
-      "masterProject": "",
-      "project": "DAMAC HILLS (2) - VIRIDIS",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19216-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 10835.095137420718,
-      "lat": null,
-      "lng": null,
-      "gisScore": null,
-      "gisFacilities": null,
-      "gisMatchedBy": null,
-      "hasGis": false,
-      "aqarValuation": 412115,
-      "aqarVsActual": 0.5,
-      "evalLevel": "project_size",
-      "evalCount": 43,
-      "gisMultiplier": 1,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 412115,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.35,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.1,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "small",
-        "comparableCounts": {
-          "project_size": 43,
-          "project": 50,
-          "district_size": 65,
-          "district": 72
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 43,
-        "selectedPeerPricePerSqm": {
-          "count": 43,
-          "min": 7813.99,
-          "q1": 10048.81,
-          "median": 11113.89,
-          "q3": 11965.38,
-          "max": 13623.15,
-          "iqrRatio": 0.1724,
-          "maxMinRatio": 1.7434
         },
         "selectedDispersion": "low",
         "flags": []
@@ -365775,8 +363721,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 6800136,
-      "aqarVsActual": -12.5,
+      "aqarValuation": 6845569,
+      "aqarVsActual": -12,
       "evalLevel": "district_size",
       "evalCount": 58,
       "gisMultiplier": 1,
@@ -365787,7 +363733,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 7888447,
+          "value": 7944600,
           "weight": 0.4,
           "assumptions": []
         },
@@ -365802,7 +363748,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 3897974,
+          "value": 3914820,
           "weight": 0.15,
           "assumptions": [
             {
@@ -365812,14 +363758,14 @@
             },
             {
               "field": "landValue",
-              "value": 2366534,
+              "value": 2383380,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 510.48,
             "constructionCostPerSqm": 3000,
-            "landValue": 2366534,
+            "landValue": 2383380,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -365843,7 +363789,7 @@
         },
         {
           "field": "landValue",
-          "value": 2366534,
+          "value": 2383380,
           "source": "ASSUMPTION"
         }
       ],
@@ -365919,8 +363865,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 4502519,
-      "aqarVsActual": -11.7,
+      "aqarValuation": 4532601,
+      "aqarVsActual": -11.1,
       "evalLevel": "district_size",
       "evalCount": 58,
       "gisMultiplier": 1,
@@ -365931,7 +363877,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 5223114,
+          "value": 5260294,
           "weight": 0.4,
           "assumptions": []
         },
@@ -365946,7 +363892,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 2580934,
+          "value": 2592088,
           "weight": 0.15,
           "assumptions": [
             {
@@ -365956,14 +363902,14 @@
             },
             {
               "field": "landValue",
-              "value": 1566934,
+              "value": 1578088,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 338,
             "constructionCostPerSqm": 3000,
-            "landValue": 1566934,
+            "landValue": 1578088,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -365987,7 +363933,7 @@
         },
         {
           "field": "landValue",
-          "value": 1566934,
+          "value": 1578088,
           "source": "ASSUMPTION"
         }
       ],
@@ -366063,8 +364009,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "alias",
       "hasGis": true,
-      "aqarValuation": 8594883,
-      "aqarVsActual": 18.6,
+      "aqarValuation": 8652307,
+      "aqarVsActual": 19.3,
       "evalLevel": "district_size",
       "evalCount": 58,
       "gisMultiplier": 1,
@@ -366075,7 +364021,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 9970430,
+          "value": 10041403,
           "weight": 0.4,
           "assumptions": []
         },
@@ -366090,7 +364036,7 @@
         {
           "method": "cost",
           "status": "APPLIED",
-          "value": 4926759,
+          "value": 4948051,
           "weight": 0.15,
           "assumptions": [
             {
@@ -366100,14 +364046,14 @@
             },
             {
               "field": "landValue",
-              "value": 2991129,
+              "value": 3012421,
               "source": "ASSUMPTION"
             }
           ],
           "inputs": {
             "area": 645.21,
             "constructionCostPerSqm": 3000,
-            "landValue": 2991129,
+            "landValue": 3012421,
             "age": 0,
             "depreciation": 0,
             "condition": "good",
@@ -366131,7 +364077,7 @@
         },
         {
           "field": "landValue",
-          "value": 2991129,
+          "value": 3012421,
           "source": "ASSUMPTION"
         }
       ],
@@ -371557,8 +369503,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3686908,
-      "aqarVsActual": 4.1,
+      "aqarValuation": 3694679,
+      "aqarVsActual": 4.4,
       "evalLevel": "project_size",
       "evalCount": 42,
       "gisMultiplier": 1,
@@ -371569,7 +369515,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3686908,
+          "value": 3694679,
           "weight": 0.55,
           "assumptions": []
         },
@@ -376915,8 +374861,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 3299929,
-      "aqarVsActual": -5.7,
+      "aqarValuation": 3246347,
+      "aqarVsActual": -7.2,
       "evalLevel": "project_size",
       "evalCount": 11,
       "gisMultiplier": 1,
@@ -376927,7 +374873,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 3299929,
+          "value": 3246347,
           "weight": 0.55,
           "assumptions": []
         },
@@ -393491,8 +391437,8 @@
       "gisFacilities": null,
       "gisMatchedBy": null,
       "hasGis": false,
-      "aqarValuation": 1985589,
-      "aqarVsActual": -0.7,
+      "aqarValuation": 1921911,
+      "aqarVsActual": -3.9,
       "evalLevel": "district_size",
       "evalCount": 31,
       "gisMultiplier": 1,
@@ -393503,7 +391449,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1985589,
+          "value": 1921911,
           "weight": 0.55,
           "assumptions": []
         },
@@ -414852,234 +412798,6 @@
       }
     },
     {
-      "propertyRef": "DLD-41-8484-2026",
-      "transactionNumber": "41-8484-2026",
-      "instanceDate": "2026-06-20 11:49:33",
-      "saleDate": "2026-06-20",
-      "propertyType": "land",
-      "propType": "Land",
-      "propSubType": "Residential",
-      "usage": "Residential",
-      "district": "WADI AL SAFA 3",
-      "area": 818.32,
-      "procedureArea": 818.32,
-      "actualSalePrice": 11695320,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "",
-      "nearestMall": "",
-      "nearestLandmark": "",
-      "masterProject": "",
-      "project": "The Wilds 1",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Delayed Sell",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:41-8484-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 14291.866262586762,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "added",
-      "hasGis": true,
-      "aqarValuation": 14352408,
-      "aqarVsActual": 22.7,
-      "evalLevel": "project",
-      "evalCount": 28,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 14352408,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.45,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "land_medium",
-        "comparableCounts": {
-          "project_size": 2,
-          "project": 28,
-          "district_size": 33,
-          "district": 108
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project",
-        "selectedComparableCount": 28,
-        "selectedPeerPricePerSqm": {
-          "count": 28,
-          "min": 12946.15,
-          "q1": 16168.92,
-          "median": 17810.18,
-          "q3": 18629.52,
-          "max": 19499.84,
-          "iqrRatio": 0.1382,
-          "maxMinRatio": 1.5062
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-41-8486-2026",
-      "transactionNumber": "41-8486-2026",
-      "instanceDate": "2026-06-20 12:10:16",
-      "saleDate": "2026-06-20",
-      "propertyType": "land",
-      "propType": "Land",
-      "propSubType": "Residential",
-      "usage": "Residential",
-      "district": "WADI AL SAFA 3",
-      "area": 535.01,
-      "procedureArea": 535.01,
-      "actualSalePrice": 9560036,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "",
-      "nearestMall": "",
-      "nearestLandmark": "",
-      "masterProject": "",
-      "project": "The Wilds 3",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Delayed Sell",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:41-8486-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 17868.892170239807,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "added",
-      "hasGis": true,
-      "aqarValuation": 8263771,
-      "aqarVsActual": -13.6,
-      "evalLevel": "project_size",
-      "evalCount": 10,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 8263771,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.45,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "land_medium",
-        "comparableCounts": {
-          "project_size": 10,
-          "project": 29,
-          "district_size": 33,
-          "district": 108
-        },
-        "qualifies": {
-          "project_size": true,
-          "project": true,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "project_size",
-        "selectedComparableCount": 10,
-        "selectedPeerPricePerSqm": {
-          "count": 10,
-          "min": 12930.37,
-          "q1": 15326.81,
-          "median": 15542.73,
-          "q3": 15842.66,
-          "max": 17510.77,
-          "iqrRatio": 0.0332,
-          "maxMinRatio": 1.3542
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
       "propertyRef": "DLD-41-8842-2026",
       "transactionNumber": "41-8842-2026",
       "instanceDate": "2026-06-29 10:43:00",
@@ -415233,8 +412951,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 9533767,
-      "aqarVsActual": 9,
+      "aqarValuation": 9568549,
+      "aqarVsActual": 9.4,
       "evalLevel": "project_size",
       "evalCount": 19,
       "gisMultiplier": 0.99376,
@@ -415245,7 +412963,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 9533767,
+          "value": 9568549,
           "weight": 0.55,
           "assumptions": []
         },
@@ -418203,8 +415921,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 1222417,
-      "aqarVsActual": -28.5,
+      "aqarValuation": 1254606,
+      "aqarVsActual": -26.6,
       "evalLevel": "district",
       "evalCount": 11,
       "gisMultiplier": 0.99376,
@@ -418215,7 +415933,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 1222417,
+          "value": 1254606,
           "weight": 0.55,
           "assumptions": []
         },
@@ -421962,120 +419680,6 @@
           "max": 39694.66,
           "iqrRatio": 0.0288,
           "maxMinRatio": 2.6
-        },
-        "selectedDispersion": "low",
-        "flags": []
-      }
-    },
-    {
-      "propertyRef": "DLD-11-19210-2026",
-      "transactionNumber": "11-19210-2026",
-      "instanceDate": "2026-06-20 12:34:52",
-      "saleDate": "2026-06-20",
-      "propertyType": "land",
-      "propType": "Land",
-      "propSubType": "Residential",
-      "usage": "Residential",
-      "district": "AL RASHIDIYA",
-      "area": 594.59,
-      "procedureArea": 594.59,
-      "actualSalePrice": 2650000,
-      "rooms": 0,
-      "parking": 0,
-      "nearestMetro": "Rashidiya Metro Station",
-      "nearestMall": "City Centre Mirdif",
-      "nearestLandmark": "Dubai International Airport",
-      "masterProject": "",
-      "project": "",
-      "isOffPlan": false,
-      "isFreeHold": false,
-      "group": "Sales",
-      "procedure": "Sale",
-      "totalBuyer": 0,
-      "totalSeller": 0,
-      "city": "dubai",
-      "scrapedFrom": "Dubai Land Department",
-      "verifiedBy": "Government Record",
-      "dataSource": "dld-real-cleaned",
-      "sourceTransactionId": "dld:11-19210-2026",
-      "evidenceStatus": "eligible",
-      "rejectionReason": null,
-      "pricePerSqm": 4456.85262113389,
-      "lat": 25,
-      "lng": 55,
-      "gisScore": 0.4,
-      "gisFacilities": {},
-      "gisMatchedBy": "alias",
-      "hasGis": true,
-      "aqarValuation": 1987720,
-      "aqarVsActual": -25,
-      "evalLevel": "district_size",
-      "evalCount": 10,
-      "gisMultiplier": 0.99376,
-      "viewMultiplier": 1,
-      "viewTypes": [],
-      "calibrationConfigId": "cal-1787651025399",
-      "valuationMethods": [
-        {
-          "method": "sales-comparison",
-          "status": "APPLIED",
-          "value": 1987720,
-          "weight": 0.55,
-          "assumptions": []
-        },
-        {
-          "method": "income",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0.45,
-          "reason": "annualRent is not available",
-          "assumptions": []
-        },
-        {
-          "method": "cost",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        },
-        {
-          "method": "dcf",
-          "status": "NOT_APPLICABLE",
-          "value": null,
-          "weight": 0,
-          "reason": "method is not applicable",
-          "assumptions": []
-        }
-      ],
-      "calibrationAssumptions": [],
-      "comparableDiagnostics": {
-        "schemaVersion": 1,
-        "diagnosticsOnly": true,
-        "sizeCategory": "land_medium",
-        "comparableCounts": {
-          "project_size": 0,
-          "project": 0,
-          "district_size": 10,
-          "district": 24
-        },
-        "qualifies": {
-          "project_size": false,
-          "project": false,
-          "district_size": true,
-          "district": true
-        },
-        "selectedLevel": "district_size",
-        "selectedComparableCount": 10,
-        "selectedPeerPricePerSqm": {
-          "count": 10,
-          "min": 2896.68,
-          "q1": 3336.81,
-          "median": 3531.9,
-          "q3": 4033.61,
-          "max": 6364.91,
-          "iqrRatio": 0.1973,
-          "maxMinRatio": 2.1973
         },
         "selectedDispersion": "low",
         "flags": []
@@ -437709,8 +435313,8 @@
       "gisFacilities": {},
       "gisMatchedBy": "added",
       "hasGis": true,
-      "aqarValuation": 6899048,
-      "aqarVsActual": -4.3,
+      "aqarValuation": 7107006,
+      "aqarVsActual": -1.4,
       "evalLevel": "project_size",
       "evalCount": 15,
       "gisMultiplier": 0.99376,
@@ -437721,7 +435325,7 @@
         {
           "method": "sales-comparison",
           "status": "APPLIED",
-          "value": 6899048,
+          "value": 7107006,
           "weight": 0.55,
           "assumptions": []
         },
